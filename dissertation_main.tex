@@ -150,7 +150,7 @@ The final decision rule is computed as the weighted average of all encountered w
 
 %
 % logit
-\subsection{Logistic Regression}
+\subsection{Logistic Regression (\lr)}
 
 % general introduction
 Logistic regression is another important method in statistical machine learning and is closely related to the Perceptron and the Support Vector Machine (Section~\ref{sc_svm}).
@@ -230,7 +230,9 @@ The dual form is given by
 \end{align*}
 Later on, optimization algorithms that are based on dual form have been developed, for example iterative optimization method \citep{Keerthi05a} and the dual coordinate descent method \citep{Yu11dual}.
 
-% TODO: expand the dual form of logistic regression
+% TODO: add detail deviation of dual form of logistic regression
+% TODO: explain the loss and gain of different optimzation algorithm
+
 
 %
 % svm
@@ -238,9 +240,9 @@ Later on, optimization algorithms that are based on dual form have been develope
 \label{sc_svm}
 
 % some history
-Support Vector Machine (\svm) transfers learning problem into optimization problem.
-The framework was firstly introduced in \citep{Boser92}.
-Theory and algorithm are detailed in e.g. \citep{taylor04,Bishop07}.
+Support Vector Machine (\svm) is probably the most widely used classification algorithm in various real world applications.
+The algorithm framework of \svm\ was firstly introduced in \citep{Boser92,Cortes95support}.
+Theory and algorithm are detailed in book chapters e.g. \citep{taylor04,Bishop07}.
 % hard margin svm
 We begin our discussion by considering a very simple case where we assume the data are linear separable that is there is a hyperplane in the feature space that separates data into two classes.
 In addition we assume the \textit{separating hyperplane} have the form
@@ -312,6 +314,10 @@ The new goal is to maximize the margin while penalize the data points that lie o
 		\st & \quad y_i[\ip{\vw}{x_i} + b] \ge 1-\xi_i, \xi_i\ge 0, \forall i\in\{1,\cdots,m\}
 	\end{align*}
 \end{definition}
+
+% optimization from primal
+The 
+
 
 \marginpar{dual, kernel, optimization}
 

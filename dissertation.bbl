@@ -56,6 +56,11 @@ Collins, M. and Duffy, N. (2002).
   Computational Linguistics}, pages 263--270, Stroudsburg, PA, USA. Association
   for Computational Linguistics.
 
+\bibitem[Cortes and Vapnik, 1995]{Cortes95support}
+Cortes, C. and Vapnik, V. (1995).
+\newblock Support-vector networks.
+\newblock {\em Machine Learning}, 20(3):273--297.
+
 \bibitem[Darroch and Ratcliff, 1972]{Darroch72}
 Darroch, J. and Ratcliff, D. (1972).
 \newblock Generalized iterative scaling for log-linear models.
