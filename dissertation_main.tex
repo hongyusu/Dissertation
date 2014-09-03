@@ -153,7 +153,7 @@ The final decision rule is computed as the weighted average of all encountered w
 \subsection{Logistic Regression}
 
 % general introduction
-Logistic regression is a important aspect in statistics and is closely related to the Perceptron and the Support Vector Machine (Section~\ref{}).
+Logistic regression is another important method in statistical machine learning and is closely related to the Perceptron and the Support Vector Machine (Section~\ref{sc_svm}).
 It is a classification model rather than regression \citep{Bishop07}.
 It models the conditional probability $p(y=+1|\vx)$ for a binary output variable $y\in\Ycal$.
 %Without loss of generality, in the rest part of this section we use $p(\vx)$ to denote above conditional probability of $p(y|\vx)$ when fixing $y=1$.
@@ -161,8 +161,9 @@ To model the probability, we do not restrict to any particular form, as any unkn
 However, we are most interested in the simple linear model as described in (\ref{linearclassifier}).
 
 % detailed model, decision boundary
-To use linear model in Logistic Regression, the first choice is to let $p(y=+1|\vx)$ be a linear function of $\vx$, where the problem is the linear function is unbounded but the probability $p(\vx)\in[0,1]$.
-Another choice is to let $\log p(y=+1|\vx)$ be a linear function of $\vx$, where the problem is the log-likelihood ranges from zero to infinite.
+To use linear model in Logistic Regression, the first choice is to let $p(y=+1|\vx)$ be a linear function of $\vx$, while the problem is the linear function is unbounded but the probability $p(\vx)\in[0,1]$.
+Another choice is to let $\log p(y=+1|\vx)$ be a linear function of $\vx$. 
+However, the problem is the log-likelihood ranges from zero to infinite but the linear function is unbounded.
 The choice in Logistic Regression is to use logistic transformation of the original probability function
 \begin{align*}
 	\log\frac{p(y=+1|\vx)}{1-p(y=+1|\vx)} = \ip{\vw}{\vx} + b,
@@ -171,18 +172,18 @@ which by solving for $p(y=+1|\vx)$ results in
 \begin{align}
 	p(y=+1|\vx;\vw,b) = \frac{1}{1+\exponential{-\ip{\vw}{x}-b}}. \label{lr_1}
 \end{align}
-We can compute
+We can also compute
 \begin{align}
-	p(y=-1|\vx;\vw,b)=1-p(y=+1|\vx;\vw,b)=\frac{1}{1+\exponential{\ip{\vw}{x}b}}. \label{lr_2}
+	p(y=-1|\vx;\vw,b)=1-p(y=+1|\vx;\vw,b)=\frac{1}{1+\exponential{\ip{\vw}{x}+b}}. \label{lr_2}
 \end{align}
-Putting together (\ref{lr_1}) and (\ref{lr_2}), we can define Logistic Regression by
+Putting together (\ref{lr_1}) and (\ref{lr_2}), we define the Logistic Regression as
 \begin{definition}{Logistic Regression}\label{logistic_regression}
 	\begin{align*}
 		p(y=\pm1|\vx;\vw,b) = \frac{1}{1+\exponential{-y_i(\ip{\vw}{x}-b)}}.
 	\end{align*}
 \end{definition}
 Naturally, we expect the prediction $y=+1$ when $p(y=+1|x;\vw,b)\ge0.5$ and $y=-1$, when $p(y=+1|x;\vw,b)<0.5$.
-Therefore, the decision rule is similar to perceptron where we predict $y=+1$ when $\ip{\vw}{x}+b\ge0$, and $y=-1$ otherwise.
+The decision rule is similar to perceptron where we predict $y=+1$ when $\ip{\vw}{x}+b\ge0$, and $y=-1$ otherwise.
 Besides decision boundary, Logistic Regression can output the class probability from (Definition~\ref{logistic_regression}) as the the 'distance' of the data point to the decision boundary.
 It is the probabilistic output that makes Logistic Regression no more than a classifier, as it outputs detailed predictions (class probability).
 
@@ -211,7 +212,7 @@ Instead of maximizing the posteriori (\ref{lr_posteriori}), it is easier to maxi
 	\log p(\vw,b|D;\sigma^2) = -{\frac{\norm{\vw}^2}{\sigma^2}} - \sum_{i=1}^{m}\log{(1+\exponential{-y_i(\ip{\vx}{\vw}+b)})}. \label{lr_posteriori_log}
 \end{align}
 
-Numbers of optimization techniques have been proposed to solve the minimization problem (\ref{lr_posteriori_log}) in Logistic Regression, many of which are covered in the survey \citep{Minka03}.
+Numbers of optimization techniques have been proposed to solve the maximization problem (\ref{lr_posteriori_log}) in Logistic Regression, many of which are covered in the survey \citep{Minka03}.
 For example, \textit{Itrative Scaling} methods were proposed and continuously developed in \citep{Darroch72,Pietra97,Berger97,Goodman02Sequential,Jin03a}.
 A quasi-Newton method was discussed in \citep{Minka03}.
 \citet{Komarek05making,Lin2008trust} have proposed truncated Newton method.
@@ -227,13 +228,14 @@ The dual form is given by
 	\underset{\valpha}{\minimize} & \quad\frac{1}{2}\sum_{i=1}^{m}\sum_{j=1}^{m}\valpha_iy_ix_ix_jy_j\valpha_j + \sum_{i=1}^{m}\left[\valpha_i\log\alpha_i+(\sigma^2-\valpha_i)\log(\sigma^2-\valpha_i)\right] \\
 	\st &\quad 0\le\alpha\le\sigma^2, \, \forall i=\{1,\cdots,m\}.
 \end{align*}
-Later on, the iterative optimization method \citep{Keerthi05a} and the dual coordinate descent method \citep{Yu11dual} are also developed and build based on the dual form.
+Later on, optimization algorithms that are based on dual form have been developed, for example iterative optimization method \citep{Keerthi05a} and the dual coordinate descent method \citep{Yu11dual}.
 
 % TODO: expand the dual form of logistic regression
 
 %
 % svm
 \subsection{Support Vector Machine (\svm)}
+\label{sc_svm}
 
 % some history
 Support Vector Machine (\svm) transfers learning problem into optimization problem.
