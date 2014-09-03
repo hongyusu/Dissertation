@@ -1,0 +1,59 @@
+
+
+%% Select the dissertation mode on
+% See the documentation for more information about the available class options
+% If you give option 'draft' or 'draft*', the draft mode is set on
+\documentclass[dissertation]{aaltoseries}
+
+\input{dissertation_macro.tex}
+
+
+% The author of the dissertation
+\author{Hongyu Su}
+% The title of the thesis
+\title{Title of the Thesis}
+
+
+%---------------------------
+%
+% Begining of the document
+%
+%---------------------------
+\begin{document}
+
+%% The abstract of the dissertation in English
+% Use this command!
+\draftabstract{\lipsum[1-3]}
+% Let's add another one in Finnish
+\draftabstract[finnish]{\lipsum[4-6]}
+% And yet another one in Swedish
+\draftabstract[swedish]{\lipsum[7-9]}
+
+%% Preface
+% If you write this somewhere else than in Helsinki, use the optional location.
+\begin{preface}[Espoo]
+	Here is the preface
+	\lipsum[1-2]
+\end{preface}
+
+%% Table of contents of the dissertation
+\tableofcontents
+
+%% For article dissertations, remove if you write a monograph dissertation.
+\listofpublications
+
+%% Add lists of figures and tables as you usually.
+
+%% Add list of abbreviations, list of symbols, etc., using your preferred package/method.
+\input{dissertation_nomenclature}
+
+
+%% The main matter, one can obviously use \input or \include
+\input{dissertation_main}
+
+
+%% The following commands are for article dissertations, remove them if you write a monograph dissertation.
+%\input{dissertation_publications}
+
+
+\end{document}

@@ -1,0 +1,529 @@
+
+
+
+\chapter{Introduction}
+\section{Motivation and Background}
+\section{Contributions and outline of the thesis}
+
+The thesis is structured as follows.
+
+
+complex outputs: multiple interdependent output variables and structured output space
+
+
+\chapter{Background}
+
+\newpage
+\section{Single Label Classification}
+
+\subsection{Preliminary and Notation}
+We consider supervised learning problem which assumes an arbitrary input space $\Xcal$, an output space $\Ycal$, and the training samples coming in pairs $(x_i,y_i)\in\Xcal\times\Ycal$.
+As we focus in this chapter standard supervised learning problem also known as binary classification, we explicitly assume the output space $\Ycal=\{-1,+1\}$.
+We point out that other kind of supervised learning problem can be formulated by altering the definition of the output space.
+For example, by setting $\Ycal=\{1,\cdots,K\}$ we have multiclass classification problem, and by setting $\Ycal=\RR$ we have regression problem.
+Additionally, we assume a feature map $\vphi:\Xcal\rightarrow\Fcal$, which embeds the input in some high dimensional feature space $\Fcal=\RR^D$.
+In particular, $\vphi(\vx)$ is a real value vector of $D$ dimension.
+The goal is to learn from a \textit{hypothesis class} $\Fcal$ a mapping function $f\in\Fcal:\Xcal\rightarrow\Ycal$  that maps an input $\vx\in\Xcal$ to an output $y\in\Ycal$. 
+
+The hypothesis class we consider is a set of \textit{linear classifiers} that are parameterized by weight vector $\vw$ and bias term $b$ that takes the form
+\begin{align}
+	f(x;\vw,b) = \ip{\vw}{\vx} + b, \label{linearclassifier}
+\end{align}
+where by $\ip{\dot\,}{\dot\,}$ we denote inner product of two vectors.
+
+% TODO: averaging perceptron
+% TODO: averaging perceptron algorithm psudocode
+
+
+
+
+\subsection{Perceptron}
+
+The Rosenblatt's Perceptron algorithm \citep{Rosenblatt58,Rosenblatt62} is one type of linear classifiers that is parameterized by a weight vector $\vw$ and a bias term $b$. 
+The decision boundary is given by 
+\begin{align*}
+	f(x;\vw,b) = \ip{\vw}{\vx} + b =0,
+\end{align*}
+which will separate the data into two classes.
+The goal is to learn $\vw$ and $b$ by minimizing the distance of misclassified training examples to the decision boundary.
+
+Assume data point $(x_i,y_i)$ is misclassified, the signed distance from $x_i$ to decision boundary can be computed 
+\begin{align*}
+	D(x_i;\vw,b) = -\frac{y_i(\ip{\vw}{x_i}+b)}{\norm{\vw}}.
+\end{align*}
+Denote by $\Xcal^m$ the set of misclassified examples, the goal of perceptron is to minimize the distance over all misclassified examples defined as
+\begin{definition}{Perceptron Objective Function}\label{perceptron}
+	\begin{align*}
+		\underset{\vw,b}{\minimize} D(\vw,b) = \underset{\vw,b}{\minimize} \left( -\sum_{x_i\in\Xcal^{m}}y_i[\ip{\vw}{x_i}+b]\right).
+	\end{align*}
+\end{definition}
+To achieve (Definition~\ref{perceptron}), we assume $\Xcal^{m}$ is fixed and compute the partial gradient
+\begin{align*}
+	\frac{\partial D(\vw,b)}{\partial\vw} = -\sum_{x_i\in\Xcal^m}{y_ix_i},\\
+	\frac{\partial D(\vw,b)}{\partial b} = -\sum_{x_i\in\Xcal^m}{y_i}.
+\end{align*}
+In practice, the perceptron algorithm uses stochastic gradient descent that processes iteratively from training data one example at a time.
+At each step, the algorithm makes sure the current $\vw$ and $v$ will correctly separate the current training example. 
+Once a misclassified example is visited, it adjust the parameter according to the update rule
+\begin{align*}
+	\vw &\leftarrow \vw + \rho y_i x_i,\\
+	b &\leftarrow b + \rho y_i,
+\end{align*}
+where $\rho$ is the perceptron learning rate.
+\begin{theory}{\citep{Block62,Novikoff62}}\label{perceptron_theory}
+	Given a sequence of training examples in pairs $D=\{(x_1,y_1),\cdots,(x_m,y_m)\}$. 
+	Assume $\norm{x_i}\le R$ for all $i\in\{1,\cdots,m\}$.
+	Suppose for some $\gamma>0$ there exists a unit length vector $\norm{\hat{\vw}}=1$ such that $y_i(\ip{\hat{\vw}}{x_i})\ge\gamma$ for $i$ (training data $D$ is linearly separable).
+	Then the number of mistakes the perceptron algorithm makes on the sequence of training data $D$ is at most ${R^2}/{\gamma^2}$.
+\end{theory}
+\begin{proof}
+	Suppose the $k$'th mistake is made on the $i$'th training example, and current weight vector is $\vw^k$.
+	In addition, we set $\vw^0=\vzero$.
+	As the Perceptron makes a mistake on $(x_i,y_i)$, we immediately have
+	\begin{align*}
+		y_i\ip{\vw_k}{x_i} \le 0.
+	\end{align*}
+	According to update rule, we have
+	\begin{align*}
+		\vw^{k+1} = \vw^{k} + \rho y_ix_i.
+	\end{align*}
+	Then, the following holds
+	\begin{align*}
+		\ip{\vw^{k+1}}{\hat{\vw}} = \ip{\vw^k}{\hat{\vw}} + \rho y_i\ip{x_i}{\hat{\vw}} \ge \ip{\vw^k}{\hat{\vw}} + \rho\gamma.
+	\end{align*}
+	Straight forward induction give us
+	\begin{align}
+		\ip{\vw^{k+1}}{\hat{\vw}}\ge k\rho\gamma. \label{induction1}
+	\end{align}
+	We also have
+	\begin{align*}
+		\norm{\vw^{k+1}}^2 
+		= \norm{\vw^{k} + \rho y_ix_i}^2
+		= \norm{\vw^k}^2 + \rho^2\norm{x_i}^2 + 2\rho y_i\ip{x_i}{\vw^k}
+		\le \norm{\vw^k}^2 + \rho^2R^2
+	\end{align*}
+	Straight forward induction give us
+	\begin{align}
+		\norm{\vw^{k+1}}^2\le k\rho^2R^2. \label{induction2}
+	\end{align}
+	Together with (\ref{induction1}) and (\ref{induction2}) we have
+	\begin{align*}
+		k\le{R^2}/{\gamma^2}.
+	\end{align*}
+\end{proof}
+Theory~\ref{perceptron_theory} shows that if the data are linearly separable, the perceptron algorithm will make a finite number of mistakes. 
+In particular, the Perceptron algorithm will iterate through the training set and will converge to a vector that well separates all training examples.
+Moreover, the number of mistakes will be bounded by the minimum gap between the positive and negative examples.
+
+The standard Perceptron algorithm supposes that the data are linearly separable, iterates over the training set, and eventually converges.
+However, the setting is less interesting for most applications where the data might not be linearly separable or it takes too long for the algorithm to converge.
+Therefore, we need to find out the best decision rule given a set of updates.
+
+\textit{Voted Perceptron} developed in \citep{Freund99} is a straight forward modification of the standard Perceptron
+As described in (Algorithm~\ref{voted_perceptron}), the Voted perceptron algorithm keeps track and updates during training all weight vectors. (line~\ref{perceptron_algorithm_weight_vector}) and their weights (line~\ref{perceptron_algorithm_weight}).
+The weight can be seen as the 'survival time' of the weight vector during Perceptron training.
+The final decision rule is computed as the weighted average of all encountered weight vectors (line~\ref{perceptron_algorithm_average}).
+\begin{algorithm}
+\caption{Voted Perceptron Learning Algorithm}
+\label{voted_perceptron}
+\begin{algorithmic}[1]
+	\REQUIRE Training sample $\lbrace (x_i,\vy_i)\rbrace_{i=1}^m$, iteration limit $T$
+	\ENSURE Weight parameter $\vw$
+	\STATE $\vw^{1}=\vzero,c^1=0$
+	\STATE $k=1$
+	\FOR{$t=1\cdots T$}
+		\FOR{$i=1\cdots m$}
+			\STATE Compute $\hat{y} = \sign(\ip{\vw}{x_i})$
+			\IF{$\hat{y} = y_i$}
+				\STATE $c^k = c^k + 1$
+			\ELSE
+				\STATE $\vw^{k+1} = \vw^{k} + \rho y_ix_i$ \label{perceptron_algorithm_weight_vector}
+				\STATE $c^{k+1} =1$ \label{perceptron_algorithm_weight}
+				\STATE $k=k+1$
+			\ENDIF
+		\ENDFOR
+	\ENDFOR
+	\RETURN $\vw = \sum_{l=1}^{k}c^l\vw^{l}$ \label{perceptron_algorithm_average}
+\end{algorithmic}
+\end{algorithm}
+
+
+%
+% logit
+\subsection{Logistic Regression}
+
+% general introduction
+Logistic regression is a important aspect in statistics and is closely related to the Perceptron and the Support Vector Machine (Section~\ref{}).
+It is a classification model rather than regression \citep{Bishop07}.
+It models the conditional probability $p(y=+1|\vx)$ for a binary output variable $y\in\Ycal$.
+%Without loss of generality, in the rest part of this section we use $p(\vx)$ to denote above conditional probability of $p(y|\vx)$ when fixing $y=1$.
+To model the probability, we do not restrict to any particular form, as any unknown parameters can be estimated by \textit{maximum likelihood estimation} (MLE).
+However, we are most interested in the simple linear model as described in (\ref{linearclassifier}).
+
+% detailed model, decision boundary
+To use linear model in Logistic Regression, the first choice is to let $p(y=+1|\vx)$ be a linear function of $\vx$, where the problem is the linear function is unbounded but the probability $p(\vx)\in[0,1]$.
+Another choice is to let $\log p(y=+1|\vx)$ be a linear function of $\vx$, where the problem is the log-likelihood ranges from zero to infinite.
+The choice in Logistic Regression is to use logistic transformation of the original probability function
+\begin{align*}
+	\log\frac{p(y=+1|\vx)}{1-p(y=+1|\vx)} = \ip{\vw}{\vx} + b,
+\end{align*}
+which by solving for $p(y=+1|\vx)$ results in 
+\begin{align}
+	p(y=+1|\vx;\vw,b) = \frac{1}{1+\exponential{-\ip{\vw}{x}-b}}. \label{lr_1}
+\end{align}
+We can compute
+\begin{align}
+	p(y=-1|\vx;\vw,b)=1-p(y=+1|\vx;\vw,b)=\frac{1}{1+\exponential{\ip{\vw}{x}b}}. \label{lr_2}
+\end{align}
+Putting together (\ref{lr_1}) and (\ref{lr_2}), we can define Logistic Regression by
+\begin{definition}{Logistic Regression}\label{logistic_regression}
+	\begin{align*}
+		p(y=\pm1|\vx;\vw,b) = \frac{1}{1+\exponential{-y_i(\ip{\vw}{x}-b)}}.
+	\end{align*}
+\end{definition}
+Naturally, we expect the prediction $y=+1$ when $p(y=+1|x;\vw,b)\ge0.5$ and $y=-1$, when $p(y=+1|x;\vw,b)<0.5$.
+Therefore, the decision rule is similar to perceptron where we predict $y=+1$ when $\ip{\vw}{x}+b\ge0$, and $y=-1$ otherwise.
+Besides decision boundary, Logistic Regression can output the class probability from (Definition~\ref{logistic_regression}) as the the 'distance' of the data point to the decision boundary.
+It is the probabilistic output that makes Logistic Regression no more than a classifier, as it outputs detailed predictions (class probability).
+
+% optimization
+As the model is capable of outputting class probability not just class category, to learn a Logistic Regression model we attempt to learn parameters $\vw$ and $b$ by maximizing the probability (likelihood) of the training data.
+In particular, the probability of training data $\vx$ with class label $y$ is $p(y|\vx)$.
+The likelihood of parameters given data can be computed from
+\begin{align}
+	L(\vw,b;D) = \prod_{i=1}^mp(y_i|\vx_i). \label{lr_likelihood}
+\end{align}
+To apply MLE, it is easier if, instead of maximizing the likelihood, we maximize the log-likelihood, which turn the product (\ref{lr_likelihood}) into sum
+\begin{align}
+	\log L(\vw,b|D) = \sum_{i=1}^{m}\log p(y_i|\vx_i) = -\sum_{i=1}^{m}\log (1+\exponential{-y_i(\ip{\vx}{\vw}+b)}) \label{lr_likelihood_sum}.
+\end{align}
+
+% logistic regression of other type
+Though MLE training for Logistic Regression model meet our need of fitting training data, it does not guarantee to generalize well on test data.
+To achieve better generalization power, various smoothing techniques have been proposed \citep{Chen99,Chen00,Goodman03}, among which adding Gaussian prior on weight parameter $\vw$ is one of the standard treatment.
+In practice, a zero-mean spherical Gaussian with variance $\sigma^2$ is assumed on $\vw$.
+Thus, the maximum likelihood problem (\ref{lr_likelihood}) is transformed into \textit{Maximum A-Posteriori} (MAP) problem of the following form
+\begin{align}
+	p(\vw,b|D;\sigma^2) = p(\vw|\sigma^2)\prod_{i=1}^mp(y_i|\vx_i)=\exponential{-\frac{\norm{\vw}^2}{\sigma^2}}\prod_{i=1}^{m}{\frac{1}{1+\exponential{-y_i(\ip{\vx}{\vw}+b)}}}. \label{lr_posteriori}
+\end{align}
+Instead of maximizing the posteriori (\ref{lr_posteriori}), it is easier to maximize the log-posteriori
+\begin{align}
+	\log p(\vw,b|D;\sigma^2) = -{\frac{\norm{\vw}^2}{\sigma^2}} - \sum_{i=1}^{m}\log{(1+\exponential{-y_i(\ip{\vx}{\vw}+b)})}. \label{lr_posteriori_log}
+\end{align}
+
+Numbers of optimization techniques have been proposed to solve the minimization problem (\ref{lr_posteriori_log}) in Logistic Regression, many of which are covered in the survey \citep{Minka03}.
+For example, \textit{Itrative Scaling} methods were proposed and continuously developed in \citep{Darroch72,Pietra97,Berger97,Goodman02Sequential,Jin03a}.
+A quasi-Newton method was discussed in \citep{Minka03}.
+\citet{Komarek05making,Lin2008trust} have proposed truncated Newton method.
+And coordinate descent method was proposed in \citep{Huang09iterative}.
+
+% dual for and optimization
+There are also efforts being made to solve the logistic regression from its dual, of which the first algorithm was proposed in \citep{Jaakkola99probabilistic}.
+The key is to introduce a set of tighter upper bound on (\ref{lr_posteriori_log}) that are parameterized by $\valpha$.
+The bound should have a simple form such that the maximizing (\ref{lr_posteriori_log}) over $\vw$ can be solved analytically with $\alpha$.
+The solution to the original problem is transferred as finding the tighter upper bound for  $\vw$, which is to minimize with respect to $\alpha$.
+The dual form is given by 
+\begin{align*}
+	\underset{\valpha}{\minimize} & \quad\frac{1}{2}\sum_{i=1}^{m}\sum_{j=1}^{m}\valpha_iy_ix_ix_jy_j\valpha_j + \sum_{i=1}^{m}\left[\valpha_i\log\alpha_i+(\sigma^2-\valpha_i)\log(\sigma^2-\valpha_i)\right] \\
+	\st &\quad 0\le\alpha\le\sigma^2, \, \forall i=\{1,\cdots,m\}.
+\end{align*}
+Later on, the iterative optimization method \citep{Keerthi05a} and the dual coordinate descent method \citep{Yu11dual} are also developed and build based on the dual form.
+
+% TODO: expand the dual form of logistic regression
+
+%
+% svm
+\subsection{Support Vector Machine (\svm)}
+
+% some history
+Support Vector Machine (\svm) transfers learning problem into optimization problem.
+The framework was firstly introduced in \citep{Boser92}.
+Theory and algorithm are detailed in e.g. \citep{taylor04,Bishop07}.
+% hard margin svm
+We begin our discussion by considering a very simple case where we assume the data are linear separable that is there is a hyperplane in the feature space that separates data into two classes.
+In addition we assume the \textit{separating hyperplane} have the form
+\begin{align*}
+	f(x)=\ip{\vw}{\vx} + b = 0,
+\end{align*}
+so that $y_i=-1$ if $f(x_i)<0$, and $y_i=+1$ if $f(x_i)>0$.
+Later, we could decide the label of the test example $x_{ts}$ via $y_{ts}=\sign(f(x_{ts}))$, given $\vw$ that achieves correct separation on the training data.
+
+However, there can be infinite number of separating hyperplane that solves the separation problem on the training data.
+We wish to find one that generalize well also on test data.
+A good strategy is to look for a hyperplane that keeps the maximum distance from both the training data and the test data, which is often known as \textit{max-margin principal}.
+To see this, imagining putting a separating hyperplane close to one class of examples which will achieve better classification on test examples from the other class.
+Base on the max-margin principal, we further define two \textit{margin hyperplanes} parallel to the separating hyperplane as
+\begin{align*}
+	\ip{\vw}{\vx} + b &= \pm a
+\end{align*}
+The distance between two margin hyperplane and the separating hyperplane, $\gamma$, is called \textit{margin}.
+And now the goal is to find the separating hyperplane such that it is equal distance to both margin hyperplanes while margin is maximized.
+Basic geometry gives us
+\begin{align}
+	\gamma = \frac{a[\ip{\vw}{x}+b]}{\norm{\vw}}. \label{svmmargin}
+\end{align}
+The max-margin solution \citep{Bishop07} is given by
+\begin{align*}
+	(\hat{\vw},\hat{b}) = \underset{\vw,b}{\argmax}\,\left\{\frac{1}{\norm{\vw}}\underset{i}{\minimize}[y_i(\ip{\vw}{x_i}+b)]\right\}.
+\end{align*}
+Notice that if one scales $\vw$ and $b$ by a constance factor $\kappa$ the margin $\gamma$ (\ref{svmmargin}) still invariant given $\vx$.
+Therefore, to avoid ambiguity we set margin hyperplane as 
+\begin{align}
+	\ip{\vw}{\vx} + b &= \pm 1.\label{svmmarginhyperplane}
+\end{align}
+According to (\ref{svmmarginhyperplane}), the constraints for all examples to be well separated follows
+\begin{align*}
+	\ip{\vw}{x_i} + b &\ge  +1, \quad \forall y_i=+1,\\
+	\ip{\vw}{x_i} + b &\le -1, \quad \forall y_i=-1.
+\end{align*}
+Together, we have
+\begin{align}
+	y_i[\ip{\vw}{x_i} + b] \ge 1, \forall i\in\{1,\cdots,m\}. \label{hardsvmconstraints}
+\end{align}
+It then follows that we can formulate the primal problem of \svm\ as
+\begin{definition}{Hard-Margin \svm\ Optimization Problem in Primal}\label{hardsvmprimal}
+	\begin{align*}
+		\underset{\vw}{\minimize} & \quad\frac{1}{2}\norm{\vw}^2\\
+		\st & \quad y_i[\ip{\vw}{x_i} + b] \ge 1, \forall i\in\{1,\cdots,m\},
+	\end{align*}
+\end{definition}
+where the objective is to find the weight vector of minimum norm that corresponds to maximize the margin between two class of examples, and the constraints states that the training data should be well separated.
+\marginpar{define the margin as maximize the minimum distance}
+\marginpar{introduce support vectors}
+
+% soft margin svm
+We do not use (Definition~\ref{hardsvmprimal}) in practice for two reasons. 
+First, many real world data are not separable, so that solution to (Definition~\ref{hardsvmprimal}) does not always exist.
+Second, the data usually come with noise and error and we do not want resulting classifier over-fit the training data.
+Therefore, we relax the constraints by introducing for each training example $x_i$ a \textit{margin slack} parameter $\xi_i$ and rewrite the constraints (\ref{hardsvmconstraints}) as 
+\begin{align*}
+	y_i[\ip{\vw}{x_i} + b] \ge 1-\xi_i, \xi_i\ge 0, \forall i\in\{1,\cdots,m\},
+\end{align*}
+where $\xi_i$ will allow the violation of the contraints.
+In particular, with $\xi_i=0$ the data point $x_i$ is correctly classified, and lies either on the margin or on the correct side.
+With $0<\xi_i\le 1$ the data point is correctly classified and lies between margin and separating hyperplanes.
+With $\xi_i>1$ the data point is misclassified.
+The new goal is to maximize the margin while penalize the data points that lie on the wrong side of the margin hyperplane as
+\begin{definition}{Soft-Margin \svm\ Optimization Problem in primal}\label{softsvmprimal}
+	\begin{align*}
+		\underset{\vw,\xi}{\minimize} & \quad\frac{1}{2}\norm{\vw}^2 + C\sum_{i=1}^{m}\xi_i\\
+		\st & \quad y_i[\ip{\vw}{x_i} + b] \ge 1-\xi_i, \xi_i\ge 0, \forall i\in\{1,\cdots,m\}
+	\end{align*}
+\end{definition}
+
+\marginpar{dual, kernel, optimization}
+
+% dual
+
+% kernel
+
+\section{Structured Output Prediction}
+
+%
+% notations
+\subsection{Preliminary and Notation}
+
+
+%
+% sub section: perceptron
+\subsection{Maximum Entropy Markov Network (\memm)}
+% TODO
+
+
+%
+% sub section: perceptron
+\subsection{Perceptron for Structured Output}
+
+The perceptron algorithm, dated back to \citep{Rosenblatt58}, is one of the oldest learning algorithm in machine learning.
+As it is extremely easy to implement and usually achieves good performance, the perceptron algorithm is still actively studied in the field.
+Structured perceptron, as suggested by its name, can be seen as the generalization of the perceptron algorithm to structured output space.
+It was firstly proposed in \citep{collins02a, collins02b} with the formalism incredibly similar to multiclass perceptron. 
+The model assumes a score function $\ip{\vw}{\vPhi(x,\vy)}$ as the inner product between a joint feature map $\vPhi(x,\vy)$ and some feature weight parameter $\vw$.
+After weight parameter $\vw$ is obtained, one need to solve the \textit{argmax problem} to get the best output for a given input
+\begin{align}
+	\hat{\vy} = \underset{\vy\in\Ycal}{\argmax} &\quad \ip{\vw}{\vPhi(x_i,\vy)}.  \label{perceptroninference}
+\end{align}
+
+The weight parameter $\vw$ is learned via standard perceptron iterative update by solving argmax operation (\ref{perceptroninference}) in each iteration.
+In particular, the algorithm loops through training examples and updates $\vw$ whenever the predicted label $\hat{\vy}$ is different from true label $\vy$, according to 
+\begin{align*}
+	\vw \leftarrow \vw + \left(\vPhi(x_i,\vy_i) - \vPhi(x_i,\hat{\vy}_i)\right).
+\end{align*}
+The update usually leads to over-fitting and a simple refinement, called "average parameter" similar to \citep{freund99}, is proposed as shown in (Algorithm~\ref{algorithm_structured_perceptron}).
+\begin{algorithm}
+\caption{Structured Perceptron with Parameter Averaging}
+\label{algorithm_structured_perceptron}
+\begin{algorithmic}[1]
+	\REQUIRE Training sample $\lbrace (x_i,\vy_i)\rbrace_{i=1}^m$
+	\ENSURE Weight parameter $\vw$
+	\STATE $\vw^{t,i}=[0,\cdots,0],\,\forall t\in\{1,\cdots,T\},\,\forall i\in\{1,\cdots,m\}$
+	\STATE $c = 1$
+	\FOR{$t=1\cdots T$}
+		\FOR{$i=1\cdots m$}
+			\STATE $\hat{\vy} = \underset{\vy\in\Ycal}{\argmax} \quad \ip{\vw^{t-1,i-1}}{\vPhi(x_i,\vy)}$
+			\IF{$\hat{\vy}\neq\vy$}
+				\STATE $\vw^{t,i} = \vw^{t-1,i-1} + \vPhi(x_i,\vy_i) - \vPhi(x_i,\hat{\vy}_i)$
+			\ENDIF
+			\STATE $c=c+1$
+		\ENDFOR
+	\ENDFOR
+	\RETURN $\vw = \frac{1}{Tm}\sum_{t=1}^{T}\sum_{i=1}^{m}\vw^{t,i}$
+\end{algorithmic}
+\end{algorithm}
+
+In fact, structural perceptron makes two strong assumptions that limit its power and applicability.
+First, the framework assumes 0/1 loss over output variables, that is $\vell(\vy,\hat{\vy})=\vone_{\ind{\vy\neq\hat{\vy}}}$, such that the nearly correct and the completely incorrect output labels will lead to the same update of the weight parameter during the training.
+Secondly, it tacitly assumes that the argmax problem can be solved efficiently, which is generally not true on many structured output space.
+In the original work \citep{collins02a}, the algorithm relied on Viterbi decoding, which works on sequence tagging problem.
+
+% TODO: incremental perceptron training
+
+
+%
+% sub section: crf
+\subsection{Conditional Random Field (\crf)}
+Condition Random Field (\crf), pioneered in \citep{lafferty01} and later in \citep{taskar02}, is a discriminative framework that constructs a conditional model $P(\vy|\vx)$ from paired input variable $x\in X$ and output variables $\vy\in Y$.
+It optimizes a log-loss which is analogue to 0/1 loss over the whole structured output space.
+\begin{definition}{Conditional Random Field (\crf)}\\
+	Denote by $Y=\{\vy_1,\cdots,\vy_m\}$ a set of output random variables, and by $X=\{x_1,\cdots,x_m\}$ a set of input random variables to condition on.
+	Let $G=(E,V)$ be a graph such that $Y = (Y_v)_{v\in V}$.
+	A Conditional Random Field (\crf) defines the conditional probability distribution
+	\begin{align*}
+		P(\vy|\vx) &= \frac{1}{Z_{x,\vw}}\exp{\ip{\vw}{\vPhi(x,\vy)}},
+	\end{align*}
+	where $Z_{x,\vw}$ is the partition function dependent on $\vx$ that sums over all possible output variables 
+	\begin{align}
+		Z_{x,\vw} &= \sum_{\vy'\in\Ycal}\exp{\ip{\vw}{\vPhi(x,\vy')}}. \label{crf_partition_function}
+	\end{align}
+	Thus, when conditioned on $\vx$, the random variables $y_v$ obey the Markov property with respect to graph $G$.
+\end{definition}
+
+The parameter $\vw$ is solved by introducing parameter prior and maximizing the log of the resulting MAP problem as described in \citep{taskar02}
+\begin{align}
+	L(\vw) = \sum_{i=1}^{m}\left[\ip{\vw}{\vPhi(x_i,\vy_i)}-\log{\sum_{\vy'\in\Ycal}{\exp{\ip{\vw}{\vPhi(x_i,\vy')}}}}\right] - \frac{1}{\sigma^2}\norm{\vw}^2 + C. \label{crf_inference}
+\end{align}
+The parameter learning problem, as (\ref{crf_inference}), is solved in \citep{lafferty01} via improved iterative scaling algorithm (\iis) from \citep{Pietra97i}.
+In order to make \crf\ work in practice, one have to make sure that the log normalization function (\ref{crf_partition_function}) and the argmax inference can be solve efficiently.
+
+
+ 
+
+
+%
+% sub section: m3n
+\subsection{Max-Margin Markov Network (\mmmn)}
+
+The Max-Margin Markov Network (\mmmn) unifies the frameworks of kernel based discriminative learning and probabilistic probabilistic graphical model \citep{taskar04}.
+The model defines a log-linear Markov network over a set of output variables, thus, it is capable of modelling the correlation between these output variables.
+Recall that Support Vector Machine (\svm) searches for a feature weight vector of smaller L$_2$ norm, which achieves a margin of at least one on training examples for the purpose of good generalization power.
+Following the same formalism, \mmmn\ also defines a margin-based quadratic programming optimization problem for the weight vector of the model.
+In particular, it extends \svm\ to structured output space via a loss function $\ell$ that requires the score difference between true output label $\vy$ and any incorrect label $\hat{\vy}$ be at least $\vell(\vy,\hat{\vy})$.
+The primal optimization problem of \mmmn\ is given as
+\begin{definition}{\mmmn\ optimization problem in primal form}\label{def_mmmn}
+	\begin{align*}
+		\underset{\vw,\vxi}{\minimize} & \quad\frac{1}{2}\norm{\vw}^2 + C\sum_{i=1}^{m}\xi_i \\
+		\st & \quad\ip{\vw}{\vPhi(x_i,\vy_i)} - \ip{\vw}{\vPhi(x_i,\vy)} \ge \vell(\vy_i,\vy)-\xi_i,\\
+		& \quad \forall \xi_i\ge0, \forall \vy\in\Ycal/\vy_i, \forall i\in\{1,\cdots,m\},
+	\end{align*}
+\end{definition}
+where $\xi_i$ denotes the slack allotted to each example to make sure solution can always be found, $\vell(\vy_i,\vy)$ is the loss function between pseudo-label and the correct label, and $C$ is the slack parameter that controls the amount of regularization in the model.
+The intuition behind the optimization is to maximizing the margin between the correct output label $\vy$ and any incorrect label $\hat{\vy}$.
+In particular, the margin is scaled by the loss function $\vell(\vy,\hat{\vy})$ such that the incorrect label with bigger loss will require larger margin. 
+
+It is immediately clear that the primal optimization problem of \mmmn\ (Definition~\ref{def_mmmn}) is difficult to solve as there are exponential numbers of constraints, one being instantiated for each pair of training example and pseudo label $(x,\vy)$.
+The corresponding dual form is also difficult as there are exponential number of dual variables \cite[p.~4]{taskar04}.
+Fortunately, by exploring the Markov network structure defined on the output labels, the original problem can be formulated into factorized dual quadratic programming, as long as the loss function $\vell$ and joint feature map $\vPhi$ are decomposable over the Markov network.
+
+As the number of parameters (weight vector) is quadratic in the number of training examples and edges in the network, it still cannot fit into standard QP solver. 
+In the original work \citep{taskar04}, the authors developed a coordinate descent method analogous to the sequential minimal optimization (\smo) used for SVM \citep{Platt98}.
+Subsequently, there are many efficient optimization algorithms being proposed, including exponential gradient optimization methods developed in \citep{bartlett04}, extra-gradient methods described in \citep{taskar06}, sub-gradient methods proposed in \citep{Ratliff07}, and conditional gradient methods in \citep{rousu06, rousu07}.
+
+In order to apply the optimization methods in practice, one have to solve the \textit{loss augmented} inference problem defined as
+\begin{align}
+	\hat{\vy} = \underset{\vy\in\Ycal/\vy_i}{\argmax} &\quad \ip{\vw}{\vPhi(x_i,\vy)} + \vell(\vy_i,\vy) \label{mmmninference}.
+\end{align} 
+To efficiently compute (\ref{mmmninference}), the loss function need to be decomposable over the Markov network.
+Nevertheless, \mmmn\ is more flexible compared to \crf\ due to the following two reasons.
+First, \mmmn\ model does not require partition function to be calculated. 
+Thus, it is more feasible in terms of computation and can be applied to problems that is \nphard\ for \crf.
+Secondly, one can define more complex loss function on \mmmn\ other than just 0/1 loss for \crf, as long as the function is decomposable.
+
+
+
+
+
+%
+% sub section: svm struct
+\subsection{Support Vector Machine for Interdependent and Structured Outputs (\svmstruct)}
+
+The formulation of Support Vector Machine for interdependent and structured output space (\svmstruct) described in \citep{THJA04,TJTA05} is amazingly similar to \mmmn.
+Compared to \mmmn\ framework which scales the margin by the loss function, \svmstruct\ formulation scales the margin errors ({\em slack variables}) by the loss function.
+The primal optimization problem of \svmstruct\ is given as
+\begin{definition}{\svmstruct\ optimization problem in primal form}\label{def_svmstruct}
+	\begin{align*}
+		\underset{\vw,\vxi}{\minimize} & \quad\frac{1}{2}\norm{\vw}^2 + \frac{C}{m}\sum_{i=1}^{m}\xi_i \\
+		\st & \quad\ip{\vw}{\vPhi(x_i,\vy_i)} - \ip{\vw}{\vPhi(x_i,\vy)} \ge 1-\frac{\xi_i}{\vell(\vy_i,\vy)},\\
+		& \quad \forall \xi_i\ge0, \forall \vy\in\Ycal/\vy_i, \forall i\in\{1,\cdots,m\},
+	\end{align*}
+\end{definition}
+where $\xi_i$ denotes the slack allotted to each example, $\vell(\vy_i,\vy)$ is the loss function between pseudo-label and the correct label, and $C$ is the slack parameter that controls the amount of regularization in the model.
+The primal form can be interpreted as maximizing the the margin between the correct training example and the pseudo-example.
+Allowing margin error is to make sure solution can always be found.
+
+It seems intuitive to scale the margin error by the loss function, the advantage of which is also claimed the authors in \citep[p.3]{THJA04}.
+They suggest that under \mmmn\ framework the learning system will work hard on the examples that incur big loss thought they may not even close to be confusable compared to true target value $\vy_i$.
+
+In addition to the slight difference in loss scaling, the optimization technique employed by \svmstruct\ differ significantly compared to \mmmn.
+Since the loss function in \svmstruct\ is not decomposable, the model cannot remove exponential number of constraints during optimization.
+On the other hand, \citet{THJA04} developed an iterative optimization approach that creates a nested sequence of successively tighter relaxation of the original problem via a cutting-plane methods \citep{Bishop07,JFY09}.
+In particular, constraints are added as necessary.
+It is also shown that the iterative optimization algorithm will converge to some optimal solution of $\epsilon$ precision in polynomial number of steps.
+
+The major drawback of \svmstruct\ is the inference is usually intractable.
+To find the most violating constraint, the model will compute the loss-augmented inference problem as in \citep{TJTA05}
+\begin{align}
+	\hat{\vy} = \underset{\vy\in\Ycal/\vy_i}{\argmax} &\quad [1-\ip{\vw}{\vPhi(x_i,\vy)}]\,\vell(\vy_i,\vy) \label{svmstructinference},
+\end{align}
+where the loss function appears as a multiplicative term.
+As the model does not assume any property of decomposition on the loss function over output space, the loss-augmented inference problem (\ref{svmstructinference}) of \svmstruct\ is in practice intractable. 
+The intractability of the inference problem can be seen as an exchange of the generality of the loss function which allows more complicated loss to be defined. 
+
+
+
+
+\section{Ensemble Methods}
+
+
+\chapter{Methods}
+
+
+\chapter{Predicting Influence Network}
+\section{Problem Definition}
+\section{Prior Work}
+\section{Methods}
+
+
+
+\chapter{Theory}
+
+
+\chapter{Applications}
+
+
+\chapter{Future Work}
+
+
+
+%% Examples of article references, remove these from your manuscript!
+% Uncomment them, if you want to see the results of these commands in this example document
+% Refer to the Journal paper 1 of this example document
+%\citepub{su14b} \& \cpub{su14b} \& \cp{su14b} \& \pageref{su14b} \& \ref{su14b}
+% Refer to the Conference paper of this example document
+%\citepub[p.~2]{su14a} \& \cpub[Sec.~ 1]{su14a} \&  \cp[pp.~1--2]{su14a} \& \pageref{su14a} \& \ref{su14a} 
+
+
+%\section{Section Heading}
+%\lipsum[5]
+
+\bibliographystyle{apalike} 
+\bibliography{dissertation}

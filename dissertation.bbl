@@ -1,0 +1,219 @@
+\begin{thebibliography}{}
+
+\bibitem[Bartlett et~al., 2005]{bartlett04}
+Bartlett, P.~L., Collins, M., Taskar, B., and McAllester, D.~A. (2005).
+\newblock Exponentiated gradient algorithms for large-margin structured
+  classification.
+\newblock In {\em Advances in Neural Information Processing Systems 17 (NIPS
+  2005)}, pages 113--120. MIT Press.
+
+\bibitem[Berger, 1999]{Berger97}
+Berger, A. (1999).
+\newblock The improved iterative scaling algorithm: A gentle introduction.
+\newblock {\em Machine Learning}.
+
+\bibitem[Bishop, 2007]{Bishop07}
+Bishop, C.~M. (2007).
+\newblock {\em {Pattern Recognition and Machine Learning (Information Science
+  and Statistics)}}.
+\newblock Springer, 1st ed. 2006. corr. 2nd printing 2011 edition.
+
+\bibitem[Block, 1962]{Block62}
+Block, H.~D. (1962).
+\newblock The perceptron: A model for brain functioning. i.
+\newblock {\em Rev. Mod. Phys.}, 34:123--135.
+
+\bibitem[Boser et~al., 1992]{Boser92}
+Boser, B.~E., Guyon, I.~M., and Vapnik, V.~N. (1992).
+\newblock A training algorithm for optimal margin classifiers.
+\newblock In {\em Proceedings of the 5th annual workshop on Computational
+  learning theory}, pages 144--152. ACM.
+
+\bibitem[Chen and Rosenfeld, 1999]{Chen99}
+Chen, S. and Rosenfeld, R. (1999).
+\newblock {\em A Gaussian Prior for Smoothing Maximum Entropy Models}.
+\newblock PhD thesis, Computer Science Department, Carnegie Mellon University.
+\newblock Technical Report CMU-CS-99-108.
+
+\bibitem[Chen and Rosenfeld, 2000]{Chen00}
+Chen, S. and Rosenfeld, R. (2000).
+\newblock A survey of smoothing techniques for me models.
+\newblock {\em Speech and Audio Processing, IEEE Transactions on}, 8(1):37--50.
+
+\bibitem[Collins, 2002]{collins02a}
+Collins, M. (2002).
+\newblock Discriminative training methods for hidden markov models: Theory and
+  experiments with perceptron algorithms.
+\newblock In {\em Proceedings of the ACL-02 Conference on Empirical Methods in
+  Natural Language Processing}, pages 1--8. Association for Computational
+  Linguistics.
+
+\bibitem[Collins and Duffy, 2002]{collins02b}
+Collins, M. and Duffy, N. (2002).
+\newblock New ranking algorithms for parsing and tagging: Kernels over discrete
+  structures, and the voted perceptron.
+\newblock In {\em Proceedings of the 40th Annual Meeting on Association for
+  Computational Linguistics}, pages 263--270, Stroudsburg, PA, USA. Association
+  for Computational Linguistics.
+
+\bibitem[Darroch and Ratcliff, 1972]{Darroch72}
+Darroch, J. and Ratcliff, D. (1972).
+\newblock Generalized iterative scaling for log-linear models.
+\newblock {\em Annals of Mathematical Statistics}, 43(4):25--40.
+
+\bibitem[Della~Pietra et~al., 1997]{Pietra97}
+Della~Pietra, S., Della~Pietra, V., and Lafferty, J. (1997).
+\newblock Inducing features of random fields.
+\newblock {\em Pattern Analysis and Machine Intelligence, IEEE Transactions
+  on}, 19(4):380--393.
+
+\bibitem[Freund and Schapire, 1999]{Freund99}
+Freund, Y. and Schapire, R.~E. (1999).
+\newblock Large margin classification using the perceptron algorithm.
+\newblock {\em Machine Learning}, 37(3):277--296.
+
+\bibitem[Goodman, 2002]{Goodman02Sequential}
+Goodman, J. (2002).
+\newblock Sequential conditional generalized iterative scaling.
+\newblock In {\em Proceedings of the 40th Annual Meeting on Association for
+  Computational Linguistics}, ACL '02, pages 9--16.
+
+\bibitem[Goodman, 2003]{Goodman03}
+Goodman, J. (2003).
+\newblock Exponential priors for maximum entropy models.
+\newblock In {\em In Proceedings of the Annual Meeting of the Association for
+  Computational Linguistics}, pages 305--312.
+
+\bibitem[Huang et~al., 2009]{Huang09iterative}
+Huang, F.-L., Hsieh, C.-J., Chang, K.-W., and Lin, C.-J. (2009).
+\newblock Iterative scaling and coordinate descent methods for maximum entropy.
+\newblock In {\em Proceedings of the ACL-IJCNLP 2009 Conference Short Papers},
+  pages 285--288.
+
+\bibitem[Jaakkola and Haussler, 1999]{Jaakkola99probabilistic}
+Jaakkola, T.~S. and Haussler, D. (1999).
+\newblock Probabilistic kernel regression models.
+\newblock In {\em In Proceedings of the 7th Workshop on Artificial Intelligent
+  and Statistics}. Morgan Kaufmann.
+
+\bibitem[Jin et~al., 2003]{Jin03a}
+Jin, R., Yan, R., Zhang, J., and Hauptmann, A.~G. (2003).
+\newblock A faster iterative scaling algorithm for conditional exponential
+  model.
+\newblock In {\em Proceedings of the 20th International Conference on Machine
+  Learning (ICML-03)}, pages 282--289.
+
+\bibitem[Joachims et~al., 2009]{JFY09}
+Joachims, T., Finley, T., and Yu, C.-N. (2009).
+\newblock Cutting-plane training of structural svms.
+\newblock {\em Machine Learning}, 77(1):27--59.
+
+\bibitem[Keerthi et~al., 2005]{Keerthi05a}
+Keerthi, S., Duan, K., Shevade, S., and Poo, A. (2005).
+\newblock A fast dual algorithm for kernel logistic regression.
+\newblock {\em Machine Learning}, 61(1-3):151--165.
+
+\bibitem[Komarek and Moore, 2005]{Komarek05making}
+Komarek, P. and Moore, A. (2005).
+\newblock Making logistic regression a core data mining tool: A practical
+  investigation of accuracy, speed, and simplicity.
+
+\bibitem[Lafferty et~al., 2001]{lafferty01}
+Lafferty, J.~D., McCallum, A., and Pereira, F. C.~N. (2001).
+\newblock Conditional random fields: Probabilistic models for segmenting and
+  labeling sequence data.
+\newblock In {\em Proceedings of the 8th International Conference on Machine
+  Learning}, pages 282--289. Morgan Kaufmann Publishers Inc.
+
+\bibitem[Lin et~al., 2008]{Lin2008trust}
+Lin, C.-J., Weng, R.~C., and Keerthi, S.~S. (2008).
+\newblock Trust region newton method for logistic regression.
+\newblock {\em Journal of Machine Learning Research}, 9:627--650.
+
+\bibitem[Minka, 2003]{Minka03}
+Minka, T.~P. (2003).
+\newblock A comparison of numerical optimizers for logistic regression.
+
+\bibitem[Novikoff, 1962]{Novikoff62}
+Novikoff, A.~B. (1962).
+\newblock On convergence proofs on perceptrons.
+\newblock {\em Symposium on the Mathematical Theory of Automata}, 12:615--622.
+
+\bibitem[Platt, 1998]{Platt98}
+Platt, J. (1998).
+\newblock Sequential minimal optimization: A fast algorithm for training
+  support vector machines.
+\newblock Technical report, Microsoft Research.
+
+\bibitem[Ratliff et~al., 2007]{Ratliff07}
+Ratliff, N., Bagnell, J. A.~D., and Zinkevich, M. (2007).
+\newblock (online) subgradient methods for structured prediction.
+\newblock In {\em Proceedings of the 11th International Conference on
+  Artificial Intelligence and Statistics (AISTATS 2007)}, volume~2. Journal of
+  Machine Learning Research W\&CP.
+
+\bibitem[Rosenblatt, 1958]{Rosenblatt58}
+Rosenblatt, F. (1958).
+\newblock The perceptron: A probabilistic model for information storage and
+  organization in the brain.
+\newblock {\em Psychological Review}, 65:386--408.
+
+\bibitem[Rosenblatt, 1962]{Rosenblatt62}
+Rosenblatt, F. (1962).
+\newblock Principles of neurodynamics.
+
+\bibitem[Rousu et~al., 2006]{rousu06}
+Rousu, J., Saunders, C., Szedmak, S., and Shawe-Taylor, J. (2006).
+\newblock {Kernel-Based Learning of Hierarchical Multilabel Classification
+  Models}.
+\newblock {\em The Journal of Machine Learning Research}, 7:1601--1626.
+
+\bibitem[Rousu et~al., 2007]{rousu07}
+Rousu, J., Saunders, C., Szedmak, S., and Shawe-Taylor, J. (2007).
+\newblock {Efficient algorithms for max-margin structured classification}.
+\newblock {\em Predicting Structured Data}, pages 105--129.
+
+\bibitem[Shawe-Taylor and Cristianini, 2004]{taylor04}
+Shawe-Taylor, J. and Cristianini, N. (2004).
+\newblock {\em {Kernel Methods for Pattern Analysis}}.
+\newblock Cambridge University Press.
+
+\bibitem[Taskar et~al., 2002]{taskar02}
+Taskar, B., Abbeel, P., and Koller, D. (2002).
+\newblock Discriminative probabilistic models for relational data.
+\newblock In {\em Proceedings of the Eighteenth Conference on Uncertainty in
+  Artificial Intelligence}, UAI'02, pages 485--492, San Francisco, CA, USA.
+  Morgan Kaufmann Publishers Inc.
+
+\bibitem[Taskar et~al., 2004]{taskar04}
+Taskar, B., Guestrin, C., and Koller, D. (2004).
+\newblock Max-margin markov networks.
+\newblock In {\em Advances in Neural Information Processing Systems 16 (NIPS
+  2004)}, pages 25--32. MIT Press.
+
+\bibitem[Taskar et~al., 2006]{taskar06}
+Taskar, B., Lacoste-Julian, S., and Jordan, M.~I. (2006).
+\newblock Structured prediction via the extragradient method.
+\newblock In {\em Advances in Neural Information Processing Systems 18 (NIPS
+  2006)}, pages 1345--1352. MIT Press.
+
+\bibitem[Tsochantaridis et~al., 2004]{THJA04}
+Tsochantaridis, I., Hofmann, T., Joachims, T., and Altun, Y. (2004).
+\newblock Support vector machine learning for interdependent and structured
+  output spaces.
+\newblock In {\em Proceedings of the 21th International Conference on Machine
+  Learning (ICML 2004)}, pages 823--830, New York, NY, USA. ACM.
+
+\bibitem[Tsochantaridis et~al., 2005]{TJTA05}
+Tsochantaridis, I., Joachims, T., Hofmann, T., and Altun, Y. (2005).
+\newblock Large margin methods for structured and interdependent output
+  variables.
+\newblock {\em Journal of Machine Learning Research}, 6:1453--1484.
+
+\bibitem[Yu et~al., 2011]{Yu11dual}
+Yu, H.-F., Huang, F.-L., and Lin, C.-J. (2011).
+\newblock Dual coordinate descent methods for logistic regression and maximum
+  entropy models.
+\newblock {\em Machine Learning}, 85(1-2):41--75.
+
+\end{thebibliography}
