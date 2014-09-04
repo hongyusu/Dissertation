@@ -61,6 +61,11 @@ Collins, M. and Duffy, N. (2002).
   Computational Linguistics}, pages 263--270, Stroudsburg, PA, USA. Association
   for Computational Linguistics.
 
+\bibitem[Collobert et~al., 2002]{Collobert02a}
+Collobert, R., Bengio, S., and Bengio, Y. (2002).
+\newblock A parallel mixture of svms for very large scale problems.
+\newblock {\em Neural Computation}, 14(5):1105--1114.
+
 \bibitem[Cortes and Vapnik, 1995]{Cortes95support}
 Cortes, C. and Vapnik, V. (1995).
 \newblock Support-vector networks.
@@ -70,6 +75,11 @@ Cortes, C. and Vapnik, V. (1995).
 Darroch, J. and Ratcliff, D. (1972).
 \newblock Generalized iterative scaling for log-linear models.
 \newblock {\em Annals of Mathematical Statistics}, 43(4):25--40.
+
+\bibitem[Decoste and Schölkopf, 2002]{Decoste02support}
+Decoste, D. and Schölkopf, B. (2002).
+\newblock Training invariant support vector machines.
+\newblock {\em Machine Learning}, 46(1-3):161--190.
 
 \bibitem[Della~Pietra et~al., 1997]{Pietra97}
 Della~Pietra, S., Della~Pietra, V., and Lafferty, J. (1997).
@@ -93,6 +103,18 @@ Goodman, J. (2003).
 \newblock Exponential priors for maximum entropy models.
 \newblock In {\em In Proceedings of the Annual Meeting of the Association for
   Computational Linguistics}, pages 305--312.
+
+\bibitem[Graf et~al., 2005]{Graf05parallel}
+Graf, H.~P., Cosatto, E., Bottou, L., Durdanovic, I., and Vapnik, V. (2005).
+\newblock Parallel support vector machines: The cascade svm.
+\newblock In {\em In Advances in Neural Information Processing Systems}, pages
+  521--528. MIT Press.
+
+\bibitem[Hsieh et~al., 2013]{Hsieh13a}
+Hsieh, C.-J., Si, S., and Dhillon, I. (2013).
+\newblock A divide-and-conquer solver for kernel support vector machines.
+\newblock In {\em Proceedings of the 31th International Conference on Machine
+  Learning (ICML 2004)}, pages 566--574. JMLR.org.
 
 \bibitem[Huang et~al., 2009]{Huang09iterative}
 Huang, F.-L., Hsieh, C.-J., Chang, K.-W., and Lin, C.-J. (2009).
@@ -205,6 +227,13 @@ Rousu, J., Saunders, C., Szedmak, S., and Shawe-Taylor, J. (2007).
 \newblock {Efficient algorithms for max-margin structured classification}.
 \newblock {\em Predicting Structured Data}, pages 105--129.
 
+\bibitem[Schwaighofer and Tresp, 2001]{Schwaighofer01the}
+Schwaighofer, A. and Tresp, V. (2001).
+\newblock The bayesian committee support vector machine.
+\newblock In Dorffner, G., Bischof, H., and Hornik, K., editors, {\em
+  Artificial Neural Networks — ICANN 2001}, volume 2130 of {\em Lecture Notes
+  in Computer Science}, pages 411--417. Springer Berlin Heidelberg.
+
 \bibitem[Schölkopf and Smola, 2002]{Scholkopf02learning}
 Schölkopf, B. and Smola, A.~J. (2002).
 \newblock {\em Learning with Kernels - Support Vector Machines, Regularization,
@@ -234,6 +263,11 @@ Taskar, B., Lacoste-Julian, S., and Jordan, M.~I. (2006).
 \newblock Structured prediction via the extragradient method.
 \newblock In {\em Advances in Neural Information Processing Systems 18 (NIPS
   2006)}, pages 1345--1352. MIT Press.
+
+\bibitem[Tresp, 2000]{Tresp00a}
+Tresp, V. (2000).
+\newblock A bayesian committee machine.
+\newblock {\em NEURAL COMPUTATION}, 12:2000.
 
 \bibitem[Tsochantaridis et~al., 2004]{THJA04}
 Tsochantaridis, I., Hofmann, T., Joachims, T., and Altun, Y. (2004).

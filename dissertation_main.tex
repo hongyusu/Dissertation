@@ -310,19 +310,19 @@ The new goal is to maximize the margin while penalize the data points that lie o
 \begin{definition}{Soft-Margin \svm\ Optimization Problem in primal}\label{softsvmprimal}
 	\begin{align*}
 		\underset{\vw,\xi}{\minimize} & \quad\frac{1}{2}\norm{\vw}^2 + C\sum_{i=1}^{m}\xi_i\\
-		\st & \quad y_i[\ip{\vw}{x_i} + b] \ge 1-\xi_i, \xi_i\ge 0, \forall i\in\{1,\cdots,m\}
+		\st & \quad y_i[\ip{\vw}{x_i} + b] \ge 1-\xi_i, \xi_i\ge 0, \forall i\in\{1,\cdots,m\}.
 	\end{align*}
 \end{definition}
 
+% dual, kernel svm
 
 
-% optimization of support vector machine
+% optimization of support vector machine,, original approach
 The optimization techniques for solving \svm\ have been intensively studied.
 A ''chunking'' method was developed in \citep{Vapnik82estimation} which takes the advantage that the \svm\ solution only depends on the nonzero Lagrangian multipliers.
-The method breaks down the original optimization problem into a set of smaller problems.
-In each iteration, it solves the problem that contains the nonzero Lagrangian multipliers from last step and a fixed number of worst examples that violate the constraints.
+The method breaks down the original optimization problem into a set of smaller problems, and solves in each iteration a small problem that contains the nonzero Lagrangian multipliers from last step and a fixed number of worst examples that violate the constraints.
 Following the similar idea, \citet{Osuna97an} proposed a decomposition strategy to solve \svm\ on very large dataset.
-The algorithm decompose the dual variables into an active part (working set) and an inactive part.
+The algorithm decomposes the dual variables into an active part (working set) and an inactive part.
 In each iteration, the algorithm updates the variables in working set while keeps the rest unchanged by solving the smaller optimization problem arising from the working set.
 It adding and deleting the same amount of examples in the working set to maintain a constant memory.
 It gains advantage of linear memory requirement with respect to the number of support vectors and the size of the working set by compromising on the convergence time.
@@ -332,9 +332,17 @@ The implementation of the algorithm is well-known as \svmlight.
 The decomposition strategy was further developed by solving in each iteration a smallest as possible optimization that only contains two Lagrangian multipliers, which is known as \textit{Sequential Minimum Optimization} (SMO) \citep{Platt98sequential,Platt99fast}.
 \smo\ is the basis of another powerful software package \libsvm\ developed by \citet{Chang11libsvm}.
 \citet{Perezcruz04double} proposed a double-chunking methods to further speed up the decomposition type of training. 
+Similarly yet another approach ''digesting'' \citep{Decoste02support} optimizes subsets close to completion before adding new data, which save huge amount of memory.
+
+Another line of research for \svm\ optimization is to divide the original problem into subproblems of smaller size, optimize \svm\ on each subproblem, and combine the results.
+In \citep{Schwaighofer01the,Tresp00a}, the authors proposed a Bayesian scheme to combine the models from subproblems.
+\citet{Collobert02a} proposed a partition scheme.
+\citet{Graf05parallel} developed the \svmcascade\ that builds a partition tree of training examples, trains \svm\ on each partition, and returns only support vector from each partition.
+Recently, \citet{Hsieh13a} proposed a divide and conquer solver that solves the original \svm\ problem with theoretical guarantee.
 
 
-\marginpar{TODOL: dual, kernel, optimization}
+
+\marginpar{TODO: dual, kernel, optimization}
 \marginpar{define the margin as maximize the minimum distance}
 \marginpar{introduce support vectors}
 
