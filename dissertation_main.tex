@@ -49,12 +49,12 @@ The goal is to learn $\vw$ and $b$ by minimizing the distance of misclassified t
 
 Assume data point $(x_i,y_i)$ is misclassified, the signed distance from $x_i$ to decision boundary can be computed 
 \begin{align*}
-	D(x_i;\vw,b) = -\frac{y_i(\ip{\vw}{x_i}+b)}{\norm{\vw}}.
+	D(x_i;\vw,b) = -\frac{y_i(\ip{\vw}{\vx_i}+b)}{\norm{\vw}}.
 \end{align*}
 Denote by $\Xcal^m$ the set of misclassified examples, the goal of perceptron is to minimize the distance over all misclassified examples defined as
 \begin{definition}{Perceptron Objective Function}\label{perceptron}
 	\begin{align*}
-		\underset{\vw,b}{\minimize} D(\vw,b) = \underset{\vw,b}{\minimize} \left( -\sum_{x_i\in\Xcal^{m}}y_i[\ip{\vw}{x_i}+b]\right).
+		\underset{\vw,b}{\minimize} D(\vw,b) = \underset{\vw,b}{\minimize} \left( -\sum_{x_i\in\Xcal^{m}}y_i[\ip{\vw}{\vx_i}+b]\right).
 	\end{align*}
 \end{definition}
 To achieve (Definition~\ref{perceptron}), we assume $\Xcal^{m}$ is fixed and compute the partial gradient
@@ -72,8 +72,8 @@ Once a misclassified example is visited, it adjust the parameter according to th
 where $\rho$ is the perceptron learning rate.
 \begin{theory}{\citep{Block62,Novikoff62}}\label{perceptron_theory}
 	Given a sequence of training examples in pairs $D=\{(x_1,y_1),\cdots,(x_m,y_m)\}$. 
-	Assume $\norm{x_i}\le R$ for all $i\in\{1,\cdots,m\}$.
-	Suppose for some $\gamma>0$ there exists a unit length vector $\norm{\hat{\vw}}=1$ such that $y_i(\ip{\hat{\vw}}{x_i})\ge\gamma$ for $i$ (training data $D$ is linearly separable).
+	Assume $\norm{\vx_i}\le R$ for all $i\in\{1,\cdots,m\}$.
+	Suppose for some $\gamma>0$ there exists a unit length vector $\norm{\hat{\vw}}=1$ such that $y_i(\ip{\hat{\vw}}{\vx_i})\ge\gamma$ for $i$ (training data $D$ is linearly separable).
 	Then the number of mistakes the perceptron algorithm makes on the sequence of training data $D$ is at most ${R^2}/{\gamma^2}$.
 \end{theory}
 \begin{proof}
@@ -81,7 +81,7 @@ where $\rho$ is the perceptron learning rate.
 	In addition, we set $\vw^0=\vzero$.
 	As the Perceptron makes a mistake on $(x_i,y_i)$, we immediately have
 	\begin{align*}
-		y_i\ip{\vw_k}{x_i} \le 0.
+		y_i\ip{\vw_k}{\vx_i} \le 0.
 	\end{align*}
 	According to update rule, we have
 	\begin{align*}
@@ -89,7 +89,7 @@ where $\rho$ is the perceptron learning rate.
 	\end{align*}
 	Then, the following holds
 	\begin{align*}
-		\ip{\vw^{k+1}}{\hat{\vw}} = \ip{\vw^k}{\hat{\vw}} + \rho y_i\ip{x_i}{\hat{\vw}} \ge \ip{\vw^k}{\hat{\vw}} + \rho\gamma.
+		\ip{\vw^{k+1}}{\hat{\vw}} = \ip{\vw^k}{\hat{\vw}} + \rho y_i\ip{\vx_i}{\hat{\vw}} \ge \ip{\vw^k}{\hat{\vw}} + \rho\gamma.
 	\end{align*}
 	Straight forward induction give us
 	\begin{align}
@@ -99,7 +99,7 @@ where $\rho$ is the perceptron learning rate.
 	\begin{align*}
 		\norm{\vw^{k+1}}^2 
 		= \norm{\vw^{k} + \rho y_ix_i}^2
-		= \norm{\vw^k}^2 + \rho^2\norm{x_i}^2 + 2\rho y_i\ip{x_i}{\vw^k}
+		= \norm{\vw^k}^2 + \rho^2\norm{\vx_i}^2 + 2\rho y_i\ip{\vx_i}{\vw^k}
 		\le \norm{\vw^k}^2 + \rho^2R^2
 	\end{align*}
 	Straight forward induction give us
@@ -133,7 +133,7 @@ The final decision rule is computed as the weighted average of all encountered w
 	\STATE $k=1$
 	\FOR{$t=1\cdots T$}
 		\FOR{$i=1\cdots m$}
-			\STATE Compute $\hat{y} = \sign(\ip{\vw}{x_i})$
+			\STATE Compute $\hat{y} = \sign(\ip{\vw}{\vx_i})$
 			\IF{$\hat{y} = y_i$}
 				\STATE $c^k = c^k + 1$
 			\ELSE
@@ -243,71 +243,69 @@ Later on, optimization algorithms that are based on dual form have been develope
 Support Vector Machine (\svm) is probably the most widely used classification algorithm in various real world applications.
 It is also among the best plug-and-play machine learning algorithms that usually achieves good classification results.
 In this section we will begin the story of \svm\ by first introducing the maximum margin principle of separating training data.
-Then we will discuss the primal-dual optimization strategy and the kernel methods that make \svm\ no more than a linear separator.
+Then we will discuss the primal-dual optimization strategy and the kernel methods that allows \svm\ to deal with high dimensionality.
 In the end we will try to cover the optimization strategy used in \svm.
 
 The algorithm framework of \svm\ was firstly introduced in \citep{Boser92,Cortes95support}.
 Theory and algorithm are detailed in book chapters e.g. \citep{Scholkopf02learning,taylor04,Bishop07}.
 % hard margin svm
-We begin our discussion by considering a very simple case where we assume the data are linear separable that is there is a hyperplane in the feature space that separates data into two classes.
-In addition we assume the \textit{separating hyperplane} have the form
+We begin our discussion by considering a very simple case where we assume the data are linearly separable that is there is a hyperplane in the feature space that separates data into two classes.
+In addition we assume the \textit{separating hyperplane} has a simple form
 \begin{align*}
 	f(x)=\ip{\vw}{\vx} + b = 0,
 \end{align*}
-so that $y_i=-1$ if $f(x_i)<0$, and $y_i=+1$ if $f(x_i)>0$.
-Later, we could decide the label of the test example $x_{ts}$ via $y_{ts}=\sign(f(x_{ts}))$, given $\vw$ that achieves correct separation on the training data.
+such that for training data we have $y_i=-1$ if $f(\vx_i)<0$, and $y_i=+1$ if $f(\vx_i)>0$.
+Given $\vw$ that achieves correct separation on the training data, we can decide the label of arbitary test example $x_{ts}$ by the decision rule $y_{ts}=\sign(f(\vx_{ts}))$, 
 
 However, there can be infinite number of separating hyperplane that solves the separation problem on the training data.
 We wish to find one that generalize well also on test data.
-A good strategy is to look for a hyperplane that keeps the maximum distance from both the training data and the test data, which is often known as \textit{max-margin principal}.
+A good strategy is to look for a hyperplane that keeps the maximum distance for examples of two classes, which is often known as \textit{maximum-margin principal}.
 To see this, imagining putting a separating hyperplane close to one class of examples which will achieve better classification on test examples from the other class.
-Base on the max-margin principal, we further define two \textit{margin hyperplanes} parallel to the separating hyperplane as
+
+Based on the maximum-margin principal, we further define the margin for the $i$'th example as the geometric distance from the data point to the separating hyperplane
 \begin{align*}
-	\ip{\vw}{\vx} + b &= \pm a
+	\gamma_i = \frac{y_i(\ip{\vw}{\vx_i}+b)}{\norm{\vw}}.
 \end{align*}
-The distance between two margin hyperplane and the separating hyperplane, $\gamma$, is called \textit{margin}.
-And now the goal is to find the separating hyperplane such that it is equal distance to both margin hyperplanes while margin is maximized.
-Basic geometry gives us
-\begin{align}
-	\gamma = \frac{a[\ip{\vw}{x}+b]}{\norm{\vw}}. \label{svmmargin}
-\end{align}
-The max-margin solution \citep{Bishop07} is given by
+We notice if we scale $\vw$ and $b$ with any constant the margin $\gamma_i$ stays unchanged. 
+As the parameters are invariance to scaling, we can set $\norm{\vw}=1$.
+Given a set of training example $D$, we also define the margin with respect to $D$ as the minimum margin of individual training examples
 \begin{align*}
-	(\hat{\vw},\hat{b}) = \underset{\vw,b}{\argmax}\,\left\{\frac{1}{\norm{\vw}}\underset{i}{\minimize}[y_i(\ip{\vw}{x_i}+b)]\right\}.
+	\gamma = \underset{i\in\{1,\cdots,m\}}{\minimize}\gamma_i.
 \end{align*}
-Notice that if one scales $\vw$ and $b$ by a constance factor $\kappa$ the margin $\gamma$ (\ref{svmmargin}) still invariant given $\vx$.
-Therefore, to avoid ambiguity we set margin hyperplane as 
-\begin{align}
-	\ip{\vw}{\vx} + b &= \pm 1.\label{svmmarginhyperplane}
-\end{align}
-According to (\ref{svmmarginhyperplane}), the constraints for all examples to be well separated follows
+
+Now the goal is to find the separating hyperplane such that it maximizes the margin with respect to all training data while separating the training examples into two classes.
+Naturally, this corresponds to finding a big-gap between two classes.
+The max-margin solution is given as \citep{Bishop07}
 \begin{align*}
-	\ip{\vw}{x_i} + b &\ge  +1, \quad \forall y_i=+1,\\
-	\ip{\vw}{x_i} + b &\le -1, \quad \forall y_i=-1.
+	\underset{\vw,b,\gamma}{\maximize} &\quad \gamma\\
+	\st &\quad y_i(\ip{\vw}{\vx_i}+b) \ge \gamma, \, \norm{\vw}=1,\\
+	 &\quad \forall i\in\{1,\cdots,m\}.
 \end{align*}
-Together, we have
-\begin{align}
-	y_i[\ip{\vw}{x_i} + b] \ge 1, \forall i\in\{1,\cdots,m\}. \label{hardsvmconstraints}
-\end{align}
-It then follows that we can formulate the primal problem of \svm\ as
+We want to maximize the minimum margin over all training examples such that all examples are correctly separated with margin at least $\gamma$.
+However, this is very difficult to optimize not only because the constraint $\norm{\vw}=1$ is non-convex also the objective function is not in any standard form.
+By replacing $\vw$ with $\frac{\vw}{\gamma}$, we have 
+\begin{align*}
+	\underset{\vw,b}{\maximize} &\quad \frac{1}{\norm{\vw}}\\
+	\st &\quad y_i(\ip{\vw}{\vx_i}+b) \ge 1, \, \forall i\in\{1,\cdots,m\},
+\end{align*}
+which is equivalent to optimize
 \begin{definition}{Hard-Margin \svm\ Optimization Problem in Primal}\label{hardsvmprimal}
 	\begin{align*}
 		\underset{\vw}{\minimize} & \quad\frac{1}{2}\norm{\vw}^2\\
-		\st & \quad y_i[\ip{\vw}{x_i} + b] \ge 1, \forall i\in\{1,\cdots,m\},
+		\st & \quad y_i[\ip{\vw}{\vx_i} + b] \ge 1, \forall i\in\{1,\cdots,m\},
 	\end{align*}
 \end{definition}
 where the objective is to find the weight vector of minimum norm that corresponds to maximize the margin between two class of examples, and the constraints states that the training data should be well separated.
-
 
 % soft margin svm
 We do not use (Definition~\ref{hardsvmprimal}) in practice for two reasons. 
 First, many real world data are not separable, so that solution to (Definition~\ref{hardsvmprimal}) does not always exist.
 Second, the data usually come with noise and error and we do not want resulting classifier over-fit the training data.
-Therefore, we relax the constraints by introducing for each training example $x_i$ a \textit{margin slack} parameter $\xi_i$ and rewrite the constraints (\ref{hardsvmconstraints}) as 
+Therefore, we relax the constraints by introducing for each training example $x_i$ a \textit{margin slack} parameter $\xi_i$ and rewrite the constraints as 
 \begin{align*}
-	y_i[\ip{\vw}{x_i} + b] \ge 1-\xi_i, \xi_i\ge 0, \forall i\in\{1,\cdots,m\},
+	y_i[\ip{\vw}{\vx_i} + b] \ge 1-\xi_i, \xi_i\ge 0, \forall i\in\{1,\cdots,m\},
 \end{align*}
-where $\xi_i$ will allow the violation of the contraints.
+where $\xi_i$ will allow example with margin less than $1$ (the violation of the constraints).
 In particular, with $\xi_i=0$ the data point $x_i$ is correctly classified, and lies either on the margin or on the correct side.
 With $0<\xi_i\le 1$ the data point is correctly classified and lies between margin and separating hyperplanes.
 With $\xi_i>1$ the data point is misclassified.
@@ -315,7 +313,7 @@ The new goal is to maximize the margin while penalize the data points that lie o
 \begin{definition}{Soft-Margin \svm\ Optimization Problem in primal}\label{softsvmprimal}
 	\begin{align*}
 		\underset{\vw,\xi}{\minimize} & \quad\frac{1}{2}\norm{\vw}^2 + C\sum_{i=1}^{m}\xi_i\\
-		\st & \quad y_i[\ip{\vw}{x_i} + b] \ge 1-\xi_i, \xi_i\ge 0, \forall i\in\{1,\cdots,m\}.
+		\st & \quad y_i(\ip{\vw}{\vx_i} + b) \ge 1-\xi_i, \xi_i\ge 0, \forall i\in\{1,\cdots,m\}.
 	\end{align*}
 \end{definition}
 
