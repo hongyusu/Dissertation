@@ -242,7 +242,7 @@ Later on, optimization algorithms that are based on dual form have been develope
 % some history
 Support Vector Machine (\svm) is probably the most widely used classification algorithm in various real world applications.
 The algorithm framework of \svm\ was firstly introduced in \citep{Boser92,Cortes95support}.
-Theory and algorithm are detailed in book chapters e.g. \citep{taylor04,Bishop07}.
+Theory and algorithm are detailed in book chapters e.g. \citep{Scholkopf02learning,taylor04,Bishop07}.
 % hard margin svm
 We begin our discussion by considering a very simple case where we assume the data are linear separable that is there is a hyperplane in the feature space that separates data into two classes.
 In addition we assume the \textit{separating hyperplane} have the form
@@ -292,8 +292,7 @@ It then follows that we can formulate the primal problem of \svm\ as
 	\end{align*}
 \end{definition}
 where the objective is to find the weight vector of minimum norm that corresponds to maximize the margin between two class of examples, and the constraints states that the training data should be well separated.
-\marginpar{define the margin as maximize the minimum distance}
-\marginpar{introduce support vectors}
+
 
 % soft margin svm
 We do not use (Definition~\ref{hardsvmprimal}) in practice for two reasons. 
@@ -315,11 +314,29 @@ The new goal is to maximize the margin while penalize the data points that lie o
 	\end{align*}
 \end{definition}
 
-% optimization from primal
-The 
 
 
-\marginpar{dual, kernel, optimization}
+% optimization of support vector machine
+The optimization techniques for solving \svm\ have been intensively studied.
+A ''chunking'' method was developed in \citep{Vapnik82estimation} which takes the advantage that the \svm\ solution only depends on the nonzero Lagrangian multipliers.
+The method breaks down the original optimization problem into a set of smaller problems.
+In each iteration, it solves the problem that contains the nonzero Lagrangian multipliers from last step and a fixed number of worst examples that violate the constraints.
+Following the similar idea, \citet{Osuna97an} proposed a decomposition strategy to solve \svm\ on very large dataset.
+The algorithm decompose the dual variables into an active part (working set) and an inactive part.
+In each iteration, the algorithm updates the variables in working set while keeps the rest unchanged by solving the smaller optimization problem arising from the working set.
+It adding and deleting the same amount of examples in the working set to maintain a constant memory.
+It gains advantage of linear memory requirement with respect to the number of support vectors and the size of the working set by compromising on the convergence time.
+\citep{Joachims98making} has improved this decomposition strategy by applying a shrinking technique which will identify the dual variables that is less likely to change their values.
+Thus, the algorithm effectively maintains a good working set that makes much progress towards the object.
+The implementation of the algorithm is well-known as \svmlight.
+The decomposition strategy was further developed by solving in each iteration a smallest as possible optimization that only contains two Lagrangian multipliers, which is known as \textit{Sequential Minimum Optimization} (SMO) \citep{Platt98sequential,Platt99fast}.
+\smo\ is the basis of another powerful software package \libsvm\ developed by \citet{Chang11libsvm}.
+\citet{Perezcruz04double} proposed a double-chunking methods to further speed up the decomposition type of training. 
+
+
+\marginpar{TODOL: dual, kernel, optimization}
+\marginpar{define the margin as maximize the minimum distance}
+\marginpar{introduce support vectors}
 
 % dual
 

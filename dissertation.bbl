@@ -29,6 +29,11 @@ Boser, B.~E., Guyon, I.~M., and Vapnik, V.~N. (1992).
 \newblock In {\em Proceedings of the 5th annual workshop on Computational
   learning theory}, pages 144--152. ACM.
 
+\bibitem[Chang and Lin, 2011]{Chang11libsvm}
+Chang, C.-C. and Lin, C.-J. (2011).
+\newblock Libsvm: A library for support vector machines.
+\newblock {\em ACM Trans. Intell. Syst. Technol.}, 2(3):27:1--27:27.
+
 \bibitem[Chen and Rosenfeld, 1999]{Chen99}
 Chen, S. and Rosenfeld, R. (1999).
 \newblock {\em A Gaussian Prior for Smoothing Maximum Entropy Models}.
@@ -108,6 +113,11 @@ Jin, R., Yan, R., Zhang, J., and Hauptmann, A.~G. (2003).
 \newblock In {\em Proceedings of the 20th International Conference on Machine
   Learning (ICML-03)}, pages 282--289.
 
+\bibitem[Joachims, 1998]{Joachims98making}
+Joachims, T. (1998).
+\newblock Making large-scale svm learning practical.
+\newblock LS8-Report~24, Universit{\"a}t Dortmund, LS VIII-Report.
+
 \bibitem[Joachims et~al., 2009]{JFY09}
 Joachims, T., Finley, T., and Yu, C.-N. (2009).
 \newblock Cutting-plane training of structural svms.
@@ -144,11 +154,28 @@ Novikoff, A.~B. (1962).
 \newblock On convergence proofs on perceptrons.
 \newblock {\em Symposium on the Mathematical Theory of Automata}, 12:615--622.
 
-\bibitem[Platt, 1998]{Platt98}
+\bibitem[Osuna et~al., 1997]{Osuna97an}
+Osuna, E., Freund, R., and Girosi, F. (1997).
+\newblock An improved training algorithm for support vector machines.
+\newblock In {\em Neural Networks for Signal Processing [1997] VII. Proceedings
+  of the 1997 IEEE Workshop}, pages 276--285.
+
+\bibitem[Platt, 1998]{Platt98sequential}
 Platt, J. (1998).
 \newblock Sequential minimal optimization: A fast algorithm for training
   support vector machines.
-\newblock Technical report, Microsoft Research.
+\newblock Technical Report MSR-TR-98-14, Microsoft Research.
+
+\bibitem[Platt, 1999]{Platt99fast}
+Platt, J.~C. (1999).
+\newblock Advances in kernel methods.
+\newblock chapter Fast Training of Support Vector Machines Using Sequential
+  Minimal Optimization, pages 185--208. MIT Press, Cambridge, MA, USA.
+
+\bibitem[Pérez-cruz et~al., 2004]{Perezcruz04double}
+Pérez-cruz, O., Figueiras-vidal, A.~R., and Artés-rodríguez, A. (2004).
+\newblock Double chunking for solving svms for very large datasets.
+\newblock In {\em Learning’04, Elche, Spain (2004)}.
 
 \bibitem[Ratliff et~al., 2007]{Ratliff07}
 Ratliff, N., Bagnell, J. A.~D., and Zinkevich, M. (2007).
@@ -177,6 +204,12 @@ Rousu, J., Saunders, C., Szedmak, S., and Shawe-Taylor, J. (2006).
 Rousu, J., Saunders, C., Szedmak, S., and Shawe-Taylor, J. (2007).
 \newblock {Efficient algorithms for max-margin structured classification}.
 \newblock {\em Predicting Structured Data}, pages 105--129.
+
+\bibitem[Schölkopf and Smola, 2002]{Scholkopf02learning}
+Schölkopf, B. and Smola, A.~J. (2002).
+\newblock {\em Learning with Kernels - Support Vector Machines, Regularization,
+  Optimization, and Beyond}.
+\newblock MIT Press.
 
 \bibitem[Shawe-Taylor and Cristianini, 2004]{taylor04}
 Shawe-Taylor, J. and Cristianini, N. (2004).
@@ -214,6 +247,11 @@ Tsochantaridis, I., Joachims, T., Hofmann, T., and Altun, Y. (2005).
 \newblock Large margin methods for structured and interdependent output
   variables.
 \newblock {\em Journal of Machine Learning Research}, 6:1453--1484.
+
+\bibitem[Vapnik, 1982]{Vapnik82estimation}
+Vapnik, V. (1982).
+\newblock {\em Estimation of Dependences Based on Empirical Data}.
+\newblock Springer-Verlag.
 
 \bibitem[Yu et~al., 2011]{Yu11dual}
 Yu, H.-F., Huang, F.-L., and Lin, C.-J. (2011).
