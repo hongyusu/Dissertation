@@ -241,6 +241,11 @@ Later on, optimization algorithms that are based on dual form have been develope
 
 % some history
 Support Vector Machine (\svm) is probably the most widely used classification algorithm in various real world applications.
+It is also among the best plug-and-play machine learning algorithms that usually achieves good classification results.
+In this section we will begin the story of \svm\ by first introducing the maximum margin principle of separating training data.
+Then we will discuss the primal-dual optimization strategy and the kernel methods that make \svm\ no more than a linear separator.
+In the end we will try to cover the optimization strategy used in \svm.
+
 The algorithm framework of \svm\ was firstly introduced in \citep{Boser92,Cortes95support}.
 Theory and algorithm are detailed in book chapters e.g. \citep{Scholkopf02learning,taylor04,Bishop07}.
 % hard margin svm
@@ -468,7 +473,7 @@ The corresponding dual form is also difficult as there are exponential number of
 Fortunately, by exploring the Markov network structure defined on the output labels, the original problem can be formulated into factorized dual quadratic programming, as long as the loss function $\vell$ and joint feature map $\vPhi$ are decomposable over the Markov network.
 
 As the number of parameters (weight vector) is quadratic in the number of training examples and edges in the network, it still cannot fit into standard QP solver. 
-In the original work \citep{taskar04}, the authors developed a coordinate descent method analogous to the sequential minimal optimization (\smo) used for SVM \citep{Platt98}.
+In the original work \citep{taskar04}, the authors developed a coordinate descent method analogous to the sequential minimal optimization (\smo) used for SVM \citep{Platt98sequential,Platt99fast}.
 Subsequently, there are many efficient optimization algorithms being proposed, including exponential gradient optimization methods developed in \citep{bartlett04}, extra-gradient methods described in \citep{taskar06}, sub-gradient methods proposed in \citep{Ratliff07}, and conditional gradient methods in \citep{rousu06, rousu07}.
 
 In order to apply the optimization methods in practice, one have to solve the \textit{loss augmented} inference problem defined as
