@@ -342,12 +342,13 @@ As most of the dual variables are zero, the evaluation can be done efficiently b
 In addition, we notice that to work out (Definition~\ref{softsvmdual}) it is not necessary to work on the explicit representation of $\vx$, as only the value of the inner product $\ip{\vx_i}{\vx_j}$ is need.
 As the algorithm can be represented entirely in terms of the inner product, we can also replace the inner product with $\ip{\phi(\vx_i)}{\phi(\vx_j)}$.
 In particular, we defined the \textit{kernel}
-\begin{align*}
-	K(\vx_i,\vx_j) = \ip{\phi(\vx_i)}{\phi(\vx_j)},
-\end{align*}
+\begin{align}
+	K(\vx_i,\vx_j) = \ip{\phi(\vx_i)}{\phi(\vx_j)}, \label{kernel}
+\end{align}
 where $\phi(\cdot)$ is some high-dimensional feature map.
 Whenever we need $\ip{\vx_i}{\vx_j}$, we instead use $K(\vx_i,\vx_j)$.
-Thus the algorithm can tackle high dimensionality by learning from $\phi(\cdot)$.
+Besides, the property of kernel function \citep{Scholkopf02learning} allows us to compute (\ref{kernel}) without explicitly accessing the high dimensional feature map.
+Thus the algorithm can tackle high dimensionality by learning from $\phi(\cdot)$ at a low computational cost.
 
 % optimization of support vector machine,, original approach
 The optimization techniques for solving \svm\ have been intensively studied.
@@ -367,16 +368,13 @@ The decomposition strategy was further developed by solving in each iteration a 
 Similarly yet another approach ''digesting'' \citep{Decoste02support} optimizes subsets close to completion before adding new data, which save huge amount of memory.
 
 Another line of research for \svm\ optimization is to divide the original problem into subproblems of smaller size, optimize \svm\ on each subproblem, and combine the results.
-In \citep{Schwaighofer01the,Tresp00a}, the authors proposed a Bayesian scheme to combine the models from subproblems.
+In \citep{Tresp00a,Schwaighofer01the}, the authors proposed a Bayesian scheme to combine the models from subproblems.
 \citet{Collobert02a} proposed a partition scheme.
 \citet{Graf05parallel} developed the \svmcascade\ that builds a partition tree of training examples, trains \svm\ on each partition, and returns only support vector from each partition.
 Recently, \citet{Hsieh13a} proposed a divide and conquer solver that solves the original \svm\ problem with theoretical guarantee.
 
 
 
-\marginpar{TODO: dual, kernel, optimization}
-\marginpar{define the margin as maximize the minimum distance}
-\marginpar{introduce support vectors}
 
 % dual
 
