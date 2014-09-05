@@ -241,49 +241,51 @@ Later on, optimization algorithms that are based on dual form have been develope
 
 % some history
 Support Vector Machine (\svm) is probably the most widely used classification algorithm in various real world applications.
-It is also among the best plug-and-play machine learning algorithms that usually achieves good classification results.
+It is also among the best plug-and-play machine learning algorithms that usually achieves good classification performance.
 In this section we will begin the story of \svm\ by first introducing the maximum margin principle of separating training data.
 Then we will discuss the primal-dual optimization strategy and the kernel methods that allows \svm\ to deal with high dimensionality.
-In the end we will try to cover the optimization strategy used in \svm.
+In the end we will try to cover the optimization strategy developed for \svm.
 
 The algorithm framework of \svm\ was firstly introduced in \citep{Boser92,Cortes95support}.
 Theory and algorithm are detailed in book chapters e.g. \citep{Scholkopf02learning,taylor04,Bishop07}.
 % hard margin svm
-We begin our discussion by considering a very simple case where we assume the data are linearly separable that is there is a hyperplane in the feature space that separates data into two classes.
+We begin our discussion by considering a very simple case where we assume the data are linearly separable, that is there is a hyperplane in the feature space which separates the training data into two classes.
 In addition we assume the \textit{separating hyperplane} has a simple form
 \begin{align*}
-	f(x)=\ip{\vw}{\vx} + b = 0,
+	f(\vx)=\ip{\vw}{\vx} + b = 0,
 \end{align*}
 such that for training data we have $y_i=-1$ if $f(\vx_i)<0$, and $y_i=+1$ if $f(\vx_i)>0$.
-Given $\vw$ that achieves correct separation on the training data, we can decide the label of arbitary test example $x_{ts}$ by the decision rule $y_{ts}=\sign(f(\vx_{ts}))$, 
+Given $\vw$ that achieves correct separation on the training data, we can decide the label of an arbitrary test example $x_{ts}$ by the decision rule $y_{ts}=\sign(f(\vx_{ts}))$.
 
 However, there can be infinite number of separating hyperplane that solves the separation problem on the training data.
-We wish to find one that generalize well also on test data.
-A good strategy is to look for a hyperplane that keeps the maximum distance for examples of two classes, which is often known as \textit{maximum-margin principal}.
+We wish to find the one that also generalize well on the test data.
+A good strategy is to look for a hyperplane that keeps the maximum distance from examples of two classes.
+The strategy is often known as \textit{maximum-margin principal}.
 To see this, imagining putting a separating hyperplane close to one class of examples which will achieve better classification on test examples from the other class.
 
-Based on the maximum-margin principal, we further define the margin for the $i$'th example as the geometric distance from the data point to the separating hyperplane
+Based on the maximum-margin principal, we further denote by $\gamma_i$ the \textit{margin} for the $i$'th example which is defined as the geometric distance from the data point to the separating hyperplane
 \begin{align*}
 	\gamma_i = \frac{y_i(\ip{\vw}{\vx_i}+b)}{\norm{\vw}}.
 \end{align*}
-We notice if we scale $\vw$ and $b$ with any constant the margin $\gamma_i$ stays unchanged. 
-As the parameters are invariance to scaling, we can set $\norm{\vw}=1$.
-Given a set of training example $D$, we also define the margin with respect to $D$ as the minimum margin of individual training examples
+We notice if we scale $\vw$ and $b$ with any constant (e.g. $\vw\leftarrow\kappa\vw, b\leftarrow\kappa b, \kappa\in\RR$, ) the margin $\gamma_i$ stays unchanged. 
+We still achieve the same classification and generalization performance.
+As parameters are invariance to scaling, we set $\norm{\vw}=1$.
+Given a set of training example $D$, we also define the margin with respect to $D$ as the minimum margin of individual training example
 \begin{align*}
 	\gamma = \underset{i\in\{1,\cdots,m\}}{\minimize}\gamma_i.
 \end{align*}
 
-Now the goal is to find the separating hyperplane such that it maximizes the margin with respect to all training data while separating the training examples into two classes.
-Naturally, this corresponds to finding a big-gap between two classes.
+Our goal is to find the separating hyperplane such that it maximizes the margin with respect to all training data while separating the training examples into two classes.
+Naturally, this corresponds to finding a ''big-gap'' between two classes.
 The max-margin solution is given as \citep{Bishop07}
 \begin{align*}
 	\underset{\vw,b,\gamma}{\maximize} &\quad \gamma\\
 	\st &\quad y_i(\ip{\vw}{\vx_i}+b) \ge \gamma, \, \norm{\vw}=1,\\
 	 &\quad \forall i\in\{1,\cdots,m\}.
 \end{align*}
-We want to maximize the minimum margin over all training examples such that all examples are correctly separated with margin at least $\gamma$.
-However, this is very difficult to optimize not only because the constraint $\norm{\vw}=1$ is non-convex also the objective function is not in any standard form.
-By replacing $\vw$ with $\frac{\vw}{\gamma}$, we have 
+The objective maximizes the minimum margin over all training examples such that all examples are correctly separated with margin at least $\gamma$.
+However, this is very difficult to optimize not only because the constraint $\norm{\vw}=1$ is non-convex, also the optimization is not like any standard form.
+By replacing $\vw$ with $\frac{\vw}{\gamma}$, we obtain 
 \begin{align*}
 	\underset{\vw,b}{\maximize} &\quad \frac{1}{\norm{\vw}}\\
 	\st &\quad y_i(\ip{\vw}{\vx_i}+b) \ge 1, \, \forall i\in\{1,\cdots,m\},
@@ -292,24 +294,25 @@ which is equivalent to optimize
 \begin{definition}{Hard-Margin \svm\ Optimization Problem in Primal}\label{hardsvmprimal}
 	\begin{align*}
 		\underset{\vw}{\minimize} & \quad\frac{1}{2}\norm{\vw}^2\\
-		\st & \quad y_i[\ip{\vw}{\vx_i} + b] \ge 1, \forall i\in\{1,\cdots,m\},
+		\st & \quad y_i(\ip{\vw}{\vx_i} + b) \ge 1, \forall i\in\{1,\cdots,m\},
 	\end{align*}
 \end{definition}
-where the objective is to find the weight vector of minimum norm that corresponds to maximize the margin between two class of examples, and the constraints states that the training data should be well separated.
+where the objective is to find the weight vector of minimum norm that corresponds to maximize the margin between two class of examples.
+The constraints states that the training data should be well separated.
 
 % soft margin svm
 We do not use (Definition~\ref{hardsvmprimal}) in practice for two reasons. 
 First, many real world data are not separable, so that solution to (Definition~\ref{hardsvmprimal}) does not always exist.
 Second, the data usually come with noise and error and we do not want resulting classifier over-fit the training data.
 Therefore, we relax the constraints by introducing for each training example $x_i$ a \textit{margin slack} parameter $\xi_i$ and rewrite the constraints as 
-\begin{align*}
-	y_i[\ip{\vw}{\vx_i} + b] \ge 1-\xi_i, \xi_i\ge 0, \forall i\in\{1,\cdots,m\},
-\end{align*}
-where $\xi_i$ will allow example with margin less than $1$ (the violation of the constraints).
+\begin{align}
+	y_i(\ip{\vw}{\vx_i} + b) \ge 1-\xi_i, \xi_i\ge 0, \forall i\in\{1,\cdots,m\}. \label{softsvmconstraint}
+\end{align}
+The margin slack parameter $\xi_i$ will allow example with margin less than $1$ (the violation of the constraints).
 In particular, with $\xi_i=0$ the data point $x_i$ is correctly classified, and lies either on the margin or on the correct side.
-With $0<\xi_i\le 1$ the data point is correctly classified and lies between margin and separating hyperplanes.
-With $\xi_i>1$ the data point is misclassified.
-The new goal is to maximize the margin while penalize the data points that lie on the wrong side of the margin hyperplane as
+With $0<\xi_i\le 1$ the data point is correctly classified and lies between margin and separating hyperplane.
+With $\xi_i>1$ the data point is misclassified locating on the other side of the hyperplane.
+With margin slack parameter, the new goal is to maximize the margin while penalizing the data points that either lies on the wrong side of the hyperplane or has margin less than one
 \begin{definition}{Soft-Margin \svm\ Optimization Problem in primal}\label{softsvmprimal}
 	\begin{align*}
 		\underset{\vw,\xi}{\minimize} & \quad\frac{1}{2}\norm{\vw}^2 + C\sum_{i=1}^{m}\xi_i\\
@@ -318,7 +321,14 @@ The new goal is to maximize the margin while penalize the data points that lie o
 \end{definition}
 
 % dual, kernel svm
-
+Optimization problem is usually transformed into dual form by introducing for each constraint a Lagrangian multiplier (dual variable) $\alpha$.
+We obtain the following dual optimization problem
+\begin{definition}{Soft-Margin \svm\ Optimization Problem in dual}\label{softsvmdual}
+	\begin{align*}
+		\underset{\valpha}{\maximize} & \quad\sum_{i=1}^{m}\alpha_i -\frac{1}{2}\sum_{i=1}^{m}\sum_{i=1}^{m}\alpha_i\alpha_jy_iy_j\ip{\vx_i}{\vx_j}\\
+		\st & \quad \sum_{i=1}^{m}\alpha_iy_i=0, \, 0\le\alpha_i\le C, \, \forall i\in\{1,\cdots,m\}.
+	\end{align*}
+\end{definition}
 
 % optimization of support vector machine,, original approach
 The optimization techniques for solving \svm\ have been intensively studied.
