@@ -23,6 +23,17 @@ Block, H.~D. (1962).
 \newblock The perceptron: A model for brain functioning. i.
 \newblock {\em Rev. Mod. Phys.}, 34:123--135.
 
+\bibitem[Boley and Cao, 2004]{Boley04training}
+Boley, D. and Cao, D. (2004).
+\newblock Training support vector machine using adaptive clustering.
+\newblock In {\em in Proc. of the 4th SIAM International Conference on Data
+  Mining, Lake Buena}.
+
+\bibitem[Bordes et~al., 2005]{Bordes05fast}
+Bordes, A., Ertekin, S., Weston, J., and Bottou, L. (2005).
+\newblock Fast kernel classifiers with online and active learning.
+\newblock {\em J. Mach. Learn. Res.}, 6:1579--1619.
+
 \bibitem[Boser et~al., 1992]{Boser92}
 Boser, B.~E., Guyon, I.~M., and Vapnik, V.~N. (1992).
 \newblock A training algorithm for optimal margin classifiers.
@@ -150,6 +161,11 @@ Keerthi, S., Duan, K., Shevade, S., and Poo, A. (2005).
 \newblock A fast dual algorithm for kernel logistic regression.
 \newblock {\em Machine Learning}, 61(1-3):151--165.
 
+\bibitem[Keerthi et~al., 2006]{Keerthi06building}
+Keerthi, S.~S., Chapelle, O., and DeCoste, D. (2006).
+\newblock Building support vector machines with reduced classifier complexity.
+\newblock {\em J. Mach. Learn. Res.}, 7:1493--1515.
+
 \bibitem[Komarek and Moore, 2005]{Komarek05making}
 Komarek, P. and Moore, A. (2005).
 \newblock Making logistic regression a core data mining tool: A practical
@@ -161,6 +177,11 @@ Lafferty, J.~D., McCallum, A., and Pereira, F. C.~N. (2001).
   labeling sequence data.
 \newblock In {\em Proceedings of the 8th International Conference on Machine
   Learning}, pages 282--289. Morgan Kaufmann Publishers Inc.
+
+\bibitem[Le et~al., 2013]{Le13fast}
+Le, Q., Sarlos, T., and Smola, A. (2013).
+\newblock Fastfood - approximating kernel expansions in loglinear time.
+\newblock In {\em 30th International Conference on Machine Learning (ICML)}.
 
 \bibitem[Lin et~al., 2008]{Lin2008trust}
 Lin, C.-J., Weng, R.~C., and Keerthi, S.~S. (2008).
@@ -181,6 +202,13 @@ Osuna, E., Freund, R., and Girosi, F. (1997).
 \newblock An improved training algorithm for support vector machines.
 \newblock In {\em Neural Networks for Signal Processing [1997] VII. Proceedings
   of the 1997 IEEE Workshop}, pages 276--285.
+
+\bibitem[Pavlov et~al., 2000]{Pavlov00towards}
+Pavlov, D., Chudova, D., and Smyth, P. (2000).
+\newblock Towards scalable support vector machines using squashing.
+\newblock In {\em Proceedings of the Sixth ACM SIGKDD International Conference
+  on Knowledge Discovery and Data Mining}, KDD '00, pages 295--299, New York,
+  NY, USA. ACM.
 
 \bibitem[Platt, 1998]{Platt98sequential}
 Platt, J. (1998).
@@ -287,10 +315,30 @@ Vapnik, V. (1982).
 \newblock {\em Estimation of Dependences Based on Empirical Data}.
 \newblock Springer-Verlag.
 
+\bibitem[Yu et~al., 2005]{Yu05making}
+Yu, H., Yang, J., Han, J., and Li, X. (2005).
+\newblock Making svms scalable to large data sets using hierarchical cluster
+  indexing.
+\newblock {\em Data Min. Knowl. Discov.}, 11(3):295--321.
+
 \bibitem[Yu et~al., 2011]{Yu11dual}
 Yu, H.-F., Huang, F.-L., and Lin, C.-J. (2011).
 \newblock Dual coordinate descent methods for logistic regression and maximum
   entropy models.
 \newblock {\em Machine Learning}, 85(1-2):41--75.
+
+\bibitem[Zhang et~al., 2012]{Zhang12scaling}
+Zhang, K., Lan, L., Wang, Z., and Moerchen, F. (2012).
+\newblock Scaling up kernel svm on limited resources: A low-rank linearization
+  approach.
+\newblock In Lawrence, N.~D. and Girolami, M.~A., editors, {\em Proceedings of
+  the Fifteenth International Conference on Artificial Intelligence and
+  Statistics (AISTATS-12)}, volume~22, pages 1425--1434.
+
+\bibitem[Zhang et~al., 2008]{Zhang08improved}
+Zhang, K., Tsang, I.~W., and Kwok, J.~T. (2008).
+\newblock Improved nystr\"{o}m low-rank approximation and error analysis.
+\newblock In {\em Proceedings of the 25th International Conference on Machine
+  Learning}, ICML '08, pages 1232--1239, New York, NY, USA. ACM.
 
 \end{thebibliography}
