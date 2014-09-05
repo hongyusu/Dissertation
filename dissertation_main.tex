@@ -18,12 +18,12 @@ complex outputs: multiple interdependent output variables and structured output 
 
 \subsection{Preliminary and Notation}
 We consider supervised learning problem which assumes an arbitrary input space $\Xcal$, an output space $\Ycal$, and the training samples coming in pairs $(x_i,y_i)\in\Xcal\times\Ycal$.
-As we focus in this chapter standard supervised learning problem also known as binary classification, we explicitly assume the output space $\Ycal=\{-1,+1\}$.
+As we focus in this chapter standard supervised learning problem also known as binary classification, we explicitly assume the output space $\Ycal=\{-1,+1\}$ (instead of $\Ycal=\{0,+1\}$).
 We point out that other kind of supervised learning problem can be formulated by altering the definition of the output space.
 For example, by setting $\Ycal=\{1,\cdots,K\}$ we have multiclass classification problem, and by setting $\Ycal=\RR$ we have regression problem.
-Additionally, we assume a feature map $\vphi:\Xcal\rightarrow\Fcal$, which embeds the input in some high dimensional feature space $\Fcal=\RR^D$.
-In particular, $\vphi(\vx)$ is a real value vector of $D$ dimension.
-The goal is to learn from a \textit{hypothesis class} $\Fcal$ a mapping function $f\in\Fcal:\Xcal\rightarrow\Ycal$  that maps an input $\vx\in\Xcal$ to an output $y\in\Ycal$. 
+Additionally, we assume a feature map $\vphi:\Xcal\rightarrow\Fcal$, which embeds the input in some high dimensional feature space $\Fcal=\RR^d$.
+In particular, $\vphi(\vx)$ is a real value vector of $d$ dimension.
+Given a set of training data $\Scal=\{(\vx_1,y_1),\cdots,(\vx_m,y_m)\}$, the goal is to learn from a \textit{hypothesis class} $\Fcal$ a mapping function $f\in\Fcal:\Xcal\rightarrow\Ycal$  that maps an input $\vx\in\Xcal$ to an output $y\in\Ycal$. 
 
 The hypothesis class we consider is a set of \textit{linear classifiers} that are parameterized by weight vector $\vw$ and bias term $b$ that takes the form
 \begin{align}
@@ -40,30 +40,30 @@ where by $\ip{\dot\,}{\dot\,}$ we denote inner product of two vectors.
 \subsection{Perceptron}
 
 The Rosenblatt's Perceptron algorithm \citep{Rosenblatt58,Rosenblatt62} is one type of linear classifiers that is parameterized by a weight vector $\vw$ and a bias term $b$. 
-The decision boundary is given by 
+The decision boundary given by 
 \begin{align*}
 	f(x;\vw,b) = \ip{\vw}{\vx} + b =0,
 \end{align*}
-which will separate the data into two classes.
+will separate the data into two classes.
 The goal is to learn $\vw$ and $b$ by minimizing the distance of misclassified training examples to the decision boundary.
 
-Assume data point $(x_i,y_i)$ is misclassified, the signed distance from $x_i$ to decision boundary can be computed 
+Assume data point $(x_i,y_i)$ is misclassified, the signed geometric distance from $x_i$ to decision boundary can be computed 
 \begin{align*}
 	D(x_i;\vw,b) = -\frac{y_i(\ip{\vw}{\vx_i}+b)}{\norm{\vw}}.
 \end{align*}
 Denote by $\Xcal^m$ the set of misclassified examples, the goal of perceptron is to minimize the distance over all misclassified examples defined as
 \begin{definition}{Perceptron Objective Function}\label{perceptron}
 	\begin{align*}
-		\underset{\vw,b}{\minimize} D(\vw,b) = \underset{\vw,b}{\minimize} \left( -\sum_{x_i\in\Xcal^{m}}y_i[\ip{\vw}{\vx_i}+b]\right).
+		\underset{\vw,b}{\minimize} \, D(\vw,b) = \underset{\vw,b}{\minimize} \left( -\sum_{x_i\in\Xcal^{m}}y_i[\ip{\vw}{\vx_i}+b]\right).
 	\end{align*}
 \end{definition}
-To achieve (Definition~\ref{perceptron}), we assume $\Xcal^{m}$ is fixed and compute the partial gradient
+To achieve (Definition~\ref{perceptron}), we assume $\Xcal^{m}$ is fixed and compute the partial gradient with respect to parameters
 \begin{align*}
 	\frac{\partial D(\vw,b)}{\partial\vw} = -\sum_{x_i\in\Xcal^m}{y_ix_i},\\
 	\frac{\partial D(\vw,b)}{\partial b} = -\sum_{x_i\in\Xcal^m}{y_i}.
 \end{align*}
 In practice, the perceptron algorithm uses stochastic gradient descent that processes iteratively from training data one example at a time.
-At each step, the algorithm makes sure the current $\vw$ and $v$ will correctly separate the current training example. 
+At each step, the algorithm makes sure the current $\vw$ and $b$ will correctly separate the current training example. 
 Once a misclassified example is visited, it adjust the parameter according to the update rule
 \begin{align*}
 	\vw &\leftarrow \vw + \rho y_i x_i,\\
@@ -71,10 +71,10 @@ Once a misclassified example is visited, it adjust the parameter according to th
 \end{align*}
 where $\rho$ is the perceptron learning rate.
 \begin{theory}{\citep{Block62,Novikoff62}}\label{perceptron_theory}
-	Given a sequence of training examples in pairs $D=\{(x_1,y_1),\cdots,(x_m,y_m)\}$. 
+	Given a sequence of training examples in pairs $\Scal=\{(x_1,y_1),\cdots,(x_m,y_m)\}$. 
 	Assume $\norm{\vx_i}\le R$ for all $i\in\{1,\cdots,m\}$.
-	Suppose for some $\gamma>0$ there exists a unit length vector $\norm{\hat{\vw}}=1$ such that $y_i(\ip{\hat{\vw}}{\vx_i})\ge\gamma$ for $i$ (training data $D$ is linearly separable).
-	Then the number of mistakes the perceptron algorithm makes on the sequence of training data $D$ is at most ${R^2}/{\gamma^2}$.
+	Suppose for some $\gamma>0$ there exists a unit length vector $\norm{\hat{\vw}}=1$ such that $y_i(\ip{\hat{\vw}}{\vx_i})\ge\gamma$ for $i$ (training data $\Scal$ is linearly separable).
+	Then the number of mistakes the perceptron algorithm makes on the sequence of training data $\Scal$ is at most ${R^2}/{\gamma^2}$.
 \end{theory}
 \begin{proof}
 	Suppose the $k$'th mistake is made on the $i$'th training example, and current weight vector is $\vw^k$.
