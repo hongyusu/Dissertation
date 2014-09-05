@@ -329,6 +329,25 @@ We obtain the following dual optimization problem
 		\st & \quad \sum_{i=1}^{m}\alpha_iy_i=0, \, 0\le\alpha_i\le C, \, \forall i\in\{1,\cdots,m\}.
 	\end{align*}
 \end{definition}
+It is not difficult to verify that according to KKT condition only examples with both $\xi_i=0$ and satisfying equality constraints in (\ref{softsvmconstraint}) will be ''active'' and have dual variable $\alpha_i>0$.
+These training examples lie on the margin and have $\gamma_i=1$.
+They are called \textit{support vectors} in \svm\ optimization problem.
+In fact the number of support vectors is usually smaller than the size of the training set.
+The property is extreme useful, as the weight vector can be expressed as the linear combination of the training examples
+\begin{align*}
+	\vw = \sum_{i=1}^{m}\alpha_iy_i\vx_i.
+\end{align*}
+As most of the dual variables are zero, the evaluation can be done efficiently by maintaining a small set of non-zero $\alpha$.
+
+In addition, we notice that to work out (Definition~\ref{softsvmdual}) it is not necessary to work on the explicit representation of $\vx$, as only the value of the inner product $\ip{\vx_i}{\vx_j}$ is need.
+As the algorithm can be represented entirely in terms of the inner product, we can also replace the inner product with $\ip{\phi(\vx_i)}{\phi(\vx_j)}$.
+In particular, we defined the \textit{kernel}
+\begin{align*}
+	K(\vx_i,\vx_j) = \ip{\phi(\vx_i)}{\phi(\vx_j)},
+\end{align*}
+where $\phi(\cdot)$ is some high-dimensional feature map.
+Whenever we need $\ip{\vx_i}{\vx_j}$, we instead use $K(\vx_i,\vx_j)$.
+Thus the algorithm can tackle high dimensionality by learning from $\phi(\cdot)$.
 
 % optimization of support vector machine,, original approach
 The optimization techniques for solving \svm\ have been intensively studied.
