@@ -72,6 +72,7 @@ Once a misclassified example is visited, it adjust the parameter according to th
 where $\rho$ is the perceptron learning rate.
 \begin{theory}[Perceptron Convergence Theorem \citep{Block62the,Novikoff62}]\label{perceptron_theory}
 	Given a sequence of training examples in pairs $\Scal=\{(x_1,y_1),\cdots,(x_m,y_m)\}$. 
+	For simplicity, we consider a perceptron without bias term $b$.
 	Assume $\norm{\vx_i}\le R$ for all $i\in\{1,\cdots,m\}$.
 	Suppose for some $\gamma>0$ there exists a unit length vector $\norm{\hat{\vw}}=1$ such that $y_i(\ip{\hat{\vw}}{\vx_i})\ge\gamma$ for $i$ (training data $\Scal$ is linearly separable).
 	Then the number of mistakes the perceptron algorithm makes on the sequence of training data $\Scal$ is at most ${R^2}/{\gamma^2}$.
@@ -365,6 +366,21 @@ Whenever we need $\ip{\vx_i}{\vx_j}$, we instead use $K(\vx_i,\vx_j)$.
 Besides, the property of kernel function \citep{Scholkopf02learning} allows us to compute (\ref{kernel}) without explicitly accessing the high dimensional feature map.
 Thus the algorithm can tackle high dimensionality by learning from $\phi(\cdot)$ at a low computational cost.
 
+In addition, according to \textit{Mercer's Theorem} \citep{taylor04}, every positive semidefinite symmetric function is a kernel.
+Kernel functions that heavily used in practice include the \textit{linear kernel}
+\begin{align*}
+	K(\vx_i,\vx_j) = \ip{\vx_i}{\vx_j},
+\end{align*}
+the \textit{polynomial kernel}
+\begin{align*}
+	K(\vx_i,\vx_j) = (\ip{\vx_i}{\vx_j} + b)^k,
+\end{align*}
+where $b$ is the bias term and $d$ is the degree of polynomial, and the \textit{Gaussian kernel} (RBF)
+\begin{align*}
+	K(\vx_i,\vx_j) = \exp{\left(\frac{\norm{{\vx_i}-{\vx_j}}^2}{2\sigma^2}\right)},
+\end{align*}
+where $\sigma$ is the Gaussian width parameter.
+
 % optimization of support vector machine,, original approach
 The optimization techniques for solving \svm\ have been intensively studied.
 A ''chunking'' method was developed in \citep{Vapnik82estimation} which takes the advantage that the \svm\ solution only depends on the nonzero Lagrangian multipliers.
@@ -571,6 +587,8 @@ The intractability of the inference problem can be seen as an exchange of the ge
 
 
 \section{Ensemble Methods}
+
+
 
 
 \chapter{Methods}
