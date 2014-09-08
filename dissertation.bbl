@@ -40,6 +40,17 @@ Boser, B.~E., Guyon, I.~M., and Vapnik, V.~N. (1992).
 \newblock In {\em Proceedings of the 5th annual workshop on Computational
   learning theory}, pages 144--152. ACM.
 
+\bibitem[Breiman, 1996]{Breiman96bagging}
+Breiman, L. (1996).
+\newblock Bagging predictors.
+\newblock {\em Machine Learning}, 24(2):123--140.
+
+\bibitem[Breiman, 2006]{Breiman96out}
+Breiman, L. (2006).
+\newblock Out-of-bag estimation.
+\newblock Technical report, Statistics Department, University of California,
+  Berkeley.
+
 \bibitem[Chang and Lin, 2011]{Chang11libsvm}
 Chang, C.-C. and Lin, C.-J. (2011).
 \newblock Libsvm: A library for support vector machines.
@@ -97,6 +108,10 @@ Della~Pietra, S., Della~Pietra, V., and Lafferty, J. (1997).
 \newblock Inducing features of random fields.
 \newblock {\em Pattern Analysis and Machine Intelligence, IEEE Transactions
   on}, 19(4):380--393.
+
+\bibitem[Efron and Tibshirani, 1994]{Efron1994introduction}
+Efron, B. and Tibshirani, R. (1994).
+\newblock An introduction to the bootstrap (crc, boca raton, fl).
 
 \bibitem[Freund and Schapire, 1999]{Freund99}
 Freund, Y. and Schapire, R.~E. (1999).
@@ -170,6 +185,7 @@ Keerthi, S.~S., Chapelle, O., and DeCoste, D. (2006).
 Komarek, P. and Moore, A. (2005).
 \newblock Making logistic regression a core data mining tool: A practical
   investigation of accuracy, speed, and simplicity.
+\newblock Technical Report CMU-RI-TR-05-27, Robotics Institute.
 
 \bibitem[Lafferty et~al., 2001]{lafferty01}
 Lafferty, J.~D., McCallum, A., and Pereira, F. C.~N. (2001).
@@ -292,6 +308,10 @@ Taskar, B., Lacoste-Julian, S., and Jordan, M.~I. (2006).
 \newblock In {\em Advances in Neural Information Processing Systems 18 (NIPS
   2006)}, pages 1345--1352. MIT Press.
 
+\bibitem[Tibshirani, 1996]{Tibshirani1996bias}
+Tibshirani, R. (1996).
+\newblock Bias, variance and prediction error for classification rules.
+
 \bibitem[Tresp, 2000]{Tresp00a}
 Tresp, V. (2000).
 \newblock A bayesian committee machine.
@@ -314,6 +334,11 @@ Tsochantaridis, I., Joachims, T., Hofmann, T., and Altun, Y. (2005).
 Vapnik, V. (1982).
 \newblock {\em Estimation of Dependences Based on Empirical Data}.
 \newblock Springer-Verlag.
+
+\bibitem[Wolpert and Macready, 1999]{Wolpert99an}
+Wolpert, D. and Macready, W. (1999).
+\newblock An efficient method to estimate bagging's generalization error.
+\newblock {\em Machine Learning}, 35(1):41--55.
 
 \bibitem[Yu et~al., 2005]{Yu05making}
 Yu, H., Yang, J., Han, J., and Li, X. (2005).
