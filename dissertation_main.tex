@@ -70,7 +70,7 @@ Once a misclassified example is visited, it adjust the parameter according to th
 	b &\leftarrow b + \rho y_i,
 \end{align*}
 where $\rho$ is the perceptron learning rate.
-\begin{theory}{\citep{Block62,Novikoff62}}\label{perceptron_theory}
+\begin{theory}[Perceptron Convergence Theorem \citep{Block62the,Novikoff62}]\label{perceptron_theory}
 	Given a sequence of training examples in pairs $\Scal=\{(x_1,y_1),\cdots,(x_m,y_m)\}$. 
 	Assume $\norm{\vx_i}\le R$ for all $i\in\{1,\cdots,m\}$.
 	Suppose for some $\gamma>0$ there exists a unit length vector $\norm{\hat{\vw}}=1$ such that $y_i(\ip{\hat{\vw}}{\vx_i})\ge\gamma$ for $i$ (training data $\Scal$ is linearly separable).
@@ -114,15 +114,21 @@ where $\rho$ is the perceptron learning rate.
 Theory~\ref{perceptron_theory} shows that if the data are linearly separable, the perceptron algorithm will make a finite number of mistakes. 
 In particular, the Perceptron algorithm will iterate through the training set and will converge to a vector that well separates all training examples.
 Moreover, the number of mistakes will be bounded by the minimum gap between the positive and negative examples.
+That is the algorithm converges quickly when the gap $\gamma$ is big.
+We have to keep in mind that the convergence theorem does not say anything about the quality of the solution, though it is built based on the the assumption that there is a ''gap'' between positive and negative examples.
 
 The standard Perceptron algorithm supposes that the data are linearly separable, iterates over the training set, and eventually converges.
 However, the setting is less interesting for most applications where the data might not be linearly separable or it takes too long for the algorithm to converge.
 Therefore, we need to find out the best decision rule given a set of updates.
 
 \textit{Voted Perceptron} developed in \citep{Freund99} is a straight forward modification of the standard Perceptron
-As described in (Algorithm~\ref{voted_perceptron}), the Voted perceptron algorithm keeps track and updates during training all weight vectors. (line~\ref{perceptron_algorithm_weight_vector}) and their weights (line~\ref{perceptron_algorithm_weight}).
+As described in (Algorithm~\ref{voted_perceptron}), the Voted perceptron algorithm keeps track all weight vectors that appears during training phase. (line~\ref{perceptron_algorithm_weight_vector}) and their weights (line~\ref{perceptron_algorithm_weight}).
 The weight can be seen as the 'survival time' of the weight vector during Perceptron training.
-The final decision rule is computed as the weighted average of all encountered weight vectors (line~\ref{perceptron_algorithm_average}).
+The prediction for a new test example $\vx_{ts}$ is computed by 
+\begin{align}
+	y_{ts} = \sign\left({\sum_{l=1}^{k}c^l(\sign{\ip{\vw^l}{\vx_{ts}}+b^{l}}})\right) \label{voted_perceptron_prediction}
+\end{align}
+using the weight vectors and the corresponding weights outputted from the algorithm (line~\ref{perceptron_algorithm_average}).
 \begin{algorithm}
 \caption{Voted Perceptron Learning Algorithm}
 \label{voted_perceptron}
@@ -143,10 +149,19 @@ The final decision rule is computed as the weighted average of all encountered w
 			\ENDIF
 		\ENDFOR
 	\ENDFOR
-	\RETURN $\vw = \sum_{l=1}^{k}c^l\vw^{l}$ \label{perceptron_algorithm_average}
+	\RETURN $\vw = \{\vw^{k}\}_{l=1}^{k},\,c = \{c^{k}\}_{l=1}^{k}$ \label{perceptron_algorithm_average}
 \end{algorithmic}
 \end{algorithm}
 
+% TODO: vote perceptron error bound, add reference 
+It is proved that the voted perceptron guarantees to achieve better generalization error than original perceptron \citep{}.
+However, voted perceptron is not practical as it has to remember all weight vectors encountered during the training.
+The \textit{averaged perceptron} is a simple alternative, where in stead of store all weight vectors the algorithm only keep the weighted sum $\sum_{l=1}^{k}c^k\vw^l$. 
+The prediction for a new test example $\vx_{ts}$ is computed by 
+\begin{align*}
+	y_{ts} = \sign\left(c^l({\sum_{l=1}^{k}{\ip{\vw^l}{\vx_{ts}}+b^{l}}})\right) = \sign\left({{\ip{c^l\sum_{l=1}^{k}\vw^l}{\vx_{ts}}+c^l\sum_{l=1}^{k}b^{l}}}\right),
+\end{align*}
+which is extreme similar to (\ref{voted_perceptron_prediction}) except for the inside $\sign$ operation, and is more efficient to compute.
 
 %
 % logit
