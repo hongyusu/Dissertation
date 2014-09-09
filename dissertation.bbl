@@ -40,13 +40,13 @@ Boser, B.~E., Guyon, I.~M., and Vapnik, V.~N. (1992).
 \newblock In {\em Proceedings of the 5th annual workshop on Computational
   learning theory}, pages 144--152. ACM.
 
-\bibitem[Breiman, 1996]{Breiman96bagging}
-Breiman, L. (1996).
+\bibitem[Breiman, 1996a]{Breiman96bagging}
+Breiman, L. (1996a).
 \newblock Bagging predictors.
 \newblock {\em Machine Learning}, 24(2):123--140.
 
-\bibitem[Breiman, 2006]{Breiman96out}
-Breiman, L. (2006).
+\bibitem[Breiman, 1996b]{Breiman96out}
+Breiman, L. (1996b).
 \newblock Out-of-bag estimation.
 \newblock Technical report, Statistics Department, University of California,
   Berkeley.
