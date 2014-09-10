@@ -588,7 +588,45 @@ The intractability of the inference problem can be seen as an exchange of the ge
 
 \section{Ensemble Methods}
 
+%
+% boosting
 \subsection{Boosting}
+\textit{Boosting} corresponds to a learning framework or a family of algorithms that take in a weak classifer and turning it into a strong one.
+A function class is \textit{strongly learnable} if there exists a polynomial algorithm that achieve high accuracy with high confident for all functions in the class.
+On the other hand, a function class is \textit{weak learnable} if the algorithm can achieve arbitrary high accuracy.
+That is the algorithm only needs to output a function that has a performance better than coin-toss.
+The concepts were proposed in \citep{Kearns94cryptographic} together with the question whether the strong learnability and the weak learnability are equivalent. 
+Finding a weak learner which performs better than random guessing is usually easy in practice but find a strong learner is difficult.
+\citet{Schapire90the} proved that two concepts are equivalent which lays the foundation of the boosting algorithm that converts a weak learning algorithm into one that achieves high performance.
+
+Adaptive Boosting (\adaboost) developed by \citet{Freund97a} is the very first practical boosting algorithm and is most influential one.
+The exact algorithm is shown in (Algorithm~\ref{adaboost}).
+The fundamental idea of \adaboost\ is to maintain a distribution $D$ over all training examples, and update the distribution in each iteration such that difficult-to-classify examples will get more probability mass for the next iteration (line~\ref{update_d}).
+During each iteration, the algorithm compute a weak learner $f^t(\vx)$ base on all training data and current distribution $D^{t}$ (line~\ref{compuet_f}), compute the weighted training error $\epsilon^k$ for the current weak learner (line~\ref{compute_error}), and compute the adaptive parameter $\alpha^t$ for current weak learner (line~\ref{compute_alpha}).
+The ensemble is the weighted combination of all weak learners.
+\begin{align*}
+	H(\vx) = \sign(\sum_{t=1}^T\alpha^tf^t(\vx)).
+\end{align*}
+\begin{algorithm}
+\caption{\adaboost}
+\label{adaboost}
+\begin{algorithmic}[1]
+	\REQUIRE Training sample $\Scal = \{(x_i,\vy_i)\}_{i=1}^m$, learning function $\Wcal$, number of weak learners $T$
+	\ENSURE Boosting ensemble $H(\vx)$
+	\STATE Initialize $D^0(i)=\frac{1}{m},i\in\{1,\cdots,m\}$
+	\FOR{$t=1\cdots T$}
+		\STATE $f^t(\vx)\leftarrow\Wcal(\Scal,D^{i-1})$ \label{compuet_f}
+		\STATE $y_i = f^t(\vx_i),\forall i\in\{1,\cdots,m\}$
+		\STATE $\epsilon^t = \sum_{i=1}^{m}D^t(i)\ind{y_i\neq\hat{y}_i}$ \label{compute_error}
+		\STATE $\alpha^{t} = \frac{1}{2}\log\left(\frac{1-\epsilon^k}{\epsilon^k}\right)$ \label{compute_alpha}
+		\STATE $D^t(i) = D^{t-1}(i)\exp(-\alpha^ty_i\hat{y}_i),\forall i\in\{1,\cdots,m\}$ \label{update_d}
+	\ENDFOR
+	\RETURN $H(\vx) = \sign(\sum_{t=1}^T\alpha^tf^t(\vx))$
+\end{algorithmic}
+\end{algorithm}
+
+%
+% bagging
 \subsection{Bagging}
 \textit{Bootstrap Aggregating} (Bagging), initially developed by \citet{Breiman96bagging}, is an ensemble methods that exploit the independency between the weak learners.
 The algorithm is based on the fact that the error can be dramatically re duced by combining independent base learners.

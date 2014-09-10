@@ -113,6 +113,12 @@ Della~Pietra, S., Della~Pietra, V., and Lafferty, J. (1997).
 Efron, B. and Tibshirani, R. (1994).
 \newblock An introduction to the bootstrap (crc, boca raton, fl).
 
+\bibitem[Freund and Schapire, 1997]{Freund97a}
+Freund, Y. and Schapire, R.~E. (1997).
+\newblock A decision-theoretic generalization of on-line learning and an
+  application to boosting.
+\newblock {\em J. Comput. Syst. Sci.}, 55(1):119--139.
+
 \bibitem[Freund and Schapire, 1999]{Freund99}
 Freund, Y. and Schapire, R.~E. (1999).
 \newblock Large margin classification using the perceptron algorithm.
@@ -170,6 +176,12 @@ Joachims, T. (1998).
 Joachims, T., Finley, T., and Yu, C.-N. (2009).
 \newblock Cutting-plane training of structural svms.
 \newblock {\em Machine Learning}, 77(1):27--59.
+
+\bibitem[Kearns and Valiant, 1989]{Kearns94cryptographic}
+Kearns, M. and Valiant, L. (1989).
+\newblock Cryptographic limitations on learning boolean formulae and finite
+  automata.
+\newblock {\em J. ACM}, 41(1):67--95.
 
 \bibitem[Keerthi et~al., 2005]{Keerthi05a}
 Keerthi, S., Duan, K., Shevade, S., and Poo, A. (2005).
@@ -270,6 +282,11 @@ Rousu, J., Saunders, C., Szedmak, S., and Shawe-Taylor, J. (2006).
 Rousu, J., Saunders, C., Szedmak, S., and Shawe-Taylor, J. (2007).
 \newblock {Efficient algorithms for max-margin structured classification}.
 \newblock {\em Predicting Structured Data}, pages 105--129.
+
+\bibitem[Schapire, 1990]{Schapire90the}
+Schapire, R.~E. (1990).
+\newblock The strength of weak learnability.
+\newblock {\em Mach. Learn.}, 5(2):197--227.
 
 \bibitem[Schwaighofer and Tresp, 2001]{Schwaighofer01the}
 Schwaighofer, A. and Tresp, V. (2001).
