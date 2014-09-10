@@ -51,6 +51,11 @@ Breiman, L. (1996b).
 \newblock Technical report, Statistics Department, University of California,
   Berkeley.
 
+\bibitem[Breiman, 2001]{Breiman01random}
+Breiman, L. (2001).
+\newblock Random forests.
+\newblock {\em Machine Learning}, 45(1):5--32.
+
 \bibitem[Chang and Lin, 2011]{Chang11libsvm}
 Chang, C.-C. and Lin, C.-J. (2011).
 \newblock Libsvm: A library for support vector machines.
