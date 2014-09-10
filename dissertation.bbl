@@ -113,6 +113,11 @@ Della~Pietra, S., Della~Pietra, V., and Lafferty, J. (1997).
 Efron, B. and Tibshirani, R. (1994).
 \newblock An introduction to the bootstrap (crc, boca raton, fl).
 
+\bibitem[Esuli et~al., 2008]{Esuli2008boosting}
+Esuli, A., Fagni, T., and Sebastiani, F. (2008).
+\newblock Boosting multi-label hierarchical text categorization.
+\newblock {\em Information Retrieval}, 11(4):287--313.
+
 \bibitem[Freund and Schapire, 1997]{Freund97a}
 Freund, Y. and Schapire, R.~E. (1997).
 \newblock A decision-theoretic generalization of on-line learning and an

@@ -626,23 +626,52 @@ The ensemble is the weighted combination of all weak learners.
 \end{algorithmic}
 \end{algorithm}
 
-For each weak learner $f^t(\vx)$, the strategy of updating adaptive parameter $\alpha^t$ is to ensure that the exponential loss of $f^t(\vx)$ is minimized.
-To see this, we fist compute the exponential loss for $f^t(\vx)$ given current distribution $D^t$ over training example and adaptive parameter for $f^t(\vx)$
+For each weak learner $f^t(\vx)$, the strategy of updating adaptive parameter $\alpha^t$ is to ensure that the exponential loss of $\alpha^tf^t(\vx)$ is minimized.
+To see this, we fist compute the exponential loss for $\alpha^tf^t(\vx)$ given current distribution $D^t$ over training example and adaptive parameter for $f^t(\vx)$
 \begin{align*}
-	\ell_{exp}&(\alpha^t,f^t(\vx),D^t) = \sum_{i=1}^mD^t(i)\exp(-\hatf(\vx_i)\alpha^tf^t(\vx_i))\\
+	\ell_{exp}&(\alpha^t,f^t(\vx),D^t) \\
+	&= \sum_{i=1}^mD^t(i)\exp(-\hatf(\vx_i)\alpha^tf^t(\vx_i))\\
 	&=\exp(-\alpha^t)\sum_{i=1}^mD^t(i)\ind{\hatf(\vx_i)=f(\vx_i)} + \exp(\alpha^t)\sum_{i=1}^mD^t(i)\ind{\hatf(\vx_i)\neq f(\vx_i)}\\
 	&=\exp(-\alpha^t)(1-\epsilon^t) + \exp(\alpha^t)\epsilon^t.
 \end{align*}
-To minimize $\ell_{exp}(\alpha^t,f^t(\vx),D^t)$, we can take partial gradient with respect to $\alpha^t$ and set it to zero.
-Solve for $\alpha^t$, we get
+To minimize $\ell_{exp}(\alpha^t,f^t(\vx),D^t)$, we take partial derivative with respect to $\alpha^t$ and set it to zero
+\begin{align*}
+	\frac{\partial\ell_{\exp}(\alpha^t,f^t(\vx),D^t)}{\partial\alpha^t} = -\exp(-\alpha^t)(1-\epsilon^t) + \exp(\alpha^t)\epsilon^t=0
+\end{align*}
+Solve it for $\alpha^t$, we get
 \begin{align*}
 	\alpha^{t} = \frac{1}{2}\ln\left(\frac{1-\epsilon^t}{\epsilon^t}\right).
 \end{align*}
+Thus the rule for updating $\alpha^t$ will make sure the exponential loss of $\alpha^tf^t(\vx)$ will be minimized.
 
 It is worth noticing that the \adaboost\ algorithm describe in (algorithm~\ref{adaboost}) requires the learning algorithm $\Wcal$ capable of learning from some specific distribution.
 The distribution will reflect the difficulty of the training examples during the learning.
 It is usually achieved by reweighing which initials a uniform distribution over training examples and updates the distribution after each iteration.
 For learning algorithms that cannot handle training data with specific distribution, we can apply resampling which samples training examples in each iteration according to some desired distribution.
+
+\adaboostmh\ is the multilabel variance of original \adaboost\ algorithm developed by \citet{Schapire99improved}, which is further developed in \citep{Esuli2008boosting}.
+The core idea of \adaboostmh is to adopt hamming loss instead of 0/1 loss. 
+In particular, the algorithm reduces from a multilabel classification problem to a set of single label classification problem by replacing each training example $(\vx_i,\vy_i)$ with $k$ examples $\{(\vx_i,\vy_i[l])\}_{l=1}^k$.
+The algorithm is detailed in (Algorithm~\ref{adaboostmh}).
+It maintains a distribution over all examples and labels.
+In each iteration, the algorithm takes in the distribution and all training examples, generates a weak learner $f^k(\vx)$ (line~\ref{mh_compuet_f}), computes hamming loss (line~\ref{mh_compute_error}), computes the adaptive parameter $\alpha^t$ (line~\ref{mh_compute_alpha}), and update the distribution (line~\ref{mh_update_d}).
+\begin{algorithm}
+\caption{\adaboostmh}
+\label{adaboostmh}
+\begin{algorithmic}[1]
+	\REQUIRE Training sample $\Scal = \{(x_i,\vy_i)\}_{i=1}^m$, learning function $\Wcal$, number of weak learners $T$
+	\ENSURE Boosting ensemble $H(\vx)$
+	\STATE Initialize $D^0(i,l)=\frac{1}{mk},i\in\{1,\cdots,m\}$
+	\FOR{$t=1\cdots T$}
+		\STATE $f^t(\vx)\leftarrow\Wcal(\Scal,D^{i-1})$ \label{mh_compuet_f}
+		\STATE $\vy_i = f^t(\vx_i),\forall i\in\{1,\cdots,m\}$
+		\STATE $\epsilon^t =\sum_{l=1}^k\sum_{i=1}^{m}D^t(i,l)\ind{\vy_i[l]\neq\hat{\vy}_i[l]}$ \label{mh_compute_error}
+		\STATE $\alpha^{t} = \frac{1}{2}\ln\left(\frac{1-\epsilon^t}{\epsilon^t}\right)$ \label{mh_compute_alpha}
+		\STATE $D^t(i,l) = D^{t-1}(i,l)\exp(-\alpha^t\vy_i[l]\hat{\vy}_i[l]),\forall i\in\{1,\cdots,m\},\forall l\in\{1,\cdots,k\}$ \label{mh_update_d}
+	\ENDFOR
+	\RETURN $H(\vx) = \sign(\sum_{t=1}^T\alpha^tf^t(\vx))$
+\end{algorithmic}
+\end{algorithm}
 
 
 % TODO: adaboost loss bound
