@@ -283,6 +283,11 @@ Rousu, J., Saunders, C., Szedmak, S., and Shawe-Taylor, J. (2007).
 \newblock {Efficient algorithms for max-margin structured classification}.
 \newblock {\em Predicting Structured Data}, pages 105--129.
 
+\bibitem[Schapire and Singer, 1999]{Schapire99improved}
+Schapire, R. and Singer, Y. (1999).
+\newblock Improved boosting algorithms using confidence-rated predictions.
+\newblock {\em Machine Learning}, 37(3):297--336.
+
 \bibitem[Schapire, 1990]{Schapire90the}
 Schapire, R.~E. (1990).
 \newblock The strength of weak learnability.

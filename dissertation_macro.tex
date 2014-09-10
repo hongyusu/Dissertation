@@ -26,6 +26,9 @@
 % theory
 \usepackage{amsthm}
 
+% double bracket
+\usepackage{stmaryrd}
+
 
 
 %-------------------
@@ -126,7 +129,7 @@
 \newcommand{\kminimize}{\textbf{kmin}}
 \newcommand{\st}{\textbf{s.t.}}
 \newcommand{\set}[1]{\{ #1 \}}
-\newcommand{\ind}[1]{[ #1 ]}
+\newcommand{\ind}[1]{{\llbracket #1 \rrbracket}}
 \newcommand{\norm}[1]{\left|\left| #1 \right|\right|}
 \newcommand{\ip}[2]{\langle #1, #2 \rangle}
 \newcommand{\var}{\textbf{Var}}
@@ -157,6 +160,8 @@
 \newcommand{\libsvm}{{\sc libsvm}}
 \newcommand{\svmcascade}{{\sc svmcascade}}
 \newcommand{\adaboost}{{\sc adaboost}}
+
+\newcommand{\hatf}{{\hat{f}}}
 
 \renewcommand{\algorithmicrequire}{\textbf{Input:}}
 \renewcommand{\algorithmicensure}{\textbf{Output:}}

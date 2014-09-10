@@ -600,9 +600,10 @@ Finding a weak learner which performs better than random guessing is usually eas
 \citet{Schapire90the} proved that two concepts are equivalent which lays the foundation of the boosting algorithm that converts a weak learning algorithm into one that achieves high performance.
 
 Adaptive Boosting (\adaboost) developed by \citet{Freund97a} is the very first practical boosting algorithm and is most influential one.
+In addition, \citet{Schapire99improved} proposed a variant of the algorithm which updates the adaptive parameters in order to minimize the exponential loss.
 The exact algorithm is shown in (Algorithm~\ref{adaboost}).
 The fundamental idea of \adaboost\ is to maintain a distribution $D$ over all training examples, and update the distribution in each iteration such that difficult-to-classify examples will get more probability mass for the next iteration (line~\ref{update_d}).
-During each iteration, the algorithm compute a weak learner $f^t(\vx)$ base on all training data and current distribution $D^{t}$ (line~\ref{compuet_f}), compute the weighted training error $\epsilon^k$ for the current weak learner (line~\ref{compute_error}), and compute the adaptive parameter $\alpha^t$ for current weak learner (line~\ref{compute_alpha}).
+During each iteration, the algorithm compute a weak learner $f^t(\vx)$ base on all training examples and the current distribution $D^{t}$ (line~\ref{compuet_f}), compute the weighted training error $\epsilon^k$ for the current weak learner (line~\ref{compute_error}), and compute the adaptive parameter $\alpha^t$ for current weak learner (line~\ref{compute_alpha}).
 The ensemble is the weighted combination of all weak learners.
 \begin{align*}
 	H(\vx) = \sign(\sum_{t=1}^T\alpha^tf^t(\vx)).
@@ -618,12 +619,26 @@ The ensemble is the weighted combination of all weak learners.
 		\STATE $f^t(\vx)\leftarrow\Wcal(\Scal,D^{i-1})$ \label{compuet_f}
 		\STATE $y_i = f^t(\vx_i),\forall i\in\{1,\cdots,m\}$
 		\STATE $\epsilon^t = \sum_{i=1}^{m}D^t(i)\ind{y_i\neq\hat{y}_i}$ \label{compute_error}
-		\STATE $\alpha^{t} = \frac{1}{2}\log\left(\frac{1-\epsilon^k}{\epsilon^k}\right)$ \label{compute_alpha}
+		\STATE $\alpha^{t} = \frac{1}{2}\ln\left(\frac{1-\epsilon^t}{\epsilon^t}\right)$ \label{compute_alpha}
 		\STATE $D^t(i) = D^{t-1}(i)\exp(-\alpha^ty_i\hat{y}_i),\forall i\in\{1,\cdots,m\}$ \label{update_d}
 	\ENDFOR
 	\RETURN $H(\vx) = \sign(\sum_{t=1}^T\alpha^tf^t(\vx))$
 \end{algorithmic}
 \end{algorithm}
+
+For each weak learner $f^t(\vx)$, the strategy of updating adaptive parameter $\alpha^t$ is to ensure that the exponential loss of $f^t(\vx)$ is minimized.
+To see this, we fist compute the exponential loss 
+\begin{align*}
+	\ell_{exp}&(\alpha^t,f^t(\vx),D^t) = \sum_{i=1}^mD^t(i)\exp(-\hatf(\vx_i)\alpha^tf^t(\vx_i))\\
+	&=\exp(-\alpha^t)\sum_{i=1}^mD^t(i)\ind{\hatf(\vx_i)=f(\vx_i)} + \exp(\alpha^t)\sum_{i=1}^mD^t(i)\ind{\hatf(\vx_i)\neq f(\vx_i)}\\
+	&=\exp(-\alpha^t)(1-\epsilon^t) + \exp(\alpha^t)\epsilon^t.
+\end{align*}
+To minimize $\ell_{exp}(\alpha^t,f^t(\vx),D^t)$, we can take partial gradient with respect to $\alpha^t$ and set it to zero.
+Solve for $\alpha^t$, we get
+\begin{align*}
+	\alpha^{t} = \frac{1}{2}\ln\left(\frac{1-\epsilon^t}{\epsilon^t}\right).
+\end{align*}
+
 
 %
 % bagging
@@ -635,14 +650,14 @@ The ensemble prediction $H(\vx)$ is the averaged prediction over all weak learne
 \begin{align}
 	H(\vx) = \sign\left(\sum_{i=1}^{T}f_i(\vx)\right). \label{bagging_ensemble}
 \end{align}
-Denote by $\hat{f}$ the ground true function.
+Denote by $\hatf$ the ground true function.
 Suppose base learner has probability $\epsilon$ of making independent mistake
 \begin{align*}
-	P(f_i(\vx) \ne \hat{f}(\vx)) = \epsilon.
+	P(f_i(\vx) \ne \hatf(\vx)) = \epsilon.
 \end{align*}
 As the bagging ensemble (\ref{bagging_ensemble}) makes a mistake when at least half of the weak learners make mistakes, we can compute the probability of bagging ensemble making mistake by
 \begin{align*}
-	P(H(\vx)\neq\hat{f}(\vx)) = \sum_{i=0}^{T/2}\left(\begin{tabular}{cc}T\\k\end{tabular}\right)(1-\epsilon)^k\epsilon^{T-k} \le\exp\left(-\frac{1}{2}T(2\epsilon-1)^2\right).
+	P(H(\vx)\neq\hatf(\vx)) = \sum_{i=0}^{T/2}\left(\begin{tabular}{cc}T\\k\end{tabular}\right)(1-\epsilon)^k\epsilon^{T-k} \le\exp\left(-\frac{1}{2}T(2\epsilon-1)^2\right).
 \end{align*}
 It is clear that the probability decreases exponentially with respect to the number of the weak learners.
 In extreme case, the probability will approach zero when $T$ approaches infinity.
