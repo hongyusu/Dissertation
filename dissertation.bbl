@@ -88,6 +88,11 @@ Collins, M. and Duffy, N. (2002).
   Computational Linguistics}, pages 263--270, Stroudsburg, PA, USA. Association
   for Computational Linguistics.
 
+\bibitem[Collins and Koo, 2005]{Collins05distrimnative}
+Collins, M. and Koo, T. (2005).
+\newblock Discriminative reranking for natural language parsing.
+\newblock {\em Comput. Linguist.}, 31(1):25--70.
+
 \bibitem[Collobert et~al., 2002]{Collobert02a}
 Collobert, R., Bengio, S., and Bengio, Y. (2002).
 \newblock A parallel mixture of svms for very large scale problems.
@@ -134,6 +139,13 @@ Efron, B. and Tibshirani, R. (1994).
 Esuli, A., Fagni, T., and Sebastiani, F. (2008).
 \newblock Boosting multi-label hierarchical text categorization.
 \newblock {\em Information Retrieval}, 11(4):287--313.
+
+\bibitem[Fiscus, 1997]{Fiscus97a}
+Fiscus, J. (1997).
+\newblock A post-processing system to yield reduced word error rates:
+  Recognizer output voting error reduction (rover).
+\newblock In {\em Automatic Speech Recognition and Understanding, 1997.
+  Proceedings., 1997 IEEE Workshop on}, pages 347--354.
 
 \bibitem[Freund et~al., 2004]{Freund04generalization}
 Freund, Y., Mansour, Y., and Schapire, R.~E. (2004).
@@ -220,6 +232,11 @@ Keerthi, S.~S., Chapelle, O., and DeCoste, D. (2006).
 \newblock Building support vector machines with reduced classifier complexity.
 \newblock {\em J. Mach. Learn. Res.}, 7:1493--1515.
 
+\bibitem[Kocev et~al., 2013]{Kocev13tree}
+Kocev, D., Vens, C., Struyf, J., and Deroski, S. (2013).
+\newblock Tree ensembles for predicting structured outputs.
+\newblock {\em Pattern Recogn.}, 46(3):817--833.
+
 \bibitem[Koltchinskii and Panchenko, 2000]{Koltchinskii00empirical}
 Koltchinskii, V. and Panchenko, D. (2000).
 \newblock Empirical margin distributions and bounding the generalization error
@@ -258,6 +275,12 @@ Liu, F.~T., Ting, K.~M., Yu, Y., and Zhou, Z.-H. (2008).
 Minka, T.~P. (2003).
 \newblock A comparison of numerical optimizers for logistic regression.
 
+\bibitem[Mohri et~al., 2008]{Benesty08speech}
+Mohri, M., Pereira, F., and Riley, M. (2008).
+\newblock Speech recognition with weighted finite-state transducers.
+\newblock In Benesty, J., Sondhi, M., and Huang, Y., editors, {\em Springer
+  Handbook of Speech Processing}, pages 559--584. Springer Berlin Heidelberg.
+
 \bibitem[Novikoff, 1962]{Novikoff62}
 Novikoff, A.~B. (1962).
 \newblock On convergence proofs on perceptrons.
@@ -275,6 +298,14 @@ Pavlov, D., Chudova, D., and Smyth, P. (2000).
 \newblock In {\em Proceedings of the Sixth ACM SIGKDD International Conference
   on Knowledge Discovery and Data Mining}, KDD '00, pages 295--299, New York,
   NY, USA. ACM.
+
+\bibitem[Petrov, 2010]{Petrov10products}
+Petrov, S. (2010).
+\newblock Products of random latent variable grammars.
+\newblock In {\em Human Language Technologies: The 2010 Annual Conference of
+  the North American Chapter of the Association for Computational Linguistics},
+  HLT '10, pages 19--27, Stroudsburg, PA, USA. Association for Computational
+  Linguistics.
 
 \bibitem[Platt, 1998]{Platt98sequential}
 Platt, J. (1998).
@@ -320,6 +351,13 @@ Rousu, J., Saunders, C., Szedmak, S., and Shawe-Taylor, J. (2006).
 Rousu, J., Saunders, C., Szedmak, S., and Shawe-Taylor, J. (2007).
 \newblock {Efficient algorithms for max-margin structured classification}.
 \newblock {\em Predicting Structured Data}, pages 105--129.
+
+\bibitem[Sagae and Lavie, 2006]{Sagae06parsing}
+Sagae, K. and Lavie, A. (2006).
+\newblock Parser combination by reparsing.
+\newblock In {\em Proceedings of the Human Language Technology Conference of
+  the NAACL, Companion Volume: Short Papers}, NAACL-Short '06, pages 129--132,
+  Stroudsburg, PA, USA. Association for Computational Linguistics.
 
 \bibitem[Schapire and Singer, 1999]{Schapire99improved}
 Schapire, R. and Singer, Y. (1999).
@@ -424,6 +462,20 @@ Yu, H.-F., Huang, F.-L., and Lin, C.-J. (2011).
 \newblock Dual coordinate descent methods for logistic regression and maximum
   entropy models.
 \newblock {\em Machine Learning}, 85(1-2):41--75.
+
+\bibitem[Zeman and \v{Z}abokrtsk\'{y}, 2005]{Zeman05improving}
+Zeman, D. and \v{Z}abokrtsk\'{y}, Z. (2005).
+\newblock Improving parsing accuracy by combining diverse dependency parsers.
+\newblock In {\em Proceedings of the Ninth International Workshop on Parsing
+  Technology}, Parsing '05, pages 171--178, Stroudsburg, PA, USA. Association
+  for Computational Linguistics.
+
+\bibitem[Zhang et~al., 2009]{Zhang09kbest}
+Zhang, H., Zhang, M., Tan, C.~L., and Li, H. (2009).
+\newblock K-best combination of syntactic parsers.
+\newblock In {\em Proceedings of the 2009 Conference on Empirical Methods in
+  Natural Language Processing: Volume 3 - Volume 3}, EMNLP '09, pages
+  1552--1560, Stroudsburg, PA, USA. Association for Computational Linguistics.
 
 \bibitem[Zhang et~al., 2012]{Zhang12scaling}
 Zhang, K., Lan, L., Wang, Z., and Moerchen, F. (2012).

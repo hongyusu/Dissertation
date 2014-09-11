@@ -719,7 +719,10 @@ The feature split process of decision tree is deterministic given a set of featu
 
 \subsection{Ensemble Methods in Structured Output Space}
 
-\adaboostmh\ is the multilabel variance of original \adaboost\ algorithm developed by \citet{Schapire99improved}, which is further developed in \citep{Esuli2008boosting}.
+The ensemble methods have been initially developed for single task classification \citep{Breiman96bagging,Freund97a} or regression tasks \citep{Breiman96bagging}, as it is straightforward to combine multiple scalar output variables.
+However, it is not immediately clear how to combine vector valued outputs in multilabel structured output space.
+
+\adaboostmh\ is the multilabel variance of original \adaboost\ algorithm developed by \citet{Schapire99improved}, which is further developed by \citet{Esuli2008boosting}.
 The core idea of \adaboostmh\ is to adopt hamming loss instead of 0/1 loss. 
 In particular, the algorithm reduces from a multilabel classification problem to a set of single label classification problems by replacing each training example $(\vx_i,\vy_i)$ with $k$ examples $\{(\vx_i,\vy_i[l])\}_{l=1}^k$.
 The algorithm is detailed in (Algorithm~\ref{adaboostmh}).
@@ -742,6 +745,14 @@ In each iteration, the algorithm takes in the distribution and all training exam
 	\RETURN $H(\vx) = \sign(\sum_{t=1}^T\alpha^tf^t(\vx))$
 \end{algorithmic}
 \end{algorithm}
+
+Furthermore, many other ensemble approaches have been proposed and applied in specific areas, to name a few, in natural language processing \citep{Collins05distrimnative,Zeman05improving,Sagae06parsing,Zhang09kbest} and 
+in speech recognition \citep{Fiscus97a,Benesty08speech,Petrov10products}.
+Limiting the power of these approaches is the fact that they are mostly tailored for the application and it is not immediately clear how to apply them to other machine learning tasks.
+In addition, \citet{Kocev13tree} have developed ensemble approaches based on bagging with the limitation that the methods can only use decision tree as base learner.
+Most recently, a series of learning algorithms with performance guarantee are proposed in \citep{Cortes14semble}.
+
+
 
 
 \section{Evaluation}
