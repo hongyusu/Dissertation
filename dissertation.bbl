@@ -93,6 +93,18 @@ Collobert, R., Bengio, S., and Bengio, Y. (2002).
 \newblock A parallel mixture of svms for very large scale problems.
 \newblock {\em Neural Computation}, 14(5):1105--1114.
 
+\bibitem[Cortes et~al., 2014a]{Cortes14semble}
+Cortes, C., Kuznetsov, V., and Mohri, M. (2014a).
+\newblock Ensemble methods for structured prediction.
+\newblock In {\em Proceedings of the 31th International Conference on Machine
+  Learning (ICML 2004)}, pages 823--830. JMLR.org.
+
+\bibitem[Cortes et~al., 2014b]{Cortes14deep}
+Cortes, C., Mohri, M., and Syed, U. (2014b).
+\newblock Deep boosting.
+\newblock In {\em Proceedings of the 31th International Conference on Machine
+  Learning (ICML 2004)}, pages 823--830. JMLR.org.
+
 \bibitem[Cortes and Vapnik, 1995]{Cortes95support}
 Cortes, C. and Vapnik, V. (1995).
 \newblock Support-vector networks.
@@ -122,6 +134,11 @@ Efron, B. and Tibshirani, R. (1994).
 Esuli, A., Fagni, T., and Sebastiani, F. (2008).
 \newblock Boosting multi-label hierarchical text categorization.
 \newblock {\em Information Retrieval}, 11(4):287--313.
+
+\bibitem[Freund et~al., 2004]{Freund04generalization}
+Freund, Y., Mansour, Y., and Schapire, R.~E. (2004).
+\newblock Generalization bounds for averaged classifiers.
+\newblock {\em THE ANNALS OF STATISTICS}, 32:1698--1722.
 
 \bibitem[Freund and Schapire, 1997]{Freund97a}
 Freund, Y. and Schapire, R.~E. (1997).
@@ -202,6 +219,12 @@ Keerthi, S., Duan, K., Shevade, S., and Poo, A. (2005).
 Keerthi, S.~S., Chapelle, O., and DeCoste, D. (2006).
 \newblock Building support vector machines with reduced classifier complexity.
 \newblock {\em J. Mach. Learn. Res.}, 7:1493--1515.
+
+\bibitem[Koltchinskii and Panchenko, 2000]{Koltchinskii00empirical}
+Koltchinskii, V. and Panchenko, D. (2000).
+\newblock Empirical margin distributions and bounding the generalization error
+  of combined classifiers.
+\newblock {\em Annals of Statistics}, 30:2002.
 
 \bibitem[Komarek and Moore, 2005]{Komarek05making}
 Komarek, P. and Moore, A. (2005).
@@ -308,6 +331,14 @@ Schapire, R.~E. (1990).
 \newblock The strength of weak learnability.
 \newblock {\em Mach. Learn.}, 5(2):197--227.
 
+\bibitem[Schapire et~al., 1997]{Schapire97boosting}
+Schapire, R.~E., Freund, Y., Barlett, P., and Lee, W.~S. (1997).
+\newblock Boosting the margin: A new explanation for the effectiveness of
+  voting methods.
+\newblock In {\em Proceedings of the Fourteenth International Conference on
+  Machine Learning}, ICML '97, pages 322--330, San Francisco, CA, USA. Morgan
+  Kaufmann Publishers Inc.
+
 \bibitem[Schwaighofer and Tresp, 2001]{Schwaighofer01the}
 Schwaighofer, A. and Tresp, V. (2001).
 \newblock The bayesian committee support vector machine.
@@ -325,6 +356,11 @@ Schölkopf, B. and Smola, A.~J. (2002).
 Shawe-Taylor, J. and Cristianini, N. (2004).
 \newblock {\em {Kernel Methods for Pattern Analysis}}.
 \newblock Cambridge University Press.
+
+\bibitem[Smyth and Wolpert, 1999]{Smyth99linearly}
+Smyth, P. and Wolpert, D. (1999).
+\newblock Linearly combining density estimators via stacking.
+\newblock {\em Machine Learning}, 36(1-2):59--83.
 
 \bibitem[Taskar et~al., 2002]{taskar02}
 Taskar, B., Abbeel, P., and Koller, D. (2002).

@@ -585,25 +585,43 @@ The intractability of the inference problem can be seen as an exchange of the ge
 
 
 
-
+%
+% ensemble methdos
 \section{Ensemble Methods}
+
+Ensemble methods are one of the prominent classification techniques widely used in Machine Learning.
+In general, the methods train multiple base learners and combine them in order to achiever better classification performance.
+Most importantly, there is no requirement for base learners to be strong as long as they perform better than random guessing.
+%To trace the exact originality of the ensemble methods seems impossible, as the methods involve along well with human society by which it is wiser to take in to account advises from multiple human experts.
+There are several different type of ensemble algortihm, to name a few, bagging \citep{Breiman96bagging}, boosting \citep{Freund97a,Schapire99improved}, stacking \citep{Smyth99linearly}, Bayesian averaging \citep{Freund04generalization}.
+Most of the algorithms have improved the classification performance when compared to individual counterpart, some of them also enjoyed theoretical guarantee \citep{Schapire97boosting,Koltchinskii00empirical,Cortes14deep,Cortes14semble}.
+For our purposes, the section will start with and focus on bagging and boosting ensemble since both are best known approaches and most related to this thesis.
+In the later part of the section, we will extend the ensemble methods to structured output space by reviewing several recently established algorithms.
+
+%
+% preliminary notations
+\subsection{Preliminary and Notations}
+
+
 
 %
 % boosting
 \subsection{Boosting}
 \textit{Boosting} corresponds to a learning framework or a family of algorithms that take in a weak classifier and turning it into a strong one.
-A function class is \textit{strongly learnable} if there exists a polynomial algorithm that achieve high accuracy with high confident for all functions in the class.
-On the other hand, a function class is \textit{weak learnable} if the algorithm can achieve arbitrary high accuracy.
-That is the algorithm only needs to output a function that has a performance better than coin-toss.
-The concepts were proposed in \citep{Kearns94cryptographic} together with the question whether the strong learnability and the weak learnability are equivalent. 
-Finding a weak learner which performs better than random guessing is usually easy in practice but find a strong learner is difficult.
-\citet{Schapire90the} proved that two concepts are equivalent which lays the foundation of the boosting algorithm that converts a weak learning algorithm into one that achieves high performance.
+We begin our discussion from the notion of  \textit{concept class}.
+A \textit{concept} is a boolean function over domain $\Xcal$, and a \textit{concept class} is a class of concept.
+% TODO: an illustrative example
+A concept class is \textit{strongly learnable} if there exists a polynomial learning algorithm that achieves high accuracy with high probability for all concept.
+On the other hand, a concept class is \textit{weak learnable} if the learning algorithm achieves arbitrary high accuracy where the only requirement is that the learning algorithm find a function performs better than coin flip.
+The concept of learnability were proposed in \citep{Kearns94cryptographic} together with the question whether the strong learnability and the weak learnability are equivalent which is known as \textit{hypothesis boosting problem}.
+Finding a weak learner which performs better than random guessing is easy in practice, but finding a strong learner is usually difficult.
+\citet{Schapire90the} has proved that two classes of learnability are equal which lays the foundation of the boosting algorithm that aim to convert a weak learning algorithm into a strong one that achieves high performance.
 
 Adaptive Boosting (\adaboost) developed by \citet{Freund97a} is the very first practical boosting algorithm and is the most influential one.
-In addition, \citet{Schapire99improved} proposed a variant of the algorithm which updates the adaptive parameters in order to minimize the exponential loss.
+In addition, \citet{Schapire99improved} proposed a variant of the algorithm which updates the adaptive parameters in order to minimize the exponential loss of the weak learners.
 The exact algorithm is shown in (Algorithm~\ref{adaboost}).
 The fundamental idea of \adaboost\ is to maintain a distribution $D$ over all training examples, and update the distribution in each iteration such that difficult-to-classify examples will get more probability mass for the next iteration (line~\ref{update_d}).
-In particular, the algorithm compute in each iteration a weak learner $f^t(\vx)$ base on all training examples and the current distribution $D^{t}$ (line~\ref{compuet_f}), compute the weighted training error $\epsilon^k$ for the current weak learner (line~\ref{compute_error}), and compute the adaptive parameter $\alpha^t$ for current weak learner (line~\ref{compute_alpha}).
+In particular, the algorithm computes in each iteration a weak learner $f^t(\vx)$ base on all training examples and the current distribution $D^{t}$ (line~\ref{compuet_f}), calculates the weighted training error $\epsilon^k$ for the current weak learner (line~\ref{compute_error}), and computes the adaptive parameter $\alpha^t$ for current weak learner (line~\ref{compute_alpha}).
 The ensemble is the weighted combination of all weak learners.
 \begin{align*}
 	H(\vx) = \sign(\sum_{t=1}^T\alpha^tf^t(\vx)).
@@ -649,29 +667,10 @@ The distribution will reflect the difficulty of the training examples during the
 It is usually achieved by reweighing which initials a uniform distribution over training examples and updates the distribution after each iteration.
 For learning algorithms that cannot handle training data with specific distribution, we can apply resampling which samples training examples in each iteration according to some desired distribution.
 
-\adaboostmh\ is the multilabel variance of original \adaboost\ algorithm developed by \citet{Schapire99improved}, which is further developed in \citep{Esuli2008boosting}.
-The core idea of \adaboostmh is to adopt hamming loss instead of 0/1 loss. 
-In particular, the algorithm reduces from a multilabel classification problem to a set of single label classification problem by replacing each training example $(\vx_i,\vy_i)$ with $k$ examples $\{(\vx_i,\vy_i[l])\}_{l=1}^k$.
-The algorithm is detailed in (Algorithm~\ref{adaboostmh}).
-It maintains a distribution over all examples and labels.
-In each iteration, the algorithm takes in the distribution and all training examples, generates a weak learner $f^k(\vx)$ (line~\ref{mh_compuet_f}), computes hamming loss (line~\ref{mh_compute_error}), computes the adaptive parameter $\alpha^t$ (line~\ref{mh_compute_alpha}), and update the distribution (line~\ref{mh_update_d}).
-\begin{algorithm}
-\caption{\adaboostmh}
-\label{adaboostmh}
-\begin{algorithmic}[1]
-	\REQUIRE Training sample $\Scal = \{(x_i,\vy_i)\}_{i=1}^m$, learning function $\Wcal$, number of weak learners $T$
-	\ENSURE Boosting ensemble $H(\vx)$
-	\STATE Initialize $D^0(i,l)=\frac{1}{mk},i\in\{1,\cdots,m\}$
-	\FOR{$t=1\cdots T$}
-		\STATE $f^t(\vx)\leftarrow\Wcal(\Scal,D^{i-1})$ \label{mh_compuet_f}
-		\STATE $\vy_i = f^t(\vx_i),\forall i\in\{1,\cdots,m\}$
-		\STATE $\epsilon^t =\sum_{l=1}^k\sum_{i=1}^{m}D^t(i,l)\ind{\vy_i[l]\neq\hat{\vy}_i[l]}$ \label{mh_compute_error}
-		\STATE $\alpha^{t} = \frac{1}{2}\ln\left(\frac{1-\epsilon^t}{\epsilon^t}\right)$ \label{mh_compute_alpha}
-		\STATE $D^t(i,l) = D^{t-1}(i,l)\exp(-\alpha^t\vy_i[l]\hat{\vy}_i[l]),\forall i\in\{1,\cdots,m\},\forall l\in\{1,\cdots,k\}$ \label{mh_update_d}
-	\ENDFOR
-	\RETURN $H(\vx) = \sign(\sum_{t=1}^T\alpha^tf^t(\vx))$
-\end{algorithmic}
-\end{algorithm}
+Most recently, a new boosting algorithm \deepboosting\ was developed in \citep{Cortes14deep}.
+\deepboosting\ allows the learning algorithm to use complex hypothesis class contain very deep decision trees, by which it extends \adaboost\ that only uses simple hypothesis class of decision tree in depth one.
+In addition, \citet{Cortes14deep} also developed rich learning bounds for \deepboosting\ optimization problem in terms of the Rademacher complexity theory.
+The new theory advances the previous performance guarantee of \adaboost\ which is build in terms of margins of the training examples \citep{Schapire97boosting,Koltchinskii00empirical}.
 
 
 % TODO: adaboost loss bound
@@ -717,6 +716,32 @@ In practice, the random forest algorithm selects in each step a subset of featur
 The feature split process of decision tree is deterministic given a set of features.
 \citet{Liu08spectrum} proposed \vrtree\ which further extend random forest algorithm by introducing randomness in both feature selection and split processes.
 
+
+\subsection{Ensemble Methods in Structured Output Space}
+
+\adaboostmh\ is the multilabel variance of original \adaboost\ algorithm developed by \citet{Schapire99improved}, which is further developed in \citep{Esuli2008boosting}.
+The core idea of \adaboostmh\ is to adopt hamming loss instead of 0/1 loss. 
+In particular, the algorithm reduces from a multilabel classification problem to a set of single label classification problems by replacing each training example $(\vx_i,\vy_i)$ with $k$ examples $\{(\vx_i,\vy_i[l])\}_{l=1}^k$.
+The algorithm is detailed in (Algorithm~\ref{adaboostmh}).
+It maintains a distribution over all examples and labels.
+In each iteration, the algorithm takes in the distribution and all training examples, generates a weak learner $f^k(\vx)$ (line~\ref{mh_compuet_f}), computes hamming loss (line~\ref{mh_compute_error}), computes the adaptive parameter $\alpha^t$ (line~\ref{mh_compute_alpha}), and update the distribution (line~\ref{mh_update_d}).
+\begin{algorithm}
+\caption{\adaboostmh}
+\label{adaboostmh}
+\begin{algorithmic}[1]
+	\REQUIRE Training sample $\Scal = \{(x_i,\vy_i)\}_{i=1}^m$, learning function $\Wcal$, number of weak learners $T$
+	\ENSURE Boosting ensemble $H(\vx)$
+	\STATE Initialize $D^0(i,l)=\frac{1}{mk},i\in\{1,\cdots,m\}$
+	\FOR{$t=1\cdots T$}
+		\STATE $f^t(\vx)\leftarrow\Wcal(\Scal,D^{i-1})$ \label{mh_compuet_f}
+		\STATE $\vy_i = f^t(\vx_i),\forall i\in\{1,\cdots,m\}$
+		\STATE $\epsilon^t =\sum_{l=1}^k\sum_{i=1}^{m}D^t(i,l)\ind{\vy_i[l]\neq\hat{\vy}_i[l]}$ \label{mh_compute_error}
+		\STATE $\alpha^{t} = \frac{1}{2}\ln\left(\frac{1-\epsilon^t}{\epsilon^t}\right)$ \label{mh_compute_alpha}
+		\STATE $D^t(i,l) = D^{t-1}(i,l)\exp(-\alpha^t\vy_i[l]\hat{\vy}_i[l]),\forall i\in\{1,\cdots,m\},\forall l\in\{1,\cdots,k\}$ \label{mh_update_d}
+	\ENDFOR
+	\RETURN $H(\vx) = \sign(\sum_{t=1}^T\alpha^tf^t(\vx))$
+\end{algorithmic}
+\end{algorithm}
 
 
 \section{Evaluation}
