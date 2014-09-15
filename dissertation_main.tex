@@ -591,9 +591,9 @@ The intractability of the inference problem can be seen as an exchange of the ge
 
 Ensemble methods are one of the prominent classification techniques widely used in Machine Learning.
 In general, the methods train multiple base learners and combine them in order to achiever better classification performance.
-Most importantly, there is no requirement for base learners to be strong as long as they perform better than random guessing.
+Most importantly, there is no requirement for base learners to be accuracy as long as they perform better than random guessing.
 %To trace the exact originality of the ensemble methods seems impossible, as the methods involve along well with human society by which it is wiser to take in to account advises from multiple human experts.
-There are several different type of ensemble algortihm, to name a few, bagging \citep{Breiman96bagging}, boosting \citep{Freund97a,Schapire99improved}, stacking \citep{Smyth99linearly}, Bayesian averaging \citep{Freund04generalization}.
+There are several different types of ensemble algorithm, to name a few, bagging \citep{Breiman96bagging}, boosting \citep{Freund97a,Schapire99improved}, stacking \citep{Smyth99linearly}, Bayesian averaging \citep{Freund04generalization}.
 Most of the algorithms have improved the classification performance when compared to individual counterpart, some of them also enjoyed theoretical guarantee \citep{Schapire97boosting,Koltchinskii00empirical,Cortes14deep,Cortes14semble}.
 For our purposes, the section will start with and focus on bagging and boosting ensemble since both are best known approaches and most related to this thesis.
 In the later part of the section, we will extend the ensemble methods to structured output space by reviewing several recently established algorithms.
@@ -609,10 +609,10 @@ In the later part of the section, we will extend the ensemble methods to structu
 \subsection{Boosting}
 \textit{Boosting} corresponds to a learning framework or a family of algorithms that take in a weak classifier and turning it into a strong one.
 We begin our discussion from the notion of  \textit{concept class}.
-A \textit{concept} is a boolean function over domain $\Xcal$, and a \textit{concept class} is a class of concept.
+A \textit{concept} is a boolean function over domain $\Xcal$, and a \textit{concept class} is a class of concepts.
 % TODO: an illustrative example
-A concept class is \textit{strongly learnable} if there exists a polynomial learning algorithm that achieves high accuracy with high probability for all concept.
-On the other hand, a concept class is \textit{weak learnable} if the learning algorithm achieves arbitrary high accuracy where the only requirement is that the learning algorithm find a function performs better than coin flip.
+A concept class is \textit{strongly learnable} if there exists a polynomial learning algorithm that achieves high accuracy with high probability for all concepts in the class.
+On the other hand, a concept class is \textit{weak learnable} if the learning algorithm achieves arbitrary high accuracy where the only requirement is that the learning algorithm finds a function that performs better than coin flip.
 The concept of learnability were proposed in \citep{Kearns94cryptographic} together with the question whether the strong learnability and the weak learnability are equivalent which is known as \textit{hypothesis boosting problem}.
 Finding a weak learner which performs better than random guessing is easy in practice, but finding a strong learner is usually difficult.
 \citet{Schapire90the} has proved that two classes of learnability are equal which lays the foundation of the boosting algorithm that aim to convert a weak learning algorithm into a strong one that achieves high performance.
@@ -621,7 +621,7 @@ Adaptive Boosting (\adaboost) developed by \citet{Freund97a} is the very first p
 In addition, \citet{Schapire99improved} proposed a variant of the algorithm which updates the adaptive parameters in order to minimize the exponential loss of the weak learners.
 The exact algorithm is shown in (Algorithm~\ref{adaboost}).
 The fundamental idea of \adaboost\ is to maintain a distribution $D$ over all training examples, and update the distribution in each iteration such that difficult-to-classify examples will get more probability mass for the next iteration (line~\ref{update_d}).
-In particular, the algorithm computes in each iteration a weak learner $f^t(\vx)$ base on all training examples and the current distribution $D^{t}$ (line~\ref{compuet_f}), calculates the weighted training error $\epsilon^k$ for the current weak learner (line~\ref{compute_error}), and computes the adaptive parameter $\alpha^t$ for current weak learner (line~\ref{compute_alpha}).
+In particular, the algorithm computes in each iteration a weak learner $f^t(\vx)$ base on all training examples and the current distribution $D^{t}$ (line~\ref{compuet_f}), calculates the weighted training error $\epsilon^k$ for the current weak learner (line~\ref{compute_error}), and computes the adaptive parameter $\alpha^t$ for the current weak learner (line~\ref{compute_alpha}).
 The ensemble is the weighted combination of all weak learners.
 \begin{align*}
 	H(\vx) = \sign(\sum_{t=1}^T\alpha^tf^t(\vx)).
@@ -638,14 +638,15 @@ The ensemble is the weighted combination of all weak learners.
 		\STATE $y_i = f^t(\vx_i),\forall i\in\{1,\cdots,m\}$
 		\STATE $\epsilon^t = \sum_{i=1}^{m}D^t(i)\ind{y_i\neq\hat{y}_i}$ \label{compute_error}
 		\STATE $\alpha^{t} = \frac{1}{2}\ln\left(\frac{1-\epsilon^t}{\epsilon^t}\right)$ \label{compute_alpha}
-		\STATE $D^t(i) = D^{t-1}(i)\exp(-\alpha^ty_i\hat{y}_i),\forall i\in\{1,\cdots,m\}$ \label{update_d}
+		\STATE $Z=\sum_{i=1}^{m}D^{t-1}(i)\exp(-\alpha^ty_i\hat{y}_i)$
+		\STATE $D^t(i) = \frac{1}{Z}D^{t-1}(i)\exp(-\alpha^ty_i\hat{y}_i),\forall i\in\{1,\cdots,m\}$ \label{update_d}
 	\ENDFOR
 	\RETURN $H(\vx) = \sign(\sum_{t=1}^T\alpha^tf^t(\vx))$
 \end{algorithmic}
 \end{algorithm}
 
 For each weak learner $f^t(\vx)$, the strategy of updating adaptive parameter $\alpha^t$ is to ensure that the exponential loss of $\alpha^tf^t(\vx)$ is minimized.
-To see this, we fist compute the exponential loss for $\alpha^tf^t(\vx)$ given current distribution $D^t$ over training example and adaptive parameter for $f^t(\vx)$
+To see this, we first compute the exponential loss for $\alpha^tf^t(\vx)$ given current distribution $D^t$ over training example and adaptive parameter for $f^t(\vx)$
 \begin{align*}
 	\ell_{exp}&(\alpha^t,f^t(\vx),D^t) \\
 	&= \sum_{i=1}^mD^t(i)\exp(-\hatf(\vx_i)\alpha^tf^t(\vx_i))\\
@@ -664,11 +665,11 @@ Thus the rule for updating $\alpha^t$ will make sure the exponential loss of $\a
 
 It is worth noticing that the \adaboost\ algorithm describe in (algorithm~\ref{adaboost}) requires the learning algorithm $\Wcal$ capable of learning from some specific distribution.
 The distribution will reflect the difficulty of the training examples during the learning.
-It is usually achieved by reweighing which initials a uniform distribution over training examples and updates the distribution after each iteration.
-For learning algorithms that cannot handle training data with specific distribution, we can apply resampling which samples training examples in each iteration according to some desired distribution.
+It is usually achieved by \textit{reweighing} which initials a uniform distribution over training examples and updates the distribution after each iteration.
+For learning algorithms that cannot handle training data with specific distribution, we can apply \textit{resampling} which samples training examples in each iteration according to some desired distribution.
 
 Most recently, a new boosting algorithm \deepboosting\ was developed in \citep{Cortes14deep}.
-\deepboosting\ allows the learning algorithm to use complex hypothesis class contain very deep decision trees, by which it extends \adaboost\ that only uses simple hypothesis class of decision tree in depth one.
+\deepboosting\ allows the learning algorithm to use complex hypothesis class contain very deep decision trees, by which it extends \adaboost\ that only uses simple hypothesis class of decision tree with depth one.
 In addition, \citet{Cortes14deep} also developed rich learning bounds for \deepboosting\ optimization problem in terms of the Rademacher complexity theory.
 The new theory advances the previous performance guarantee of \adaboost\ which is build in terms of margins of the training examples \citep{Schapire97boosting,Koltchinskii00empirical}.
 
@@ -722,12 +723,13 @@ The feature split process of decision tree is deterministic given a set of featu
 The ensemble methods have been initially developed for single task classification \citep{Breiman96bagging,Freund97a} or regression tasks \citep{Breiman96bagging}, as it is straightforward to combine multiple scalar output variables.
 However, it is not immediately clear how to combine vector valued outputs in multilabel structured output space.
 
-\adaboostmh\ is the multilabel variance of original \adaboost\ algorithm developed by \citet{Schapire99improved}, which is further developed by \citet{Esuli2008boosting}.
+\adaboostmh\ is the multilabel variance of original \adaboost\ algorithm proposed by \citet{Schapire99improved}, which is further developed by \citet{Esuli2008boosting}.
 The core idea of \adaboostmh\ is to adopt hamming loss instead of 0/1 loss. 
 In particular, the algorithm reduces from a multilabel classification problem to a set of single label classification problems by replacing each training example $(\vx_i,\vy_i)$ with $k$ examples $\{(\vx_i,\vy_i[l])\}_{l=1}^k$.
 The algorithm is detailed in (Algorithm~\ref{adaboostmh}).
-It maintains a distribution over all examples and labels.
+In particular, it maintains a distribution over all examples and labels.
 In each iteration, the algorithm takes in the distribution and all training examples, generates a weak learner $f^k(\vx)$ (line~\ref{mh_compuet_f}), computes hamming loss (line~\ref{mh_compute_error}), computes the adaptive parameter $\alpha^t$ (line~\ref{mh_compute_alpha}), and update the distribution (line~\ref{mh_update_d}).
+The returned prediction $H(x)$ is the combination of base learners $f^t(x)$ weighted by $\alpha^t$.
 \begin{algorithm}
 \caption{\adaboostmh}
 \label{adaboostmh}
@@ -740,7 +742,8 @@ In each iteration, the algorithm takes in the distribution and all training exam
 		\STATE $\vy_i = f^t(\vx_i),\forall i\in\{1,\cdots,m\}$
 		\STATE $\epsilon^t =\sum_{l=1}^k\sum_{i=1}^{m}D^t(i,l)\ind{\vy_i[l]\neq\hat{\vy}_i[l]}$ \label{mh_compute_error}
 		\STATE $\alpha^{t} = \frac{1}{2}\ln\left(\frac{1-\epsilon^t}{\epsilon^t}\right)$ \label{mh_compute_alpha}
-		\STATE $D^t(i,l) = D^{t-1}(i,l)\exp(-\alpha^t\vy_i[l]\hat{\vy}_i[l]),\forall i\in\{1,\cdots,m\},\forall l\in\{1,\cdots,k\}$ \label{mh_update_d}
+		\STATE $Z=\sum_{i=1}^{m}\sum_{l=1}^{k}D^{t-1}(i,l)\exp(-\alpha^t\vy_i[l]\hat{\vy}_i[l])$
+		\STATE $D^t(i,l) = \frac{1}{Z}D^{t-1}(i,l)\exp(-\alpha^t\vy_i[l]\hat{\vy}_i[l]),\forall i,\forall l$ \label{mh_update_d}
 	\ENDFOR
 	\RETURN $H(\vx) = \sign(\sum_{t=1}^T\alpha^tf^t(\vx))$
 \end{algorithmic}
@@ -748,7 +751,8 @@ In each iteration, the algorithm takes in the distribution and all training exam
 
 Furthermore, many other ensemble approaches have been proposed and applied in specific areas, including, in natural language processing applications \citep{Collins05distrimnative,Zeman05improving,Sagae06parsing,Zhang09kbest} and 
 in text and speech recognition applications \citep{Fiscus97a,Benesty08speech,Petrov10products}.
-Limiting the applicability of these methods is the fact that they are mostly developed from the ensemble approaches for single task problem, and are specially tailored for the application for which it is not immediately clear how to apply to other machine learning tasks.
+Limiting the applicability of these methods is the fact that they are mostly developed from the ensemble approaches for single task problem, and are specially tailored for the applications.
+It is not immediately clear how to apply to other machine learning tasks.
 In addition, other methods that are based on boosting or bagging are also developed in \citep{Wang07simple,Kocev13tree}.
 Most recently, a series of learning algorithms with performance guarantee are proposed in \citep{Cortes14semble}.
 
