@@ -16,7 +16,7 @@ complex outputs: multiple interdependent output variables and structured output 
 \newpage
 \section{Single Label Classification}
 
-\subsection{Preliminary and Notation}
+\subsection{Preliminary and Notation}\label{singlelabel_preliminary}
 We consider supervised learning problem which assumes an arbitrary input space $\Xcal$, an output space $\Ycal$, and the training samples coming in pairs $(x_i,y_i)\in\Xcal\times\Ycal$.
 As we focus in this chapter standard supervised learning problem also known as binary classification, we explicitly assume the output space $\Ycal=\{-1,+1\}$ (instead of $\Ycal=\{0,+1\}$).
 We point out that other kind of supervised learning problem can be formulated by altering the definition of the output space.
@@ -416,7 +416,7 @@ Other \svm\ approximation approaches for \svm\ include representing the training
 
 %
 % notations
-\subsection{Preliminary and Notation}
+\subsection{Preliminary and Notation}\label{multilabel_preliminary}
 
 
 %
@@ -593,16 +593,19 @@ Ensemble methods are one of the prominent classification techniques widely used 
 In general, the methods train multiple base learners and combine them in order to achiever better classification performance.
 Most importantly, there is no requirement for base learners to be accuracy as long as they perform better than random guessing.
 %To trace the exact originality of the ensemble methods seems impossible, as the methods involve along well with human society by which it is wiser to take in to account advises from multiple human experts.
-There are several different types of ensemble algorithm, to name a few, bagging \citep{Breiman96bagging}, boosting \citep{Freund97a,Schapire99improved}, stacking \citep{Smyth99linearly}, Bayesian averaging \citep{Freund04generalization}.
+There are several different types of ensemble algorithms, to name a few, bagging \citep{Breiman96bagging}, boosting \citep{Freund97a,Schapire99improved}, stacking \citep{Smyth99linearly}, Bayesian averaging \citep{Freund04generalization}.
 Most of the algorithms have improved the classification performance when compared to individual counterpart, some of them also enjoyed theoretical guarantee \citep{Schapire97boosting,Koltchinskii00empirical,Cortes14deep,Cortes14semble}.
-For our purposes, the section will start with and focus on bagging and boosting ensemble since both are best known approaches and most related to this thesis.
+For our purposes, the section will start with and focus on bagging and boosting ensemble since both are best known approaches and are most related to this thesis.
 In the later part of the section, we will extend the ensemble methods to structured output space by reviewing several recently established algorithms.
 
 %
 % preliminary notations
 \subsection{Preliminary and Notations}
 
-
+In addition to the notations introduced in (section~\ref{singlelabel_preliminary}, \ref{multilabel_preliminary}), we assume there is hypothesis class $\Fcal$ where we generate weak/base hypothesis $f^t(x)\in\Fcal$.
+By $t$ we intend to index the $t$'th weak hypothesis.
+We denote by $H(x)$ the ensemble framework that is able to combine multiple weak hypothesises and generate a stronger one.
+In many cases, no other information about $f^t(x)$ is available to $H(x)$ except that each weak hypothesis will take in as parameter $x$ and output either $y\in\Ycal$ for single label classification ($\vy\in\Ycal$ in multilabel classification respectively).
 
 %
 % boosting
@@ -762,7 +765,9 @@ Most recently, three other learning algorithms with performance guarantee are pr
 
 
 
-\section{Evaluation}
+\section{Performance Evaluation and Comparison}
+
+
 
 \chapter{Methods}
 
