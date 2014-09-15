@@ -446,6 +446,13 @@ Vapnik, V. (1982).
 \newblock {\em Estimation of Dependences Based on Empirical Data}.
 \newblock Springer-Verlag.
 
+\bibitem[Wang et~al., 2007]{Wang07simple}
+Wang, Q.~I., Lin, D., and Schuurmans, D. (2007).
+\newblock Simple training of dependency parsers via structured boosting.
+\newblock In {\em Proceedings of the 20th International Joint Conference on
+  Artifical Intelligence}, IJCAI'07, pages 1756--1762, San Francisco, CA, USA.
+  Morgan Kaufmann Publishers Inc.
+
 \bibitem[Wolpert and Macready, 1999]{Wolpert99an}
 Wolpert, D. and Macready, W. (1999).
 \newblock An efficient method to estimate bagging's generalization error.
