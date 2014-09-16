@@ -767,6 +767,8 @@ Most recently, three other learning algorithms with performance guarantee are pr
 
 \section{Performance Evaluation and Comparison}
 
+\subsection{Performance Evalution}
+
 It is quite often difficult and expensive to get labeled data. 
 In order to maximize the outcomes of the valuable experimental data, the common approach adopted in practice is known as \textit{K-fold cross-validation}.
 In particular, the origin set of labeled examples are partitioned into $k$ disjoint subsets of same size, denoted by $\{S_1,\cdots,S_k\}$.
@@ -805,6 +807,48 @@ where microlabel precision and recall are defined by
 	Pre &= \frac{TP}{TP+FP}\\
 	Rec &= \frac{TP}{TP+FN}.
 \end{align*}
+
+\subsection{Statistical Test}
+
+Once we compute the performance measures of multiple classifiers in terms of 0/1 loss, hamming loss and $F_1$ score, we want to compare the performance in order to decide the best model under consideration. 
+To serve as a starting point, we assume a very basic setting where we already have the performance of multiple learning algorithms on one selected dataset.
+It is then easy to compare the performance of the learning algorithms in terms of the performance measures without employing any statistical methods.
+In practice, when a new learning algorithm is developed, it is usually evaluated over multiple dataset to rule out the probability that it performs well on one particular dataset by chance.
+Statistical evaluation of experimental results have been considered as an essential part of comparison steps in such complicate scenario.
+We will base our discuss on \citep{Demsar06statistical,Garcia08an} in the following part of the section.
+
+We first consider the case where we want to compare two learning algorithms over multiple datasets.
+In order to decide the best performing method, one way is to average the performance over all testing datasets.
+However, it is debatable that the error rate from different domains (testing datasets) are commensurable.
+Beside, the averaging is susceptible to the outliers.
+Another approach is to use paired t-test to check if the average difference of two learning algorithms is significantly different from zero.
+Paired t-test is problematic due to commensurability and result will not be significant unless the sample size is larger enough (over 30 datasets).
+\citet{Demsar06statistical} proposed Wilcoxon signed-ranks test which is a non-parametric alternative to the paired t-test to compared two algorithms over multiple datasets.
+They also suggest sign-test which details can be found from \citep{Demsar06statistical}.
+
+Second, we will consider a more common situation where we want to compare multiple learning algorithms over many datasets.
+In practice, we want to answer the question, for example, whether algorithm A is significantly better than algorithm C, and algorithm C outperformances algorithm B in a significantly manner.
+This is equivalent to multiple hypothesis test.
+One common way is use repeat-measures ANOVA which is base on two assumptions: first, the samples are drawn from normal distribution; second, the variants should be the same.
+It is not difficult to see that the ANOVA is ill-posed as none the assumptions are met within the context of performance of learning algorithms over datasets.
+
+% to test if pair of algorithms are significantly different from each other 
+To overcome the problem, Friedman test \citep{Friedman37the,Friedman40Comparison} with post-hoc Nemenyi test \citep{Nemenyi63distribution} are proposed in \citep{Demsar06statistical}.
+The goal of the combination test is to examine whether a pair of algorithms are significantly different from each other under multiple hypothesis test setup.
+To perform Friedman test, we first compute the average rank $R_j$ of the $j$'th algorithms.
+The Friedman test compares the average ranks and under null-hypothesis states that the average ranks are equal.
+The test statistics can be computed according to the procedure discussed in \citep{Demsar06statistical}.
+If null-hypothesis is rejected, we can proceed with post-hoc Nemenyi test to compare algorithms with each other.
+In particular, we can compute the \textit{critical different} ($CD$) and state that the performance of two classifiers are significantly different if the corresponding average rank differs by at least $CD$.
+As the post-hoc Nemenyi test is usually conservative and has little statistical power, we sometimes use Bonferroni-Dunn test \citep{Dunn61mulitple} to compare the learning algorithms against the selected control algorithm.
+The test results are usually visualized as \textit{$CD$ diagram}.
+
+
+% to test if algorithms are significantly different from control
+
+
+
+
 
 
 

@@ -131,6 +131,17 @@ Della~Pietra, S., Della~Pietra, V., and Lafferty, J. (1997).
 \newblock {\em Pattern Analysis and Machine Intelligence, IEEE Transactions
   on}, 19(4):380--393.
 
+\bibitem[Dem\v{s}ar, 2006]{Demsar06statistical}
+Dem\v{s}ar, J. (2006).
+\newblock Statistical comparisons of classifiers over multiple data sets.
+\newblock {\em J. Mach. Learn. Res.}, 7:1--30.
+
+\bibitem[Dunn, 1961]{Dunn61mulitple}
+Dunn, O.~J. (1961).
+\newblock Multiple comparisons among means.
+\newblock {\em Journal of the American Statistical Association},
+  56(293):52--64.
+
 \bibitem[Efron and Tibshirani, 1994]{Efron1994introduction}
 Efron, B. and Tibshirani, R. (1994).
 \newblock An introduction to the bootstrap (crc, boca raton, fl).
@@ -162,6 +173,25 @@ Freund, Y. and Schapire, R.~E. (1997).
 Freund, Y. and Schapire, R.~E. (1999).
 \newblock Large margin classification using the perceptron algorithm.
 \newblock {\em Machine Learning}, 37(3):277--296.
+
+\bibitem[Friedman, 1937]{Friedman37the}
+Friedman, M. (1937).
+\newblock The use of ranks to avoid the assumption of normality implicit in the
+  analysis of variance.
+\newblock {\em Journal of the American Statistical Association}, 32(200):pp.
+  675--701.
+
+\bibitem[Friedman, 1940]{Friedman40Comparison}
+Friedman, M. (1940).
+\newblock {A Comparison of Alternative Tests of Significance for the Problem of
+  m Rankings}.
+\newblock {\em The Annals of Mathematical Statistics}, 11(1):86--92.
+
+\bibitem[García and Herrera, 2008]{Garcia08an}
+García, S. and Herrera, F. (2008).
+\newblock An extension on "statistical comparisons of classifiers over multiple
+  data sets" for all pairwise comparisons.
+\newblock {\em J. Mach. Learn. Res.}, 9:2677--2694.
 
 \bibitem[Goodman, 2002]{Goodman02Sequential}
 Goodman, J. (2002).
@@ -280,6 +310,11 @@ Mohri, M., Pereira, F., and Riley, M. (2008).
 \newblock Speech recognition with weighted finite-state transducers.
 \newblock In Benesty, J., Sondhi, M., and Huang, Y., editors, {\em Springer
   Handbook of Speech Processing}, pages 559--584. Springer Berlin Heidelberg.
+
+\bibitem[Nemenyi, 1963]{Nemenyi63distribution}
+Nemenyi, P.~B. (1963).
+\newblock Distribution-free multiple comparisons.
+\newblock {\em PhD thesis, Princeton University}.
 
 \bibitem[Novikoff, 1962]{Novikoff62}
 Novikoff, A.~B. (1962).
