@@ -434,6 +434,13 @@ Shawe-Taylor, J. and Cristianini, N. (2004).
 \newblock {\em {Kernel Methods for Pattern Analysis}}.
 \newblock Cambridge University Press.
 
+\bibitem[Si et~al., 2014]{Si14memory}
+Si, S., jui Hsieh, C., and Dhillon, I. (2014).
+\newblock Memory efficient kernel approximation.
+\newblock In Jebara, T. and Xing, E.~P., editors, {\em Proceedings of the 31st
+  International Conference on Machine Learning (ICML-14)}, pages 701--709. JMLR
+  Workshop and Conference Proceedings.
+
 \bibitem[Smyth and Wolpert, 1999]{Smyth99linearly}
 Smyth, P. and Wolpert, D. (1999).
 \newblock Linearly combining density estimators via stacking.
