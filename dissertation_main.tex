@@ -769,23 +769,23 @@ Most recently, three other learning algorithms with performance guarantee are pr
 
 \subsection{Performance Evalution}
 
-It is quite often difficult and expensive to get labeled data. 
-In order to maximize the outcomes of the valuable experimental data, the common approach adopted in practice is known as \textit{K-fold cross-validation}.
+Often, it is quite difficult and expensive to get labeled data. 
+In order to maximize the outcomes of the valuable labeled data, the common approach adopted in practice is known as \textit{K-fold cross-validation}.
 In particular, the origin set of labeled examples are partitioned into $k$ disjoint subsets of same size, denoted by $\{S_1,\cdots,S_k\}$.
-The cross-validation framework will repeat training and testing procedures $k$ times.
+The cross-validation framework will repeat training and testing procedures $K$ times.
 In the $k$'th iteration, the validation scheme use $K-1$ subsets of labeled examples $\cup_{k\in\{1,\cdots,K\}/k}S_i$ to build a training set for learning a classifier.
-The examples in the $k$'th subset is then taken as testing data of which the label is assumed to be unknown.
-The resulting classifier is used to predict the examples in the $k$'th subset.
+The examples in the $k$'th subset is then taken as testing data of which the label is assumed to be unknown to the classifier.
+The resulting classifier is used to predict the examples in the $k$'th subset, and is evaluated according to the true labels in the testing set.
 In the extreme case where we have $K$ equal to the number of original training examples, there will be only one example in each testing set.
 This is typically known as \textit{leave-one-out cross-validation} (\loo).
 
-As most learning algorithm explicitly assume that the training data and the testing data are from the same distribution,
-it is worth noticing that we should make sure that the property of training data is well preserved when partitioning the original training data into subsets.
+As most machine learning algorithms explicitly assume that the training data and the testing data are drawn from the same distribution,
+it is worth noticing that we should make sure that the property of original labeled data is well preserved when partitioning the original labeled set into subsets.
 In single-label classification problem we can easily preserve the label distribution if we randomly sample labeled examples without replacement from the origin experimental data set.
 However, it is not clear how to preserve label distribution in multilabel classification problem.
-To this end, we use \textit{stratification} or \textit{stratified sampling} where we first group training examples into equivalent classes based on the number of positive labels they have. 
+To this end, we use \textit{stratification} or \textit{stratified sampling} method where we first group training examples into equivalent classes based on the number of positive labels they have. 
 Each class is then randomly split into $K$ local fold, after that local folds are merged to create $K$ global fold.
-The stratification scheme ensure that also smaller classes have representations in all folds. 
+The stratification scheme ensures that also smaller classes have representations in all folds. 
 
 After partition the original data into training and testing sets, we adopt several well known performance measures in order to quantitively evaluate the performance of difference classifiers.
 We report \textit{multilabel accuracy} (\textit{0/1 accuracy}) which counts the percentage of multilabel predictions that have all of the microlabel being correct.
@@ -793,58 +793,64 @@ The counterpart is often known as \textit{multilabel loss} (\textit{0/1 loss})
 \begin{align*}
 	\ell_{0/1} = \frac{1}{m}\sum_{i=1}^{m}\ind{\vy_i \neq \hat{\vy}_i},
 \end{align*}
-where by $\vy_i$ we denote the predicted label and by $\hat{\vy}_i$ we denote ground true label.
+where by $\vy_i$ we denote the predicted label for example $\vx_i$, and by $\hat{\vy}_i$ we denote ground true label.
 We also report \textit{microlabel accuracy} as the proportion microlabel being correctly predicted, of which the counterpart is often known as \textit{hamming loss}
 \begin{align*}
 	\ell_{h} = \frac{1}{mk}\sum_{i=1}^{m}\sum_{j=1}^{k}\ind{\vy_i[j] \neq \hat{\vy}_i[j]}.
 \end{align*}
 In addition, we report \textit{$F_1$ score} as harmonic mean of \textit{microlabel precision} and \textit{microlabel recall}
 \begin{align*}
-	F_1 = 2\cdot\frac{Pre\times Rec}{Pre+Rec},
+	F_1 = 2\cdot\frac{Pre\times Rec}{Pre+Rec}.
 \end{align*}
-where microlabel precision and recall are defined by
+Microlabel precision and microlabel recall are defined by
 \begin{align*}
 	Pre &= \frac{TP}{TP+FP}\\
-	Rec &= \frac{TP}{TP+FN}.
+	Rec &= \frac{TP}{TP+FN},
 \end{align*}
+where by $TP$, $FP$, and $FN$ we denote \textit{true positive}, \textit{false positive}, and \textit{false negative} predictions respectively.
+
 
 \subsection{Statistical Test}
 
-Once we compute the performance measures of multiple classifiers in terms of 0/1 loss, hamming loss and $F_1$ score, we want to compare the performance in order to decide the best model under consideration. 
-To serve as a starting point, we assume a very basic setting where we already have the performance of multiple learning algorithms on one selected dataset.
-It is then easy to compare the performance of the learning algorithms in terms of the performance measures without employing any statistical methods.
-In practice, when a new learning algorithm is developed, it is usually evaluated over multiple dataset to rule out the probability that it performs well on one particular dataset by chance.
-Statistical evaluation of experimental results have been considered as an essential part of comparison steps in such complicate scenario.
+Once we compute the performance measures of multiple machine learning algorithms in terms of 0/1 loss, hamming loss and $F_1$ score, we want to compare the performance in order to decide the best model under consideration. 
+To serve as a starting point, we assume a very basic setting where we already have the performance of multiple machine learning algorithms on one selected dataset.
+It is straight forward to compare the performance of the algorithms in terms of the performance measures and choose the best base on the value of the measure without employing any statistical methods.
+The only assumption made is that the measures are accurately revealing the performance of the algorithms.
+However, in practice, when a new learning algorithm is developed, it is usually evaluated over multiple dataset to rule out the probability that it performs well on one particular dataset by chance.
+Statistical evaluation of experimental results have been considered as an essential part of comparison steps in, for example, such complicate scenarios.
 We will base our discuss on \citep{Demsar06statistical,Garcia08an} in the following part of the section.
 
 We first consider the case where we want to compare two learning algorithms over multiple datasets.
 In order to decide the best performing method, one way is to average the performance over all testing datasets.
 However, it is debatable that the error rate from different domains (testing datasets) are commensurable.
 Beside, the averaging is susceptible to the outliers.
-Another approach is to use paired t-test to check if the average difference of two learning algorithms is significantly different from zero.
-Paired t-test is problematic due to commensurability and result will not be significant unless the sample size is larger enough (over 30 datasets).
+Another approach is to use paired t-test to check if the average difference of two learning algorithms over datasets is significantly different from zero.
+Paired t-test is problematic due to commensurability.
+Besides, the result will not be significant unless the sample size is larger enough (over 30 datasets).
 \citet{Demsar06statistical} proposed Wilcoxon signed-ranks test which is a non-parametric alternative to the paired t-test to compared two algorithms over multiple datasets.
-They also suggest sign-test which details can be found from \citep{Demsar06statistical}.
+Meanwhile, sign-test is also proposed in \citep{Demsar06statistical}.
+As the setting is not very interesting for our purpose, we will not expand our discussion on the details.
 
 Second, we will consider a more common situation where we want to compare multiple learning algorithms over many datasets.
 In practice, we want to answer the question, for example, whether algorithm A is significantly better than algorithm C, and algorithm C outperformances algorithm B in a significantly manner.
-This is equivalent to multiple hypothesis test.
-One common way is use repeat-measures ANOVA which is base on two assumptions: first, the samples are drawn from normal distribution; second, the variants should be the same.
-It is not difficult to see that the ANOVA is ill-posed as none the assumptions are met within the context of performance of learning algorithms over datasets.
+In statistics, this is equivalent to multiple hypothesis test.
+The common way is to use repeat-measures ANOVA \citep{Fisher59statistical} with post-hoc Tukey test \citep{Turkey49comparing}. The test procedure is based on two assumptions: the first is known as \textit{normality} meaning samples are drawn from normal distributions; second is known as \textit{sphericity} meaning samples should have equal variant.
+It is not difficult to see that the ANOVA is ill-posed as none the assumptions are met within the context of comparing the performance of learning algorithms over datasets.
 
 % to test if pair of algorithms are significantly different from each other 
-To overcome the problem, Friedman test \citep{Friedman37the,Friedman40Comparison} with post-hoc Nemenyi test \citep{Nemenyi63distribution} are proposed in \citep{Demsar06statistical}.
-The goal of the combination test is to examine whether a pair of algorithms are significantly different from each other under multiple hypothesis test setup.
+% to test if algorithms are significantly different from control
+To overcome the problem, Friedman test \citep{Friedman37the,Friedman40Comparison} with post-hoc Nemenyi test \citep{Nemenyi63distribution} are suggest to use \citep{Demsar06statistical}.
+The goal of the test procedure is to examine whether a pair of algorithms are significantly different from each other under multiple hypothesis test setup.
 To perform Friedman test, we first compute the average rank $R_j$ of the $j$'th algorithms.
-The Friedman test compares the average ranks and under null-hypothesis states that the average ranks are equal.
+The Friedman test then compares the average ranks and under null-hypothesis states that the average ranks are equal.
 The test statistics can be computed according to the procedure discussed in \citep{Demsar06statistical}.
 If null-hypothesis is rejected, we can proceed with post-hoc Nemenyi test to compare algorithms with each other.
 In particular, we can compute the \textit{critical different} ($CD$) and state that the performance of two classifiers are significantly different if the corresponding average rank differs by at least $CD$.
-As the post-hoc Nemenyi test is usually conservative and has little statistical power, we sometimes use Bonferroni-Dunn test \citep{Dunn61mulitple} to compare the learning algorithms against the selected control algorithm.
-The test results are usually visualized as \textit{$CD$ diagram}.
+As the post-hoc Nemenyi test is usually conservative and has little statistical power, we sometimes use Bonferroni-Dunn test \citep{Dunn61mulitple} to compare the learning algorithms against the selected control algorithm, which is usually the newly established or proposed algorithm.
+The test results are often visualized as \textit{$CD$ diagram}.
 
 
-% to test if algorithms are significantly different from control
+
 
 
 

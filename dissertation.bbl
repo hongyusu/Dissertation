@@ -158,6 +158,10 @@ Fiscus, J. (1997).
 \newblock In {\em Automatic Speech Recognition and Understanding, 1997.
   Proceedings., 1997 IEEE Workshop on}, pages 347--354.
 
+\bibitem[Fisher, 1959]{Fisher59statistical}
+Fisher, S. R.~A. (1959).
+\newblock Statistical methods and scientific inference.
+
 \bibitem[Freund et~al., 2004]{Freund04generalization}
 Freund, Y., Mansour, Y., and Schapire, R.~E. (2004).
 \newblock Generalization bounds for averaged classifiers.
@@ -475,6 +479,11 @@ Tsochantaridis, I., Joachims, T., Hofmann, T., and Altun, Y. (2005).
 \newblock Large margin methods for structured and interdependent output
   variables.
 \newblock {\em Journal of Machine Learning Research}, 6:1453--1484.
+
+\bibitem[Tukey, 1949]{Turkey49comparing}
+Tukey, J.~W. (1949).
+\newblock Comparing individual means in the analysis of variance.
+\newblock {\em Biometrics}, 5(2):99--114.
 
 \bibitem[Vapnik, 1982]{Vapnik82estimation}
 Vapnik, V. (1982).
