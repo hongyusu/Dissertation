@@ -122,7 +122,7 @@ The standard Perceptron algorithm supposes that the data are linearly separable,
 However, the setting is less interesting for most applications where the data might not be linearly separable or it takes too long for the algorithm to converge.
 Therefore, we need to find out the best decision rule given a set of updates.
 
-\textit{Voted Perceptron} developed in \citep{Freund99} is a straight forward modification of the standard Perceptron
+\textit{Voted Perceptron} developed in \citep{Freund99large} is a straight forward modification of the standard Perceptron
 As described in (Algorithm~\ref{voted_perceptron}), the Voted perceptron algorithm keeps track all weight vectors that appears during training phase. (line~\ref{perceptron_algorithm_weight_vector}) and their weights (line~\ref{perceptron_algorithm_weight}).
 The weight can be seen as the 'survival time' of the weight vector during Perceptron training.
 The prediction for a new test example $\vx_{ts}$ is computed by 
@@ -398,20 +398,20 @@ The decomposition strategy was further developed by solving in each iteration a 
 \citet{Perezcruz04double} proposed a double-chunking methods to further speed up the decomposition type of training. 
 Similarly yet another approach ''digesting'' \citep{Decoste02support} optimizes subsets close to completion before adding new data, which save huge amount of memory.
 
-Another line of research for \svm\ optimization is to divide the original problem into subproblems of smaller size, optimize \svm\ on each subproblem, and combine the results.
+Another line of research to speed up \svm\ training is to divide the original problem into subproblems of smaller size, optimize \svm\ on each subproblem, and combine the results from each subproblem.
 In \citep{Tresp00a,Schwaighofer01the}, the authors proposed a Bayesian scheme to combine the models from subproblems.
 \citet{Collobert02a} proposed a partition scheme.
 \citet{Graf05parallel} developed the \svmcascade\ that builds a partition tree of training examples, trains \svm\ on each partition, and returns only support vector from each partition.
-Recently, \citet{Hsieh13a} proposed a divide and conquer solver that solves the original \svm\ problem with theoretical guarantee.
+Quite recently, \citet{Hsieh14a} proposed a divide and conquer solver that solves the original \svm\ problem with theoretical guarantee.
 
-Other \svm\ approximation approaches for \svm\ include representing the training data with a small set of landmark points \citep{Pavlov00towards,Boley04training,Yu05making,Zhang08improved}, greedy method for basis selection \citep{Keerthi06building}, online \svm\ solver \citep{Bordes05fast}, and kernel approximation methods \citep{Zhang12scaling,Le13fast,Si14memory}.
+There are many other active researches on \svm\ optimization that aim to make kernel support vector machine scalable on very large scale dataset in terms of both computational time and memory space, to name but a few, representing the training data with a small set of landmark points \citep{Pavlov00towards,Boley04training,Yu05making,Zhang08improved}, greedy method for basis selection \citep{Keerthi06building}, online \svm\ solver \citep{Bordes05fast}, approximating kernel \svm\ objective function \citep{Zhang12scaling, Le13fast} which avoids high computational and memory cost but struggles in prediction performance, and approximating kernel matrix with low-rank matrix \citep{Smola00sparse,Fine02efficient,Drineas05on,Si14memory}.
 
 
 
-% dual
 
-% kernel
-
+%
+%
+% multilabel classification problem
 \section{Structured Output Prediction}
 
 %
@@ -444,7 +444,7 @@ In particular, the algorithm loops through training examples and updates $\vw$ w
 \begin{align*}
 	\vw \leftarrow \vw + \left(\vPhi(x_i,\vy_i) - \vPhi(x_i,\hat{\vy}_i)\right).
 \end{align*}
-The update usually leads to over-fitting and a simple refinement, called "average parameter" similar to \citep{freund99}, is proposed as shown in (Algorithm~\ref{algorithm_structured_perceptron}).
+The update usually leads to over-fitting and a simple refinement, called "average parameter" similar to \citep{Freund99large}, is proposed as shown in (Algorithm~\ref{algorithm_structured_perceptron}).
 \begin{algorithm}
 \caption{Structured Perceptron with Parameter Averaging}
 \label{algorithm_structured_perceptron}

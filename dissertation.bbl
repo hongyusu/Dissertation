@@ -136,6 +136,12 @@ Dem\v{s}ar, J. (2006).
 \newblock Statistical comparisons of classifiers over multiple data sets.
 \newblock {\em J. Mach. Learn. Res.}, 7:1--30.
 
+\bibitem[Drineas and Mahoney, 2005]{Drineas05on}
+Drineas, P. and Mahoney, M.~W. (2005).
+\newblock On the nystr\&\#246;m method for approximating a gram matrix for
+  improved kernel-based learning.
+\newblock {\em J. Mach. Learn. Res.}, 6:2153--2175.
+
 \bibitem[Dunn, 1961]{Dunn61mulitple}
 Dunn, O.~J. (1961).
 \newblock Multiple comparisons among means.
@@ -150,6 +156,11 @@ Efron, B. and Tibshirani, R. (1994).
 Esuli, A., Fagni, T., and Sebastiani, F. (2008).
 \newblock Boosting multi-label hierarchical text categorization.
 \newblock {\em Information Retrieval}, 11(4):287--313.
+
+\bibitem[Fine and Scheinberg, 2002]{Fine02efficient}
+Fine, S. and Scheinberg, K. (2002).
+\newblock Efficient svm training using low-rank kernel representations.
+\newblock {\em J. Mach. Learn. Res.}, 2:243--264.
 
 \bibitem[Fiscus, 1997]{Fiscus97a}
 Fiscus, J. (1997).
@@ -173,7 +184,7 @@ Freund, Y. and Schapire, R.~E. (1997).
   application to boosting.
 \newblock {\em J. Comput. Syst. Sci.}, 55(1):119--139.
 
-\bibitem[Freund and Schapire, 1999]{Freund99}
+\bibitem[Freund and Schapire, 1999]{Freund99large}
 Freund, Y. and Schapire, R.~E. (1999).
 \newblock Large margin classification using the perceptron algorithm.
 \newblock {\em Machine Learning}, 37(3):277--296.
@@ -215,11 +226,11 @@ Graf, H.~P., Cosatto, E., Bottou, L., Durdanovic, I., and Vapnik, V. (2005).
 \newblock In {\em In Advances in Neural Information Processing Systems}, pages
   521--528. MIT Press.
 
-\bibitem[Hsieh et~al., 2013]{Hsieh13a}
-Hsieh, C.-J., Si, S., and Dhillon, I. (2013).
+\bibitem[Hsieh et~al., 2014]{Hsieh14a}
+Hsieh, C.-J., Si, S., and Dhillon, I. (2014).
 \newblock A divide-and-conquer solver for kernel support vector machines.
 \newblock In {\em Proceedings of the 31th International Conference on Machine
-  Learning (ICML 2004)}, pages 566--574. JMLR.org.
+  Learning (ICML 2014)}, pages 566--574. JMLR.org.
 
 \bibitem[Huang et~al., 2009]{Huang09iterative}
 Huang, F.-L., Hsieh, C.-J., Chang, K.-W., and Lin, C.-J. (2009).
@@ -440,6 +451,13 @@ Si, S., jui Hsieh, C., and Dhillon, I. (2014).
 \newblock In Jebara, T. and Xing, E.~P., editors, {\em Proceedings of the 31st
   International Conference on Machine Learning (ICML-14)}, pages 701--709. JMLR
   Workshop and Conference Proceedings.
+
+\bibitem[Smola and Sch\"{o}kopf, 2000]{Smola00sparse}
+Smola, A.~J. and Sch\"{o}kopf, B. (2000).
+\newblock Sparse greedy matrix approximation for machine learning.
+\newblock In {\em Proceedings of the Seventeenth International Conference on
+  Machine Learning}, ICML '00, pages 911--918, San Francisco, CA, USA. Morgan
+  Kaufmann Publishers Inc.
 
 \bibitem[Smyth and Wolpert, 1999]{Smyth99linearly}
 Smyth, P. and Wolpert, D. (1999).
