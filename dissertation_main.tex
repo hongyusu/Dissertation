@@ -8,19 +8,27 @@
 The thesis is structured as follows.
 
 
-complex outputs: multiple interdependent output variables and structured output space
-
-
 \chapter{Background}
 
-\newpage
+%\newpage
+
+%
+%
+%
 \section{Single Label Classification}
 
+In this section, we will introduce the basic classification problem known as single label classification.
+We will explain three prominent algorithms in the area: Perceptron, Logistic Regression and the Support Vector Machines.
+The optimization techniques and the latest advances of these algorithms will also be briefly discussed.
+The goal is to cover the background that is necessary to understand the algorithms presented in the later part of the dissertation. 
+
+%
+%
 \subsection{Preliminary and Notation}\label{singlelabel_preliminary}
 We consider supervised learning problem which assumes an arbitrary input space $\Xcal$, an output space $\Ycal$, and the training samples coming in pairs $(x_i,y_i)\in\Xcal\times\Ycal$.
 As we focus in this chapter standard supervised learning problem also known as binary classification, we explicitly assume the output space $\Ycal=\{-1,+1\}$ (instead of $\Ycal=\{0,+1\}$).
 We point out that other kind of supervised learning problem can be formulated by altering the definition of the output space.
-For example, by setting $\Ycal=\{1,\cdots,K\}$ we have multiclass classification problem, and by setting $\Ycal=\RR$ we have regression problem.
+For example, by setting $\Ycal=\{1,\cdots,K\}$ we have multiclass classification problem, and by setting $\Ycal=\RR$ we have regression problem, where $\RR$ is the set of real numbers.
 Additionally, we assume a feature map $\vphi:\Xcal\rightarrow\Fcal$, which embeds the input in some high dimensional feature space $\Fcal=\RR^d$.
 In particular, $\vphi(\vx)$ is a real value vector of $d$ dimension.
 Given a set of training data $\Scal=\{(\vx_1,y_1),\cdots,(\vx_m,y_m)\}$, the goal is to learn from a \textit{hypothesis class} $\Fcal$ a mapping function $f\in\Fcal:\Xcal\rightarrow\Ycal$  that maps an input $\vx\in\Xcal$ to an output $y\in\Ycal$. 
@@ -29,14 +37,19 @@ The hypothesis class we consider is a set of \textit{linear classifiers} that ar
 \begin{align}
 	f(x;\vw,b) = \ip{\vw}{\vx} + b, \label{linearclassifier}
 \end{align}
-where by $\ip{\dot\,}{\dot\,}$ we denote inner product of two vectors.
+where by $\ip{\dot\,}{\dot\,}$ we denote inner product of two vectors
+\begin{align*}
+	\ip{\vw}{\vx} = \sum_{i=1}^{d}\vw_i\vx_i.
+\end{align*}
 
-% TODO: averaging perceptron
-% TODO: averaging perceptron algorithm psudocode
+In addition, for any $1\le\rho\in\RR$ we defined the {$L_{\rho}$-norm of vector $\vw$ 
+\begin{align*}
+	\norm{\vw}_{\rho} = \left(\sum_{i=1}^{d}|\vw_i|^{\rho}\right)^{\frac{1}{\rho}}.
+\end{align*}
 
 
-
-
+%
+%
 \subsection{Perceptron}
 
 The Rosenblatt's Perceptron algorithm \citep{Rosenblatt58,Rosenblatt62} is one type of linear classifiers that is parameterized by a weight vector $\vw$ and a bias term $b$. 
@@ -229,7 +242,7 @@ Instead of maximizing the posteriori (\ref{lr_posteriori}), it is easier to maxi
 \end{align}
 
 Numbers of optimization techniques have been proposed to solve the maximization problem (\ref{lr_posteriori_log}) in Logistic Regression, many of which are covered in the survey \citep{Minka03}.
-For example, \textit{Itrative Scaling} methods were proposed and continuously developed in \citep{Darroch72,Pietra97,Berger97,Goodman02Sequential,Jin03a}.
+For example, \textit{Itrative Scaling} methods were proposed and continuously developed in \citep{Darroch72,Pietra97inducing,Berger97,Goodman02Sequential,Jin03a}.
 A quasi-Newton method was discussed in \citep{Minka03}.
 \citet{Komarek05making,Lin2008trust} have proposed truncated Newton method.
 And coordinate descent method was proposed in \citep{Huang09iterative}.
@@ -252,11 +265,11 @@ Later on, optimization algorithms that are based on dual form have been develope
 
 %
 % svm
-\subsection{Support Vector Machine (\svm)}
+\subsection{Support Vector Machines (\svm)}
 \label{sc_svm}
 
 % some history
-Support Vector Machine (\svm) is probably the most widely used classification algorithm in various real world applications.
+Support Vector Machines (\svm) is probably the most widely used classification algorithm in various real world applications.
 It is also among the best plug-and-play machine learning algorithms that usually achieves good classification performance.
 In this section we will begin the story of \svm\ by first introducing the maximum margin principle of separating training data.
 Then we will discuss the primal-dual optimization strategy and the kernel methods that allows \svm\ to deal with high dimensionality.
@@ -421,7 +434,7 @@ There are many other active researches on \svm\ optimization that aim to make ke
 
 %
 % sub section: perceptron
-\subsection{Maximum Entropy Markov Network (\memm)}
+%\subsection{Maximum Entropy Markov Network (\memm)}
 % TODO
 
 
@@ -497,7 +510,7 @@ The parameter $\vw$ is solved by introducing parameter prior and maximizing the 
 \begin{align}
 	L(\vw) = \sum_{i=1}^{m}\left[\ip{\vw}{\vPhi(x_i,\vy_i)}-\log{\sum_{\vy'\in\Ycal}{\exp{\ip{\vw}{\vPhi(x_i,\vy')}}}}\right] - \frac{1}{\sigma^2}\norm{\vw}^2 + C. \label{crf_inference}
 \end{align}
-The parameter learning problem, as (\ref{crf_inference}), is solved in \citep{lafferty01} via improved iterative scaling algorithm (\iis) from \citep{Pietra97i}.
+The parameter learning problem, as (\ref{crf_inference}), is solved in \citep{lafferty01} via improved iterative scaling algorithm (\iis) from \citep{Pietra97inducing}.
 In order to make \crf\ work in practice, one have to make sure that the log normalization function (\ref{crf_partition_function}) and the argmax inference can be solve efficiently.
 
 
@@ -584,6 +597,42 @@ As the model does not assume any property of decomposition on the loss function 
 The intractability of the inference problem can be seen as an exchange of the generality of the loss function which allows more complicated loss to be defined. 
 
 
+%
+% mtl
+\subsection{Multitask Feature Learning (\mtl)}
+
+\citet{Argyriou07multitask} proposed the Multitask Feature Learning (\mtl) for multitask or multilabel classification problems.
+\mtl\ is quite different from other structured output learning algorithms that are discussed in the previous sections.
+In particular, the \mtl\ approach is based on the assumption that different tasks are related such that they share a common underlying feature representations.
+Similar assumption is also made in \citep{Caruana97multitask,Baxter00a,BenDavide03exploiting}.
+
+Denote by $f_t(\vx)$ the task specific function for the $t$'th task.
+$f_t(\vx)$ can be expressed as
+\begin{align*}
+	f_t(\vx) = \ip{\va_t}{h(x)} = \sum_{j=1}^{d}a_{i,t}h_i(\vx),
+\end{align*}
+where $\va_t\in\RR^d$ is the weight vector for the $t$'th task.
+$h_t(\vx)$ is a linear feature mapping composed by
+\begin{align*}
+	h_t(\vx) = \ip{u_i}{\vx},
+\end{align*}
+where $\vx\in\RR^d$ is in original feature space and $u_i\in\RR^d$ is a linear feature map.
+Denote by $A$ the matrix composed by $a_{i,t}$, and $U$ is composed by column vector $u_i$.
+\mtl\ assumes that tasks share small set of features where $A$ is supposed to be sparse with many entries equal to zero.
+As a results, the optimization problem is defined as
+%\begin{align*}
+%	\minimize\left\{\sum_{i=1}^{m}L(\vy_{i,t},\ip{\va_t}{\ip{U}{x_i}})+C\norm{\va_t}_1^2\right\}
+%\end{align*}
+\begin{align}
+	\underset{\substack{U\in\RR^{d\times d}\\A\in\RR^{d\times T}}}{\minimize} \left\{\sum_{t=1}^{T}\sum_{i=1}^{m}L(\vy_{i,t},\ip{\va_t}{\ip{U}{x_i}})+C\norm{A}_{2,1}^2\right\},\label{mtl_obj}
+\end{align}
+where the objective is to minimize the empirical error $L(\vy_{i,t},\ip{\va_t}{\ip{U}{x_i}})$ and to keep a small proportion of the non-zero element in $\va_t$.
+$C$ is the parameter to balance these two aspects.
+As (\ref{mtl_obj}) is non-convex and the second term is non-smooth, it is transformed into an equivalent form and solved by an alternative optimization approach.
+
+An extension of \mtl\ algorithm was proposed in \citep{Argyriou08convex} which introduced a nonlinear generalization using kernel methods.
+In addition, similar but not identical algorithms \citep{Argyriou08an,Jacob09cluster} are also proposed which assume that the tasks form clusters such that task specific weight vectors should be similar within the clusters.
+Recently, \citet{Paredes12exploit} proposed a method which exploits the information between unrelated tasks, based on a similar assumption that tasks of different groups tend not to share any features.
 
 %
 % ensemble methdos
@@ -765,11 +814,20 @@ Most recently, three other learning algorithms with performance guarantee are pr
 
 
 
+
+%
+%
+%
 \section{Evaluation and Comparison}
 
+In this section, we will briefly introduce the performance measures and statistical test methods that were employed in the later part of the dissertation.
+These methods will enable us to quantitatively evaluate the performance of the proposed models and measure the significancy compared to other well established methods.
+
+%
+%
 \subsection{Performance Measures}
 
-Often, it is quite difficult and expensive to get labeled data. 
+It is often quite difficult and expensive to get labeled data. 
 In order to maximize the outcomes of the valuable labeled data, the common approach adopted in practice is known as \textit{K-fold cross-validation}.
 In particular, the origin set of labeled examples are partitioned into $k$ disjoint subsets of same size, denoted by $\{S_1,\cdots,S_k\}$.
 The cross-validation framework will repeat training and testing procedures $K$ times.
@@ -809,7 +867,8 @@ Microlabel precision and microlabel recall are defined by
 \end{align*}
 where by $TP$, $FP$, and $FN$ we denote \textit{true positive}, \textit{false positive}, and \textit{false negative} predictions respectively.
 
-
+%
+%
 \subsection{Statistical Test}
 
 Once we compute the performance measures of multiple machine learning algorithms in terms of 0/1 loss, hamming loss and $F_1$ score, we want to compare the performance in order to decide the best model under consideration. 

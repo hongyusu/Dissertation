@@ -1,11 +1,41 @@
 \begin{thebibliography}{}
 
+\bibitem[Argyriou et~al., 2007]{Argyriou07multitask}
+Argyriou, A., Evgeniou, T., and Pontil, M. (2007).
+\newblock Multi-task feature learning.
+\newblock In {\em Advances in Neural Information Processing Systems 19}. MIT
+  Press.
+
+\bibitem[Argyriou et~al., 2008a]{Argyriou08convex}
+Argyriou, A., Evgeniou, T., and Pontil, M. (2008a).
+\newblock Convex multi-task feature learning.
+\newblock {\em Machine Learning}, 73(3):243--272.
+
+\bibitem[Argyriou et~al., 2008b]{Argyriou08an}
+Argyriou, A., Maurer, A., and Pontil, M. (2008b).
+\newblock An algorithm for transfer learning in a heterogeneous environment.
+\newblock In {\em Proceedings of the 2008 European Conference on Machine
+  Learning and Knowledge Discovery in Databases - Part I}, ECML PKDD '08, pages
+  71--85, Berlin, Heidelberg. Springer-Verlag.
+
 \bibitem[Bartlett et~al., 2005]{bartlett04}
 Bartlett, P.~L., Collins, M., Taskar, B., and McAllester, D.~A. (2005).
 \newblock Exponentiated gradient algorithms for large-margin structured
   classification.
 \newblock In {\em Advances in Neural Information Processing Systems 17 (NIPS
   2005)}, pages 113--120. MIT Press.
+
+\bibitem[Baxter, 2000]{Baxter00a}
+Baxter, J. (2000).
+\newblock A model of inductive bias learning.
+\newblock {\em J. Artif. Int. Res.}, 12(1):149--198.
+
+\bibitem[Ben-David and Schuller, 2003]{BenDavide03exploiting}
+Ben-David, S. and Schuller, R. (2003).
+\newblock Exploiting task relatedness for multiple task learning.
+\newblock In Schölkopf, B. and Warmuth, M., editors, {\em Learning Theory and
+  Kernel Machines}, volume 2777 of {\em Lecture Notes in Computer Science},
+  pages 567--580. Springer Berlin Heidelberg.
 
 \bibitem[Berger, 1999]{Berger97}
 Berger, A. (1999).
@@ -55,6 +85,11 @@ Breiman, L. (1996b).
 Breiman, L. (2001).
 \newblock Random forests.
 \newblock {\em Machine Learning}, 45(1):5--32.
+
+\bibitem[Caruana, 1997]{Caruana97multitask}
+Caruana, R. (1997).
+\newblock Multitask learning.
+\newblock {\em Mach. Learn.}, 28(1):41--75.
 
 \bibitem[Chang and Lin, 2011]{Chang11libsvm}
 Chang, C.-C. and Lin, C.-J. (2011).
@@ -125,7 +160,7 @@ Decoste, D. and Schölkopf, B. (2002).
 \newblock Training invariant support vector machines.
 \newblock {\em Machine Learning}, 46(1-3):161--190.
 
-\bibitem[Della~Pietra et~al., 1997]{Pietra97}
+\bibitem[Della~Pietra et~al., 1997]{Pietra97inducing}
 Della~Pietra, S., Della~Pietra, V., and Lafferty, J. (1997).
 \newblock Inducing features of random fields.
 \newblock {\em Pattern Analysis and Machine Intelligence, IEEE Transactions
@@ -243,6 +278,12 @@ Jaakkola, T.~S. and Haussler, D. (1999).
 \newblock Probabilistic kernel regression models.
 \newblock In {\em In Proceedings of the 7th Workshop on Artificial Intelligent
   and Statistics}. Morgan Kaufmann.
+
+\bibitem[jacob et~al., 2009]{Jacob09cluster}
+jacob, L., Bach, F., and Vert, J.-P. (2009).
+\newblock Clustered multi-task learning: a convex formulation.
+\newblock In {\em Advances in Neural Information Processing Systems 16 (NIPS
+  2009)}, pages 25--32. MIT Press.
 
 \bibitem[Jin et~al., 2003]{Jin03a}
 Jin, R., Yan, R., Zhang, J., and Hauptmann, A.~G. (2003).
@@ -380,6 +421,12 @@ Ratliff, N., Bagnell, J. A.~D., and Zinkevich, M. (2007).
 \newblock In {\em Proceedings of the 11th International Conference on
   Artificial Intelligence and Statistics (AISTATS 2007)}, volume~2. Journal of
   Machine Learning Research W\&CP.
+
+\bibitem[Romera-Paredes et~al., 2012]{Paredes12exploit}
+Romera-Paredes, B., Argyriou, A., Berthouze, N., and Pontil, M. (2012).
+\newblock Exploiting unrelated tasks in multi-task learning.
+\newblock In Lawrence, N.~D. and Girolami, M., editors, {\em AISTATS},
+  volume~22 of {\em JMLR Proceedings}, pages 951--959. JMLR.org.
 
 \bibitem[Rosenblatt, 1958]{Rosenblatt58}
 Rosenblatt, F. (1958).
