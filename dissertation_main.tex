@@ -427,9 +427,32 @@ There are many other active researches on \svm\ optimization that aim to make ke
 % multilabel classification problem
 \section{Structured Output Prediction}
 
+As the learning algorithms for multilabel classification in structured output space have evolved rapidly during the last decade, the author wish to briefly review in this section several prominent structured output learning algorithms, namely,  Structured Perceptron, Conditional Random Field, Maximum-Margin Markov Networks, Structured SVM, and Mutltask Feature Learning.
+These algorithms are also relevant to this thesis.
+These algorithms are mostly from 2010, the period when this field of researches has begun to emerge.
+
+
 %
 % notations
 \subsection{Preliminary and Notation}\label{multilabel_preliminary}
+
+We will keep most notations from (section~\ref{singlelabel_preliminary}).
+In particular, we examine the following multilabel classification setting.
+We assume data from a domain $\Xcal\times\Ycal$, where $\Xcal$ is a set and $\Ycal$ is the set of multilabels.
+$\Ycal = \Ycal_1\times\cdots\times\Ycal_k$ is composed by a Cartesian product of $k$ sets $\Ycal_i=\{-1,+1\}$.
+We retain a single-label classification setting by letting $k=1$.
+A vector $\vy=(y_1,\cdots,y_k)\in\Ycal$ is called \textit{multilabel} and each element $y_j$ is called \textit{microlabel}.
+In addition, we are given a set of labeled training examples $\Scal=\{(\vx_i,\vy_i)\}_{i=1}^{m}\in\Xcal\times\Ycal$. 
+A pair $(\vx_i,\vy)$, where $\vx_i$ is the training input and $\vy\in\Ycal$ is an arbitrary output, is call \textit{pseudo-example}.
+The goal is to learn a mapping $f\in\Fcal:\Xcal\rightarrow\Ycal$ from input to output such that the loss for the future unseen examples is minimized, where the loss function is usually tailored for the structured output learning algorithm.
+
+Multilabel classification deals with multiple interdependent output variables (e.g. $\vy$), which locate in structured output space.
+As graph is the natural way of modeling the multiple interdependencies, we assume a graph $G=(E,V)$ with node set $V=\{1,\cdots,k\}$ corresponding to the microlabels $\{y_1,\cdots,y_k\}$ and edge set $E=V\times V$ representing the dependency between pair of microlabels.
+For each edge $e=(j,j')\in E$, we denote by $\vy_e$ the edge label of edge $\ve$ with respect to multilabel $\vy$ by concatenating the head label $y_i$ and the tail label $y_i$, with the edge label domain $\vy_e\in\Ycal_e=\Ycal_i\times\Ycal_{j'}$.
+We denote by $\vy_{i,e}$ the edge label of example pair $(\vx_i,\vy_i)$ on edge $\ve$.
+Thus, given a pair of training example $(\vx_i,\vy_i)$ and the output graph $G$, we can uniquely identify the node label $y_i$ and the edge label $\vy_{i,e}$.
+In addition, we denote by $u_i$ the possible label of node $i$ and by $\vu_{e}$ the possible label of edge $\ve$ where $u_i$ and $\vu_{e}$ do not constraint to any multilabel $\vy$.
+Naturally, $u_i\in\Ycal_i$ and $\vu_e\in\Ycal_e$.
 
 
 %
@@ -482,7 +505,7 @@ The update usually leads to over-fitting and a simple refinement, called "averag
 In fact, structural perceptron makes two strong assumptions that limit its power and applicability.
 First, the framework assumes 0/1 loss over output variables, that is $\vell(\vy,\hat{\vy})=\vone_{\ind{\vy\neq\hat{\vy}}}$, such that the nearly correct and the completely incorrect output labels will lead to the same update of the weight parameter during the training.
 Secondly, it tacitly assumes that the argmax problem can be solved efficiently, which is generally not true on many structured output space.
-In the original work \citep{collins02a}, the algorithm relied on Viterbi decoding, which works on sequence tagging problem.
+In the original work \citep{collins02a}, the algorithm relied on Viterbi decoding to find the best tagged sequence under current parameter settings, which only works on sequence tagging problem.
 
 % TODO: incremental perceptron training
 
@@ -510,7 +533,7 @@ The parameter $\vw$ is solved by introducing parameter prior and maximizing the 
 \begin{align}
 	L(\vw) = \sum_{i=1}^{m}\left[\ip{\vw}{\vPhi(x_i,\vy_i)}-\log{\sum_{\vy'\in\Ycal}{\exp{\ip{\vw}{\vPhi(x_i,\vy')}}}}\right] - \frac{1}{\sigma^2}\norm{\vw}^2 + C. \label{crf_inference}
 \end{align}
-The parameter learning problem, as (\ref{crf_inference}), is solved in \citep{lafferty01} via improved iterative scaling algorithm (\iis) from \citep{Pietra97inducing}.
+The parameter learning problem, as (\ref{crf_inference}), is solved in \citep{lafferty01} via improved iterative scaling algorithm (\iis) \citep{Pietra97inducing}.
 In order to make \crf\ work in practice, one have to make sure that the log normalization function (\ref{crf_partition_function}) and the argmax inference can be solve efficiently.
 
 
@@ -523,8 +546,8 @@ In order to make \crf\ work in practice, one have to make sure that the log norm
 
 The Max-Margin Markov Network (\mmmn) unifies the frameworks of kernel based discriminative learning and probabilistic probabilistic graphical model \citep{taskar04}.
 The model defines a log-linear Markov network over a set of output variables, thus, it is capable of modelling the correlation between these output variables.
-Recall that Support Vector Machine (\svm) searches for a feature weight vector of smaller L$_2$ norm, which achieves a margin of at least one on training examples for the purpose of good generalization power.
-Following the same formalism, \mmmn\ also defines a margin-based quadratic programming optimization problem for the weight vector of the model.
+Recall that Support Vector Machine (\svm) searches for a feature weight vector of smaller $L_2$ norm, which achieves a margin of at least one on training examples for the purpose of good generalization power.
+Following the same principal, \mmmn\ defines a margin-based quadratic programming optimization problem for the weight vector of the model.
 In particular, it extends \svm\ to structured output space via a loss function $\ell$ that requires the score difference between true output label $\vy$ and any incorrect label $\hat{\vy}$ be at least $\vell(\vy,\hat{\vy})$.
 The primal optimization problem of \mmmn\ is given as
 \begin{definition}{\mmmn\ optimization problem in primal form}\label{def_mmmn}
@@ -898,8 +921,8 @@ It is not difficult to see that the ANOVA is ill-posed as none the assumptions a
 
 % to test if pair of algorithms are significantly different from each other 
 % to test if algorithms are significantly different from control
-To overcome the problem, Friedman test \citep{Friedman37the,Friedman40Comparison} with post-hoc Nemenyi test \citep{Nemenyi63distribution} are suggest to use \citep{Demsar06statistical}.
-The goal of the test procedure is to examine whether a pair of algorithms are significantly different from each other under multiple hypothesis test setup.
+To overcome the problem, Friedman test \citep{Friedman37the,Friedman40Comparison} with post-hoc Nemenyi test \citep{Nemenyi63distribution} are recommended by \citet{Demsar06statistical}.
+The goal of the test procedure is to examine under multiple hypothesis test setting whether a pair of algorithms are significantly different from each other.
 To perform Friedman test, we first compute the average rank $R_j$ of the $j$'th algorithms.
 The Friedman test then compares the average ranks and under null-hypothesis states that the average ranks are equal.
 The test statistics can be computed according to the procedure discussed in \citep{Demsar06statistical}.
@@ -922,11 +945,35 @@ The test results are often visualized as \textit{$CD$ diagram}.
 
 \chapter{Methods}
 
+In this section, we will briefly explain the contribution of each publication.
+We will begin in each section with the background of the method, following by explaining the theoretical and technical novelties.
+We will close the discussion with the discussion and the direction for future work.
 
-\chapter{Predicting Influence Network}
-\section{Problem Definition}
-\section{Prior Work}
-\section{Methods}
+
+
+\section{Network Response Prediction through Structured Output Learning}
+
+\subsection{Problem Definition}
+\subsection{Prior Work}
+\subsection{Methods}
+We approach the problem by structured output learning framework, where we define a computability score as a inner product of the action $\va$ and the response network $\Gva$
+\begin{align*}
+	F(\va,\Gva;\vw) = \ip{\va}{\vPhi(\va,\Gva)},
+\end{align*}
+where by intuition the action $\va$ with correct response network $\Gva$ will achieve high score than with any incorrect response network $\Gva'$.
+As introduced in previous section, $\vPhi(\va,\Gva)$ is composed by the tensor product between action feature $\phi(\va)$ and the feature of the response network $\varphi(\Gva)$.
+In particular, $\phi(\va)$ can be a bag-of-words feature of the action and $\varphi(\Gva)$ is a vector of edges and labels in the response network $\Gva$.
+
+The feature weight vector $\vw$ is learned through maximum-margin structured output learning approach by solving the following optimization problem
+\begin{definition}{SPIN Optimization Problem}
+\begin{align*}
+	\underset{\vw,\vxi}{\minimize} &\quad \frac{1}{2}\norm{\vw}^2+C\sum_{i=1}^{m}\xi_i\\
+	\st &\quad F(\va_i,G_{\va_i};\vw) > \underset{G_{\va_i}'\in\Hcal(G)}{\maximize}(F(\va_i,G_{\va_i}';\vw)+\vell_{G}(G_{\va_i},G_{\va_i}') - \xi_i,\\
+	&\quad xi_i\ge0, \forall i\in\{1,\cdots,m\},
+\end{align*}
+\end{definition}
+where by $\Hcal(G)$ we denote the set of directed acyclic graphs of $G$.
+
 
 
 
