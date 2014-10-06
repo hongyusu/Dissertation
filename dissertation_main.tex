@@ -1033,8 +1033,30 @@ In correlation thresholding approach, we take all edges that exceed fixed thresh
 
 \section{Multi-task Bioactivity Classification with Graph Labeling Ensembles}
 
-\section{Methods}
+When apply structured output learning, it is explicitly assumed the structure of the output Markov network is observed.
+In \citepub{su10}, we also supposed the feasibility to extract the structures although it is given implicitly by auxiliary datasets.
+In many real world structured output classification problem, we cannot take the structure as grant since it is often difficult to get the underlying dependency structure.
+Therefore, we explored in \citepub{su11} the possibility of constructing an ensemble of multiple structured output learners built on random output graphs and applied the technique on molecular activity prediction task.
 
+\subsection{Methods}
+
+We use \mmcrf\ as base classifier trained on a set of random output graphs.
+Particularly, for each base model, a random graph $G_t$ is generated to couple output variables $\vy_i$ which is the inhibition potentials of molecular structures $\vx_i$ over cell-line targets.
+The base model \mmcrf\ is then learned from the training data $S=\{(\vx_i,\vy_i)\}_{i=1}^{m}$ and the output graph $G_t$.
+After ensemble has been generated, the predictions are extracted from each base learner and collected for a post-processing step: we compute a majority vote over the graph labeling from the sign on the means of the base learner's prediction.
+
+We designed two approaches to generate random graph structure.
+In random spanning tree approach, we first generate a random correlation matrix and extract the spanning tree out from the matrix.
+The approach will eventual output a tree structure that connects all vertices.
+In random pairing approach, we randomly draw two vertices at a time and couple the two with an edge.
+The approach will output disconnected pairs.
+
+
+\section{Random Graph Ensemble for Multilabel Classification}
+
+\subsection{Background and Introduction}
+
+\subsection{Methods}
 
 
 \section{Network Response Prediction through Structured Output Learning}
