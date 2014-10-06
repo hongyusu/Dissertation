@@ -1,5 +1,28 @@
 \begin{thebibliography}{}
 
+\bibitem[Adar and Adamic, 2005]{Adar05tracking}
+Adar, E. and Adamic, L.~A. (2005).
+\newblock Tracking information epidemics in blogspace.
+\newblock In {\em Proceedings of the 2005 IEEE/WIC/ACM International Conference
+  on Web Intelligence}, WI '05, pages 207--214, Washington, DC, USA. IEEE
+  Computer Society.
+
+\bibitem[Adar et~al., 2004]{Adar04implicit}
+Adar, E., Zhang, L., Adamic, L., and Lukose, R. (2004).
+\newblock Implicit structure and the dynamics of blogspace.
+\newblock In {\em Workshop on the Weblogging Ecosystem}, volume~13.
+
+\bibitem[Amin et~al., 2014]{Amin14learning}
+Amin, K., Heidari, H., and Kearns, M. (2014).
+\newblock Learning from contagion (without timestamps).
+\newblock In {\em Proceedings of the 31th International Conference on Machine
+  Learning (ICML 2004)}, pages 823--830. JMLR.org.
+
+\bibitem[Anderson and May, 2002]{Anderson02infectious}
+Anderson, R.~M. and May, R.~M. (2002).
+\newblock {\em Infectious Diseases of Humans: Dynamics and Control}.
+\newblock Oxford Press.
+
 \bibitem[Argyriou et~al., 2007]{Argyriou07multitask}
 Argyriou, A., Evgeniou, T., and Pontil, M. (2007).
 \newblock Multi-task feature learning.
@@ -150,6 +173,13 @@ Cortes, C. and Vapnik, V. (1995).
 \newblock Support-vector networks.
 \newblock {\em Machine Learning}, 20(3):273--297.
 
+\bibitem[Daneshmand et~al., 2014]{Daneshmand14estimating}
+Daneshmand, H., Gomez-Rodriguez, M., Song, L., and Schoelkopf, B. (2014).
+\newblock Estimating diffusion network structures: Recovery conditions, sample
+  complexity and soft-thresholding algorithm.
+\newblock In {\em Proceedings of the 31th International Conference on Machine
+  Learning (ICML 2004)}, pages 823--830. JMLR.org.
+
 \bibitem[Darroch and Ratcliff, 1972]{Darroch72}
 Darroch, J. and Ratcliff, D. (1972).
 \newblock Generalized iterative scaling for log-linear models.
@@ -171,11 +201,29 @@ Dem\v{s}ar, J. (2006).
 \newblock Statistical comparisons of classifiers over multiple data sets.
 \newblock {\em J. Mach. Learn. Res.}, 7:1--30.
 
+\bibitem[Domingos and Richardson, 2001]{Domingos01mining}
+Domingos, P. and Richardson, M. (2001).
+\newblock Mining the network value of customers.
+\newblock In {\em Proceedings of the Seventh ACM SIGKDD International
+  Conference on Knowledge Discovery and Data Mining}, KDD '01, pages 57--66,
+  New York, NY, USA. ACM.
+
 \bibitem[Drineas and Mahoney, 2005]{Drineas05on}
 Drineas, P. and Mahoney, M.~W. (2005).
 \newblock On the nystr\&\#246;m method for approximating a gram matrix for
   improved kernel-based learning.
 \newblock {\em J. Mach. Learn. Res.}, 6:2153--2175.
+
+\bibitem[Du et~al., 2014]{Du14influence}
+Du, N., Liang, Y., Balcan, M.-F., and Song, L. (2014).
+\newblock Influence function learning in information diffusion networks.
+\newblock In {\em Proceedings of the 31th International Conference on Machine
+  Learning (ICML 2004)}, pages 823--830. JMLR.org.
+
+\bibitem[Du et~al., 2012]{Du12learning}
+Du, N., Song, L., Smola, A.~J., and Yuan, M. (2012).
+\newblock Learning networks of heterogeneous influence.
+\newblock In {\em Advances in Neural Information Processing Systems (NIPS)}.
 
 \bibitem[Dunn, 1961]{Dunn61mulitple}
 Dunn, O.~J. (1961).
@@ -243,6 +291,25 @@ García, S. and Herrera, F. (2008).
   data sets" for all pairwise comparisons.
 \newblock {\em J. Mach. Learn. Res.}, 9:2677--2694.
 
+\bibitem[Garey and Johnson, 1990]{Garey90computers}
+Garey, M.~R. and Johnson, D.~S. (1990).
+\newblock {\em Computers and Intractability; A Guide to the Theory of
+  NP-Completeness}.
+\newblock W. H. Freeman \& Co., New York, NY, USA.
+
+\bibitem[Goemans and Williamson, 1995]{Geomans1995improved}
+Goemans, M. and Williamson, D. (1995).
+\newblock Improved approximation algorithms for maximum cut and satisfiability
+  problems using semidefinite programming.
+\newblock {\em Journal of the {ACM}}, 42(6):1115 -- 1145.
+
+\bibitem[Gomez~Rodriguez et~al., 2010]{GomezRodriguez10inferring}
+Gomez~Rodriguez, M., Leskovec, J., and Krause, A. (2010).
+\newblock Inferring networks of diffusion and influence.
+\newblock In {\em Proceedings of the 16th ACM SIGKDD International Conference
+  on Knowledge Discovery and Data Mining}, KDD '10, pages 1019--1028, New York,
+  NY, USA. ACM.
+
 \bibitem[Goodman, 2002]{Goodman02Sequential}
 Goodman, J. (2002).
 \newblock Sequential conditional generalized iterative scaling.
@@ -260,6 +327,17 @@ Graf, H.~P., Cosatto, E., Bottou, L., Durdanovic, I., and Vapnik, V. (2005).
 \newblock Parallel support vector machines: The cascade svm.
 \newblock In {\em In Advances in Neural Information Processing Systems}, pages
   521--528. MIT Press.
+
+\bibitem[Gruhl et~al., 2004]{Gruhl04information}
+Gruhl, D., Guha, R., Liben-Nowell, D., and Tomkins, A. (2004).
+\newblock Information diffusion through blogspace.
+\newblock In {\em Proceedings of the 13th International Conference on World
+  Wide Web}, WWW '04, pages 491--501, New York, NY, USA. ACM.
+
+\bibitem[Hethcote, 2000]{Hethcote00the}
+Hethcote, H.~W. (2000).
+\newblock The mathematics of infectious diseases.
+\newblock {\em SIAM Review}, 42:599--653.
 
 \bibitem[Hsieh et~al., 2014]{Hsieh14a}
 Hsieh, C.-J., Si, S., and Dhillon, I. (2014).
@@ -318,6 +396,13 @@ Keerthi, S.~S., Chapelle, O., and DeCoste, D. (2006).
 \newblock Building support vector machines with reduced classifier complexity.
 \newblock {\em J. Mach. Learn. Res.}, 7:1493--1515.
 
+\bibitem[Kempe et~al., 2003]{Kempe03maximizing}
+Kempe, D., Kleinberg, J., and Tardos, E. (2003).
+\newblock Maximizing the spread of influence through a social network.
+\newblock In {\em Proceedings of the Ninth ACM SIGKDD International Conference
+  on Knowledge Discovery and Data Mining}, KDD '03, pages 137--146, New York,
+  NY, USA. ACM.
+
 \bibitem[Kocev et~al., 2013]{Kocev13tree}
 Kocev, D., Vens, C., Struyf, J., and Deroski, S. (2013).
 \newblock Tree ensembles for predicting structured outputs.
@@ -346,6 +431,33 @@ Lafferty, J.~D., McCallum, A., and Pereira, F. C.~N. (2001).
 Le, Q., Sarlos, T., and Smola, A. (2013).
 \newblock Fastfood - approximating kernel expansions in loglinear time.
 \newblock In {\em 30th International Conference on Machine Learning (ICML)}.
+
+\bibitem[Leskovec et~al., 2009]{Leskovec09meme}
+Leskovec, J., Backstrom, L., and Kleinberg, J. (2009).
+\newblock Meme-tracking and the dynamics of the news cycle.
+\newblock In {\em Proceedings of the 15th ACM SIGKDD International Conference
+  on Knowledge Discovery and Data Mining}, KDD '09, pages 497--506, New York,
+  NY, USA. ACM.
+
+\bibitem[Leskovec et~al., 2007]{Leskovec07cascading}
+Leskovec, J., McGlohon, M., Faloutsos, C., Glance, N., and Hurst, M. (2007).
+\newblock Cascading behavior in large blog graphs: Patterns and a model.
+\newblock In {\em Society of Applied and Industrial Mathematics: Data Mining
+  (SDM07)}.
+
+\bibitem[Liben-Nowell and Kleinberg, 2003]{Liben-Nowell03the}
+Liben-Nowell, D. and Kleinberg, J. (2003).
+\newblock The link prediction problem for social networks.
+\newblock In {\em Proceedings of the Twelfth International Conference on
+  Information and Knowledge Management}, CIKM '03, pages 556--559, New York,
+  NY, USA. ACM.
+
+\bibitem[Liben-Nowell and Kleinberg, 2008]{Nowell08tracing}
+Liben-Nowell, D. and Kleinberg, J. (2008).
+\newblock {Tracing information flow on a global scale using Internet
+  chain-letter data}.
+\newblock {\em Proceedings of the National Academy of Sciences},
+  105(12):4633--4638.
 
 \bibitem[Lin et~al., 2008]{Lin2008trust}
 Lin, C.-J., Weng, R.~C., and Keerthi, S.~S. (2008).
@@ -421,6 +533,18 @@ Ratliff, N., Bagnell, J. A.~D., and Zinkevich, M. (2007).
 \newblock In {\em Proceedings of the 11th International Conference on
   Artificial Intelligence and Statistics (AISTATS 2007)}, volume~2. Journal of
   Machine Learning Research W\&CP.
+
+\bibitem[Rodriguez et~al., 2011]{Rodrigues11unconvering}
+Rodriguez, M.~G., Balduzzi, D., and Schölkopf, B. (2011).
+\newblock Uncovering the temporal dynamics of diffusion networks.
+\newblock In Getoor, L. and Scheffer, T., editors, {\em Proceedings of the 28th
+  International Conference on Machine Learning (ICML-11)}, pages 561--568, New
+  York, NY, USA. ACM.
+
+\bibitem[Rogers, 20]{Rogers03the}
+Rogers, E.~M. (20).
+\newblock {\em Diffusion of Innovations}.
+\newblock The Free Press, 5th ed. 2003 edition.
 
 \bibitem[Romera-Paredes et~al., 2012]{Paredes12exploit}
 Romera-Paredes, B., Argyriou, A., Berthouze, N., and Pontil, M. (2012).
@@ -510,6 +634,12 @@ Smola, A.~J. and Sch\"{o}kopf, B. (2000).
 Smyth, P. and Wolpert, D. (1999).
 \newblock Linearly combining density estimators via stacking.
 \newblock {\em Machine Learning}, 36(1-2):59--83.
+
+\bibitem[Strang and Soule, 1998]{Strang98diffusion}
+Strang, D. and Soule, S.~A. (1998).
+\newblock {Diffusion in Organizations and Social Movements: From Hybrid Corn to
+  Poison Pills}.
+\newblock {\em Annual Review of Sociology}, 24(1):265--290.
 
 \bibitem[Taskar et~al., 2002]{taskar02}
 Taskar, B., Abbeel, P., and Koller, D. (2002).

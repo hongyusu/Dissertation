@@ -954,29 +954,113 @@ We will close the discussion with the discussion and the direction for future wo
 \section{Network Response Prediction through Structured Output Learning}
 
 \subsection{Problem Definition}
+With the extensive availability of the large scale network, many researches have been devote to studying the structure , the function, and the dynamics of the network.
+The outcome of the network influence research have been widely applied in many areas, to name but a few, spreadness of pathogens or infectious diseases \citep{Hethcote00the,Anderson02infectious}, diffusion of medical and technology innovation \citep{Strang98diffusion,Rogers03the}, opinion and news formation \citep{Adar04implicit,Gruhl04information,Adar05tracking,Leskovec07cascading,Nowell08tracing,Leskovec09meme}, viral market \citep{Domingos01mining,Kempe03maximizing,Liben-Nowell03the}.
+
+
+
+
+The network influence problem is motivated by the following observation: for a given action $\va$ performed on the network $G$, the influence from node $u$ to $u'$ not only depends on their connections but also depend on the action under consideration.
+For example, $u'$ follows $u'$ in twitter network, $u'$ will retweet the message from $u$ if the message is related to \textit{science} but not related to \textit{politics}.
+
+\begin{definition}{Network Influence Problem}\\
+	Given a complex network and an action performed on the network, predict the subnetwork that responses to the action. In particular, which nodes will perform the action and which directed edges relay the action from one node to its neighbors.
+\end{definition}
+
 \subsection{Prior Work}
+
+In the field of studying network influence, one primary interest is to discover the latent structures that reveal the dynamics of influences.
+In general, the problem can be defined into two different ways depending on the availability of the underlying network structure.
+On one hand, one would assume that the underlying structure is hidden or incomplete and the only observation is a cascade of actions.
+The instantiation of the setting can be, for example, online news agents sharing information but not physically connected, or in epidemiological study where people are affected by pathogens through various ways.
+In this case, the task is to infer network structure in terms of edges connecting nodes given a set of action cascade.
+With early work on independent cascade and linear threshold model in 
+Many algorithms are designed to solve the problem in this setting from \netinf\ \citep{GomezRodriguez10inferring}, \netrate\ \citep{Rodrigues11unconvering}, \kernelcascade\ \citep{Du12learning} to the most recent work about two stage model for inferring influence \citep{Du14influence}, inference algorithm using cascade without timestamp \citep{Amin14learning}, and general framework of inferring diffusion structure \citep{Daneshmand14estimating}.
+
+%
+%
 \subsection{Methods}
 We approach the problem by structured output learning framework, where we define a computability score as a inner product of the action $\va$ and the response network $\Gva$
 \begin{align*}
-	F(\va,\Gva;\vw) = \ip{\va}{\vPhi(\va,\Gva)},
+	F(\va,\Gva;\vw) = \ip{\va}{\vPhi(\va,\Gva)}.
 \end{align*}
-where by intuition the action $\va$ with correct response network $\Gva$ will achieve high score than with any incorrect response network $\Gva'$.
-As introduced in previous section, $\vPhi(\va,\Gva)$ is composed by the tensor product between action feature $\phi(\va)$ and the feature of the response network $\varphi(\Gva)$.
-In particular, $\phi(\va)$ can be a bag-of-words feature of the action and $\varphi(\Gva)$ is a vector of edges and labels in the response network $\Gva$.
+It is obvious that the action $\va$ with correct response network $\Gva$ will achieve high score than with any incorrect response network $\Gva'$.
+As introduced in previous section, the joint feature map $\vPhi(\va,\Gva)$ is composed by the tensor product between action feature $\phi(\va)$ and the feature of the response network $\varphi(\Gva)$.
+In particular, $\phi(\va)$ can be a bag-of-words feature of the action (e.g. blog post) and $\varphi(\Gva)$ is a vector of edges and labels in the response network $\Gva$.
 
+% optimization
 The feature weight vector $\vw$ is learned through maximum-margin structured output learning approach by solving the following optimization problem
-\begin{definition}{SPIN Optimization Problem}
+\begin{definition}{SPIN Optimization Problem in Primal}
 \begin{align*}
 	\underset{\vw,\vxi}{\minimize} &\quad \frac{1}{2}\norm{\vw}^2+C\sum_{i=1}^{m}\xi_i\\
-	\st &\quad F(\va_i,G_{\va_i};\vw) > \underset{G_{\va_i}'\in\Hcal(G)}{\maximize}(F(\va_i,G_{\va_i}';\vw)+\vell_{G}(G_{\va_i},G_{\va_i}') - \xi_i,\\
+	\st &\quad F(\va_i,G_{\va_i};\vw) > \underset{G_{\va_i}'\in\Hcal(G)/G_{\va_i}}{\maximize}(F(\va_i,G_{\va_i}';\vw)+\vell_{G}(G_{\va_i},G_{\va_i}')) - \xi_i,\\
 	&\quad xi_i\ge0, \forall i\in\{1,\cdots,m\},
 \end{align*}
 \end{definition}
 where by $\Hcal(G)$ we denote the set of directed acyclic graphs of $G$.
 
+% inference
+To solve the above optimization problem, we have to compute both in training and in prediction the highest-scoring subgraph for an action. 
+In particular, during the training the goal is to find the worst margin violating subgraph which corresponds to solving the loss-augmented maximization problem
+\begin{align*}
+	H^*(\va_i) = \underset{G_{\va_i}'\in\Hcal(G)/G_{\va_i}}{\argmax}\, (F(\va_i,G_{\va_i}';\vw)+\vell_{G}(G_{\va_i},G_{\va_i}')).
+\end{align*}
+During the prediction, the goal is to find the subgraph with maximum compatibility given the action
+\begin{align}
+	H^*(\va_i) = \underset{H\in\Hcal(G)}{\argmax}\, F(\va_i,H;\vw) \label{spin_inference}.
+\end{align}
+As the two problems are different only in terms of the definition of the score, we explain our inference algorithm based on (\ref{spin_inference}) by writing the problem explicitly in terms of weight vectors and the feature maps
+\begin{align}
+	H^*(\va_i) &= \underset{H\in\Hcal(G)}{\argmax}\, \ip{\vw}{\phi(\va)\otimes\varphi(H)} \nonumber \\
+	&= \underset{H\in\Hcal(G)}{\argmax}\, \sum_{e\in E^H}s_{\vy_e}(e,\va), \label{spin_np}
+\end{align}
+where we denote by $s_{\vy_e}(e,\va) = \sum_{i}w_{i,e,\vy_e}\phi(\va)$ the score of edge $e$ with edge label $\vy_e$.
+
+\begin{lemma}
+	Finding the graph that maximizes (\ref{spin_np}) is an \nphard\ problem.
+\end{lemma}
+In supplementary material of \citepub{su14a}, we have proved the \nphardness\ by forming a reduction from the \maxcut\ problem \citep{Garey90computers}.
+In addition, we proposed two algorithms to solve (\ref{spin_np}).
+The first is called '{\sdp\ inference}' which introduces for each node $u\in V$ a binary variable $x_u\in\{-1,+1\}$ and transfer the inference problem into an integer quadratic program (\iqp) problem.
+The \iqp\ is then tackle by similar technique introduced in \citep{Geomans1995improved}, such that each variable $x_u$ is relaxed to a vector $\vv_u\in\RR^n$ and the relaxed problem is solved by semidefinite programming (\sdp). 
+The resulting vector is rounded back into binary value by Cholesky decomposition.
+
+The benefit from \sdp\ inference algorithm is the approximation guarantee. 
+If we denote by $Z^*$ ($Z_R$, and $Z$ respectively) the optimal value achieved by \iqp\ (the relaxed problem, and the \sdp\ inference respectively), we have $Z_R\ge Z^*$ and $E[Z]\ge(\alpha-\epsilon)Z_R$ where $\alpha\ge0.796$.
+In words, the proposed \sdp\ inference algorithm is a $0.796$ approximation of the original \iqp.
+
+As \sdp\ inference is not scalable on large networks, we developed a \greedy\ heuristic base on observation stated as the following lemma:
+\begin{lemma}
+	The inference problem (\ref{spin_np}) can be stated equivalently as a function of activated vertices
+	\begin{align*}
+		H^{*}(\va) = \underset{{H \in {\cal H}(G)}}{\argmax} \sum_{ \substack{v_i\in V^H_{\p}}}F_m(v_i). \nonumber 
+	\end{align*}
+\end{lemma}
+The proof is given in supplementary material of \citepub{su14a}. 
+As a results, the \greedy\ algorithm starts with an empty vertex set and adds one vertex at a time such that the increment of the score is maximized over all inactivated vertices.
+The iteration ends when the objective cannot be improved.  
+It is worthy noticing that we are not able to give any approximation guarantee for the solutions produced by the \greedy\ algorithm.
+The property of submodularity, which is often used to analyze the greedy algorithm, only holds for the special case of our inference problem.
+
+% loss function
+The decomposable loss function $\ell_G(G_{\va},G_{\va}')$ will penalize the mistakes uniformly over the network.
+However, we wish the learning algorithm focus on the vicinity of the \textit{foci} based on the observation that one certain action will only affect a small part of the network.
+This suggests we should penalize the mistake according to the distance to the \textit{foci}.
+Therefore, we define the \textit{symmetric-difference loss}, also known as \textit{hamming loss}, applied on the nodes and edges of the network. 
+In addition, we define the scaling function $\gamma_G$ according to the distance to \textit{foci}.
+The resulting loss function is 
+\begin{align*}
+	\ell_G(G_{\va},G_{\vb}) = \sum_{u\in V}\ell_v(G_{\va},G_{\vb})\gamma_G(u_k;u) + \sum_{(u,u')\in V}\ell_e(G_{\va},G_{\vb})\gamma_G(u_k;u).
+\end{align*}
+We proposed two scaling function in \citepub{su14a}.
+One is \textit{exponential scaling} where mistakes are penalized by $\lambda$ and $\lambda$ is weighted exponentially according to the shortest path distance to \textit{foci}.
+The other is \textit{diffusion scaling} where mistakes are penalized by the values computed from diffusion kernel.
+Diffusion scaling has the effect of shrinking the distance to the nodes that are connect to \textit{foci} by many paths.
 
 
 
+%
+%
 \chapter{Theory}
 
 
