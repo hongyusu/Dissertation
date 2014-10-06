@@ -946,20 +946,53 @@ The test results are often visualized as \textit{$CD$ diagram}.
 \chapter{Methods}
 
 In this chapter, the author tries to give a high level overview of the publications and the corresponding contributions.
-Each section is mostly build upon one publication.
-The section will start with background knowledge that is necessary to understand the content of the publication, and will followed by the brief discussion about the theoretical end technical novelties.
+The discussion of each section is mostly build upon one publication.
+Section will start with background knowledge that is necessary to understand the content of the publication, and will followed by the brief discussion of the theoretical end technical novelties.
 We will end the section with the discussion and the future direction.
 
 \section{Structured Prediction of Molecular Activity}
 
+The molecular activity prediction problem has been long tackled by single task classification approaches.
+Due to the face that multiple activities are often screened at the same time, these methods cannot avoid two disadvantages.
+The first is the scalability issue which in order to predict multiple inhibition potentials a set of single task learners need to build separately, which soon becomes infeasible when large amount of targets need to be predict.
+The second lies in that the single task model discard the dependency information among multiple targets which can be utilized to improve the performance.
+Therefore, in \citepub{su10}, we investigate the potential of using structured output learning framework to tackle the molecular activity prediction problem.
+
+
 \subsection{Background and Introduction}
 
+Molecular classification, the goal of which is to predict the anticancer potentials of drug-like molecule, is one crucial step in drug discovery and has draw enormous attention from machine learning community.
+Viable molecular structures are scanner, searched, or designed for therapeutic efficacy.
+In particular, expensive preclinical \textit{in vitro} and \textit{in vivo} drug testing can be largely avoided and special efforts can be devoted to few promising candidate molecules, once accurate \textit{in silico} models are available \citep{Burbidg01drug}.
+
+Various machine methods have been developed for the task, to name but a few, inductive logic programming \citep{King96structure}, artificial neural network \citep{Bernazzani06predicting}, kernel methods for nonlinear molecular properties \citep{Trotter01drug,Ralaivola05graph,Swamidass05kernel,Ceroni07classification}, and \svm\ based methods for reliable predictions \citep{Trotter01drug,Byvatov03comparison,Xue04effect}.
+Albeit numerous methods being developed, they only focus on predicting single target variable (e.g. inhibition potential in one certain cell-line). 
+On the other hand, relative larger number of cell-line targets are often screened at the same time, for example in '\textit{NCI-60} Human Tumor Cell Line Screen' project \citep{Shoemaker06the}.
 
 
-\subsection{Structured Output Learning}
+\subsection{Methods}
 
+To reliably predict multiple cell-line targets at the same time, we proposed a structured output learning algorithm in \citepub{su10}, which is to our knowledge the first multilabel learning approach for molecular classification problem.
+The algorithm is an instantiation of structured output prediction methods \mmcrf\ \citep{rousu06}.
+In particular, the model defines a compatibility score for a molecular structure $\vx$ and the activities over multiple cell-line targets $\vy$
+\begin{align*}
+	F(\vx,\vy;\vw) = \ip{\vw}{\Phi(\vx,\vy)},
+\end{align*}
+where $\vw$ is the weight parameters that ensures the structure with correct activities will achieve high score than with incorrect activities.
+The weight parameters are learned by maximing the minimum loss-scaled margin between correct examples $(\vx_i,\vy_i)$ and incorrect examples $(\vx_i,\vy)$ over the whole training set
+\begin{align*}
+	\underset{\vw}{\minimize} & \quad \frac{1}{2}\norm{\vw}^2 + C\sum_{i=1}^{m}\xi_i\\
+	\st &\quad \ip{\vw}{\Phi(\vx_i,\vy_i)} - \ip{\vw}{\Phi(\vx_i,\vy)} \ge \ell(\vy_i,\vy)-\xi_i,\\
+	&\quad \forall i\in\{1,\cdots,m\}, \forall \vy,
+\end{align*}
+where $\ell(\vy_i,\vy)$ is the loss function defined as
+\begin{align*}
+	\ell(\vy_i,\vy) = \sum_{j=1}^{k}\ind{\vy_i[j]\neq \vy[j]}.
+\end{align*}
+The loss scaled margin optimization will push high-loss pseudo-examples further away from the correct example than the loss-loss pseudo-examples.
+The model is optimized  with conditional gradient optimization \citep{Bertsekas95nonlinear} in marginalized dual form which enjoys polynomial-size parameter space and kernel function that deal with non-linearity of the molecular structures.
 
-\subsection{Graph Kernels for Small Molecules}
+%\subsubsection{Graph Kernels for Small Molecules}
 
 Graph kernel is the classic method to measure the similarity between two graph objectives.
 The common way to represent the structure of a molecule is to use an undirected labeled graph $G=(V,E)$, where vertices $V=\{v_1,\cdots,v_n\}$ corresponds to atoms and edge $E=\{e_1,\cdots,e_m\}$ corresponds to the covalent bonds.
@@ -986,6 +1019,23 @@ Using exponential series or geometric series the walk kernel can be compute in c
 
 \textit{Weighted Decomposition Kernel} in \citep{Menchetti05weighted,Ceroni08classification} is an extension of substructure kernel by weighting identical part in two graph with contextual information.
 Also see recent \citep{Vishwanathan10graph} for a more comprehensive survey on graph kernels.
+
+
+%\subsubsection{Generation of Markov Network}
+To apply structured output learning algorithm described above, one assume to observe the underlying Markov network structure.
+In other words, we need to build network structure for cell-lines used as output, with nodes correspond to cell-lines and edges correspond to potential statistical dependencies.
+Fortunately, there are auxiliary dataset available \cite{Shoemaker06the} which implicitly describes the relationship among cell-line targets.
+In practice, we extract the network structure for cell-lines from auxiliary datasets by applying the following two methods.
+In maximum spanning tree approach, we take the minimum number of edges that make a connected network whilst maximizing the edge weights.
+In correlation thresholding approach, we take all edges that exceed fixed threshold, which typically give generate a non-tree graph.
+
+
+
+\section{Multi-task Bioactivity Classification with Graph Labeling Ensembles}
+
+\section{Methods}
+
+
 
 \section{Network Response Prediction through Structured Output Learning}
 
