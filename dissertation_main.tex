@@ -945,29 +945,54 @@ The test results are often visualized as \textit{$CD$ diagram}.
 
 \chapter{Methods}
 
-In this section, we will briefly explain the contribution of each publication.
-We will begin in each section with the background of the method, following by explaining the theoretical and technical novelties.
-We will close the discussion with the discussion and the direction for future work.
+In this chapter, the author tries to give a high level overview of the publications and the corresponding contributions.
+Each section is mostly build upon one publication.
+The section will start with background knowledge that is necessary to understand the content of the publication, and will followed by the brief discussion about the theoretical end technical novelties.
+We will end the section with the discussion and the future direction.
+
+\section{Structured Prediction of Molecular Activity}
+
+\subsection{Background and Introduction}
 
 
+
+\subsection{Structured Output Learning}
+
+
+\subsection{Graph Kernels for Small Molecules}
+
+Graph kernel is the classic method to measure the similarity between two graph objectives.
+The common way to represent the structure of a molecule is to use an undirected labeled graph $G=(V,E)$, where vertices $V=\{v_1,\cdots,v_n\}$ corresponds to atoms and edge $E=\{e_1,\cdots,e_m\}$ corresponds to the covalent bonds.
+The adjacency matrix $E$ of graph $G$ is defined tush that its $(i,j)$'th entry equals to one if there is an edge between atom $i$ and atom $j$.
+\textit{Walk Kernel} \citep{Kashima03marginalized,Gartner03a} compute the sum of matching walks in a pair of graphs. 
+The contribution of each matching walk is down scaled exponentially according to its length.  
+We denote by $w_m$ a walk of length $m$ in graph $G$ such that there exists a edge for each pair of vertices $(v_i,v_{i+1})$.
+In addition, we denote by $G_{\times}(G_1,G_2)$ the direct product graph of two graph $G_1$ and $G_2$, of which the vertices of a product graph are computed from 
+\begin{align*}
+	V_{\times}(G_1,G_2) = \{(v_1,v_2)\in V_1\times V_2, label(v_1)=label(v_2)\},
+\end{align*}
+and edges are computed from
+\begin{align*}
+	E_{\times}(G_1,G_2) = \{((v_1,v_2),(u_1,u_2))\in V_{\times}\times V_{\times},(v_1,u_i)\in E_1\wedge (v_2,u_2)\in E_2\}.
+\end{align*}
+The walk kernel can be defined on the adjacency matrix of $G_{\times}$
+\begin{align*}
+	K_{wk}(G_1,G_2) = \sum_{i,j=1}^{|V_{\times}|}\left[\sum_{n=0}^{\infty}\lambda^{n}E_{\times}^n\right]_{i,j}.
+\end{align*}
+Using exponential series or geometric series the walk kernel can be compute in cubic time \citep{Gartner03a}
+\begin{align*}
+	K_{wk}(G_1,G_2) = \ve\tp(\vI-\lambda E_{\times})^{-1}\ve.
+\end{align*}
+
+\textit{Weighted Decomposition Kernel} in \citep{Menchetti05weighted,Ceroni08classification} is an extension of substructure kernel by weighting identical part in two graph with contextual information.
+Also see recent \citep{Vishwanathan10graph} for a more comprehensive survey on graph kernels.
 
 \section{Network Response Prediction through Structured Output Learning}
 
-\subsection{Problem Definition}
-With the extensive availability of the large scale network, many researches have been devote to studying the structure , the function, and the dynamics of the network.
+\subsection{Background and Introduction}
+
+With the extensive availability of the large scale network, there are tremendous interest in studying the phenomena of the network influence, in particular, the structure, the function and the influence dynamics. 
 The outcome of the network influence research have been widely applied in many areas, to name but a few, spreadness of pathogens or infectious diseases \citep{Hethcote00the,Anderson02infectious}, diffusion of medical and technology innovation \citep{Strang98diffusion,Rogers03the}, opinion and news formation \citep{Adar04implicit,Gruhl04information,Adar05tracking,Leskovec07cascading,Nowell08tracing,Leskovec09meme}, viral market \citep{Domingos01mining,Kempe03maximizing,Liben-Nowell03the}.
-
-
-
-
-The network influence problem is motivated by the following observation: for a given action $\va$ performed on the network $G$, the influence from node $u$ to $u'$ not only depends on their connections but also depend on the action under consideration.
-For example, $u'$ follows $u'$ in twitter network, $u'$ will retweet the message from $u$ if the message is related to \textit{science} but not related to \textit{politics}.
-
-\begin{definition}{Network Influence Problem}\\
-	Given a complex network and an action performed on the network, predict the subnetwork that responses to the action. In particular, which nodes will perform the action and which directed edges relay the action from one node to its neighbors.
-\end{definition}
-
-\subsection{Prior Work}
 
 In the field of studying network influence, one primary interest is to discover the latent structures that reveal the dynamics of influences.
 In general, the problem can be defined into two different ways depending on the availability of the underlying network structure.
@@ -976,6 +1001,17 @@ The instantiation of the setting can be, for example, online news agents sharing
 In this case, the task is to infer network structure in terms of edges connecting nodes given a set of action cascade.
 With early work on independent cascade and linear threshold model in 
 Many algorithms are designed to solve the problem in this setting from \netinf\ \citep{GomezRodriguez10inferring}, \netrate\ \citep{Rodrigues11unconvering}, \kernelcascade\ \citep{Du12learning} to the most recent work about two stage model for inferring influence \citep{Du14influence}, inference algorithm using cascade without timestamp \citep{Amin14learning}, and general framework of inferring diffusion structure \citep{Daneshmand14estimating}.
+On the other hand, we argue the problem is unnecessarily hard to solve as in many cases the structure of the network is given (e.g. friendship network).
+There are also related researches aim to discover the hidden variables in the network \citep{Lovrek08prediction,Goyal10learning}
+
+However, none of they consider the property of the action.
+In particular, our network influence problem is motivated by the following observation: for a given action $\va$ performed on the network $G$, the influence from node $u$ to $u'$ not only depends on their connections but also depend on the action under consideration.
+For example, $u'$ follows $u'$ in twitter network, $u'$ will retweet the message from $u$ if the message is related to \textit{science} but not related to \textit{politics}.
+
+\begin{definition}{Network Influence Problem}\\
+	Given a complex network and an action performed on the network, predict the subnetwork that responses to the action. In particular, which nodes will perform the action and which directed edges relay the action from one node to its neighbors.
+\end{definition}
+
 
 %
 %
@@ -1054,7 +1090,7 @@ The resulting loss function is
 \end{align*}
 We proposed two scaling function in \citepub{su14a}.
 One is \textit{exponential scaling} where mistakes are penalized by $\lambda$ and $\lambda$ is weighted exponentially according to the shortest path distance to \textit{foci}.
-The other is \textit{diffusion scaling} where mistakes are penalized by the values computed from diffusion kernel.
+The other is \textit{diffusion scaling} where mistakes are penalized by the values computed from diffusion kernel \citep{Kondor02diffusion}.
 Diffusion scaling has the effect of shrinking the distance to the nodes that are connect to \textit{foci} by many paths.
 
 

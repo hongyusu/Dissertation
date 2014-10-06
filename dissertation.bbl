@@ -114,6 +114,12 @@ Caruana, R. (1997).
 \newblock Multitask learning.
 \newblock {\em Mach. Learn.}, 28(1):41--75.
 
+\bibitem[Ceroni et~al., 2007]{Ceroni08classification}
+Ceroni, A., Costa, F., and Frasconi, P. (2007).
+\newblock Classification of small molecules by two- and three-dimensional
+  decomposition kernels.
+\newblock {\em Bioinformatics}, 23(16):2038--2045.
+
 \bibitem[Chang and Lin, 2011]{Chang11libsvm}
 Chang, C.-C. and Lin, C.-J. (2011).
 \newblock Libsvm: A library for support vector machines.
@@ -297,6 +303,11 @@ Garey, M.~R. and Johnson, D.~S. (1990).
   NP-Completeness}.
 \newblock W. H. Freeman \& Co., New York, NY, USA.
 
+\bibitem[G\"{a}rtner, 2003]{Gartner03a}
+G\"{a}rtner, T. (2003).
+\newblock A survey of kernels for structured data.
+\newblock {\em SIGKDD Explor. Newsl.}, 5(1):49--58.
+
 \bibitem[Goemans and Williamson, 1995]{Geomans1995improved}
 Goemans, M. and Williamson, D. (1995).
 \newblock Improved approximation algorithms for maximum cut and satisfiability
@@ -321,6 +332,12 @@ Goodman, J. (2003).
 \newblock Exponential priors for maximum entropy models.
 \newblock In {\em In Proceedings of the Annual Meeting of the Association for
   Computational Linguistics}, pages 305--312.
+
+\bibitem[Goyal et~al., 2010]{Goyal10learning}
+Goyal, A., Bonchi, F., and Lakshmanan, L.~V. (2010).
+\newblock Learning influence probabilities in social networks.
+\newblock In {\em Proceedings of the Third ACM International Conference on Web
+  Search and Data Mining}, WSDM '10, pages 241--250, New York, NY, USA. ACM.
 
 \bibitem[Graf et~al., 2005]{Graf05parallel}
 Graf, H.~P., Cosatto, E., Bottou, L., Durdanovic, I., and Vapnik, V. (2005).
@@ -380,6 +397,12 @@ Joachims, T., Finley, T., and Yu, C.-N. (2009).
 \newblock Cutting-plane training of structural svms.
 \newblock {\em Machine Learning}, 77(1):27--59.
 
+\bibitem[Kashima et~al., 2003]{Kashima03marginalized}
+Kashima, H., Tsuda, K., and Inokuchi, A. (2003).
+\newblock Marginalized kernels between labeled graphs.
+\newblock In {\em Proceedings of the Twentieth International Conference on
+  Machine Learning}, pages 321--328. AAAI Press.
+
 \bibitem[Kearns and Valiant, 1989]{Kearns94cryptographic}
 Kearns, M. and Valiant, L. (1989).
 \newblock Cryptographic limitations on learning boolean formulae and finite
@@ -419,6 +442,13 @@ Komarek, P. and Moore, A. (2005).
 \newblock Making logistic regression a core data mining tool: A practical
   investigation of accuracy, speed, and simplicity.
 \newblock Technical Report CMU-RI-TR-05-27, Robotics Institute.
+
+\bibitem[Kondor and Lafferty, 2002]{Kondor02diffusion}
+Kondor, R.~I. and Lafferty, J.~D. (2002).
+\newblock Diffusion kernels on graphs and other discrete input spaces.
+\newblock In {\em Proceedings of the Nineteenth International Conference on
+  Machine Learning}, ICML '02, pages 315--322, San Francisco, CA, USA. Morgan
+  Kaufmann Publishers Inc.
 
 \bibitem[Lafferty et~al., 2001]{lafferty01}
 Lafferty, J.~D., McCallum, A., and Pereira, F. C.~N. (2001).
@@ -468,6 +498,12 @@ Lin, C.-J., Weng, R.~C., and Keerthi, S.~S. (2008).
 Liu, F.~T., Ting, K.~M., Yu, Y., and Zhou, Z.-H. (2008).
 \newblock Spectrum of variable-random trees.
 \newblock {\em J. Artif. Int. Res.}, 32(1):355--384.
+
+\bibitem[Menchetti et~al., 2005]{Menchetti05weighted}
+Menchetti, S., Costa, F., and Frasconi, P. (2005).
+\newblock Weighted decomposition kernels.
+\newblock In {\em Proceedings of the 22Nd International Conference on Machine
+  Learning}, ICML '05, pages 585--592, New York, NY, USA. ACM.
 
 \bibitem[Minka, 2003]{Minka03}
 Minka, T.~P. (2003).
@@ -541,8 +577,8 @@ Rodriguez, M.~G., Balduzzi, D., and Schölkopf, B. (2011).
   International Conference on Machine Learning (ICML-11)}, pages 561--568, New
   York, NY, USA. ACM.
 
-\bibitem[Rogers, 20]{Rogers03the}
-Rogers, E.~M. (20).
+\bibitem[Rogers, 2003]{Rogers03the}
+Rogers, E.~M. (2003).
 \newblock {\em Diffusion of Innovations}.
 \newblock The Free Press, 5th ed. 2003 edition.
 
@@ -579,6 +615,15 @@ Sagae, K. and Lavie, A. (2006).
 \newblock In {\em Proceedings of the Human Language Technology Conference of
   the NAACL, Companion Volume: Short Papers}, NAACL-Short '06, pages 129--132,
   Stroudsburg, PA, USA. Association for Computational Linguistics.
+
+\bibitem[Saito et~al., 2008]{Lovrek08prediction}
+Saito, K., Nakano, R., and Kimura, M. (2008).
+\newblock Prediction of information diffusion probabilities for independent
+  cascade model.
+\newblock In Lovrek, I., Howlett, R., and Jain, L., editors, {\em
+  Knowledge-Based Intelligent Information and Engineering Systems}, volume 5179
+  of {\em Lecture Notes in Computer Science}, pages 67--75. Springer Berlin
+  Heidelberg.
 
 \bibitem[Schapire and Singer, 1999]{Schapire99improved}
 Schapire, R. and Singer, Y. (1999).
@@ -691,6 +736,12 @@ Tukey, J.~W. (1949).
 Vapnik, V. (1982).
 \newblock {\em Estimation of Dependences Based on Empirical Data}.
 \newblock Springer-Verlag.
+
+\bibitem[Vishwanathan et~al., 2010]{Vishwanathan10graph}
+Vishwanathan, S. V.~N., Schraudolph, N.~N., Kondor, R., and Borgwardt, K.~M.
+  (2010).
+\newblock Graph kernels.
+\newblock {\em J. Mach. Learn. Res.}, 11:1201--1242.
 
 \bibitem[Wang et~al., 2007]{Wang07simple}
 Wang, Q.~I., Lin, D., and Schuurmans, D. (2007).
