@@ -121,6 +121,11 @@ Breiman, L. (2001).
 \newblock Random forests.
 \newblock {\em Machine Learning}, 45(1):5--32.
 
+\bibitem[Brown and Kuncheva, 2010]{Brown10good}
+Brown, G. and Kuncheva, L.~I. (2010).
+\newblock “good” and “bad” diversity in majority vote ensembles.
+\newblock In {\em Multiple Classifier Systems}, pages 124--133. Springer.
+
 \bibitem[Burbidge et~al., 2001]{Burbidg01drug}
 Burbidge, R., Trotter, M., Buxton, B., and Holden, S. (2001).
 \newblock Drug design by machine learning: support vector machines for
@@ -475,6 +480,12 @@ Koltchinskii, V. and Panchenko, D. (2000).
   of combined classifiers.
 \newblock {\em Annals of Statistics}, 30:2002.
 
+\bibitem[Komarek and Moore, 1999]{Haussler99convolution}
+Komarek, P. and Moore, A. (1999).
+\newblock Convolution kernels on discrete structures.
+\newblock Technical Report UCSC-CRL-99-10, University of California at Santa
+  Cruz.
+
 \bibitem[Komarek and Moore, 2005]{Komarek05making}
 Komarek, P. and Moore, A. (2005).
 \newblock Making logistic regression a core data mining tool: A practical
@@ -748,7 +759,7 @@ Taskar, B., Abbeel, P., and Koller, D. (2002).
   Artificial Intelligence}, UAI'02, pages 485--492, San Francisco, CA, USA.
   Morgan Kaufmann Publishers Inc.
 
-\bibitem[Taskar et~al., 2004]{taskar04}
+\bibitem[Taskar et~al., 2004]{Taskar04max}
 Taskar, B., Guestrin, C., and Koller, D. (2004).
 \newblock Max-margin markov networks.
 \newblock In {\em Advances in Neural Information Processing Systems 16 (NIPS
@@ -803,6 +814,12 @@ Vishwanathan, S. V.~N., Schraudolph, N.~N., Kondor, R., and Borgwardt, K.~M.
   (2010).
 \newblock Graph kernels.
 \newblock {\em J. Mach. Learn. Res.}, 11:1201--1242.
+
+\bibitem[Wainwright et~al., 2005]{Wainwright05map}
+Wainwright, M., Jaakkola, T., and Willsky, A. (2005).
+\newblock {MAP estimation via agreement on trees: message-passing and linear
+  programming}.
+\newblock {\em IEEE Transactions on Information Theory}, 51(11):3697--3717.
 
 \bibitem[Wang et~al., 2007]{Wang07simple}
 Wang, Q.~I., Lin, D., and Schuurmans, D. (2007).
