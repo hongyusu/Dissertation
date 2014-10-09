@@ -1073,7 +1073,7 @@ The approach will output disconnected pairs.
 
 Through extensive experiments in \citepub{su11}, we have validated the feasibility of constructing a simple majority voting ensemble (\mve) of structured output learner built on a set of random output graphs.
 The proposed method also improved the performance on molecular activity classification problem.
-In \citepub{su14b}, we aimed to develop advanced aggregation techniques (\amm\ and \mam\ respectively) that also perform inference before or after forming ensemble.
+In \citepub{su14b}, we aimed to develop elegant aggregation techniques (\amm\ and \mam\ respectively) that perform inference before or after forming ensemble.
 We tested the proposed techniques on a set of heterogeneous multilabel datasets from various domains to verify the wide applicability.
 In addition, we have put forward a theory that explains the improvement of \mam\ framework, based on the reconstruction error of compatibility score.
 
@@ -1153,6 +1153,9 @@ The improvement can be decomposed into two terms, namely \textit{diversity} and 
 %
 \section{Random Spanning Tree Approximation (\rta)}
 
+Random Spanning Tree Approximation (\rta) algorithm developed in \citepub{su14c} is a major step forward of \mam.
+The goal of \rta\ is to bring in joint learning and inference framework and to provide extensive theory to guarantee the performance as well as the tractable inference.
+
 \subsection{Background and Introduction}
 
 \subsection{Methods}
@@ -1163,8 +1166,8 @@ The improvement can be decomposed into two terms, namely \textit{diversity} and 
 %
 \section{\spin\ for Network Response Prediction}
 
-In \citepub{su14a}, we developed a structure output learning model for network response prediction problem.
-The proposed model, \spin, is \textit{context-sensitive} and is different from the previous the state-of-the-art models which only model the influence in terms of the connectivity.
+In \citepub{su14a}, a structure output learning model for network response prediction problem is developed.
+The proposed model, \spin, is \textit{context-sensitive} and is different from the previous the state-of-the-art methods which only model the influence in terms of the connectivity.
 The inference problem of \spin\ is \nphard\ where was solved by a semidefinite programming algorithm \sdp\ with approximation guarantee and a fast \greedy\ algorithm.
 
 \subsection{Background and Introduction}
