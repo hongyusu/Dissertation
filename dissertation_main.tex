@@ -369,15 +369,15 @@ The property is extreme useful, as the weight vector can be expressed as the lin
 As most of the dual variables are zero, the evaluation can be done efficiently by maintaining a small set of non-zero $\alpha$.
 
 In addition, we notice that to work out (Definition~\ref{softsvmdual}) it is not necessary to work on the explicit representation of $\vx$, as only the value of the inner product $\ip{\vx_i}{\vx_j}$ is need.
-As the algorithm can be represented entirely in terms of the inner product, we can also replace the inner product with $\ip{\phi(\vx_i)}{\phi(\vx_j)}$.
+As the algorithm can be represented entirely in terms of the inner product, we can also replace the inner product with $\ip{\phib(\vx_i)}{\phib(\vx_j)}$.
 In particular, we defined the \textit{kernel}
 \begin{align}
-	K(\vx_i,\vx_j) = \ip{\phi(\vx_i)}{\phi(\vx_j)}, \label{kernel}
+	K(\vx_i,\vx_j) = \ip{\phib(\vx_i)}{\phib(\vx_j)}, \label{kernel}
 \end{align}
-where $\phi(\cdot)$ is some high-dimensional feature map.
+where $\phib(\cdot)$ is some high-dimensional feature map.
 Whenever we need $\ip{\vx_i}{\vx_j}$, we instead use $K(\vx_i,\vx_j)$.
 Besides, the property of kernel function \citep{Scholkopf02learning} allows us to compute (\ref{kernel}) without explicitly accessing the high dimensional feature map.
-Thus the algorithm can tackle high dimensionality by learning from $\phi(\cdot)$ at a low computational cost.
+Thus the algorithm can tackle high dimensionality by learning from $\phib(\cdot)$ at a low computational cost.
 
 In addition, according to \textit{Mercer's Theorem} \citep{taylor04}, every positive semidefinite symmetric function is a kernel.
 Kernel functions that heavily used in practice include the \textit{linear kernel}
@@ -944,47 +944,53 @@ The test results are often visualized as \textit{$CD$ diagram}.
 
 
 
-
+% --------------------------
+%
+% 		chapter
+%
+% --------------------------
 \chapter{Novel Statistical Methods}
 
-
-In this chapter, the author aims to explain the connection of the publications as well as to discuss the corresponding contributions.
-The content of each section is mostly built based on one publication.
-Section will often start with introduction and background knowledge that is necessary to understand the content within the section, and will followed by an overview of the theoretical end technical novelties.
+In this chapter, the author aims to build the connection of the publications as well as to discuss the corresponding contributions.
+Each section will mostly focus on one publication, and will start with introduction and background knowledge that is necessary to understand the content within the section.
+An overview of the theoretical end technical novelties will also be briefly presented.
 
 \section{Structured Output Learning for Molecular Activity Classification}
 
-The molecular activity classification problem has long been tackled under the single label classification setting.
-In practice, multiple interdependent molecular activities are often screened simultaneously which makes single label classification approaches suffer from two formidable issues.
-The first is the scalability issue which in order to predict multiple activities a set of single task learners need to build separately, which soon becomes infeasible when large amount of targets need to be predict.
-The second lies in the fact the single task model discard the dependency information among multiple targets which can be utilized to improve the performance.
-Therefore, we investigated in \citepub{su10} the potential of using structured output learning framework to tackle the molecular activity classification problem.
+The molecular activity classification problem has long been tackled under the single task classification setting.
+On the other hand, multiple interdependent molecular activities are often screened simultaneously.
+This makes single task classification approaches suffer from two formidable issues.
+The first issue is scalability which in order to predict multiple activities for one molecule a set of single task classifiers need to be built separately, which soon becomes infeasible when large amount of activities need to be predicted.
+The second issue lies in the fact the single task model discards the dependency information among multiple output targets.
+The dependency structure can be further utilized to improve the performance.
+Therefore, in \citepub{su10} we investigate the potential of using structured output learning framework to tackle the molecular activity classification problem.
+
 
 \subsection{Background and Introduction}
 
-Molecular classification, the goal of which is to predict the anticancer potentials of drug-like molecules, is one crucial step in drug discovery and has draw enormous attention from machine learning community.
+Molecular classification, the goal of which is to predict the anticancer potentials of the drug-like molecules, is one crucial step in drug discovery and has draw enormous attention from machine learning community.
 Viable molecular structures are scanned, searched, or designed for therapeutic efficacy.
-In particular, expensive preclinical \textit{in vitro} and \textit{in vivo} drug testing can be largely avoided and special efforts can be devoted to few promising candidate drug-like molecules, once accurate \textit{in silico} models are available \citep{Burbidg01drug}.
+In particular, expensive preclinical \textit{in vitro} and \textit{in vivo} drug tests can be largely avoided and special efforts can be devoted to few promising candidate molecules, once accurate \textit{in silico} models are available \citep{Burbidg01drug}.
 
 Various machine learning methods have been developed for the task, to name but a few, inductive logic programming \citep{King96structure}, artificial neural network \citep{Bernazzani06predicting}, kernel methods for nonlinear molecular properties \citep{Trotter01drug,Ralaivola05graph,Swamidass05kernel,Ceroni07classification}, and \svm\ based methods for reliable predictions \citep{Trotter01drug,Byvatov03comparison,Xue04effect}.
-Albeit with the large quantity of the computational models, they only focus on predicting single target variable (e.g. inhibition potential in one certain cell line). 
+Albeit with the large quantity of the computational models, they only focus on predicting single target variable (e.g. inhibition potential in one cell line). 
 On the other hand, relative larger number of cell line targets are often screened at the same time.
 For example in \textit{NCI-60 Human Tumor Cell Line Screen} project \citep{Shoemaker06the}, thousands of molecular structures are tested agains hundreds of cell line targets.
 
 
 \subsection{Methods}
 
-To efficiently and accurately predict molecular activities in multiple cell line targets at the same time, we proposed a structured output learning algorithm in \citepub{su10}, which is to our knowledge the first multilabel learning approach for molecular classification problem.
-The algorithm can be seen as an instantiation of structured output learning methods \mmcrf\ \citep{rousu06}.
-In particular, the model defines a compatibility score for a molecular structure $\vx$ and the activities over multiple cell line targets $\vy$
+To efficiently and accurately predict molecular activities in multiple cell line at the same time, we proposed a structured output learning algorithm in \citepub{su10}, which is to our knowledge the first multi-task learning approach for molecular classification problem.
+The algorithm can be seen as an instantiation of the structured output learning method \mmcrf\ \citep{rousu06}.
+In particular, the model defines a compatibility score through inner product for a molecular structure $\vx$ and the activities in multiple cell lines $\vy$
 \begin{align*}
-	F(\vx,\vy;\vw) = \ip{\vw}{\phi(\vx,\vy)},
+	F(\vx,\vy;\vw) = \ip{\vw}{\phib(\vx,\vy)},
 \end{align*}
-where $\vw$ are the feature weight parameters that ensures the molecular structure with correct activities will achieve higher score than with incorrect activities.
+where $\vw$ are the feature weight parameters that ensures the molecular structure with correct activities will be scored higher than with incorrect activities.
 $\vw$ are learned by maximizing the minimum loss-scaled margin between correct examples $(\vx_i,\vy_i)$ and incorrect examples $(\vx_i,\vy)$ over the whole training set
 \begin{align*}
-	\underset{\vw,\vxi}{\minimize} & \quad \frac{1}{2}\norm{\vw}^2 + C\sum_{i=1}^{m}\xi_i\\
-	\st &\quad \ip{\vw}{\phi(\vx_i,\vy_i)} - \ip{\vw}{\phi(\vx_i,\vy)} \ge \ell(\vy_i,\vy)-\xi_i,\\
+	\underset{\vw,\vxi_i}{\minimize} & \quad \frac{1}{2}\norm{\vw}^2 + C\sum_{i=1}^{m}\xi_i\\
+	\st &\quad \ip{\vw}{\phib(\vx_i,\vy_i)} - \ip{\vw}{\phib(\vx_i,\vy)} \ge \ell(\vy_i,\vy)-\xi_i,\\
 	&\quad \forall i\in\{1,\cdots,m\}, \forall \vy\in\Ycal,
 \end{align*}
 where $\ell(\vy_i,\vy)$ is the loss function defined as
@@ -992,17 +998,17 @@ where $\ell(\vy_i,\vy)$ is the loss function defined as
 	\ell(\vy_i,\vy) = \sum_{j=1}^{k}\ind{\vy_i[j]\neq \vy[j]}.
 \end{align*}
 The loss scaled margin optimization will push high-loss pseudo-examples further away from the correct example than the low-loss pseudo-examples.
-The model is optimized by marginalized dual transformation \citep{Taskar04max} and conditional gradient optimization \citep{Bertsekas95nonlinear} which not only enjoys a polynomial-size parameter space in marginalized dual representation but also enables the kernel function that deals with non-linearity of the complex molecular structures.
+The model is optimized by conditional gradient optimization \citep{Bertsekas95nonlinear} in marginalized dual space \citep{Taskar04max}, which not only enjoys a polynomial-size parameter space in marginalized dual representation but also enables the kernel function that is capable of dealing with non-linearity of the complex molecular structures.
 
 Kernel is the classic way of defining the similarity between complex objects.
-In \citepub{su10}, We use graph kernel to measure the similarity of pair of molecular structures.
+In \citepub{su10}, We used graph kernel to measure the similarity of pair of molecular structures.
 The common way to represent the structure of a molecule is to use an undirected labeled graph $G=(V,E)$, where vertices $V=\{v_1,\cdots,v_n\}$ corresponds to atoms and edge $E=\{e_1,\cdots,e_m\}$ corresponds to the covalent bonds.
 The adjacency matrix $E$ of graph $G$ is defined sush that its $(i,j)$'th entry $E_{i,j}$ equals to one if there is an edge between atom $i$ and atom $j$.
 
 % walk kernel
-\textit{Walk Kernel} \citep{Kashima03marginalized,Gartner03a} compute the sum of matching walks in a pair of graphs. 
+\textit{Walk Kernel} \citep{Kashima03marginalized,Gartner03a} computes the sum of matching walks in a pair of graphs. 
 The contribution of each matching walk is down scaled exponentially according to its length.  
-We denote by $w_m$ a walk of length $m$ in graph $G$ such that there exists a edge for each pair of vertices $(v_i,v_{i+1})$.
+We denote by $w_m$ a walk of length $m$ in graph $G$ such that there exists a edge for each pair of vertices $(v_i,v_{i+1})$ for all $i\in\{1,\cdots,m-1\}$.
 In addition, we denote by $G_{\times}(G_1,G_2)$ the direct product graph of two graph $G_1$ and $G_2$, of which the vertices of a product graph are computed from 
 \begin{align*}
 	V_{\times}(G_1,G_2) = \{(v_1,v_2)\in V_1\times V_2, label(v_1)=label(v_2)\},
@@ -1013,9 +1019,9 @@ and edges are computed from
 \end{align*}
 The walk kernel can be defined on the adjacency matrix of $G_{\times}$
 \begin{align*}
-	K_{wk}(G_1,G_2) = \sum_{i,j=1}^{|V_{\times}|}\left[\sum_{n=0}^{\infty}\lambda^{n}E_{\times}^n\right]_{i,j}.
+	K_{wk}(G_1,G_2) = \sum_{i,j=1}^{|V_{\times}|}\left[\sum_{n=0}^{\infty}\lambda^{n}E_{\times}^n\right]_{i,j},
 \end{align*}
-Using exponential series or geometric series the walk kernel can be compute in cubic time \citep{Gartner03a}
+where $0<\lambda<1$Using exponential series or geometric series the walk kernel can be compute in cubic time \citep{Gartner03a}
 \begin{align*}
 	K_{wk}(G_1,G_2) = \ve\tp(\vI-\lambda E_{\times})^{-1}\ve.
 \end{align*}
@@ -1023,67 +1029,68 @@ Using exponential series or geometric series the walk kernel can be compute in c
 % weighted decomposition kernel and others
 \textit{Weighted Decomposition Kernel} in \citep{Menchetti05weighted,Ceroni08classification} is an extension of substructure kernel \citep{Haussler99convolution} by weighting identical part in two graph with contextual information.
 The kernel will evaluate the matching subgraphs (\textit{contextor}) in the neighborhood of an atom (\textit{selector}).
-We also use \textit{Tanimoto Kernel} \citep{Ralaivola05graph} on a finite set of molecular fingerprints.
-Also see \citep{Vishwanathan10graph} for a more comprehensive survey on graph kernels.
+We also used \textit{Tanimoto Kernel} \citep{Ralaivola05graph} on a finite set of molecular fingerprints \citep{Wang09pubchem}.
+See \citep{Vishwanathan10graph} for a more comprehensive survey on graph kernels.
 
 %\subsubsection{Generation of Markov Network}
-To apply structured output learning algorithm described above, we assume to observe the underlying Markov network structure.
-In other words, we need to build network structure for cell lines used as output graph, with nodes correspond to cell lines and edges correspond to potential statistical dependencies.
-Auxiliary datasets are available for this purpose \citep{Shoemaker06the}  which implicitly describes the relationship among cell line targets.
-In practice, we extract the network structure for cell lines from auxiliary datasets by applying the following two methods.
+To apply structured output learning algorithm described above, we assume the underlying Markov network structure is fully observed.
+In other words, we need to build a network connecting cell lines used as the output graph, with nodes correspond to cell lines and edges correspond to potential statistical dependencies.
+Auxiliary datasets are available for this purpose \citep{Shoemaker06the}  which implicitly describes the relationship between cell lines.
+In practice, we first computed the covariance matrix for cell lines based on auxiliary datasets, then extracted the network structure by applying the following two methods.
 In maximum spanning tree approach, we take the minimum number of edges that make a connected network whilst maximizing the edge weights.
-In correlation thresholding approach, we take all edges that exceed fixed threshold, which typically give generate a non-tree graph.
+In correlation thresholding approach, we take all edges that exceed a fixed threshold, which typically generates a non-tree graph.
 
 
 %
 %
 \section{Graph Labeling Ensemble (\mve)}
 
-Multi-task molecular activities classification with structured output learning that relies on the representation of the cell-lines structures allows us to model the dependencies among different output variables.
+Multi-task molecular activities classification with structured output learning that relies on the representation of the cell-lines structures allows us to model the dependencies betweem different output variables.
 When apply structured output learning, it is explicitly assumed the structure of the output network is fully observed.
-In \citepub{su10}, we also supposed the feasibility of extracting the structures although it is given implicitly in auxiliary datasets.
-In many real world structured output classification problem, we cannot take the structure as granted as it is often difficult to get the underlying dependency structure.
-Therefore, we explored in \citepub{su11} the possibility of constructing an simple ensemble of multiple structured output learners built on random output graphs and applied the technique on molecular activity classification task.
+In \citepub{su10}, we supposed the feasibility of extracting the structures assuming it is given implicitly in the auxiliary datasets.
+For many real world structured output learning problems, we cannot take the structure as granted as it is often difficult to get the underlying dependency structure.
+Therefore, we explored in \citepub{su11} the possibility of constructing an simple ensemble of multiple structured output learning models built on random output graphs and applied the technique on molecular activity classification task.
+
 
 \subsection{Methods}
 
 We use \mmcrf\ as base classifier trained on a set of random output graphs.
-Particularly, for each base model, a random graph $G_t$ is generated to couple output variables $\vy$ which is the inhibition potentials of molecular structures $\vx$ over cell line targets.
-The base model \mmcrf\ is then learned from the training data $S=\{(\vx_i,\vy_i)\}_{i=1}^{m}$ and the output graph $G_t$.
-After ensemble has been generated, the predictions are extracted from each base learner and collected for a post-processing step: we compute a majority vote over the graph labeling from the sign on the means of the base learner's prediction
+Particularly, for each base model, a random graph $G_t$ is generated to couple the output vector variables $\vy$ which are the activities of molecular structure $\vx$ over all cell lines.
+The base model \mmcrf\ is then learned based on training data $S=\{(\vx_i,\vy_i)\}_{i=1}^{m}$ and the output graph $G_t$.
+After ensemble has been generated, the predictions are extracted from each base classifier and are collected for a post-processing step: we compute a majority vote over the graph labeling from the sign on the means of the base classifier's prediction
 \begin{definition}{Majority Voting Ensemble (\mve)}
 \begin{align*}
 	F_j^{\text{\mve}}=\underset{y_j\in\Ycal_j}{\argmax}\,\left(\frac{1}{T}\sum_{i=1}^{T}\ind{F_j^{(t)}(x)=y_j}\right), \forall j\in\{1,\cdots,k\},
 \end{align*}
 \end{definition}
-where $T$ is the size of the ensemble and $F^{(t)}(\vx)=\{F^{(t)}_j(x)\}_{j=1}^{k}$ is the predicted multilabel in the $t$'th base classifier.
+where by $T$ we denote the size of the ensemble, and by $F^{(t)}(\vx)=\{F^{(t)}_j(x)\}_{j=1}^{k}$ we denote the predicted multilabel in the $t$'th base classifier.
 In words, the ensemble prediction on each microlabel is the most frequently appearing prediction among the base classifiers.
 It is also worthy of noticing that the \mve\ framework can be extended with any structured output learning models as long as they incorporate the output structure into learning process and make predictions based on the structure.
 
-We designed two approaches to generate random output graph.
+We designed two approaches to generate random output graphs.
 In random spanning tree approach, we first generate a random correlation matrix and extract the spanning tree out from the matrix.
 The approach will eventual output a tree structure connecting all vertices.
 In random pairing approach, we randomly draw two vertices at a time and couple the two with an edge.
 The approach will output disconnected pairs.
 
 
-%
-%
 \section{Random Graph Ensemble (\amm, \mam)}
 
-Through extensive experiments in \citepub{su11}, we have validated the feasibility of constructing a simple majority voting ensemble (\mve) of structured output learner built on a set of random output graphs.
+Through extensive experiments in \citepub{su11}, we have validated the feasibility of constructing a majority voting ensemble (\mve) of structured output learner built on a set of random output graphs.
 The proposed method also improved the performance on molecular activity classification problem.
-In \citepub{su14b}, we aimed to develop elegant aggregation techniques (\amm\ and \mam\ respectively) that perform inference before or after forming ensemble.
+In \citepub{su14b}, we aim to develop elegant aggregation techniques (\amm\ and \mam\ respectively) that will perform inference before or after forming ensemble.
 We tested the proposed techniques on a set of heterogeneous multilabel datasets from various domains to verify the wide applicability.
-In addition, we have put forward a theory that explains the improvement of \mam\ framework, based on the reconstruction error of compatibility score.
+In addition, we have brought forward a theory that explains the improvement of \mam\ framework.
+The theory is based on the reconstruction error of the compatibility score.
+
 
 \subsection{Background and Introduction}
 
 % compatibility score
-Besides the assumption made for \mve\ that base classifier will devise the prediction according to the output graph, we also assume that the base classifier for \amm\ and \mam\ have a Markov network structure.
+Besides the assumption made for \mve\ which the base classifier will devise the prediction according to the structure of the output graph, we also assume that the base classifier for \amm\ and \mam\ is modelled with a Markov network structure.
 That is the base classifier defines a compatibility score $\psi(\vx,\vy)$ for pairs $(\vx,\vy)\in\Xcal\times\Ycal$ indicating how well the input and the output goes together
 \begin{align*}
-	\psi(\vx,\vy) = \ip{\vw}{\phi(\vx,\vy)} = \sum_{e\in E}\ip{\vw}{\phi_e(\vx,\vy_e)}=\sum_{e\in E}\psi_e(\vx,\vy_e),
+	\psi(\vx,\vy) = \ip{\vw}{\phib(\vx,\vy)} = \sum_{e\in E}\ip{\vw}{\phi_e(\vx,\vy_e)}=\sum_{e\in E}\psi_e(\vx,\vy_e),
 \end{align*}
 where by $\psi_e(\vx,\vy_e)$ we denote edge compatibility score, or \textit{edge potential}, between input $\vx$ and edge label $\vy_e$ on edge $e$.
 $\vw$ is the feature weight parameters that naturally ensures input $\vx$ with correct output $\vy$ achieves higher compatibility score than with incorrect output.
@@ -1127,8 +1134,8 @@ On the other hand, the maximum of average marginals aggregation (\mam) will firs
 \end{definition}
 With following lemma from \citepub{su14b}, we are able to simplify the computation of \mam\ in terms of dual variables and kernels.
 \begin{lemma}
-	Let $w$ be the feature weight parameters, $\phi(x,\vy)$ be the joint feature map, and let $G=(V,E)$ be the graph defining the output graph structure, and let us denote
-	$$H_e(x_i,\vu_e;x,\vy_e)  = K_\phi(x,x_i)\cdot\left(K_{\Upsilon,e}(\vy_{ie},\vy_e)-K_{\Upsilon,e}(\vu_e,\vy_e)\right).$$
+	Let $w$ be the feature weight parameters, $\phib(x,\vy)$ be the joint feature map, and let $G=(V,E)$ be the graph defining the output graph structure, and let us denote
+	$$H_e(x_i,\vu_e;x,\vy_e)  = K_{\phib}(x,x_i)\cdot\left(K_{\Upsilon,e}(\vy_{ie},\vy_e)-K_{\Upsilon,e}(\vu_e,\vy_e)\right).$$
 	Then, we have
 	\begin{align*}
 	 \psi_e(x,\vy_e) =  \ip{w_e}{\phi_e(x,\vy_e)}  =  \sum_{i,\vu_e} \mu(i,e,\vu_e) \cdot H_e(x_i,\vu_e;x,\vy_e),
@@ -1202,11 +1209,10 @@ In particular, it is known that the exact solution for the inference problem on 
 \end{align}
 can be solved in $\Theta(k)$ time by \textit{dynamic programming} also known as \textit{max-product}.
 However, there is no guarantee the the maximizer of (\ref{rta:maximizer_onetree}) is also the global maximizer over all spanning trees.
-Therefore, we compute for each random spanning tree $K$ best multilabel, which in total costs $\Theta(K\ell)$ time for all spanning trees.
-Then we propose in \citepub{su14c} a lemma that is able to retrieve the best multilabel from $K$ best list in linear time.
-
+Therefore, we compute for each random spanning tree $K$ best multilabel, which in total costs $\Theta(Knk)$ time for all spanning trees.
+\citepub[Lemma 7]{su14c} provides a method to retrieve the best multilabel from $K$ best list in linear time.
 Now the question is to make sure the global violation multilabel is within the list.
-We provided a lemma in \citepub{su14c} to guarantee that with high probability the global violation multilabel is in the list when $K$ is not too large.
+\citepub[Lemma 8]{su14c} guarantees that with high probability the global violation multilabel is in the list when $K$ is not too large.
 
 In addition, we derive the marginalized dual representation of definition~\ref{primalrta}
 \begin{definition}{\bf $L_2$-norm RTA Marginalized Dual}\label{l2-marginaldual}\label{l2-md}
@@ -1268,7 +1274,7 @@ We approach the problem by structured output learning framework, where we define
 	F(\va,\Gva;\vw) = \ip{\va}{\vphi(\va,\Gva)}.
 \end{align*}
 It is obvious that the action $\va$ with correct response network $\Gva$ will achieve high score than with any incorrect response network $\Gva'$.
-As introduced in previous section, the joint feature map $\phi(\va,\Gva)$ is composed by the tensor product between action feature $\varphi(\va)$ and the feature of the response network $\Gamma(\Gva)$.
+As introduced in previous section, the joint feature map $\phib(\va,\Gva)$ is composed by the tensor product between action feature $\varphi(\va)$ and the feature of the response network $\Gamma(\Gva)$.
 In particular, $\varphi(\va)$ can be a bag-of-words feature of the action (e.g. blog post) and $\Gamma(\Gva)$ is a vector of edges and labels in the response network $\Gva$.
 
 % optimization

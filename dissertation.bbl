@@ -852,6 +852,13 @@ Wang, Q.~I., Lin, D., and Schuurmans, D. (2007).
   Artifical Intelligence}, IJCAI'07, pages 1756--1762, San Francisco, CA, USA.
   Morgan Kaufmann Publishers Inc.
 
+\bibitem[Wang et~al., 2009]{Wang09pubchem}
+Wang, Y., Xiao, J., Suzek, T.~O., Zhang, J., Wang, J., and Bryant, S.~H.
+  (2009).
+\newblock Pubchem: a public information system for analyzing bioactivities of
+  small molecules.
+\newblock {\em Nucleic Acids Research}, 37(suppl 2):W623--W633.
+
 \bibitem[Wolpert and Macready, 1999]{Wolpert99an}
 Wolpert, D. and Macready, W. (1999).
 \newblock An efficient method to estimate bagging's generalization error.
