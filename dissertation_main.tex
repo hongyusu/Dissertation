@@ -1150,15 +1150,81 @@ In general, the theory described in \citepub{su14b} states that the reconstructi
 The improvement can be decomposed into two terms, namely \textit{diversity} and \textit{coherence}.
 
 %
+% RTA
 %
 \section{Random Spanning Tree Approximation (\rta)}
 
-Random Spanning Tree Approximation (\rta) algorithm developed in \citepub{su14c} is a major step forward of \mam.
-The goal of \rta\ is to bring in joint learning and inference framework and to provide extensive theory to guarantee the performance as well as the tractable inference.
+Random Spanning Tree Approximation (\rta) model developed in \citepub{su14c} is a major step forward of \mam.
+The goal of \rta\ is to bring in joint learning and inference framework as well as to provide extensive theory to guarantee the performance and the tractability of the inference.
+Especially, \rta\ explores the potential of tackling the intractable graph inference problem with a set of random spanning trees.
+Thus, it lays the foundation of performing inference on unknown structure to achieve accurate optimization with attainable computational efforts.
 
 \subsection{Background and Introduction}
 
+Limiting the applicability of structured output learning methods is the fact that the output structure is assume to be observed.
+However, it is often prohibitive to obtain the correct output structure, sometimes it is arguably a even harder problem that the structured output learning itself \citep{Chickering94learning}.
+In stead, one can opt to the \textit{complete graph}, in which there is an edge connecting each pair of vertices, as the output graph structure and rely on the learning algorithm to discover the proper 'parameters' defined for the edges (e.g. edge potentials).
+To understand this, think the edges that are not from the correct output graph will have zero 'parameters' in the complete graph.
+
+Structured output learning with complete graph is by no mean a easier problem as the inference is \nphard\ in nature, which is often instantiated as finding the \textit{maximum a posteriori} (MAP) configuration on a graph-structured probability distribution.
+In terms of the intractability issue of graph inference problem, many techniques have been proposed but with important differences.
+\citet{Jordan04semiefinite} developed semi-definite programming convex relaxation for inference on graph with cycles.
+\citet{Wainwright05map} proposed MAP inference with tree-based and \textit{linear programming} (LP) relaxation.
+Efficient inference on special case of graph has also been extensively studied in \citep{Globerson07approximate}.
+
+\citepub{su14c} is motivated by well-established max-margin assumption (section~\ref{}) and investigate whether the problem of inference over a complete graph in structured output learning can be avoided in a analogous way.
+Start from a sampling results, \citepub[Lemma 3]{su14c} shows that with high probability a big fraction of margin from the complete graph can be obtained by a sample of spanning trees of small size.
+Besides, \citepub[Theorem 5]{su14c} shows the good generalization can also be guaranteed when learning with in stead of complete graph a sample of spanning trees.
+
+Thus, in addition to (Theory~\ref{}), we further provide theoretical justification of \mam\ that constructs a set of base learners on random spanning trees. 
+Besides, \citepub[Theorem 5]{su14c} suggests we should optimize the joint margin from all spanning trees which leads to the \rta\ model described in the following section.
+
 \subsection{Methods}
+
+Denote by $\Tcal=\{T_1,\cdots,T_n\}$ a sample of $n$ random spanning trees, and by $\{\vw_{T_t}|T_t\in\Tcal\}$ the feature weights to be learner on each tree.
+The goal of optimization is to maximize the joint margin from all spanning trees between correct training examples and other examples.
+\begin{definition}{\bf Primal $L_2$-norm Random Tree Approximation (\rta).}\label{primalrta}
+	\begin{align*}
+		\underset{\vw_{T_t},\xi_k}{\minimize} & \quad \frac{1}{2}\sum_{t=1}^{n}\norm{\vw_{T_t}}_2^2 + C\sum_{i=1}^{m}\xi_i\\
+		\st & \quad \sum_{t=1}^{n}{ \langle \vw_{T_t}, \phibh_{T_t}(x_i,\vy_i) \rangle} - \underset{\vy \neq \vy_i}{\maximize\ } \sum_{t=1}^{n}{\langle \vw_{T_t}, \phibh_{T_t}(x_i,\vy) \rangle } \geq 1 -  \xi_i, \\
+		& \quad \xi_i\ge0\, , \forall\ i \in \set{1,\dots,m},
+	\end{align*}
+where $\phibh_{T_t}(\vx,\vy)$ is the feature map that is local on each tree $T_t$, $\xi_i$ is the margin slack allocated for each $x_i$, and $C$ is the slack parameter that controls the amount of regularization.
+\end{definition}
+
+The key for the optimization is to solve the '$\argmax$' problem efficiently.
+This is a \nphard\ problem in practice, as the multilabel space is exponential in terms of the number of microlabels.
+We proposed in \citepub{su14c} a $K$-best inference algorithm for the optimization problem working in $\Theta(Knk)$ time per data point, where $k$ is the number of microlabels in the multilabel vector and $K$ is the number of best multilabel we compute from each spanning tree.
+
+In particular, it is known that the exact solution for the inference problem on individual tree $T_t$ is tractable \citep{Koller09probabilistic}, for which 
+\begin{align}\label{rta:maximizer_onetree}
+	\hat{\vy}_{T_t}(x) = \underset{\vy\in\Ycal}{\argmax}\, F_{\vw_{T_t}}(x,\vy)\ \eqdef\ \underset{\vy\in\Ycal}{\argmax}\, \langle \vw_{T_t}, \phibh_{T_t}(x,\vy)\rangle,
+\end{align}
+can be solved in $\Theta(k)$ time by \textit{dynamic programming} also known as \textit{max-product}.
+However, there is no guarantee the the maximizer of (\ref{rta:maximizer_onetree}) is also the global maximizer over all spanning trees.
+Therefore, we compute for each random spanning tree $K$ best multilabel, which in total costs $\Theta(K\ell)$ time for all spanning trees.
+Then we propose in \citepub{su14c} a lemma that is able to retrieve the best multilabel from $K$ best list in linear time.
+
+Now the question is to make sure the global violation multilabel is within the list.
+We provided a lemma in \citepub{su14c} to guarantee that with high probability the global violation multilabel is in the list when $K$ is not too large.
+
+In addition, we derive the marginalized dual representation of definition~\ref{primalrta}
+\begin{definition}{\bf $L_2$-norm RTA Marginalized Dual}\label{l2-marginaldual}\label{l2-md}
+	\begin{align*}
+		%\underset{\mub\in\Mcal^m}{\maximize} &\quad \frac{1}{|E_\Tcal|}\sum_{k,e,\vu_e}\mu(k,e,\vu_e)   -\frac{1}{2}\sum_{k,e,\vu_e} \mu(k,e,\vu_e) K_\Tcal^e(k,\vu_e;k',\vu'_e) \mu(k',e,\vu'_e)\, ,
+		\underset{\vmu\in\Mcal^m}{\maximize} &\quad \frac{1}{|E_\Tcal|}\sum_{e,k,\vu_e}\mu(k,e,\vu_e)   -\frac{1}{2}\sum_{\substack{e,k,\vu_e,\\k',\vu_e'}} \mu(k,e,\vu_e) K_\Tcal^e(x_k,\vu_e;x_k',\vu'_e) \mu(k',e,\vu'_e)\, ,
+	\end{align*}
+\end{definition}
+which not only enjoys a polynomial sized parameter space but also enable kernel function to deal with complex input space.
+
+
+
+
+% k-best inference
+
+% condition for y*
+
+% marginalized dual form
 
 
 
@@ -1167,8 +1233,8 @@ The goal of \rta\ is to bring in joint learning and inference framework and to p
 \section{\spin\ for Network Response Prediction}
 
 In \citepub{su14a}, a structure output learning model for network response prediction problem is developed.
-The proposed model, \spin, is \textit{context-sensitive} and is different from the previous the state-of-the-art methods which only model the influence in terms of the connectivity.
-The inference problem of \spin\ is \nphard\ where was solved by a semidefinite programming algorithm \sdp\ with approximation guarantee and a fast \greedy\ algorithm.
+The proposed model, \spin, is \textit{context-sensitive} and is different from the previous the state-of-the-art methods which only model the influence in terms of the network connectivity.
+The inference problem of \spin\ is \nphard\ in general which was solved by a semidefinite programming algorithm \sdp\ with approximation guarantee and a fast \greedy\ heuristics.
 
 \subsection{Background and Introduction}
 
@@ -1278,13 +1344,9 @@ Diffusion scaling has the effect of shrinking the distance to the nodes that are
 
 %
 %
-\chapter{Theory}
 
 
-\chapter{Applications}
-
-
-\chapter{Future Work}
+\chapter{Discussion and Conclusion}
 
 
 

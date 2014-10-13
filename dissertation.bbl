@@ -171,6 +171,11 @@ Chen, S. and Rosenfeld, R. (2000).
 \newblock A survey of smoothing techniques for me models.
 \newblock {\em Speech and Audio Processing, IEEE Transactions on}, 8(1):37--50.
 
+\bibitem[Chickering et~al., 1994]{Chickering94learning}
+Chickering, D.~M., Geiger, D., and Heckerman, D. (1994).
+\newblock Learning bayesian networks is np-hard.
+\newblock Technical Report MSR-TR-94-17, Microsoft Research.
+
 \bibitem[Collins, 2002]{collins02a}
 Collins, M. (2002).
 \newblock Discriminative training methods for hidden markov models: Theory and
@@ -343,6 +348,13 @@ G\"{a}rtner, T. (2003).
 \newblock A survey of kernels for structured data.
 \newblock {\em SIGKDD Explor. Newsl.}, 5(1):49--58.
 
+\bibitem[Globerson and Jaakkola, 2007]{Globerson07approximate}
+Globerson, A. and Jaakkola, T.~S. (2007).
+\newblock Approximate inference using planar graph decomposition.
+\newblock In Sch\"{o}lkopf, B., Platt, J., and Hoffman, T., editors, {\em
+  Advances in Neural Information Processing Systems 19}, pages 473--480. MIT
+  Press.
+
 \bibitem[Goemans and Williamson, 1995]{Geomans1995improved}
 Goemans, M. and Williamson, D. (1995).
 \newblock Improved approximation algorithms for maximum cut and satisfiability
@@ -432,6 +444,13 @@ Joachims, T., Finley, T., and Yu, C.-N. (2009).
 \newblock Cutting-plane training of structural svms.
 \newblock {\em Machine Learning}, 77(1):27--59.
 
+\bibitem[Jordan and Wainwright, 2004]{Jordan04semiefinite}
+Jordan, M.~I. and Wainwright, M.~J. (2004).
+\newblock Semidefinite relaxations for approximate inference on graphs with
+  cycles.
+\newblock In Thrun, S., Saul, L., and Sch\"{o}lkopf, B., editors, {\em Advances
+  in Neural Information Processing Systems 16}, pages 369--376. MIT Press.
+
 \bibitem[Kashima et~al., 2003]{Kashima03marginalized}
 Kashima, H., Tsuda, K., and Inokuchi, A. (2003).
 \newblock Marginalized kernels between labeled graphs.
@@ -473,6 +492,11 @@ King, R.~D., Muggleton, S.~H., Srinivasan, A., and Sternberg, M.~J. (1996).
 Kocev, D., Vens, C., Struyf, J., and Deroski, S. (2013).
 \newblock Tree ensembles for predicting structured outputs.
 \newblock {\em Pattern Recogn.}, 46(3):817--833.
+
+\bibitem[Koller and Friedman, 2009]{Koller09probabilistic}
+Koller, D. and Friedman, N. (2009).
+\newblock {\em Probabilistic Graphical Models: Principles and Techniques}.
+\newblock The MIT Press.
 
 \bibitem[Koltchinskii and Panchenko, 2000]{Koltchinskii00empirical}
 Koltchinskii, V. and Panchenko, D. (2000).
@@ -817,8 +841,8 @@ Vishwanathan, S. V.~N., Schraudolph, N.~N., Kondor, R., and Borgwardt, K.~M.
 
 \bibitem[Wainwright et~al., 2005]{Wainwright05map}
 Wainwright, M., Jaakkola, T., and Willsky, A. (2005).
-\newblock {MAP estimation via agreement on trees: message-passing and linear
-  programming}.
+\newblock Map estimation via agreement on trees: message-passing and linear
+  programming.
 \newblock {\em IEEE Transactions on Information Theory}, 51(11):3697--3717.
 
 \bibitem[Wang et~al., 2007]{Wang07simple}
