@@ -661,28 +661,28 @@ Recently, \citet{Paredes12exploit} proposed a method which exploits the informat
 % ensemble methdos
 \section{Ensemble Methods}
 
-Ensemble methods are one of the prominent classification techniques widely used in Machine Learning.
-In general, the methods train multiple base learners and combine them in order to achiever better classification performance.
-Most importantly, there is no requirement for base learners to be accuracy as long as they perform better than random guessing.
+Ensemble methods are one of the prominent classification techniques widely used in machine learning community.
+In general, the methods train multiple base classifiers and combine them in order to achiever better classification performance.
+Most importantly, there is no requirement for base classifiers to be accuracy as long as they perform better than random guessing.
 %To trace the exact originality of the ensemble methods seems impossible, as the methods involve along well with human society by which it is wiser to take in to account advises from multiple human experts.
 There are several different types of ensemble algorithms, to name a few, bagging \citep{Breiman96bagging}, boosting \citep{Freund97a,Schapire99improved}, stacking \citep{Smyth99linearly}, Bayesian averaging \citep{Freund04generalization}.
-Most of the algorithms have improved the classification performance when compared to individual counterpart, some of them also enjoyed theoretical guarantee \citep{Schapire97boosting,Koltchinskii00empirical,Cortes14deep,Cortes14semble}.
-For our purposes, the section will start with and focus on bagging and boosting ensemble since both are best known approaches and are most related to this thesis.
+Most of the algorithms have improved the classification performance when compared to their base classifier counterpart, some of them also enjoyed theoretical guarantee \citep{Schapire97boosting,Koltchinskii00empirical,Cortes14semble,Cortes14deep}.
+For our purposes, the section will start with and focus on bagging and boosting ensemble since both methods are best known approaches and are most related to this thesis.
 In the later part of the section, we will extend the ensemble methods to structured output space by reviewing several recently established algorithms.
 
 %
 % preliminary notations
 \subsection{Preliminary and Notations}
 
-In addition to the notations introduced in (section~\ref{singlelabel_preliminary}, \ref{multilabel_preliminary}), we assume there is hypothesis class $\Fcal$ where we generate weak/base hypothesis $f^t(x)\in\Fcal$.
+In addition to the notations introduced in (section~\ref{singlelabel_preliminary}, \ref{multilabel_preliminary}), we assume there is a hypothesis class $\Fcal$ where we generate weak/base hypothesis $f^t(x)\in\Fcal$.
 By $t$ we intend to index the $t$'th weak hypothesis.
 We denote by $H(x)$ the ensemble framework that is able to combine multiple weak hypothesises and generate a stronger one.
-In many cases, no other information about $f^t(x)$ is available to $H(x)$ except that each weak hypothesis will take in as parameter $x$ and output either $y\in\Ycal$ for single label classification ($\vy\in\Ycal$ in multilabel classification respectively).
+In many cases, no other information about $f^t(x)$ is available to $H(x)$ except that each weak hypothesis will take in as parameter $x$ and output $y\in\Ycal$ for single label classification ($\vy\in\vYcal$ in multilabel classification respectively).
 
 %
 % boosting
 \subsection{Boosting}
-\textit{Boosting} corresponds to a learning framework or a family of algorithms that take in a weak classifier and turning it into a strong one.
+\textit{Boosting} corresponds to a learning framework or a family of algorithms that take in a weak classifier and tuning it into a strong one.
 We begin our discussion from the notion of  \textit{concept class}.
 A \textit{concept} is a boolean function over domain $\Xcal$, and a \textit{concept class} is a class of concepts.
 % TODO: an illustrative example
@@ -749,17 +749,11 @@ In addition, \citet{Cortes14deep} also developed rich learning bounds for \deepb
 The new theory advances the previous performance guarantee of \adaboost\ which is build in terms of margins of the training examples \citep{Schapire97boosting,Koltchinskii00empirical}.
 
 
-\marginpar{TODO: adding adaboost loss bound.}
-\marginpar{TODO: describe adaboost as coordinate descent with Newton or Cauchy-Newton methods.}
-
-
-
-
 %
 % bagging
 \subsection{Bootstrap Aggregating}
-\textit{Bootstrap Aggregating} (\bagging), initially developed by \citet{Breiman96bagging}, is an ensemble methods that exploit the independency between the weak learners.
-The algorithm is based on the fact that the error can be dramatically re duced by combining independent base learners.
+\textit{Bootstrap Aggregating} (\bagging), initially developed by \citet{Breiman96bagging}, is an ensemble method that exploits the independency between the weak learners.
+The algorithm is based on the fact that the error can be dramatically reduced by combining independent base learners.
 Denote by $f_i$ the $i$'th weak learner.
 The ensemble prediction $H(\vx)$ is the averaged prediction over all weak learners
 \begin{align}
@@ -833,7 +827,7 @@ It is not immediately clear how to apply these methods to other machine learning
 In addition, other methods that are based on boosting or bagging are also developed in \citep{Wang07simple,Kocev13tree}.
 Most recently, three other learning algorithms with performance guarantee are proposed in \citep{Cortes14semble}.
 
-\marginpar{TODO: extend the section by adding algorithm details in \citep{Cortes14semble}.}
+%\marginpar{TODO: extend the section by adding algorithm details in \citep{Cortes14semble}.}
 
 
 
@@ -851,31 +845,31 @@ These measures will enable us to quantitatively evaluate the performance of the 
 \subsection{Performance Measures}
 
 It is often quite difficult and expensive to get labeled data. 
-In order to maximize the outcomes of the valuable labeled data, the common approach adopted in practice is known as \textit{K-fold cross-validation}.
-In particular, the origin set of labeled examples are partitioned into $k$ disjoint subsets of same size, denoted by $\{S_1,\cdots,S_k\}$.
-The cross-validation framework will repeat training and testing procedures $K$ times.
-In the $k$'th iteration, the validation scheme use $K-1$ subsets of labeled examples $\cup_{k\in\{1,\cdots,K\}/k}S_i$ to build a training set for learning a classifier.
-The examples in the $k$'th subset is then taken as testing data of which the label is assumed to be unknown to the classifier.
-The resulting classifier is used to predict the examples in the $k$'th subset, and is evaluated according to the true labels in the testing set.
-In the extreme case where we have $K$ equal to the number of original training examples, there will be only one example in each testing set.
+In order to maximize the outcomes of the valuable labeled data, the common approach adopted in practice is known as \textit{$K$-fold cross-validation}.
+In particular, the origin set of labeled examples are partitioned into $K$ disjoint subsets of same size, denoted by $\{S_1,\cdots,S_K\}$.
+The cross-validation framework will repeat training and test procedures $K$ times.
+In the $i$'th iteration, the validation scheme uses $K-1$ subsets of labeled examples $\cup_{j\in\{1,\cdots,K\}/i}S_j$ to build a training set for learning a classifier.
+The examples in the $i$'th subset is then taken as test data of which the label is assumed to be unknown to the classifier.
+The resulting classifier is used to predict the examples in the $i$'th subset, and is evaluated according to the true labels in the testing set.
+In extreme case where we have $K$ equal to the number of original training examples, there will be only one example in each test set.
 This is typically known as \textit{leave-one-out cross-validation} (\loo).
 
 As most machine learning algorithms explicitly assume that the training data and the testing data are drawn from the same distribution,
 it is worth noticing that we should make sure that the property of original labeled data is well preserved when partitioning the original labeled set into subsets.
-In single-label classification problem we can easily preserve the label distribution if we randomly sample labeled examples without replacement from the origin experimental data set.
-However, it is not clear how to preserve label distribution in multilabel classification problem.
+In single-label classification problem we can easily preserve the label distribution if we randomly sample labeled examples without replacement from the origin experimental dataset.
+However, it is not clear how to preserve label distribution under multilabel classification setting.
 To this end, we use \textit{stratification} or \textit{stratified sampling} method where we first group training examples into equivalent classes based on the number of positive labels they have. 
 Each class is then randomly split into $K$ local fold, after that local folds are merged to create $K$ global fold.
 The stratification scheme ensures that also smaller classes have representations in all folds. 
 
-After partition the original data into training and testing sets, we adopt several well known performance measures in order to quantitively evaluate the performance of difference classifiers.
+After partition the original data into training and test sets, we adopt several well known performance measures in order to quantitively evaluate the performance of difference classifiers.
 We report \textit{multilabel accuracy} (\textit{0/1 accuracy}) which counts the percentage of multilabel predictions that have all of the microlabel being correct.
 The counterpart is often known as \textit{multilabel loss} (\textit{0/1 loss})
 \begin{align*}
 	\ell_{0/1} = \frac{1}{m}\sum_{i=1}^{m}\ind{\vy_i \neq \hat{\vy}_i},
 \end{align*}
-where by $\vy_i$ we denote the predicted label for example $\vx_i$, and by $\hat{\vy}_i$ we denote ground true label.
-We also report \textit{microlabel accuracy} as the proportion microlabel being correctly predicted, of which the counterpart is often known as \textit{hamming loss}
+where by $\vy_i$ we denote the predicted multilabel for example $\vx_i$, and by $\hat{\vy}_i$ we denote ground true multilabel.
+We also report \textit{microlabel accuracy} as the proportion of microlabel being correctly predicted, of which the counterpart is often known as \textit{hamming loss}
 \begin{align*}
 	\ell_{h} = \frac{1}{mk}\sum_{i=1}^{m}\sum_{j=1}^{k}\ind{\vy_i[j] \neq \hat{\vy}_i[j]}.
 \end{align*}
@@ -896,8 +890,8 @@ where by $TP$, $FP$, and $FN$ we denote \textit{true positive}, \textit{false po
 
 Once we compute the performance measures of multiple machine learning algorithms in terms of 0/1 loss, hamming loss and $F_1$ score, we want to compare the performance in order to decide the best model under consideration. 
 To serve as a starting point, we assume a very basic setting where we already have the performance of multiple machine learning algorithms on one selected dataset.
-It is straight forward to compare the performance of the algorithms in terms of the performance measures and choose the best base on the value of the measure without employing any statistical methods.
-The only assumption made is that the measures are accurately revealing the performance of the algorithms.
+It is straight forward to compare the performance of the algorithms in terms of the performance measures and choose the best based on the value of the measure without relying any statistical methods.
+The only assumption made is that the measures accurately reveal the performance of the algorithms.
 However, in practice, when a new learning algorithm is developed, it is usually evaluated over multiple dataset to rule out the probability that it performs well on one particular dataset by chance.
 Statistical evaluation of experimental results have been considered as an essential part of comparison steps in, for example, such complicate scenarios.
 We will base our discuss on \citep{Demsar06statistical,Garcia08an} in the following part of the section.
