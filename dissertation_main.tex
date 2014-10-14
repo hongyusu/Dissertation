@@ -627,31 +627,30 @@ The intractability of the inference problem can be seen as an exchange of the ge
 Multi-task Feature Learning (\mtl) developed in \citep{Argyriou07multitask} is another algorithm designed for multiple interdependent structured output space.
 \mtl\ is quite different from other structured output learning algorithms discussed in the previous sections.
 In particular, the \mtl\ approach is based on the assumption that different tasks are related such that they share a common underlying feature representations.
-Similar assumption is also made in \citep{Caruana97multitask,Baxter00a,BenDavide03exploiting}.
+Similar assumption is also applied in \citep{Caruana97multitask,Baxter00a,BenDavide03exploiting}.
 
 Denote by $f_t(\vx)$ the task specific function for the $t$'th task.
 $f_t(\vx)$ can be expressed as
 \begin{align*}
-	f_t(\vx) = \ip{\va_t}{h(x)} = \sum_{j=1}^{d}a_{i,t}h_i(\vx),
+	f_t(\vx) = \ip{\va_t}{h(\phib(\vx))} = \sum_{i=1}^{d}\va_{t}[i]h(\phib(\vx))[i],
 \end{align*}
-where $\va_t\in\RR^d$ is the weight vector for the $t$'th task.
-$h_t(\vx)$ is a linear feature mapping composed by
+where $\va_t\in\RR^d$ is the weight vector parameters for the $t$'th task.
+$h(\phib(\vx))$ is a linear feature mapping composed by
 \begin{align*}
-	h_t(\vx) = \ip{u_i}{\vx},
+	h(\phib(\vx))[i] = \ip{\vu_i}{\phib(\vx)},
 \end{align*}
-where $\vx\in\RR^d$ is in original feature space and $u_i\in\RR^d$ is a linear feature map.
-Denote by $A$ the matrix composed by $a_{i,t}$, and $U$ is composed by column vector $u_i$.
-\mtl\ assumes that tasks share small set of features where $A$ is supposed to be sparse with many entries equal to zero.
-As a results, the optimization problem is defined as
-%\begin{align*}
-%	\minimize\left\{\sum_{i=1}^{m}L(\vy_{i,t},\ip{\va_t}{\ip{U}{x_i}})+C\norm{\va_t}_1^2\right\}
-%\end{align*}
-\begin{align}
-	\underset{\substack{U\in\RR^{d\times d}\\A\in\RR^{d\times T}}}{\minimize} \left\{\sum_{t=1}^{T}\sum_{i=1}^{m}L(\vy_{i,t},\ip{\va_t}{\ip{U}{x_i}})+C\norm{A}_{2,1}^2\right\},\label{mtl_obj}
-\end{align}
-where the objective is to minimize the empirical error $L(\vy_{i,t},\ip{\va_t}{\ip{U}{x_i}})$ and to keep a small proportion of the non-zero element in $\va_t$.
+where $\phib(\vx)\in\RR^d$ is in original feature space and $\vu_i\in\RR^{d}$ is a linear feature map.
+We further denote by $A$ the matrix composed by $\va_{t}$, and denote by $U$ the matrix composed by $\vu_i$.
+\mtl\ assumes that tasks share a small set of features where $A$ is supposed to be sparse with many entries equal to zero.
+The optimization problem of \mtl\ is defined as
+\begin{definition}{\mtl\ Optimization Problem in Primal}\label{mtl_opt}
+	\begin{align*}
+		\underset{\substack{\vu\in\RR^{d\times d}\\A\in\RR^{d\times T}}}{\minimize} \left\{\sum_{t=1}^{T}\sum_{i=1}^{m}\ell(\vy_{i,t},\ip{\va_t}{\ip{U}{\phib(\vx_i)}})+C\norm{A}_{2,1}^2\right\},
+	\end{align*}
+\end{definition}
+where the objective is to minimize the empirical error $\ell(\vy_{i,t},\ip{\va_t}{\ip{U}{\phib(\vx_i)}})$ and to keep a small proportion of the non-zero element in $\va_t$.
 $C$ is the parameter to balance these two aspects.
-As (\ref{mtl_obj}) is non-convex and the second term is non-smooth, it is transformed into an equivalent form and solved by an alternative optimization approach.
+As (Definition~\ref{mtl_opt}) is non-convex and the second term is non-smooth, it is transformed into an equivalent form and solved by an alternative optimization approach.
 
 An extension of \mtl\ algorithm was proposed in \citep{Argyriou08convex} which introduced a nonlinear generalization using kernel methods.
 In addition, similar but not identical algorithms \citep{Argyriou08an,Jacob09cluster} are also proposed which assume that the tasks form clusters such that task specific weight vectors should be similar within the clusters.
