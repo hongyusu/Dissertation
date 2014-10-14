@@ -29,8 +29,8 @@ We consider supervised learning problem which assumes an arbitrary input space $
 As we focus in this chapter standard supervised learning problem also known as binary classification, we explicitly assume the output space $\Ycal=\{-1,+1\}$ (instead of $\Ycal=\{0,+1\}$).
 We point out that other kind of supervised learning problem can be formulated by altering the definition of the output space.
 For example, by setting $\Ycal=\{1,\cdots,K\}$ we have multiclass classification problem, and by setting $\Ycal=\RR$ we have regression problem, where $\RR$ is the set of real numbers.
-Additionally, we assume a feature map $\vphi:\Xcal\rightarrow\Fcal$, which embeds the input in some high dimensional feature space $\Fcal=\RR^d$.
-In particular, $\vphi(\vx)$ is a real value vector of $d$ dimension.
+Additionally, we assume a feature map $\phib:\Xcal\rightarrow\Fcal$, which embeds the input in some high dimensional feature space $\Fcal=\RR^d$.
+In particular, $\phib(\vx)$ is a real value vector of $d$ dimension.
 Given a set of training data $\Scal=\{(\vx_1,y_1),\cdots,(\vx_m,y_m)\}$, the goal is to learn from a \textit{hypothesis class} $\Fcal$ a mapping function $f\in\Fcal:\Xcal\rightarrow\Ycal$  that maps an input $\vx\in\Xcal$ to an output $y\in\Ycal$. 
 
 The hypothesis class we consider is a set of \textit{linear classifiers} that are parameterized by weight vector $\vw$ and bias term $b$ that takes the form
@@ -65,7 +65,7 @@ Assume data point $(x_i,y_i)$ is misclassified, the signed geometric distance fr
 	D(x_i;\vw,b) = -\frac{y_i(\ip{\vw}{\vx_i}+b)}{\norm{\vw}}.
 \end{align*}
 Denote by $\Xcal^m$ the set of misclassified examples, the goal of perceptron is to minimize the distance over all misclassified examples defined as
-\begin{definition}{Perceptron Objective Function}\label{perceptron}
+\begin{definition}{Perceptron Objective Function.}\label{perceptron}
 	\begin{align*}
 		\underset{\vw,b}{\minimize} \, D(\vw,b) = \underset{\vw,b}{\minimize} \left( -\sum_{x_i\in\Xcal^{m}}y_i[\ip{\vw}{\vx_i}+b]\right).
 	\end{align*}
@@ -206,7 +206,7 @@ We can also compute
 	p(y=-1|\vx;\vw,b)=1-p(y=+1|\vx;\vw,b)=\frac{1}{1+\exponential{\ip{\vw}{x}+b}}. \label{lr_2}
 \end{align}
 Putting together (\ref{lr_1}) and (\ref{lr_2}), we define the Logistic Regression as
-\begin{definition}{Logistic Regression}\label{logistic_regression}
+\begin{definition}{Logistic Regression.}\label{logistic_regression}
 	\begin{align*}
 		p(y=\pm1|\vx;\vw,b) = \frac{1}{1+\exponential{-y_i(\ip{\vw}{x}-b)}}.
 	\end{align*}
@@ -320,7 +320,7 @@ By replacing $\vw$ with $\frac{\vw}{\gamma}$, we obtain
 	\st &\quad y_i(\ip{\vw}{\vx_i}+b) \ge 1, \, \forall i\in\{1,\cdots,m\},
 \end{align*}
 which is equivalent to optimize
-\begin{definition}{Hard-Margin \svm\ Optimization Problem in Primal}\label{hardsvmprimal}
+\begin{definition}{Primal Hard-Margin \svm\ Optimization Problem.}\label{hardsvmprimal}
 	\begin{align*}
 		\underset{\vw}{\minimize} & \quad\frac{1}{2}\norm{\vw}^2\\
 		\st & \quad y_i(\ip{\vw}{\vx_i} + b) \ge 1, \forall i\in\{1,\cdots,m\},
@@ -342,7 +342,7 @@ In particular, with $\xi_i=0$ the data point $x_i$ is correctly classified, and 
 With $0<\xi_i\le 1$ the data point is correctly classified and lies between margin and separating hyperplane.
 With $\xi_i>1$ the data point is misclassified locating on the other side of the hyperplane.
 With margin slack parameter, the new goal is to maximize the margin while penalizing the data points that either lies on the wrong side of the hyperplane or has margin less than one
-\begin{definition}{Soft-Margin \svm\ Optimization Problem in primal}\label{softsvmprimal}
+\begin{definition}{Primal Soft-Margin \svm\ Optimization Problem.}\label{softsvmprimal}
 	\begin{align*}
 		\underset{\vw,\xi}{\minimize} & \quad\frac{1}{2}\norm{\vw}^2 + C\sum_{i=1}^{m}\xi_i\\
 		\st & \quad y_i(\ip{\vw}{\vx_i} + b) \ge 1-\xi_i, \xi_i\ge 0, \forall i\in\{1,\cdots,m\}.
@@ -352,7 +352,7 @@ With margin slack parameter, the new goal is to maximize the margin while penali
 % dual, kernel svm
 Optimization problem is usually transformed into dual form by introducing for each constraint a Lagrangian multiplier (dual variable) $\alpha$.
 We obtain the following dual optimization problem
-\begin{definition}{Soft-Margin \svm\ Optimization Problem in dual}\label{softsvmdual}
+\begin{definition}{Dual Soft-Margin \svm\ Optimization Problem.}\label{softsvmdual}
 	\begin{align*}
 		\underset{\valpha}{\maximize} & \quad\sum_{i=1}^{m}\alpha_i -\frac{1}{2}\sum_{i=1}^{m}\sum_{i=1}^{m}\alpha_i\alpha_jy_iy_j\ip{\vx_i}{\vx_j}\\
 		\st & \quad \sum_{i=1}^{m}\alpha_iy_i=0, \, 0\le\alpha_i\le C, \, \forall i\in\{1,\cdots,m\}.
@@ -469,16 +469,16 @@ The perceptron algorithm, dated back to \citep{Rosenblatt58}, is one of the olde
 As it is extremely easy to implement and usually achieves good performance, the perceptron algorithm is still actively studied in the field.
 Structured perceptron, as suggested by its name, can be seen as the generalization of the perceptron algorithm to structured output space.
 It was firstly proposed in \citep{collins02a, collins02b} with the formalism incredibly similar to multiclass perceptron. 
-The model assumes a score function $\ip{\vw}{\vPhi(x,\vy)}$ as the inner product between a joint feature map $\vPhi(x,\vy)$ and some feature weight parameter $\vw$.
+The model assumes a score function $\ip{\vw}{\phib(x,\vy)}$ as the inner product between a joint feature map $\phib(x,\vy)$ and some feature weight parameter $\vw$.
 After weight parameter $\vw$ is obtained, one need to solve the \textit{argmax problem} to get the best output for a given input
 \begin{align}
-	\hat{\vy} = \underset{\vy\in\Ycal}{\argmax} &\quad \ip{\vw}{\vPhi(x_i,\vy)}.  \label{perceptroninference}
+	\hat{\vy} = \underset{\vy\in\Ycal}{\argmax} &\quad \ip{\vw}{\phib(x_i,\vy)}.  \label{perceptroninference}
 \end{align}
 
 The weight parameter $\vw$ is learned via standard perceptron iterative update by solving argmax operation (\ref{perceptroninference}) in each iteration.
 In particular, the algorithm loops through training examples and updates $\vw$ whenever the predicted label $\hat{\vy}$ is different from true label $\vy$, according to 
 \begin{align*}
-	\vw \leftarrow \vw + \left(\vPhi(x_i,\vy_i) - \vPhi(x_i,\hat{\vy}_i)\right).
+	\vw \leftarrow \vw + \left(\phib(x_i,\vy_i) - \phib(x_i,\hat{\vy}_i)\right).
 \end{align*}
 The update usually leads to over-fitting and a simple refinement, called "average parameter" similar to \citep{Freund99large}, is proposed as shown in (Algorithm~\ref{algorithm_structured_perceptron}).
 \begin{algorithm}
@@ -491,9 +491,9 @@ The update usually leads to over-fitting and a simple refinement, called "averag
 	\STATE $c = 1$
 	\FOR{$t=1\cdots T$}
 		\FOR{$i=1\cdots m$}
-			\STATE $\hat{\vy} = \underset{\vy\in\Ycal}{\argmax} \quad \ip{\vw^{t-1,i-1}}{\vPhi(x_i,\vy)}$
+			\STATE $\hat{\vy} = \underset{\vy\in\Ycal}{\argmax} \quad \ip{\vw^{t-1,i-1}}{\phib(x_i,\vy)}$
 			\IF{$\hat{\vy}\neq\vy$}
-				\STATE $\vw^{t,i} = \vw^{t-1,i-1} + \vPhi(x_i,\vy_i) - \vPhi(x_i,\hat{\vy}_i)$
+				\STATE $\vw^{t,i} = \vw^{t-1,i-1} + \phib(x_i,\vy_i) - \phib(x_i,\hat{\vy}_i)$
 			\ENDIF
 			\STATE $c=c+1$
 		\ENDFOR
@@ -515,23 +515,23 @@ In the original work \citep{collins02a}, the algorithm relied on Viterbi decodin
 \subsection{Conditional Random Field (\crf)}
 Condition Random Field (\crf), pioneered in \citep{lafferty01} and later in \citep{taskar02}, is a discriminative framework that constructs a conditional model $P(\vy|\vx)$ from paired input variable $x\in X$ and output variables $\vy\in Y$.
 It optimizes a log-loss which is analogue to 0/1 loss over the whole structured output space.
-\begin{definition}{Conditional Random Field (\crf)}\\
+\begin{definition}{Conditional Random Field (\crf).}\\
 	Denote by $Y=\{\vy_1,\cdots,\vy_m\}$ a set of output random variables, and by $X=\{x_1,\cdots,x_m\}$ a set of input random variables to condition on.
 	Let $G=(E,V)$ be a graph such that $Y = (Y_v)_{v\in V}$.
 	A Conditional Random Field (\crf) defines the conditional probability distribution
 	\begin{align*}
-		P(\vy|\vx) &= \frac{1}{Z_{x,\vw}}\exp{\ip{\vw}{\vPhi(x,\vy)}},
+		P(\vy|\vx) &= \frac{1}{Z_{x,\vw}}\exp{\ip{\vw}{\phib(x,\vy)}},
 	\end{align*}
 	where $Z_{x,\vw}$ is the partition function dependent on $\vx$ that sums over all possible output variables 
 	\begin{align}
-		Z_{x,\vw} &= \sum_{\vy'\in\Ycal}\exp{\ip{\vw}{\vPhi(x,\vy')}}. \label{crf_partition_function}
+		Z_{x,\vw} &= \sum_{\vy'\in\Ycal}\exp{\ip{\vw}{\phib(x,\vy')}}. \label{crf_partition_function}
 	\end{align}
 	Thus, when conditioned on $\vx$, the random variables $y_v$ obey the Markov property with respect to graph $G$.
 \end{definition}
 
 The parameter $\vw$ is solved by introducing parameter prior and maximizing the log of the resulting MAP problem as described in \citep{taskar02}
 \begin{align}
-	L(\vw) = \sum_{i=1}^{m}\left[\ip{\vw}{\vPhi(x_i,\vy_i)}-\log{\sum_{\vy'\in\Ycal}{\exp{\ip{\vw}{\vPhi(x_i,\vy')}}}}\right] - \frac{1}{\sigma^2}\norm{\vw}^2 + C. \label{crf_inference}
+	L(\vw) = \sum_{i=1}^{m}\left[\ip{\vw}{\phib(x_i,\vy_i)}-\log{\sum_{\vy'\in\Ycal}{\exp{\ip{\vw}{\phib(x_i,\vy')}}}}\right] - \frac{1}{\sigma^2}\norm{\vw}^2 + C. \label{crf_inference}
 \end{align}
 The parameter learning problem, as (\ref{crf_inference}), is solved in \citep{lafferty01} via improved iterative scaling algorithm (\iis) \citep{Pietra97inducing}.
 In order to make \crf\ work in practice, one have to make sure that the log normalization function (\ref{crf_partition_function}) and the argmax inference can be solve efficiently.
@@ -550,10 +550,10 @@ Recall that Support Vector Machine (\svm) searches for a feature weight vector o
 Following the same principal, \mmmn\ defines a margin-based quadratic programming optimization problem for the weight vector of the model.
 In particular, it extends \svm\ to structured output space via a loss function $\ell$ that requires the score difference between true output label $\vy$ and any incorrect label $\hat{\vy}$ be at least $\vell(\vy,\hat{\vy})$.
 The primal optimization problem of \mmmn\ is given as
-\begin{definition}{\mmmn\ optimization problem in primal form}\label{def_mmmn}
+\begin{definition}{Primal \mmmn\ optimization problem.}\label{def_mmmn}
 	\begin{align*}
 		\underset{\vw,\vxi}{\minimize} & \quad\frac{1}{2}\norm{\vw}^2 + C\sum_{i=1}^{m}\xi_i \\
-		\st & \quad\ip{\vw}{\vPhi(x_i,\vy_i)} - \ip{\vw}{\vPhi(x_i,\vy)} \ge \vell(\vy_i,\vy)-\xi_i,\\
+		\st & \quad\ip{\vw}{\phib(x_i,\vy_i)} - \ip{\vw}{\phib(x_i,\vy)} \ge \vell(\vy_i,\vy)-\xi_i,\\
 		& \quad \forall \xi_i\ge0, \forall \vy\in\Ycal/\vy_i, \forall i\in\{1,\cdots,m\},
 	\end{align*}
 \end{definition}
@@ -563,7 +563,7 @@ In particular, the margin is scaled by the loss function $\vell(\vy,\hat{\vy})$ 
 
 It is immediately clear that the primal optimization problem of \mmmn\ (Definition~\ref{def_mmmn}) is difficult to solve as there are exponential numbers of constraints, one being instantiated for each pair of training example and pseudo label $(x,\vy)$.
 The corresponding dual form is also difficult as there are exponential number of dual variables \cite[p.~4]{Taskar04max}.
-Fortunately, by exploring the Markov network structure defined on the output labels, the original problem can be formulated into factorized dual quadratic programming, as long as the loss function $\vell$ and joint feature map $\vPhi$ are decomposable over the Markov network.
+Fortunately, by exploring the Markov network structure defined on the output labels, the original problem can be formulated into factorized dual quadratic programming, as long as the loss function $\vell$ and joint feature map $\phib$ are decomposable over the Markov network.
 
 As the number of parameters (weight vector) is quadratic in the number of training examples and edges in the network, it still cannot fit into standard QP solver. 
 In the original work \citep{Taskar04max}, the authors developed a coordinate descent method analogous to the sequential minimal optimization (\smo) used for SVM \citep{Platt98sequential,Platt99fast}.
@@ -571,7 +571,7 @@ Subsequently, there are many efficient optimization algorithms being proposed, i
 
 In order to apply the optimization methods in practice, one have to solve the \textit{loss augmented} inference problem defined as
 \begin{align}
-	\hat{\vy} = \underset{\vy\in\Ycal/\vy_i}{\argmax} &\quad \ip{\vw}{\vPhi(x_i,\vy)} + \vell(\vy_i,\vy) \label{mmmninference}.
+	\hat{\vy} = \underset{\vy\in\Ycal/\vy_i}{\argmax} &\quad \ip{\vw}{\phib(x_i,\vy)} + \vell(\vy_i,\vy) \label{mmmninference}.
 \end{align} 
 To efficiently compute (\ref{mmmninference}), the loss function need to be decomposable over the Markov network.
 Nevertheless, \mmmn\ is more flexible compared to \crf\ due to the following two reasons.
@@ -590,10 +590,10 @@ Secondly, one can define more complex loss function on \mmmn\ other than just 0/
 The formulation of Support Vector Machine for interdependent and structured output space (\svmstruct) described in \citep{THJA04,TJTA05} is amazingly similar to \mmmn.
 Compared to \mmmn\ framework which scales the margin by the loss function, \svmstruct\ formulation scales the margin errors ({\em slack variables}) by the loss function.
 The primal optimization problem of \svmstruct\ is given as
-\begin{definition}{\svmstruct\ optimization problem in primal form}\label{def_svmstruct}
+\begin{definition}{Primal \svmstruct\ optimization problem.}\label{def_svmstruct}
 	\begin{align*}
 		\underset{\vw,\vxi}{\minimize} & \quad\frac{1}{2}\norm{\vw}^2 + \frac{C}{m}\sum_{i=1}^{m}\xi_i \\
-		\st & \quad\ip{\vw}{\vPhi(x_i,\vy_i)} - \ip{\vw}{\vPhi(x_i,\vy)} \ge 1-\frac{\xi_i}{\vell(\vy_i,\vy)},\\
+		\st & \quad\ip{\vw}{\phib(x_i,\vy_i)} - \ip{\vw}{\phib(x_i,\vy)} \ge 1-\frac{\xi_i}{\vell(\vy_i,\vy)},\\
 		& \quad \forall \xi_i\ge0, \forall \vy\in\Ycal/\vy_i, \forall i\in\{1,\cdots,m\},
 	\end{align*}
 \end{definition}
@@ -613,7 +613,7 @@ It is also shown that the iterative optimization algorithm will converge to some
 The major drawback of \svmstruct\ is the inference is usually intractable.
 To find the most violating constraint, the model will compute the loss-augmented inference problem as in \citep{TJTA05}
 \begin{align}
-	\hat{\vy} = \underset{\vy\in\Ycal/\vy_i}{\argmax} &\quad [1-\ip{\vw}{\vPhi(x_i,\vy)}]\,\vell(\vy_i,\vy) \label{svmstructinference},
+	\hat{\vy} = \underset{\vy\in\Ycal/\vy_i}{\argmax} &\quad [1-\ip{\vw}{\phib(x_i,\vy)}]\,\vell(\vy_i,\vy) \label{svmstructinference},
 \end{align}
 where the loss function appears as a multiplicative term.
 As the model does not assume any property of decomposition on the loss function over output space, the loss-augmented inference problem (\ref{svmstructinference}) of \svmstruct\ is in practice intractable. 
@@ -843,8 +843,8 @@ Most recently, three other learning algorithms with performance guarantee are pr
 %
 \section{Evaluation and Comparison}
 
-In this section, we will briefly introduce the performance measures and statistical test methods that were employed in the later part of the dissertation.
-These methods will enable us to quantitatively evaluate the performance of the proposed models and measure the significancy compared to other well established methods.
+In this section, we will briefly introduce the performance measures and statistical test methods that are involved in the publications as well as in the later part of the dissertation.
+These measures will enable us to quantitatively evaluate the performance of the proposed models and measure the significancy compared to other well established methods.
 
 %
 %
@@ -991,7 +991,7 @@ $\vw$ are learned by maximizing the minimum loss-scaled margin between correct e
 \begin{align*}
 	\underset{\vw,\vxi_i}{\minimize} & \quad \frac{1}{2}\norm{\vw}^2 + C\sum_{i=1}^{m}\xi_i\\
 	\st &\quad \ip{\vw}{\phib(\vx_i,\vy_i)} - \ip{\vw}{\phib(\vx_i,\vy)} \ge \ell(\vy_i,\vy)-\xi_i,\\
-	&\quad \forall i\in\{1,\cdots,m\}, \forall \vy\in\Ycal,
+	&\quad \xi_i>0, \forall i\in\{1,\cdots,m\}, \forall \vy\in\Ycal,
 \end{align*}
 where $\ell(\vy_i,\vy)$ is the loss function defined as
 \begin{align*}
@@ -1058,7 +1058,7 @@ We use \mmcrf\ as base classifier trained on a set of random output graphs.
 Particularly, for each base model, a random graph $G_t$ is generated to couple the output vector variables $\vy$ which are the activities of molecular structure $\vx$ over all cell lines.
 The base model \mmcrf\ is then learned based on training data $S=\{(\vx_i,\vy_i)\}_{i=1}^{m}$ and the output graph $G_t$.
 After ensemble has been generated, the predictions are extracted from each base classifier and are collected for a post-processing step: we compute a majority vote over the graph labeling from the sign on the means of the base classifier's prediction
-\begin{definition}{Majority Voting Ensemble (\mve)}
+\begin{definition}{Majority Voting Ensemble (\mve).}
 \begin{align*}
 	F_j^{\text{\mve}}=\underset{y_j\in\Ycal_j}{\argmax}\,\left(\frac{1}{T}\sum_{i=1}^{T}\ind{F_j^{(t)}(x)=y_j}\right), \forall j\in\{1,\cdots,k\},
 \end{align*}
@@ -1087,10 +1087,10 @@ The theory is based on the reconstruction error of the compatibility score.
 \subsection{Background and Introduction}
 
 % compatibility score
-Besides the assumption made for \mve\ which the base classifier will devise the prediction according to the structure of the output graph, we also assume that the base classifier for \amm\ and \mam\ is modelled with a Markov network structure.
-That is the base classifier defines a compatibility score $\psi(\vx,\vy)$ for pairs $(\vx,\vy)\in\Xcal\times\Ycal$ indicating how well the input and the output goes together
+Besides the assumption made for \mve\ which the base classifier will devise the prediction according to the structure of the output graph, we also assume that the base classifier for \amm\ and \mam\ is modelled with a Markov network structure $G=(E,V)$.
+That is the base classifier defines a compatibility score $\psi(\vx,\vy)$ for pairs $(\vx,\vy)\in\Xcal\times\Ycal$ according to the output graph $G$, indicating how well the input and the output goes together
 \begin{align*}
-	\psi(\vx,\vy) = \ip{\vw}{\phib(\vx,\vy)} = \sum_{e\in E}\ip{\vw}{\phi_e(\vx,\vy_e)}=\sum_{e\in E}\psi_e(\vx,\vy_e),
+	\psi(\vx,\vy) = \ip{\vw}{\phib(\vx,\vy)} = \sum_{e\in E}\ip{\vw}{\phib_e(\vx,\vy_e)}=\sum_{e\in E}\psi_e(\vx,\vy_e),
 \end{align*}
 where by $\psi_e(\vx,\vy_e)$ we denote edge compatibility score, or \textit{edge potential}, between input $\vx$ and edge label $\vy_e$ on edge $e$.
 $\vw$ is the feature weight parameters that naturally ensures input $\vx$ with correct output $\vy$ achieves higher compatibility score than with incorrect output.
@@ -1098,21 +1098,21 @@ $\vw$ is the feature weight parameters that naturally ensures input $\vx$ with c
 % edge potential
 In addition, we assume we have access to the edge potentials between input and edge labels for each base classifiers
 \begin{align*}
-	\Psi_E^{(t)} = (\psi_e^{(t)}(\vx,\vu_e))_{e\in E^{(t)},\vu_e\in\Ycal_e}.
+	\psib_E^{(t)} = (\psi_e^{(t)}(\vx,\vu_e))_{e\in E^{(t)},\vu_e\in\Ycal_e}.
 \end{align*}
 With edge compatibility scores, we can infer the max-marginal of label $u_i$ on node $y_i$ \citep{Wainwright05map}.
 \begin{align*}
-	\tilde{\psi}_j(\vx,u_j) = \underset{\vy\in\Ycal,y_j=u_j}{\maximize}\sum_{e}\psi_e(\vx,\vy_e).
+	\tilde{\psi}_j(\vx,u_j) = \underset{\vy\in\Ycal,y_j=u_j}{\maximize}\sum_{e\in E}\psi_e(\vx,\vy_e).
 \end{align*}
 That is the maximum score of the multilabel consistent with $y_i=u_i$.
-We denote the collection of max-marginals by $\tilde{\Psi} = (\tilde{\psi}_j(\vx,u_j))_{j\in V}$.
+We denote the collection of max-marginals by $\tilde{\psib} = (\tilde{\psi}_j(\vx,u_j))_{j\in V,u_j\in\Ycal_j}$.
 
 \subsection{Methods}
 
 % amm
-Denote by  $\Gcal=\{G^{(1)},\cdots,G^{(T)}\}$ a set of random output graphs, and by $\{\tilde{\Psi}^{(1)},\cdots,\tilde{\Psi}^{(T)}\}$ the max-marginal vectors from base classifiers that is built on each output graph.
+Denote by  $\Gcal=\{G^{(1)},\cdots,G^{(T)}\}$ a set of random output graphs, and by $\{\tilde{\psib}^{(1)},\cdots,\tilde{\psib}^{(T)}\}$ the max-marginal vectors from base classifiers that is built on each output graph.
 The \amm\ prediction on each node is obtained by averaging the max-marginals of base classifiers and choose the maximizing microlabel for the node
-\begin{definition}{Average of Max-Marginal Aggregation (\amm)}
+\begin{definition}{Average of Max-Marginal Aggregation (\amm).}
 	\begin{align*}
 	F_j^{\text{\amm}}=\underset{u_j\in\Ycal_j}{\argmax}\,\frac{1}{T}\sum_{t=1}^{T}\tilde{\psi}_{j,u_j}^{(t)}(\vx),
 	\end{align*}
@@ -1124,37 +1124,31 @@ and the predicted multilabel is composted by the predicted microlabels
 
 % mam
 \amm\ performs the inference to find the max-marginals before forming ensemble. 
-On the other hand, the maximum of average marginals aggregation (\mam) will first collect the local edge potentials $\Psi_E^{(t)}$ from each base classifier, average them and finally performs inference on the global consensus graph with averaged edge potentials
-\begin{definition}{Maximum of Average marginals Aggregation (\mam)}
+On the other hand, the maximum of average marginals aggregation (\mam) will first collect the local edge potentials $\psib_E^{(t)}$ from each base classifier, average them and finally performs inference on the global consensus graph $\hat{G}=(\hat{E},V)$ with averaged edge potentials
+\begin{definition}{Maximum of Average marginals Aggregation (\mam).}
 	\begin{align*}
-		F^{\text{\tiny MAM}}(x) &= \underset{\vy \in \Ycal }{\argmax}\,\sum_{e\in E}\frac{1}{T}\sum_{t=1}^{T}\ \psi^{(t)}_e(x,\vy_e)
-		%\vy^* &= \underset{\vy}{\argmax}\, \frac{1}{T}\sum_{t=1}^{T}\sum_{e\in E_t}{w^t_e}^T\varphi_e(x,\vy)
-		= \underset{\vy \in \Ycal}{\argmax}\, \frac{1}{T} \sum_{t=1}^T \sum_{e\in E} \ip{\vw_e^{(t)}}{\phi_e(x,\vy_e)}. %\label{ensemble3}
+		F^{\text{\tiny MAM}}(x) &= \underset{\vy \in \Ycal }{\argmax}\,\sum_{e\in \hat{E}}\frac{1}{T}\sum_{t=1}^{T}\ \psi^{(t)}_e(x,\vy_e)
+		%\vy^* &= \underset{\vy}{\argmax}\, \frac{1}{T}\sum_{t=1}^{T}\sum_{e\in E_t}{w^t_e}^T\varphib_e(x,\vy)
+		= \underset{\vy \in \Ycal}{\argmax}\, \frac{1}{T} \sum_{t=1}^T \sum_{e\in \hat{E}} \ip{\vw_e^{(t)}}{\phib_e(x,\vy_e)}. %\label{ensemble3}
 	\end{align*}
 \end{definition}
-With following lemma from \citepub{su14b}, we are able to simplify the computation of \mam\ in terms of dual variables and kernels.
-\begin{lemma}
-	Let $w$ be the feature weight parameters, $\phib(x,\vy)$ be the joint feature map, and let $G=(V,E)$ be the graph defining the output graph structure, and let us denote
-	$$H_e(x_i,\vu_e;x,\vy_e)  = K_{\phib}(x,x_i)\cdot\left(K_{\Upsilon,e}(\vy_{ie},\vy_e)-K_{\Upsilon,e}(\vu_e,\vy_e)\right).$$
-	Then, we have
-	\begin{align*}
-	 \psi_e(x,\vy_e) =  \ip{w_e}{\phi_e(x,\vy_e)}  =  \sum_{i,\vu_e} \mu(i,e,\vu_e) \cdot H_e(x_i,\vu_e;x,\vy_e),
-	\end{align*}
-	where $\mu$ is the marginal dual variable learned by solving optimization problem in marginalized dual form.
-\end{lemma}
-The proof can be found from \citepub{su14b}. 
+\citepub[Lemma 1]{su14b} allows us to simplify the computation of \mam\ in terms of dual variables and kernels.
 As a results, the \mam\ ensemble can be equivalently stated as
 \begin{align*}
 F^{\text{\tiny MAM}}(x) 
  & =\underset{\vy \in \Ycal}{\argmax}\, \frac{1}{T} \sum_{t=1}^T \sum_{i,e,\vu_e} \mu^{(t)}(i,e,\vu_e) \cdot H_e(i,\vu_e;x,\vy_e)\nonumber \\
  & =\underset{\vy \in \Ycal}{\argmax}\,   \sum_{i,e,\vu_e}  \bar\mu(i,e,\vu_e) H_e(i,\vu_e;x,\vy_e),
 \end{align*}
-where by $\bar\mu(i,e,\vu_e)=\frac{1}{T}\sum_{t=1}^T\mu^{(t)}(i,e,\vu_e)$ we denote the marginalized dual variable averaged over ensemble.
-
+where by $\bar\mu(i,e,\vu_e)=\frac{1}{T}\sum_{t=1}^T\mu^{(t)}(i,e,\vu_e)$ we denote the marginalized dual variable averaged over ensemble, and
+\begin{align*}
+	H_e(x_i,\vu_e;x,\vy_e)  = K_{\phib}(x,x_i)\cdot\left(K_{\Upsilon,e}(\vy_{ie},\vy_e)-K_{\Upsilon,e}(\vu_e,\vy_e)\right).
+\end{align*}
+	
 Besides the algorithm frameworks for random graph ensemble, we also developed theoretical analysis to explain the improvement of \mam\ ensemble.
-The analysis extends the theory on single label ensemble proposed by \citet{Brown10good}.
-In general, the theory described in \citepub{su14b} states that the reconstructive error from \mam\ ensemble is guaranteed to be less than or equal to the average reconstruction error from the base classifiers.
+The analysis extends the theory on single task ensemble developed by \citet{Brown10good}.
+In general, \citepub[Theory 1]{su14b} states that the reconstructive error from \mam\ ensemble is guaranteed to be less than or equal to the average reconstruction error from the base classifiers.
 The improvement can be decomposed into two terms, namely \textit{diversity} and \textit{coherence}.
+The former measures the variability of individual classifiers learned from different perspectives which shares the same argument as the analysis of single task ensemble model \citep{Brown10good}, the later measures the correlation of microlabel predictions which higher correlation gives better improvements.
 
 %
 % RTA
@@ -1183,8 +1177,8 @@ Efficient inference on special case of graph has also been extensively studied i
 Start from a sampling results, \citepub[Lemma 3]{su14c} shows that with high probability a big fraction of margin from the complete graph can be obtained by a sample of spanning trees of small size.
 Besides, \citepub[Theorem 5]{su14c} shows the good generalization can also be guaranteed when learning with in stead of complete graph a sample of spanning trees.
 
-Thus, in addition to (Theory~\ref{}), we further provide theoretical justification of \mam\ that constructs a set of base learners on random spanning trees. 
-Besides, \citepub[Theorem 5]{su14c} suggests we should optimize the joint margin from all spanning trees which leads to the \rta\ model described in the following section.
+Thus, in addition to \citepub[Theory 1]{su14b}, we further provide the theoretical justification of \mam\ that constructs a set of base classifiers trained on random spanning trees. 
+Besides, \citepub[Theorem 5]{su14c} suggests we should optimize the joint margin from all spanning trees, instead of optimizing them separately as \mam, which leads to the \rta\ model described in the following section.
 
 \subsection{Methods}
 
@@ -1192,46 +1186,38 @@ Denote by $\Tcal=\{T_1,\cdots,T_n\}$ a sample of $n$ random spanning trees, and 
 The goal of optimization is to maximize the joint margin from all spanning trees between correct training examples and other examples.
 \begin{definition}{\bf Primal $L_2$-norm Random Tree Approximation (\rta).}\label{primalrta}
 	\begin{align*}
-		\underset{\vw_{T_t},\xi_k}{\minimize} & \quad \frac{1}{2}\sum_{t=1}^{n}\norm{\vw_{T_t}}_2^2 + C\sum_{i=1}^{m}\xi_i\\
-		\st & \quad \sum_{t=1}^{n}{ \langle \vw_{T_t}, \phibh_{T_t}(x_i,\vy_i) \rangle} - \underset{\vy \neq \vy_i}{\maximize\ } \sum_{t=1}^{n}{\langle \vw_{T_t}, \phibh_{T_t}(x_i,\vy) \rangle } \geq 1 -  \xi_i, \\
+		\underset{\vw_{T_t},\xi_i}{\minimize} & \quad \frac{1}{2}\sum_{t=1}^{n}\norm{\vw_{T_t}}_2^2 + C\sum_{i=1}^{m}\xi_i\\
+		\st & \quad \sum_{t=1}^{n}{ \langle \vw_{T_t}, \phib_{T_t}(\vx_i,\vy_i) \rangle} - \underset{\vy \neq \vy_i}{\maximize\ } \sum_{t=1}^{n}{\langle \vw_{T_t}, \phib_{T_t}(\vx_i,\vy) \rangle } \geq 1 -  \xi_i, \\
 		& \quad \xi_i\ge0\, , \forall\ i \in \set{1,\dots,m},
 	\end{align*}
-where $\phibh_{T_t}(\vx,\vy)$ is the feature map that is local on each tree $T_t$, $\xi_i$ is the margin slack allocated for each $x_i$, and $C$ is the slack parameter that controls the amount of regularization.
 \end{definition}
+where $\phib_{T_t}(\vx,\vy)$ is the feature map that is local on each tree $T_t$, $\xi_i$ is the margin slack allocated for each $\vx_i$, and $C$ is the slack parameter that controls the amount of regularization.
 
 The key for the optimization is to solve the '$\argmax$' problem efficiently.
-This is a \nphard\ problem in practice, as the multilabel space is exponential in terms of the number of microlabels.
-We proposed in \citepub{su14c} a $K$-best inference algorithm for the optimization problem working in $\Theta(Knk)$ time per data point, where $k$ is the number of microlabels in the multilabel vector and $K$ is the number of best multilabel we compute from each spanning tree.
+This is a \nphard\ problem in practice, as the size of the multilabel space is exponential in terms of the number of microlabels.
+For the optimization problem, we proposed in \citepub{su14c} a $K$-best inference algorithm working in $\Theta(Knk)$ time per data point, where $k$ is the number of microlabels in the multilabel vector and $K$ is the number of best multilabels we compute from each random spanning tree.
 
 In particular, it is known that the exact solution for the inference problem on individual tree $T_t$ is tractable \citep{Koller09probabilistic}, for which 
 \begin{align}\label{rta:maximizer_onetree}
-	\hat{\vy}_{T_t}(x) = \underset{\vy\in\Ycal}{\argmax}\, F_{\vw_{T_t}}(x,\vy)\ \eqdef\ \underset{\vy\in\Ycal}{\argmax}\, \langle \vw_{T_t}, \phibh_{T_t}(x,\vy)\rangle,
+	\hat{\vy}_{T_t}(x) = \underset{\vy\in\Ycal}{\argmax}\, F_{\vw_{T_t}}(x,\vy)\ =\ \underset{\vy\in\Ycal}{\argmax}\, \langle \vw_{T_t}, \phib_{T_t}(x,\vy)\rangle,
 \end{align}
-can be solved in $\Theta(k)$ time by \textit{dynamic programming} also known as \textit{max-product}.
-However, there is no guarantee the the maximizer of (\ref{rta:maximizer_onetree}) is also the global maximizer over all spanning trees.
-Therefore, we compute for each random spanning tree $K$ best multilabel, which in total costs $\Theta(Knk)$ time for all spanning trees.
-\citepub[Lemma 7]{su14c} provides a method to retrieve the best multilabel from $K$ best list in linear time.
+can be solved in $\Theta(k)$ time by \textit{dynamic programming} also known as \textit{max-product} or \textit{min-sum}.
+However, there is no guarantee the the maximizer of (\ref{rta:maximizer_onetree}) is also the global maximizer of (Definition~\ref{primalrta}) over all spanning trees.
+Therefore, we compute for each random spanning tree $K$-best multilabels, which in total costs $\Theta(Knk)$ time for all spanning trees.
+\citepub[Lemma 7]{su14c} provides a method to retrieve the best multilabel from $K$-best list in linear time.
 Now the question is to make sure the global violation multilabel is within the list.
-\citepub[Lemma 8]{su14c} guarantees that with high probability the global violation multilabel is in the list when $K$ is not too large.
+\citepub[Lemma 8]{su14c} guarantees that with high probability the global violation multilabel is in the list and $K$ does not need to be large.
 
-In addition, we derive the marginalized dual representation of definition~\ref{primalrta}
-\begin{definition}{\bf $L_2$-norm RTA Marginalized Dual}\label{l2-marginaldual}\label{l2-md}
+In addition, we derived the marginalized dual representation of (Definition~\ref{primalrta})
+\iffalse
+\begin{definition}{\bf $L_2$-norm RTA Marginalized Dual.}
 	\begin{align*}
 		%\underset{\mub\in\Mcal^m}{\maximize} &\quad \frac{1}{|E_\Tcal|}\sum_{k,e,\vu_e}\mu(k,e,\vu_e)   -\frac{1}{2}\sum_{k,e,\vu_e} \mu(k,e,\vu_e) K_\Tcal^e(k,\vu_e;k',\vu'_e) \mu(k',e,\vu'_e)\, ,
 		\underset{\vmu\in\Mcal^m}{\maximize} &\quad \frac{1}{|E_\Tcal|}\sum_{e,k,\vu_e}\mu(k,e,\vu_e)   -\frac{1}{2}\sum_{\substack{e,k,\vu_e,\\k',\vu_e'}} \mu(k,e,\vu_e) K_\Tcal^e(x_k,\vu_e;x_k',\vu'_e) \mu(k',e,\vu'_e)\, ,
 	\end{align*}
 \end{definition}
+\fi
 which not only enjoys a polynomial sized parameter space but also enable kernel function to deal with complex input space.
-
-
-
-
-% k-best inference
-
-% condition for y*
-
-% marginalized dual form
-
 
 
 %
@@ -1240,11 +1226,11 @@ which not only enjoys a polynomial sized parameter space but also enable kernel 
 
 In \citepub{su14a}, a structure output learning model for network response prediction problem is developed.
 The proposed model, \spin, is \textit{context-sensitive} and is different from the previous the state-of-the-art methods which only model the influence in terms of the network connectivity.
-The inference problem of \spin\ is \nphard\ in general which was solved by a semidefinite programming algorithm \sdp\ with approximation guarantee and a fast \greedy\ heuristics.
+The inference problem of \spin\ is \nphard\ in general which was solved by a semidefinite programming algorithm \sdp\ with approximation guarantee and by a fast \greedy\ heuristics.
 
 \subsection{Background and Introduction}
 
-With the extensive availability of the large scale network, there are tremendous interest in studying the phenomena of the network influence, in particular, the structure, the function and the influence dynamics. 
+With the extensive availability of the large scale networks, there are tremendous interest in studying the phenomena of the network influence, in particular, the structure, the function and the influence dynamics. 
 The outcome of the network influence research have been widely applied in many areas, to name but a few, spreadness of pathogens or infectious diseases \citep{Hethcote00the,Anderson02infectious}, diffusion of medical and technology innovation \citep{Strang98diffusion,Rogers03the}, opinion and news formation \citep{Adar04implicit,Gruhl04information,Adar05tracking,Leskovec07cascading,Nowell08tracing,Leskovec09meme}, viral market \citep{Domingos01mining,Kempe03maximizing,Liben-Nowell03the}.
 
 In the field of studying network influence, one primary interest is to discover the latent structures that reveal the dynamics of influences.
@@ -1252,38 +1238,36 @@ In general, the problem can be defined into two different ways depending on the 
 On one hand, one would assume that the underlying structure is hidden or incomplete and the only observation is a cascade of actions.
 The instantiation of the setting can be, for example, online news agents sharing information but not physically connected, or in epidemiological study where people are affected by pathogens through various ways.
 In this case, the task is to infer network structure in terms of edges connecting nodes given a set of action cascade.
-With early work on independent cascade and linear threshold model in 
+%With early work on independent cascade and linear threshold model \citep{Kempe03maximizing},
 Many algorithms are designed to solve the problem in this setting from \netinf\ \citep{GomezRodriguez10inferring}, \netrate\ \citep{Rodrigues11unconvering}, \kernelcascade\ \citep{Du12learning} to the most recent work about two stage model for inferring influence \citep{Du14influence}, inference algorithm using cascade without timestamp \citep{Amin14learning}, and general framework of inferring diffusion structure \citep{Daneshmand14estimating}.
 On the other hand, we argue the problem is unnecessarily hard to solve as in many cases the structure of the network is given (e.g. friendship network).
 There are also related researches aim to discover the hidden variables in the network \citep{Lovrek08prediction,Goyal10learning}
 
-However, none of they consider the property of the action.
+However, none of them consider the property of the action.
 In particular, our network influence problem is motivated by the following observation: for a given action $\va$ performed on the network $G$, the influence from node $u$ to $u'$ not only depends on their connections but also depend on the action under consideration.
 For example, $u'$ follows $u'$ in twitter network, $u'$ will retweet the message from $u$ if the message is related to \textit{science} but not related to \textit{politics}.
-
-\begin{definition}{Network Influence Problem}\\
+Therefore, we propose the following definition of the network influence problem
+\begin{definition}{Network Influence Problem.}\\
 	Given a complex network and an action performed on the network, predict the subnetwork that responses to the action. In particular, which nodes will perform the action and which directed edges relay the action from one node to its neighbors.
 \end{definition}
 
-
-%
 %
 \subsection{Methods}
-We approach the problem by structured output learning framework, where we define a computability score as a inner product of the action $\va$ and the response network $\Gva$
+We approach the problem by structured output learning, where we define a computability score as a inner product of the action $\va$ and the response network $\Gva$
 \begin{align*}
-	F(\va,\Gva;\vw) = \ip{\va}{\vphi(\va,\Gva)}.
+	F(\va,\Gva;\vw) = \ip{\va}{\phib(\va,\Gva)}.
 \end{align*}
-It is obvious that the action $\va$ with correct response network $\Gva$ will achieve high score than with any incorrect response network $\Gva'$.
-As introduced in previous section, the joint feature map $\phib(\va,\Gva)$ is composed by the tensor product between action feature $\varphi(\va)$ and the feature of the response network $\Gamma(\Gva)$.
-In particular, $\varphi(\va)$ can be a bag-of-words feature of the action (e.g. blog post) and $\Gamma(\Gva)$ is a vector of edges and labels in the response network $\Gva$.
+It is easy to understand that the action $\va$ with correct response network $\Gva$ will achieve high score than with any incorrect response network $\Gva'$.
+As introduced in previous section, the joint feature map $\phib(\va,\Gva)$ is composed by the tensor product between action feature $\varphib(\va)$ and the features of the response network $\Upsilonb(\Gva)$.
+In particular, $\varphib(\va)$ can be a bag-of-words features of the action (e.g. blog post) and $\Upsilonb(\Gva)$ is a vector of edges and labels of the response network $\Gva$.
 
 % optimization
-The feature weight vector $\vw$ is learned through maximum-margin structured output learning approach by solving the following optimization problem
-\begin{definition}{SPIN Optimization Problem in Primal}
+The feature weight vector $\vw$ is learned through maximum-margin structured output learning by solving the following optimization problem
+\begin{definition}{Primal \spin\ Optimization Problem.}
 \begin{align*}
-	\underset{\vw,\vxi}{\minimize} &\quad \frac{1}{2}\norm{\vw}^2+C\sum_{i=1}^{m}\xi_i\\
-	\st &\quad F(\va_i,G_{\va_i};\vw) > \underset{G_{\va_i}'\in\Hcal(G)/G_{\va_i}}{\maximize}(F(\va_i,G_{\va_i}';\vw)+\vell_{G}(G_{\va_i},G_{\va_i}')) - \xi_i,\\
-	&\quad xi_i\ge0, \forall i\in\{1,\cdots,m\},
+	\underset{\vw,\vxi_i}{\minimize} &\quad \frac{1}{2}\norm{\vw}^2+C\sum_{i=1}^{m}\xi_i\\
+	\st &\quad F(\va_i,G_{\va_i};\vw) > \underset{\substack{G_{\va_i}'\in\Hcal(G)/G_{\va_i}}}{\maximize}(F(\va_i,G_{\va_i}';\vw)+\vell_{G}(G_{\va_i},G_{\va_i}')) - \xi_i,\\
+	&\quad \xi_i\ge0, \forall i\in\{1,\cdots,m\},
 \end{align*}
 \end{definition}
 where by $\Hcal(G)$ we denote the set of directed acyclic graphs of $G$.
@@ -1300,23 +1284,22 @@ During the prediction, the goal is to find the subgraph with maximum compatibili
 \end{align}
 As the two problems are different only in terms of the definition of the score, we explain our inference algorithm based on (\ref{spin_inference}) by writing the problem explicitly in terms of weight vectors and the feature maps
 \begin{align}
-	H^*(\va_i) &= \underset{H\in\Hcal(G)}{\argmax}\, \ip{\vw}{\varphi(\va)\otimes\Gamma(H)} \nonumber \\
+	H^*(\va_i) &= \underset{H\in\Hcal(G)}{\argmax}\, \ip{\vw}{\varphib(\va)\otimes\Upsilonb(H)} \nonumber \\
 	&= \underset{H\in\Hcal(G)}{\argmax}\, \sum_{e\in E^H}s_{\vy_e}(e,\va), \label{spin_np}
 \end{align}
-where we denote by $s_{\vy_e}(e,\va) = \sum_{i}w_{i,e,\vy_e}\varphi(\va)$ the score of edge $e$ with edge label $\vy_e$.
+where we denote by $s_{\vy_e}(e,\va) = \sum_{i}\vw_{i,e,\vy_e}\varphib(\va)$ the score of edge $e$ with edge label $\vy_e$.
 
 \begin{lemma}
 	Finding the graph that maximizes (\ref{spin_np}) is an \nphard\ problem.
 \end{lemma}
 In supplementary material of \citepub{su14a}, we have proved the \nphardness\ by forming a reduction from the \maxcut\ problem \citep{Garey90computers}.
 In addition, we proposed two algorithms to solve (\ref{spin_np}).
-The first is called '{\sdp\ inference}' which introduces for each node $u\in V$ a binary variable $x_u\in\{-1,+1\}$ and transfer the inference problem into an integer quadratic program (\iqp) problem.
+The first is called {\sdp\ inference} which introduces for each node $u\in V$ a binary variable $x_u\in\{-1,+1\}$ and transfer the inference problem into an integer quadratic program (\iqp) problem.
 The \iqp\ is then tackle by similar technique introduced in \citep{Geomans1995improved}, such that each variable $x_u$ is relaxed to a vector $\vv_u\in\RR^n$ and the relaxed problem is solved by semidefinite programming (\sdp). 
-The resulting vector is rounded back into binary value by Cholesky decomposition.
-
+The resulting vector is rounded back into binary value by incomplete Cholesky decomposition.
 The benefit from \sdp\ inference algorithm is the approximation guarantee. 
-If we denote by $Z^*$ ($Z_R$, and $Z$ respectively) the optimal value achieved by \iqp\ (the relaxed problem, and the \sdp\ inference respectively), we have $Z_R\ge Z^*$ and $E[Z]\ge(\alpha-\epsilon)Z_R$ where $\alpha\ge0.796$.
-In words, the proposed \sdp\ inference algorithm is a $0.796$ approximation of the original \iqp.
+%If we denote by $Z^*$ ($Z_R$, and $Z$ respectively) the optimal value achieved by \iqp\ (the relaxed problem, and the \sdp\ inference respectively), we have $Z_R\ge Z^*$ and $E[Z]\ge(\alpha-\epsilon)Z_R$ where $\alpha\ge0.796$.
+In particular, the proposed \sdp\ inference algorithm is a $0.796$ approximation of the original \iqp.
 
 As \sdp\ inference is not scalable on large networks, we developed a \greedy\ heuristic base on observation stated as the following lemma:
 \begin{lemma}
