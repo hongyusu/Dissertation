@@ -17,34 +17,34 @@ The thesis is structured as follows.
 %
 \section{Single Label Classification}
 
-In this section, we will introduce the basic classification problem known as single label classification.
-We will explain three prominent algorithms in the area: Perceptron, Logistic Regression and the Support Vector Machines.
+In this section, the author will introduce the basic classification problem known as single task classification.
+The author will explain three prominent algorithms in the area: Perceptron, Logistic Regression and the Support Vector Machines.
 The optimization techniques and the latest advances of these algorithms will also be briefly discussed.
 The goal is to cover the background that is necessary to understand the algorithms presented in the later part of the dissertation. 
 
 %
 %
 \subsection{Preliminary and Notation}\label{singlelabel_preliminary}
-We consider supervised learning problem which assumes an arbitrary input space $\Xcal$, an output space $\Ycal$, and the training samples coming in pairs $(x_i,y_i)\in\Xcal\times\Ycal$.
+We consider supervised learning problem which assumes an arbitrary input space $\vXcal$, an output space $\Ycal$, and the training samples coming in pairs $(\vx_i,y_i)\in\vXcal\times\Ycal$.
 As we focus in this chapter standard supervised learning problem also known as binary classification, we explicitly assume the output space $\Ycal=\{-1,+1\}$ (instead of $\Ycal=\{0,+1\}$).
 We point out that other kind of supervised learning problem can be formulated by altering the definition of the output space.
 For example, by setting $\Ycal=\{1,\cdots,K\}$ we have multiclass classification problem, and by setting $\Ycal=\RR$ we have regression problem, where $\RR$ is the set of real numbers.
-Additionally, we assume a feature map $\phib:\Xcal\rightarrow\Fcal$, which embeds the input in some high dimensional feature space $\Fcal=\RR^d$.
+Additionally, we assume a feature map $\phib:\vXcal\rightarrow\Fcal$, which embeds the input in some high dimensional feature space $\Fcal=\RR^d$.
 In particular, $\phib(\vx)$ is a real value vector of $d$ dimension.
-Given a set of training data $\Scal=\{(\vx_1,y_1),\cdots,(\vx_m,y_m)\}$, the goal is to learn from a \textit{hypothesis class} $\Fcal$ a mapping function $f\in\Fcal:\Xcal\rightarrow\Ycal$  that maps an input $\vx\in\Xcal$ to an output $y\in\Ycal$. 
+Given a training set of $m$ training examples $\Scal=\{(\vx_1,y_1),\cdots,(\vx_m,y_m)\}$, the goal is to learn from a \textit{hypothesis class} $\Hcal$ a mapping function $f\in\Hcal:\vXcal\rightarrow\Ycal$  that maps an input $\vx\in\vXcal$ to an output $y\in\Ycal$. 
 
-The hypothesis class we consider is a set of \textit{linear classifiers} that are parameterized by weight vector $\vw$ and bias term $b$ that takes the form
+The hypothesis class we consider is a set of \textit{linear classifiers} that are parameterized by the weight vector $\vw$ and the bias term $b$ that takes the form
 \begin{align}
 	f(x;\vw,b) = \ip{\vw}{\vx} + b, \label{linearclassifier}
 \end{align}
-where by $\ip{\dot\,}{\dot\,}$ we denote inner product of two vectors
+where by $\ip{\dot\,}{\dot\,}$ we denote the inner product of two vectors
 \begin{align*}
-	\ip{\vw}{\vx} = \sum_{i=1}^{d}\vw_i\vx_i.
+	\ip{\vw}{\vx} = \sum_{i=1}^{d}\vw[i]\,\vx[i].
 \end{align*}
 
 In addition, for any $1\le\rho\in\RR$ we defined the {$L_{\rho}$-norm of vector $\vw$ 
 \begin{align*}
-	\norm{\vw}_{\rho} = \left(\sum_{i=1}^{d}|\vw_i|^{\rho}\right)^{\frac{1}{\rho}}.
+	\norm{\vw}_{\rho} = \left(\sum_{i=1}^{d}|\vw[i]|^{\rho}\right)^{\frac{1}{\rho}}.
 \end{align*}
 
 
@@ -64,16 +64,16 @@ Assume data point $(x_i,y_i)$ is misclassified, the signed geometric distance fr
 \begin{align*}
 	D(x_i;\vw,b) = -\frac{y_i(\ip{\vw}{\vx_i}+b)}{\norm{\vw}}.
 \end{align*}
-Denote by $\Xcal^m$ the set of misclassified examples, the goal of perceptron is to minimize the distance over all misclassified examples defined as
+Denote by $\vXcal^m$ the set of misclassified examples, the goal of perceptron is to minimize the distance over all misclassified examples defined as
 \begin{definition}{Perceptron Objective Function.}\label{perceptron}
 	\begin{align*}
-		\underset{\vw,b}{\minimize} \, D(\vw,b) = \underset{\vw,b}{\minimize} \left( -\sum_{x_i\in\Xcal^{m}}y_i[\ip{\vw}{\vx_i}+b]\right).
+		\underset{\vw,b}{\minimize} \, D(\vw,b) = \underset{\vw,b}{\minimize} \left( -\sum_{x_i\in\vXcal^{m}}y_i[\ip{\vw}{\vx_i}+b]\right).
 	\end{align*}
 \end{definition}
-To achieve (Definition~\ref{perceptron}), we assume $\Xcal^{m}$ is fixed and compute the partial gradient with respect to parameters
+To achieve (Definition~\ref{perceptron}), we assume $\vXcal^{m}$ is fixed and compute the partial gradient with respect to parameters
 \begin{align*}
-	\frac{\partial D(\vw,b)}{\partial\vw} = -\sum_{x_i\in\Xcal^m}{y_ix_i},\\
-	\frac{\partial D(\vw,b)}{\partial b} = -\sum_{x_i\in\Xcal^m}{y_i}.
+	\frac{\partial D(\vw,b)}{\partial\vw} = -\sum_{x_i\in\vXcal^m}{y_ix_i},\\
+	\frac{\partial D(\vw,b)}{\partial b} = -\sum_{x_i\in\vXcal^m}{y_i}.
 \end{align*}
 In practice, the perceptron algorithm uses stochastic gradient descent that processes iteratively from training data one example at a time.
 At each step, the algorithm makes sure the current $\vw$ and $b$ will correctly separate the current training example. 
@@ -427,7 +427,7 @@ There are many other active researches on \svm\ optimization that aim to make ke
 % multilabel classification problem
 \section{Structured Output Prediction}
 
-As the learning algorithms for multilabel classification in structured output space have evolved rapidly during the last decade, the author wish to briefly review in this section several prominent structured output learning algorithms, namely,  Structured Perceptron, Conditional Random Field, Maximum-Margin Markov Networks, Structured SVM, and Mutltask Feature Learning.
+As the learning algorithms for multi-task classification in structured output space have evolved rapidly during the last decade, the author wish to briefly review in this section several prominent structured output learning algorithms, namely,  Structured Perceptron, Conditional Random Field, Maximum-Margin Markov Networks, Structured SVM, and Mutltask Feature Learning.
 These algorithms are also relevant to this thesis.
 These algorithms are mostly from 2010, the period when this field of researches has begun to emerge.
 
@@ -438,21 +438,21 @@ These algorithms are mostly from 2010, the period when this field of researches 
 
 We will keep most notations from (section~\ref{singlelabel_preliminary}).
 In particular, we examine the following multilabel classification setting.
-We assume data from a domain $\Xcal\times\Ycal$, where $\Xcal$ is a set and $\Ycal$ is the set of multilabels.
-$\Ycal = \Ycal_1\times\cdots\times\Ycal_k$ is composed by a Cartesian product of $k$ sets $\Ycal_i=\{-1,+1\}$.
+We assume data from a domain $\vXcal\times\vYcal$, where $\vXcal$ is a set and $\vYcal$ is the set of multilabels.
+$\vYcal = \Ycal_1\times\cdots\times\Ycal_k$ is composed by a Cartesian product of $k$ sets $\Ycal_i=\{-1,+1\}$.
 We retain a single-label classification setting by letting $k=1$.
-A vector $\vy=(y_1,\cdots,y_k)\in\Ycal$ is called \textit{multilabel} and each element $y_j$ is called \textit{microlabel}.
-In addition, we are given a set of labeled training examples $\Scal=\{(\vx_i,\vy_i)\}_{i=1}^{m}\in\Xcal\times\Ycal$. 
-A pair $(\vx_i,\vy)$, where $\vx_i$ is the training input and $\vy\in\Ycal$ is an arbitrary output, is call \textit{pseudo-example}.
-The goal is to learn a mapping $f\in\Fcal:\Xcal\rightarrow\Ycal$ from input to output such that the loss for the future unseen examples is minimized, where the loss function is usually tailored for the structured output learning algorithm.
+A vector $\vy=(y_1,\cdots,y_k)\in\vYcal$ is called \textit{multilabel} and each element $y_j$ is called \textit{microlabel}.
+In addition, we are given a set of labeled training examples $\Scal=\{(\vx_i,\vy_i)\}_{i=1}^{m}\in\vXcal\times\vYcal$. 
+A pair $(\vx_i,\vy)$, where $\vx_i$ is the training input and $\vy\in\vYcal$ is an arbitrary output, is call \textit{pseudo-example}.
+The goal is to learn a mapping $f\in\Hcal:\vXcal\rightarrow\vYcal$ from input to output such that the loss $\ell$ for the future unseen examples is minimized, where the loss function is usually tailored for the structured output learning algorithm.
 
-Multilabel classification deals with multiple interdependent output variables (e.g. $\vy$), which locate in structured output space.
+Multilabel classification deals with multiple interdependent output variables (e.g. $\vy\in\vYcal$), which locates in structured output space.
 As graph is the natural way of modeling the multiple interdependencies, we assume a graph $G=(E,V)$ with node set $V=\{1,\cdots,k\}$ corresponding to the microlabels $\{y_1,\cdots,y_k\}$ and edge set $E=V\times V$ representing the dependency between pair of microlabels.
-For each edge $e=(j,j')\in E$, we denote by $\vy_e$ the edge label of edge $\ve$ with respect to multilabel $\vy$ by concatenating the head label $y_i$ and the tail label $y_i$, with the edge label domain $\vy_e\in\Ycal_e=\Ycal_i\times\Ycal_{j'}$.
+For each edge $e=(j,j')\in E$, we denote by $\vy_e$ the edge label of edge $\ve$ with respect to multilabel $\vy$ by concatenating the head label $y_i$ and the tail label $y_i$, with the edge label domain $\vy_e\in\vYcal_e=\Ycal_i\times\Ycal_{j'}$.
 We denote by $\vy_{i,e}$ the edge label of example pair $(\vx_i,\vy_i)$ on edge $\ve$.
 Thus, given a pair of training example $(\vx_i,\vy_i)$ and the output graph $G$, we can uniquely identify the node label $y_i$ and the edge label $\vy_{i,e}$.
 In addition, we denote by $u_i$ the possible label of node $i$ and by $\vu_{e}$ the possible label of edge $\ve$ where $u_i$ and $\vu_{e}$ do not constraint to any multilabel $\vy$.
-Naturally, $u_i\in\Ycal_i$ and $\vu_e\in\Ycal_e$.
+Naturally, $u_i\in\Ycal_i$ and $\vu_e\in\vYcal_e$.
 
 
 %
@@ -684,7 +684,7 @@ In many cases, no other information about $f^t(x)$ is available to $H(x)$ except
 \subsection{Boosting}
 \textit{Boosting} corresponds to a learning framework or a family of algorithms that take in a weak classifier and tuning it into a strong one.
 We begin our discussion from the notion of  \textit{concept class}.
-A \textit{concept} is a boolean function over domain $\Xcal$, and a \textit{concept class} is a class of concepts.
+A \textit{concept} is a boolean function over domain $\vXcal$, and a \textit{concept class} is a class of concepts.
 % TODO: an illustrative example
 A concept class is \textit{strongly learnable} if there exists a polynomial learning algorithm that achieves high accuracy with high probability for all concepts in the class.
 On the other hand, a concept class is \textit{weak learnable} if the learning algorithm achieves arbitrary high accuracy where the only requirement is that the learning algorithm finds a function that performs better than coin flip.
@@ -1082,7 +1082,7 @@ The theory is based on the reconstruction error of the compatibility score.
 
 % compatibility score
 Besides the assumption made for \mve\ which the base classifier will devise the prediction according to the structure of the output graph, we also assume that the base classifier for \amm\ and \mam\ is modelled with a Markov network structure $G=(E,V)$.
-That is the base classifier defines a compatibility score $\psi(\vx,\vy)$ for pairs $(\vx,\vy)\in\Xcal\times\Ycal$ according to the output graph $G$, indicating how well the input and the output goes together
+That is the base classifier defines a compatibility score $\psi(\vx,\vy)$ for pairs $(\vx,\vy)\in\vXcal\times\Ycal$ according to the output graph $G$, indicating how well the input and the output goes together
 \begin{align*}
 	\psi(\vx,\vy) = \ip{\vw}{\phib(\vx,\vy)} = \sum_{e\in E}\ip{\vw}{\phib_e(\vx,\vy_e)}=\sum_{e\in E}\psi_e(\vx,\vy_e),
 \end{align*}
