@@ -1,19 +1,22 @@
 
 
 
-\chapter{Introduction}
-\section{Motivation and Background}
-\section{Contributions and outline of the thesis}
 
-The thesis is structured as follows.
+
+
+\chapter{Introduction}
+\section{Aim of the Thesis}
+
+
+
+\section{Contributions and Outline of the Thesis}
+
+
 
 
 \chapter{Background}
 
-%\newpage
 
-%
-%
 %
 \section{Single Label Classification}
 
@@ -46,11 +49,12 @@ In addition, for any $1\le\rho\in\RR$ we defined the {$L_{\rho}$-norm of vector 
 \begin{align*}
 	\norm{\vw}_{\rho} = \left(\sum_{i=1}^{d}|\vw[i]|^{\rho}\right)^{\frac{1}{\rho}}.
 \end{align*}
+Without loss of generality, we denote by $||\vw||$ the $L_2$-norm of vector $\vw$ in the following sections.
 
 
 %
 %
-\subsection{Perceptron}
+\subsection{Perceptron}\label{sc_perceptron}
 
 The Rosenblatt's Perceptron algorithm \citep{Rosenblatt58,Rosenblatt62} is one type of linear classifiers that is parameterized by a weight vector $\vw$ and a bias term $b$. 
 The decision boundary given by 
@@ -58,33 +62,33 @@ The decision boundary given by
 	f(x;\vw,b) = \ip{\vw}{\vx} + b =0,
 \end{align*}
 will separate the data into two classes.
-The goal is to learn $\vw$ and $b$ by minimizing the distance of misclassified training examples to the decision boundary.
+The goal of learning is to obtain $\vw$ and $b$ by minimizing the distance of misclassified training examples to the decision boundary.
 
-Assume data point $(x_i,y_i)$ is misclassified, the signed geometric distance from $x_i$ to decision boundary can be computed 
+Assume data point $(\vx_i,y_i)$ is misclassified, the signed geometric distance from $\vx_i$ to decision boundary can be computed according to
 \begin{align*}
-	D(x_i;\vw,b) = -\frac{y_i(\ip{\vw}{\vx_i}+b)}{\norm{\vw}}.
+	D(\vx_i;\vw,b) = -\frac{y_i(\ip{\vw}{\vx_i}+b)}{\norm{\vw}}.
 \end{align*}
 Denote by $\vXcal^m$ the set of misclassified examples, the goal of perceptron is to minimize the distance over all misclassified examples defined as
 \begin{definition}{Perceptron Objective Function.}\label{perceptron}
 	\begin{align*}
-		\underset{\vw,b}{\minimize} \, D(\vw,b) = \underset{\vw,b}{\minimize} \left( -\sum_{x_i\in\vXcal^{m}}y_i[\ip{\vw}{\vx_i}+b]\right).
+		\underset{\vw,b}{\minimize} \, D(\vw,b) = \underset{\vw,b}{\minimize} \left( -\sum_{\vx_i\in\vXcal^{m}}y_i[\ip{\vw}{\vx_i}+b]\right).
 	\end{align*}
 \end{definition}
-To achieve (Definition~\ref{perceptron}), we assume $\vXcal^{m}$ is fixed and compute the partial gradient with respect to parameters
+To optimize (Definition~\ref{perceptron}), we first assume $\vXcal^{m}$ is fixed and compute the partial gradient with respect to parameters $\vw$ and $b$
 \begin{align*}
-	\frac{\partial D(\vw,b)}{\partial\vw} = -\sum_{x_i\in\vXcal^m}{y_ix_i},\\
-	\frac{\partial D(\vw,b)}{\partial b} = -\sum_{x_i\in\vXcal^m}{y_i}.
+	\frac{\partial D(\vw,b)}{\partial\vw} = -\sum_{\vx_i\in\vXcal^m}{y_i\vx_i},\quad
+	\frac{\partial D(\vw,b)}{\partial b} = -\sum_{\vx_i\in\vXcal^m}{y_i}.
 \end{align*}
 In practice, the perceptron algorithm uses stochastic gradient descent that processes iteratively from training data one example at a time.
-At each step, the algorithm makes sure the current $\vw$ and $b$ will correctly separate the current training example. 
+On each step, the algorithm makes sure the current $\vw$ and $b$ will correctly separate the current training example. 
 Once a misclassified example is visited, it adjust the parameter according to the update rule
 \begin{align*}
-	\vw &\leftarrow \vw + \rho y_i x_i,\\
+	\vw &\leftarrow \vw + \rho y_i \vx_i,\\
 	b &\leftarrow b + \rho y_i,
 \end{align*}
 where $\rho$ is the perceptron learning rate.
 \begin{theory}[Perceptron Convergence Theorem \citep{Block62the,Novikoff62}]\label{perceptron_theory}
-	Given a sequence of training examples in pairs $\Scal=\{(x_1,y_1),\cdots,(x_m,y_m)\}$. 
+	Given a sequence of training examples in pairs $\Scal=\{(\vx_1,y_1),\cdots,(\vx_m,y_m)\}$. 
 	For simplicity, we consider a perceptron without bias term $b$.
 	Assume $\norm{\vx_i}\le R$ for all $i\in\{1,\cdots,m\}$.
 	Suppose for some $\gamma>0$ there exists a unit length vector $\norm{\hat{\vw}}=1$ such that $y_i(\ip{\hat{\vw}}{\vx_i})\ge\gamma$ for $i$ (training data $\Scal$ is linearly separable).
@@ -93,13 +97,13 @@ where $\rho$ is the perceptron learning rate.
 \begin{proof}
 	Suppose the $k$'th mistake is made on the $i$'th training example, and current weight vector is $\vw^k$.
 	In addition, we set $\vw^0=\vzero$.
-	As the Perceptron makes a mistake on $(x_i,y_i)$, we immediately have
+	As the Perceptron makes a mistake on $(\vx_i,y_i)$, we immediately have
 	\begin{align*}
 		y_i\ip{\vw_k}{\vx_i} \le 0.
 	\end{align*}
 	According to update rule, we have
 	\begin{align*}
-		\vw^{k+1} = \vw^{k} + \rho y_ix_i.
+		\vw^{k+1} = \vw^{k} + \rho y_i\vx_i.
 	\end{align*}
 	Then, the following holds
 	\begin{align*}
@@ -126,7 +130,7 @@ where $\rho$ is the perceptron learning rate.
 	\end{align*}
 \end{proof}
 Theory~\ref{perceptron_theory} shows that if the data are linearly separable, the perceptron algorithm will make a finite number of mistakes. 
-In particular, the Perceptron algorithm will iterate through the training set and will converge to a vector that well separates all training examples.
+In particular, the perceptron algorithm will iterate through the training set and will converge to a vector that well separates all training examples.
 Moreover, the number of mistakes will be bounded by the minimum gap between the positive and negative examples.
 That is the algorithm converges quickly when the gap $\gamma$ is big.
 We have to keep in mind that the convergence theorem does not say anything about the quality of the solution, though it is built based on the the assumption that there is a ''gap'' between positive and negative examples.
@@ -157,7 +161,7 @@ using the weight vectors and the corresponding weights outputted from the algori
 			\IF{$\hat{y} = y_i$}
 				\STATE $c^k = c^k + 1$
 			\ELSE
-				\STATE $\vw^{k+1} = \vw^{k} + \rho y_ix_i$ \label{perceptron_algorithm_weight_vector}
+				\STATE $\vw^{k+1} = \vw^{k} + \rho y_i\vx_i$ \label{perceptron_algorithm_weight_vector}
 				\STATE $c^{k+1} =1$ \label{perceptron_algorithm_weight}
 				\STATE $k=k+1$
 			\ENDIF
@@ -168,7 +172,7 @@ using the weight vectors and the corresponding weights outputted from the algori
 \end{algorithm}
 
 % TODO: vote perceptron error bound, add reference 
-It is proved that the voted perceptron guarantees to achieve better generalization error than original perceptron \citep{}.
+It is proved that the voted perceptron guarantees to achieve better generalization error than original perceptron \citep{Rosenblatt58,Rosenblatt62}.
 However, voted perceptron is not practical as it has to remember all weight vectors encountered during the training.
 The \textit{averaged perceptron} is a simple alternative, where in stead of store all weight vectors the algorithm only keep the weighted sum $\sum_{l=1}^{k}c^k\vw^l$. 
 The prediction for a new test example $\vx_{ts}$ is computed by 
@@ -182,8 +186,8 @@ which is extreme similar to (\ref{voted_perceptron_prediction}) except for the i
 \subsection{Logistic Regression (\lr)}
 
 % general introduction
-Logistic regression is another important method in statistical machine learning and is closely related to the Perceptron and the Support Vector Machine (Section~\ref{sc_svm}).
-It is a classification model rather than regression \citep{Bishop07}.
+Logistic regression is another important method in statistical machine learning and is closely related to the Perceptron (Section~\ref{sc_perceptron}) and the Support Vector Machine (Section~\ref{sc_svm}).
+It is in fact a classification model rather than regression \citep{Bishop07}.
 It models the conditional probability $p(y=+1|\vx)$ for a binary output variable $y\in\Ycal$.
 %Without loss of generality, in the rest part of this section we use $p(\vx)$ to denote above conditional probability of $p(y|\vx)$ when fixing $y=1$.
 To model the probability, we do not restrict to any particular form, as any unknown parameters can be estimated by \textit{maximum likelihood estimation} (MLE).
@@ -199,19 +203,19 @@ The choice in Logistic Regression is to use logistic transformation of the origi
 \end{align*}
 which by solving for $p(y=+1|\vx)$ results in 
 \begin{align}
-	p(y=+1|\vx;\vw,b) = \frac{1}{1+\exponential{-\ip{\vw}{x}-b}}. \label{lr_1}
+	p(y=+1|\vx;\vw,b) = \frac{1}{1+\exponential{-\ip{\vw}{\vx}-b}}. \label{lr_1}
 \end{align}
 We can also compute
 \begin{align}
-	p(y=-1|\vx;\vw,b)=1-p(y=+1|\vx;\vw,b)=\frac{1}{1+\exponential{\ip{\vw}{x}+b}}. \label{lr_2}
+	p(y=-1|\vx;\vw,b)=1-p(y=+1|\vx;\vw,b)=\frac{1}{1+\exponential{\ip{\vw}{\vx}+b}}. \label{lr_2}
 \end{align}
 Putting together (\ref{lr_1}) and (\ref{lr_2}), we define the Logistic Regression as
 \begin{definition}{Logistic Regression.}\label{logistic_regression}
 	\begin{align*}
-		p(y=\pm1|\vx;\vw,b) = \frac{1}{1+\exponential{-y_i(\ip{\vw}{x}-b)}}.
+		p(y=\pm1|\vx;\vw,b) = \frac{1}{1+\exponential{-y(\ip{\vw}{\vx}-b)}}.
 	\end{align*}
 \end{definition}
-Naturally, we expect the prediction $y=+1$ when $p(y=+1|x;\vw,b)\ge0.5$ and $y=-1$, when $p(y=+1|x;\vw,b)<0.5$.
+Naturally, we expect the prediction $y=+1$ when $p(y=+1|\vx;\vw,b)\ge0.5$ and $y=-1$, when $p(y=+1|\vx;\vw,b)<0.5$.
 The decision rule is similar to perceptron where we predict $y=+1$ when $\ip{\vw}{x}+b\ge0$, and $y=-1$ otherwise.
 Besides decision boundary, Logistic Regression can output the class probability from (Definition~\ref{logistic_regression}) as the the 'distance' of the data point to the decision boundary.
 It is the probabilistic output that makes Logistic Regression no more than a classifier, as it outputs detailed predictions (class probability).
@@ -225,7 +229,7 @@ The likelihood of parameters given data can be computed from
 \end{align}
 To apply MLE, it is easier if, instead of maximizing the likelihood, we maximize the log-likelihood, which turn the product (\ref{lr_likelihood}) into sum
 \begin{align}
-	\log L(\vw,b|D) = \sum_{i=1}^{m}\log p(y_i|\vx_i) = -\sum_{i=1}^{m}\log (1+\exponential{-y_i(\ip{\vx}{\vw}+b)}) \label{lr_likelihood_sum}.
+	\log L(\vw,b|D) = \sum_{i=1}^{m}\log p(y_i|\vx_i) = -\sum_{i=1}^{m}\log (1+\exponential{-y_i(\ip{\vx_i}{\vw}+b)}) \label{lr_likelihood_sum}.
 \end{align}
 
 % logistic regression of other type
@@ -252,11 +256,13 @@ There are also efforts being made to solve the logistic regression from its dual
 The key is to introduce a set of tighter upper bound on (\ref{lr_posteriori_log}) that are parameterized by $\valpha$.
 The bound should have a simple form such that the maximizing (\ref{lr_posteriori_log}) over $\vw$ can be solved analytically with $\alpha$.
 The solution to the original problem is transferred as finding the tighter upper bound for  $\vw$, which is to minimize with respect to $\alpha$.
+\iffalse
 The dual form is given by 
 \begin{align*}
 	\underset{\valpha}{\minimize} & \quad\frac{1}{2}\sum_{i=1}^{m}\sum_{j=1}^{m}\valpha_iy_ix_ix_jy_j\valpha_j + \sum_{i=1}^{m}\left[\valpha_i\log\alpha_i+(\sigma^2-\valpha_i)\log(\sigma^2-\valpha_i)\right] \\
 	\st &\quad 0\le\alpha\le\sigma^2, \, \forall i=\{1,\cdots,m\}.
 \end{align*}
+\fi
 Later on, optimization algorithms that are based on dual form have been developed, for example iterative optimization method \citep{Keerthi05a} and the dual coordinate descent method \citep{Yu11dual}.
 
 % TODO: add detail deviation of dual form of logistic regression
