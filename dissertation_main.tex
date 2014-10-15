@@ -4,21 +4,63 @@
 
 
 
-\chapter{Introduction}
+\chapter{Introduction}\label{ch_introduction}
+
 \section{Aim of the Thesis}
 
+\section{Research Questions}
+
+We investigate the potentials of developing novel structured output learning models to improve the prediction performance in real world multi-task classification problems.
+We start with molecular activity prediction problem where the task is to predict multiple anti-cancer potentials given a drug-like molecules.
+We also study the network influence prediction problem where the goal is to predict the response subnetwork (e.g. a group of people in social network) from the underlying network with nodes performing the action and edges relying the action given an action (e.g. a posted message) performed on the network.
+We focus on the efficiency and the scalability of the structured output learning models, as the inference problem is ofter \nphard to solve.
+Additionally, we wish to provide the theory to explain the behaviour and to guarantee the performance of the models.
+In particular, our research questions can be casted as followings:
+
+\textbf{Question 1}: Is structured output learning models more suitable for predicting multiple interdependent variables in structured output space?
+
+\textbf{Question 2}: Can we efficient compute the inference problem of the structured output learning model which is usually \nphard?
+
+\textbf{Question 3}: How to tackle the problem in structured output learning when the dependency structure is unknown?
+
+\textbf{Question 4}: Can we provide any theories to explain the improvement and to guarantee the empirical risk of the structured output models?
 
 
-\section{Contributions and Outline of the Thesis}
+\section{Outline of the Thesis}
+ 
+The thesis is structured as follows.
+In Chapter~\ref{ch_introduction}, the scope of the research is briefly explained with several research questions being proposed which will be answered in this thesis.
+Chapter~\ref{ch_background} provides the introduction to the problem settings, learning algorithms, and statistical models that are necessary to understand the rest part of the thesis.
+The chapter starts by introducing in Section~\ref{sc_single} several single task classification algorithms, including 
+perceptron (Section~\ref{sc_perceptron}), 
+logistic regression (Section~\ref{sc_lr}), 
+and \svm\ (Section~\ref{sc_svm}).
+Section~\ref{sc_multi} extends the previous section by introducing the learning algorithms designed for multiple interdependent variables in structured output space.
+Ensemble models for both single task and multi-task classification will be briefly covered in Section~\ref{sc_ensemble}.
+Section~\ref{sc_statistics} describes the performance measures and the statistical models that are used for model evaluation and comparison.
+
+Chapter~\ref{ch_models} introduces the novel statistical models developed by the authors.
+In particular, Section~\ref{sc_su10} explains the structured output learning model for molecular activity prediction.
+Section~\ref{sc_su11} and Section~\ref{sc_su14a} discuss three ensemble model (\mve, \amm, \mam) that tackle the problem in structured output learning when the output structure is unknown.
+Section~\ref{sc_su14c} considers \rta\ model that is a major step forward of \mam.
+Section~\ref{sc_su14b} introduces \spin\ for network influence prediction.
+Finally, Chapter~\ref{ch_conclusion} concludes the thesis by answering the research questions and by point out possible future directions.
+
+In this thesis, the ideas and the formalisms of proposed statistical models for structured output learning are explained.
+However, the technical details from the original publications are usually not repeated.
+Furthermore, the notations and the presentations of some proposed models are slightly improved to be better incorporated into a unified framework.
+The background information and the related work of some proposed models are sometimes elaborated in the thesis to help better understand its contribution to the community.
+Empirical evaluations of the proposed models are in nowhere restated, rather, they can be found from original publications. 
 
 
 
 
-\chapter{Background}
+
+\chapter{Background}\label{ch_background}
 
 
 %
-\section{Single Label Classification}
+\section{Single Label Classification}\label{sc_single}
 
 In this section, the author will introduce the basic classification problem known as single task classification.
 The author will explain three prominent algorithms in the area: Perceptron, Logistic Regression and the Support Vector Machines.
@@ -183,7 +225,7 @@ which is extreme similar to (\ref{voted_perceptron_prediction}) except for the i
 
 %
 % logit
-\subsection{Logistic Regression (\lr)}
+\subsection{Logistic Regression (\lr)}\label{sc_lr}
 
 % general introduction
 Logistic regression is another important method in statistical machine learning and is closely related to the Perceptron (Section~\ref{sc_perceptron}) and the Support Vector Machine (Section~\ref{sc_svm}).
@@ -271,7 +313,7 @@ Later on, optimization algorithms that are based on dual form have been develope
 
 %
 % svm
-\subsection{Support Vector Machines (\svm)}
+\subsection{Support Vector Machines (\svm)}\label{sc_svm}
 \label{sc_svm}
 
 % some history
@@ -431,7 +473,7 @@ There are many other active researches on \svm\ optimization that aim to make ke
 %
 %
 % multilabel classification problem
-\section{Structured Output Prediction}
+\section{Structured Output Prediction}\label{sc_multi}
 
 As the learning algorithms for multi-task classification in structured output space have evolved rapidly during the last decade, the author wish to briefly review in this section several prominent structured output learning algorithms, namely,  Structured Perceptron, Conditional Random Field, Maximum-Margin Markov Networks, Structured SVM, and Mutltask Feature Learning.
 These algorithms are also relevant to this thesis.
@@ -442,7 +484,7 @@ These algorithms are mostly from 2010, the period when this field of researches 
 % notations
 \subsection{Preliminary and Notation}\label{multilabel_preliminary}
 
-We will keep most notations from (section~\ref{singlelabel_preliminary}).
+We will keep most notations from (Section~\ref{singlelabel_preliminary}).
 In particular, we examine the following multilabel classification setting.
 We assume data from a domain $\vXcal\times\vYcal$, where $\vXcal$ is a set and $\vYcal$ is the set of multilabels.
 $\vYcal = \Ycal_1\times\cdots\times\Ycal_k$ is composed by a Cartesian product of $k$ sets $\Ycal_i=\{-1,+1\}$.
@@ -664,7 +706,7 @@ Recently, \citet{Paredes12exploit} proposed a method which exploits the informat
 
 %
 % ensemble methdos
-\section{Ensemble Methods}
+\section{Ensemble Methods}\label{sc_ensemble}
 
 Ensemble methods are one of the prominent classification techniques widely used in machine learning community.
 In general, the methods train multiple base classifiers and combine them in order to achiever better classification performance.
@@ -679,7 +721,7 @@ In the later part of the section, we will extend the ensemble methods to structu
 % preliminary notations
 \subsection{Preliminary and Notations}
 
-In addition to the notations introduced in (section~\ref{singlelabel_preliminary}, \ref{multilabel_preliminary}), we assume there is a hypothesis class $\Fcal$ where we generate weak/base hypothesis $f^t(x)\in\Fcal$.
+In addition to the notations introduced in (Section~\ref{singlelabel_preliminary}, \ref{multilabel_preliminary}), we assume there is a hypothesis class $\Fcal$ where we generate weak/base hypothesis $f^t(x)\in\Fcal$.
 By $t$ we intend to index the $t$'th weak hypothesis.
 We denote by $H(x)$ the ensemble framework that is able to combine multiple weak hypothesises and generate a stronger one.
 In many cases, no other information about $f^t(x)$ is available to $H(x)$ except that each weak hypothesis will take in as parameter $x$ and output $y\in\Ycal$ for single label classification ($\vy\in\vYcal$ in multilabel classification respectively).
@@ -840,7 +882,7 @@ Most recently, three other learning algorithms with performance guarantee are pr
 %
 %
 %
-\section{Evaluation and Comparison}
+\section{Evaluation and Comparison}\label{sc_statistics}
 
 In this section, we will briefly introduce the performance measures and statistical test methods that are involved in the publications as well as in the later part of the dissertation.
 These measures will enable us to quantitatively evaluate the performance of the proposed models and measure the significancy compared to other well established methods.
@@ -948,13 +990,13 @@ The test results are often visualized as \textit{$CD$ diagram}.
 % 		chapter
 %
 % --------------------------
-\chapter{Novel Statistical Methods}
+\chapter{Novel Statistical Methods}\label{ch_models}
 
 In this chapter, the author aims to build the connection of the publications as well as to discuss the corresponding contributions.
 Each section will mostly focus on one publication, and will start with introduction and background knowledge that is necessary to understand the content within the section.
 An overview of the theoretical end technical novelties will also be briefly presented.
 
-\section{Structured Output Learning for Molecular Activity Classification}
+\section{Structured Output Learning for Molecular Activity Classification}\label{sc_su10}
 
 The molecular activity classification problem has long been tackled under the single task classification setting.
 On the other hand, multiple interdependent molecular activities are often screened simultaneously.
@@ -1042,7 +1084,7 @@ In correlation thresholding approach, we take all edges that exceed a fixed thre
 
 %
 %
-\section{Graph Labeling Ensemble (\mve)}
+\section{Graph Labeling Ensemble (\mve)}\label{sc_su11}
 
 Multi-task molecular activities classification with structured output learning that relies on the representation of the cell-lines structures allows us to model the dependencies betweem different output variables.
 When apply structured output learning, it is explicitly assumed the structure of the output network is fully observed.
@@ -1073,7 +1115,7 @@ In random pairing approach, we randomly draw two vertices at a time and couple t
 The approach will output disconnected pairs.
 
 
-\section{Random Graph Ensemble (\amm, \mam)}
+\section{Random Graph Ensemble (\amm, \mam)}\label{sc_su14a}
 
 Through extensive experiments in \citepub{su11}, we have validated the feasibility of constructing a majority voting ensemble (\mve) of structured output learner built on a set of random output graphs.
 The proposed method also improved the performance on molecular activity classification problem.
@@ -1152,7 +1194,7 @@ The former measures the variability of individual classifiers learned from diffe
 %
 % RTA
 %
-\section{Random Spanning Tree Approximation (\rta)}
+\section{Random Spanning Tree Approximation (\rta)}\label{sc_su14c}
 
 Random Spanning Tree Approximation (\rta) model developed in \citepub{su14c} is a major step forward of \mam.
 The goal of \rta\ is to bring in joint learning and inference framework as well as to provide extensive theory to guarantee the performance and the tractability of the inference.
@@ -1172,7 +1214,7 @@ In terms of the intractability issue of graph inference problem, many techniques
 \citet{Wainwright05map} proposed MAP inference with tree-based and \textit{linear programming} (LP) relaxation.
 Efficient inference on special case of graph has also been extensively studied in \citep{Globerson07approximate}.
 
-\citepub{su14c} is motivated by well-established max-margin assumption (section~\ref{}) and investigate whether the problem of inference over a complete graph in structured output learning can be avoided in a analogous way.
+\citepub{su14c} is motivated by well-established max-margin assumption (Section~\ref{}) and investigate whether the problem of inference over a complete graph in structured output learning can be avoided in a analogous way.
 Start from a sampling results, \citepub[Lemma 3]{su14c} shows that with high probability a big fraction of margin from the complete graph can be obtained by a sample of spanning trees of small size.
 Besides, \citepub[Theorem 5]{su14c} shows the good generalization can also be guaranteed when learning with in stead of complete graph a sample of spanning trees.
 
@@ -1221,7 +1263,7 @@ which not only enjoys a polynomial sized parameter space but also enable kernel 
 
 %
 %
-\section{\spin\ for Network Response Prediction}
+\section{\spin\ for Network Response Prediction}\label{sc_su14b}
 
 In \citepub{su14a}, a structure output learning model for network response prediction problem is developed.
 The proposed model, \spin, is \textit{context-sensitive} and is different from the previous the state-of-the-art methods which only model the influence in terms of the network connectivity.
@@ -1334,7 +1376,7 @@ Diffusion scaling has the effect of shrinking the distance to the nodes that are
 %
 
 
-\chapter{Discussion and Conclusion}
+\chapter{Discussion and Conclusion}\label{ch_conclusion}
 
 
 
