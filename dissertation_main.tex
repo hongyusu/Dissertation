@@ -8,11 +8,19 @@
 
 \section{Aim of the Thesis}
 
+In this thesis, we study the supervised learning in structure output space, also known as structured output prediction.
+
+\textit{Supervised learning}, one of the most important fields in \textit{machine learning}, is usually instantiated as learning a function that is capable of predicting the best value/values for the output variable $\vy$ given an observed input variable $\vx$.
+The function is learned by utilizing a set of input and output pairs known as training examples.
+
+
+
+
 \section{Research Questions}
 
-We investigate the potentials of developing novel structured output learning models to improve the prediction performance in real world multi-task classification problems.
-We start with molecular activity prediction problem where the task is to predict multiple anti-cancer potentials given a drug-like molecules.
-We also study the network influence prediction problem where the goal is to predict the response subnetwork (e.g. a group of people in social network) from the underlying network with nodes performing the action and edges relying the action given an action (e.g. a posted message) performed on the network.
+We investigate the potentials of developing novel structured output learning models to improve the prediction performance in real world multi-task classification problems (e.g. molecular activity prediction, network influence prediction).
+%We start with molecular activity prediction problem where the task is to predict multiple anti-cancer potentials given a drug-like molecules.
+%We also study the network influence prediction problem where the goal is to predict the response subnetwork (e.g. a group of people in social network) from the underlying network with nodes performing the action and edges relying the action given an action (e.g. a posted message) performed on the network.
 We focus on the efficiency and the scalability of the structured output learning models, as the inference problem is ofter \nphard to solve.
 Additionally, we wish to provide the theory to explain the behaviour and to guarantee the performance of the models.
 In particular, our research questions can be casted as followings:
@@ -26,8 +34,15 @@ In particular, our research questions can be casted as followings:
 \textbf{Question 4}: Can we provide any theories to explain the improvement and to guarantee the empirical risk of the structured output models?
 
 
-\section{Outline of the Thesis}
- 
+\section{Contribution and Outline of the Thesis}
+
+The main contribution of the thesis is to present a learning framework for structured output prediction with both empirical and theoretical guarantee.
+Under the framework, several learning algorithms are proposed.
+Unlike previous structured output learning algorithms, the proposed models do not assume any observed structured on the output variables, and thus largely widen the applicability of the structured output learning.
+Meanwhile, the thesis presents several attractive theoretical properties which support the new learning framework and guarantee the generalization error.
+In addition to the main contribution, the thesis also proposes a new learning algorithm that is capable of predicting a directed acyclic graph and demonstrates the performance on influence network prediction problem.
+Besides, the thesis also focuses on elegant optimization strategy with which the new proposed models often avoid the exponential parameter space and \nphard\ inference problem.
+
 The thesis is structured as follows.
 In Chapter~\ref{ch_introduction}, the scope of the research is briefly explained with several research questions being proposed which will be answered in this thesis.
 Chapter~\ref{ch_background} provides the introduction to the problem settings, learning algorithms, and statistical models that are necessary to understand the rest part of the thesis.
