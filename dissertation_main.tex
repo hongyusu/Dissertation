@@ -6,23 +6,33 @@
 
 \chapter{Introduction}\label{ch_introduction}
 
-\section{Aim of the Thesis}
+\section{Scope of the Thesis}
 
-In this thesis, we study the supervised learning in structure output space, also known as structured output prediction.
+In this thesis, we study the \textit{supervised learning} in structure output space, also known as \textit{structured output prediction}.
 
-\textit{Supervised learning}, one of the most important fields in \textit{machine learning}, is usually instantiated as learning a function that is capable of predicting the best value/values for the output variable $\vy$ given an observed input variable $\vx$.
+\textit{Machine learning}, a active research field in information and computer science, has drawn enormous attentions during laster few decades, not only because it develops intelligent systems that generalize well from previous observed examples; but also because it is grounded from rich statistical learning theories that prove the feasibility and guarantee the performance.
+Machine learning has in practice provided lots of inventions, which people may use many times a day without knowing it, to name but a few, from web searching engine to self-driving car, from optical image recognition to email spam filter, from automatic stock exchange to online recommender system.
+
+\textit{Supervised learning}, one of the most important fields in \textit{machine learning}, is usually instantiated as learning a function that is capable of predicting the best value for the output variable $\vy$ given an observed input variable $\vx$.
 The function is learned by utilizing a set of input and output pairs known as training examples.
+In the classic supervised learning setting, the value that the output variable $\vy$ can take is often no more than one discrete or continuous number.
+This is often referred as single-task classification in machine learning community.
+Many excellent learning algorithms have been designed for the problems and achieved remarkable success in many applications.
 
+However, many real world problems require multiple interdependent output variables defined in structured output space to be predicted at the same time, known as \textit{structured output prediction}.
+Otherwise, the problem can be summarized as learning function for mapping from arbitrary input to arbitrary output.
+In this case, single task classification approaches render inefficiency and incapability of modeling the interdependency.
+In addition, the interdependency can be given either explicitly as output graph that connecting multiple output variables (e.g. sequence parsing, network influence prediction, hierarchical document classification), or implicitly with the only assumption that the output variable are correlated (e.g. molecular classification, computer vision).
+Nevertheless, it is crucial to capture the common properties shared between similar output variables in order to achieve good performance and generalize well.
 
+Most existing methods for structured output prediction do not tackle the situation when the output graph structure is not observed.
+Especially, the learning model built on Markov network over multiple output variables will break down without the observed output structure.
+On the other hand, methods that do not explicitly assume the output structure usually have less power of modeling the interdependency and often struggle in optimizing the model.
 
-
-\section{Research Questions}
-
-We investigate the potentials of developing novel structured output learning models to improve the prediction performance in real world multi-task classification problems (e.g. molecular activity prediction, network influence prediction).
-%We start with molecular activity prediction problem where the task is to predict multiple anti-cancer potentials given a drug-like molecules.
-%We also study the network influence prediction problem where the goal is to predict the response subnetwork (e.g. a group of people in social network) from the underlying network with nodes performing the action and edges relying the action given an action (e.g. a posted message) performed on the network.
-We focus on the efficiency and the scalability of the structured output learning models, as the inference problem is ofter \nphard to solve.
-Additionally, we wish to provide the theory to explain the behaviour and to guarantee the performance of the models.
+In this thesis, we investigate the potentials of developing novel structured output prediction models to improve the prediction performance in real world multi-task classification problems (e.g. molecular activity prediction, network influence prediction).
+In particular, the proposed model is capable of learning without predefined structured.
+We focus on the efficiency and the scalability of the structured output prediction models, as the inference problem is ofter \nphard to solve.
+Additionally, we provide the theory to explain the behaviour and to guarantee the performance of the models.
 In particular, our research questions can be casted as followings:
 
 \textbf{Question 1}: Is structured output learning models more suitable for predicting multiple interdependent variables in structured output space?
