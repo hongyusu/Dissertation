@@ -128,7 +128,7 @@ Without loss of generality, we denote by $||\vw||$ the $L_2$-norm of vector $\vw
 The Rosenblatt's Perceptron algorithm \citep{Rosenblatt58,Rosenblatt62} is one type of linear classifiers that is parameterized by a weight vector $\vw$ and a bias term $b$. 
 The decision boundary given by 
 \begin{align*}
-	f(x;\vw,b) = \ip{\vw}{\vx} + b =0,
+	f(x;\vw,b) = \ip{\vw}{\vx} + b =0
 \end{align*}
 will separate the data into two classes.
 The goal of learning is to obtain $\vw$ and $b$ by minimizing the distance of misclassified training examples to the decision boundary.
@@ -150,7 +150,7 @@ To optimize (Definition~\ref{perceptron}), we first assume $\vXcal^{m}$ is fixed
 \end{align*}
 In practice, the perceptron algorithm uses stochastic gradient descent that processes iteratively from training data one example at a time.
 On each step, the algorithm makes sure the current $\vw$ and $b$ will correctly separate the current training example. 
-Once a misclassified example is visited, it adjust the parameter according to the update rule
+Once a misclassified example is visited, it adjusts the parameter according to the update rule
 \begin{align*}
 	\vw &\leftarrow \vw + \rho y_i \vx_i,\\
 	b &\leftarrow b + \rho y_i,
@@ -178,7 +178,7 @@ where $\rho$ is the perceptron learning rate.
 	\begin{align*}
 		\ip{\vw^{k+1}}{\hat{\vw}} = \ip{\vw^k}{\hat{\vw}} + \rho y_i\ip{\vx_i}{\hat{\vw}} \ge \ip{\vw^k}{\hat{\vw}} + \rho\gamma.
 	\end{align*}
-	Straight forward induction give us
+	Straight forward induction gives us
 	\begin{align}
 		\ip{\vw^{k+1}}{\hat{\vw}}\ge k\rho\gamma. \label{induction1}
 	\end{align}
@@ -189,7 +189,7 @@ where $\rho$ is the perceptron learning rate.
 		= \norm{\vw^k}^2 + \rho^2\norm{\vx_i}^2 + 2\rho y_i\ip{\vx_i}{\vw^k}
 		\le \norm{\vw^k}^2 + \rho^2R^2
 	\end{align*}
-	Straight forward induction give us
+	Straight forward induction gives us
 	\begin{align}
 		\norm{\vw^{k+1}}^2\le k\rho^2R^2. \label{induction2}
 	\end{align}
@@ -202,20 +202,20 @@ Theory~\ref{perceptron_theory} shows that if the data are linearly separable, th
 In particular, the perceptron algorithm will iterate through the training set and will converge to a vector that well separates all training examples.
 Moreover, the number of mistakes will be bounded by the minimum gap between the positive and negative examples.
 That is the algorithm converges quickly when the gap $\gamma$ is big.
-We have to keep in mind that the convergence theorem does not say anything about the quality of the solution, though it is built based on the the assumption that there is a ''gap'' between positive and negative examples.
+We have to keep in mind that the convergence theorem does not say anything about the quality of the solution, though it is built based on the assumption that there is a ``gap'' between positive and negative examples.
 
 The standard Perceptron algorithm supposes that the data are linearly separable, iterates over the training set, and eventually converges.
 However, the setting is less interesting for most applications where the data might not be linearly separable or it takes too long for the algorithm to converge.
 Therefore, we need to find out the best decision rule given a set of updates.
 
-\textit{Voted Perceptron} developed in \citep{Freund99large} is a straight forward modification of the standard Perceptron
-As described in (Algorithm~\ref{voted_perceptron}), the Voted perceptron algorithm keeps track all weight vectors that appears during training phase. (line~\ref{perceptron_algorithm_weight_vector}) and their weights (line~\ref{perceptron_algorithm_weight}).
-The weight can be seen as the 'survival time' of the weight vector during Perceptron training.
+\textit{Voted Perceptron} developed in \citep{Freund99large} is a straight forward modification of the standard perceptron.
+As described in (Algorithm~\ref{voted_perceptron}), the voted perceptron algorithm keeps track all weight vectors that appears during training phase (line~\ref{perceptron_algorithm_weight_vector}) and their weights (line~\ref{perceptron_algorithm_weight}).
+The weight can be seen as the ``survival time'' of the weight vector during Perceptron training.
 The prediction for a new test example $\vx_{ts}$ is computed by 
 \begin{align}
 	y_{ts} = \sign\left({\sum_{l=1}^{k}c^l(\sign{\ip{\vw^l}{\vx_{ts}}+b^{l}}})\right) \label{voted_perceptron_prediction}
 \end{align}
-using the weight vectors and the corresponding weights outputted from the algorithm (line~\ref{perceptron_algorithm_average}).
+using the weight vectors and the corresponding weights output from the algorithm (line~\ref{perceptron_algorithm_average}).
 \begin{algorithm}
 \caption{Voted Perceptron Learning Algorithm}
 \label{voted_perceptron}
@@ -380,7 +380,7 @@ Given a set of training example $D$, we also define the margin with respect to $
 \end{align*}
 
 Our goal is to find the separating hyperplane such that it maximizes the margin with respect to all training data while separating the training examples into two classes.
-Naturally, this corresponds to finding a ''big-gap'' between two classes.
+Naturally, this corresponds to finding a ``big-gap'' between two classes.
 The max-margin solution is given as \citep{Bishop07}
 \begin{align*}
 	\underset{\vw,b,\gamma}{\maximize} &\quad \gamma\\
@@ -433,7 +433,7 @@ We obtain the following dual optimization problem
 		\st & \quad \sum_{i=1}^{m}\alpha_iy_i=0, \, 0\le\alpha_i\le C, \, \forall i\in\{1,\cdots,m\}.
 	\end{align*}
 \end{definition}
-It is not difficult to verify that according to KKT condition only examples with both $\xi_i=0$ and satisfying equality constraints in (\ref{softsvmconstraint}) will be ''active'' and have dual variable $\alpha_i>0$.
+It is not difficult to verify that according to KKT condition only examples with both $\xi_i=0$ and satisfying equality constraints in (\ref{softsvmconstraint}) will be ``active'' and have dual variable $\alpha_i>0$.
 These training examples lie on the margin and have $\gamma_i=1$.
 They are called \textit{support vectors} in \svm\ optimization problem.
 In fact the number of support vectors is usually smaller than the size of the training set.
@@ -471,7 +471,7 @@ where $\sigma$ is the Gaussian width parameter.
 
 % optimization of support vector machine,, original approach
 The optimization techniques for solving \svm\ have been intensively studied.
-A ''chunking'' method was developed in \citep{Vapnik82estimation} which takes the advantage that the \svm\ solution only depends on the nonzero Lagrangian multipliers.
+A ``chunking'' method was developed in \citep{Vapnik82estimation} which takes the advantage that the \svm\ solution only depends on the nonzero Lagrangian multipliers.
 The method breaks down the original optimization problem into a set of smaller problems, and solves in each iteration a small problem that contains the nonzero Lagrangian multipliers from last step and a fixed number of worst examples that violate the constraints.
 Following the similar idea, \citet{Osuna97an} proposed a decomposition strategy to solve \svm\ on very large dataset.
 The algorithm decomposes the dual variables into an active part (working set) and an inactive part.
@@ -484,7 +484,7 @@ The implementation of the algorithm is well-known as \svmlight.
 The decomposition strategy was further developed by solving in each iteration a smallest as possible optimization that only contains two Lagrangian multipliers, which is known as \textit{Sequential Minimum Optimization} (SMO) \citep{Platt98sequential,Platt99fast}.
 \smo\ is the basis of another powerful software package \libsvm\ developed by \citet{Chang11libsvm}.
 \citet{Perezcruz04double} proposed a double-chunking methods to further speed up the decomposition type of training. 
-Similarly yet another approach ''digesting'' \citep{Decoste02support} optimizes subsets close to completion before adding new data, which save huge amount of memory.
+Similarly yet another approach ``digesting'' \citep{Decoste02support} optimizes subsets close to completion before adding new data, which save huge amount of memory.
 
 Another line of research to speed up \svm\ training is to divide the original problem into subproblems of smaller size, optimize \svm\ on each subproblem, and combine the results from each subproblem.
 In \citep{Tresp00a,Schwaighofer01the}, the authors proposed a Bayesian scheme to combine the models from subproblems.
