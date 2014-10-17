@@ -1440,9 +1440,15 @@ We use $K$-best inference algorithm developed in \citepub{su14c} for the inferen
 We have also developed \sdp\ inference algorithm for the inference problem defined on directed graph.
 
 
-\textbf{Question 4}: It the proposed learning framework well motivated? Can we explain the improvement and guarantee the empirical risk of the proposed structured output prediction models?
+\textbf{Question 4}: What is the motivation of the proposed structured output learning framework? Can we explain the improvement and guarantee the empirical risk of the proposed models?
 
-The idea of learning from a random sample of spanning tree as output graph has been explained in \citepub{su14c} as an approximation to learning with a complete graph in terms of margin achieved on a set of training examples.
+The proposed learning framework is designed for structured output prediction problem with unknown output structure.
+Learning with any observed structure can be seen as a special case of learning with a complete graph.
+The idea of learning from a random sample of spanning trees as output graph has been explained in \citepub{su14c} as an approximation to learning with a complete graph in terms of margin achieved on a set of training examples.
+Thus, the proposed new learning framework is well motivated.
+The improvement of the performance can be explained in terms of reconstruction error of the compatibility scores as in \citepub{su14a}.
+\citepub{su14c} also provide the generalization error for the proposed model.
+
 
 
 
