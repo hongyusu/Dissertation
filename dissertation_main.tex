@@ -437,7 +437,7 @@ It is not difficult to verify that according to KKT condition only examples with
 These training examples lie on the margin and have $\gamma_i=1$.
 They are called \textit{support vectors} in \svm\ optimization problem.
 In fact the number of support vectors is usually smaller than the size of the training set.
-The property is extreme useful, as the weight vector can be expressed as the linear combination of the training examples
+The property is extremely useful, as the weight vector can be expressed as the linear combination of the training examples
 \begin{align*}
 	\vw = \sum_{i=1}^{m}\alpha_iy_i\vx_i.
 \end{align*}
@@ -577,7 +577,7 @@ The update usually leads to over-fitting and a simple refinement, called "averag
 \end{algorithmic}
 \end{algorithm}
 
-In fact, structured perceptron makes two strong assumptions that restricts its power and applicability.
+In fact, structured perceptron makes two strong assumptions that restrict its power and applicability.
 First, the framework assumes 0/1 loss over output variables, that is $\vell(\vy,\hat{\vy})=\ind{\vy\neq\hat{\vy}}$, such that the nearly correct and the completely incorrect output labels will lead to the same update of the weight parameter during the training.
 Secondly, it tacitly assumes that the argmax problem can be solved efficiently, which is generally not true in many structured output space.
 In the original work, \citet{collins02a} only demonstrated the algorithm on sequence tagging problem with Viterbi decoding.
@@ -619,8 +619,8 @@ In order to make \crf\ work in practice, one has to make sure that the log norma
 % sub section: m3n
 \subsection{Max-Margin Markov Network (\mmmn)}
 
-The Max-Margin Markov Network (\mmmn) unifies the frameworks of kernel based discriminative learning and probabilistic probabilistic graphical model \citep{Taskar04max}.
-The model defines a log-linear Markov network over a set of output variables, thus, it is capable of modelling the correlation between these output variables.
+The Max-Margin Markov Network (\mmmn) unifies the frameworks of kernel based discriminative learning and probabilistic graphical model \citep{Taskar04max}.
+The model defines a log-linear Markov network over a set of output variables, thus, it is capable of modeling the correlation between these output variables.
 Recall that Support Vector Machine (\svm) searches for a feature weight vector of smaller $L_2$ norm, which achieves a margin of at least one on training examples for the purpose of good generalization power.
 Following the same principal, \mmmn\ defines a margin-based quadratic programming optimization problem for the weight vector of the model.
 In particular, it extends \svm\ to structured output space via a loss function $\ell$ that requires the score difference between true output label $\vy_i$ and any incorrect label ${\vy}$ be at least $\vell(\vy_i,{\vy})$.
@@ -636,7 +636,7 @@ where $\xi_i$ denotes the slack allotted to each example to make sure solution c
 The intuition behind the optimization is to maximizing the margin from each training example between the correct output label $\vy_i$ and any incorrect label ${\vy}$.
 In particular, the margin is scaled by the loss function $\vell(\vy_i,{\vy})$ such that the incorrect label with bigger loss will require larger margin. 
 
-It is immediately clear that the primal optimization problem of \mmmn\ (Definition~\ref{def_mmmn}) is difficult to solve as there are exponential numbers of constraints, one being instantiated for each pair of training example and pseudo label $(x,\vy)$.
+It is immediately apparent that the primal optimization problem of \mmmn\ (Definition~\ref{def_mmmn}) is difficult to solve as there are exponential numbers of constraints, one being instantiated for each pair of training example and pseudo label $(x,\vy)$.
 The corresponding dual form is also difficult as there are exponential number of dual variables \cite[p.~4]{Taskar04max}.
 Fortunately, by exploring the Markov network structure defined on the output labels, the original problem can be formulated into factorized dual quadratic programming, as long as the loss function $\vell$ and joint feature map $\phib$ are decomposable over the Markov network.
 
@@ -866,7 +866,7 @@ The feature split process of decision tree is deterministic given a set of featu
 \subsection{Ensemble Methods in Structured Output Space}
 
 The ensemble methods have been initially developed for single task classification \citep{Breiman96bagging,Freund97a} or regression tasks \citep{Breiman96bagging}, as it is straightforward to combine multiple scalar output variables.
-However, it is not immediately clear how to combine vector valued outputs in multilabel structured output space.
+However, it is not immediately apparent how to combine vector valued outputs in multilabel structured output space.
 
 \adaboostmh\ is the multilabel variance of original \adaboost\ algorithm proposed by \citet{Schapire99improved}, which is further developed by \citet{Esuli2008boosting}.
 The core idea of \adaboostmh\ is to adopt hamming loss instead of 0/1 loss. 
@@ -897,7 +897,7 @@ The returned prediction $H(x)$ is the combination of base learners $f^t(x)$ weig
 Furthermore, many other ensemble approaches have been proposed and applied in specific areas, including, in natural language processing applications \citep{Collins05distrimnative,Zeman05improving,Sagae06parsing,Zhang09kbest} and 
 in text and speech recognition applications \citep{Fiscus97a,Benesty08speech,Petrov10products}.
 Limiting the applicability of these methods is the fact that they are mostly extensions of the ensemble approaches for single task problem, and are specially tailored for the applications.
-It is not immediately clear how to apply these methods to other machine learning tasks.
+It is not immediately apparent how to apply these methods to other machine learning tasks.
 In addition, other methods that are based on boosting or bagging are also developed in \citep{Wang07simple,Kocev13tree}.
 Most recently, three other learning algorithms with performance guarantee are proposed in \citep{Cortes14semble}.
 
@@ -1461,7 +1461,7 @@ We have also developed \sdp\ inference algorithm for the inference problem defin
 \section{Future Work}
 
 What has been shown in the thesis is a new learning framework with algorithm instantiations for structured output prediction problems where the structure of the output is not known but is expected to play an important role.
-An immediately extension is to explore its enormous potentials in real world practical data analysis applications with the significant benefit that we do not need to know the output structure as \textit{prior}.
+An immediate extension is to explore its enormous potentials in real world practical data analysis applications with the significant benefit that we do not need to know the output structure as \textit{prior}.
 In addition, since the inference algorithm designed for optimizing over a random sample of spanning tree is tractable both in theoretic analysis and empirical results, we can apply the model on the structure prediction problems for which the output structure is rather complex.
 
 With respect to algorithm development and theoretical study, we plan to continue with \rta\ framework that performs joint learning and inference over a random sample of spanning trees.
