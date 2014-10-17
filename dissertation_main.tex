@@ -1457,7 +1457,20 @@ We have also developed \sdp\ inference algorithm for the inference problem defin
 
 \section{Future Work}
 
-What has been shown in the thesis is a new learning framework with algorithm instantiation for structured output learning where the structure of the output is not known but is expected to play an important role.
+What has been shown in the thesis is a new learning framework with algorithm instantiations for structured output prediction problems where the structure of the output is not known but is expected to play an important role.
+An immediately extension is to explore its enormous potentials in real world practical data analysis applications with the significant benefit that we do not need to know the output structure as \textit{prior}.
+In addition, since the inference algorithm designed for optimizing over a random sample of spanning tree is tractable both in theoretic analysis and empirical results, we can apply the model on the structure prediction problems for which the output structure is rather complex.
+
+With respect to algorithm development and theoretical study, we plan to continue with \rta\ framework that performs joint learning and inference over a random sample of spanning trees.
+In particular, we will explore the possibility of applying $L_1$ norm combination of the feature weight parameter $\vw_{T_t}$ of individual random spanning tree, instead of using convex $L_2$ norm combination. 
+Learning with $L_1$ norm regularization of parameter combination can be expressed into an equivalent form of learning weighted $L_2$ norm regularization \citep{Rakotomamonjy08simplemkl}, where the weight of $\{\vw_{T_t}\}_{t=1}^{T}$ is the extra parameter during the optimization.
+We also gain benefit by seeing the weight as the fitness of each spanning tree to current training data.
+Similar to $L_2$ norm, the studies on generalization error and the condition for the tractable inference are required.
+Besides the alternative optimization for the $L_1$ norm combination in \citep{Rakotomamonjy08simplemkl}, we plan to develop more elegant optimization strategy for the problem. 
+
+
+
+
 
 
 

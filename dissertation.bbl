@@ -636,6 +636,11 @@ Pérez-cruz, O., Figueiras-vidal, A.~R., and Artés-rodríguez, A. (2004).
 \newblock Double chunking for solving svms for very large datasets.
 \newblock In {\em Learning’04, Elche, Spain (2004)}.
 
+\bibitem[Rakotomamonjy et~al., 2008]{Rakotomamonjy08simplemkl}
+Rakotomamonjy, A., , Bach, F., Canu, S., and Grandvalet, Y. (2008).
+\newblock implemkl.
+\newblock {\em Journal of Machine Learning Research 9}.
+
 \bibitem[Ralaivola et~al., 2005]{Ralaivola05graph}
 Ralaivola, L., Swamidass, S., Saigo, H., and Baldi, P. (2005).
 \newblock Graph kernels for chemical informatics.
