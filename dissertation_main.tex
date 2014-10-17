@@ -19,18 +19,18 @@ In the classic supervised learning setting, the value that the output variable $
 This is often referred as single-task classification in machine learning community.
 Many excellent learning algorithms have been designed for the problems and achieved remarkable success in many applications.
 
-However, many real world problems require multiple interdependent output variables defined in structured output space to be predicted at the same time, known as \textit{structured output prediction}.
+However, many real world problems require multiple interdependent output variables defined in structured output space to be predicted at the same time, known as \textit{multi-task structured output prediction}.
 Otherwise, the problem can be summarized as learning function for mapping from arbitrary input to arbitrary output.
 In this case, single task classification approaches render inefficiency and incapability of modeling the interdependency.
-In addition, the interdependency can be given either explicitly as output graph that connecting multiple output variables (e.g. sequence parsing, network influence prediction, hierarchical document classification), or implicitly with the only assumption that the output variable are correlated (e.g. molecular classification, computer vision).
-Nevertheless, it is crucial to capture the common properties shared between similar output variables in order to achieve good performance and generalize well.
+In addition, the interdependency can be given either explicitly as the output graph that connecting multiple output variables (e.g. sequence parsing, network influence prediction, hierarchical document classification), or implicitly with the only assumption that the output variable are correlated (e.g. molecular classification, computer vision).
+Nevertheless, it is crucial to capture the common properties shared between similar output variables in order to achieve good performance and to generalize well.
 
 Most existing methods for structured output prediction do not tackle the situation when the output graph structure is not observed.
-Especially, the learning model built on Markov network over multiple output variables will break down without the observed output structure.
-On the other hand, methods that do not explicitly assume the output structure usually have less power of modeling the interdependency and often struggle in optimizing the model.
+Especially, the learning models built on Markov network over multiple output variables will break down without the observed output structure.
+On the other hand, methods that do not explicitly assume the output structure usually have less power of modeling the interdependency and often struggle in optimization.
 
 In this thesis, we investigate the potentials of developing novel structured output prediction models to improve the prediction performance in real world multi-task classification problems (e.g. molecular activity prediction, network influence prediction).
-In particular, the proposed model is capable of learning without predefined structured.
+In particular, the proposed model is capable of learning without predefined structure.
 We focus on the efficiency and the scalability of the structured output prediction models, as the inference problem is ofter \nphard to solve.
 Additionally, we provide the theory to explain the behaviour and to guarantee the performance of the models.
 In particular, our research questions can be casted as followings:
@@ -51,7 +51,7 @@ Under the framework, several learning algorithms are proposed.
 Unlike previous structured output learning algorithms, the proposed models do not assume any observed structured on the output variables, and thus largely widen the applicability of the structured output learning.
 Meanwhile, the thesis presents several attractive theoretical properties which support the new learning framework and guarantee the generalization error.
 In addition to the main contribution, the thesis also proposes a new learning algorithm that is capable of predicting a directed acyclic graph and demonstrates the performance on influence network prediction problem.
-Besides, the thesis also focuses on elegant optimization strategy with which the new proposed models often avoid the exponential parameter space and \nphard\ inference problem.
+Besides, the thesis also focuses on elegant optimization strategy with which the newly proposed models often avoid the exponential parameter space and \nphard\ inference problem.
 
 The thesis is structured as follows.
 In Chapter~\ref{ch_introduction}, the scope of the research is briefly explained with several research questions being proposed which will be answered in this thesis.
@@ -1399,9 +1399,51 @@ Diffusion scaling has the effect of shrinking the distance to the nodes that are
 
 %
 %
+\chapter{Conclusions and Future Directions}\label{ch_conclusion}
+
+In this thesis, we study supervised learning in structured output space of which the task is to predict multiple interdependent variables for an arbitrary input variable.
+In particular, we focus on the problem of structured output learning when the output structure is not observed.
+We propose a learning framework that is capable of optimizing on a set of random output spanning trees when the output graph structure is missing.
+We provide rich theory to justify our learning framework as well as to guarantee the performance.
+We also study the network influence prediction problem for which we proposed a new structure output prediction model that can predict a direct acyclic graph.
+We focus on the optimization of the proposed models for which we usually avoid a exponential size parameter space and the \nphard inference problem.
+
+We posed several research question at the beginning of the thesis which are served as the guide through the presentation of the work.
+Section~\ref{sc_single} and Section~\ref{sc_multi} introduce the backgrounds for both single-task and multi-task classification settings as well as discuss the algorithms that are relevant to the thesis.
+Section~\ref{sc_ensemble} presents a few ensemble approaches that are also close related to the algorithm framework developed in the thesis.
+Chapter~\ref{ch_models} is devoted to bringing in novel statistical models for structured output prediction that are developed by the author.
+We will revisit the research questions with the insights and the results we gain from the novel statistical models discussed in the thesis as well as detailed in the publications.
+In particular, we give the answer to the following questions.
+
+\textbf{Question 1}: Is structured output learning models more suitable for predicting multiple interdependent variables in structured output space?
+
+Multi-task structured output prediction problem presented in Section~\ref{sc_multi} requires multiple output variables to be predicted at the same time.
+The structured output prediction models are more suitable for the problem as it can describe the interdependencies between the output variables and is more efficient compared to single-task models presented in Section~\ref{sc_single}.
+Besides, we demonstrate the performance of the structured output prediction model in molecular activity prediction problem in \citepub{su10} and in network influence prediction problem in \citepub{su14a}.
+
+\textbf{Question 3}: How to tackle the problem in structured output learning when the dependency structure is unknown?
+
+As it is often difficult to get the output graph structure that describes the interdependencies of output variables, we have developed several learning algorithms which eventually lead to a general framework that enable guide us to learn from a set of random output spanning trees.
+This is based on the observation that any graph structure can be expressed by a complete graph connecting output variables.
+Thus, we transfer the learning with unknown structure into learning with a complete graph.
+With extensive theories in \citepub{su14c}, we are able to show that with a set of random spanning trees we can approximate the margin achieved by the complete graph.
+Therefore, we are able to develop efficient learning algorithm based on a collection of random spanning trees.
+
+\textbf{Question 2}: Can we efficient compute the inference problem of the structured output learning model which is usually \nphard?
+
+The difficulty of the proposed structured output prediction models lies in two aspect, exponential parameter space and \nphard\ inference.
+To avoid the exponential parameter space, we use marginalize dual decomposition technique which reduces the parameter space to polynomial size in terms of the edges in the output graph.
+To overcome the \nphard\ inference problem, we adopted different inference techinques.
+We use loopy belief propagation for the inference problem defined on general graph with output a approximate solution.
+We use dynamic programming for the inference problem defined on a tree where the exact solution is guaranteed.
+We use $K$-best inference algorithm developed in \citepub{su14c} for the inference problem defined on a set of random spanning trees.
+We have also developed \sdp\ inference algorithm for the inference problem defined on directed graph.
 
 
-\chapter{Discussion and Conclusion}\label{ch_conclusion}
+\textbf{Question 4}: It the proposed learning framework well motivated? Can we explain the improvement and guarantee the empirical risk of the proposed structured output prediction models?
+
+The idea of learning from a random sample of spanning tree as output graph has been explained in \citepub{su14c} as an approximation to learning with a complete graph in terms of margin achieved on a set of training examples.
+
 
 
 
@@ -1412,9 +1454,6 @@ Diffusion scaling has the effect of shrinking the distance to the nodes that are
 % Refer to the Conference paper of this example document
 %\citepub[p.~2]{su14a} \& \cpub[Sec.~ 1]{su14a} \&  \cp[pp.~1--2]{su14a} \& \pageref{su14a} \& \ref{su14a} 
 
-
-%\section{Section Heading}
-%\lipsum[5]
 
 \bibliographystyle{apalike} 
 \bibliography{dissertation}
