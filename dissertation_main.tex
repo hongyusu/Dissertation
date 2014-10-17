@@ -286,7 +286,7 @@ Putting together (\ref{lr_1}) and (\ref{lr_2}), we define the Logistic Regressio
 \end{definition}
 Naturally, we expect the prediction $y=+1$ when $p(y=+1|\vx;\vw,b)\ge0.5$ and $y=-1$, when $p(y=+1|\vx;\vw,b)<0.5$.
 The decision rule is similar to perceptron where we predict $y=+1$ when $\ip{\vw}{x}+b\ge0$, and $y=-1$ otherwise.
-Besides decision boundary, Logistic Regression can output the class probability from (Definition~\ref{logistic_regression}) as the the 'distance' of the data point to the decision boundary.
+Besides decision boundary, Logistic Regression can output the class probability from (Definition~\ref{logistic_regression}) as the the ``distance'' of the data point to the decision boundary.
 It is the probabilistic output that makes Logistic Regression no more than a classifier, as it outputs detailed predictions (class probability).
 
 % optimization
@@ -296,13 +296,13 @@ The likelihood of parameters given data can be computed from
 \begin{align}
 	L(\vw,b;D) = \prod_{i=1}^mp(y_i|\vx_i). \label{lr_likelihood}
 \end{align}
-To apply MLE, it is easier if, instead of maximizing the likelihood, we maximize the log-likelihood, which turn the product (\ref{lr_likelihood}) into sum
+To apply MLE, it is easier if, instead of maximizing the likelihood, we maximize the log-likelihood, which turns the product (\ref{lr_likelihood}) into sum
 \begin{align}
 	\log L(\vw,b|D) = \sum_{i=1}^{m}\log p(y_i|\vx_i) = -\sum_{i=1}^{m}\log (1+\exponential{-y_i(\ip{\vx_i}{\vw}+b)}) \label{lr_likelihood_sum}.
 \end{align}
 
 % logistic regression of other type
-Though MLE training for Logistic Regression model meet our need of fitting training data, it does not guarantee to generalize well on test data.
+Though MLE training for Logistic Regression model meets our need of fitting training data, it does not guarantee to generalize well on test data.
 To achieve better generalization power, various smoothing techniques have been proposed \citep{Chen99,Chen00,Goodman03}, among which adding Gaussian prior on weight parameter $\vw$ is one of the standard treatment.
 In practice, a zero-mean spherical Gaussian with variance $\sigma^2$ is assumed on $\vw$.
 Thus, the maximum likelihood problem (\ref{lr_likelihood}) is transformed into \textit{Maximum A-Posteriori} (MAP) problem of the following form
@@ -322,9 +322,9 @@ And coordinate descent method was proposed in \citep{Huang09iterative}.
 
 % dual for and optimization
 There are also efforts being made to solve the logistic regression from its dual, of which the first algorithm was proposed in \citep{Jaakkola99probabilistic}.
-The key is to introduce a set of tighter upper bound on (\ref{lr_posteriori_log}) that are parameterized by $\valpha$.
-The bound should have a simple form such that the maximizing (\ref{lr_posteriori_log}) over $\vw$ can be solved analytically with $\alpha$.
-The solution to the original problem is transferred as finding the tighter upper bound for  $\vw$, which is to minimize with respect to $\alpha$.
+The key is to introduce a set of tighter upper bounds on (\ref{lr_posteriori_log}) that are parameterized by $\valpha$.
+The bounds should have a simple form such that the maximizing (\ref{lr_posteriori_log}) over $\vw$ can be solved analytically with $\alpha$.
+The solution to the original problem is transferred as finding the tighter upper bounds for  $\vw$, which is to minimize with respect to $\alpha$.
 \iffalse
 The dual form is given by 
 \begin{align*}
@@ -416,7 +416,7 @@ The margin slack parameter $\xi_i$ will allow example with margin less than $1$ 
 In particular, with $\xi_i=0$ the data point $x_i$ is correctly classified, and lies either on the margin or on the correct side.
 With $0<\xi_i\le 1$ the data point is correctly classified and lies between margin and separating hyperplane.
 With $\xi_i>1$ the data point is misclassified locating on the other side of the hyperplane.
-With margin slack parameter, the new goal is to maximize the margin while penalizing the data points that either lies on the wrong side of the hyperplane or has margin less than one
+With margin slack parameter, the new goal is to maximize the margin while penalizing the data points that either lies on the wrong side of the hyperplane or has margin less than one as defined by
 \begin{definition}{Primal Soft-Margin \svm\ Optimization Problem.}\label{softsvmprimal}
 	\begin{align*}
 		\underset{\vw,\xi}{\minimize} & \quad\frac{1}{2}\norm{\vw}^2 + C\sum_{i=1}^{m}\xi_i\\
@@ -443,9 +443,9 @@ The property is extreme useful, as the weight vector can be expressed as the lin
 \end{align*}
 As most of the dual variables are zero, the evaluation can be done efficiently by maintaining a small set of non-zero $\alpha$.
 
-In addition, we notice that to work out (Definition~\ref{softsvmdual}) it is not necessary to work on the explicit representation of $\vx$, as only the value of the inner product $\ip{\vx_i}{\vx_j}$ is need.
+In addition, we notice that to work out (Definition~\ref{softsvmdual}) it is not necessary to work on the explicit representation of $\vx$, as only the value of the inner product $\ip{\vx_i}{\vx_j}$ is needed.
 As the algorithm can be represented entirely in terms of the inner product, we can also replace the inner product with $\ip{\phib(\vx_i)}{\phib(\vx_j)}$.
-In particular, we defined the \textit{kernel}
+In particular, we define the \textit{kernel}
 \begin{align}
 	K(\vx_i,\vx_j) = \ip{\phib(\vx_i)}{\phib(\vx_j)}, \label{kernel}
 \end{align}
@@ -483,8 +483,8 @@ Thus, the algorithm effectively maintains a good working set that makes much pro
 The implementation of the algorithm is well-known as \svmlight.
 The decomposition strategy was further developed by solving in each iteration a smallest as possible optimization that only contains two Lagrangian multipliers, which is known as \textit{Sequential Minimum Optimization} (SMO) \citep{Platt98sequential,Platt99fast}.
 \smo\ is the basis of another powerful software package \libsvm\ developed by \citet{Chang11libsvm}.
-\citet{Perezcruz04double} proposed a double-chunking methods to further speed up the decomposition type of training. 
-Similarly yet another approach ``digesting'' \citep{Decoste02support} optimizes subsets close to completion before adding new data, which save huge amount of memory.
+\citet{Perezcruz04double} proposed a double-chunking method to further speed up the decomposition type of training. 
+Similarly yet another approach ``digesting'' \citep{Decoste02support} optimizes subsets close to completion before adding new data, which saves huge amount of memory.
 
 Another line of research to speed up \svm\ training is to divide the original problem into subproblems of smaller size, optimize \svm\ on each subproblem, and combine the results from each subproblem.
 In \citep{Tresp00a,Schwaighofer01the}, the authors proposed a Bayesian scheme to combine the models from subproblems.
