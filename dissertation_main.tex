@@ -31,9 +31,9 @@ On the other hand, methods that do not explicitly assume the output structure us
 
 In this thesis, we investigate the potentials of developing novel structured output prediction models to improve the prediction performance in real world multi-task classification problems (e.g. molecular activity prediction, network influence prediction).
 In particular, we present the novel structured output prediction models that are capable of learning without predefined structure.
-We focus on the efficiency and the scalability of the proposed structured output prediction models, as the inference problem is ofter \nphard\ to solve.
+We focus on the efficiency and the scalability of the proposed structured output prediction models, as the inference problem is often \nphard\ to solve.
 Additionally, the new learning models are well motivated.
-The theoretical study is able to explain the behaviour and to guarantees the performance of the models.
+The theoretical study is able to explain the behaviour and to guarantee the performance of the models.
 In particular, our research questions can be casted as followings:
 \begin{enumerate}[label=\textbf{Q \Roman*}:]
 \item Is the structured output prediction models more suitable for predicting multiple interdependent variables in structured output space?
@@ -52,7 +52,7 @@ The main contribution of the thesis is to present a learning framework for struc
 Under the framework, several learning algorithms are proposed.
 Unlike previous structured output learning algorithms, the proposed models do not assume any observed structured on the output variables, and thus largely widen the applicability of the structured output learning.
 Meanwhile, the thesis presents several attractive theoretical properties which support the new learning framework and guarantee the generalization error.
-In addition to the main contribution, the thesis also proposes a new learning algorithm that is capable of predicting a directed acyclic graph and demonstrates the performance on influence network prediction problem.
+In addition to the main contribution, the thesis also proposes a new learning algorithm that is capable of predicting a directed acyclic graph and demonstrating the performance on influence network prediction problem.
 Besides, the thesis also focuses on elegant optimization strategy with which the newly proposed models often avoid the exponential parameter space and \nphard\ inference problem.
 
 The thesis is structured as follows.
@@ -68,7 +68,7 @@ Section~\ref{sc_statistics} describes the performance measures and the statistic
 
 Chapter~\ref{ch_models} introduces the novel statistical models developed by the author.
 In particular, Section~\ref{sc_su10} explains the structured output learning model for molecular activity prediction.
-Section~\ref{sc_su11} and Section~\ref{sc_su14a} discuss three ensemble model (\mve, \amm, \mam) that tackle the problem in structured output prediction when the output structure is unknown.
+Section~\ref{sc_su11} and Section~\ref{sc_su14a} discuss three ensemble models (\mve, \amm, \mam) that tackle the problem in structured output prediction when the output structure is unknown.
 Section~\ref{sc_su14c} presents \rta\ model that is a major step forward of \mam\ by performing joint learning and inference over a random sample of spanning trees.
 Section~\ref{sc_su14b} introduces network influence prediction problem and presents \spin\ that is capable of predicting a directed acyclic graph (DAG).
 Finally, Chapter~\ref{ch_conclusion} concludes the thesis by answering the research questions and by pointing out possible future directions.
@@ -1017,13 +1017,13 @@ The test results are often visualized as \textit{$CD$ diagram}.
 % 		chapter
 %
 % --------------------------
-\chapter{Novel Statistical Methods}\label{ch_models}
+\chapter{Novel Statistical Models}\label{ch_models}
 
 In this chapter, the author aims to build the connection of the publications as well as to discuss the corresponding contributions.
-Each section will mostly focus on one publication, and will start with introduction and background knowledge that is necessary to understand the content within the section.
-An overview of the theoretical end technical novelties will also be briefly presented.
+Each section will mostly focus on one publication, and will start with introduction and background knowledge that are necessary to understand the content within the section.
+An overview of the theoretical end technical novelties will also be briefly presented in each section.
 
-\section{Structured Output Learning for Molecular Activity Classification}\label{sc_su10}
+\section{Structured Output Prediction for Molecular Activity Classification}\label{sc_su10}
 
 The molecular activity classification problem has long been tackled under the single task classification setting.
 On the other hand, multiple interdependent molecular activities are often screened simultaneously.
@@ -1043,12 +1043,12 @@ In particular, expensive preclinical \textit{in vitro} and \textit{in vivo} drug
 Various machine learning methods have been developed for the task, to name but a few, inductive logic programming \citep{King96structure}, artificial neural network \citep{Bernazzani06predicting}, kernel methods for nonlinear molecular properties \citep{Trotter01drug,Ralaivola05graph,Swamidass05kernel,Ceroni07classification}, and \svm\ based methods for reliable predictions \citep{Trotter01drug,Byvatov03comparison,Xue04effect}.
 Albeit with the large quantity of the computational models, they only focus on predicting single target variable (e.g. inhibition potential in one cell line). 
 On the other hand, relative larger number of cell line targets are often screened at the same time.
-For example in \textit{NCI-60 Human Tumor Cell Line Screen} project \citep{Shoemaker06the}, thousands of molecular structures are tested agains hundreds of cell line targets.
+For example in the recent \textit{NCI-60} {Human Tumor Cell Line Screen} project \citep{Shoemaker06the}, thousands of molecular structures are tested agains hundreds of cell line targets.
 
 
 \subsection{Methods}
 
-To efficiently and accurately predict molecular activities in multiple cell line at the same time, we proposed a structured output learning algorithm in \citepub{su10}, which is to our knowledge the first multi-task learning approach for molecular classification problem.
+To efficiently and accurately predict molecular activities in multiple cell lines at the same time, we proposed a structured output learning algorithm in \citepub{su10}, which is to our knowledge the first multi-task learning approach for molecular classification problem.
 The algorithm can be seen as an instantiation of the structured output learning method \mmcrf\ \citep{rousu06}.
 In particular, the model defines a compatibility score through inner product for a molecular structure $\vx$ and the activities in multiple cell lines $\vy$
 \begin{align*}
@@ -1089,10 +1089,12 @@ The walk kernel can be defined on the adjacency matrix of $G_{\times}$
 \begin{align*}
 	K_{wk}(G_1,G_2) = \sum_{i,j=1}^{|V_{\times}|}\left[\sum_{n=0}^{\infty}\lambda^{n}E_{\times}^n\right]_{i,j},
 \end{align*}
-where $0<\lambda<1$Using exponential series or geometric series the walk kernel can be compute in cubic time \citep{Gartner03a}
+where $0<\lambda<1$.
+Using exponential series or geometric series the walk kernel can be compute in cubic time \citep{Gartner03a}
 \begin{align*}
-	K_{wk}(G_1,G_2) = \ve\tp(\vI-\lambda E_{\times})^{-1}\ve.
+	K_{wk}(G_1,G_2) = \ve\tp(\vI-\lambda E_{\times})^{-1}\ve,
 \end{align*}
+where we denote by $\vI$ the identity matrix and by $\ve$ the matrix of ones.
 
 % weighted decomposition kernel and others
 \textit{Weighted Decomposition Kernel} in \citep{Menchetti05weighted,Ceroni08classification} is an extension of substructure kernel \citep{Haussler99convolution} by weighting identical part in two graph with contextual information.
