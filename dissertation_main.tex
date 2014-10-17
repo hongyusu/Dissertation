@@ -673,7 +673,7 @@ The primal optimization problem of \svmstruct\ is given as
 	\end{align*}
 \end{definition}
 where $\xi_i$ denotes the slack allotted to each example, $\vell(\vy_i,\vy)$ is the loss function between pseudo-label and the correct label, and $C$ is the slack parameter that controls the amount of regularization in the model.
-The primal form can be interpreted as maximizing the the margin between the correct training example and the pseudo-example.
+The primal form can be interpreted as maximizing the margin between the correct training example and the pseudo-example.
 Allowing margin error is to make sure solution can always be found.
 
 It seems intuitive to scale the margin error by the loss function, the advantage of which is also claimed the authors in \citep[p.3]{THJA04}.
