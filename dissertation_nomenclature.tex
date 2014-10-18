@@ -1,7 +1,7 @@
 
 \renewcommand{\nompreamble}{
-The author has made effort to declare and clarify the following mathematical symbols and notations before entering the main text of this dissertation.
-This is to make sure symbols and notations are correct and consistent throughout the dissertation.
+The author has made effort to declare and clarify the following mathematical symbols and notations before entering the main text of this thesis.
+This is to make sure symbols and notations are correct and consistent throughout the thesis.
 On the other hand, sometimes they might look different from how they were defined and used in the original research articles.
 }
 
@@ -10,64 +10,64 @@ On the other hand, sometimes they might look different from how they were define
 
 
 % section 2.1
-\nomenclature{$\Xcal$}{{Domain of input space.}}
-\nomenclature{$\Ycal$}{{Single-task output space.}}
+\nomenclature{$\Xcal$}{Input space.}
+\nomenclature{$\Ycal$}{Single-task output space.}
 \nomenclature{$\vx_i$}{The $i$'th example from input space.}
 \nomenclature{$y_i$}{The $i$'th label from single-task output space.}
 \nomenclature{$\RR$}{The set of real number.}
-\nomenclature{$\varphib(\vx)$}{Input feature map of input example $\vx$.}
+\nomenclature{$\varphib(\vx)$}{Input feature map on input example $\vx$.}
 \nomenclature{$\Fcal$}{Input feature space.}
-\nomenclature{$d$}{The number of input features.}
+\nomenclature{$d$}{The dimension of the input feature.}
 \nomenclature{$\Scal$}{The set of training examples.}
 \nomenclature{$m$}{The number of training examples.}
 \nomenclature{$\Hcal$}{Hypothesis class.}
 \nomenclature{$f$}{One mapping function from hypothesis class.}
-\nomenclature{$\vw$}{Feature weight vectors.}
+\nomenclature{$\vw$}{Feature weight vector.}
 \nomenclature{$b$}{Bias term.}
 \nomenclature{$\rho$}{The norm of the feature weight vectors.}
 \nomenclature{$||\vw||$}{The $L_2$ norm of the vectors $\vw$.}
 \nomenclature{$D$}{Geometric distance.}
-\nomenclature{$\gamma$}{Margin of data point to hyperplane.}
+\nomenclature{$\gamma$}{Margin as geometric distance of the data point to hyperplane.}
 \nomenclature{$\xi_i$}{Margin error of the $i$'th example.}
 \nomenclature{$C$}{Margin slack parameter.}
 \nomenclature{$\alpha_i$}{Dual variable corresponding to the $i$'th constraint.}
 \nomenclature{$K$}{Kernel function.}
-\nomenclature{$\delta$}{Gaussian width parameter.}
+\nomenclature{$\delta$}{Width parameter of Gaussian function.}
 \nomenclature{$\vYcal$}{Multi-task output space.}
 \nomenclature{$\vy_i$}{The $i$'th multilabel from multi-task output space.}
-\nomenclature{$G$}{Output graph with edge set and node set.}
-\nomenclature{$E$}{Edge set of graph $G$}
-\nomenclature{$V$}{Vertex set of graph $G$}
-\nomenclature{$\vy[i]$}{The $i$'th microlabel in multilabel vector.}
-\nomenclature{$k$}{The number of microlabel in the multilabel vector.}
+\nomenclature{$G$}{Output graph.}
+\nomenclature{$E$}{Edge set of the graph $G$}
+\nomenclature{$V$}{Vertex set of the graph $G$}
+\nomenclature{$\vy[i]$}{The $i$'th microlabel in multilabel vector $\vy$.}
+\nomenclature{$k$}{The total number of microlabel in the multilabel vector.}
 \nomenclature{$\vy_e$}{The label of the edge $e$.}
 \nomenclature{$\vYcal_e$}{Edge label space.}
 \nomenclature{$u_i$}{Possible node label.}
 \nomenclature{$\vu_e$}{Possible edge label.}
-\nomenclature{$\phib(x,\vy)$}{{Joint feature map of example and label pair $(x,\vy)$.}}
-\nomenclature{$\ell(\vy_i,\vy_j)$}{Loss function for two label $\vy_i$ and $\vy_j$.}
+\nomenclature{$\phib(x,\vy)$}{Joint feature map of example and label pair $(x,\vy)$.}
+\nomenclature{$\ell(\vy_i,\vy_j)$}{Loss function defined on label $\vy_i$ and label $\vy_j$.}
 \nomenclature{$\ind{\cdot}$}{Indicator function.}
 \nomenclature{$G_{\times}$}{Product graph.}
-\nomenclature{$E_{\times}$}{Edge set of product graph.}
-\nomenclature{$V_{\times}$}{Vertex set of product graph.}
+\nomenclature{$E_{\times}$}{Edge set of product graph $G_{\times}$.}
+\nomenclature{$V_{\times}$}{Vertex set of product graph $G_{\times}$.}
 \nomenclature{$A$}{Adjacency matrix of graph $G$}
 \nomenclature{$\ve$}{Matrix of one.}
 \nomenclature{$\vI$}{Identity matrix.}
 \nomenclature{$\Upsilonb(\vy)$}{Output feature map of multilabel $\vy$ on output graph.}
-\nomenclature{$\tp$}{Matrix transpose.}
-\nomenclature{$\psi(x,\vy)$}{{Compatibility score of $(x,\vy)$.}}
-\nomenclature{$\psi_e(x,\vy_e)$}{{Local edge potential/compatibility score of edge $e$ with label $\vy_e$.}}
-\nomenclature{$\psi_e^{(t)}(x,\vu_e)$}{{Local compatibility score of edge $e$ with labeled $\vu_e$ from the $t$'th base learner.}}
-\nomenclature{$\psib_E(x)$}{{Collection of all local edge potentials/compatibility scores.}}
-\nomenclature{$\tilde{\psi}_j(x,u_j)$}{{Maximal marginal of node $j$ with label $u_j$.}}
-\nomenclature{$\tilde{\psib}(x)$}{{Collection of all node max-marginals.}}
-\nomenclature{$\tilde{\psib}^{(t)}(x)$}{{Collection of all node max-marginals from the $t$'th base learner.}}
-\nomenclature{$\tilde{G}$}{{Consensus graph.}}
-\nomenclature{$\tilde{E}$}{{Edge set of the consensus graph.}}
-\nomenclature{$\Gcal$}{{A set of random output graphs.}}
-\nomenclature{$T$}{The size of ensemble.}
-\nomenclature{$t$}{Index for the $t$'th ensemble.}
+\nomenclature{$\tp$}{Matrix transpose operation.}
+\nomenclature{$\psi(x,\vy)$}{Compatibility score of $(x,\vy)$.}
+\nomenclature{$\psi_e(x,\vy_e)$}{Local edge potential/compatibility score of edge $e$ with label $\vy_e$.}
+\nomenclature{$\psi_e^{(t)}(x,\vu_e)$}{Local compatibility score of edge $e$ with labeled $\vu_e$ from the $t$'th base classifier.}
+\nomenclature{$\psib_E(x)$}{Collection of local edge potentials/compatibility scores from all base classifiers.}
+\nomenclature{$\tilde{\psi}_j(x,u_j)$}{Maximal marginal of node $j$ with label $u_j$.}
+\nomenclature{$\tilde{\psib}^{(t)}(x)$}{Collection of all node max-marginals from the $t$'th base learner.}
+\nomenclature{$\tilde{\psib}(x)$}{Collection of all node max-marginals from all base classifiers.}
+\nomenclature{$\tilde{G}$}{Consensus graph by pooling edges from all spanning trees.}
+\nomenclature{$\tilde{E}$}{Edge set of the consensus graph.}
+\nomenclature{$\Gcal$}{A random sample of random output graphs.}
+\nomenclature{$T$}{The total number of base classifer.}
+\nomenclature{$t$}{Index for the $t$'th base classifier in ensemble.}
 \nomenclature{$\mu$}{Marginalized dual variables.}
-\nomenclature{$\vw_{T_t}$}{Feature weight parameters on the $t$'th random spanning tree.}
-\nomenclature{$\phib_{T_t}(\vx,\vy)$}{Feature weight parameter for the $t$'th random spanning tree.}
-\nomenclature{$\gamma_G$}{Feature weight scaling function.}
+\nomenclature{$\vw_{T_t}$}{Feature weight parameters on the $t$'th random spanning tree $T_{t}$.}
+\nomenclature{$\phib_{T_t}(\vx,\vy)$}{Output feature map for the $t$'th random spanning tree.}
+\nomenclature{$\gamma_G$}{Loss scaling function based on graph $G$.}
