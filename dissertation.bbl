@@ -916,4 +916,10 @@ Zhang, K., Tsang, I.~W., and Kwok, J.~T. (2008).
 \newblock In {\em Proceedings of the 25th International Conference on Machine
   Learning}, ICML '08, pages 1232--1239, New York, NY, USA. ACM.
 
+\bibitem[Zou and Hastie, 2005]{Zou05regularizationa}
+Zou, H. and Hastie, T. (2005).
+\newblock Regularization and variable selection via the elastic net.
+\newblock {\em Journal of the Royal Statistical Society, Series B},
+  67:301--320.
+
 \end{thebibliography}
