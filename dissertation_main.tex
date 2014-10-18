@@ -1071,7 +1071,7 @@ The model is optimized by conditional gradient optimization \citep{Bertsekas95no
 Kernel is the classic way of defining the similarity between complex objects.
 In \citepub{su10}, We used graph kernel to measure the similarity of pair of molecular structures.
 The common way to represent the structure of a molecule is to use an undirected labeled graph $G=(V,E)$, where vertices $V=\{v_1,\cdots,v_n\}$ corresponds to atoms and edge $E=\{e_1,\cdots,e_m\}$ corresponds to the covalent bonds.
-The adjacency matrix $E$ of graph $G$ is defined sush that its $(i,j)$'th entry $E_{i,j}$ equals to one if there is an edge between atom $i$ and atom $j$.
+The adjacency matrix $A$ of graph $G$ is defined sush that its $(i,j)$'th entry $A_{i,j}$ equals to one if there is an edge between atom $i$ and atom $j$.
 
 % walk kernel
 \textit{Walk Kernel} \citep{Kashima03marginalized,Gartner03a} computes the sum of matching walks in a pair of graphs. 
@@ -1087,12 +1087,12 @@ and edges are computed from
 \end{align*}
 The walk kernel can be defined on the adjacency matrix of $G_{\times}$
 \begin{align*}
-	K_{wk}(G_1,G_2) = \sum_{i,j=1}^{|V_{\times}|}\left[\sum_{n=0}^{\infty}\lambda^{n}E_{\times}^n\right]_{i,j},
+	K_{wk}(G_1,G_2) = \sum_{i,j=1}^{|V_{\times}|}\left[\sum_{n=0}^{\infty}\lambda^{n}A_{\times}^n\right]_{i,j},
 \end{align*}
 where $0<\lambda<1$.
 Using exponential series or geometric series the walk kernel can be compute in cubic time \citep{Gartner03a}
 \begin{align*}
-	K_{wk}(G_1,G_2) = \ve\tp(\vI-\lambda E_{\times})^{-1}\ve,
+	K_{wk}(G_1,G_2) = \ve\tp(\vI-\lambda A_{\times})^{-1}\ve,
 \end{align*}
 where we denote by $\vI$ the identity matrix and by $\ve$ the matrix of ones.
 

@@ -9,70 +9,65 @@ On the other hand, sometimes they might look different from how they were define
 \printnomenclature[2cm]  
 
 
-
-
-
-\nomenclature{$\Xcal$}{{Domain of training data.}}
-\nomenclature{$\Ycal$}{{Multilabel space.}}
-\nomenclature{$k$}{{Length of a multilabel.}}
-\nomenclature{$j$}{{Index of a microlabel in a multilabel.}}
-\nomenclature{$m$}{{Size of training data.}}
-\nomenclature{$i$}{{Index of training data.}}
-\nomenclature{$\ind{\cdot}$}{{Indicator function.}}
-\nomenclature{$\Ycal_j$}{{Microlabel space.}}
-\nomenclature{$\vy$}{{Multilabel vector.}}
-\nomenclature{$y_j$}{{Microlabel, the $j$'th position in multilabel.}}
-\nomenclature{$(x_i,\vy_i)$}{{Example and multilabel pair.}}
-\nomenclature{$F$}{{Mapping function from $\Xcal$ to $\Ycal$.}}
-\nomenclature{$G$}{{Output graph structure.}}
-\nomenclature{$E$}{{Edge set of $G$, revealing potential dependencies.}}
-\nomenclature{$V$}{{Vertex set of $G$, corresponding to multilabel.}}
-\nomenclature{$\vy_e$}{{Label of edge $e$.}}
-\nomenclature{$\vy_{ie}$}{{Label of edge $e$ for the $i$'th example.}}
-\nomenclature{$u_j$}{{Possible label of node $j$.}}
-\nomenclature{$\vu_e $}{{Possible label of edge $e$.}}
-% 2.1
-\nomenclature{$\vw$}{{Weight vector.}}
-\nomenclature{$\varphi(x,\vy)$}{{Joint feature map of example and label pair $(x,\vy)$.}}
+% section 2.1
+\nomenclature{$\Xcal$}{{Domain of input space.}}
+\nomenclature{$\Ycal$}{{Single-task output space.}}
+\nomenclature{$\vx_i$}{The $i$'th example from input space.}
+\nomenclature{$y_i$}{The $i$'th label from single-task output space.}
+\nomenclature{$\RR$}{The set of real number.}
+\nomenclature{$\varphib(\vx)$}{Input feature map of input example $\vx$.}
+\nomenclature{$\Fcal$}{Input feature space.}
+\nomenclature{$d$}{The number of input features.}
+\nomenclature{$\Scal$}{The set of training examples.}
+\nomenclature{$m$}{The number of training examples.}
+\nomenclature{$\Hcal$}{Hypothesis class.}
+\nomenclature{$f$}{One mapping function from hypothesis class.}
+\nomenclature{$\vw$}{Feature weight vectors.}
+\nomenclature{$b$}{Bias term.}
+\nomenclature{$\rho$}{The norm of the feature weight vectors.}
+\nomenclature{$||\vw||$}{The $L_2$ norm of the vectors $\vw$.}
+\nomenclature{$D$}{Geometric distance.}
+\nomenclature{$\gamma$}{Margin of data point to hyperplane.}
+\nomenclature{$\xi_i$}{Margin error of the $i$'th example.}
+\nomenclature{$C$}{Margin slack parameter.}
+\nomenclature{$\alpha_i$}{Dual variable corresponding to the $i$'th constraint.}
+\nomenclature{$K$}{Kernel function.}
+\nomenclature{$\delta$}{Gaussian width parameter.}
+\nomenclature{$\vYcal$}{Multi-task output space.}
+\nomenclature{$\vy_i$}{The $i$'th multilabel from multi-task output space.}
+\nomenclature{$G$}{Output graph with edge set and node set.}
+\nomenclature{$E$}{Edge set of graph $G$}
+\nomenclature{$V$}{Vertex set of graph $G$}
+\nomenclature{$\vy[i]$}{The $i$'th microlabel in multilabel vector.}
+\nomenclature{$k$}{The number of microlabel in the multilabel vector.}
+\nomenclature{$\vy_e$}{The label of the edge $e$.}
+\nomenclature{$\vYcal_e$}{Edge label space.}
+\nomenclature{$u_i$}{Possible node label.}
+\nomenclature{$\vu_e$}{Possible edge label.}
+\nomenclature{$\phib(x,\vy)$}{{Joint feature map of example and label pair $(x,\vy)$.}}
+\nomenclature{$\ell(\vy_i,\vy_j)$}{Loss function for two label $\vy_i$ and $\vy_j$.}
+\nomenclature{$\ind{\cdot}$}{Indicator function.}
+\nomenclature{$G_{\times}$}{Product graph.}
+\nomenclature{$E_{\times}$}{Edge set of product graph.}
+\nomenclature{$V_{\times}$}{Vertex set of product graph.}
+\nomenclature{$A$}{Adjacency matrix of graph $G$}
+\nomenclature{$\ve$}{Matrix of one.}
+\nomenclature{$\vI$}{Identity matrix.}
+\nomenclature{$\Upsilonb(\vy)$}{Output feature map of multilabel $\vy$ on output graph.}
+\nomenclature{$\tp$}{Matrix transpose.}
 \nomenclature{$\psi(x,\vy)$}{{Compatibility score of $(x,\vy)$.}}
-\nomenclature{$\psi_e(x,\vy_e)$}{{Local edge potential/compatibility score of edge $e$ with label $\vy_e$.}}	
-\nomenclature{$\phi(x)$}{{Input feature map.}}
-\nomenclature{$\Upsilon(\vy)$}{{Output feature map.}}
-\nomenclature{$\xi$}{{Slack parameter.}}
-\nomenclature{$\ell(\cdot,\cdot)$}{{Loss function.}}
-\nomenclature{$\alpha$}{{Dual variable.}}
-% 2.2
-% 2.3
-% 3
-\nomenclature{$G^{(t)}$}{{The $t$'th random output graph.}}
-\nomenclature{$E^{(t)}$}{{Edge set of the $t$'th random output graph.}}
+\nomenclature{$\psi_e(x,\vy_e)$}{{Local edge potential/compatibility score of edge $e$ with label $\vy_e$.}}
+\nomenclature{$\psi_e^{(t)}(x,\vu_e)$}{{Local compatibility score of edge $e$ with labeled $\vu_e$ from the $t$'th base learner.}}
+\nomenclature{$\psib_E(x)$}{{Collection of all local edge potentials/compatibility scores.}}
+\nomenclature{$\tilde{\psi}_j(x,u_j)$}{{Maximal marginal of node $j$ with label $u_j$.}}
+\nomenclature{$\tilde{\psib}(x)$}{{Collection of all node max-marginals.}}
+\nomenclature{$\tilde{\psib}^{(t)}(x)$}{{Collection of all node max-marginals from the $t$'th base learner.}}
 \nomenclature{$\tilde{G}$}{{Consensus graph.}}
 \nomenclature{$\tilde{E}$}{{Edge set of the consensus graph.}}
-\nomenclature{$A(\cdot)$}{{Aggregation function.}}
-\nomenclature{$F^{(t)}(\cdot)$}{{The $t$'th base learner, graph labeling model.}}	
-\nomenclature{$F(\cdot)$}{{Ensemble model in general form.}}
-% 3.1
-\nomenclature{$\Gcal$}{{A set of random output graphs.}}	
-% 3.2
-\nomenclature{$\psi_e^{(t)}(x,\vu_e)$}{{Local compatibility score of edge $e$ with labeled $\vu_e$ from the $t$'th base learner.}}
-\nomenclature{$\Psi_E(x)$}{{Collection of all local edge potentials/compatibility scores.}}	
-\nomenclature{$\Psi_E^{(t)}(x)$}{{Collection of all local edge potentials/compatibility scores from the $t$'th base learner.}}	
-\nomenclature{$\tilde{\psi}_j(x,u_j)$}{{Maximal marginal of node $j$ with label $u_j$.}}
-\nomenclature{$\tilde{\Psi}(x)$}{{Collection of all node max-marginals.}}
-\nomenclature{$\tilde{\Psi}^{(t)}(x)$}{{Collection of all node max-marginals from the $t$'th base learner.}}
-% 3.3	
-\nomenclature{$\bar\mu$}{{Marginal dual variable averaged over ensembles.}}	
-\nomenclature{$\mu$}{{Marginal dual variable.}}	
-% 3.4
-\nomenclature{$\Delta^R_{{\tiny MAM}}(x,\vy)$}{{Reconstruction error from MAM.}}	
-\nomenclature{$\Delta^R_{{\tiny I}}(x,\vy)$}{{Reconstruction error from individual base learners.}}	
-\nomenclature{$T$}{{Size of ensemble.}}
-\nomenclature{$t$}{{Index of individual base learner $t\in\{1,\cdots,T\}$}}
-\nomenclature{$\psi_j(x,\vy_j)$}{{Local node potential/compatibility score of node $j$ with label $\vy_j$.}}	
-\nomenclature{$\psi_j^{(t)}(x,\vy_j)$}{{Local node potential/compatibility score of node $j$ with label $\vy_j$, from the $t$'th learner.}}
-\nomenclature{$\psi^{{\tiny MAM}}(x,\vy)$}{{Compatibility score from MAM ensemble.}}
-\nomenclature{$\bar\psi_e(x,\vy_e)$}{{Mean compatibility score of edge $e$ with label $\vy_e$ over ensemble.}}
-\nomenclature{$\bar\psi_j(x,\vy_j)$}{{Mean compatibility score of node $j$ being label $y_j$ over ensemble.}}
-\nomenclature{$\Psi_j(x,y_j)$}{{Random variable of compatibility score on node $j$, $\Psi_j(x,y_j)=\{\psi^{(1)}_j(x,y_j),\cdots,\psi^{(T)}_j(x,y_j)\}$}.}
-\nomenclature{$\psi^*(x,\vy)$}{{True compatibility score.}}
-\nomenclature{$\psi_j^*(x,y_j)$}{{True compatibility score of node $j$.}}
+\nomenclature{$\Gcal$}{{A set of random output graphs.}}
+\nomenclature{$T$}{The size of ensemble.}
+\nomenclature{$t$}{Index for the $t$'th ensemble.}
+\nomenclature{$\mu$}{Marginalized dual variables.}
+\nomenclature{$\vw_{T_t}$}{Feature weight parameters on the $t$'th random spanning tree.}
+\nomenclature{$\phib_{T_t}(\vx,\vy)$}{Feature weight parameter for the $t$'th random spanning tree.}
+\nomenclature{$\gamma_G$}{Feature weight scaling function.}
