@@ -58,11 +58,12 @@ Besides, the thesis also focuses on elegant optimization strategy with which the
 The thesis is structured as follows.
 In Chapter~\ref{ch_introduction}, the scope of the research is briefly explained with several research questions being proposed which will be answered in this thesis.
 Chapter~\ref{ch_background} provides the introduction to the problem settings, learning algorithms, and statistical models that are necessary to understand the rest part of the thesis.
-The chapter starts by introducing in Section~\ref{sc_single} several single task classification algorithms, including 
+The chapter starts by introducing in Section~\ref{sc_emp} two fundamental concepts, empirical risk minimization and regularization, in statistical machine learning.
+Section~\ref{sc_single} presents several single task classification algorithms, including 
 perceptron (Section~\ref{sc_perceptron}), 
 logistic regression (Section~\ref{sc_lr}), 
 and \svm\ (Section~\ref{sc_svm}).
-Section~\ref{sc_multi} extends the previous section by introducing the learning algorithms designed for multiple interdependent variables in structured output space.
+Section~\ref{sc_multi} will extend the previous section by introducing the learning algorithms designed for multiple interdependent variables in structured output space.
 Ensemble models for both single task and multi-task classification will be briefly covered in Section~\ref{sc_ensemble}.
 Section~\ref{sc_statistics} describes the performance measures and the statistical models that are used for model evaluation and comparison.
 
@@ -115,9 +116,9 @@ The strategy is known in machine learning community as \textit{empirical risk mi
 
 \subsection{Regularized Learning}
 
-The empirical risk minimization strategy is ill-posed which in general can provide infinity number of estimators with same empirical risk on the training data.
+The empirical risk minimization strategy is ill-posed which in general can provide infinity number of estimators with same empirical risk on the same training data.
 Besides, it often leads to \textit{overfitting} when the dimensionality of the feature space is high and the number of training data is limited.
-In other words, underlying true distribution $P(\vx,\vy)$ is difficult to be estimated from a finite sample of training examples.
+In other words, underlying true distribution $P(\vx,\vy)$ is difficult to to estimate from a finite sample of training examples.
 Thus, the estimator will generalize poor on unseen test examples.
 The \textit{regularization theory} provides a framework to alleviate these two difficulties.
 In particular, it aims to minimize 
@@ -146,17 +147,17 @@ We consider supervised learning problem which assumes an arbitrary input space $
 As we focus in this chapter standard supervised learning problem also known as binary classification, we explicitly assume the output space $\Ycal=\{-1,+1\}$ (instead of $\Ycal=\{0,+1\}$).
 We point out that other kind of supervised learning problem can be formulated by altering the definition of the output space.
 For example, by setting $\Ycal=\{1,\cdots,K\}$ we have multiclass classification problem, and by setting $\Ycal=\RR$ we have regression problem, where $\RR$ is the set of real numbers.
-Additionally, we assume a feature map $\phib:\vXcal\rightarrow\Fcal$, which embeds the input in some high dimensional feature space $\Fcal=\RR^d$.
-In particular, $\phib(\vx)$ is a real value vector of $d$ dimension.
+Additionally, we assume a feature map $\varphib:\vXcal\rightarrow\Fcal$, which embeds the input in some high dimensional feature space $\Fcal=\RR^d$.
+In particular, $\varphib(\vx)$ is a real value vector of $d$ dimension.
 Given a training set of $m$ training examples $\Scal=\{(\vx_1,y_1),\cdots,(\vx_m,y_m)\}$, the goal is to learn from a \textit{hypothesis class} $\Hcal$ a mapping function $f\in\Hcal:\vXcal\rightarrow\Ycal$  that maps an input $\vx\in\vXcal$ to an output $y\in\Ycal$. 
 
 The hypothesis class we consider is a set of \textit{linear classifiers} that are parameterized by the weight vector $\vw$ and the bias term $b$ that takes the form
 \begin{align}
-	f(x;\vw,b) = \ip{\vw}{\vx} + b, \label{linearclassifier}
+	f(\vx;\vw,b) = \ip{\vw}{\varphib(\vx)} + b, \label{linearclassifier}
 \end{align}
 where by $\ip{\dot\,}{\dot\,}$ we denote the inner product of two vectors
 \begin{align*}
-	\ip{\vw}{\vx} = \sum_{i=1}^{d}\vw[i]\,\vx[i].
+	\ip{\vw}{\varphib(\vx)} = \sum_{i=1}^{d}\vw[i]\,\varphib(\vx)[i].
 \end{align*}
 
 In addition, for any $1\le\rho\in\RR$ we defined the {$L_{\rho}$-norm of vector $\vw$ 
@@ -173,19 +174,19 @@ Without loss of generality, we denote by $||\vw||$ the $L_2$-norm of vector $\vw
 The Rosenblatt's Perceptron algorithm \citep{Rosenblatt58,Rosenblatt62} is one type of linear classifiers that is parameterized by a weight vector $\vw$ and a bias term $b$. 
 The decision boundary given by 
 \begin{align*}
-	f(x;\vw,b) = \ip{\vw}{\vx} + b =0
+	f(\vx;\vw,b) = \ip{\vw}{\varphib(\vx)} + b =0
 \end{align*}
 will separate the data into two classes.
 The goal of learning is to obtain $\vw$ and $b$ by minimizing the distance of misclassified training examples to the decision boundary.
 
 Assume data point $(\vx_i,y_i)$ is misclassified, the signed geometric distance from $\vx_i$ to decision boundary can be computed according to
 \begin{align*}
-	D(\vx_i;\vw,b) = -\frac{y_i(\ip{\vw}{\vx_i}+b)}{\norm{\vw}}.
+	D(\vx_i;\vw,b) = -\frac{y_i(\ip{\vw}{\varphib(\vx_i)}+b)}{\norm{\vw}}.
 \end{align*}
 Denote by $\vXcal^m$ the set of misclassified examples, the goal of perceptron is to minimize the distance over all misclassified examples defined as
 \begin{definition}{Perceptron Objective Function.}\label{perceptron}
 	\begin{align*}
-		\underset{\vw,b}{\minimize} \, D(\vw,b) = \underset{\vw,b}{\minimize} \left( -\sum_{\vx_i\in\vXcal^{m}}y_i[\ip{\vw}{\vx_i}+b]\right).
+		\underset{\vw,b}{\minimize} \, D(\vw,b) = \underset{\vw,b}{\minimize} \left( -\sum_{\vx_i\in\vXcal^{m}}y_i[\ip{\vw}{\varphib(\vx_i)}+b]\right).
 	\end{align*}
 \end{definition}
 To optimize (Definition~\ref{perceptron}), we first assume $\vXcal^{m}$ is fixed and compute the partial gradient with respect to parameters $\vw$ and $b$
@@ -205,7 +206,7 @@ where $\rho$ is the perceptron learning rate.
 	Given a sequence of training examples in pairs $\Scal=\{(\vx_1,y_1),\cdots,(\vx_m,y_m)\}$. 
 	For simplicity, we consider a perceptron without bias term $b$.
 	Assume $\norm{\vx_i}\le R$ for all $i\in\{1,\cdots,m\}$.
-	Suppose for some $\gamma>0$ there exists a unit length vector $\norm{\hat{\vw}}=1$ such that $y_i(\ip{\hat{\vw}}{\vx_i})\ge\gamma$ for $i$ (training data $\Scal$ is linearly separable).
+	Suppose for some $\gamma>0$ there exists a unit length vector $\norm{\hat{\vw}}=1$ such that $y_i(\ip{\hat{\vw}}{\varphib(\vx_i)})\ge\gamma$ for $i$ (training data $\Scal$ is linearly separable).
 	Then the number of mistakes the perceptron algorithm makes on the sequence of training data $\Scal$ is at most ${R^2}/{\gamma^2}$.
 \end{theory}
 \begin{proof}
@@ -213,15 +214,15 @@ where $\rho$ is the perceptron learning rate.
 	In addition, we set $\vw^0=\vzero$.
 	As the Perceptron makes a mistake on $(\vx_i,y_i)$, we immediately have
 	\begin{align*}
-		y_i\ip{\vw_k}{\vx_i} \le 0.
+		y_i\ip{\vw_k}{\varphib(\vx_i)} \le 0.
 	\end{align*}
 	According to update rule, we have
 	\begin{align*}
-		\vw^{k+1} = \vw^{k} + \rho y_i\vx_i.
+		\vw^{k+1} = \vw^{k} + \rho y_i\varphib(\vx_i).
 	\end{align*}
 	Then, the following holds
 	\begin{align*}
-		\ip{\vw^{k+1}}{\hat{\vw}} = \ip{\vw^k}{\hat{\vw}} + \rho y_i\ip{\vx_i}{\hat{\vw}} \ge \ip{\vw^k}{\hat{\vw}} + \rho\gamma.
+		\ip{\vw^{k+1}}{\hat{\vw}} = \ip{\vw^k}{\hat{\vw}} + \rho y_i\ip{\varphib(\vx_i)}{\hat{\vw}} \ge \ip{\vw^k}{\hat{\vw}} + \rho\gamma.
 	\end{align*}
 	Straight forward induction gives us
 	\begin{align}
@@ -231,7 +232,7 @@ where $\rho$ is the perceptron learning rate.
 	\begin{align*}
 		\norm{\vw^{k+1}}^2 
 		= \norm{\vw^{k} + \rho y_ix_i}^2
-		= \norm{\vw^k}^2 + \rho^2\norm{\vx_i}^2 + 2\rho y_i\ip{\vx_i}{\vw^k}
+		= \norm{\vw^k}^2 + \rho^2\norm{\varphib(\vx_i)}^2 + 2\rho y_i\ip{\varphib(\vx_i)}{\vw^k}
 		\le \norm{\vw^k}^2 + \rho^2R^2
 	\end{align*}
 	Straight forward induction gives us
@@ -258,7 +259,7 @@ As described in (Algorithm~\ref{voted_perceptron}), the voted perceptron algorit
 The weight can be seen as the ``survival time'' of the weight vector during Perceptron training.
 The prediction for a new test example $\vx_{ts}$ is computed by 
 \begin{align}
-	y_{ts} = \sign\left({\sum_{l=1}^{k}c^l(\sign{\ip{\vw^l}{\vx_{ts}}+b^{l}}})\right) \label{voted_perceptron_prediction}
+	y_{ts} = \sign\left({\sum_{l=1}^{k}c^l(\sign{\ip{\vw^l}{\varphib(\vx_{ts})}+b^{l}}})\right) \label{voted_perceptron_prediction}
 \end{align}
 using the weight vectors and the corresponding weights output from the algorithm (line~\ref{perceptron_algorithm_average}).
 \begin{algorithm}
@@ -271,11 +272,11 @@ using the weight vectors and the corresponding weights output from the algorithm
 	\STATE $k=1$
 	\FOR{$t=1\cdots T$}
 		\FOR{$i=1\cdots m$}
-			\STATE Compute $\hat{y} = \sign(\ip{\vw}{\vx_i})$
+			\STATE Compute $\hat{y} = \sign(\ip{\vw}{\varphib(\vx_i)})$
 			\IF{$\hat{y} = y_i$}
 				\STATE $c^k = c^k + 1$
 			\ELSE
-				\STATE $\vw^{k+1} = \vw^{k} + \rho y_i\vx_i$ \label{perceptron_algorithm_weight_vector}
+				\STATE $\vw^{k+1} = \vw^{k} + \rho y_i\varphib(\vx_i)$ \label{perceptron_algorithm_weight_vector}
 				\STATE $c^{k+1} =1$ \label{perceptron_algorithm_weight}
 				\STATE $k=k+1$
 			\ENDIF
@@ -291,7 +292,7 @@ However, voted perceptron is not practical as it has to store all weight vectors
 The \textit{averaged perceptron} is a simple alternative, where in stead of storing all weight vectors the algorithm only keeps the weighted sum $\sum_{l=1}^{k}c^k\vw^l$. 
 The prediction for a new test example $\vx_{ts}$ is computed by 
 \begin{align*}
-	y_{ts} = \sign\left(c^l({\sum_{l=1}^{k}{\ip{\vw^l}{\vx_{ts}}+b^{l}}})\right) = \sign\left({{\ip{c^l\sum_{l=1}^{k}\vw^l}{\vx_{ts}}+c^l\sum_{l=1}^{k}b^{l}}}\right),
+	y_{ts} = \sign\left(c^l({\sum_{l=1}^{k}{\ip{\vw^l}{\varphib(\vx_{ts})}+b^{l}}})\right) = \sign\left({{\ip{c^l\sum_{l=1}^{k}\vw^l}{\varphib(\vx_{ts})}+c^l\sum_{l=1}^{k}b^{l}}}\right),
 \end{align*}
 which is extremely similar to (\ref{voted_perceptron_prediction}) except for the inside $\sign$ operation, and is more efficient to compute.
 
@@ -313,24 +314,24 @@ Another choice is to let $\log p(y=+1|\vx)$ be a linear function of $\vx$.
 However, the problem is the log-likelihood ranges from zero to infinite but the linear function is unbounded.
 The choice in Logistic Regression is to use logistic transformation of the original probability function
 \begin{align*}
-	\log\frac{p(y=+1|\vx)}{1-p(y=+1|\vx)} = \ip{\vw}{\vx} + b,
+	\log\frac{p(y=+1|\vx)}{1-p(y=+1|\vx)} = \ip{\vw}{\varphib(\vx)} + b,
 \end{align*}
 which by solving for $p(y=+1|\vx)$ results in 
 \begin{align}
-	p(y=+1|\vx;\vw,b) = \frac{1}{1+\exponential{-\ip{\vw}{\vx}-b}}. \label{lr_1}
+	p(y=+1|\vx;\vw,b) = \frac{1}{1+\exponential{-\ip{\vw}{\varphib(\vx)}-b}}. \label{lr_1}
 \end{align}
 We can also compute
 \begin{align}
-	p(y=-1|\vx;\vw,b)=1-p(y=+1|\vx;\vw,b)=\frac{1}{1+\exponential{\ip{\vw}{\vx}+b}}. \label{lr_2}
+	p(y=-1|\vx;\vw,b)=1-p(y=+1|\vx;\vw,b)=\frac{1}{1+\exponential{\ip{\vw}{\varphib(\vx)}+b}}. \label{lr_2}
 \end{align}
 Putting together (\ref{lr_1}) and (\ref{lr_2}), we define the Logistic Regression as
 \begin{definition}{Logistic Regression.}\label{logistic_regression}
 	\begin{align*}
-		p(y=\pm1|\vx;\vw,b) = \frac{1}{1+\exponential{-y(\ip{\vw}{\vx}-b)}}.
+		p(y=\pm1|\vx;\vw,b) = \frac{1}{1+\exponential{-y(\ip{\vw}{\varphib(\vx)}-b)}}.
 	\end{align*}
 \end{definition}
 Naturally, we expect the prediction $y=+1$ when $p(y=+1|\vx;\vw,b)\ge0.5$ and $y=-1$, when $p(y=+1|\vx;\vw,b)<0.5$.
-The decision rule is similar to perceptron where we predict $y=+1$ when $\ip{\vw}{x}+b\ge0$, and $y=-1$ otherwise.
+The decision rule is similar to perceptron where we predict $y=+1$ when $\ip{\vw}{\varphib(\vx)}+b\ge0$, and $y=-1$ otherwise.
 Besides decision boundary, Logistic Regression can output the class probability from (Definition~\ref{logistic_regression}) as the the ``distance'' of the data point to the decision boundary.
 It is the probabilistic output that makes Logistic Regression no more than a classifier, as it outputs detailed predictions (class probability).
 
@@ -343,7 +344,7 @@ The likelihood of parameters given data can be computed from
 \end{align}
 To apply MLE, it is easier if, instead of maximizing the likelihood, we maximize the log-likelihood, which turns the product (\ref{lr_likelihood}) into sum
 \begin{align}
-	\log L(\vw,b|D) = \sum_{i=1}^{m}\log p(y_i|\vx_i) = -\sum_{i=1}^{m}\log (1+\exponential{-y_i(\ip{\vx_i}{\vw}+b)}) \label{lr_likelihood_sum}.
+	\log L(\vw,b|D) = \sum_{i=1}^{m}\log p(y_i|\vx_i) = -\sum_{i=1}^{m}\log (1+\exponential{-y_i(\ip{\varphib(\vx_i)}{\vw}+b)}) \label{lr_likelihood_sum}.
 \end{align}
 
 % logistic regression of other type
@@ -352,11 +353,11 @@ To achieve better generalization power, various smoothing techniques have been p
 In practice, a zero-mean spherical Gaussian with variance $\sigma^2$ is assumed on $\vw$.
 Thus, the maximum likelihood problem (\ref{lr_likelihood}) is transformed into \textit{Maximum A-Posteriori} (MAP) problem of the following form
 \begin{align}
-	p(\vw,b|D;\sigma^2) = p(\vw|\sigma^2)\prod_{i=1}^mp(y_i|\vx_i)=\exponential{-\frac{\norm{\vw}^2}{\sigma^2}}\prod_{i=1}^{m}{\frac{1}{1+\exponential{-y_i(\ip{\vx}{\vw}+b)}}}. \label{lr_posteriori}
+	p(\vw,b|D;\sigma^2) = p(\vw|\sigma^2)\prod_{i=1}^mp(y_i|\varphib(\vx_i))=\exponential{-\frac{\norm{\vw}^2}{\sigma^2}}\prod_{i=1}^{m}{\frac{1}{1+\exponential{-y_i(\ip{\varphib(\vx)}{\vw}+b)}}}. \label{lr_posteriori}
 \end{align}
 Instead of maximizing the posteriori (\ref{lr_posteriori}), it is easier to maximize the log-posteriori
 \begin{align}
-	\log p(\vw,b|D;\sigma^2) = -{\frac{\norm{\vw}^2}{\sigma^2}} - \sum_{i=1}^{m}\log{(1+\exponential{-y_i(\ip{\vx}{\vw}+b)})}. \label{lr_posteriori_log}
+	\log p(\vw,b|D;\sigma^2) = -{\frac{\norm{\vw}^2}{\sigma^2}} - \sum_{i=1}^{m}\log{(1+\exponential{-y_i(\ip{\varphib(\vx)}{\vw}+b)})}. \label{lr_posteriori_log}
 \end{align}
 
 Numbers of optimization techniques have been proposed to solve the maximization problem (\ref{lr_posteriori_log}) in Logistic Regression, many of which are covered in the survey \citep{Minka03}.
@@ -401,7 +402,7 @@ Theory and algorithm are detailed in book chapters e.g. \citep{Scholkopf02learni
 We begin our discussion by considering a very simple case where we assume the data are linearly separable, that is there is a hyperplane in the feature space which separates the training data into two classes.
 In addition we assume the \textit{separating hyperplane} has a simple form
 \begin{align*}
-	f(\vx)=\ip{\vw}{\vx} + b = 0,
+	f(\vx)=\ip{\vw}{\varphib(\vx)} + b = 0,
 \end{align*}
 such that for training data we have $y_i=-1$ if $f(\vx_i)<0$, and $y_i=+1$ if $f(\vx_i)>0$.
 Given $\vw$ that achieves correct separation on the training data, we can decide the label of an arbitrary test example $x_{ts}$ by the decision rule $y_{ts}=\sign(f(\vx_{ts}))$.
@@ -414,7 +415,7 @@ To see this, imagining putting a separating hyperplane close to one class of exa
 
 Based on the maximum-margin principal, we further denote by $\gamma_i$ the \textit{margin} for the $i$'th example which is defined as the geometric distance from the data point to the separating hyperplane
 \begin{align*}
-	\gamma_i = \frac{y_i(\ip{\vw}{\vx_i}+b)}{\norm{\vw}}.
+	\gamma_i = \frac{y_i(\ip{\vw}{\varphib(\vx_i)}+b)}{\norm{\vw}}.
 \end{align*}
 We notice if we scale $\vw$ and $b$ with any constant (e.g. $\vw\leftarrow\kappa\vw, b\leftarrow\kappa b, \kappa\in\RR$, ) the margin $\gamma_i$ stays unchanged. 
 We still achieve the same classification and generalization performance.
@@ -429,7 +430,7 @@ Naturally, this corresponds to finding a ``big-gap'' between two classes.
 The max-margin solution is given as \citep{Bishop07}
 \begin{align*}
 	\underset{\vw,b,\gamma}{\maximize} &\quad \gamma\\
-	\st &\quad y_i(\ip{\vw}{\vx_i}+b) \ge \gamma, \, \norm{\vw}=1,\\
+	\st &\quad y_i(\ip{\vw}{\varphib(\vx_i)}+b) \ge \gamma, \, \norm{\vw}=1,\\
 	 &\quad \forall i\in\{1,\cdots,m\}.
 \end{align*}
 The objective maximizes the minimum margin over all training examples such that all examples are correctly separated with margin at least $\gamma$.
@@ -437,13 +438,13 @@ However, this is very difficult to optimize not only because the constraint $\no
 By replacing $\vw$ with $\frac{\vw}{\gamma}$, we obtain 
 \begin{align*}
 	\underset{\vw,b}{\maximize} &\quad \frac{1}{\norm{\vw}}\\
-	\st &\quad y_i(\ip{\vw}{\vx_i}+b) \ge 1, \, \forall i\in\{1,\cdots,m\},
+	\st &\quad y_i(\ip{\vw}{\varphib(\vx_i)}+b) \ge 1, \, \forall i\in\{1,\cdots,m\},
 \end{align*}
 which is equivalent to optimize
 \begin{definition}{Primal Hard-Margin \svm\ Optimization Problem.}\label{hardsvmprimal}
 	\begin{align*}
 		\underset{\vw}{\minimize} & \quad\frac{1}{2}\norm{\vw}^2\\
-		\st & \quad y_i(\ip{\vw}{\vx_i} + b) \ge 1, \forall i\in\{1,\cdots,m\},
+		\st & \quad y_i(\ip{\vw}{\varphib(\vx_i)} + b) \ge 1, \forall i\in\{1,\cdots,m\},
 	\end{align*}
 \end{definition}
 where the objective is to find the weight vector of minimum norm that corresponds to maximize the margin between two class of examples.
@@ -455,7 +456,7 @@ First, many real world data are not separable, so that solution to (Definition~\
 Second, the data usually come with noise and error and we do not want resulting classifier over-fit the training data.
 Therefore, we relax the constraints by introducing for each training example $x_i$ a \textit{margin slack} parameter $\xi_i$ and rewrite the constraints as 
 \begin{align}
-	y_i(\ip{\vw}{\vx_i} + b) \ge 1-\xi_i, \xi_i\ge 0, \forall i\in\{1,\cdots,m\}. \label{softsvmconstraint}
+	y_i(\ip{\vw}{\varphib(\vx_i)} + b) \ge 1-\xi_i, \xi_i\ge 0, \forall i\in\{1,\cdots,m\}. \label{softsvmconstraint}
 \end{align}
 The margin slack parameter $\xi_i$ will allow example with margin less than $1$ (the violation of the constraints).
 In particular, with $\xi_i=0$ the data point $x_i$ is correctly classified, and lies either on the margin or on the correct side.
@@ -465,7 +466,7 @@ With margin slack parameter, the new goal is to maximize the margin while penali
 \begin{definition}{Primal Soft-Margin \svm\ Optimization Problem.}\label{softsvmprimal}
 	\begin{align*}
 		\underset{\vw,\xi}{\minimize} & \quad\frac{1}{2}\norm{\vw}^2 + C\sum_{i=1}^{m}\xi_i\\
-		\st & \quad y_i(\ip{\vw}{\vx_i} + b) \ge 1-\xi_i, \xi_i\ge 0, \forall i\in\{1,\cdots,m\}.
+		\st & \quad y_i(\ip{\vw}{\varphib(\vx_i)} + b) \ge 1-\xi_i, \xi_i\ge 0, \forall i\in\{1,\cdots,m\}.
 	\end{align*}
 \end{definition}
 
@@ -474,7 +475,7 @@ Optimization problem is usually transformed into dual form by introducing for ea
 We obtain the following dual optimization problem
 \begin{definition}{Dual Soft-Margin \svm\ Optimization Problem.}\label{softsvmdual}
 	\begin{align*}
-		\underset{\valpha}{\maximize} & \quad\sum_{i=1}^{m}\alpha_i -\frac{1}{2}\sum_{i=1}^{m}\sum_{i=1}^{m}\alpha_i\alpha_jy_iy_j\ip{\vx_i}{\vx_j}\\
+		\underset{\valpha}{\maximize} & \quad\sum_{i=1}^{m}\alpha_i -\frac{1}{2}\sum_{i=1}^{m}\sum_{i=1}^{m}\alpha_i\alpha_jy_iy_j\ip{\varphib(\vx_i)}{\varphib(\vx_j)}\\
 		\st & \quad \sum_{i=1}^{m}\alpha_iy_i=0, \, 0\le\alpha_i\le C, \, \forall i\in\{1,\cdots,m\}.
 	\end{align*}
 \end{definition}
@@ -484,33 +485,33 @@ They are called \textit{support vectors} in \svm\ optimization problem.
 In fact the number of support vectors is usually smaller than the size of the training set.
 The property is extremely useful, as the weight vector can be expressed as the linear combination of the training examples
 \begin{align*}
-	\vw = \sum_{i=1}^{m}\alpha_iy_i\vx_i.
+	\vw = \sum_{i=1}^{m}\alpha_iy_i\varphib(\vx_i).
 \end{align*}
 As most of the dual variables are zero, the evaluation can be done efficiently by maintaining a small set of non-zero $\alpha$.
 
-In addition, we notice that to work out (Definition~\ref{softsvmdual}) it is not necessary to work on the explicit representation of $\vx$, as only the value of the inner product $\ip{\vx_i}{\vx_j}$ is needed.
-As the algorithm can be represented entirely in terms of the inner product, we can also replace the inner product with $\ip{\phib(\vx_i)}{\phib(\vx_j)}$.
+In addition, we notice that to work out (Definition~\ref{softsvmdual}) it is not necessary to work on the explicit representation of $\vx$, as only the value of the inner product $\ip{\varphib(\vx_i)}{\varphib(\vx_j)}$ is needed.
+As the algorithm can be represented entirely in terms of the inner product, we can also replace the inner product with $\ip{\varphib(\vx_i)}{\varphib(\vx_j)}$.
 In particular, we define the \textit{kernel}
 \begin{align}
-	K(\vx_i,\vx_j) = \ip{\phib(\vx_i)}{\phib(\vx_j)}, \label{kernel}
+	K(\vx_i,\vx_j) = \ip{\varphib(\vx_i)}{\varphib(\vx_j)}, \label{kernel}
 \end{align}
-where $\phib(\cdot)$ is some high-dimensional feature map.
+where $\varphib(\cdot)$ is some high-dimensional feature map.
 Whenever we need $\ip{\vx_i}{\vx_j}$, we instead use $K(\vx_i,\vx_j)$.
 Besides, the property of kernel function \citep{Scholkopf02learning} allows us to compute (\ref{kernel}) without explicitly accessing the high dimensional feature map.
-Thus the algorithm can tackle high dimensionality by learning from $\phib(\cdot)$ at a low computational cost.
+Thus the algorithm can tackle high dimensionality by learning from $\varphib(\cdot)$ at a low computational cost.
 
 In addition, according to \textit{Mercer's Theorem} \citep{taylor04}, every positive semidefinite symmetric function is a kernel.
 Kernel functions that heavily used in practice include the \textit{linear kernel}
 \begin{align*}
-	K(\vx_i,\vx_j) = \ip{\vx_i}{\vx_j},
+	K(\vx_i,\vx_j) = \ip{\varphib(\vx_i)}{\varphib(\vx_j)},
 \end{align*}
 the \textit{polynomial kernel}
 \begin{align*}
-	K(\vx_i,\vx_j) = (\ip{\vx_i}{\vx_j} + b)^k,
+	K(\vx_i,\vx_j) = (\ip{\varphib(\vx_i)}{\varphib(\vx_j)} + b)^k,
 \end{align*}
 where $b$ is the bias term and $d$ is the degree of polynomial, and the \textit{Gaussian kernel} (RBF)
 \begin{align*}
-	K(\vx_i,\vx_j) = \exp{\left(\frac{\norm{{\vx_i}-{\vx_j}}^2}{2\sigma^2}\right)},
+	K(\vx_i,\vx_j) = \exp{\left(\frac{\norm{{\varphib(\vx_i)}-{\varphib(\vx_j)}}^2}{2\sigma^2}\right)},
 \end{align*}
 where $\sigma$ is the Gaussian width parameter.
 
