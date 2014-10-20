@@ -403,6 +403,11 @@ Hethcote, H.~W. (2000).
 \newblock The mathematics of infectious diseases.
 \newblock {\em SIAM Review}, 42:599--653.
 
+\bibitem[Hoerl and Kennard, 2000]{Hoerl00ridge}
+Hoerl, A.~E. and Kennard, R.~W. (2000).
+\newblock Ridge regression: Biased estimation for nonorthogonal problems.
+\newblock {\em Technometrics}, 42(1):80--86.
+
 \bibitem[Hsieh et~al., 2014]{Hsieh14a}
 Hsieh, C.-J., Si, S., and Dhillon, I. (2014).
 \newblock A divide-and-conquer solver for kernel support vector machines.
@@ -800,6 +805,12 @@ Taskar, B., Lacoste-Julian, S., and Jordan, M.~I. (2006).
 \newblock In {\em Advances in Neural Information Processing Systems 18 (NIPS
   2006)}, pages 1345--1352. MIT Press.
 
+\bibitem[Tibshirani, 1994]{Tibshirani94regression}
+Tibshirani, R. (1994).
+\newblock Regression shrinkage and selection via the lasso.
+\newblock {\em Journal of the Royal Statistical Society, Series B},
+  58:267--288.
+
 \bibitem[Tibshirani, 1996]{Tibshirani1996bias}
 Tibshirani, R. (1996).
 \newblock Bias, variance and prediction error for classification rules.
@@ -837,6 +848,12 @@ Tukey, J.~W. (1949).
 Vapnik, V. (1982).
 \newblock {\em Estimation of Dependences Based on Empirical Data}.
 \newblock Springer-Verlag.
+
+\bibitem[Vapnik, 1992]{Vapnik92principles}
+Vapnik, V. (1992).
+\newblock Principles of risk minimization for learning theory.
+\newblock In Moody, J., Hanson, S., and Lippmann, R., editors, {\em Advances in
+  Neural Information Processing Systems 4}, pages 831--838. Morgan-Kaufmann.
 
 \bibitem[Vishwanathan et~al., 2010]{Vishwanathan10graph}
 Vishwanathan, S. V.~N., Schraudolph, N.~N., Kondor, R., and Borgwardt, K.~M.
