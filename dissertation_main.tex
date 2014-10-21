@@ -484,7 +484,7 @@ The constraints states that the training data should be well separated.
 % soft margin svm
 We do not use Definition~\ref{hardsvmprimal} in practice for two reasons. 
 First, many real world data are not linearly separable, where the solution to Definition~\ref{hardsvmprimal} does not always exist.
-Second, the data usually come with noises and errors and we do not want the resulting classifier to over-fit the training data.
+Secondly, the data usually come with noises and errors and we do not want the resulting classifier to over-fit the training data.
 Therefore, we relax the constraints by introducing a \textit{margin slack} parameter $\xi_i$ for each training example $x_i$ and rewrite the constraints as 
 \begin{align}
 	y_i(\ip{\vw}{\varphib(\vx_i)} + b) \ge 1-\xi_i, \xi_i\ge 0, \forall i\in\{1,\cdots,m\}. \label{softsvmconstraint}
@@ -614,21 +614,25 @@ Naturally, $u_i\in\Ycal_i$ and $\vu_e\in\vYcal_e$.
 % sub section: perceptron
 \subsection{Perceptron in Structured Output Space}
 
-The perceptron algorithm, dated back to \citep{Rosenblatt58}, is one of the oldest learning algorithm in machine learning.
-As it is extremely easy to implement and usually achieves good performance, the perceptron algorithm is still actively studied in the field.
-Structured perceptron, as suggested by its name, can be seen as the generalization of the perceptron algorithm to structured output space.
-It was firstly proposed in \citep{collins02a, collins02b} with the formalism incredibly similar to multiclass perceptron. 
+The Perceptrion, dated back to \citep{Rosenblatt58}, is one of the oldest learning algorithm in machine learning.
+As it is extremely easy to implement and usually achieves good performance, Perceptron is still actively studied in the field.
+Structured Perceptron, as suggested by its name, can be seen as the generalization of Perceptron algorithm to structured output space.
+It was firstly proposed in \citep{collins02a, collins02b} with the formalism incredibly similar to multiclass Perceptron. 
 The model assumes a score function $\ip{\vw}{\phib(\vx,\vy)}$ as the inner product between a joint feature map $\phib(\vx,\vy)$ and some feature weight parameter $\vw$.
-After weight parameter $\vw$ is obtained, one need to solve the \textit{argmax} problem to get the best output for a given input
+After weight parameter $\vw$ is obtained, one need to solve the \textit{argmax} problem to compute the best output for a given input
 \begin{align}
 	\hat{\vy} = \underset{\vy\in\vYcal}{\argmax} &\, \ip{\vw}{\phib(\vx_i,\vy)}.  \label{perceptroninference}
 \end{align}
 
-The weight parameter $\vw$ is learned via standard perceptron iterative update by solving argmax operation (\ref{perceptroninference}) in each iteration.
+The weight parameter $\vw$ is learned via standard Perceptron iterative update by solving argmax operation (\ref{perceptroninference}) in each iteration.
 In particular, the algorithm loops through training examples and updates $\vw$ whenever the predicted label $\hat{\vy}$ is different from true label $\vy$, according to 
 \begin{align*}
 	\vw \leftarrow \vw + \left(\phib(\vx_i,\vy_i) - \phib(\vx_i,\hat{\vy}_i)\right).
 \end{align*}
+The update usually leads to over-fitting.
+A simple refinement is proposed which is similar to ``Average Perceptron'' developed by \citet{Freund99large}.
+
+\iffalse
 The update usually leads to over-fitting and a simple refinement, called "average parameter" similar to \citep{Freund99large}, is shown in (Algorithm~\ref{algorithm_structured_perceptron}).
 \begin{algorithm}
 \caption{Structured Perceptron with Parameter Averaging}
@@ -650,9 +654,10 @@ The update usually leads to over-fitting and a simple refinement, called "averag
 	\RETURN $\vw = \frac{1}{Tm}\sum_{t=1}^{T}\sum_{i=1}^{m}\vw^{t,i}$
 \end{algorithmic}
 \end{algorithm}
+\fi
 
-In fact, structured perceptron makes two strong assumptions that restrict its power and applicability.
-First, the framework assumes 0/1 loss over output variables, that is $\vell(\vy,\hat{\vy})=\ind{\vy\neq\hat{\vy}}$, such that the nearly correct and the completely incorrect output labels will lead to the same update of the weight parameter during the training.
+In fact, Structured Perceptron makes two strong assumptions that limits its power and applicability.
+First, it uses $0/1$ loss over output variables, that is $\vell(\vy,\hat{\vy})=\ind{\vy\neq\hat{\vy}}$, such that the nearly correct and the completely incorrect output labels will lead to the same update of the weight parameter during the training.
 Secondly, it tacitly assumes that the argmax problem can be solved efficiently, which is generally not true in many structured output space.
 In the original work, \citet{collins02a} only demonstrated the algorithm on sequence tagging problem with Viterbi decoding.
 
@@ -1055,7 +1060,7 @@ Besides, the result will not be significant unless the sample size is larger eno
 Meanwhile, sign-test is also proposed in \citep{Demsar06statistical}.
 As the setting is not very interesting for our purpose, we will not expand our discussion on the details.
 
-Second, we will consider a more common situation where we want to compare multiple learning algorithms over many datasets.
+Secondly, we will consider a more common situation where we want to compare multiple learning algorithms over many datasets.
 In practice, we want to answer the question, for example, whether algorithm A is significantly better than algorithm C, and algorithm C outperformances algorithm B in a significantly manner.
 In statistics, this is equivalent to multiple hypothesis test.
 The common way is to use repeat-measures ANOVA \citep{Fisher59statistical} with post-hoc Tukey test \citep{Turkey49comparing}. The test procedure is based on two assumptions: the first is known as \textit{normality} meaning samples are drawn from normal distributions; second is known as \textit{sphericity} meaning samples should have equal variant.
