@@ -580,7 +580,7 @@ There are many other active researches on \svm\ optimization that aim to make ke
 % multilabel classification problem
 \section{Structured Output Prediction}\label{sc_multi}
 
-As the learning algorithms for multi-task classification in structured output space have evolved rapidly during the last decade, the author wish to briefly review several prominent structured output prediction algorithms in this section, namely, Structured Perceptron, Conditional Random Field, Maximum-Margin Markov Networks, Structured SVM, and Mutltask Feature Learning.
+As the learning algorithms for multi-task classification in structured output space have evolved rapidly during the last decade, the author wish to briefly review several prominent structured output prediction algorithms in this section, namely, Structured Perceptron, Conditional Random Field, Maximum-Margin Markov Networks, Structured SVM, and Mutli-task Feature Learning.
 These algorithms are also relevant to this thesis.
 These algorithms are mostly from 2010, the period when this field of researches has begun to emerge.
 
@@ -589,7 +589,7 @@ These algorithms are mostly from 2010, the period when this field of researches 
 % notations
 \subsection{Preliminary and Notation}\label{multilabel_preliminary}
 
-We will keep most notations from (Section~\ref{singlelabel_preliminary}).
+We will borrow most notations from Section~\ref{singlelabel_preliminary}.
 In particular, we examine the following multilabel classification setting.
 We assume data from a domain $\vXcal\times\vYcal$, where $\vXcal$ is a set and $\vYcal$ is the set of multilabels.
 $\vYcal = \Ycal_1\times\cdots\times\Ycal_k$ is composed by a Cartesian product of $k$ sets $\Ycal_i=\{-1,+1\}$.
@@ -597,26 +597,22 @@ We retain a single-label classification setting by letting $k=1$.
 A vector $\vy=(y_1,\cdots,y_k)\in\vYcal$ is called \textit{multilabel} and each element $y_j$ is called \textit{microlabel}.
 In addition, we are given a set of labeled training examples $\Scal=\{(\vx_i,\vy_i)\}_{i=1}^{m}\in\vXcal\times\vYcal$. 
 A pair $(\vx_i,\vy)$, where $\vx_i$ is the training input and $\vy\in\vYcal$ is an arbitrary output, is call \textit{pseudo-example}.
-The goal is to learn a mapping $f\in\Hcal:\vXcal\rightarrow\vYcal$ from input to output such that the loss $\ell$ for the future unseen examples is minimized, where the loss function is usually tailored for the structured output learning algorithm.
+The goal is to learn a mapping $f\in\Hcal:\vXcal\rightarrow\vYcal$ from input to output such that the loss $\ell$ for the future unseen examples is minimized.
+Loss function is usually tailored for the structured output prediction models.
 
-Multilabel classification deals with multiple interdependent output variables (e.g. $\vy\in\vYcal$), which locates in structured output space.
+Multi-task classification deals with multiple interdependent output variables (e.g. $\vy\in\vYcal$), which locates in structured output space.
 As graph is the natural way of modeling the multiple interdependencies, we assume a graph $G=(E,V)$ with node set $V=\{1,\cdots,k\}$ corresponding to the microlabels $\{y_1,\cdots,y_k\}$ and edge set $E=V\times V$ representing the dependency between pair of microlabels.
+$G$ is also known as \textit{output graph} in structured output learning.
 For each edge $e=(j,j')\in E$, we denote by $\vy_e$ the edge label of edge $\ve$ with respect to multilabel $\vy$ by concatenating the head label $y_i$ and the tail label $y_i$, with the edge label domain $\vy_e\in\vYcal_e=\Ycal_i\times\Ycal_{j'}$.
-We denote by $\vy_{i,e}$ the edge label of example pair $(\vx_i,\vy_i)$ on edge $\ve$.
+By $\vy_{i,e}$, we denote the edge label of example pair $(\vx_i,\vy_i)$ on edge $\ve$.
 Thus, given a pair of training example $(\vx_i,\vy_i)$ and the output graph $G$, we can uniquely identify the node label $y_i$ and the edge label $\vy_{i,e}$.
-In addition, we denote by $u_i$ the possible label of node $i$ and by $\vu_{e}$ the possible label of edge $\ve$ where $u_i$ and $\vu_{e}$ do not constraint to any multilabel $\vy$.
+In addition, we denote the possible label of node $i$ by $u_i$ and the possible label of edge $\ve$ by $\vu_{e}$ where $u_i$ and $\vu_{e}$ do not constraint to any multilabel $\vy$.
 Naturally, $u_i\in\Ycal_i$ and $\vu_e\in\vYcal_e$.
 
 
 %
 % sub section: perceptron
-%\subsection{Maximum Entropy Markov Network (\memm)}
-% TODO
-
-
-%
-% sub section: perceptron
-\subsection{Perceptron for Structured Output}
+\subsection{Perceptron in Structured Output Space}
 
 The perceptron algorithm, dated back to \citep{Rosenblatt58}, is one of the oldest learning algorithm in machine learning.
 As it is extremely easy to implement and usually achieves good performance, the perceptron algorithm is still actively studied in the field.
@@ -826,7 +822,7 @@ In the later part of the section, we will extend the ensemble methods to structu
 % preliminary notations
 \subsection{Preliminary and Notations}
 
-In addition to the notations introduced in (Section~\ref{singlelabel_preliminary}, \ref{multilabel_preliminary}), we assume there is a hypothesis class $\Fcal$ where we generate weak/base hypothesis $f^t(x)\in\Fcal$.
+In addition to the notations introduced in Section~\ref{singlelabel_preliminary} and \ref{multilabel_preliminary}, we assume there is a hypothesis class $\Fcal$ where we generate weak/base hypothesis $f^t(x)\in\Fcal$.
 By $t$ we intend to index the $t$'th weak hypothesis.
 We denote by $H(x)$ the ensemble framework that is able to combine multiple weak hypotheses and generate a stronger one.
 In many cases, no other information about $f^t(x)$ is available to $H(x)$ except that each weak hypothesis will take in as parameter $x$ and output $y\in\Ycal$ for single label classification ($\vy\in\vYcal$ in multilabel classification respectively).
@@ -1321,7 +1317,7 @@ In terms of the intractability issue of graph inference problem, many techniques
 \citet{Wainwright05map} proposed MAP inference with tree-based and \textit{linear programming} (LP) relaxation.
 Efficient inference on special case of graph has also been extensively studied in \citep{Globerson07approximate}.
 
-\citepub{su14c} is motivated by well-established max-margin assumption (Section~\ref{}) and investigate whether the problem of inference over a complete graph in structured output learning can be avoided in a analogous way.
+\citepub{su14c} is motivated by well-established max-margin assumption presented in Section~\ref{sc_svm} and investigate whether the problem of inference over a complete graph in structured output learning can be avoided in a analogous way.
 Start from a sampling results, \citepub[Lemma 3]{su14c} shows that with high probability a big fraction of margin from the complete graph can be obtained by a sample of spanning trees of small size.
 Besides, \citepub[Theorem 5]{su14c} shows the good generalization can also be guaranteed when learning with in stead of complete graph a sample of spanning trees.
 
