@@ -6,22 +6,25 @@
 
 \chapter{Introduction}\label{ch_introduction}
 
+
+%
+%
 \section{Scope of the Thesis}
 
 In this thesis, we study the \textit{supervised learning} in structured output space, also known as \textit{structured output prediction}.
 
-\textit{Machine learning}, an active research field in information and computer science, has drawn enormous attentions during the last few decades, not only because it develops intelligent systems that generalize well from previous observed examples; but also because it is grounded from rich statistical learning theories that prove the feasibility and guarantee the performance.
-Machine learning has in practice provided lots of inventions, which people may use many times a day without knowing it, to name but a few, from web searching engine to self-driving car, from optical image recognition to email spam filter, from automatic stock exchange to online recommender system.
+\textit{Machine learning}, an active research field in information and computer science, has drawn enormous attentions during the last few decades, not only because it develops intelligent systems that generalize well from previously observed examples; but also because it is rooted from rich statistical learning theories that prove the feasibility and guarantee the performance.
+Machine learning has in practice provided lots of inventions, that people may use many times a day without noticing, from web searching engine to self-driving car, from optical image recognizer to spam filter, from automatic stock exchange to online recommender system.
 
 \textit{Supervised learning}, one of the most important fields in {machine learning}, is usually instantiated as learning a function that is capable of predicting the best value for the output variable $\vy$ given an observed input variable $\vx$.
-The function is learned by utilizing a set of input and output pairs known as training examples.
+The function is learned by utilizing a set of observed input/output pairs known as training examples.
 In the classical supervised learning setting, the value that the output variable $\vy$ can take is often no more than one discrete or continuous number.
-This is often referred as single-task classification in machine learning community.
-Many excellent learning algorithms have been designed for the problem and achieved remarkable success in many applications.
+This is often referred as \textit{single-task classification} in machine learning community.
+Many well-designed learning algorithms have been delivered for the problem and achieved remarkable success in many applications.
 
 However, many real world problems require multiple interdependent output variables defined in structured output space to be predicted at the same time, known as \textit{multi-task structured output prediction}.
 Otherwise, the problem can be summarized as learning a function for mapping from arbitrary input to arbitrary output.
-In this case, single task classification approaches render inefficiency and incapability of modeling the interdependency.
+In this case, single-task classification approach renders inefficiency and incapability of modeling the interdependency.
 In addition, the interdependency can be given either explicitly as the output graph that connecting multiple output variables (e.g. sequence parsing, network influence prediction, hierarchical document classification), or implicitly with the only assumption that the output variable are correlated (e.g. molecular classification, computer vision).
 Nevertheless, it is crucial to capture the common properties shared between similar output variables in order to achieve good performance and to generalize well.
 
@@ -31,12 +34,12 @@ On the other hand, methods that do not explicitly assume the output structure us
 
 In this thesis, we investigate the potentials of developing novel structured output prediction models to improve the prediction performance in real world multi-task classification problems (e.g. molecular activity prediction, network influence prediction).
 In particular, we present the novel structured output prediction models that are capable of learning without predefined structure.
-We focus on the efficiency and the scalability of the proposed structured output prediction models, as the inference problem is often \nphard\ to solve.
-Additionally, the new learning models are well motivated.
+We focus on the efficiency and the scalability of the proposed structured output prediction models, as the inference problem is often difficult to solve.
+Additionally, our new models are well motivated.
 The theoretical study is able to explain the behaviour and to guarantee the performance of the models.
 In particular, our research questions can be casted as followings:
 \begin{enumerate}[label=\textbf{Q \Roman*}:]
-\item Is the structured output prediction models more suitable for predicting multiple interdependent variables in structured output space?
+\item Is the structured output prediction model more suitable for predicting multiple interdependent variables in structured output space?
 \item How to tackle the problem of structured output learning without observed output structure?
 \item What is the motivation of the proposed structured output learning framework? Can we explain the improvement and guarantee the empirical risk of the proposed models?
 \item Can we efficiently optimize the proposed structured output prediction models?
@@ -44,16 +47,16 @@ In particular, our research questions can be casted as followings:
 
 
 
-
-
+%
+%
 \section{Contribution and Outline of the Thesis}
 
 The main contribution of the thesis is to present a learning framework for structured output prediction with both empirical and theoretical guarantee.
 Under the framework, several learning algorithms are proposed.
 Unlike previous structured output learning algorithms, the proposed models do not assume any observed structured on the output variables, and thus largely widen the applicability of the structured output learning.
 Meanwhile, the thesis presents several attractive theoretical properties which support the new learning framework and guarantee the generalization error.
-In addition to the main contribution, the thesis also proposes a new learning algorithm that is capable of predicting a directed acyclic graph and demonstrating the performance on influence network prediction problem.
-Besides, the thesis also focuses on elegant optimization strategy with which the newly proposed models often avoid the exponential parameter space and \nphard\ inference problem.
+In addition to the main contribution, the thesis also proposes a new learning algorithm that is capable of predicting a directed acyclic graph and demonstrating the performance on the influence network prediction problem.
+Besides, the thesis also focuses on elegant optimization strategy with which the proposed models often avoid the exponential parameter space and the \nphard\ inference problem.
 
 The thesis is structured as follows.
 In Chapter~\ref{ch_introduction}, the scope of the research is briefly explained with several research questions being proposed which will be answered in this thesis.
@@ -64,39 +67,43 @@ perceptron (Section~\ref{sc_perceptron}),
 logistic regression (Section~\ref{sc_lr}), 
 and \svm\ (Section~\ref{sc_svm}).
 Section~\ref{sc_multi} will extend the previous section by introducing the learning algorithms designed for multiple interdependent variables in structured output space.
-Ensemble models for both single task and multi-task classification will be briefly covered in Section~\ref{sc_ensemble}.
+Ensemble models for both single-task and multi-task classification will be briefly covered in Section~\ref{sc_ensemble}.
 Section~\ref{sc_statistics} describes the performance measures and the statistical models that are used for model evaluation and comparison.
 
 Chapter~\ref{ch_models} introduces the novel statistical models developed by the author.
 In particular, Section~\ref{sc_su10} explains the structured output learning model for molecular activity prediction.
 Section~\ref{sc_su11} and Section~\ref{sc_su14a} discuss three ensemble models (\mve, \amm, \mam) that tackle the problem in structured output prediction when the output structure is unknown.
 Section~\ref{sc_su14c} presents \rta\ model that is a major step forward of \mam\ by performing joint learning and inference over a random sample of spanning trees.
-Section~\ref{sc_su14b} introduces network influence prediction problem and presents \spin\ that is capable of predicting a directed acyclic graph (DAG).
-Finally, Chapter~\ref{ch_conclusion} concludes the thesis by answering the research questions and by pointing out future directions.
+Section~\ref{sc_su14b} introduces network influence prediction problem and presents \spin\ that is capable of predicting a directed acyclic graph.
+Finally, Chapter~\ref{ch_conclusion} concludes the thesis by answering the research questions and pointing out future directions.
 
-In this thesis, the ideas and the formalisms of the proposed statistical models for structured output learning are explained.
+In this thesis, the ideas and the formalisms of the proposed statistical models for structured output prediction are explained.
 However, the technical details from the original publications are usually not repeated.
 Furthermore, the notations and the presentations of some proposed models are slightly improved to be better incorporated into a unified framework.
 The background information and the related work of some proposed models are sometimes elaborated in the thesis to help better understand their contributions to the community.
-Empirical evaluations of the proposed models are in nowhere restated, rather, they can be found from the original publications. 
+Empirical evaluations of the proposed models are in nowhere restated, rather, they can be found from the original research articles. 
 
 
 
-
-
+%
+%
+%
 \chapter{Background}\label{ch_background}
 
 
-\section{Regularized Risk Minimization}
+
+%
+%
+\section{Regularized Risk Minimization}\label{sc_emp}
 
 In this section, the author will introduce two fundamental concepts in statistical machine learning, known as \textit{empirical risk minimization} and \textit{regularization}.
 Together they give rise to the learning algorithms that will be presented in the following part of the thesis.
 
 \subsection{Empirical Risk Minimization}
 
-Without loss of generality, we assume two random variable $\vx\in\vXcal$ and $\vy\in\vYcal$ are joint distributed according to some fixed but unknown probability distribution $P(\vx,\vy)$ over domain of $\vXcal\times\vYcal$.
+Without loss of generality, we assume two random variable $\vx\in\vXcal$ and $\vy\in\vYcal$ are joint distributed according to some fixed but unknown probability distribution $P(\vx,\vy)$ over domain $\vXcal\times\vYcal$.
 In addition, we are provided with examples in pair $(\vx,\vy)\in\vXcal\times\vYcal$ generated by sampling according to the distribution $P(\vx,\vy)$.
-A \textit{hypothesis class} $\Hcal$ is a set of functions that learning algorithm is allowed to search against.
+A \textit{hypothesis class} $\Hcal$ is a set of functions that the learning algorithm is allowed to search against.
 The basic goal for \textit{statistical learning} is to provide from a hypothesis class $\Hcal$ an \textit{estimator} $f\in\Hcal:\vXcal\rightarrow\vYcal$ that predicts the value of $\vy$ given an arbitrary input $\vx$.
 
 To measure the goodness of the estimator, we define a risk function (loss function) $\Lcal(\vy,f(\vx))$ between the true value $f(\vx)$ and the predicted value $\vy$.
@@ -114,29 +121,32 @@ Instead, we are given a random sample of $m$ examples, denoted by $S=\{(\vx_1,\v
 This suggest the learning algorithm should search for an estimator $f$ to minimize the risk defined in (\ref{empirical_risk}).
 The strategy is known in machine learning community as \textit{empirical risk minimization} \citep{Vapnik92principles}.
 
-\subsection{Regularized Learning}
+\subsection{Regularized Learning}\label{sc_regularization}
 
 The empirical risk minimization strategy is ill-posed which in general can provide infinity number of estimators with same empirical risk on the same training data.
 Besides, it often leads to \textit{overfitting} when the dimensionality of the feature space is high and the number of training data is limited.
 In other words, underlying true distribution $P(\vx,\vy)$ is difficult to to estimate from a finite sample of training examples.
-Thus, the estimator will generalize poor on unseen test examples.
+Thus, the estimator will generalize poorly on unseen test examples.
 The \textit{regularization theory} provides a framework to alleviate these two difficulties.
 In particular, it aims to minimize 
  \begin{align*}
 	\Jcal(f) = \Rcal_{emp}(f) + \Omega(f),
 \end{align*}
 where $\Omega(f)$ is the regularization function that controls the complexity of the estimator $f$ by penalizing the norm of the parameter vector.
+
 In terms of the linear function class, there are varying way to defined $\Omega(f)$, among which $L_1$ and $L_2$ norm regularization are most popular.
-The $L_2$ norm regularization defined by $\Omega(f) = ||\vw||^2_2$ will controls the complex of $f$ and provides a smooth solution, for example, ridge regression \citep{Hoerl00ridge}, logistic regression \citep{Chen00}, \svm \citep{Cortes95support}.
-The $L_1$ norm regularization defined by $\Omega(f) = ||\vw||^2_1$ will provides sparse estimation which means that we obtain a high dimensional feature weight vector with many zero entries, for example, \lasso \citep{Tibshirani94regression}.
+The $L_2$ norm regularization defined by $\Omega(f) = ||\vw||^2_2$ will controls the complex of $f$ and provides a smooth solution, for example, Ridge Regression \citep{Hoerl00ridge}, Logistic Regression \citep{Chen00}, Support Vector Machines \citep{Cortes95support}.
+The $L_1$ norm regularization defined by $\Omega(f) = ||\vw||^2_1$ will provides sparse estimation which means that we obtain a high dimensional feature weight vector with many zero entries, for example, \lasso\ \citep{Tibshirani94regression}.
 This is a attractive property as feature selection is incorporated into the learning and the interpretability of the resulting model is usually high.
 Besides, other regularization functions are also widely studied, to name a few, $L_{1,2}$ norm regularization in \citep{Argyriou07multitask} and elastic net regularization in \citep{Zou05regularizationa}.
 
+
+%
 %
 \section{Single Label Classification}\label{sc_single}
 
-In this section, the author will introduce the basic classification problem known as single task classification.
-The author will explain three prominent algorithms in the area: Perceptron, Logistic Regression and the Support Vector Machines.
+In this section, the author will introduce the basic classification problem known as single-task classification.
+The author will explain three prominent algorithms in the area: Perceptron, Logistic Regression and Support Vector Machines.
 The optimization techniques and the latest advances of these algorithms will also be briefly discussed.
 The goal is to cover the background that is necessary to understand the algorithms presented in the later part of the dissertation. 
 
@@ -146,10 +156,10 @@ The goal is to cover the background that is necessary to understand the algorith
 We consider supervised learning problem which assumes an arbitrary input space $\vXcal$, an output space $\Ycal$, and the training samples coming in pairs $(\vx_i,y_i)\in\vXcal\times\Ycal$.
 As we focus in this chapter standard supervised learning problem also known as binary classification, we explicitly assume the output space $\Ycal=\{-1,+1\}$ (instead of $\Ycal=\{0,+1\}$).
 We point out that other kind of supervised learning problem can be formulated by altering the definition of the output space.
-For example, by setting $\Ycal=\{1,\cdots,K\}$ we have multiclass classification problem, and by setting $\Ycal=\RR$ we have regression problem, where $\RR$ is the set of real numbers.
-Additionally, we assume a feature map $\varphib:\vXcal\rightarrow\Fcal$, which embeds the input in some high dimensional feature space $\Fcal=\RR^d$.
+For example,  we obtain multiclass classification problem by setting $\Ycal=\{1,\cdots,K\}$, and regression problem by setting $\Ycal=\RR$ where $\RR$ is the set of real numbers.
+Additionally, we assume a feature map $\varphib:\vXcal\rightarrow\Fcal$, which embeds the input into some high dimensional feature space $\Fcal=\RR^d$.
 In particular, $\varphib(\vx)$ is a real value vector of $d$ dimension.
-Given a training set of $m$ training examples $\Scal=\{(\vx_1,y_1),\cdots,(\vx_m,y_m)\}$, the goal is to learn from a \textit{hypothesis class} $\Hcal$ a mapping function $f\in\Hcal:\vXcal\rightarrow\Ycal$  that maps an input $\vx\in\vXcal$ to an output $y\in\Ycal$. 
+Given a training set of $m$ training examples $\Scal=\{(\vx_1,y_1),\cdots,(\vx_m,y_m)\}$, the goal is to learn from a \textit{hypothesis class} $\Hcal$ a mapping function $f\in\Hcal:\vXcal\rightarrow\Ycal$ that maps an input $\vx\in\vXcal$ to an output $y\in\Ycal$. 
 
 The hypothesis class we consider is a set of \textit{linear classifiers} that are parameterized by the weight vector $\vw$ and the bias term $b$ that takes the form
 \begin{align}
@@ -172,18 +182,18 @@ Without loss of generality, we denote by $||\vw||$ the $L_2$-norm of vector $\vw
 \subsection{Perceptron}\label{sc_perceptron}
 
 The Rosenblatt's Perceptron algorithm \citep{Rosenblatt58,Rosenblatt62} is one type of linear classifiers that is parameterized by a weight vector $\vw$ and a bias term $b$. 
-The decision boundary given by 
+The decision boundary, given by 
 \begin{align*}
-	f(\vx;\vw,b) = \ip{\vw}{\varphib(\vx)} + b =0
+	f(\vx;\vw,b) = \ip{\vw}{\varphib(\vx)} + b =0,
 \end{align*}
 will separate the data into two classes.
-The goal of learning is to obtain $\vw$ and $b$ by minimizing the distance of misclassified training examples to the decision boundary.
+The goal of the Perceptron learning is to obtain $\vw$ and $b$ by minimizing the distance of misclassified training examples to the decision boundary.
 
 Assume data point $(\vx_i,y_i)$ is misclassified, the signed geometric distance from $\vx_i$ to decision boundary can be computed according to
 \begin{align*}
 	D(\vx_i;\vw,b) = -\frac{y_i(\ip{\vw}{\varphib(\vx_i)}+b)}{\norm{\vw}}.
 \end{align*}
-Denote by $\vXcal^m$ the set of misclassified examples, the goal of perceptron is to minimize the distance over all misclassified examples defined as
+Denote by $\vXcal^m$ the set of misclassified examples, the objective function of Perceptron is defined as
 \begin{definition}{Perceptron Objective Function.}\label{perceptron}
 	\begin{align*}
 		\underset{\vw,b}{\minimize} \, D(\vw,b) = \underset{\vw,b}{\minimize} \left( -\sum_{\vx_i\in\vXcal^{m}}y_i[\ip{\vw}{\varphib(\vx_i)}+b]\right).
@@ -194,12 +204,11 @@ To optimize (Definition~\ref{perceptron}), we first assume $\vXcal^{m}$ is fixed
 	\frac{\partial D(\vw,b)}{\partial\vw} = -\sum_{\vx_i\in\vXcal^m}{y_i\vx_i},\quad
 	\frac{\partial D(\vw,b)}{\partial b} = -\sum_{\vx_i\in\vXcal^m}{y_i}.
 \end{align*}
-In practice, the perceptron algorithm uses stochastic gradient descent that processes iteratively from training data one example at a time.
-On each step, the algorithm makes sure the current $\vw$ and $b$ will correctly separate the current training example. 
+In practice, the Perceptron algorithm uses stochastic gradient descent that iteratively processes from training data one example at a time.
+In each step, the algorithm makes sure the current $\vw$ and $b$ will correctly separate the current training example. 
 Once a misclassified example is visited, it adjusts the parameter according to the update rule
 \begin{align*}
-	\vw &\leftarrow \vw + \rho y_i \vx_i,\\
-	b &\leftarrow b + \rho y_i,
+	\vw \leftarrow \vw + \rho y_i \vx_i, \, b \leftarrow b + \rho y_i,
 \end{align*}
 where $\rho$ is the perceptron learning rate.
 \begin{theory}[Perceptron Convergence Theorem \citep{Block62the,Novikoff62}]\label{perceptron_theory}
@@ -209,6 +218,7 @@ where $\rho$ is the perceptron learning rate.
 	Suppose for some $\gamma>0$ there exists a unit length vector $\norm{\hat{\vw}}=1$ such that $y_i(\ip{\hat{\vw}}{\varphib(\vx_i)})\ge\gamma$ for $i$ (training data $\Scal$ is linearly separable).
 	Then the number of mistakes the perceptron algorithm makes on the sequence of training data $\Scal$ is at most ${R^2}/{\gamma^2}$.
 \end{theory}
+\iffalse
 \begin{proof}
 	Suppose the $k$'th mistake is made on the $i$'th training example, and current weight vector is $\vw^k$.
 	In addition, we set $\vw^0=\vzero$.
@@ -244,6 +254,7 @@ where $\rho$ is the perceptron learning rate.
 		k\le{R^2}/{\gamma^2}.
 	\end{align*}
 \end{proof}
+\fi
 Theory~\ref{perceptron_theory} shows that if the data are linearly separable, the perceptron algorithm will make a finite number of mistakes. 
 In particular, the perceptron algorithm will iterate through the training set and will converge to a vector that well separates all training examples.
 Moreover, the number of mistakes will be bounded by the minimum gap between the positive and negative examples.
@@ -254,6 +265,16 @@ The standard Perceptron algorithm supposes that the data are linearly separable,
 However, the setting is less interesting for most applications where the data might not be linearly separable or it takes too long for the algorithm to converge.
 Therefore, we need to find out the best decision rule given a set of updates.
 
+\textit{Voted Perceptron} developed in \citep{Freund99large} is a straight forward modification of the standard perceptron.
+Voted Perceptron algorithm keeps track all weight vectors that appears during training phase and their weights.
+The weight can be seen as the ``survival time'' of the weight vector during the Perceptron training.
+The prediction for a new test example $\vx_{ts}$ is computed by 
+\begin{align}
+	y_{ts} = \sign\left({\sum_{l=1}^{k}c^l(\sign{\ip{\vw^l}{\varphib(\vx_{ts})}+b^{l}}})\right) \label{voted_perceptron_prediction}
+\end{align}
+using the weight vectors and the corresponding weights output from the algorithm.
+
+\iffalse
 \textit{Voted Perceptron} developed in \citep{Freund99large} is a straight forward modification of the standard perceptron.
 As described in (Algorithm~\ref{voted_perceptron}), the voted perceptron algorithm keeps track all weight vectors that appears during training phase (line~\ref{perceptron_algorithm_weight_vector}) and their weights (line~\ref{perceptron_algorithm_weight}).
 The weight can be seen as the ``survival time'' of the weight vector during Perceptron training.
@@ -285,11 +306,12 @@ using the weight vectors and the corresponding weights output from the algorithm
 	\RETURN $\vw = \{\vw^{k}\}_{l=1}^{k},\,c = \{c^{k}\}_{l=1}^{k}$ \label{perceptron_algorithm_average}
 \end{algorithmic}
 \end{algorithm}
+\fi
 
 % TODO: vote perceptron error bound, add reference 
-It is proved that the voted perceptron guarantees to achieve better generalization error than original perceptron \citep{Rosenblatt58,Rosenblatt62}.
+It is proved that the Voted Perceptron guarantees to achieve better generalization error than original perceptron \citep{Rosenblatt58,Rosenblatt62}.
 However, voted perceptron is not practical as it has to store all weight vectors encountered during the training.
-The \textit{averaged perceptron} is a simple alternative, where in stead of storing all weight vectors the algorithm only keeps the weighted sum $\sum_{l=1}^{k}c^k\vw^l$. 
+The \textit{Averaged Perceptron} is a simple alternative, where in stead of storing all weight vectors the algorithm only keeps the weighted sum $\sum_{l=1}^{k}c^k\vw^l$. 
 The prediction for a new test example $\vx_{ts}$ is computed by 
 \begin{align*}
 	y_{ts} = \sign\left(c^l({\sum_{l=1}^{k}{\ip{\vw^l}{\varphib(\vx_{ts})}+b^{l}}})\right) = \sign\left({{\ip{c^l\sum_{l=1}^{k}\vw^l}{\varphib(\vx_{ts})}+c^l\sum_{l=1}^{k}b^{l}}}\right),
@@ -301,73 +323,82 @@ which is extremely similar to (\ref{voted_perceptron_prediction}) except for the
 \subsection{Logistic Regression (\lr)}\label{sc_lr}
 
 % general introduction
-Logistic regression is another important method in statistical machine learning and is closely related to the Perceptron (Section~\ref{sc_perceptron}) and the Support Vector Machines (Section~\ref{sc_svm}).
+Logistic Regression is another important method in statistical machine learning and is closely related to Perceptron (Section~\ref{sc_perceptron}) and Support Vector Machines (Section~\ref{sc_svm}).
 It is in fact a classification model rather than regression \citep{Bishop07}.
-It models the conditional probability $p(y=+1|\vx)$ for a binary output variable $y\in\Ycal$.
-%Without loss of generality, in the rest part of this section we use $p(\vx)$ to denote above conditional probability of $p(y|\vx)$ when fixing $y=1$.
-To model the probability, we do not restrict to any particular form, as any unknown parameters can be estimated by \textit{maximum likelihood estimation} (MLE).
-However, we are most interested in the simple linear model as described in (\ref{linearclassifier}).
+It models the conditional probability $P(y=+1|\vx)$ for a binary output variable $y\in\Ycal$.
+%Without loss of generality, in the rest part of this section we use $P(\vx)$ to denote above conditional probability of $P(y|\vx)$ when fixing $y=1$.
+To model the probability, we do not restrict to any particular form, as any unknown parameters can be estimated by \textit{Maximum Likelihood Estimation} (\mle).
+However, we are most interested in the simple linear model as presented in (\ref{linearclassifier}).
 
 % detailed model, decision boundary
-To use linear model in Logistic Regression, the first choice is to let $p(y=+1|\vx)$ be a linear function of $\vx$, while the problem is the linear function is unbounded but the probability $p(\vx)\in[0,1]$.
-Another choice is to let $\log p(y=+1|\vx)$ be a linear function of $\vx$. 
+To use linear model in Logistic Regression, 
+\iffalse
+the first choice is to let $P(y=+1|\vx)$ be a linear function of $\vx$, while the problem is the linear function is unbounded but the probability $P(\vx)\in[0,1]$.
+Another choice is to let $\log P(y=+1|\vx)$ be a linear function of $\vx$. 
 However, the problem is the log-likelihood ranges from zero to infinite but the linear function is unbounded.
-The choice in Logistic Regression is to use logistic transformation of the original probability function
+The choice in Logistic Regression is to use 
+\fi
+we apply logistic transformation of the original probability function
 \begin{align*}
-	\log\frac{p(y=+1|\vx)}{1-p(y=+1|\vx)} = \ip{\vw}{\varphib(\vx)} + b,
+	\log\frac{P(y=+1|\vx)}{1-P(y=+1|\vx)} = \ip{\vw}{\varphib(\vx)} + b,
 \end{align*}
-which by solving for $p(y=+1|\vx)$ results in 
+which by solving for $P(y=+1|\vx)$ results in 
 \begin{align}
-	p(y=+1|\vx;\vw,b) = \frac{1}{1+\exponential{-\ip{\vw}{\varphib(\vx)}-b}}. \label{lr_1}
+	P(y=+1|\vx;\vw,b) = \frac{1}{1+\exponential{-\ip{\vw}{\varphib(\vx)}-b}}. \label{lr_1}
 \end{align}
 We can also compute
 \begin{align}
-	p(y=-1|\vx;\vw,b)=1-p(y=+1|\vx;\vw,b)=\frac{1}{1+\exponential{\ip{\vw}{\varphib(\vx)}+b}}. \label{lr_2}
+	P(y=-1|\vx;\vw,b)=1-P(y=+1|\vx;\vw,b)=\frac{1}{1+\exponential{\ip{\vw}{\varphib(\vx)}+b}}. \label{lr_2}
 \end{align}
-Putting together (\ref{lr_1}) and (\ref{lr_2}), we define the Logistic Regression as
+By putting (\ref{lr_1}) and (\ref{lr_2}) together, we define Logistic Regression as
 \begin{definition}{Logistic Regression.}\label{logistic_regression}
 	\begin{align*}
-		p(y=\pm1|\vx;\vw,b) = \frac{1}{1+\exponential{-y(\ip{\vw}{\varphib(\vx)}-b)}}.
+		P(y=\pm1|\vx;\vw,b) = \frac{1}{1+\exponential{-y(\ip{\vw}{\varphib(\vx)}-b)}}.
 	\end{align*}
 \end{definition}
-Naturally, we expect the prediction $y=+1$ when $p(y=+1|\vx;\vw,b)\ge0.5$ and $y=-1$, when $p(y=+1|\vx;\vw,b)<0.5$.
-The decision rule is similar to perceptron where we predict $y=+1$ when $\ip{\vw}{\varphib(\vx)}+b\ge0$, and $y=-1$ otherwise.
+Naturally, we expect the prediction $y=+1$ when $P(y=+1|\vx;\vw,b)\ge0.5$ and $y=-1$, when $P(y=+1|\vx;\vw,b)<0.5$.
+The decision rule is similar to Perceptron where we predict $y=+1$ when $\ip{\vw}{\varphib(\vx)}+b\ge0$, and $y=-1$ otherwise.
 Besides decision boundary, Logistic Regression can output the class probability from (Definition~\ref{logistic_regression}) as the the ``distance'' of the data point to the decision boundary.
 It is the probabilistic output that makes Logistic Regression no more than a classifier, as it outputs detailed predictions (class probability).
 
 % optimization
-As the model is capable of outputting class probability not just class category, to learn a Logistic Regression model we attempt to learn parameters $\vw$ and $b$ by maximizing the probability (likelihood) of the training data.
-In particular, the probability of training data $\vx$ with class label $y$ is $p(y|\vx)$.
+As the model can output class probability, to obtain a Logistic Regression model we attempt to learn parameters $\vw$ and $b$ by maximizing the probability (likelihood) of the training data.
+In particular, the probability of training data $\vx$ with class label $y$ is $P(y|\vx)$.
 The likelihood of parameters given data can be computed from
 \begin{align}
-	L(\vw,b;D) = \prod_{i=1}^mp(y_i|\vx_i). \label{lr_likelihood}
+	L(\vw,b;D) = \prod_{i=1}^mP(y_i|\vx_i). \label{lr_likelihood}
 \end{align}
-To apply MLE, it is easier if, instead of maximizing the likelihood, we maximize the log-likelihood, which turns the product (\ref{lr_likelihood}) into sum
+To apply \mle, it is easier if, instead of maximizing the likelihood, we maximize the log-likelihood, which turns the product (\ref{lr_likelihood}) into sum
 \begin{align}
-	\log L(\vw,b|D) = \sum_{i=1}^{m}\log p(y_i|\vx_i) = -\sum_{i=1}^{m}\log (1+\exponential{-y_i(\ip{\varphib(\vx_i)}{\vw}+b)}) \label{lr_likelihood_sum}.
+	\log L(\vw,b|D) = \sum_{i=1}^{m}\log P(y_i|\vx_i) = -\sum_{i=1}^{m}\log (1+\exponential{-y_i(\ip{\varphib(\vx_i)}{\vw}+b)}) \label{lr_likelihood_sum}.
 \end{align}
 
 % logistic regression of other type
-Though MLE training for Logistic Regression model meets our need of fitting training data, it does not guarantee to generalize well on test data.
-To achieve better generalization power, various smoothing techniques have been proposed \citep{Chen99,Chen00,Goodman03}, among which adding Gaussian prior on weight parameter $\vw$ is one of the standard treatment.
-In practice, a zero-mean spherical Gaussian with variance $\sigma^2$ is assumed on $\vw$.
-Thus, the maximum likelihood problem (\ref{lr_likelihood}) is transformed into \textit{Maximum A-Posteriori} (MAP) problem of the following form
+Though \mle\ training for Logistic Regression meets our need of fitting the training data, it does not guarantee to generalize well on the test data.
+To achieve better generalization power, one can apply regularization technique as discussed in Section~\ref{sc_regularization}.
+Many regularization methods for Logistic Regression have been proposed \citep{Chen99,Chen00,Goodman03}, among which adding Gaussian prior on weight parameter $\vw$ is one of the standard option.
+In practice, we assume $\vw$ is generated according to a zero-mean spherical Gaussian with variance $\sigma^2$.
+Thus, the \mle\ problem (\ref{lr_likelihood}) is transformed into \textit{Maximum A-Posteriori} (\map) problem of the following form
 \begin{align}
-	p(\vw,b|D;\sigma^2) = p(\vw|\sigma^2)\prod_{i=1}^mp(y_i|\varphib(\vx_i))=\exponential{-\frac{\norm{\vw}^2}{\sigma^2}}\prod_{i=1}^{m}{\frac{1}{1+\exponential{-y_i(\ip{\varphib(\vx_i)}{\vw}+b)}}}. \label{lr_posteriori}
+	P(\vw,b|D;\sigma^2) = P(\vw|\sigma^2)\prod_{i=1}^mP(y_i|\varphib(\vx_i))=\exponential{-\frac{\norm{\vw}^2}{\sigma^2}}\prod_{i=1}^{m}{\frac{1}{1+\exponential{-y_i(\ip{\varphib(\vx_i)}{\vw}+b)}}}. \label{lr_posteriori}
 \end{align}
 Instead of maximizing the posteriori (\ref{lr_posteriori}), it is easier to maximize the log-posteriori
 \begin{align}
-	\log p(\vw,b|D;\sigma^2) = -{\frac{\norm{\vw}^2}{\sigma^2}} - \sum_{i=1}^{m}\log{(1+\exponential{-y_i(\ip{\varphib(\vx_i)}{\vw}+b)})}. \label{lr_posteriori_log}
+	\log P(\vw,b|D;\sigma^2) = -{\frac{\norm{\vw}^2}{\sigma^2}} - \sum_{i=1}^{m}\log{(1+\exponential{-y_i(\ip{\varphib(\vx_i)}{\vw}+b)})}. \label{lr_posteriori_log}
 \end{align}
 
 Numbers of optimization techniques have been proposed to solve the maximization problem (\ref{lr_posteriori_log}) in Logistic Regression, many of which are covered in the survey \citep{Minka03}.
-For example, \textit{Itrative Scaling} methods were proposed and continuously developed in \citep{Darroch72,Pietra97inducing,Berger97,Goodman02Sequential,Jin03a}.
+For example, {Itrative Scaling} methods were proposed and continuously developed in \citep{Darroch72,Pietra97inducing,Berger97,Goodman02Sequential,Jin03a}.
 A quasi-Newton method was discussed in \citep{Minka03}.
 \citet{Komarek05making,Lin2008trust} have proposed truncated Newton method.
 And coordinate descent method was proposed in \citep{Huang09iterative}.
 
 % dual for and optimization
 There are also efforts being made to solve the logistic regression from its dual, of which the first algorithm was proposed in \citep{Jaakkola99probabilistic}.
+Later on, other dual optimization algorithms have been developed, for example iterative optimization method \citep{Keerthi05a} and dual coordinate descent method \citep{Yu11dual}.
+
+
+\iffalse
 The key is to introduce a set of tighter upper bounds on (\ref{lr_posteriori_log}) that are parameterized by $\valpha$.
 The bounds should have a simple form such that the maximizing (\ref{lr_posteriori_log}) over $\vw$ can be solved analytically with $\alpha$.
 The solution to the original problem is transferred as finding the tighter upper bounds for  $\vw$, which is to minimize with respect to $\alpha$.
@@ -379,7 +410,7 @@ The dual form is given by
 \end{align*}
 \fi
 Later on, optimization algorithms that are based on dual form have been developed, for example iterative optimization method \citep{Keerthi05a} and the dual coordinate descent method \citep{Yu11dual}.
-
+\fi
 % TODO: add detail deviation of dual form of logistic regression
 % TODO: explain the loss and gain of different optimzation algorithm
 
@@ -650,7 +681,7 @@ It optimizes a log-loss which is analogue to 0/1 loss over the whole structured 
 	Thus, when conditioned on $\vx$, the random variables $y_v$ obey the Markov property with respect to graph $G$.
 \end{definition}
 
-The parameter $\vw$ is solved by introducing parameter prior and maximizing the log of the resulting \textit{maximum a posteriori} (MAP) problem as described in \citep{taskar02}
+The parameter $\vw$ is solved by introducing parameter prior and maximizing the log of the resulting \textit{maximum a posteriori} (\map) problem as described in \citep{taskar02}
 \begin{align}
 	L(\vw) = \sum_{i=1}^{m}\left[\ip{\vw}{\phib(\vx_i,\vy_i)}-\log{\sum_{\vy'\in\vYcal}{\exp{\ip{\vw}{\phib(\vx_i,\vy')}}}}\right] - \frac{1}{\sigma^2}\norm{\vw}^2 + C. \label{crf_inference}
 \end{align}
@@ -1283,7 +1314,7 @@ However, it is often prohibitive to obtain the correct output structure, sometim
 In stead, one can opt to the \textit{complete graph}, in which there is an edge connecting each pair of vertices, as the output graph structure and rely on the learning algorithm to discover the proper 'parameters' defined for the edges (e.g. edge potentials).
 To understand this, think the edges that are not from the correct output graph will have zero 'parameters' in the complete graph.
 
-Structured output learning with complete graph is by no mean a easier problem as the inference is \nphard\ in nature, which is often instantiated as finding the \textit{maximum a posteriori} (MAP) configuration on a graph-structured probability distribution.
+Structured output learning with complete graph is by no mean a easier problem as the inference is \nphard\ in nature, which is often instantiated as finding the \textit{maximum a posteriori} (\map) configuration on a graph-structured probability distribution.
 In terms of the intractability issue of graph inference problem, many techniques have been proposed but with important differences.
 \citet{Jordan04semiefinite} developed semi-definite programming convex relaxation for inference on graph with cycles.
 \citet{Wainwright05map} proposed MAP inference with tree-based and \textit{linear programming} (LP) relaxation.
