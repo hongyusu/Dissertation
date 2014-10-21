@@ -668,7 +668,7 @@ In the original work, \citet{collins02a} only demonstrated the algorithm on sequ
 % sub section: crf
 \subsection{Conditional Random Field (\crf)}
 Condition Random Field (\crf), pioneered in \citep{lafferty01} and later in \citep{taskar02}, is a discriminative framework that constructs a conditional model $P(\vy|\vx)$ from paired input variable $\vx\in\vXcal$ and output variables $\vy\in\vYcal$.
-It optimizes a log-loss which is analogue to 0/1 loss over the whole structured output space.
+It optimizes a log-loss which is analogue to $0/1$ loss over the whole structured output space.
 \begin{definition}{Conditional Random Field (\crf).}\\
 	Denote by $Y=\{\vy_1,\cdots,\vy_m\}$ a set of output random variables, and by $X=\{\vx_1,\cdots,\vx_m\}$ a set of input random variables to condition on.
 	Let $G=(E,V)$ be a graph such that $\vy = (y_v)_{v\in V}$.
@@ -683,12 +683,12 @@ It optimizes a log-loss which is analogue to 0/1 loss over the whole structured 
 	Thus, when conditioned on $\vx$, the random variables $y_v$ obey the Markov property with respect to graph $G$.
 \end{definition}
 
-The parameter $\vw$ is solved by introducing parameter prior and maximizing the log of the resulting \textit{maximum a posteriori} (\map) problem as described in \citep{taskar02}
+The parameter $\vw$ is solved by introducing parameter prior and maximizing the logarithm of the resulting \textit{maximum a posteriori} (\map) problem as described in \citep{taskar02}
 \begin{align}
 	L(\vw) = \sum_{i=1}^{m}\left[\ip{\vw}{\phib(\vx_i,\vy_i)}-\log{\sum_{\vy'\in\vYcal}{\exp{\ip{\vw}{\phib(\vx_i,\vy')}}}}\right] - \frac{1}{\sigma^2}\norm{\vw}^2 + C. \label{crf_inference}
 \end{align}
-The parameter learning problem, as (\ref{crf_inference}), is solved in \citep{lafferty01} via improved iterative scaling algorithm (\iis) \citep{Pietra97inducing}.
-In order to make \crf\ work in practice, one has to make sure that the log normalization function (\ref{crf_partition_function}) and the argmax inference can be solve efficiently.
+The parameter learning problem defined as (\ref{crf_inference}), is solved in \citep{lafferty01} via improved iterative scaling algorithm (\iis) \citep{Pietra97inducing}.
+In order to make \crf\ work in practice, one has to make sure that the logarithm of the normalization function (\ref{crf_partition_function}) and the argmax inference can be solved efficiently.
 
 
  
