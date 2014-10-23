@@ -591,7 +591,7 @@ There are many other active lines of research on \svm\ optimization that aim to 
 %
 %
 %------------------------------------------------
-\chapter{Ensemble Methods} \label{ch_em}
+\section{Ensemble Methods} \label{sc_em}
 
 Ensemble methods are one of the prominent classification techniques widely used in machine learning community.
 In general, the methods train multiple base classifiers and combine them in order to achiever better classification performance.
@@ -603,21 +603,12 @@ For our purposes, the section will start with and focus on bagging and boosting 
 In the later part of the section, we will extend the ensemble methods to structured output space by reviewing several recently established algorithms.
 
 
-%------------------------------------------------
-%
-%------------------------------------------------
-\section{Preliminary and Notations} \label{sc_em_pn}
+\subsection{Preliminary and Notations} \label{sc_em_pn}
 
 In addition to the notations introduced in Section~\ref{singlelabel_preliminary} and \ref{multilabel_preliminary}, we assume there is a hypothesis class $\Fcal$ where we generate weak/base hypothesis $f^t(x)\in\Fcal$.
 By $t$ we intend to index the $t$'th weak hypothesis.
 We denote by $H(x)$ the ensemble framework that is able to combine multiple weak hypotheses and generate a stronger one.
 In many cases, no other information about $f^t(x)$ is available to $H(x)$ except that each weak hypothesis will take in as parameter $x$ and output $y\in\Ycal$ for single label classification ($\vy\in\vYcal$ in multilabel classification respectively).
-
-%------------------------------------------------
-%
-%------------------------------------------------
-\section{Methods} \label{sc_em_m}
-
 
 \subsection{Boosting} \label{sc_boosting}
 
