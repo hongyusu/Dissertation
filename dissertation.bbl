@@ -839,6 +839,11 @@ Tsochantaridis, I., Joachims, T., Hofmann, T., and Altun, Y. (2005).
   variables.
 \newblock {\em Journal of Machine Learning Research}, 6:1453--1484.
 
+\bibitem[Tsoumakas and Katakis, 2007]{Tsoumakas07multi}
+Tsoumakas, G. and Katakis, I. (2007).
+\newblock Multi-label classification: An overview.
+\newblock {\em Int J Data Warehousing and Mining}, 2007:1--13.
+
 \bibitem[Tukey, 1949]{Turkey49comparing}
 Tukey, J.~W. (1949).
 \newblock Comparing individual means in the analysis of variance.
@@ -932,6 +937,17 @@ Zhang, K., Tsang, I.~W., and Kwok, J.~T. (2008).
 \newblock Improved nystr\"{o}m low-rank approximation and error analysis.
 \newblock In {\em Proceedings of the 25th International Conference on Machine
   Learning}, ICML '08, pages 1232--1239, New York, NY, USA. ACM.
+
+\bibitem[Zhang and Zhou, 2005]{Zhang05a}
+Zhang, M. and Zhou, Z. (2005).
+\newblock A k-nearest neighbor based algorithm for multi-label classification.
+\newblock In {\em Granular Computing, 2005 IEEE International Conference on},
+  volume~2, pages 718--721 Vol. 2.
+
+\bibitem[Zhang and Zhou, 2007]{Zhang07mlknn}
+Zhang, M. and Zhou, Z. (2007).
+\newblock Ml-knn: A lazy learning approach to multi-label learning.
+\newblock {\em PATTERN RECOGNITION}, 40:2007.
 
 \bibitem[Zou and Hastie, 2005]{Zou05regularizationa}
 Zou, H. and Hastie, T. (2005).
