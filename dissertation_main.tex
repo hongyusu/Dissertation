@@ -1444,43 +1444,43 @@ These metrics will enable us to quantitatively evaluate the performance of the p
 %------------------------------------------------
 \section{Performance Measures} \label{sc_pm}
 
-It is often quite difficult and expensive to get labeled data. 
-In order to maximize the outcomes of the valuable labeled data, the common approach adopted in practice is known as \textit{$K$-fold cross-validation}.
-In particular, the origin set of labeled examples are partitioned into $K$ disjoint subsets of same size, denoted by $\{S_1,\cdots,S_K\}$.
+It is often difficult and expensive to get labeled data. 
+In order to maximize the outcomes of the valuable labeled data, the common approach adopted by machine learning community is known as \textit{$K$-fold cross-validation}.
+In particular, the origin set of labeled examples are partitioned into $K$ disjoint subsets of same size denoted by $\{S_1,\cdots,S_K\}$.
 The cross-validation framework will repeat training and test procedures $K$ times.
-In the $i$'th iteration, the validation scheme uses $K-1$ subsets of labeled examples $\cup_{j\in\{1,\cdots,K\}/i}S_j$ to build a training set for learning a classifier.
-The examples in the $i$'th subset is then taken as test data of which the label is assumed to be unknown to the classifier.
-The resulting classifier is used to predict the examples in the $i$'th subset, and is evaluated according to the true labels in the testing set.
-In extreme case where we have $K$ equal to the number of original training examples, there will be only one example in each test set.
+In the $i$'th iteration, the method uses $K-1$ subsets of labeled examples $\cup_{j\in\{1,\cdots,K\}/i}S_j$ to build a training set to construct a classifier.
+The examples in the $i$'th subset is then taken as test data of which the label is supposed to be unknown to the classifier.
+The resulting classifier is used to predict the label of each example in the $i$'th subset $S_i$.
+The performance is evaluated by comparing to the true labels from the test set $S_i$.
+In extreme case where we have $K$ equal to the number of all labeled examples, there will be only one example in each test set.
 This is typically known as \textit{leave-one-out cross-validation} (\loo).
 
-As most machine learning algorithms explicitly assume that the training data and the testing data are drawn from the same distribution,
-it is worth noticing that we should make sure that the property of original labeled data is well preserved when partitioning the original labeled set into subsets.
-In single-label classification problem we can easily preserve the label distribution if we randomly sample labeled examples without replacement from the origin experimental dataset.
+As most machine learning algorithms explicitly assume that the training data and the test data are drawn from the same distribution,
+it is worth noticing that we should make sure that the property of original labeled data is well preserved when partitioning the original labeled examples into subsets.
+In single-label classification problem we can easily preserve the label distribution if we randomly sample labeled examples without replacement from the origin labeled dataset.
 However, it is not clear how to preserve label distribution under multilabel classification setting.
-To this end, we use \textit{stratification} or \textit{stratified sampling} method where we first group training examples into equivalent classes based on the number of positive labels they have. 
+To this end, we use \textit{stratification} (\textit{stratified sampling}) method where we first group the labeled examples into equivalent classes based on the number of positive labels they have. 
 Each class is then randomly split into $K$ local fold, after that local folds are merged to create $K$ global fold.
 The stratification scheme ensures that also smaller classes have representations in all folds. 
 
-After partition the original data into training and test sets, we adopt several well known performance measures in order to quantitively evaluate the performance of difference classifiers.
+After partition the original data into training and test sets, we adopt several well-known performance measures in order to quantitively evaluate the performance of difference classifiers.
 We report \textit{multilabel accuracy} (\textit{0/1 accuracy}) which counts the percentage of multilabel predictions that have all of the microlabel being correct.
-The counterpart is often known as \textit{multilabel loss} (\textit{0/1 loss})
+The counterpart is often known as \textit{multilabel loss} (\textit{0/1 loss}) defined as
 \begin{align*}
 	\ell_{0/1} = \frac{1}{m}\sum_{i=1}^{m}\ind{\vy_i \neq \hat{\vy}_i},
 \end{align*}
-where by $\vy_i$ we denote the predicted multilabel for example $\vx_i$, and by $\hat{\vy}_i$ we denote ground true multilabel.
-We also report \textit{microlabel accuracy} as the proportion of microlabel being correctly predicted, of which the counterpart is often known as \textit{hamming loss}
+where by $\vy_i$ we denote the predicted multilabel of the $i$'th example $\vx_i$, and by $\hat{\vy}_i$ we denote ground true multilabel.
+We also report \textit{microlabel accuracy} as the proportion of microlabel being correct, of which the counterpart is often known as \textit{hamming loss} defined as
 \begin{align*}
 	\ell_{h} = \frac{1}{mk}\sum_{i=1}^{m}\sum_{j=1}^{k}\ind{\vy_i[j] \neq \hat{\vy}_i[j]}.
 \end{align*}
-In addition, we report \textit{$F_1$ score} as harmonic mean of \textit{microlabel precision} and \textit{microlabel recall}
+In addition, we report \textit{$F_1$ score} as the harmonic mean of \textit{microlabel precision} and \textit{microlabel recall} defined as
 \begin{align*}
 	F_1 = 2\cdot\frac{Pre\times Rec}{Pre+Rec}.
 \end{align*}
 Microlabel precision and microlabel recall are defined by
 \begin{align*}
-	Pre &= \frac{TP}{TP+FP}\\
-	Rec &= \frac{TP}{TP+FN},
+	Pre &= \frac{TP}{TP+FP}, \quad Rec &= \frac{TP}{TP+FN},
 \end{align*}
 where by $TP$, $FP$, and $FN$ we denote \textit{true positive}, \textit{false positive}, and \textit{false negative} predictions respectively.
 
@@ -1492,10 +1492,10 @@ where by $TP$, $FP$, and $FN$ we denote \textit{true positive}, \textit{false po
 
 Once we compute the performance measures of multiple machine learning algorithms in terms of 0/1 loss, hamming loss and $F_1$ score, we want to compare the performance in order to decide the best model under consideration. 
 To serve as a starting point, we assume a very basic setting where we already have the performance of multiple machine learning algorithms on one selected dataset.
-It is straight forward to compare the performance of the algorithms in terms of the performance measures and choose the best based on the value of the measure without relying any statistical methods.
-The only assumption made is that the measures accurately reveal the performance of the algorithms.
-However, in practice, when a new learning algorithm is developed, it is usually evaluated over multiple dataset to rule out the probability that it performs well on one particular dataset by chance.
-Statistical evaluation of experimental results have been considered as an essential part of comparison steps in, for example, such complicate scenarios.
+It is straight forward to compare the performance of the algorithms in terms of the performance metrics and choose the best one based on the value of the metric without relying on any statistical methods.
+The only assumption made is that the metrics accurately reveal the performance of the algorithms.
+However, when a new learning algorithm is developed, it is usually evaluated over multiple dataset to rule out the probability that it performs well on one particular dataset by chance.
+Statistical evaluation of experimental results have been considered as an essential part of comparison steps in such complicate scenarios.
 We will base our discuss on \citep{Demsar06statistical,Garcia08an} in the following part of the section.
 
 We first consider the case where we want to compare two learning algorithms over multiple datasets.
@@ -1515,26 +1515,15 @@ In statistics, this is equivalent to multiple hypothesis test.
 The common way is to use repeat-measures ANOVA \citep{Fisher59statistical} with post-hoc Tukey test \citep{Turkey49comparing}. The test procedure is based on two assumptions: the first is known as \textit{normality} meaning samples are drawn from normal distributions; second is known as \textit{sphericity} meaning samples should have equal variant.
 It is not difficult to see that the ANOVA is ill-posed as none the assumptions are met within the context of comparing the performance of learning algorithms over datasets.
 
-% to test if pair of algorithms are significantly different from each other 
-% to test if algorithms are significantly different from control
-To overcome the problem, Friedman test \citep{Friedman37the,Friedman40Comparison} with post-hoc Nemenyi test \citep{Nemenyi63distribution} are recommended by \citet{Demsar06statistical}.
-The goal of the test procedure is to examine under multiple hypothesis test setting whether a pair of algorithms are significantly different from each other.
+To alleviate the problems, \citet{Demsar06statistical} suggest to use Friedman test \citep{Friedman37the,Friedman40Comparison} with post-hoc Nemenyi test \citep{Nemenyi63distribution}.
+The goal of the test procedure is to examine whether a pair of algorithms are significantly different from each other under multiple hypothesis test setting.
 To perform Friedman test, we first compute the average rank $R_j$ of the $j$'th algorithms.
 The Friedman test then compares the average ranks and under null-hypothesis states that the average ranks are equal.
 The test statistics can be computed according to the procedure discussed in \citep{Demsar06statistical}.
 If null-hypothesis is rejected, we can proceed with post-hoc Nemenyi test to compare algorithms with each other.
 In particular, we can compute the \textit{critical different} ($CD$) and state that the performance of two classifiers are significantly different if the corresponding average rank differs by at least $CD$.
-As the post-hoc Nemenyi test is usually conservative and has little statistical power, we sometimes use Bonferroni-Dunn test \citep{Dunn61mulitple} to compare the learning algorithms against the selected control algorithm, which is usually the newly established or proposed algorithm.
+As the post-hoc Nemenyi test is usually conservative and has little statistical power, we sometimes use Bonferroni-Dunn test \citep{Dunn61mulitple} to compare the learning algorithms against the selected control which is usually the newly proposed algorithm.
 The test results are often visualized as \textit{$CD$ diagram}.
-
-
-
-
-
-
-
-
-
 
 
 
