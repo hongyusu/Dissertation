@@ -591,7 +591,7 @@ There are many other active lines of research on \svm\ optimization that aim to 
 %
 %
 %------------------------------------------------
-\chapter{Ensemble Methods} \chapter{ch_em}
+\chapter{Ensemble Methods} \label{ch_em}
 
 Ensemble methods are one of the prominent classification techniques widely used in machine learning community.
 In general, the methods train multiple base classifiers and combine them in order to achiever better classification performance.
@@ -775,21 +775,16 @@ Most recently, three other learning algorithms with performance guarantee are pr
 %
 %
 %------------------------------------------------
-\chapter{Multi-Label Classification} \label{ch_mlc}
+\chapter{Multilabel Classification} \label{ch_mlc}
 
-Multi-label classification is a nature extension to the single-label classification presented in Chapter~\ref{ch_slc}.
-In multi-label classification each input (instant) is associated with multiple outputs (labels) simultaneously. 
-The research in multi-label classification has progressed rapidly in the past few decades with many learning algorithms being developed and applied in practice.
-In this section, the author wish to approach the multilabel classification problem by introducing two families of algorithms.
-The first is known as flat multilabel classification by which the multilabel is treated as a ``flat'' vector.
-The second family is known as structured output prediction by which the interdependency of multiple labels is models by an output graph.
-
-
-
-
-As the learning algorithms for multi-task classification in structured output space have evolved rapidly during the last decade, the author wish to briefly review several prominent structured output prediction algorithms in this section, namely, Structured Perceptron, Conditional Random Field, Maximum-Margin Markov Networks, Structured SVM, and Mutli-task Feature Learning.
-These algorithms are also relevant to this thesis.
-These algorithms are mostly from 2010, the period when this field of researches has begun to emerge.
+Multilabel classification is a nature extension to single-label classification presented in Chapter~\ref{sc_slc}.
+In multilabel classification each input (instant) is simultaneously associated with multiple outputs (labels). 
+The research of multi-label classification has progressed rapidly in the past two decades with many learning algorithms being developed and applied in practice.
+In this chapter, the author wish to discuss the multilabel classification problem by introducing two families of algorithms.
+The first family is known as flat multilabel classification by which the multilabel is treated as a ``flat'' vector.
+The second family is known as structured output prediction by which the interdependency of multiple labels is models via an output graph that connecting multiple labels.
+An improvement to structured output prediction is presented in the later part of this chapter which allow the structured output learning works with unknown output structure.
+Thus, it broadens the applicability of structured output learning.
 
 
 %------------------------------------------------
@@ -829,13 +824,13 @@ Naturally, $u_i\in\Ycal_i$ and $\vu_e\in\vYcal_e$.
 
 %
 %
-\subsubsection{ML-KNN}
+\subsection{ML-KNN}
 
 
 
 %
 % 
-\subsubsection{Support Vector Machine for Interdependent and Structured Outputs (\svmstruct)}
+\subsection{Support Vector Machine for Interdependent and Structured Outputs (\svmstruct)}
 
 The formulation of Support Vector Machine for interdependent and structured output space (\svmstruct) described in \citep{THJA04,TJTA05} is amazingly similar to \mmmn.
 Compared to \mmmn\ framework which scales the margin by the loss function, \svmstruct\ formulation scales the margin errors ({\em slack variables}) by the loss function.
