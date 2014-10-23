@@ -157,7 +157,7 @@ Besides, other regularization techniques have been widely studied, to name a few
 %------------------------------------------------
 %
 %------------------------------------------------
-\section{Single-Label Classification}\label{sc_single}
+\section{Single-Label Classification}\label{sc_slc}
 
 In this section, the author will introduce the basic classification problem known as \textit{single-label classification}.
 The author will explain three prominent algorithms in this area: Perceptron, Logistic Regression and Support Vector Machines.
@@ -166,7 +166,7 @@ The goal is to cover the background that is necessary to understand the algorith
 
 %
 %
-\subsection{Preliminary and Notations}\label{singlelabel_preliminary}
+\subsection{Preliminary and Notations}\label{sc_slc_pn}
 We consider supervised learning problem which assumes an arbitrary input space $\vXcal$, an output space $\Ycal$, and the training samples coming in pairs $(\vx_i,y_i)\in\vXcal\times\Ycal$.
 The definition of the output space will decide the type of the learning problem.
 For example, we obtain multiclass classification problem by setting $\Ycal=\{1,\cdots,K\}$ and regression problem by setting $\Ycal=\RR$ where $\RR$ is the set of real numbers.
@@ -430,9 +430,8 @@ Later on, optimization algorithms that are based on dual form have been develope
 
 
 %
-% svm
-\subsection{Support Vector Machines (\svm)}\label{sc_svm}
-\label{sc_svm}
+% 
+\subsection{Support Vector Machines (\svm)}	\label{sc_svm}
 
 % some history
 Support Vector Machines (\svm) is probably the most widely used classification algorithm in various real world applications.
@@ -592,7 +591,7 @@ There are many other active lines of research on \svm\ optimization that aim to 
 %
 %
 %------------------------------------------------
-\chapter{Ensemble Methods}\label{ch_em}
+\chapter{Ensemble Methods} \chapter{ch_em}
 
 Ensemble methods are one of the prominent classification techniques widely used in machine learning community.
 In general, the methods train multiple base classifiers and combine them in order to achiever better classification performance.
@@ -607,7 +606,7 @@ In the later part of the section, we will extend the ensemble methods to structu
 %------------------------------------------------
 %
 %------------------------------------------------
-\section{Preliminary and Notations}\label{sc_em_pn}
+\section{Preliminary and Notations} \label{sc_em_pn}
 
 In addition to the notations introduced in Section~\ref{singlelabel_preliminary} and \ref{multilabel_preliminary}, we assume there is a hypothesis class $\Fcal$ where we generate weak/base hypothesis $f^t(x)\in\Fcal$.
 By $t$ we intend to index the $t$'th weak hypothesis.
@@ -617,10 +616,10 @@ In many cases, no other information about $f^t(x)$ is available to $H(x)$ except
 %------------------------------------------------
 %
 %------------------------------------------------
-\section{Methods}\label{sc_em_m}
+\section{Methods} \label{sc_em_m}
 
 
-\subsection{Boosting}\label{sc_boosting}
+\subsection{Boosting} \label{sc_boosting}
 
 \textit{Boosting} corresponds to a learning framework or a family of algorithms that take in a weak classifier and tuning it into a strong one.
 We begin our discussion from the notion of  \textit{concept class}.
@@ -689,7 +688,7 @@ In addition, \citet{Cortes14deep} also developed rich learning bounds for \deepb
 The new theory advances the previous performance guarantee of \adaboost\ which is build in terms of margins of the training examples \citep{Schapire97boosting,Koltchinskii00empirical}.
 
 
-\subsection{Bootstrap Aggregating}
+\subsection{Bootstrap Aggregating} \label{sc_ba}
 
 \textit{Bootstrap Aggregating} (\bagging), initially developed by \citet{Breiman96bagging}, is an ensemble method that exploits the independency between the weak learners.
 The algorithm is based on the fact that the error can be dramatically reduced by combining independent base learners.
@@ -727,7 +726,7 @@ In practice, the random forest algorithm selects in each step a subset of featur
 The feature split process of decision tree is deterministic given a set of features.
 \citet{Liu08spectrum} proposed \vrtree\ which further extend random forest algorithm by introducing randomness in both feature selection and split processes.
 
-\subsection{Ensemble Methods for Multi-Label Classification}
+\subsection{Ensemble Methods for Multi-Label Classification} \label{sc_emmlc}
 
 As it is straightforward to combine multiple scalar output variables, the ensemble methods have been initially developed for single-label classification \citep{Breiman96bagging,Freund97a} or regression  \citep{Breiman96bagging} tasks.
 However, it is not immediately apparent how to combine vector valued outputs in multi-label space.
@@ -778,7 +777,7 @@ Most recently, three other learning algorithms with performance guarantee are pr
 %------------------------------------------------
 \chapter{Multi-Label Classification} \label{ch_mlc}
 
-Multi-label classification is a nature extension to the single-label classification presented in Section~\ref{sc_single}.
+Multi-label classification is a nature extension to the single-label classification presented in Chapter~\ref{ch_slc}.
 In multi-label classification each input (instant) is associated with multiple outputs (labels) simultaneously. 
 The research in multi-label classification has progressed rapidly in the past few decades with many learning algorithms being developed and applied in practice.
 In this section, the author wish to approach the multilabel classification problem by introducing two families of algorithms.
