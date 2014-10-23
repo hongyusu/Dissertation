@@ -90,7 +90,7 @@ Empirical evaluations of the proposed models are in nowhere restated, rather, th
 %
 %
 %------------------------------------------------
-\chapter{Single-Label Classification}\label{ch_slc}
+\chapter{Regularized Learning for Classification} \label{ch_rlc}
 
 
 
@@ -768,14 +768,14 @@ Most recently, three other learning algorithms with performance guarantee are pr
 %------------------------------------------------
 \chapter{Flat Multilabel Classification} \label{ch_mlc}
 
-Multilabel classification is a nature extension to single-label classification presented in Section~\ref{sc_slc}.
-In multilabel classification each input (instant) is simultaneously associated with multiple outputs (labels). 
-The research of multi-label classification has progressed rapidly in the past two decades with many learning algorithms being developed and applied.
-In this chapter, the author wish to discuss the multilabel classification problem by introducing two families of algorithms.
-The first family is known as flat multilabel classification by which the multilabel is treated as a ``flat'' vector.
-The second family is known as structured output prediction by which the interdependency of multiple labels is models via an output graph that connects multiple labels.
-An improvement to the research of structured output learning is presented in the later part of this chapter which allows this type of learnings work without observed output structure.
-Thus, it broadens the applicability of structured output learning.
+Multilabel classification is a natural extension to single-label classification presented in Section~\ref{sc_slc}.
+In multilabel classification each input (instant) is simultaneously associated with multiple outputs (labels)
+The research of the multilabel classification has progressed rapidly in the past two decades with many learning algorithms being developed and applied.
+In general, there are two lines of research for multilabel classification, namely flat multilabel classification and structured output prediction respectively.
+In flat multilabel classification, the multiple labels are essentially taken as a ``flat'' vector of labels.
+The structured output prediction, on the other hand, models the multiple labels via a graph structure that connects labels.
+This chapter will devote to flat multilabel classification in which we will present several classical algorithm techniques.
+The structured output prediction will be covered in the later part of the thesis.
 
 
 %------------------------------------------------
@@ -808,7 +808,11 @@ Naturally, $u_i\in\Ycal_i$ and $\vu_e\in\vYcal_e$.
 
 
 
-\section{ML-KNN}
+%
+%
+\section{Multilabel $K$-Nearest Neighbor (\mlknn)} \label{sc_mlknn}
+
+
 
 
 
