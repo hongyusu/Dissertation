@@ -772,43 +772,43 @@ Most recently, three other learning algorithms with performance guarantee are pr
 
 %------------------------------------------------
 %
-%
+%	chapter
 %
 %------------------------------------------------
 \chapter{Multilabel Classification} \label{ch_mlc}
 
-Multilabel classification is a nature extension to single-label classification presented in Chapter~\ref{sc_slc}.
+Multilabel classification is a nature extension to single-label classification presented in Section~\ref{sc_slc}.
 In multilabel classification each input (instant) is simultaneously associated with multiple outputs (labels). 
-The research of multi-label classification has progressed rapidly in the past two decades with many learning algorithms being developed and applied in practice.
+The research of multi-label classification has progressed rapidly in the past two decades with many learning algorithms being developed and applied.
 In this chapter, the author wish to discuss the multilabel classification problem by introducing two families of algorithms.
 The first family is known as flat multilabel classification by which the multilabel is treated as a ``flat'' vector.
-The second family is known as structured output prediction by which the interdependency of multiple labels is models via an output graph that connecting multiple labels.
-An improvement to structured output prediction is presented in the later part of this chapter which allow the structured output learning works with unknown output structure.
+The second family is known as structured output prediction by which the interdependency of multiple labels is models via an output graph that connects multiple labels.
+An improvement to the research of structured output learning is presented in the later part of this chapter which allows this type of learnings work without observed output structure.
 Thus, it broadens the applicability of structured output learning.
 
 
 %------------------------------------------------
-%
+%	section
 %------------------------------------------------
-\section{Preliminary and Notations}\label{multilabel_preliminary}
+\section{Preliminary and Notations} \label{sc_mlc_pn}
 
-We borrow most notations from the single-label classification setting described in Section~\ref{singlelabel_preliminary}.
+We borrow most notations from the single-label classification setting described in Section~\ref{sc_slc_pn}.
 In particular, we examine the following \textit{multilabel classification} problem.
-We assume data are drawn from a domain $\vXcal\times\vYcal$, where $\vXcal$ is a set and $\vYcal$ is the set of multilabels.
+We assume data are drawn from a domain $\vXcal\times\vYcal$, where $\vXcal$ is a set of inputs (instants) and $\vYcal$ is the set of outputs (multilabels).
 $\vYcal = \Ycal_1\times\cdots\times\Ycal_k$ is composed by a Cartesian product of $k$ sets $\Ycal_i=\{-1,+1\}$.
 We retain a single-label classification setting by letting $k=1$.
 A vector $\vy=(y_1,\cdots,y_k)\in\vYcal$ is called \textit{multilabel} and its element $y_j$ is called \textit{microlabel}.
 We use $\vy_i[j]$ to denote the $j$'th microlabel in the $i$'th multilabel vector.
-In addition, we are given a set of labeled training examples $\Scal=\{(\vx_i,\vy_i)\}_{i=1}^{m}\in\vXcal\times\vYcal$. 
+In addition, we are given a training set consisting of $m$ labeled examples $\Scal=\{(\vx_i,\vy_i)\}_{i=1}^{m}\in\vXcal\times\vYcal$. 
 A pair $(\vx_i,\vy)$, where $\vx_i$ is the training input and $\vy\in\vYcal$ is an arbitrary output, is called \textit{pseudo-example}.
 It is worthy of noticing that pseudo-example $(\vx_i,\vy)$ can be generated from a different distribution that generates training example $(\vx_i,\vy_i)$.
-The goal is to learn a mapping function $f\in\Hcal:\vXcal\rightarrow\vYcal$ that can compute the output value of an arbitrary input such that the loss $\ell$ for the future unseen examples is minimized.
+The goal is to learn a mapping function $f\in\Hcal:\vXcal\rightarrow\vYcal$ that can compute the multilabel given an arbitrary input such that the loss $\ell$ for the future unseen examples is minimized.
 The loss function is usually tailored for the learning models.
 
 Multi-label classification deals with multiple interdependent output variables (e.g. $\vy\in\vYcal$).
 The problem is known as \textit{structured output prediction} when these variables are located in structured output space.
-That is the interdependency is described by an \textit{output graph} that connects multiple labels.
-In particular, we define the output graph $G=(E,V)$ via a node set $V=\{1,\cdots,k\}$ corresponding to the microlabels $\{y_1,\cdots,y_k\}$ and a edge set $E=V\times V$ representing the dependency between pair of microlabels.
+That is the interdependency between multiple labels is described by an \textit{output graph} that connects multiple labels.
+In particular, we define the output graph $G=(E,V)$ by a node set $V=\{1,\cdots,k\}$ corresponding to the microlabels $\{y_1,\cdots,y_k\}$ and a edge set $E=V\times V$ representing the dependency between pair of microlabels.
 For each edge $e=(j,j')\in E$, we use $\vy_e$ to denote the edge label of edge $\ve$ with respect to multilabel $\vy$ by concatenating the head label $y_i$ and the tail label $y_i$, with the edge label domain $\vy_e\in\vYcal_e=\Ycal_i\times\Ycal_{j'}$.
 By $\vy_{i,e}$, we denote the edge label of example pair $(\vx_i,\vy_i)$ on edge $\ve$.
 Thus, given a training example $(\vx_i,\vy_i)$ and the output graph $G$, we can uniquely identify the node label $y_i$ and the edge label $\vy_{i,e}$ on the graph.
@@ -868,7 +868,7 @@ The intractability of the inference problem can be seen as an exchange of the ge
 
 %
 %
-\subsubsection{Multitask Feature Learning (\mtl)}
+\subsection{Multitask Feature Learning (\mtl)}
 
 Multi-task Feature Learning (\mtl) developed in \citep{Argyriou07multitask} is another algorithm designed for multiple interdependent structured output space.
 \mtl\ is quite different from other structured output learning algorithms discussed in the previous sections.
@@ -906,13 +906,15 @@ Recently, \citet{Paredes12exploit} proposed a method which exploits the informat
 
 %------------------------------------------------
 %
+%	chapter
+%
 %------------------------------------------------
-\section{Structured Output Prediction}\label{sc_multi}
+\chapter{Structured Output Prediction} \label{ch_multi}
 
 
 %
 %
-\subsection{Perceptron in Structured Output Space}
+\section{Perceptron in Structured Output Space}
 
 The Perceptrion, dated back to \citep{Rosenblatt58}, is one of the oldest learning algorithm in machine learning.
 As it is extremely easy to implement and usually achieves good performance, Perceptron is still actively studied in the field.
@@ -966,7 +968,7 @@ In the original work, \citet{collins02a} only demonstrated the algorithm on sequ
 
 %
 % 
-\subsection{Conditional Random Field (\crf)}
+\section{Conditional Random Field (\crf)}
 Condition Random Field (\crf), pioneered in \citep{lafferty01} and later in \citep{taskar02}, is a discriminative framework that constructs a conditional model $P(\vy|\vx)$ from paired input variable $\vx\in\vXcal$ and output variables $\vy\in\vYcal$.
 It optimizes a log-loss which is analogue to $0/1$ loss over the whole structured output space.
 \begin{definition}{Conditional Random Field (\crf).}\\
@@ -996,7 +998,7 @@ In order to make \crf\ work in practice, one has to make sure that the logarithm
 
 %
 % sub section: m3n
-\subsection{Max-Margin Markov Network (\mmmn)}
+\section{Max-Margin Markov Network (\mmmn)}
 
 The Max-Margin Markov Network (\mmmn) unifies the frameworks of kernel based discriminative learning and probabilistic graphical model \citep{Taskar04max}.
 The model defines a log-linear Markov network over a set of output variables, thus, it is capable of modeling the correlation between these output variables.
@@ -1034,7 +1036,7 @@ Thus, it is more feasible in terms of computation and can be applied to problems
 Secondly, one can define more complex loss function on \mmmn\ other than just 0/1 loss for \crf, as long as the function is decomposable.
 
 
-\subsection{Structured Output Prediction for Molecular Activity Classification}\label{sc_su10}
+\section{Structured Output Prediction for Molecular Activity Classification}\label{sc_su10}
 
 The molecular activity classification problem has long been tackled under the single task classification setting.
 On the other hand, multiple interdependent molecular activities are often screened simultaneously.
@@ -1045,7 +1047,7 @@ The dependency structure can be further utilized to improve the performance.
 Therefore, in \citepub{su10} we investigate the potential of using structured output learning framework to tackle the molecular activity classification problem.
 
 
-\subsubsection{Background and Introduction}
+\subsection{Background and Introduction}
 
 Molecular classification, the goal of which is to predict the anticancer potentials of the drug-like molecules, is one crucial step in drug discovery and has draw enormous attention from machine learning community.
 Viable molecular structures are scanned, searched, or designed for therapeutic efficacy.
@@ -1057,7 +1059,7 @@ On the other hand, relative larger number of cell line targets are often screene
 For example in the recent \textit{NCI-60} {Human Tumor Cell Line Screen} project \citep{Shoemaker06the}, thousands of molecular structures are tested agains hundreds of cell line targets.
 
 
-\subsubsection{Methods}
+\subsection{Methods}
 
 To efficiently and accurately predict molecular activities in multiple cell lines at the same time, we proposed a structured output learning algorithm in \citepub{su10}, which is to our knowledge the first multi-task learning approach for molecular classification problem.
 The algorithm can be seen as an instantiation of the structured output learning method \mmcrf\ \citep{rousu06}.
@@ -1124,13 +1126,13 @@ In correlation thresholding approach, we take all edges that exceed a fixed thre
 
 %
 %
-\subsection{\spin\ for Network Response Prediction}\label{sc_su14b}
+\section{\spin\ for Network Response Prediction}\label{sc_su14b}
 
 In \citepub{su14a}, a structured output learning model for network response prediction problem is developed.
 The proposed model, \spin, is \textit{context-sensitive} and is different from the previous the state-of-the-art methods which only model the influence in terms of the network connectivity.
 The inference problem of \spin\ is \nphard\ in general which was solved by a semidefinite programming algorithm \sdp\ with approximation guarantee and by a fast \greedy\ heuristics.
 
-\subsubsection{Background and Introduction}
+\subsection{Background and Introduction}
 
 With the extensive availability of the large scale networks, there are tremendous interest in studying the phenomena of the network influence, in particular, the structure, the function and the influence dynamics. 
 The outcome of the network influence research have been widely applied in many areas, to name but a few, spreadness of pathogens or infectious diseases \citep{Hethcote00the,Anderson02infectious}, diffusion of medical and technology innovation \citep{Strang98diffusion,Rogers03the}, opinion and news formation \citep{Adar04implicit,Gruhl04information,Adar05tracking,Leskovec07cascading,Nowell08tracing,Leskovec09meme}, viral market \citep{Domingos01mining,Kempe03maximizing,Liben-Nowell03the}.
@@ -1154,7 +1156,7 @@ Therefore, we propose the following definition of the network influence problem
 \end{definition}
 
 %
-\subsubsection{Methods}
+\subsection{Methods}
 We approach the problem by structured output learning, where we define a computability score as a inner product of the action $\va$ and the response network $\Gva$
 \begin{align*}
 	F(\va,\Gva;\vw) = \ip{\va}{\phib(\va,\Gva)}.
@@ -1245,11 +1247,11 @@ Diffusion scaling has the effect of shrinking the distance to the nodes that are
 %------------------------------------------------
 %
 %------------------------------------------------
-\section{Structured Output Learning with Unknown Structure}
+\chapter{Structured Output Learning with Unknown Structure}
 
 %
 %
-\subsection{Graph Labeling Ensemble (\mve)}\label{sc_su11}
+\section{Graph Labeling Ensemble (\mve)}\label{sc_su11}
 
 Multi-task molecular activities classification with structured output learning that relies on the representation of the cell-lines structures allows us to model the dependencies betweem different output variables.
 When apply structured output learning, it is explicitly assumed the structure of the output network is fully observed.
@@ -1258,7 +1260,7 @@ For many real world structured output learning problems, we cannot take the stru
 Therefore, we explored in \citepub{su11} the possibility of constructing an simple ensemble of multiple structured output learning models built on random output graphs and applied the technique on molecular activity classification task.
 
 
-\subsubsection{Methods}
+\subsection{Methods}
 
 We use \mmcrf\ as base classifier trained on a set of random output graphs.
 Particularly, for each base model, a random graph $G_t$ is generated to couple the output vector variables $\vy$ which are the activities of molecular structure $\vx$ over all cell lines.
@@ -1280,7 +1282,7 @@ In random pairing approach, we randomly draw two vertices at a time and couple t
 The approach will output disconnected pairs.
 
 
-\subsection{Random Graph Ensemble (\amm, \mam)}\label{sc_su14a}
+\section{Random Graph Ensemble (\amm, \mam)}\label{sc_su14a}
 
 Through extensive experiments in \citepub{su11}, we have validated the feasibility of constructing a majority voting ensemble (\mve) of structured output learner built on a set of random output graphs.
 The proposed method also improved the performance on molecular activity classification problem.
@@ -1290,7 +1292,7 @@ In addition, we have brought forward a theory that explains the improvement of \
 The theory is based on the reconstruction error of the compatibility score.
 
 
-\subsubsection{Background and Introduction}
+\subsection{Background and Introduction}
 
 % compatibility score
 Besides the assumption made for \mve\ which the base classifier will devise the prediction according to the structure of the output graph, we also assume that the base classifier for \amm\ and \mam\ is modelled with a Markov network structure $G=(E,V)$.
@@ -1313,7 +1315,7 @@ With edge compatibility scores, we can infer the max-marginal of label $u_i$ on 
 That is the maximum score of the multilabel consistent with $y_i=u_i$.
 We denote the collection of max-marginals by $\tilde{\psib} = (\tilde{\psi}_j(\vx,u_j))_{j\in V,u_j\in\Ycal_j}$.
 
-\subsubsection{Methods}
+\subsection{Methods}
 
 % amm
 Denote by  $\Gcal=\{G^{(1)},\cdots,G^{(T)}\}$ a set of random output graphs, and by $\{\tilde{\psib}^{(1)},\cdots,\tilde{\psib}^{(T)}\}$ the max-marginal vectors from base classifiers that is built on each output graph.
@@ -1359,14 +1361,14 @@ The former measures the variability of individual classifiers learned from diffe
 %
 % RTA
 %
-\subsection{Random Spanning Tree Approximation (\rta)}\label{sc_su14c}
+\section{Random Spanning Tree Approximation (\rta)}\label{sc_su14c}
 
 Random Spanning Tree Approximation (\rta) model developed in \citepub{su14c} is a major step forward of \mam.
 The goal of \rta\ is to bring in joint learning and inference framework as well as to provide extensive theory to guarantee the performance and the tractability of the inference.
 Especially, \rta\ explores the potential of tackling the intractable graph inference problem with a set of random spanning trees.
 Thus, it lays the foundation of performing inference on unknown structure to achieve accurate optimization with attainable computational efforts.
 
-\subsubsection{Background and Introduction}
+\subsection{Background and Introduction}
 
 Limiting the applicability of structured output learning methods is the fact that the output structure is assume to be observed.
 However, it is often prohibitive to obtain the correct output structure, sometimes it is arguably a even harder problem that the structured output learning itself \citep{Chickering94learning}.
@@ -1386,7 +1388,7 @@ Besides, \citepub[Theorem 5]{su14c} shows the good generalization can also be gu
 Thus, in addition to \citepub[Theory 1]{su14b}, we further provide the theoretical justification of \mam\ that constructs a set of base classifiers trained on random spanning trees. 
 Besides, \citepub[Theorem 5]{su14c} suggests we should optimize the joint margin from all spanning trees, instead of optimizing them separately as \mam, which leads to the \rta\ model described in the following section.
 
-\subsubsection{Methods}
+\subsection{Methods}
 
 Denote by $\Tcal=\{T_1,\cdots,T_n\}$ a sample of $n$ random spanning trees, and by $\{\vw_{T_t}|T_t\in\Tcal\}$ the feature weights to be learner on each tree.
 The goal of optimization is to maximize the joint margin from all spanning trees between correct training examples and other examples.
@@ -1432,14 +1434,15 @@ which not only enjoys a polynomial sized parameter space but also enable kernel 
 %------------------------------------------------
 %
 %------------------------------------------------
-\section{Evaluation and Comparison Metrics}\label{sc_statistics}
+\chapter{Evaluation and Comparison Metrics} \label{sc_ecm}
 
-In this section, we will briefly introduce the performance measures and statistical test methods that are involved in the publications as well as in the later part of the dissertation.
-These measures will enable us to quantitatively evaluate the performance of the proposed models and measure the significancy compared to other well established methods.
+In this section, the author will briefly introduce the performance measures and statistical test methods that are involved in the research. 
+These metrics will enable us to quantitatively evaluate the performance of the proposed models and to measure the significancy comparing to other well established methods.
 
+%------------------------------------------------
 %
-%
-\subsection{Performance Measures}
+%------------------------------------------------
+\section{Performance Measures} \label{sc_pm}
 
 It is often quite difficult and expensive to get labeled data. 
 In order to maximize the outcomes of the valuable labeled data, the common approach adopted in practice is known as \textit{$K$-fold cross-validation}.
@@ -1482,9 +1485,10 @@ Microlabel precision and microlabel recall are defined by
 where by $TP$, $FP$, and $FN$ we denote \textit{true positive}, \textit{false positive}, and \textit{false negative} predictions respectively.
 
 
+%------------------------------------------------
 %
-%
-\subsection{Statistical Tests}
+%------------------------------------------------
+\section{Statistical Tests} \label{sc_st}
 
 Once we compute the performance measures of multiple machine learning algorithms in terms of 0/1 loss, hamming loss and $F_1$ score, we want to compare the performance in order to decide the best model under consideration. 
 To serve as a starting point, we assume a very basic setting where we already have the performance of multiple machine learning algorithms on one selected dataset.
@@ -1541,11 +1545,10 @@ The test results are often visualized as \textit{$CD$ diagram}.
 % 		chapter
 %
 % --------------------------
-\chapter{Novel Statistical Models}\label{ch_models}
-
-In this chapter, the author aims to build the connection of the publications as well as to discuss the corresponding contributions.
-Each section will mostly focus on one publication, and will start with introduction and background knowledge that are necessary to understand the content within the section.
-An overview of the theoretical end technical novelties will also be briefly presented in each section.
+%\chapter{Novel Statistical Models}\label{ch_models}
+%In this chapter, the author aims to build the connection of the publications as well as to discuss the corresponding contributions.
+%Each section will mostly focus on one publication, and will start with introduction and background knowledge that are necessary to understand the content within the section.
+%An overview of the theoretical end technical novelties will also be briefly presented in each section.
 
 
 
@@ -1558,11 +1561,14 @@ An overview of the theoretical end technical novelties will also be briefly pres
 
 %------------------------------------------------
 %
-%
+%	chapter
 %
 %------------------------------------------------
 \chapter{Conclusion}\label{ch_conclusion}
 
+%------------------------------------------------
+%	section
+%------------------------------------------------
 \section{Discussion}
 
 In this thesis, we study supervised learning in structured output space of which the task is to predict the best values for multiple interdependent variables given an arbitrary input variable.
@@ -1616,6 +1622,10 @@ We developed $K$-best inference algorithm in \citepub{su14c} for the inference p
 We have also developed \sdp\ inference algorithm for the inference problem defined on directed acyclic graph (DAG).
 \end{enumerate}
 
+
+%------------------------------------------------
+%	section
+%------------------------------------------------
 \section{Future Work}
 
 What has been shown in the thesis is a new learning framework with algorithm instantiations for structured output prediction problems where the structure of the output is not known but is expected to play an important role.
