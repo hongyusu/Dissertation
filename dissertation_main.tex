@@ -808,9 +808,13 @@ Naturally, $u_i\in\Ycal_i$ and $\vu_e\in\vYcal_e$.
 
 
 
+% binary relevant
+% 	mlknn 
+% adapative algorithm 
+% 	iblr adaboostmh cc 
+% ranking based
+% 	rankingbased
 %
-%
-
 
 \section{Multilabel $K$-Nearest Neighbor (\mlknn)} \label{sc_mlknn}
 
@@ -835,15 +839,16 @@ The prior probability distribution $H^b_{\vx}(j)$ and the likelihood distributio
 Essentially \mlknn\ is a binary relevant classifier.
 In other words, the algorithm ignores the label dependencies.
 
-
 %
 %
-\section{Instant Based Logistic Regression (\iblr)}
+\subsection{Instant Based Logistic Regression (\iblr)}
 
 \citet{Cheng09combining} developed Instance Based Logistic Regression (\iblr) with extension to flat multilabel classification.
 \iblr\ is also an instant base learning approach \citep{Aha91instance} as \mlknn.
-It extends \mlknn\ by exploring the label correlation.
-For each unseen example $\vx$, \iblr\ first identifies the set of $K$-nearest neighbors $N_k(\vx)$ from the training sets.
+It extends \mlknn\ by exploring the label correlation within the neighbors of an instant for posterior inference.
+The central idea of \iblr\ is to take the labels of the neighboring examples as features in order to evaluate the label of current example.
+Similar idea has been applied in collective classification \citep{Ghamrawi05collective} and link based classification \citep{Getoor05link, Getoor07introduction}.
+In particular, for each unseen example $\vx$, \iblr\ first identifies the set of $K$-nearest neighbors $N_k(\vx)$ from the training sets.
 Then the algorithm builds a logistic regression (\lr) model for each microlabel based on the label information collected from all training examples in $N_k(\vx)$.
 
 Mathematically, given an unseen example $\vx$, \iblr\ defines a posterior probability for the $j$'th microlabel of $\vx$ being labeled as $u_j$ by
@@ -862,6 +867,7 @@ $w_i^{(j)}(\vx)$ defined by
 collects the $i'$th microlabel from each neighbor $\vx'\in N_k(\vx)$ and weights the microlabel according to the similarity between $\vx$ and $\vx'$ encoded in $K(\vx',\vx)$.
 $\alpha_i^{(j)}$ is the regression coefficient of the $i$'th microlabel information from the neighbors of $\vx$ to the $j$'th microlabel of example $\vx$.
 $w_0^{(j)}$ is a bias term.
+
 
 
 
