@@ -808,15 +808,9 @@ Naturally, $u_i\in\Ycal_i$ and $\vu_e\in\vYcal_e$.
 
 
 
-% binary relevant
-% 	mlknn 
-% adapative algorithm 
-% 	iblr adaboostmh cc 
-% ranking based
-% 	rankingbased
-%
+\section{Instance Based Learning}
 
-\section{Multilabel $K$-Nearest Neighbor (\mlknn)} \label{sc_mlknn}
+\subsection{Multilabel $K$-Nearest Neighbor (\mlknn)} \label{sc_mlknn}
 
 \citet{Zhang05a,Zhang07mlknn} proposed Multilabel $K$-Nearest neightbor (\mlknn) for flat multilabel classification.
 \mlknn\ is an instance based learning \citep{Aha91instance} that is derived from $K$-Nearest Neightbor (\knn) algorithm designed for single-label classification problem.
@@ -835,7 +829,8 @@ and let $E_{\vx}^l(j)$ denote the event that $0\le l \le K$ neighbors of $x$ hav
 \end{align*}
 The prior probability distribution $H^b_{\vx}(j)$ and the likelihood distribution $P( H^b_{\vx}(j) | E_{\vx}^{C_{\vx(j)}}(j) )$ can be estimated from training data in terms of corresponding relative frequencies.
 
-\citet{Tsoumakas07multi} proposed the concept of \textit{binary relevant classifier} that amounts to transform the multilabel classification problem into a set of single-label classification problems and to independently learn a single-label classifier for each microlabel.
+\citet{Tsoumakas07multi,Tsoumakas10mining} proposed the concept of \textit{binary relevant classifier} (\br) for flat multilabel classification.
+\br\ amounts to transform the multilabel classification problem into a set of single-label classification problems and to independently learn a single-label classifier for each microlabel.
 Essentially \mlknn\ is a binary relevant classifier.
 In other words, the algorithm ignores the label dependencies.
 
@@ -850,7 +845,7 @@ The central idea of \iblr\ is to take the labels of the neighboring examples as 
 Similar idea has been applied in collective classification \citep{Ghamrawi05collective} and link based classification \citep{Getoor05link, Getoor07introduction}.
 
 In particular, for each unseen example $\vx$, \iblr\ first identifies the set of $K$-nearest neighbors $N_k(\vx)$ from the training sets.
-Then the algorithm builds a logistic regression (\lr) model for each microlabel based on the label information collected from all training examples in $N_k(\vx)$.
+Then the algorithm builds a logistic regression (\lr) model (\ref{sc_lr}) for each microlabel based on the label information collected from all training examples in $N_k(\vx)$.
 Mathematically \iblr\ defines a posterior probability for the $j$'th microlabel of $\vx$ being labeled as $u_j$ by
 \begin{align*}
 	\pi^{(j)} = P( \vy(\vx)[j]=u_j | N_k(\vx)), u_j\in\Ycal_j.
@@ -869,48 +864,14 @@ $\alpha_i^{(j)}$ is the regression coefficient of the $i$'th microlabel informat
 $w_0^{(j)}$ is a bias term.
 
 
-%
-%
-% cc ecc etc
-\section{Classifier Chain (\cc)}
+\section{Model Based Learning}
+
+\subsection{Correlated Logistic Regression (\corrlog)}
+
+\section{subClassifier Chain (\cc)}
 
 
 
-%
-% 
-\section{Support Vector Machine for Interdependent and Structured Outputs (\svmstruct)}
-
-The formulation of Support Vector Machine for interdependent and structured output space (\svmstruct) described in \citep{THJA04,TJTA05} is amazingly similar to \mmmn.
-Compared to \mmmn\ framework which scales the margin by the loss function, \svmstruct\ formulation scales the margin errors ({\em slack variables}) by the loss function.
-The primal optimization problem of \svmstruct\ is given as
-\begin{definition}{\svmstruct\ Optimization Problem in Primal.}\label{def_svmstruct}
-	\begin{align*}
-		\underset{\vw,\xi_i}{\minimize} & \quad\frac{1}{2}\norm{\vw}^2 + \frac{C}{m}\sum_{i=1}^{m}\xi_i \\
-		\st & \quad\ip{\vw}{\phib(x_i,\vy_i)} - \ip{\vw}{\phib(x_i,\vy)} \ge 1-\frac{\xi_i}{\vell(\vy_i,\vy)},\\
-		& \quad \forall \xi_i\ge0,\, \forall \vy\in\vYcal/\vy_i,\, \forall i\in\{1,\cdots,m\},
-	\end{align*}
-\end{definition}
-where $\xi_i$ denotes the slack allotted to each example, $\vell(\vy_i,\vy)$ is the loss function between pseudo-label and the correct label, and $C$ is the slack parameter that controls the amount of regularization in the model.
-The primal form can be interpreted as maximizing the margin between the correct training example and the pseudo-example.
-Allowing margin error is to make sure solution can always be found.
-
-It seems intuitive to scale the margin error by the loss function, the advantage of which is also claimed the authors in \citep[p.3]{THJA04}.
-They suggest that under \mmmn\ framework the learning system will work hard on the examples that incur big loss thought they may not even close to be confusable compared to true target value $\vy_i$.
-
-In addition to the slight difference in loss scaling, the optimization technique employed by \svmstruct\ differ significantly compared to \mmmn.
-Since the part of the \svmstruct optimization problem containing loss function is not decomposable, the model cannot remove exponential number of constraints during optimization.
-On the other hand, \citet{THJA04} developed an iterative optimization approach that creates a nested sequence of successively tighter relaxation of the original problem via a cutting-plane methods \citep{Bishop07,JFY09}.
-In particular, constraints are added as necessary.
-It is also shown that the iterative optimization algorithm will converge to some optimal solution of $\epsilon$ precision in polynomial number of steps.
-
-Besides the optimization issue, the major drawback of \svmstruct\ is the intractability of the the inference problem.
-In particular, to find the most violating constraint, the model will compute the loss-augmented inference problem as in \citep{TJTA05}
-\begin{align}
-	\hat{\vy} = \underset{\vy\in\vYcal/\vy_i}{\argmax} &\, [1-\ip{\vw}{\phib(\vx_i,\vy)}]\,\vell(\vy_i,\vy) \label{svmstructinference},
-\end{align}
-where the loss function $\ell$ appears as a multiplicative term.
-As the model does not assume any property of decomposition on the loss function over output space, the loss-augmented inference problem (\ref{svmstructinference}) of \svmstruct\ is in practice intractable. 
-The intractability of the inference problem can be seen as an exchange of the generality of the loss function which allows more complicated loss to be defined. 
 
 
 
@@ -1041,7 +1002,42 @@ The parameter learning problem defined as (\ref{crf_inference}), is solved in \c
 In order to make \crf\ work in practice, one has to make sure that the logarithm of the normalization function (\ref{crf_partition_function}) and the argmax inference can be solved efficiently.
 
 
- 
+%
+% 
+\section{Support Vector Machine for Interdependent and Structured Outputs (\svmstruct)}
+
+The formulation of Support Vector Machine for interdependent and structured output space (\svmstruct) described in \citep{THJA04,TJTA05} is amazingly similar to \mmmn.
+Compared to \mmmn\ framework which scales the margin by the loss function, \svmstruct\ formulation scales the margin errors ({\em slack variables}) by the loss function.
+The primal optimization problem of \svmstruct\ is given as
+\begin{definition}{\svmstruct\ Optimization Problem in Primal.}\label{def_svmstruct}
+	\begin{align*}
+		\underset{\vw,\xi_i}{\minimize} & \quad\frac{1}{2}\norm{\vw}^2 + \frac{C}{m}\sum_{i=1}^{m}\xi_i \\
+		\st & \quad\ip{\vw}{\phib(x_i,\vy_i)} - \ip{\vw}{\phib(x_i,\vy)} \ge 1-\frac{\xi_i}{\vell(\vy_i,\vy)},\\
+		& \quad \forall \xi_i\ge0,\, \forall \vy\in\vYcal/\vy_i,\, \forall i\in\{1,\cdots,m\},
+	\end{align*}
+\end{definition}
+where $\xi_i$ denotes the slack allotted to each example, $\vell(\vy_i,\vy)$ is the loss function between pseudo-label and the correct label, and $C$ is the slack parameter that controls the amount of regularization in the model.
+The primal form can be interpreted as maximizing the margin between the correct training example and the pseudo-example.
+Allowing margin error is to make sure solution can always be found.
+
+It seems intuitive to scale the margin error by the loss function, the advantage of which is also claimed the authors in \citep[p.3]{THJA04}.
+They suggest that under \mmmn\ framework the learning system will work hard on the examples that incur big loss thought they may not even close to be confusable compared to true target value $\vy_i$.
+
+In addition to the slight difference in loss scaling, the optimization technique employed by \svmstruct\ differ significantly compared to \mmmn.
+Since the part of the \svmstruct optimization problem containing loss function is not decomposable, the model cannot remove exponential number of constraints during optimization.
+On the other hand, \citet{THJA04} developed an iterative optimization approach that creates a nested sequence of successively tighter relaxation of the original problem via a cutting-plane methods \citep{Bishop07,JFY09}.
+In particular, constraints are added as necessary.
+It is also shown that the iterative optimization algorithm will converge to some optimal solution of $\epsilon$ precision in polynomial number of steps.
+
+Besides the optimization issue, the major drawback of \svmstruct\ is the intractability of the the inference problem.
+In particular, to find the most violating constraint, the model will compute the loss-augmented inference problem as in \citep{TJTA05}
+\begin{align}
+	\hat{\vy} = \underset{\vy\in\vYcal/\vy_i}{\argmax} &\, [1-\ip{\vw}{\phib(\vx_i,\vy)}]\,\vell(\vy_i,\vy) \label{svmstructinference},
+\end{align}
+where the loss function $\ell$ appears as a multiplicative term.
+As the model does not assume any property of decomposition on the loss function over output space, the loss-augmented inference problem (\ref{svmstructinference}) of \svmstruct\ is in practice intractable. 
+The intractability of the inference problem can be seen as an exchange of the generality of the loss function which allows more complicated loss to be defined. 
+
 
 
 %
