@@ -810,12 +810,14 @@ Naturally, $u_i\in\Ycal_i$ and $\vu_e\in\vYcal_e$.
 
 %
 %
+
+
 \section{Multilabel $K$-Nearest Neighbor (\mlknn)} \label{sc_mlknn}
 
 \citet{Zhang05a,Zhang07mlknn} proposed Multilabel $K$-Nearest neightbor (\mlknn) for flat multilabel classification.
-\mlknn\ is derived from $K$-Nearest Neightbor (\knn) algorithm which is an instant based learning originally designed for single-label classification problem.
+\mlknn\ is an instance based learning \citep{Aha91instance} that is derived from $K$-Nearest Neightbor (\knn) algorithm designed for single-label classification problem.
 \mlknn\ transforms the flat multilabel classification problem into a set of single-label classification and processes each microlabel independently.
-For each unseen example $\vx$, the \mlknn\ algorithm first identifies the set of $K$-nearest neighbors $H(\vx)$ from the training sets.
+For each unseen example $\vx$, the \mlknn\ algorithm first identifies the set of $K$-nearest neighbors $N(\vx)$ from the training sets.
 After that the algorithm computes the multilabel $\vy$ of the unseen example $\vx$ by examining the set of labels collected from its $K$-nearest neightbors.
 
 Mathematically 
@@ -825,7 +827,7 @@ and let $E_{\vx}^l(j)$ denote the event that $0\le l \le K$ neighbors of $x$ hav
 \mlknn\ processes each microlabel at a time and determines the value of the microlabel by examining the following Maximize A-Posteriori (\map) problem
 \begin{align*}
 	\vy[j]^* = \underset{b\in\Ycal_j}{\argmax} \, P( H^b_{\vx}(j) | E_{\vx}^{C_{\vx(j)}}(j) )
-	= \underset{b\in\Ycal_j}{\argmax} \, \frac{P( H^b_{\vx}(j) ) P(  E_{\vx}^{C_{\vx(j)}}(j) ) | H^b_{\vx}(j)}{P( E_{\vx}^{C_{\vx(j)}}(j))}.
+	= \underset{b\in\Ycal_j}{\argmax} \, \frac{P( H^b_{\vx}(j) ) P(  E_{\vx}^{C_{\vx(j)}}(j) ) | H^b_{\vx}(j))}{P( E_{\vx}^{C_{\vx(j)}}(j))}.
 \end{align*}
 The prior probability distribution $H^b_{\vx}(j)$ and the likelihood distribution $P( H^b_{\vx}(j) | E_{\vx}^{C_{\vx(j)}}(j) )$ can be estimated from training data in terms of corresponding relative frequencies.
 
@@ -834,8 +836,33 @@ Essentially \mlknn\ is a binary relevant classifier.
 In other words, the algorithm ignores the label dependencies.
 
 
+%
+%
+\section{Instant Based Logistic Regression (\iblr)}
 
-\section{Instant Based Logistic Regression}
+\citet{Cheng09combining} developed Instance Based Logistic Regression (\iblr) with extension to flat multilabel classification.
+\iblr\ is also an instant base learning approach \citep{Aha91instance} as \mlknn.
+It extends \mlknn\ by exploring the label correlation.
+For each unseen example $\vx$, \iblr\ first identifies the set of $K$-nearest neighbors $N_k(\vx)$ from the training sets.
+Then the algorithm builds a logistic regression (\lr) model for each microlabel based on the label information collected from all training examples in $N_k(\vx)$.
+
+Mathematically, given an unseen example $\vx$, \iblr\ defines a posterior probability for the $j$'th microlabel of $\vx$ being labeled as $u_j$ by
+\begin{align*}
+	\pi^{(j)} = P( \vy(\vx)[j]=u_j | N_k(\vx)), u_j\in\Ycal_j.
+\end{align*}
+Then \iblr\ constructs a logistic regression classifier for $\pi^{(j)}$ which can be derived from the following 
+\begin{align*}
+	\log\frac{\pi^{(j)}}{1-\pi^{(j)}} = w_0^{(j)} + \sum_{i=1}^{k}\alpha_i^{(j)}\cdot w_{i}^{(j)}(\vx),
+\end{align*}
+where $i$ is the index that iterates over all microlabels.
+$w_i^{(j)}(\vx)$ defined by 
+\begin{align*}
+	w_i^{(j)}(\vx) = \sum_{\vx'\in N_k(\vx)}K(\vx',\vx)\cdot \vy(\vx')[i]
+\end{align*}
+collects the $i'$th microlabel from each neighbor $\vx'\in N_k(\vx)$ and weights the microlabel according to the similarity between $\vx$ and $\vx'$ encoded in $K(\vx',\vx)$.
+$\alpha_i^{(j)}$ is the regression coefficient of the $i$'th microlabel information from the neighbors of $\vx$ to the $j$'th microlabel of example $\vx$.
+$w_0^{(j)}$ is a bias term.
+
 
 
 

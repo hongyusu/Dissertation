@@ -12,6 +12,11 @@ Adar, E., Zhang, L., Adamic, L., and Lukose, R. (2004).
 \newblock Implicit structure and the dynamics of blogspace.
 \newblock In {\em Workshop on the Weblogging Ecosystem}, volume~13.
 
+\bibitem[Aha et~al., 1991]{Aha91instance}
+Aha, D., Kibler, D., and Albert, M. (1991).
+\newblock Instance-based learning algorithms.
+\newblock {\em Machine Learning}, 6(1):37--66.
+
 \bibitem[Amin et~al., 2014]{Amin14learning}
 Amin, K., Heidari, H., and Kearns, M. (2014).
 \newblock Learning from contagion (without timestamps).
@@ -170,6 +175,12 @@ Chen, S. and Rosenfeld, R. (1999).
 Chen, S. and Rosenfeld, R. (2000).
 \newblock A survey of smoothing techniques for me models.
 \newblock {\em Speech and Audio Processing, IEEE Transactions on}, 8(1):37--50.
+
+\bibitem[Cheng and Hüllermeier, 2009]{Cheng09combining}
+Cheng, W. and Hüllermeier, E. (2009).
+\newblock Combining instance-based learning and logistic regression for
+  multilabel classification.
+\newblock {\em Machine Learning}, 76(2-3):211--225.
 
 \bibitem[Chickering et~al., 1994]{Chickering94learning}
 Chickering, D.~M., Geiger, D., and Heckerman, D. (1994).
