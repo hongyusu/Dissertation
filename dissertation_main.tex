@@ -769,7 +769,7 @@ Most recently, three other learning algorithms with performance guarantee are pr
 \chapter{Flat Multilabel Classification} \label{ch_mlc}
 
 Multilabel classification is a natural extension to single-label classification presented in Section~\ref{sc_slc}.
-In multilabel classification each input (instant) is simultaneously associated with multiple outputs (labels)
+In multilabel classification each input (instant) is simultaneously associated with multiple outputs (labels).
 The research of the multilabel classification has progressed rapidly in the past two decades with many learning algorithms being developed and applied.
 In general, there are two lines of research for multilabel classification, namely flat multilabel classification and structured output prediction respectively.
 In flat multilabel classification, the multiple labels are essentially taken as a ``flat'' vector of labels.
@@ -813,15 +813,15 @@ Naturally, $u_i\in\Ycal_i$ and $\vu_e\in\vYcal_e$.
 \section{Multilabel $K$-Nearest Neighbor (\mlknn)} \label{sc_mlknn}
 
 \citet{Zhang05a,Zhang07mlknn} proposed Multilabel $K$-Nearest neightbor (\mlknn) for flat multilabel classification.
-\mlknn\ is derived from $K$-Nearest Neightbor algorithm (\knn) which is an instant based learning originally designed for single-label classification problem.
+\mlknn\ is derived from $K$-Nearest Neightbor (\knn) algorithm which is an instant based learning originally designed for single-label classification problem.
 \mlknn\ transforms the flat multilabel classification problem into a set of single-label classification and processes each microlabel independently.
 For each unseen example $\vx$, the \mlknn\ algorithm first identifies the set of $K$-nearest neighbors $H(\vx)$ from the training sets.
-After that the algorithm compute the multilabel $\vy$ of the unseen example $\vx$ by examining the set of labels collected from its $K$-nearest neightbors.
+After that the algorithm computes the multilabel $\vy$ of the unseen example $\vx$ by examining the set of labels collected from its $K$-nearest neightbors.
 
 Mathematically 
-let $C_{\vx}(j)$ denote the number of the neighbors of $\vx$ with $j$'th label being $+1$,
+let $C_{\vx}(j)$ denote the number of the neighbors of $\vx$ with $j$'th label being ``$+1$'',
 let $H^b_{\vx}(j)$ denote the event that the $j$'th label of $\vx$ is $b\in\Ycal_j$,
-and let $E_{\vx}^l(j)$ denote the even that $0\le l \le K$ neighbors of $x$ have the $j$'th label being $+1$.
+and let $E_{\vx}^l(j)$ denote the event that $0\le l \le K$ neighbors of $x$ have the $j$'th label being ``$+1$''.
 \mlknn\ processes each microlabel at a time and determines the value of the microlabel by examining the following Maximize A-Posteriori (\map) problem
 \begin{align*}
 	\vy[j]^* = \underset{b\in\Ycal_j}{\argmax} \, P( H^b_{\vx}(j) | E_{\vx}^{C_{\vx(j)}}(j) )
@@ -836,7 +836,8 @@ In other words, the algorithm ignores the label dependencies.
 
 
 \section{Instant Based Logistic Regression}
-\section{Binary Relevant Classification}
+
+
 
 
 %
