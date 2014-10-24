@@ -810,10 +810,10 @@ Naturally, $u_i\in\Ycal_i$ and $\vu_e\in\vYcal_e$.
 
 \section{Instance Based Learning}
 
-\subsection{Multilabel $K$-Nearest Neighbor (\mlknn)} \label{sc_mlknn}
+\subsection{Multilabel $K$-Nearest Neighbors (\mlknn)} \label{sc_mlknn}
 
-\citet{Zhang05a,Zhang07mlknn} proposed Multilabel $K$-Nearest neightbor (\mlknn) for flat multilabel classification.
-\mlknn\ is an instance based learning \citep{Aha91instance} that is derived from $K$-Nearest Neightbor (\knn) algorithm designed for single-label classification problem.
+\citet{Zhang05a,Zhang07mlknn} proposed Multilabel $K$-Nearest Neightbors (\mlknn) for flat multilabel classification.
+\mlknn\ is an instance based learning approach \citep{Aha91instance} that is derived from $K$-Nearest Neightbor (\knn) algorithm designed for single-label classification problem.
 \mlknn\ transforms the flat multilabel classification problem into a set of single-label classification and processes each microlabel independently.
 For each unseen example $\vx$, the \mlknn\ algorithm first identifies the set of $K$-nearest neighbors $N(\vx)$ from the training sets.
 After that the algorithm computes the multilabel $\vy$ of the unseen example $\vx$ by examining the set of labels collected from its $K$-nearest neightbors.
@@ -866,18 +866,45 @@ $w_0^{(j)}$ is a bias term.
 
 \section{Model Based Learning}
 
+%
+%
 \subsection{Correlated Logistic Regression (\corrlog)}
 
-\section{subClassifier Chain (\cc)}
+Correlated Logistic Regression (\corrlog) developed by \citet{Bian12corrlog} is a model based approach for flat multilabel classification.
+\corrlog\ is a major step forward of \iblr\ by constructing a logistic regression classifier over all microlabels and by modeling pairwise microlabel correlation with a function defined on microlabels.
 
-
-
-
+We will present \corrlog\ by first introducing the Independent Logistic Regression (\ilrs) model. 
+Given an arbitrary training example and label $(\vx,\vy)$, we can construct a set of independent logistic regreesion classifiers, one for each microlabel.
+The posteriori probability can be computed by
+\begin{align}
+	P_{\text{\ilrs}}(\vy|\vx) 
+	= \prod_{j=1}^{k}P_{\text{\lr}}(\vy[j]|\vx)
+	= \prod_{j=1}^{k}\frac{\exp(\vy[j]\vw^{\tp}\vx)}{\exp(\vw^{\tp}\vx)+\exp(-\vw^{\tp}\vx)}, \label{ilrs}
+\end{align}
+where $j$ is the index that iterates over all microlabels. 
+The bias term as in (\ref{}) is omitted which is equvilent to augment $\vx$ with a constant term \citep{Bian12corrlog}.
+Otherwise, (\ref{ilrs}) can be derived into (\ref{}) by replacing $\vw$ with $\frac{\vw}{2}$.
+\ilrs\ has the problem of ignoring the label correlation and overfitting the training data when the number of microlabel $k$ is high.
+To reveal label correlation, \corrlog\ augments the posteriori probability (\ref{ilrs}) by a function $Q(\vy)$ defined on the set of microlabels as
+\begin{align*}
+	Q(\vy) = \exp\left\{\sum_{k<j}\alpha_{k,j}\vy[k]\vy[j]\right\}.
+\end{align*}
+The formalism of \corrlog\ is
+\begin{align*}
+	P_{\text{\corrlog}}(\vy|\vx) &\propto P_{\text{\ilrs}}(\vy|\vx) Q(\vy) \\
+		&=\exp\left\{ \sum_{j=1}^{m}\vy(x)[j]\vw^{\tp}\vx + \sum_{k<j}\alpha_{kj}\vy(\vx)[k]\vy(\vx)[j] \right\}.
+\end{align*}
+Thus, \corrlog\ examines the label correlation by augmenting joint prediction with a quadratic term $Q(\vy)$.
 
 
 %
 %
-\section{Multitask Feature Learning (\mtl)}
+\subsection{Classifier Chain (\cc)}
+
+
+%
+%
+\subsection{Multitask Feature Learning (\mtl)}
 
 Multi-task Feature Learning (\mtl) developed in \citep{Argyriou07multitask} is another algorithm designed for multiple interdependent structured output space.
 \mtl\ is quite different from other structured output learning algorithms discussed in the previous sections.
@@ -910,6 +937,10 @@ As (Definition~\ref{mtl_opt}) is non-convex and the second term is non-smooth, i
 An extension of \mtl\ algorithm was proposed in \citep{Argyriou08convex} which introduced a nonlinear generalization using kernel methods.
 In addition, similar but not identical algorithms \citep{Argyriou08an,Jacob09cluster} are also proposed which assume that the tasks form clusters such that task specific weight vectors should be similar within the clusters.
 Recently, \citet{Paredes12exploit} proposed a method which exploits the information between unrelated tasks, based on a similar assumption that tasks of different groups tend not to share any features.
+
+\section{Alternative Methods}
+
+\subsection{Ensemble Methods for Flat Multilabel Classification}
 
 
 
