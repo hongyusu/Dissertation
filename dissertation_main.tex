@@ -717,46 +717,6 @@ In practice, the random forest algorithm selects in each step a subset of featur
 The feature split process of decision tree is deterministic given a set of features.
 \citet{Liu08spectrum} proposed \vrtree\ which further extend random forest algorithm by introducing randomness in both feature selection and split processes.
 
-\subsection{Ensemble Methods for Multi-Label Classification} \label{sc_emmlc}
-
-As it is straightforward to combine multiple scalar output variables, the ensemble methods have been initially developed for single-label classification \citep{Breiman96bagging,Freund97a} or regression  \citep{Breiman96bagging} tasks.
-However, it is not immediately apparent how to combine vector valued outputs in multi-label space.
-
-\adaboostmh\ is the multilabel variance of original \adaboost\ algorithm proposed by \citet{Schapire99improved}, which is further developed by \citet{Esuli2008boosting}.
-The core idea of \adaboostmh\ is to adopt hamming loss instead of 0/1 loss. 
-In particular, the algorithm reduces from a multilabel classification problem to a set of single label classification problems by replacing each training example $(\vx_i,\vy_i)$ with $k$ examples $\{(\vx_i,\vy_i[l])\}_{l=1}^k$.
-The algorithm is detailed in (Algorithm~\ref{adaboostmh}).
-In particular, it maintains a distribution over all examples and labels.
-In each iteration, the algorithm takes in the distribution and all training examples, generates a weak learner $f^k(\vx)$ (line~\ref{mh_compuet_f}), computes hamming loss (line~\ref{mh_compute_error}), computes the adaptive parameter $\alpha^t$ (line~\ref{mh_compute_alpha}), and update the distribution (line~\ref{mh_update_d}).
-The returned prediction $H(x)$ is the combination of base learners $f^t(x)$ weighted by $\alpha^t$.
-\begin{algorithm}
-\caption{\adaboostmh}
-\label{adaboostmh}
-\begin{algorithmic}[1]
-	\REQUIRE Training sample $\Scal = \{(x_i,\vy_i)\}_{i=1}^m$, learning function $\Wcal$, number of weak learners $T$
-	\ENSURE Boosting ensemble $H(\vx)$
-	\STATE Initialize $D^0(i,l)=\frac{1}{mk},i\in\{1,\cdots,m\}$
-	\FOR{$t=1\cdots T$}
-		\STATE $f^t(\vx)\leftarrow\Wcal(\Scal,D^{i-1})$ \label{mh_compuet_f}
-		\STATE $\vy_i = f^t(\vx_i),\forall i\in\{1,\cdots,m\}$
-		\STATE $\epsilon^t =\sum_{l=1}^k\sum_{i=1}^{m}D^t(i,l)\ind{\vy_i[l]\neq\hat{\vy}_i[l]}$ \label{mh_compute_error}
-		\STATE $\alpha^{t} = \frac{1}{2}\ln\left(\frac{1-\epsilon^t}{\epsilon^t}\right)$ \label{mh_compute_alpha}
-		\STATE $Z=\sum_{i=1}^{m}\sum_{l=1}^{k}D^{t-1}(i,l)\exp(-\alpha^t\vy_i[l]\hat{\vy}_i[l])$
-		\STATE $D^t(i,l) = \frac{1}{Z}D^{t-1}(i,l)\exp(-\alpha^t\vy_i[l]\hat{\vy}_i[l]),\forall i,\forall l$ \label{mh_update_d}
-	\ENDFOR
-	\RETURN $H(\vx) = \sign(\sum_{t=1}^T\alpha^tf^t(\vx))$
-\end{algorithmic}
-\end{algorithm}
-
-Furthermore, many other ensemble approaches have been proposed and applied in specific areas, including, in natural language processing applications \citep{Collins05distrimnative,Zeman05improving,Sagae06parsing,Zhang09kbest} and 
-in text and speech recognition applications \citep{Fiscus97a,Benesty08speech,Petrov10products}.
-Limiting the applicability of these methods is the fact that they are mostly extensions of the ensemble approaches for single task problem, and are specially tailored for the applications.
-It is not immediately apparent how to apply these methods to other machine learning tasks.
-In addition, other methods that are based on boosting or bagging are also developed in \citep{Wang07simple,Kocev13tree}.
-Most recently, three other learning algorithms with performance guarantee are proposed in \citep{Cortes14semble}.
-
-%\marginpar{TODO: extend the section by adding algorithm details in \citep{Cortes14semble}.}
-
 
 
 
@@ -772,7 +732,7 @@ Multilabel classification is a natural extension to single-label classification 
 In multilabel classification each input (instant) is simultaneously associated with multiple outputs (labels).
 The research of the multilabel classification has progressed rapidly in the past two decades with many learning algorithms being developed and applied.
 In general, there are two lines of research for multilabel classification, namely flat multilabel classification and structured output prediction respectively.
-In flat multilabel classification, the multiple labels are essentially taken as a ``flat'' vector of labels.
+In flat multilabel classification, the multiple labels are essentially treated as a ``flat'' vector of labels.
 The structured output prediction, on the other hand, models the multiple labels via a graph structure that connects labels.
 This chapter will devote to flat multilabel classification in which we will present several classical algorithm techniques.
 The structured output prediction will be covered in the later part of the thesis.
@@ -816,8 +776,10 @@ Naturally, $u_i\in\Ycal_i$ and $\vu_e\in\vYcal_e$.
 %
 \subsection{Multilabel $K$-Nearest Neighbors (\mlknn)} \label{sc_mlknn}
 
-\citet{Zhang05a,Zhang07mlknn} proposed Multilabel $K$-Nearest Neightbors (\mlknn) for flat multilabel classification.
-\mlknn\ is an instance based learning approach \citep{Aha91instance} that is derived from $K$-Nearest Neightbor (\knn) algorithm designed for single-label classification problem.
+\citet{Tsoumakas07multi,Tsoumakas10mining} proposed the concept of \textit{binary relevant classifier} (\br) for flat multilabel classification.
+\br\ amounts to transform the multilabel classification problem into a set of single-label classification problems and to independently learn a single-label classifier for each microlabel.
+Multilabel $K$-Nearest Neightbors (\mlknn) proposed by \citet{Zhang05a,Zhang07mlknn} is perhaps the most famous binary relevant classifier for flat multilabel classification.
+\mlknn\ is also an instance based learning approach \citep{Aha91instance} that is derived from $K$-Nearest Neightbor (\knn) algorithm designed for single-label classification problem.
 \mlknn\ transforms the flat multilabel classification problem into a set of single-label classification and processes each microlabel independently.
 For each unseen example $\vx$, the \mlknn\ algorithm first identifies the set of $K$-nearest neighbors $N(\vx)$ from the training sets.
 After that the algorithm computes the multilabel $\vy$ of the unseen example $\vx$ by examining the set of labels collected from its $K$-nearest neightbors.
@@ -833,10 +795,25 @@ and let $E_{\vx}^l(j)$ denote the event that $0\le l \le K$ neighbors of $x$ hav
 \end{align*}
 The prior probability distribution $H^b_{\vx}(j)$ and the likelihood distribution $P( H^b_{\vx}(j) | E_{\vx}^{C_{\vx(j)}}(j) )$ can be estimated from training data in terms of corresponding relative frequencies.
 
-\citet{Tsoumakas07multi,Tsoumakas10mining} proposed the concept of \textit{binary relevant classifier} (\br) for flat multilabel classification.
-\br\ amounts to transform the multilabel classification problem into a set of single-label classification problems and to independently learn a single-label classifier for each microlabel.
-Essentially \mlknn\ is a binary relevant classifier.
-In other words, the algorithm ignores the label dependencies.
+It is obvious that \mlknn\ ignores the label correlations.
+
+%
+%
+\subsection{Classifier Chains (\cc)}
+
+Classification Chains (\cc) developed in \citep{Read09classifier,Read11classifier} is another problem transformation approach for flat multilabel classification.
+\cc\ involves $k$ binary transformations and forms a chain of $k$ binary classifiers $h=\{h_1,\cdots,h_k\}$.
+The $j$'th classifier $h_j$ is responsible for learning and predicting the $j$'th microlabel.
+In particular, for each microlabel $\vy[j]$, \cc\ first constructs a new training data $S_j$ then learns a classifier $h_j$ via arbitrary single-label classifier.
+$S_j$ is built by taking the $j$'th microlabel as output variable and combing the feature space of $\vx$ and all $j-1$ prior microlabels as the input feature which is defined by
+\begin{align*}
+	S_j = \{((\vx_i[1],\cdots,\vx_i[d],\vy_i[1],\cdots,\vy_i[j-1]),\vy_i[j])\}_{i=1}^{m}.
+\end{align*} 
+\cc\ takes the label correlation into account by sharing label information between classifiers.
+
+Probabilistic Classifier Chains (\pcc) presented in \citep{Read09classifier} explains the behavior of \cc\ in terms of condition probability theory.
+Since there is no standard way for the classification order of microlabels in \cc, Ensemble Classifier Chains (\ecc) developed \citep{Read11classifier} further improves \cc\ by generating multiple chains of classifiers. 
+
 
 %
 %
@@ -868,26 +845,53 @@ $\alpha_i^{(j)}$ is the regression coefficient of the $i$'th microlabel informat
 $w_0^{(j)}$ is a bias term.
 
 
-%
-%
-\subsection{Classifier Chains (\cc)}
-
-Classification Chains (\cc) developed in \citep{Read11classifier} is another problem transformation approach for flat multilabel classification.
-\cc\ involves $k$ binary transformations and forms a chain of $k$ binary classifiers $h=\{h_1,\cdots,h_k\}$.
-The $j$'th classifier $h_j$ is responsible for learning and predicting the $j$'th microlabel.
-In particular, for each microlabel $\vy[j]$, \cc\ first constructs a new training data $S_j$ then learns a classifier $h_j$ via arbitrary single-label classifier.
-$S_j$ is built by taking the $j$'th microlabel as output variable and combing the feature space of $\vx$ and all $j-1$ prior microlabels as the input feature which is defined by
-\begin{align*}
-	S_j = \{((\vx_i[1],\cdots,\vx_i[d],\vy_i[1],\cdots,\vy_i[j-1]),\vy_i[j])\}_{i=1}^{m}.
-\end{align*} 
-\cc\ takes the label correlation into account by sharing label information between classifiers.
-
-Probabilistic Classifier Chains (\pcc) presented in \citep{Read09classifier} explains the behavior of \cc\ in terms of condition probability theory.
-Since there is no standard way for the classification order of microlabels in \cc, Ensemble Classifier Chains (\ecc) developed \citep{Read11classifier} further improves \cc\ by generating multiple chains of classifiers. 
-
 
 
 \section{Algorithm Adaptation}
+
+%
+%
+\subsection{Ensemble Methods for Flat Multilabel Classification} \label{sc_emfmlc}
+
+As it is straightforward to combine multiple scalar output variables, the ensemble methods have been initially developed for single-label classification \citep{Breiman96bagging,Freund97a} or regression  \citep{Breiman96bagging} tasks.
+However, it is not immediately apparent how to combine vector valued outputs in multi-label space.
+
+\adaboostmh\ is the multilabel variance of original \adaboost\ algorithm proposed by \citet{Schapire99improved}, which is further developed by \citet{Esuli2008boosting}.
+The core idea of \adaboostmh\ is to adopt hamming loss instead of 0/1 loss. 
+In particular, the algorithm reduces from a multilabel classification problem to a set of single label classification problems by replacing each training example $(\vx_i,\vy_i)$ with $k$ examples $\{(\vx_i,\vy_i[l])\}_{l=1}^k$.
+The algorithm is detailed in (Algorithm~\ref{adaboostmh}).
+In particular, it maintains a distribution over all examples and labels.
+In each iteration, the algorithm takes in the distribution and all training examples, generates a weak learner $f^k(\vx)$ (line~\ref{mh_compuet_f}), computes hamming loss (line~\ref{mh_compute_error}), computes the adaptive parameter $\alpha^t$ (line~\ref{mh_compute_alpha}), and update the distribution (line~\ref{mh_update_d}).
+The returned prediction $H(x)$ is the combination of base learners $f^t(x)$ weighted by $\alpha^t$.
+\begin{algorithm}
+\caption{\adaboostmh}
+\label{adaboostmh}
+\begin{algorithmic}[1]
+	\REQUIRE Training sample $\Scal = \{(x_i,\vy_i)\}_{i=1}^m$, learning function $\Wcal$, number of weak learners $T$
+	\ENSURE Boosting ensemble $H(\vx)$
+	\STATE Initialize $D^0(i,l)=\frac{1}{mk},i\in\{1,\cdots,m\}$
+	\FOR{$t=1\cdots T$}
+		\STATE $f^t(\vx)\leftarrow\Wcal(\Scal,D^{i-1})$ \label{mh_compuet_f}
+		\STATE $\vy_i = f^t(\vx_i),\forall i\in\{1,\cdots,m\}$
+		\STATE $\epsilon^t =\sum_{l=1}^k\sum_{i=1}^{m}D^t(i,l)\ind{\vy_i[l]\neq\hat{\vy}_i[l]}$ \label{mh_compute_error}
+		\STATE $\alpha^{t} = \frac{1}{2}\ln\left(\frac{1-\epsilon^t}{\epsilon^t}\right)$ \label{mh_compute_alpha}
+		\STATE $Z=\sum_{i=1}^{m}\sum_{l=1}^{k}D^{t-1}(i,l)\exp(-\alpha^t\vy_i[l]\hat{\vy}_i[l])$
+		\STATE $D^t(i,l) = \frac{1}{Z}D^{t-1}(i,l)\exp(-\alpha^t\vy_i[l]\hat{\vy}_i[l]),\forall i,\forall l$ \label{mh_update_d}
+	\ENDFOR
+	\RETURN $H(\vx) = \sign(\sum_{t=1}^T\alpha^tf^t(\vx))$
+\end{algorithmic}
+\end{algorithm}
+
+Furthermore, many other ensemble approaches have been proposed and applied in specific areas, including, in natural language processing applications \citep{Collins05distrimnative,Zeman05improving,Sagae06parsing,Zhang09kbest} and 
+in text and speech recognition applications \citep{Fiscus97a,Benesty08speech,Petrov10products}.
+Limiting the applicability of these methods is the fact that they are mostly extensions of the ensemble approaches for single task problem, and are specially tailored for the applications.
+It is not immediately apparent how to apply these methods to other machine learning tasks.
+In addition, other methods that are based on boosting or bagging are also developed in \citep{Wang07simple,Kocev13tree}.
+Most recently, three other learning algorithms with performance guarantee are proposed in \citep{Cortes14semble}.
+
+%\marginpar{TODO: extend the section by adding algorithm details in \citep{Cortes14semble}.}
+
+
 
 %
 %
@@ -962,9 +966,6 @@ In addition, similar but not identical algorithms \citep{Argyriou08an,Jacob09clu
 Recently, \citet{Paredes12exploit} proposed a method which exploits the information between unrelated tasks, based on a similar assumption that tasks of different groups tend not to share any features.
 
 \section{Alternative Methods}
-
-\subsection{Ensemble Methods for Flat Multilabel Classification}
-
 
 
 %------------------------------------------------
