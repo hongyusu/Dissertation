@@ -795,7 +795,10 @@ and let $E_{\vx}^l(j)$ denote the event that $0\le l \le K$ neighbors of $x$ hav
 \end{align*}
 The prior probability distribution $H^b_{\vx}(j)$ and the likelihood distribution $P( H^b_{\vx}(j) | E_{\vx}^{C_{\vx(j)}}(j) )$ can be estimated from training data in terms of corresponding relative frequencies.
 
-It is obvious that \mlknn\ ignores the label correlations.
+The central problem with \mlknn\ is that \mlknn\ is ignorant of the label correlations.
+In order to exploit the label dependency, other approaches have been proposed \citep{Cheng09combining,Younes11a}.
+Besides, there are many other algorithm alternatives that align to the direction of \knn\ typed learning in flat multilabel classification, for example, \citet{Brinker07case,Chiang12a} proposed methods that incorporates \knn\ with ranking model.
+
 
 %
 %
