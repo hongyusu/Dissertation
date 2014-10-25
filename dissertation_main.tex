@@ -365,7 +365,7 @@ We can also compute
 	P(y=-1|\vx;\vw,b)=1-P(y=+1|\vx;\vw,b)=\frac{1}{1+\exponential{\ip{\vw}{\varphib(\vx)}+b}}. \label{lr_2}
 \end{align}
 By putting (\ref{lr_1}) and (\ref{lr_2}) together, we define Logistic Regression as
-\begin{definition}{Logistic Regression.}\label{logistic_regression}
+\begin{definition}{Logistic Regression.} \label{logistic_regression}
 	\begin{align*}
 		P(y|\vx;\vw,b) = \frac{1}{1+\exponential{-y(\ip{\vw}{\varphib(\vx)}-b)}}.
 	\end{align*}
@@ -808,8 +808,12 @@ Naturally, $u_i\in\Ycal_i$ and $\vu_e\in\vYcal_e$.
 
 
 
-\section{Instance Based Learning}
+%
+%
+\section{Problem Transformation}
 
+%
+%
 \subsection{Multilabel $K$-Nearest Neighbors (\mlknn)} \label{sc_mlknn}
 
 \citet{Zhang05a,Zhang07mlknn} proposed Multilabel $K$-Nearest Neightbors (\mlknn) for flat multilabel classification.
@@ -864,7 +868,26 @@ $\alpha_i^{(j)}$ is the regression coefficient of the $i$'th microlabel informat
 $w_0^{(j)}$ is a bias term.
 
 
-\section{Model Based Learning}
+%
+%
+\subsection{Classifier Chains (\cc)}
+
+Classification Chains (\cc) developed in \citep{Read11classifier} is another problem transformation approach for flat multilabel classification.
+\cc\ involves $k$ binary transformations and forms a chain of $k$ binary classifiers $h=\{h_1,\cdots,h_k\}$.
+The $j$'th classifier $h_j$ is responsible for learning and predicting the $j$'th microlabel.
+In particular, for each microlabel $\vy[j]$, \cc\ first constructs a new training data $S_j$ then learns a classifier $h_j$ via arbitrary single-label classifier.
+$S_j$ is built by taking the $j$'th microlabel as output variable and combing the feature space of $\vx$ and all $j-1$ prior microlabels as the input feature which is defined by
+\begin{align*}
+	S_j = \{((\vx_i[1],\cdots,\vx_i[d],\vy_i[1],\cdots,\vy_i[j-1]),\vy_i[j])\}_{i=1}^{m}.
+\end{align*} 
+\cc\ takes the label correlation into account by sharing label information between classifiers.
+
+Probabilistic Classifier Chains (\pcc) presented in \citep{Read09classifier} explains the behavior of \cc\ in terms of condition probability theory.
+Since there is no standard way for the classification order of microlabels in \cc, Ensemble Classifier Chains (\ecc) developed \citep{Read11classifier} further improves \cc\ by generating multiple chains of classifiers. 
+
+
+
+\section{Algorithm Adaptation}
 
 %
 %
@@ -882,24 +905,24 @@ The posteriori probability can be computed by
 	= \prod_{j=1}^{k}\frac{\exp(\vy[j]\vw^{\tp}\vx)}{\exp(\vw^{\tp}\vx)+\exp(-\vw^{\tp}\vx)}, \label{ilrs}
 \end{align}
 where $j$ is the index that iterates over all microlabels. 
-The bias term as in (\ref{}) is omitted which is equvilent to augment $\vx$ with a constant term \citep{Bian12corrlog}.
-Otherwise, (\ref{ilrs}) can be derived into (\ref{}) by replacing $\vw$ with $\frac{\vw}{2}$.
+The bias term as in Definition~\ref{logistic_regression} is omitted which is equvilent to augment $\vx$ with a constant term \citep{Bian12corrlog}.
+Otherwise, (\ref{ilrs}) can be derived into Definition~\ref{logistic_regression} by replacing $\vw$ with $\frac{\vw}{2}$.
 \ilrs\ has the problem of ignoring the label correlation and overfitting the training data when the number of microlabel $k$ is high.
 To reveal label correlation, \corrlog\ augments the posteriori probability (\ref{ilrs}) by a function $Q(\vy)$ defined on the set of microlabels as
-\begin{align*}
-	Q(\vy) = \exp\left\{\sum_{k<j}\alpha_{k,j}\vy[k]\vy[j]\right\}.
-\end{align*}
-The formalism of \corrlog\ is
+\begin{align}
+	Q(\vy) = \exp\left\{\sum_{k<j}\alpha_{k,j}\vy[k]\vy[j]\right\}. \label{ilrs_augment}
+\end{align}
+Put together (\ref{ilrs}) and (\ref{ilrs_augment}), the formalism of \corrlog\ can be defined as
 \begin{align*}
 	P_{\text{\corrlog}}(\vy|\vx) &\propto P_{\text{\ilrs}}(\vy|\vx) Q(\vy) \\
 		&=\exp\left\{ \sum_{j=1}^{m}\vy(x)[j]\vw^{\tp}\vx + \sum_{k<j}\alpha_{kj}\vy(\vx)[k]\vy(\vx)[j] \right\}.
 \end{align*}
-Thus, \corrlog\ examines the label correlation by augmenting joint prediction with a quadratic term $Q(\vy)$.
+Thus, \corrlog\ examines the pairwise label correlation by augmenting joint prediction with a quadratic term $Q(\vy)$ built from microlabel pairs.
 
 
-%
-%
-\subsection{Classifier Chain (\cc)}
+
+
+
 
 
 %
