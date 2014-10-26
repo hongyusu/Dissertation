@@ -816,20 +816,21 @@ $S_j$ is built by taking the $j$'th microlabel as output variable and combing th
 Thus, \cc\ takes the label correlation into account by incorporating label information as concatenated features in the input feature space.
 The idea has previously been applied in \citep{Godbole04discriminative}.
 However, the addition label information only takes a small part of the input feature space especially when the origin space is already high.
-In this case, one can only hope to gain addition performance from the label features with high correlation to the output label.
+In this case, one can only expect to gain additional performance from concatenated label information with high correlation to the output microlabel.
 
-Besides, the \cc\ algorithm has been explained in terms of condition probability theory by Probabilistic Classifier Chains (\pcc) presented in \citep{Read09classifier}.
-Since there is no standard way for the classification order of microlabels in \cc, Ensemble Classifier Chains (\ecc) developed in \citep{Read11classifier} further improves \cc\ by generating and combining multiple chains of classifiers. 
+Besides, \cc\ has been explained in terms of condition probability theory by Probabilistic Classifier Chains (\pcc) presented in \citep{Read09classifier}.
+Since there is no standard way for classification order of microlabels in \cc, Ensemble Classifier Chains (\ecc) has been developed in \citep{Read11classifier} which further improves \cc\ by generating and combining multiple chains of classifiers. 
 
 
 %
 %
 \subsection{Instant Based Logistic Regression (\iblr)}
 
-\citet{Cheng09combining} developed Instance Based Logistic Regression (\iblr) with extension to flat multilabel classification.
+\citet{Cheng09combining} developed Instance Based Logistic Regression (\iblr) with an extension to flat multilabel classification.
 \iblr\ is also an instant base learning approach \citep{Aha91instance} as \mlknn.
 It extends \mlknn\ by exploring the label correlation within the neighbors of an instant for posterior inference.
-The central idea of \iblr\ is to take the labels of the neighboring examples as features in order to evaluate the label of current example.
+It is also similar to \cc\ but with major difference.
+The central idea of \iblr\ is to take the labels of the neighboring examples as the only features in order to evaluate the label of current example.
 Similar idea has been applied in collective classification \citep{Ghamrawi05collective} and link based classification \citep{Getoor05link, Getoor07introduction}.
 
 In particular, for each unseen example $\vx$, \iblr\ first identifies the set of $K$-nearest neighbors $N_k(\vx)$ from the training sets.
@@ -861,7 +862,7 @@ $w_0^{(j)}$ is a bias term.
 \subsection{Ensemble Methods for Flat Multilabel Classification} \label{sc_emfmlc}
 
 As it is straightforward to combine multiple scalar output variables, the ensemble methods have been initially developed for single-label classification \citep{Breiman96bagging,Freund97a} or regression  \citep{Breiman96bagging} tasks.
-However, it is not immediately apparent how to combine vector valued outputs in multi-label space.
+However, it is not immediately apparent how to combine vector valued outputs in flat multilabel space.
 
 \adaboostmh\ is the multilabel variance of original \adaboost\ algorithm proposed by \citet{Schapire99improved}, which is further developed by \citet{Esuli2008boosting}.
 The core idea of \adaboostmh\ is to adopt hamming loss instead of 0/1 loss. 
@@ -905,9 +906,9 @@ Most recently, three other learning algorithms with performance guarantee are pr
 \subsection{Correlated Logistic Regression (\corrlog)}
 
 Correlated Logistic Regression (\corrlog) developed by \citet{Bian12corrlog} is a model based approach for flat multilabel classification.
-\corrlog\ is a major step forward of \iblr\ by constructing a logistic regression classifier over all microlabels and by modeling pairwise microlabel correlation with a function defined on microlabels.
+\corrlog\ is a major step forward of \iblr\ by constructing a logistic regression classifier over all microlabels and by modeling pairwise microlabel correlation with a function defined on microlabel pairs.
 
-We will present \corrlog\ by first introducing the Independent Logistic Regression (\ilrs) model. 
+In fact, \corrlog\ is derived from Independent Logistic Regression (\ilrs) model. 
 Given an arbitrary training example and label $(\vx,\vy)$, we can construct a set of independent logistic regreesion classifiers, one for each microlabel.
 The posteriori probability can be computed by
 \begin{align}
@@ -932,17 +933,13 @@ Thus, \corrlog\ examines the pairwise label correlation by augmenting joint pred
 
 
 
-
-
-
-
 %
 %
-\subsection{Multitask Feature Learning (\mtl)}
+\subsection{Multitask Feature Learning (\mtl)} \label{sc_mtl}
 
-Multi-task Feature Learning (\mtl) developed in \citep{Argyriou07multitask} is another algorithm designed for multiple interdependent structured output space.
-\mtl\ is quite different from other structured output learning algorithms discussed in the previous sections.
-In particular, the \mtl\ approach is based on the assumption that different tasks are related such that they share a common underlying feature representations.
+Multitask Feature Learning (\mtl) developed in \citep{Argyriou07multitask} is another algorithm designed for flat multilabel classification.
+\mtl\ is quite different from other learning algorithms discussed in the previous sections.
+In particular, the \mtl\ approach is based on the assumption that different microlabels are related such that they share a common underlying feature representations.
 Similar assumption is also applied in \citep{Caruana97multitask,Baxter00a,BenDavide03exploiting}.
 
 Denote by $f_t(\vx)$ the task specific function for the $t$'th task.
@@ -970,7 +967,7 @@ As (Definition~\ref{mtl_opt}) is non-convex and the second term is non-smooth, i
 
 An extension of \mtl\ algorithm was proposed in \citep{Argyriou08convex} which introduced a nonlinear generalization using kernel methods.
 In addition, similar but not identical algorithms \citep{Argyriou08an,Jacob09cluster} are also proposed which assume that the tasks form clusters such that task specific weight vectors should be similar within the clusters.
-Recently, \citet{Paredes12exploit} proposed a method which exploits the information between unrelated tasks, based on a similar assumption that tasks of different groups tend not to share any features.
+Recently, \citet{Paredes12exploit} proposed a method which exploits the information between unrelated microlabels, based on a similar assumption that microlabels of different groups tend not to share any features.
 
 \section{Alternative Methods}
 
