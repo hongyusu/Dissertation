@@ -730,12 +730,21 @@ The feature split process of decision tree is deterministic given a set of featu
 
 Multilabel classification is a natural extension to single-label classification presented in Section~\ref{sc_slc}.
 In multilabel classification each input (instant) is simultaneously associated with multiple outputs (labels).
-The research of the multilabel classification has progressed rapidly in the past two decades with many learning algorithms being developed and applied.
+The research of the multilabel classification has progressed rapidly in the past two decades with many learning algorithms being developed and applied in real world classification tasks.
 In general, there are two lines of research for multilabel classification, namely flat multilabel classification and structured output prediction respectively.
 In flat multilabel classification, the multiple labels are essentially treated as a ``flat'' vector of labels.
 The structured output prediction, on the other hand, models the multiple labels via a graph structure that connects labels.
 This chapter will devote to flat multilabel classification in which we will present several classical algorithm techniques.
 The structured output prediction will be covered in the later part of the thesis.
+
+Consider the infeasibility of listing all algorithms for flat multilabel classification, it is easier if we are able to categorize the algorithms into classes.
+In this chapter, we adopt the simple categorization presented in \citep{Tsoumakas07multi,Tsoumakas10mining} which gives us two major algorithm categories namely problem transformation and algorithm adaptation.
+For problem transformation category, we will present the methods that aim to transfer the flat multilabel classification problem into other well studied problem settings (e.g. single-label classification problem, ranking problem).
+For algorithm adaptation category, we will describe the method that directly modify the popular learning techniques (e.g. \lr\ and ensemble method) to solve the multilabel classification problem.
+Nevertheless, the present algorithms will explore the inherited difficulties of flat multilabel classification, namely the exponential multilabel space and the implicit label correlation.
+Besides, the author realizes that it is impossible to cover every lines of research in the field of flat multilabel classification.
+Interested readers are pointed out to the recent research review articles, for example, in \citep{Tsoumakas07multi,Tsoumakas10mining,Zhang14a}
+
 
 
 %------------------------------------------------
@@ -749,22 +758,12 @@ We assume data are drawn from a domain $\vXcal\times\vYcal$, where $\vXcal$ is a
 $\vYcal = \Ycal_1\times\cdots\times\Ycal_k$ is composed by a Cartesian product of $k$ sets $\Ycal_i=\{-1,+1\}$.
 We retain a single-label classification setting by letting $k=1$.
 A vector $\vy=(y_1,\cdots,y_k)\in\vYcal$ is called \textit{multilabel} and its element $y_j$ is called \textit{microlabel}.
-We use $\vy_i[j]$ to denote the $j$'th microlabel in the $i$'th multilabel vector.
+We use $\vy_i[j]$ to denote the $j$'th microlabel in the $i$'th multilabel.
 In addition, we are given a training set consisting of $m$ labeled examples $\Scal=\{(\vx_i,\vy_i)\}_{i=1}^{m}\in\vXcal\times\vYcal$. 
 A pair $(\vx_i,\vy)$, where $\vx_i$ is the training input and $\vy\in\vYcal$ is an arbitrary output, is called \textit{pseudo-example}.
-It is worthy of noticing that pseudo-example $(\vx_i,\vy)$ can be generated from a different distribution that generates training example $(\vx_i,\vy_i)$.
-The goal is to learn a mapping function $f\in\Hcal:\vXcal\rightarrow\vYcal$ that can compute the multilabel given an arbitrary input such that the loss $\ell$ for the future unseen examples is minimized.
-The loss function is usually tailored for the learning models.
-
-Multi-label classification deals with multiple interdependent output variables (e.g. $\vy\in\vYcal$).
-The problem is known as \textit{structured output prediction} when these variables are located in structured output space.
-That is the interdependency between multiple labels is described by an \textit{output graph} that connects multiple labels.
-In particular, we define the output graph $G=(E,V)$ by a node set $V=\{1,\cdots,k\}$ corresponding to the microlabels $\{y_1,\cdots,y_k\}$ and a edge set $E=V\times V$ representing the dependency between pair of microlabels.
-For each edge $e=(j,j')\in E$, we use $\vy_e$ to denote the edge label of edge $\ve$ with respect to multilabel $\vy$ by concatenating the head label $y_i$ and the tail label $y_i$, with the edge label domain $\vy_e\in\vYcal_e=\Ycal_i\times\Ycal_{j'}$.
-By $\vy_{i,e}$, we denote the edge label of example pair $(\vx_i,\vy_i)$ on edge $\ve$.
-Thus, given a training example $(\vx_i,\vy_i)$ and the output graph $G$, we can uniquely identify the node label $y_i$ and the edge label $\vy_{i,e}$ on the graph.
-In addition, we denote the possible label of node $i$ by $u_i$ and the possible label of edge $\ve$ by $\vu_{e}$ where $u_i$ and $\vu_{e}$ do not constraint to any multilabel $\vy$.
-Naturally, $u_i\in\Ycal_i$ and $\vu_e\in\vYcal_e$.
+It is worthy of noticing that pseudo-example $(\vx_i,\vy)$ can be generated from a different distribution that generates training examples $(\vx_i,\vy_i)$.
+The goal is to learn a mapping function $f\in\Hcal:\vXcal\rightarrow\vYcal$ that can compute the multilabel given an arbitrary input such that the predifined loss $\ell$ for the future unseen examples will be minimized.
+The loss function is usually tailored for the learning algorithm.
 
 
 
@@ -772,13 +771,19 @@ Naturally, $u_i\in\Ycal_i$ and $\vu_e\in\vYcal_e$.
 %
 \section{Problem Transformation}
 
+The problem transformation approach aims to transform the flat multilabel classification problem in to other well established problem settings.
+The most typical way is known as \textit{binary relevant} proposed by \citet{Tsoumakas07multi,Tsoumakas10mining}.
+\br\ amounts to transform the multilabel classification problem into a set of single-label classification problems and to independently learn a single-label classifier for each microlabel.
+We will focus on \br\ in this section.
+Another possibilities include, for example, to transform the multiple labels into label power set \citep{Tsoumakas07random} or to transform the problem into label ranking problem \citep{Elisseeff01akernel,Brinker07case,Furnkranz08multilabel,Chiang12a}.
+However, learning through label ranking will not be discussed into details as it slightly diverges from the main scope of the thesis.
+
+
 
 %
 %
 \subsection{Multilabel $K$-Nearest Neighbors (\mlknn)} \label{sc_mlknn}
 
-\citet{Tsoumakas07multi,Tsoumakas10mining} proposed the concept of \textit{binary relevant classifier} (\br) for flat multilabel classification.
-\br\ amounts to transform the multilabel classification problem into a set of single-label classification problems and to independently learn a single-label classifier for each microlabel.
 Multilabel $K$-Nearest Neightbors (\mlknn) proposed by \citet{Zhang05a,Zhang07mlknn} is perhaps the most famous binary relevant classifier for flat multilabel classification.
 \mlknn\ is also an instance based learning approach \citep{Aha91instance} that is derived from $K$-Nearest Neightbor (\knn) algorithm designed for single-label classification problem.
 \mlknn\ transforms the flat multilabel classification problem into a set of single-label classification and processes each microlabel independently.
@@ -854,8 +859,16 @@ $w_0^{(j)}$ is a bias term.
 
 
 
-
+%
+%
 \section{Algorithm Adaptation}
+
+The central idea of the algorithm adaptation approach is to directly modify the popular single-label learning algorithms and apply them to the multilabel classification problems.
+The approach includes but is not limited to the ensemble typed learning, the \lr\ typed learning, and regularized learning that are described in the following part of the section.
+There also exists methods that are adapted from, for example, perceptron \citep{Crammer03afamily} and neural network \citep{Zhang06multilabel}.
+They are not detailed mostly due to the divergence from the main topic of the thesis.
+
+
 
 %
 %
@@ -965,13 +978,8 @@ An extension of \mtl\ algorithm was proposed in \citep{Argyriou08convex} which i
 In addition, similar but not identical algorithms \citep{Argyriou08an,Jacob09cluster} are also proposed which assume that the tasks form clusters such that task specific weight vectors should be similar within the clusters.
 Recently, \citet{Paredes12exploit} proposed a method which exploits the information between unrelated microlabels, based on a similar assumption that microlabels of different groups tend not to share any features.
 
-%
-%
-\section{Alternative Methods}
 
-Alternative approaches for flat multilabel classification include but are not limited to, for example, learning with ranking method \citep{Elisseeff01akernel,Brinker07case,Furnkranz08multilabel,Chiang12a}, learning with perceptron or neural network approaches \citep{Crammer03afamily,Zhang06multilabel}, transformation to label powerset \citep{Tsoumakas07random}.
-The author realizes that it is impossible to cover every lines of research in the field of flat multilabel classification.
-Interested readers are pointed out to the recent research review articles, for example, in \citep{Tsoumakas07multi,Tsoumakas10mining,Zhang14a}
+
 
 %------------------------------------------------
 %
@@ -979,6 +987,21 @@ Interested readers are pointed out to the recent research review articles, for e
 %
 %------------------------------------------------
 \chapter{Structured Output Prediction} \label{ch_multi}
+
+
+%
+%
+\section{Preliminary and Notations}
+Multi-label classification deals with multiple interdependent output variables (e.g. $\vy\in\vYcal$).
+The problem is known as \textit{structured output prediction} when these variables are located in structured output space.
+That is the interdependency between multiple labels is described by an \textit{output graph} that connects multiple labels.
+In particular, we define the output graph $G=(E,V)$ by a node set $V=\{1,\cdots,k\}$ corresponding to the microlabels $\{y_1,\cdots,y_k\}$ and a edge set $E=V\times V$ representing the dependency between pair of microlabels.
+For each edge $e=(j,j')\in E$, we use $\vy_e$ to denote the edge label of edge $\ve$ with respect to multilabel $\vy$ by concatenating the head label $y_i$ and the tail label $y_i$, with the edge label domain $\vy_e\in\vYcal_e=\Ycal_i\times\Ycal_{j'}$.
+By $\vy_{i,e}$, we denote the edge label of example pair $(\vx_i,\vy_i)$ on edge $\ve$.
+Thus, given a training example $(\vx_i,\vy_i)$ and the output graph $G$, we can uniquely identify the node label $y_i$ and the edge label $\vy_{i,e}$ on the graph.
+In addition, we denote the possible label of node $i$ by $u_i$ and the possible label of edge $\ve$ by $\vu_{e}$ where $u_i$ and $\vu_{e}$ do not constraint to any multilabel $\vy$.
+Naturally, $u_i\in\Ycal_i$ and $\vu_e\in\vYcal_e$.
+
 
 
 %
