@@ -992,9 +992,10 @@ Recently, \citet{Paredes12exploit} proposed a method which exploits the informat
 %
 %
 \section{Preliminary and Notations}
-Multi-label classification deals with multiple interdependent output variables (e.g. $\vy\in\vYcal$).
+
+Multilabel classification deals with multiple interdependent output variables (e.g. $\vy\in\vYcal$).
 The problem is known as \textit{structured output prediction} when these variables are located in structured output space.
-That is the interdependency between multiple labels is described by an \textit{output graph} that connects multiple labels.
+That is the label correlation is described by an \textit{output graph} that connects multiple labels.
 In particular, we define the output graph $G=(E,V)$ by a node set $V=\{1,\cdots,k\}$ corresponding to the microlabels $\{y_1,\cdots,y_k\}$ and a edge set $E=V\times V$ representing the dependency between pair of microlabels.
 For each edge $e=(j,j')\in E$, we use $\vy_e$ to denote the edge label of edge $\ve$ with respect to multilabel $\vy$ by concatenating the head label $y_i$ and the tail label $y_i$, with the edge label domain $\vy_e\in\vYcal_e=\Ycal_i\times\Ycal_{j'}$.
 By $\vy_{i,e}$, we denote the edge label of example pair $(\vx_i,\vy_i)$ on edge $\ve$.
@@ -1671,6 +1672,12 @@ The test results are often visualized as \textit{$CD$ diagram}.
 
 
 
+%------------------------------------------------
+%
+%	chapter
+%
+%------------------------------------------------
+\chapter{Implementations} \label{ch_implementations}
 
 
 
@@ -1755,8 +1762,6 @@ We also gain benefit by seeing the weight as the fitness of each spanning tree t
 Similar to $L_2$ norm, the studies on generalization error and the condition for the tractable inference are required.
 Besides the alternative optimization for the $L_1$ norm combination in \citep{Rakotomamonjy08simplemkl}, we plan to develop more elegant optimization strategy for the problem. 
 
-
-\chapter{Implementations} \label{ch_implementations}
 
 
 
