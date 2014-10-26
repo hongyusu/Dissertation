@@ -818,7 +818,7 @@ The idea has previously been applied in \citep{Godbole04discriminative}.
 However, the addition label information only takes a small part of the input feature space especially when the origin space is already high.
 In this case, one can only expect to gain additional performance from concatenated label information with high correlation to the output microlabel.
 
-Besides, \cc\ has been explained in terms of condition probability theory by Probabilistic Classifier Chains (\pcc) presented in \citep{Read09classifier}.
+Besides, \cc\ has been explained in terms of condition probability theory by Probabilistic Classifier Chains (\pcc) presented in \citep{Read09classifier,Dembczynski10bayes}.
 Since there is no standard way for classification order of microlabels in \cc, Ensemble Classifier Chains (\ecc) has been developed in \citep{Read11classifier} which further improves \cc\ by generating and combining multiple chains of classifiers. 
 
 
@@ -965,8 +965,13 @@ An extension of \mtl\ algorithm was proposed in \citep{Argyriou08convex} which i
 In addition, similar but not identical algorithms \citep{Argyriou08an,Jacob09cluster} are also proposed which assume that the tasks form clusters such that task specific weight vectors should be similar within the clusters.
 Recently, \citet{Paredes12exploit} proposed a method which exploits the information between unrelated microlabels, based on a similar assumption that microlabels of different groups tend not to share any features.
 
+%
+%
 \section{Alternative Methods}
 
+Alternative approaches for flat multilabel classification include but are not limited to, for example, learning with ranking method \citep{Elisseeff01akernel,Brinker07case,Furnkranz08multilabel,Chiang12a}, learning with perceptron or neural network approaches \citep{Crammer03afamily,Zhang06multilabel}, transformation to label powerset \citep{Tsoumakas07random}.
+The author realizes that it is impossible to cover every lines of research in the field of flat multilabel classification.
+Interested readers are pointed out to the recent research review articles, for example, in \citep{Tsoumakas07multi,Tsoumakas10mining,Zhang14a}
 
 %------------------------------------------------
 %
