@@ -726,7 +726,7 @@ The feature split process of decision tree is deterministic given a set of featu
 %	chapter
 %
 %------------------------------------------------
-\chapter{Flat Multilabel Classification} \label{ch_mlc}
+\chapter{Flat Multilabel Classification} \label{ch_fmlc}
 
 Multilabel classification is a natural extension to single-label classification presented in Section~\ref{sc_slc}.
 In multilabel classification each input (instant) is simultaneously associated with multiple outputs (labels).
@@ -743,7 +743,7 @@ For problem transformation category, we will present the methods that aim to tra
 For algorithm adaptation category, we will describe the method that directly modify the popular learning techniques (e.g. \lr\ and ensemble method) to solve the multilabel classification problem.
 Nevertheless, the present algorithms will explore the inherited difficulties of flat multilabel classification, namely the exponential multilabel space and the implicit label correlation.
 Besides, the author realizes that it is impossible to cover every lines of research in the field of flat multilabel classification.
-Interested readers are pointed out to the recent research review articles, for example, in \citep{Tsoumakas07multi,Tsoumakas10mining,Zhang14a}
+Interested readers are pointed out to the recent research review articles, for example, \citep{Tsoumakas07multi,Tsoumakas10mining,Zhang14a}
 
 
 
@@ -988,6 +988,13 @@ Recently, \citet{Paredes12exploit} proposed a method which exploits the informat
 %------------------------------------------------
 \chapter{Structured Output Prediction} \label{ch_multi}
 
+Structured output prediction is a natural extension to flat multilabel classification presented in Chapter~\ref{ch_fmlc}.
+Unlike flat multilabel classification which takes multiple output variables as a ``flat'' vector, structure output prediction assumes multiple output variables are correlated and locate in the structured output space.
+It builds a graph structure (e.g. chain, tree) to connect multiple output variables by which it gain advantage of exploring the label correlation compared to flat multilabel classification.
+In this chapter, we will start by introducing several classical structure output learning methods developed during the last decade.
+We will present our new structured output learning approaches to solve molecular activity prediction problem as well as network influence prediction problem.
+
+
 
 %
 %
@@ -1003,11 +1010,12 @@ Thus, given a training example $(\vx_i,\vy_i)$ and the output graph $G$, we can 
 In addition, we denote the possible label of node $i$ by $u_i$ and the possible label of edge $\ve$ by $\vu_{e}$ where $u_i$ and $\vu_{e}$ do not constraint to any multilabel $\vy$.
 Naturally, $u_i\in\Ycal_i$ and $\vu_e\in\vYcal_e$.
 
+\section{Related Methods}
 
 
 %
 %
-\section{Perceptron in Structured Output Space}
+\subsection{Perceptron in Structured Output Space}
 
 The Perceptrion, dated back to \citep{Rosenblatt58}, is one of the oldest learning algorithm in machine learning.
 As it is extremely easy to implement and usually achieves good performance, Perceptron is still actively studied in the field.
@@ -1061,7 +1069,7 @@ In the original work, \citet{collins02a} only demonstrated the algorithm on sequ
 
 %
 % 
-\section{Conditional Random Field (\crf)}
+\subsection{Conditional Random Field (\crf)}
 Condition Random Field (\crf), pioneered in \citep{lafferty01} and later in \citep{taskar02}, is a discriminative framework that constructs a conditional model $P(\vy|\vx)$ from paired input variable $\vx\in\vXcal$ and output variables $\vy\in\vYcal$.
 It optimizes a log-loss which is analogue to $0/1$ loss over the whole structured output space.
 \begin{definition}{Conditional Random Field (\crf).}\\
@@ -1088,7 +1096,7 @@ In order to make \crf\ work in practice, one has to make sure that the logarithm
 
 %
 % 
-\section{Support Vector Machine for Interdependent and Structured Outputs (\svmstruct)}
+\subsection{Support Vector Machine for Interdependent and Structured Outputs (\svmstruct)}
 
 The formulation of Support Vector Machine for interdependent and structured output space (\svmstruct) described in \citep{THJA04,TJTA05} is amazingly similar to \mmmn.
 Compared to \mmmn\ framework which scales the margin by the loss function, \svmstruct\ formulation scales the margin errors ({\em slack variables}) by the loss function.
@@ -1126,7 +1134,7 @@ The intractability of the inference problem can be seen as an exchange of the ge
 
 %
 % sub section: m3n
-\section{Max-Margin Markov Network (\mmmn)}
+\subsection{Max-Margin Markov Network (\mmmn)}
 
 The Max-Margin Markov Network (\mmmn) unifies the frameworks of kernel based discriminative learning and probabilistic graphical model \citep{Taskar04max}.
 The model defines a log-linear Markov network over a set of output variables, thus, it is capable of modeling the correlation between these output variables.
