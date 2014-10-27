@@ -1627,29 +1627,30 @@ where we use $TP$, $FP$, and $FN$ to denote \textit{true positive}, \textit{fals
 %------------------------------------------------
 \section{Statistical Tests} \label{sc_st}
 
-Once we compute the performance measures of multiple machine learning algorithms in terms of 0/1 loss, hamming loss and $F_1$ score, we want to compare the performance in order to decide the best model under consideration. 
+Once we have computed the performance measures of multiple machine learning algorithms, we want to compare the performance in order to decide the best model under consideration. 
 To serve as a starting point, we assume a very basic setting where we already have the performance of multiple machine learning algorithms on one selected dataset.
-It is straight forward to compare the performance of the algorithms in terms of the performance metrics and choose the best one based on the value of the metric without relying on any statistical methods.
-The only assumption made is that the metrics accurately reveal the performance of the algorithms.
-However, when a new learning algorithm is developed, it is usually evaluated over multiple dataset to rule out the probability that it performs well on one particular dataset by chance.
+It is straight forward to compare the performance of the algorithms in terms of the performance metrics and choose the best model based on the value of the metric without resorting to any statistical methods.
+We only assume that the metrics accurately reveal the performance of the algorithms.
+However, when a new learning algorithm is proposed, it is usually evaluated over multiple dataset to rule out the probability that it performs well on one particular dataset by chance.
 Statistical evaluation of experimental results have been considered as an essential part of comparison steps in such complicate scenarios.
 We will base our discuss on \citep{Demsar06statistical,Garcia08an} in the following part of the section.
 
 We first consider the case where we want to compare two learning algorithms over multiple datasets.
-In order to decide the best performing method, one way is to average the performance over all testing datasets.
-However, it is debatable that the error rate from different domains (testing datasets) are commensurable.
+In order to decide the best performing method, one way is to average the performance over all test datasets.
+However, it is debatable that the error rate from different domains (test datasets) are commensurable.
 Beside, the averaging is susceptible to the outliers.
 Another approach is to use paired t-test to check if the average difference of two learning algorithms over datasets is significantly different from zero.
 Paired t-test is problematic due to commensurability.
-Besides, the result will not be significant unless the sample size is larger enough (over 30 datasets).
+Besides, the result will not be significant unless the sample size is larger enough.
 \citet{Demsar06statistical} proposed Wilcoxon signed-ranks test which is a non-parametric alternative to the paired t-test to compared two algorithms over multiple datasets.
 Meanwhile, sign-test is also proposed in \citep{Demsar06statistical}.
 As the setting is not very interesting for our purpose, we will not expand our discussion on the details.
 
 Secondly, we will consider a more common situation where we want to compare multiple learning algorithms over many datasets.
 In practice, we want to answer the question, for example, whether algorithm A is significantly better than algorithm C, and algorithm C outperformances algorithm B in a significantly manner.
-In statistics, this is equivalent to multiple hypothesis test.
-The common way is to use repeat-measures ANOVA \citep{Fisher59statistical} with post-hoc Tukey test \citep{Turkey49comparing}. The test procedure is based on two assumptions: the first is known as \textit{normality} meaning samples are drawn from normal distributions; second is known as \textit{sphericity} meaning samples should have equal variant.
+In statistics, this amounts to multiple hypothesis test.
+The common way is to use repeat-measures ANOVA \citep{Fisher59statistical} with post-hoc Tukey test \citep{Turkey49comparing}. 
+The test procedure is based on two assumptions: the first is known as \textit{normality} meaning samples are drawn from normal distributions; the second is known as \textit{sphericity} meaning samples should have equal variant.
 It is not difficult to see that the ANOVA is ill-posed as none the assumptions are met within the context of comparing the performance of learning algorithms over datasets.
 
 To alleviate the problems, \citet{Demsar06statistical} suggest to use Friedman test \citep{Friedman37the,Friedman40Comparison} with post-hoc Nemenyi test \citep{Nemenyi63distribution}.
@@ -1666,17 +1667,6 @@ The test results are often visualized as \textit{$CD$ diagram}.
 
 
 
-% --------------------------
-%
-% 		chapter
-%
-% --------------------------
-%\chapter{Novel Statistical Models}\label{ch_models}
-%In this chapter, the author aims to build the connection of the publications as well as to discuss the corresponding contributions.
-%Each section will mostly focus on one publication, and will start with introduction and background knowledge that are necessary to understand the content within the section.
-%An overview of the theoretical end technical novelties will also be briefly presented in each section.
-
-
 
 
 
@@ -1687,6 +1677,14 @@ The test results are often visualized as \textit{$CD$ diagram}.
 %
 %------------------------------------------------
 \chapter{Implementations} \label{ch_implementations}
+
+Developed methods are implemented as software packages and can be located from public domains.
+\begin{enumerate}
+	\item \rta\ for joint learning and inference on a random sample of spanning trees for multilabel classification.
+	\item \spin\ for network influence prediction.
+	\item \mve, \amm, \mam\ for learning an ensemble on a set of structured output learners built from random spanning trees.
+	\item Structured output prediction model for molecular activities classification problem.
+\end{enumerate}
 
 
 
