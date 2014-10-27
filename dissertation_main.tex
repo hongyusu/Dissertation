@@ -1150,17 +1150,17 @@ In order to use \mmmn\ in practice, one have to solve the \textit{loss augmented
 	\hat{\vy} = \underset{\vy\in\vYcal/\vy_i}{\argmax} &\, \ip{\vw}{\phib(\vx_i,\vy)} + \vell(\vy_i,\vy) \label{mmmninference}.
 \end{align} 
 To compute (\ref{mmmninference}) efficiently, the loss function need to be decomposable over the Markov network.
-Nevertheless, \mmmn\ improves \crf\ due to the following two reasons.
-First, \mmmn\ does not require partition function to be computed. 
-Secondly, complex loss function can be defined for \mmmn\ as long as the function is decomposable.
+Nevertheless, \mmmn\ improves \crf\ by avoiding partition function and allowing complex loss function.
+
 
 %
 % 
-\subsection{Support Vector Machines for Interdependent and Structured Outputs (\svmstruct)}
+\subsection{Support Vector Machines for Interdependent and Structured Outputs (\svmstruct)} \label{sc_svmstruct}
 
-The formulation of Support Vector Machine for interdependent and structured output space (\svmstruct) described in \citep{THJA04,TJTA05} is amazingly similar to \mmmn.
-Compared to \mmmn\ framework which scales the margin by the loss function, \svmstruct\ formulation scales the margin errors ({\em slack variables}) by the loss function.
-The primal optimization problem of \svmstruct\ is given as
+Support Vector Machine for interdependent and structured output space (\svmstruct) is developed in \citep{THJA04,TJTA05}.
+The formalism of \svmstruct\ is quite similar to \mmmn\ described in (Section~\ref{sc_mmmn}).
+Compared to \mmmn\ which scales the margin by the loss function, \svmstruct\ scales the margin errors ({\em slacks}) by the loss function.
+The primal optimization problem of \svmstruct\ can be defined as
 \begin{definition}{\svmstruct\ Optimization Problem in Primal.}\label{def_svmstruct}
 	\begin{align*}
 		\underset{\vw,\xi_i}{\minimize} & \quad\frac{1}{2}\norm{\vw}^2 + \frac{C}{m}\sum_{i=1}^{m}\xi_i \\
@@ -1168,28 +1168,24 @@ The primal optimization problem of \svmstruct\ is given as
 		& \quad \forall \xi_i\ge0,\, \forall \vy\in\vYcal/\vy_i,\, \forall i\in\{1,\cdots,m\},
 	\end{align*}
 \end{definition}
-where $\xi_i$ denotes the slack allotted to each example, $\vell(\vy_i,\vy)$ is the loss function between pseudo-label and the correct label, and $C$ is the slack parameter that controls the amount of regularization in the model.
-The primal form can be interpreted as maximizing the margin between the correct training example and the pseudo-example.
-Allowing margin error is to make sure solution can always be found.
+where $\xi_i$ is the slack allotted to each example, $\vell(\vy_i,\vy)$ is the loss function between pseudo-label and the correct label, and $C$ is the slack parameter that controls the amount of regularization in the model.
+The interpretation of Definition~\ref{def_svmstruct} is also similar as of Definition~\ref{def_mmmn}.
+Besides, \citet{THJA04} suggest that \mmmn\ will work hard on the pseudo-example $(\vx_i,\vy)$ that incur big loss though they may not even close to be confusable to the true multilabel $\vy_i$.
 
-It seems intuitive to scale the margin error by the loss function, the advantage of which is also claimed the authors in \citep[p.3]{THJA04}.
-They suggest that under \mmmn\ framework the learning system will work hard on the examples that incur big loss thought they may not even close to be confusable compared to true target value $\vy_i$.
+On the other hand, the optimization techniques employed by \svmstruct\ differ significantly compared to \mmmn.
+\svmstruct\ will have to work with the exponential number of constraints as the optimization is not decomposable over the Markov network.
+\citet{THJA04} developed an iterative optimization approach that creates a nested sequence of successively tighter relaxation of the original problem via a cutting-plane methods \citep{Bishop07,JFY09}.
+Constraints are added as necessary and the iterative optimization approach will converge to some optimal solution of $\epsilon$ precision within a polynomial number of iterations.
 
-In addition to the slight difference in loss scaling, the optimization technique employed by \svmstruct\ differ significantly compared to \mmmn.
-Since the part of the \svmstruct optimization problem containing loss function is not decomposable, the model cannot remove exponential number of constraints during optimization.
-On the other hand, \citet{THJA04} developed an iterative optimization approach that creates a nested sequence of successively tighter relaxation of the original problem via a cutting-plane methods \citep{Bishop07,JFY09}.
-In particular, constraints are added as necessary.
-It is also shown that the iterative optimization algorithm will converge to some optimal solution of $\epsilon$ precision in polynomial number of steps.
-
-Besides the optimization issue, the major drawback of \svmstruct\ is the intractability of the the inference problem.
-In particular, to find the most violating constraint, the model will compute the loss-augmented inference problem as in \citep{TJTA05}
+Besides the issue during the optimization, another problem with \svmstruct\ is the intractability of the inference problem.
+To find the most violating constraint, the model need to compute the loss-augmented inference problem \citep{TJTA05} defined as
 \begin{align}
-	\hat{\vy} = \underset{\vy\in\vYcal/\vy_i}{\argmax} &\, [1-\ip{\vw}{\phib(\vx_i,\vy)}]\,\vell(\vy_i,\vy) \label{svmstructinference},
+	\hat{\vy} = \underset{\vy\in\vYcal/\vy_i}{\argmax} &\, [1-\ip{\vw}{\phib(\vx_i,\vy)}]\,\vell(\vy_i,\vy). \label{svmstructinference}
 \end{align}
-where the loss function $\ell$ appears as a multiplicative term.
-As the model does not assume any property of decomposition on the loss function over output space, the loss-augmented inference problem (\ref{svmstructinference}) of \svmstruct\ is in practice intractable. 
-The intractability of the inference problem can be seen as an exchange of the generality of the loss function which allows more complicated loss to be defined. 
-
+The loss function appears as a multiplicative term making (\ref{svmstructinference}) not decomposable over the Markov network.
+This gives a intractable inference problem in general.
+In exchange of intractability, \svmstruct\ can work with complex loss functions that do not assume any property of decomposition.
+The generality of the loss function can be seen as an advantage compared to \crf\ and \mmmn.
 
 
 
