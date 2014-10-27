@@ -731,7 +731,7 @@ The feature split process of decision tree is deterministic given a set of featu
 Multilabel classification is a natural extension to single-label classification presented in Section~\ref{sc_slc}.
 In multilabel classification each input (instant) is simultaneously associated with multiple outputs (labels).
 The research of the multilabel classification has progressed rapidly in the past two decades with many learning algorithms being developed and applied in real world classification tasks.
-In general, there are two lines of research for multilabel classification, namely flat multilabel classification and structured output prediction respectively.
+In general, there are two lines of research for multilabel classification namely flat multilabel classification and structured output prediction.
 In flat multilabel classification, the multiple labels are essentially treated as a ``flat'' vector of labels.
 The structured output prediction, on the other hand, models the multiple labels via a graph structure that connects labels.
 This chapter will devote to flat multilabel classification in which we will present several classical algorithm techniques.
@@ -740,8 +740,9 @@ The structured output prediction will be covered in the later part of the thesis
 Consider the infeasibility of listing all algorithms for flat multilabel classification, it is easier if we are able to categorize the algorithms into classes.
 In this chapter, we adopt the simple categorization presented in \citep{Tsoumakas07multi,Tsoumakas10mining} which gives us two major algorithm categories namely problem transformation and algorithm adaptation.
 For problem transformation category, we will present the methods that aim to transfer the flat multilabel classification problem into other well studied problem settings (e.g. single-label classification problem, ranking problem).
-For algorithm adaptation category, we will describe the method that directly modify the popular learning techniques (e.g. \lr\ and ensemble method) to solve the multilabel classification problem.
-Nevertheless, the present algorithms will explore the inherited difficulties of flat multilabel classification, namely the exponential multilabel space and the implicit label correlation.
+For algorithm adaptation category, we will describe the methods that directly modify the popular learning techniques (e.g. \lr\ and ensemble method) to solve the multilabel classification problem.
+Nevertheless, the present algorithms will explore the inherited difficulties of flat multilabel classification.
+That is the exponential multilabel space and the implicit label correlation.
 Besides, the author realizes that it is impossible to cover every lines of research in the field of flat multilabel classification.
 Interested readers are pointed out to the recent research review articles, for example, \citep{Tsoumakas07multi,Tsoumakas10mining,Zhang14a}
 
@@ -992,7 +993,8 @@ Structured output prediction is a natural extension to flat multilabel classific
 Unlike flat multilabel classification which takes multiple output variables as a ``flat'' vector, structure output prediction assumes multiple output variables are correlated and locate in the structured output space.
 It builds a graph structure (e.g. chain, tree) to connect multiple output variables by which it gains the advantage of exploring the label correlation compared to flat multilabel classification.
 In this chapter, we will start by introducing several classical structure output learning methods developed during the last decade.
-We will present our new structured output learning approaches to solve the molecular activity prediction problem as well as the network influence prediction problem.
+We will present our research of applying the structured output learning on molecular activity prediction problem.
+We will also present our new algorithm \spin\ that is capable of predicting a directed acyclic graph on network influence prediction problem.
 
 
 
@@ -1004,37 +1006,43 @@ Multilabel classification deals with multiple interdependent output variables (e
 The problem is known as \textit{structured output prediction} when these variables are located in structured output space.
 That is the label correlation is described by an \textit{output graph} that connects multiple labels.
 In particular, we define the output graph $G=(E,V)$ by a node set $V=\{1,\cdots,k\}$ corresponding to the microlabels $\{y_1,\cdots,y_k\}$ and a edge set $E=V\times V$ representing the dependency between pair of microlabels.
-For each edge $e=(j,j')\in E$, we use $\vy_e$ to denote the edge label of edge $\ve$ with respect to multilabel $\vy$ by concatenating the head label $y_i$ and the tail label $y_i$, with the edge label domain $\vy_e\in\vYcal_e=\Ycal_i\times\Ycal_{j'}$.
+For each edge $e=(j,j')\in E$, we use $\vy_e$ to denote the edge label of edge $\ve$ with respect to multilabel $\vy$ by concatenating the head label $y_j$ and the tail label $y_{j'}$, with the edge label domain $\vy_e\in\vYcal_e=\Ycal_j\times\Ycal_{j'}$.
 By $\vy_{i,e}$, we denote the edge label of example pair $(\vx_i,\vy_i)$ on edge $\ve$.
 Thus, given a training example $(\vx_i,\vy_i)$ and the output graph $G$, we can uniquely identify the node label $y_i$ and the edge label $\vy_{i,e}$ on the graph.
 In addition, we denote the possible label of node $i$ by $u_i$ and the possible label of edge $\ve$ by $\vu_{e}$ where $u_i$ and $\vu_{e}$ do not constraint to any multilabel $\vy$.
 Naturally, $u_i\in\Ycal_i$ and $\vu_e\in\vYcal_e$.
 
+
+
+%
+%
 \section{Related Methods}
 
-In this section, we will briefly present several related algorithms for structured output learning include structured Perceptron, Conditional Random Field, structured \svm, and Max-Margin Markov Network.
+In this section, we will briefly present several related algorithms for structured output prediction include Structured Perceptron, Conditional Random Field, Structured \svm, and Max-Margin Markov Network.
+
+
 
 %
 %
-\subsection{Perceptron in Structured Output Space}
+\subsection{Structured Perceptron}
 
-The Perceptrion, dated back to \citep{Rosenblatt58}, is one of the oldest learning algorithm in machine learning.
-As it is extremely easy to implement and usually achieves good performance, Perceptron is still actively studied in the field.
+The Perceptrion developed by \citet{Rosenblatt58} is one of the oldest learning algorithm in machine learning.
 Structured Perceptron, as suggested by its name, can be seen as the generalization of Perceptron algorithm to structured output space.
 It was firstly proposed in \citep{collins02a, collins02b} with the formalism incredibly similar to multiclass Perceptron. 
 The model assumes a score function $\ip{\vw}{\phib(\vx,\vy)}$ as the inner product between a joint feature map $\phib(\vx,\vy)$ and some feature weight parameter $\vw$.
-After weight parameter $\vw$ is obtained, one need to solve the \textit{argmax} problem to compute the best output for a given input
+After weight parameter $\vw$ is obtained, one need to solve the \textit{argmax} problem in order to find the best output for a given input $\vx$
 \begin{align}
-	\hat{\vy} = \underset{\vy\in\vYcal}{\argmax} &\, \ip{\vw}{\phib(\vx_i,\vy)}.  \label{perceptroninference}
+	\hat{\vy} = \underset{\vy\in\vYcal}{\argmax} &\, \ip{\vw}{\phib(\vx,\vy)}.  \label{sp_inference}
 \end{align}
+This is solved by Viterbi decoding in \citep{collins02a}.
 
-The weight parameter $\vw$ is learned via standard Perceptron iterative update by solving argmax operation (\ref{perceptroninference}) in each iteration.
-In particular, the algorithm loops through training examples and updates $\vw$ whenever the predicted label $\hat{\vy}$ is different from true label $\vy$, according to 
-\begin{align*}
-	\vw \leftarrow \vw + \left(\phib(\vx_i,\vy_i) - \phib(\vx_i,\hat{\vy}_i)\right).
-\end{align*}
+The weight parameter $\vw$ is learned via standard Perceptron iterative update by solving argmax problem (\ref{sp_inference}) in each iteration.
+In particular, the algorithm loops through training examples and updates $\vw$ whenever the predicted label $\hat{\vy_i}$ is different from true label $\vy_i$ defined by
+\begin{align}
+	\vw \leftarrow \vw + \left(\phib(\vx_i,\vy_i) - \phib(\vx_i,\hat{\vy}_i)\right). \label{sp_update}
+\end{align}
 The update usually leads to over-fitting.
-A simple refinement is proposed which is similar to ``Average Perceptron'' developed by \citet{Freund99large}.
+A simple refinement is usually applied the idea of which is also used in ``Average Perceptron'' \citep{Freund99large}.
 
 \iffalse
 The update usually leads to over-fitting and a simple refinement, called "average parameter" similar to \citep{Freund99large}, is shown in (Algorithm~\ref{algorithm_structured_perceptron}).
@@ -1060,44 +1068,95 @@ The update usually leads to over-fitting and a simple refinement, called "averag
 \end{algorithm}
 \fi
 
-In fact, Structured Perceptron makes two strong assumptions that limits its power and applicability.
-First, it uses $0/1$ loss over output variables, that is $\vell(\vy,\hat{\vy})=\ind{\vy\neq\hat{\vy}}$, such that the nearly correct and the completely incorrect output labels will lead to the same update of the weight parameter during the training.
-Secondly, it tacitly assumes that the argmax problem can be solved efficiently, which is generally not true in many structured output space.
-In the original work, \citet{collins02a} only demonstrated the algorithm on sequence tagging problem with Viterbi decoding.
+The central problem with Structured Perceptron learning is its loss function.
+In fact, Structured Perceptron tacitly applies $0/1$ loss over output variables defined as
+\begin{align*}
+	\vell(\vy,\hat{\vy})=\ind{\vy\neq\hat{\vy}}.
+\end{align*}
+As a result, it is impossible to distinguish the nearly correct and the completely incorrect output multilabels.
+Both will lead to the same update to the feature weight parameter during the training in (\ref{sp_update}) .
 
-% TODO: incremental perceptron training
 
 
 %
 % 
-\subsection{Conditional Random Field (\crf)}
-Condition Random Field (\crf), pioneered in \citep{lafferty01} and later in \citep{taskar02}, is a discriminative framework that constructs a conditional model $P(\vy|\vx)$ from paired input variable $\vx\in\vXcal$ and output variables $\vy\in\vYcal$.
-It optimizes a log-loss which is analogue to $0/1$ loss over the whole structured output space.
-\begin{definition}{Conditional Random Field (\crf).}\\
-	Denote by $Y=\{\vy_1,\cdots,\vy_m\}$ a set of output random variables, and by $X=\{\vx_1,\cdots,\vx_m\}$ a set of input random variables to condition on.
-	Let $G=(E,V)$ be a graph such that $\vy = (y_v)_{v\in V}$.
-	A Conditional Random Field (\crf) defines the conditional probability distribution
-	\begin{align*}
-		P(\vy|\vx) &= \frac{1}{Z_{x,\vw}}\exp{\ip{\vw}{\phib(x,\vy)}},
-	\end{align*}
-	where $Z_{x,\vw}$ is the partition function dependent on $\vx$ that sums over all possible output variables 
-	\begin{align}
-		Z_{x,\vw} &= \sum_{\vy'\in\Ycal}\exp{\ip{\vw}{\phib(x,\vy')}}. \label{crf_partition_function}
-	\end{align}
-	Thus, when conditioned on $\vx$, the random variables $y_v$ obey the Markov property with respect to graph $G$.
-\end{definition}
+\subsection{Conditional Random Field (\crf)} \label{sc_crf}
 
-The parameter $\vw$ is solved by introducing parameter prior and maximizing the logarithm of the resulting \textit{maximum a posteriori} (\map) problem as described in \citep{taskar02}
+Condition Random Field (\crf) developed in \citep{lafferty01,taskar02} is a discriminative framework that constructs a conditional model $P(\vy|\vx)$ from input variable $\vx\in\vXcal$ and output variables $\vy\in\vYcal$.
+It optimizes a log-loss which is analogue to $0/1$ loss over the structured output space.
+
+Mathematically, let $Y=\{\vy_1,\cdots,\vy_m\}$ denote a set of output random variables and $X=\{\vx_1,\cdots,\vx_m\}$ denote a set of input random variables to condition on.
+Let $G=(E,V)$ be an output graph such that $\vy = (y_v)_{v\in V}$.
+A \textit{Conditional Random Field} (\crf) defines the conditional probability distribution
+\begin{align*}
+	P(\vy|\vx) &= \frac{1}{Z_{\vx,\vw}}\exp{\ip{\vw}{\phib(\vx,\vy)}},
+\end{align*}
+where $\phib(\vx,\vy)$ is the joint feature map and $Z_{\vx,\vw}$ is the partition function dependent on $\vx$.
+$Z_{\vx,\vw}$ sums over all possible multilabels 
 \begin{align}
-	L(\vw) = \sum_{i=1}^{m}\left[\ip{\vw}{\phib(\vx_i,\vy_i)}-\log{\sum_{\vy'\in\vYcal}{\exp{\ip{\vw}{\phib(\vx_i,\vy')}}}}\right] - \frac{1}{\sigma^2}\norm{\vw}^2 + C. \label{crf_inference}
+	Z_{\vx,\vw} &= \sum_{\vy'\in\Ycal}\exp{\ip{\vw}{\phib(\vx,\vy')}}. \label{crf_partition_function}
 \end{align}
-The parameter learning problem defined as (\ref{crf_inference}), is solved in \citep{lafferty01} via improved iterative scaling algorithm (\iis) \citep{Pietra97inducing}.
-In order to make \crf\ work in practice, one has to make sure that the logarithm of the normalization function (\ref{crf_partition_function}) and the argmax inference can be solved efficiently.
+Thus, when conditioned on $\vx$, the random variables $y_v$ obey the Markov property with respect to output graph $G$.
+
+Apply similar regularization technique as used on \lr\ in Section~\ref{sc_lr}, the feature weight parameter $\vw$ can be solved by introducing a Gaussian prior and maximizing the logarithm of the resulting \textit{Maximize A-Posteriori} (\map) problem \citep{taskar02} defined as
+\begin{align}
+	L(\vw) = \sum_{i=1}^{m}\left[\ip{\vw}{\phib(\vx_i,\vy_i)}-\log{\sum_{\vy'\in\vYcal}{\exp{\ip{\vw}{\phib(\vx_i,\vy')}}}}\right] - \frac{1}{\sigma^2}\norm{\vw}^2. \label{crf_inference}
+\end{align}
+The optimization problem derived from (\ref{crf_inference}) is solved in \citep{lafferty01} by Improved Iterative Scaling algorithm (\iis) \citep{Pietra97inducing}.
+In order to make \crf\ work in practice, one has to make sure that the partition function (\ref{crf_partition_function}) can be computed efficiently.
+
 
 
 %
 % 
-\subsection{Support Vector Machine for Interdependent and Structured Outputs (\svmstruct)}
+\subsection{Max-Margin Markov Network (\mmmn)} \label{sc_mmmn}
+
+\citet{Taskar04max} designed Max-Margin Markov Network (\mmmn) that combines the framework of kernel based discriminative learning and probabilistic graphical model.
+\mmmn\ is extended from \svm\ (Section~\ref{sc_svm}) to structured output space.
+It also improves \crf\ (Section~\ref{sc_crf}) in terms that the evaluation of the partition function (\ref{crf_partition_function}) can be avoided by introducing the odd-ratio typed learning that is not dissimilar to \lr\ (Section~\ref{sc_lr}).
+
+\mmmn\ defined a log-linear Markov network over multiple output labels which explores the correlation in the label space.
+The compatibility score define by 
+\begin{align}
+	F(\vx,\vy;\vw) = \ip{\vw}{\phib(\vx,\vy)} \label{mmmn_score}
+\end{align}
+can be seen as the affinity of the multilabel $\vy$ to the input $\vx$ according to the Markov network.
+Feature weight parameter $\vw$ in (\ref{mmmn_score}) ensures the example with correct multilabel will reach higher score than with incorrect multilabel.
+To learn the feature weight parameter $\vw$, \mmmn\ defines the margin as the difference in compatibility scores between the correct example $(\vx_i,\vy_i)$ and the psudo-example $(\vx_i,\vy)$.
+Under the Maximum-Margin principle (Section~\ref{sc_svm}), \mmmn\ requires the margin to be at least $\vell(\vy_i,{\vy})$.
+The primal optimization problem of \mmmn\ can be formulated as
+\begin{definition}{\mmmn\ Optimization Problem in Primal.}\label{def_mmmn}
+	\begin{align*}
+		\underset{\vw,\vxi_i}{\minimize} & \quad\frac{1}{2}\norm{\vw}^2 + C\sum_{i=1}^{m}\xi_i \\
+		\st & \quad\ip{\vw}{\phib(\vx_i,\vy_i)} - \ip{\vw}{\phib(\vx_i,\vy)} \ge \vell(\vy_i,\vy)-\xi_i,\\
+		& \quad \forall \xi_i\ge0,\, \forall \vy\in\vYcal/\vy_i,\, \forall i\in\{1,\cdots,m\},
+	\end{align*}
+\end{definition}
+where $\xi_i$ is the slack allotted to each example to make sure solution can always be found, $\vell(\vy_i,\vy)$ is the loss function between the correct multilabel $\vy_i$ and the incorrect multilabel $\vy$, $C$ is the slack parameter that controls the amount of regularization in the model.
+For each example $\vx_i$, the optimization calls for maximizing the margin between the correct label $\vy_i$ and incorrect labels $\vy$.
+The margin is scaled by the loss function $\vell(\vy_i,{\vy})$ such that the completely incorrect multilabel will incur bigger loss than the nearly correct multilabel.
+
+
+The primal optimization problem of \mmmn\ in Definition~\ref{def_mmmn} is difficult to solve as there are exponential numbers of constraints, one for each pseudo-example $(\vx_i,\vy)$.
+The corresponding dual form is also difficult due to exponential number of dual variables \citep{Taskar04max}.
+By exploring the Markov network structure, the original optimization problem (Definition~\ref{def_mmmn}) can be formulated into factorized dual quadratic programming, as long as the loss function $\vell$ and joint feature map $\phib(\vx,\vy)$ are decomposable over the Markov network.
+
+As the number of parameters is quadratic in the number of training examples and edges in the network, it still cannot fit into standard QP solver. 
+\citep{Taskar04max} developed a coordinate descent method analogous to the Sequential Minimal Optimization (\smo) used for SVM training \citep{Platt98sequential,Platt99fast}.
+Subsequently, other efficient optimization algorithms have been proposed, which include exponential gradient optimization methods from \citet{bartlett04}, extra-gradient methods from \citet{taskar06}, sub-gradient methods from \citet{Ratliff07}, and conditional gradient methods from \citet{rousu06, rousu07}.
+
+In order to use \mmmn\ in practice, one have to solve the \textit{loss augmented} inference problem defined as
+\begin{align}
+	\hat{\vy} = \underset{\vy\in\vYcal/\vy_i}{\argmax} &\, \ip{\vw}{\phib(\vx_i,\vy)} + \vell(\vy_i,\vy) \label{mmmninference}.
+\end{align} 
+To compute (\ref{mmmninference}) efficiently, the loss function need to be decomposable over the Markov network.
+Nevertheless, \mmmn\ improves \crf\ due to the following two reasons.
+First, \mmmn\ does not require partition function to be computed. 
+Secondly, complex loss function can be defined for \mmmn\ as long as the function is decomposable.
+
+%
+% 
+\subsection{Support Vector Machines for Interdependent and Structured Outputs (\svmstruct)}
 
 The formulation of Support Vector Machine for interdependent and structured output space (\svmstruct) described in \citep{THJA04,TJTA05} is amazingly similar to \mmmn.
 Compared to \mmmn\ framework which scales the margin by the loss function, \svmstruct\ formulation scales the margin errors ({\em slack variables}) by the loss function.
@@ -1133,44 +1192,7 @@ The intractability of the inference problem can be seen as an exchange of the ge
 
 
 
-%
-% sub section: m3n
-\subsection{Max-Margin Markov Network (\mmmn)}
 
-The Max-Margin Markov Network (\mmmn) unifies the frameworks of kernel based discriminative learning and probabilistic graphical model \citep{Taskar04max}.
-The model defines a log-linear Markov network over a set of output variables, thus, it is capable of modeling the correlation between these output variables.
-Recall that Support Vector Machine (\svm) searches for a feature weight vector of smaller $L_2$ norm, which achieves a margin of at least one on training examples for the purpose of good generalization power.
-Following the same principle, \mmmn\ defines a margin-based quadratic programming optimization problem for the weight vector of the model.
-In particular, it extends \svm\ to structured output space via a loss function $\ell$ that requires the score difference between true output label $\vy_i$ and any incorrect label ${\vy}$ be at least $\vell(\vy_i,{\vy})$.
-The primal optimization problem of \mmmn\ is given as
-\begin{definition}{\mmmn\ Optimization Problem in Primal.}\label{def_mmmn}
-	\begin{align*}
-		\underset{\vw,\vxi_i}{\minimize} & \quad\frac{1}{2}\norm{\vw}^2 + C\sum_{i=1}^{m}\xi_i \\
-		\st & \quad\ip{\vw}{\phib(\vx_i,\vy_i)} - \ip{\vw}{\phib(\vx_i,\vy)} \ge \vell(\vy_i,\vy)-\xi_i,\\
-		& \quad \forall \xi_i\ge0,\, \forall \vy\in\vYcal/\vy_i,\, \forall i\in\{1,\cdots,m\},
-	\end{align*}
-\end{definition}
-where $\xi_i$ denotes the slack allotted to each example to make sure solution can always be found, $\vell(\vy_i,\vy)$ is the loss function between pseudo-label and the correct label, and $C$ is the slack parameter that controls the amount of regularization in the model.
-The intuition behind the optimization is to maximizing the margin from each training example between the correct output label $\vy_i$ and any incorrect label ${\vy}$.
-In particular, the margin is scaled by the loss function $\vell(\vy_i,{\vy})$ such that the incorrect label with bigger loss will require larger margin. 
-
-It is immediately apparent that the primal optimization problem of \mmmn\ (Definition~\ref{def_mmmn}) is difficult to solve as there are exponential numbers of constraints, one being instantiated for each pair of training example and pseudo label $(x,\vy)$.
-The corresponding dual form is also difficult as there are exponential number of dual variables \cite[p.~4]{Taskar04max}.
-Fortunately, by exploring the Markov network structure defined on the output labels, the original problem can be formulated into factorized dual quadratic programming, as long as the loss function $\vell$ and joint feature map $\phib$ are decomposable over the Markov network.
-
-As the number of parameters (weight vector) is quadratic in the number of training examples and edges in the network, it still cannot fit into standard QP solver. 
-In the original work \citep{Taskar04max}, the authors developed a coordinate descent method analogous to the sequential minimal optimization (\smo) used for SVM \citep{Platt98sequential,Platt99fast}.
-Subsequently, there are many efficient optimization algorithms being proposed, including exponential gradient optimization methods developed in \citep{bartlett04}, extra-gradient methods described in \citep{taskar06}, sub-gradient methods proposed in \citep{Ratliff07}, and conditional gradient methods in \citep{rousu06, rousu07}.
-
-In order to apply the optimization methods in practice, one have to solve the \textit{loss augmented} inference problem defined as
-\begin{align}
-	\hat{\vy} = \underset{\vy\in\vYcal/\vy_i}{\argmax} &\quad \ip{\vw}{\phib(\vx_i,\vy)} + \vell(\vy_i,\vy) \label{mmmninference}.
-\end{align} 
-To efficiently compute (\ref{mmmninference}), the loss function need to be decomposable over the Markov network.
-Nevertheless, \mmmn\ is more flexible compared to \crf\ due to the following two reasons.
-First, \mmmn\ model does not require partition function to be calculated. 
-Thus, it is more feasible in terms of computation and can be applied to problems that is \nphard\ for \crf.
-Secondly, one can define more complex loss function on \mmmn\ other than just 0/1 loss for \crf, as long as the function is decomposable.
 
 
 \section{Structured Output Prediction for Molecular Activity Classification}\label{sc_su10}
