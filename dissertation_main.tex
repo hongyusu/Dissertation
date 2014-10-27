@@ -1191,15 +1191,14 @@ The generality of the loss function can be seen as an advantage compared to \crf
 
 
 
-\section{Structured Output Prediction for Molecular Activity Classification}\label{sc_su10}
+\section{Structured Output Prediction for Molecular Activity Classification} \label{sc_su10}
 
-The molecular activity classification problem has long been tackled under the single task classification setting.
-On the other hand, multiple interdependent molecular activities are often screened simultaneously.
-This makes single task classification approaches suffer from two formidable issues.
-The first issue is scalability which in order to predict multiple activities for one molecule a set of single task classifiers need to be built separately, which soon becomes infeasible when large amount of activities need to be predicted.
-The second issue lies in the fact the single task model discards the dependency information among multiple output targets.
-The dependency structure can be further utilized to improve the performance.
-Therefore, in \citepub{su10} we investigate the potential of using structured output learning framework to tackle the molecular activity classification problem.
+The molecular activity classification problem has long been tackled with single-label classification approaches \citep{Dutt12classification}.
+On the other hand, multiple interdependent molecular activities are often screened simultaneously \citep{Shoemaker06the}, which poses two challenges for single-label classification approaches.
+The first is about scalability which a set of single-label classifiers need to be built independently in order to predict multiple activities.
+This soon becomes infeasible when large amount of activities need to be predicted.
+The second lies in the fact the single-label classification approach cannot model label correlation.
+In \citepub{su10} we investigate the potential of using structured output learning to tackle the molecular activity classification problem.
 
 
 \subsection{Background and Introduction}
@@ -1210,19 +1209,20 @@ In particular, expensive preclinical \textit{in vitro} and \textit{in vivo} drug
 
 Various machine learning methods have been developed for the task, to name but a few, inductive logic programming \citep{King96structure}, artificial neural network \citep{Bernazzani06predicting}, kernel methods for nonlinear molecular properties \citep{Trotter01drug,Ralaivola05graph,Swamidass05kernel,Ceroni07classification}, and \svm\ based methods for reliable predictions \citep{Trotter01drug,Byvatov03comparison,Xue04effect}.
 Albeit with the large quantity of the computational models, they only focus on predicting single target variable (e.g. inhibition potential in one cell line). 
-On the other hand, relative larger number of cell line targets are often screened at the same time.
-For example in the recent \textit{NCI-60} {Human Tumor Cell Line Screen} project \citep{Shoemaker06the}, thousands of molecular structures are tested agains hundreds of cell line targets.
+On the other hand, relative larger number of cell lines are often screened at the same time.
+For example in the recent \textit{NCI-60} {Human Tumor Cell Line Screen} project \citep{Shoemaker06the}, thousands of molecular structures are tested agains hundreds of cell lines.
 
 
 \subsection{Methods}
 
-To efficiently and accurately predict molecular activities in multiple cell lines at the same time, we proposed a structured output learning algorithm in \citepub{su10}, which is to our knowledge the first multi-task learning approach for molecular classification problem.
-The algorithm can be seen as an instantiation of the structured output learning method \mmcrf\ \citep{rousu06}.
+To efficiently and accurately predict molecular activities in multiple cell lines at the same time, we applied a structured output learning approach in \citepub{su10} which is to our knowledge the first multi-task learning approach for molecular classification problem.
+The algorithm is an instantiation of the structured output learning method \mmcrf\ developed in \citep{rousu06}.
+It can also be seen as a sibling method of \mmmn\ presented in Section~\ref{sc_mmmn}.
 In particular, the model defines a compatibility score through inner product for a molecular structure $\vx$ and the activities in multiple cell lines $\vy$
 \begin{align*}
 	F(\vx,\vy;\vw) = \ip{\vw}{\phib(\vx,\vy)},
 \end{align*}
-where $\vw$ are the feature weight parameters that ensures the molecular structure with correct activities will be scored higher than with incorrect activities.
+where $\vw$ is the feature weight parameter that ensures the molecular structure with correct activities will be scored higher than with incorrect activities.
 $\vw$ are learned by maximizing the minimum loss-scaled margin between correct examples $(\vx_i,\vy_i)$ and incorrect examples $(\vx_i,\vy)$ over the whole training set
 \begin{align*}
 	\underset{\vw,\vxi_i}{\minimize} & \quad \frac{1}{2}\norm{\vw}^2 + C\sum_{i=1}^{m}\xi_i\\
@@ -1236,10 +1236,10 @@ where $\ell(\vy_i,\vy)$ is the loss function defined as
 The loss scaled margin optimization will push high-loss pseudo-examples further away from the correct example than the low-loss pseudo-examples.
 The model is optimized by conditional gradient optimization \citep{Bertsekas95nonlinear} in marginalized dual space \citep{Taskar04max}, which not only enjoys a polynomial-size parameter space in marginalized dual representation but also enables the kernel function that is capable of dealing with non-linearity of the complex molecular structures.
 
-Kernel is the classical way of defining the similarity between complex objects.
-In \citepub{su10}, We used graph kernel to measure the similarity of pair of molecular structures.
+%Kernel is the classical way of defining the similarity between complex objects.
+In \citepub{su10}, ee used graph kernel to measure the similarity of pair of molecular structures.
 The common way to represent the structure of a molecule is to use an undirected labeled graph $G=(V,E)$, where vertices $V=\{v_1,\cdots,v_n\}$ corresponds to atoms and edge $E=\{e_1,\cdots,e_m\}$ corresponds to the covalent bonds.
-The adjacency matrix $A$ of graph $G$ is defined sush that its $(i,j)$'th entry $A_{i,j}$ equals to one if there is an edge between atom $i$ and atom $j$.
+The adjacency matrix $A$ of graph $G$ is defined such that its $(i,j)$'th entry $A_{i,j}$ equals to one if there is an edge between atom $i$ and atom $j$.
 
 % walk kernel
 \textit{Walk Kernel} \citep{Kashima03marginalized,Gartner03a} computes the sum of matching walks in a pair of graphs. 
@@ -1258,25 +1258,26 @@ The walk kernel can be defined on the adjacency matrix of $G_{\times}$
 	K_{wk}(G_1,G_2) = \sum_{i,j=1}^{|V_{\times}|}\left[\sum_{n=0}^{\infty}\lambda^{n}A_{\times}^n\right]_{i,j},
 \end{align*}
 where $0<\lambda<1$.
-Using exponential series or geometric series the walk kernel can be compute in cubic time \citep{Gartner03a}
+Using exponential series or geometric series the walk kernel can be compute in cubic time \citep{Gartner03a} by
 \begin{align*}
 	K_{wk}(G_1,G_2) = \ve\tp(\vI-\lambda A_{\times})^{-1}\ve,
 \end{align*}
-where we denote by $\vI$ the identity matrix and by $\ve$ the matrix of ones.
+where we use $\vI$ to denote the identity matrix and $\ve$ to denote the matrix of ones.
 
 % weighted decomposition kernel and others
-\textit{Weighted Decomposition Kernel} in \citep{Menchetti05weighted,Ceroni08classification} is an extension of substructure kernel \citep{Haussler99convolution} by weighting identical part in two graph with contextual information.
-The kernel will evaluate the matching subgraphs (\textit{contextor}) in the neighborhood of an atom (\textit{selector}).
+\textit{Weighted Decomposition Kernel} developed in \citep{Menchetti05weighted,Ceroni08classification} is an extension of substructure kernel \citep{Haussler99convolution}.
+The kernel weights identical part in two graph with contextual information.
+It evaluates the matching subgraphs (\textit{contextor}) in the neighborhood of an atom (\textit{selector}).
 We also used \textit{Tanimoto Kernel} \citep{Ralaivola05graph} on a finite set of molecular fingerprints \citep{Wang09pubchem}.
 See \citep{Vishwanathan10graph} for a more comprehensive survey on graph kernels.
 
 %\subsubsection{Generation of Markov Network}
-To apply structured output learning algorithm described above, we assume the underlying Markov network structure is fully observed.
-In other words, we need to build a network connecting cell lines used as the output graph, with nodes correspond to cell lines and edges correspond to potential statistical dependencies.
-Auxiliary datasets are available for this purpose \citep{Shoemaker06the}  which implicitly describes the relationship between cell lines.
-In practice, we first computed the covariance matrix for cell lines based on auxiliary datasets, then extracted the network structure by applying the following two methods.
-In maximum spanning tree approach, we take the minimum number of edges that make a connected network whilst maximizing the edge weights.
-In correlation thresholding approach, we take all edges that exceed a fixed threshold, which typically generates a non-tree graph.
+To apply structured output learning model described above, we assume the underlying Markov network structure is fully observed.
+In other words, we need to build an output graph with nodes correspond to cell lines and edges correspond to potential statistical dependencies.
+Auxiliary datasets are available for this purpose \citep{Shoemaker06the} which implicitly describes the correlation between cell lines.
+To build the output graph, we first compute the covariance matrix for cell lines based on auxiliary data, then extracte the network structure by applying the following two methods.
+In \textbf{maximum spanning tree approach}, we take the minimum number of edges that make a connected network whilst maximizing the edge weights.
+In \textbf{correlation thresholding approach}, we take all edges that exceed a fixed threshold, which typically generates a non-tree graph.
 
 
 %
