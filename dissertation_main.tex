@@ -1276,17 +1276,18 @@ To apply structured output learning model described above, we assume the underly
 In other words, we need to build an output graph with nodes correspond to cell lines and edges correspond to potential statistical dependencies.
 Auxiliary datasets are available for this purpose \citep{Shoemaker06the} which implicitly describes the correlation between cell lines.
 To build the output graph, we first compute the covariance matrix for cell lines based on auxiliary data, then extracte the network structure by applying the following two methods.
-In \textbf{maximum spanning tree approach}, we take the minimum number of edges that make a connected network whilst maximizing the edge weights.
-In \textbf{correlation thresholding approach}, we take all edges that exceed a fixed threshold, which typically generates a non-tree graph.
+In \textbf{maximum spanning tree} approach, we take the minimum number of edges that make a connected network whilst maximizing the edge weights.
+In \textbf{correlation thresholding} approach, we take all edges that exceed a fixed threshold, which typically generates a non-tree graph.
 
 
 %
 %
 \section{\spin\ for Network Response Prediction}\label{sc_su14b}
 
-In \citepub{su14a}, a structured output learning model for network response prediction problem is developed.
-The proposed model, \spin, is \textit{context-sensitive} and is different from the previous the state-of-the-art methods which only model the influence in terms of the network connectivity.
-The inference problem of \spin\ is \nphard\ in general which was solved by a semidefinite programming algorithm \sdp\ with approximation guarantee and by a fast \greedy\ heuristics.
+\citepub{su14a} presents a structured output learning model for network influence prediction problem.
+The proposed model, \spin, is \textit{context-sensitive} which is different from the previous the state-of-the-art methods that only model the influence in terms of the network connectivity.
+The inference problem of \spin\ is \nphard\ in general.
+We provides a semidefinite programming algorithm \sdp\ with approximation guarantee as well as fast \greedy\ heuristics.
 
 \subsection{Background and Introduction}
 
