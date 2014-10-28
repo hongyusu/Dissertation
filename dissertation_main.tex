@@ -987,14 +987,14 @@ Recently, \citet{Paredes12exploit} proposed a method which exploits the informat
 %	chapter
 %
 %------------------------------------------------
-\chapter{Structured Output Prediction} \label{ch_multi}
+\chapter{Structured Output Prediction} \label{ch_sop}
 
 Structured output prediction is a natural extension to flat multilabel classification presented in Chapter~\ref{ch_fmlc}.
 Unlike flat multilabel classification which takes multiple output variables as a ``flat'' vector, structure output prediction assumes multiple output variables are correlated and locate in the structured output space.
 It builds a graph structure (e.g. chain, tree) to connect multiple output variables by which it gains the advantage of exploring the label correlation compared to flat multilabel classification.
-In this chapter, we will start by introducing several classical structure output learning methods developed during the last decade.
+In this chapter, we will start by introducing several classical structured output learning models developed during the last decade.
 We will present our research of applying the structured output learning on molecular activity prediction problem.
-We will also present our new algorithm \spin\ that is capable of predicting a directed acyclic graph on network influence prediction problem.
+We will also present our new algorithm \spin\ that is capable of predicting a directed acyclic graph and examine the performance on the network influence prediction problem.
 
 
 
@@ -1404,15 +1404,19 @@ Diffusion scaling has the effect of shrinking the distance to the nodes that are
 %------------------------------------------------
 %
 %------------------------------------------------
-\chapter{Structured Output Learning with Unknown Structure}
+\chapter{Structured Output Prediction with Unknown Structure}
 
+Structured output learning (Chapter~\ref{ch_sop}) gains the power of the representation by connecting multiple output variables in to an output graph.
+In this chapter, we extend the structure output prediction model to the scenario where the output graph is hidden, by exploring the potential of learning from a random set of random output graphs.
+In Section~\ref{sc_su11}, we start with a majority voting ensemble (\mve) of a set of structured output classifiers and proceed with two aggregation techniques (\amm\ and \mam\ respectively) that performs inference before or after forming the ensemble.
+In Section~\ref{sc_su14c}, we present and discuss the \rta\ method that improves \mam\ by the joint learning and inference.
 
 
 %
 %
 \section{Graph Labeling Ensemble (\mve)}\label{sc_su11}
 
-We have presented in \citepub{su10} a structured output prediction model for multilabel molecular activity prediction problem.
+We have presented in Section~\ref{sc_su10} a structured output prediction model for multilabel molecular activity prediction problem.
 The model relies on the representation of the cell-line structure which allows us to model the correlation of multiple labels.
 To apply structured output learning, it is assumed the structure of the output graph is fully observed.
 Alternatively in \citepub{su10}, we suppose there exist auxiliary data that encodes the label correlation which can be utilized in order to retrieve the output graph.
@@ -1614,7 +1618,7 @@ which not only works with a polynomial sized parameter space but also enables ke
 %------------------------------------------------
 \chapter{Evaluation and Comparison Methods} \label{ch_ecm}
 
-In this chapter, the author will briefly introduce the performance measures and statistical test methods that are involved in the research. 
+In this chapter, the author will briefly introduce the performance measures and statistical tests that are involved in the research. 
 These methods enable us to quantitatively evaluate the performance of the proposed models and to measure the significancy comparing to other well established methods.
 
 %------------------------------------------------
