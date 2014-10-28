@@ -1445,37 +1445,44 @@ In \textbf{random pairing} approach, we randomly draw two vertices at a time and
 The approach outputs disconnected pairs.
 
 
-\section{Random Graph Ensemble (\amm, \mam)}\label{sc_su14a}
 
-Through extensive experiments in \citepub{su11}, we have validated the feasibility of constructing a majority voting ensemble (\mve) of structured output learner built on a set of random output graphs.
-The proposed method also improved the performance on molecular activity classification problem.
-In \citepub{su14b}, we aim to develop elegant aggregation techniques (\amm\ and \mam\ respectively) that will perform inference before or after forming ensemble.
-We tested the proposed techniques on a set of heterogeneous multilabel datasets from various domains to verify the wide applicability.
-In addition, we have brought forward a theory that explains the improvement of \mam\ framework.
-The theory is based on the reconstruction error of the compatibility score.
+%
+%
+\section{Random Graph Ensemble (\amm, \mam)} \label{sc_su14a}
+
+We have shown in Section~\ref{sc_su11} that we can construct a majority voting ensemble of structured output learners to tackle the problem during structured output learning when the output graph is not observed.
+We evaluate the method on molecular activity classification problem.
+This section is based on \citepub{su14b} where we aim to present two other aggregation techniques to combine the base structured output classifiers.
+Compare to previously developed \mve, the proposed model (\amm\ and \mam\ respectively) perform inference before or after forming the ensemble.
+We also examine the performance of the proposed models on a set of heterogeneous multilabel datasets from various domains.
+In addition, we bring in a theory which is based on the reconstruction error of the compatibility score to explains the improvement of \mam\ framework.
 
 
+
+%
+%
 \subsection{Background and Introduction}
 
-% compatibility score
-Besides the assumption made for \mve\ which the base classifier will devise the prediction according to the structure of the output graph, we also assume that the base classifier for \amm\ and \mam\ is modelled with a Markov network structure $G=(E,V)$.
-That is the base classifier defines a compatibility score $\psi(\vx,\vy)$ for pairs $(\vx,\vy)\in\vXcal\times\Ycal$ according to the output graph $G$, indicating how well the input and the output goes together
+We still work with the assumption mode for \mve\ in Section~\ref{sc_su11} in which the base classifier will devise the prediction according to the structure of the output graph.
+In addition, we assume that the base classifier for \amm\ and \mam\ is defined with a Markov network structure.
+That is the base classifier compute a compatibility score $\psi(\vx,\vy)$ for the pair $(\vx,\vy)\in\vXcal\times\Ycal$ according to the output graph $G$, indicating how well the input $\vx$ gets along with the output $\vy$.
+The compatibility score is defined as
 \begin{align*}
 	\psi(\vx,\vy) = \ip{\vw}{\phib(\vx,\vy)} = \sum_{e\in E}\ip{\vw}{\phib_e(\vx,\vy_e)}=\sum_{e\in E}\psi_e(\vx,\vy_e),
 \end{align*}
-where by $\psi_e(\vx,\vy_e)$ we denote edge compatibility score, or \textit{edge potential}, between input $\vx$ and edge label $\vy_e$ on edge $e$.
-$\vw$ is the feature weight parameters that naturally ensures input $\vx$ with correct output $\vy$ achieves higher compatibility score than with incorrect output.
+where we use $\psi_e(\vx,\vy_e)$ to denote edge compatibility score (\textit{edge potential}) between input $\vx$ and edge label $\vy_e$ on edge $e$.
+$\vw$ is the feature weight parameter which ensures input $\vx$ with correct output $\vy$ achieves higher compatibility score than with incorrect output.
 
 % edge potential
 In addition, we assume we have access to the edge potentials between input and edge labels for each base classifiers
 \begin{align*}
 	\psib_E^{(t)} = (\psi_e^{(t)}(\vx,\vu_e))_{e\in E^{(t)},\vu_e\in\Ycal_e}.
 \end{align*}
-With edge compatibility scores, we can infer the max-marginal of label $u_i$ on node $y_i$ \citep{Wainwright05map}.
+With edge compatibility scores, we can infer the max-marginal of the $i$'th node which is the score incurred by assigning label $u_i\in\Ycal_i$ to the $i$'th node \citep{Wainwright05map} defined by
 \begin{align*}
 	\tilde{\psi}_j(\vx,u_j) = \underset{\vy\in\Ycal,y_j=u_j}{\maximize}\sum_{e\in E}\psi_e(\vx,\vy_e).
 \end{align*}
-That is the maximum score of the multilabel consistent with $y_i=u_i$.
+In words, the max-marginal is the maximum score of the multilabel consistent with $y_i=u_i$.
 We denote the collection of max-marginals by $\tilde{\psib} = (\tilde{\psi}_j(\vx,u_j))_{j\in V,u_j\in\Ycal_j}$.
 
 \subsection{Methods}
