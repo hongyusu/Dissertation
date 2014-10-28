@@ -1201,7 +1201,7 @@ The second lies in the fact the single-label classification approach cannot mode
 In \citepub{su10} we investigate the potential of using structured output learning to tackle the molecular activity classification problem.
 
 
-\subsection{Background and Introduction}
+\subsection{Background}
 
 Molecular classification, the goal of which is to predict the anticancer potentials of the drug-like molecules, is one crucial step in drug discovery and has draw enormous attention from machine learning community.
 Viable molecular structures are scanned, searched, or designed for therapeutic efficacy.
@@ -1282,14 +1282,14 @@ In \textbf{correlation thresholding} approach, we take all edges that exceed a f
 
 %
 %
-\section{\spin\ for Network Response Prediction}\label{sc_su14b}
+\section{\spin\ for Network Response Prediction} \label{sc_su14b}
 
 \citepub{su14a} presents a structured output learning model for network influence prediction problem.
 The proposed model, \spin, is \textit{context-sensitive} which is different from the previous the state-of-the-art methods that only model the influence in terms of the network connectivity.
 The inference problem of \spin\ is \nphard\ in general.
 We provides a semidefinite programming algorithm \sdp\ with approximation guarantee as well as fast \greedy\ heuristics.
 
-\subsection{Background and Introduction}
+\subsection{Background}
 
 With the extensive availability of the large scale networks, there are tremendous interest in studying the phenomena of the network influence, in particular, the structure, the function and the influence dynamics. 
 The outcome of the network influence research have been widely applied in many areas, to name but a few, spreadness of pathogens or infectious diseases \citep{Hethcote00the,Anderson02infectious}, diffusion of medical and technology innovation \citep{Strang98diffusion,Rogers03the}, opinion and news formation \citep{Adar04implicit,Gruhl04information,Adar05tracking,Leskovec07cascading,Nowell08tracing,Leskovec09meme}, viral market \citep{Domingos01mining,Kempe03maximizing,Liben-Nowell03the}.
@@ -1301,15 +1301,15 @@ The instantiation of the setting can be, for example, online news agents sharing
 In this case, the task is to infer network structure in terms of edges connecting nodes given a set of action cascade.
 %With early work on independent cascade and linear threshold model \citep{Kempe03maximizing},
 Many algorithms are designed to solve the problem in this setting from \netinf\ \citep{GomezRodriguez10inferring}, \netrate\ \citep{Rodrigues11unconvering}, \kernelcascade\ \citep{Du12learning} to the most recent work about two stage model for inferring influence \citep{Du14influence}, inference algorithm using cascade without timestamp \citep{Amin14learning}, and general framework of inferring diffusion structure \citep{Daneshmand14estimating}.
-On the other hand, we argue the problem is unnecessarily hard to solve as in many cases the structure of the network is given (e.g. friendship network).
-There are also related researches aim to discover the hidden variables in the network \citep{Lovrek08prediction,Goyal10learning}
+On the other hand, we argue the problem is unnecessarily hard as in many cases the structure of the network is fully observed (e.g. friendship network, citation network).
+There are also related research that aim to discover the hidden variables in the network \citep{Lovrek08prediction,Goyal10learning}
 
 However, none of them consider the property of the action.
 In particular, our network influence problem is motivated by the following observation: for a given action $\va$ performed on the network $G$, the influence from node $u$ to $u'$ not only depends on their connections but also depend on the action under consideration.
-For example, $u'$ follows $u'$ in twitter network, $u'$ will retweet the message from $u$ if the message is related to \textit{science} but not related to \textit{politics}.
-Therefore, we propose the following definition of the network influence problem
-\begin{definition}{Network Influence Problem.}\\
-	Given a complex network and an action performed on the network, predict the subnetwork that responses to the action. In particular, which nodes will perform the action and which directed edges relay the action from one node to its neighbors.
+For example, $u'$ is a follower of $u$ in twitter network, $u'$ will retweet the message from $u$ if the message is related to \textit{science} but not related to \textit{politics}.
+We propose the following definition of the network influence problem
+\begin{definition}{Network Influence Problem.}
+	Given a complex network and an action performed on the network, predict the subnetwork that responses to the action. In particular, which nodes perform the action and which directed edges relay the action from one node to its neighbors.
 \end{definition}
 
 %
@@ -1318,12 +1318,12 @@ We approach the problem by structured output learning, where we define a computa
 \begin{align*}
 	F(\va,\Gva;\vw) = \ip{\va}{\phib(\va,\Gva)}.
 \end{align*}
-It is easy to understand that the action $\va$ with correct response network $\Gva$ will achieve high score than with any incorrect response network $\Gva'$.
-As introduced in previous section, the joint feature map $\phib(\va,\Gva)$ is composed by the tensor product between action feature $\varphib(\va)$ and the features of the response network $\Upsilonb(\Gva)$.
-In particular, $\varphib(\va)$ can be a bag-of-words features of the action (e.g. blog post) and $\Upsilonb(\Gva)$ is a vector of edges and labels of the response network $\Gva$.
+It is intuitive that the action $\va$ with correct response network $\Gva$ will achieve high score than with any incorrect response network $\Gva'$.
+The joint feature map $\phib(\va,\Gva)$ is composed by the tensor product between action feature $\varphib(\va)$ and the features of the response network $\Upsilonb(\Gva)$.
+In particular, $\varphib(\va)$ can be a bag-of-words features of the action (e.g. blog post) and $\Upsilonb(\Gva)$ can be vector of edges and labels of the response network $\Gva$.
 
 % optimization
-The feature weight vector $\vw$ is learned through maximum-margin structured output learning by solving the following optimization problem
+The feature weight parameter $\vw$ is learned through maximum-margin structured output learning by solving the following optimization problem
 \begin{definition}{Primal \spin\ Optimization Problem.}
 \begin{align*}
 	\underset{\vw,\vxi_i}{\minimize} &\quad \frac{1}{2}\norm{\vw}^2+C\sum_{i=1}^{m}\xi_i\\
@@ -1331,15 +1331,15 @@ The feature weight vector $\vw$ is learned through maximum-margin structured out
 	&\quad \xi_i\ge0, \forall i\in\{1,\cdots,m\},
 \end{align*}
 \end{definition}
-where by $\Hcal(G)$ we denote the set of directed acyclic graphs of $G$.
+where we use $\Hcal(G)$ to denote the set of directed acyclic graphs of $G$.
 
 % inference
-To solve the above optimization problem, we have to compute both in training and in prediction the highest-scoring subgraph for an action. 
-In particular, during the training the goal is to find the worst margin violating subgraph which corresponds to solving the loss-augmented maximization problem
+To solve the above optimization problem, we have to compute the highest-scoring subgraph given an action. 
+In particular, the goal during the training is to find the worst margin violating subgraph which corresponds to solving the loss-augmented maximization problem
 \begin{align*}
 	H^*(\va_i) = \underset{G_{\va_i}'\in\Hcal(G)/G_{\va_i}}{\argmax}\, (F(\va_i,G_{\va_i}';\vw)+\vell_{G}(G_{\va_i},G_{\va_i}')).
 \end{align*}
-During the prediction, the goal is to find the subgraph with maximum compatibility given the action
+The goal during the prediction is to find the subgraph with maximum compatibility given the action
 \begin{align}
 	H^*(\va_i) = \underset{H\in\Hcal(G)}{\argmax}\, F(\va_i,H;\vw) \label{spin_inference}.
 \end{align}
@@ -1350,10 +1350,7 @@ As the two problems are different only in terms of the definition of the score, 
 \end{align}
 where we denote by $s_{\vy_e}(e,\va) = \sum_{i}\vw_{i,e,\vy_e}\varphib(\va)$ the score of edge $e$ with edge label $\vy_e$.
 
-\begin{lemma}
-	Finding the graph that maximizes (\ref{spin_np}) is an \nphard\ problem.
-\end{lemma}
-In supplementary material of \citepub{su14a}, we have proved the \nphardness\ by forming a reduction from the \maxcut\ problem \citep{Garey90computers}.
+We have proved the \nphardness\ of (\ref{spin_np}) by forming a reduction from the \maxcut\ problem \citep{Garey90computers}.
 In addition, we proposed two algorithms to solve (\ref{spin_np}).
 The first is called {\sdp\ inference} which introduces for each node $u\in V$ a binary variable $x_u\in\{-1,+1\}$ and transfer the inference problem into an integer quadratic program (\iqp) problem.
 The \iqp\ is then tackle by similar technique introduced in \citep{Geomans1995improved}, such that each variable $x_u$ is relaxed to a vector $\vv_u\in\RR^n$ and the relaxed problem is solved by semidefinite programming (\sdp). 
@@ -1375,6 +1372,8 @@ The iteration ends when the objective cannot be improved.
 It is worthy noticing that we are not able to give any approximation guarantee for the solutions produced by the \greedy\ algorithm.
 The property of submodularity, which is often used to analyze the greedy algorithm, only holds for the special case of our inference problem.
 
+
+\iffalse
 % loss function
 The decomposable loss function $\ell_G(G_{\va},G_{\va}')$ will penalize the mistakes uniformly over the network.
 However, we wish the learning algorithm focus on the vicinity of the \textit{foci} based on the observation that one certain action will only affect a small part of the network.
@@ -1390,6 +1389,7 @@ One is \textit{exponential scaling} where mistakes are penalized by $\lambda$ an
 The other is \textit{diffusion scaling} where mistakes are penalized by the values computed from diffusion kernel \citep{Kondor02diffusion}.
 Diffusion scaling has the effect of shrinking the distance to the nodes that are connect to \textit{foci} by many paths.
 
+\fi
 
 
 
@@ -1406,37 +1406,43 @@ Diffusion scaling has the effect of shrinking the distance to the nodes that are
 %------------------------------------------------
 \chapter{Structured Output Learning with Unknown Structure}
 
+
+
 %
 %
 \section{Graph Labeling Ensemble (\mve)}\label{sc_su11}
 
-Multi-task molecular activities classification with structured output learning that relies on the representation of the cell-lines structures allows us to model the dependencies betweem different output variables.
-When apply structured output learning, it is explicitly assumed the structure of the output network is fully observed.
-In \citepub{su10}, we supposed the feasibility of extracting the structures assuming it is given implicitly in the auxiliary datasets.
-For many real world structured output learning problems, we cannot take the structure as granted as it is often difficult to get the underlying dependency structure.
-Therefore, we explored in \citepub{su11} the possibility of constructing an simple ensemble of multiple structured output learning models built on random output graphs and applied the technique on molecular activity classification task.
+We have presented in \citepub{su10} a structured output prediction model for multilabel molecular activity prediction problem.
+The model relies on the representation of the cell-line structure which allows us to model the correlation of multiple labels.
+To apply structured output learning, it is assumed the structure of the output graph is fully observed.
+Alternatively in \citepub{su10}, we suppose there exist auxiliary data that encodes the label correlation which can be utilized in order to retrieve the output graph.
+However, we cannot take the availability of the output graph as granted because the underlying dependency structure is often hidden in many real world problems.
+In \citepub{su11}, we explore the potential of constructing an majority voting ensemble of multiple structured output learners and examine the performance of the proposed model on molecular activity classification problem.
+Each structured output learner is built based on a random generated output graph.
+As a results, the proposed model \mve\ is not constraint to the availability of the dependency structure.
 
 
+
+%
+%
 \subsection{Methods}
 
 We use \mmcrf\ as base classifier trained on a set of random output graphs.
-Particularly, for each base model, a random graph $G_t$ is generated to couple the output vector variables $\vy$ which are the activities of molecular structure $\vx$ over all cell lines.
-The base model \mmcrf\ is then learned based on training data $S=\{(\vx_i,\vy_i)\}_{i=1}^{m}$ and the output graph $G_t$.
+For each base classifier, a random graph $G_t$ is generated to couple the multiple output labels which are the activities of molecular structure $\vx$ over all cell-lines.
+The base model \mmcrf\ is constructed with training data $S=\{(\vx_i,\vy_i)\}_{i=1}^{m}$ and the output graph $G_t$.
 After ensemble has been generated, the predictions are extracted from each base classifier and are collected for a post-processing step: we compute a majority vote over the graph labeling from the sign on the means of the base classifier's prediction
-\begin{definition}{Majority Voting Ensemble (\mve).}
 \begin{align*}
 	F_j^{\text{\mve}}=\underset{y_j\in\Ycal_j}{\argmax}\,\left(\frac{1}{T}\sum_{i=1}^{T}\ind{F_j^{(t)}(x)=y_j}\right), \forall j\in\{1,\cdots,k\},
 \end{align*}
-\end{definition}
-where by $T$ we denote the size of the ensemble, and by $F^{(t)}(\vx)=\{F^{(t)}_j(x)\}_{j=1}^{k}$ we denote the predicted multilabel in the $t$'th base classifier.
+where by $T$ we denote the size of the ensemble, and by $F^{(t)}(\vx)=\{F^{(t)}_j(x)\}_{j=1}^{k}$ we denote the predicted multilabel from the $t$'th base classifier.
 In words, the ensemble prediction on each microlabel is the most frequently appearing prediction among the base classifiers.
-It is also worthy of noticing that the \mve\ framework can be extended with any structured output learning models as long as they incorporate the output structure into learning process and make predictions based on the structure.
+It is also worthy of noticing that the \mve\ framework is not restrict to base classifier \mmcrf\ and can be extended with any structured output learning models as long as they incorporate the output structure into learning process and make predictions based on the structure.
 
-We designed two approaches to generate random output graphs.
-In random spanning tree approach, we first generate a random correlation matrix and extract the spanning tree out from the matrix.
-The approach will eventual output a tree structure connecting all vertices.
-In random pairing approach, we randomly draw two vertices at a time and couple the two with an edge.
-The approach will output disconnected pairs.
+In addition, we designed two approaches to generate random output graphs.
+In \textbf{random spanning tree} approach, we first generate a random correlation matrix and extract the spanning tree out from the matrix.
+The approach eventually generates a tree structure connecting all vertices.
+In \textbf{random pairing} approach, we randomly draw two vertices at a time and couple the two with an edge.
+The approach outputs disconnected pairs.
 
 
 \section{Random Graph Ensemble (\amm, \mam)}\label{sc_su14a}
