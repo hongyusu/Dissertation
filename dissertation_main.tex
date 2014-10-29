@@ -12,7 +12,7 @@ This chapter aims to explain the general scope the thesis, to propose several re
 %
 \section{Scope of the Thesis}
 
-Machine learning, as defined by Arthur Samuel ``a field of study that gives computers the ability to learn without being explicitly programmed'', has become an active research field in information and computer science during the past few decades.
+Machine learning, defined by Arthur Samuel as ``a field of study that gives computers the ability to learn without being explicitly programmed'', has become an active research field in information and computer science during the past few decades.
 
 \textit{Machine learning}, an active research field in information and computer science, has drawn enormous attentions during the last few decades, not only because it develops intelligent systems that generalize well from previously observed examples; but also because it is rooted from rich statistical learning theories that prove the feasibility and guarantee the performance.
 Machine learning has in practice provided lots of inventions, that people may use many times a day without noticing, from web searching engine to self-driving car, from optical image recognizer to spam filter, from automatic stock exchange to online recommender system.
@@ -34,21 +34,21 @@ Especially, the learning models built on Markov network over multiple output var
 On the other hand, methods that do not explicitly assume the output structure usually have less power of modeling the interdependency and often struggle in optimization due to the exponential sized searching space.
 
 
-In this thesis, we examine the potential of applying structured output learning to improve the prediction perforamnce in real world multilabel classification problems.
+In this thesis, we examine the potential of applying structured output learning to improve the prediction performance in real world multilabel classification problems.
 In addition, we work on the problem of the structured output learning when the output dependency structure is not observed.
-We investigate the efficiency and the scalability of the inference problems within the proposed learning models as the inference problem of the structured output learning is often difficult to solve.
-Besides, we study the proposed model from the theoretic aspect where we wish to gain better understanding of the behaviour.
+We also investigate the efficiency and the scalability of the inference problems in the proposed structured output learning models as the inference problem of the structured output learning is often difficult to solve.
+Besides, we study the proposed models from the theoretic aspect where we wish to gain better understanding of the behaviour.
 In particular, the research questions can be casted as following:
 \begin{enumerate}[label=\textbf{Q \Roman*}:]
-\item Is the structured output learning approach 
+	
+\item In terms of multilabel classification, is the structured output learning approach more appropriate compared to flat multilabel classification approach which does not model the output dependency structure?
 
-Is the structured output prediction model more suitable for predicting multiple interdependent variables in structured output space?
+\item How to apply the structured output learning on multilabel classification problem where the dependency structure is not observed.
 
-\item How to tackle the problem of structured output learning without observed output structure?
-
-\item What is the motivation of the proposed structured output learning framework? Can we explain the improvement and guarantee the empirical risk of the proposed models?
+\item Can we understand the behavior of the proposed structured output prediction models from theoretical aspect? 
 
 \item Can we efficiently tackle the inference problems in the proposed structured output learning models.
+
 \end{enumerate}
 
 
