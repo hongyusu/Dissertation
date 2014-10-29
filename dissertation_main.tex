@@ -1786,15 +1786,24 @@ As a result, the proposed model can often avoid the exponential sized parameter 
 %------------------------------------------------
 \section{Future Work}
 
-What has been shown in the thesis is a new learning approach of structured output learning for multilabel classification where the output dependency structure of the multiple output variables is not observed but is assumed to be critical.
-An immediate extension is to explore its various potentials in real world multilabel classification applications where the the dependency structure is difficult to obtain.
+The work presented in the thesis can be extended along two main directions.
+First, the presented algorithm can be applied into other multilabel classification problems in structured output space.
+Secondly, the algorithm development and theoretic analysis can be continued.
+As the first direction of applying the presented algorithm is clear and more application oriented, we will concentrate on the algorithm development and theory analysis part.
 
-With respect to algorithm development and theoretical study, we plan to continue with \rta\ framework that performs joint learning and inference over a random sample of spanning trees.
-In particular, we will explore the possibility of applying $L_1$ norm combination of the feature weight parameter $\vw_{T_t}$ of individual random spanning tree, instead of using convex $L_2$ norm combination. 
-Learning with $L_1$ norm regularization of parameter combination can be expressed into an equivalent form of learning weighted $L_2$ norm regularization \citep{Rakotomamonjy08simplemkl}, where the weight of $\{\vw_{T_t}\}_{t=1}^{T}$ is the extra parameter during the optimization.
-We also gain benefit by seeing the weight as the fitness of each spanning tree to current training data.
-Similar to $L_2$ norm, the studies on generalization error and the condition for the tractable inference are required.
-Besides the alternative optimization for the $L_1$ norm combination in \citep{Rakotomamonjy08simplemkl}, we plan to develop more elegant optimization strategy for the problem. 
+As a starting point, we can extend \spin\ model by developing new inference algorithm that is both scalable and has apprimation guarantee.
+Besides, the current research ends with \rta\ method that performs joint learning and inference on a random sample of spanning trees.
+\rta\ combines the feature weight parameter from each spanning tree using $L_2$-norm convex combination.
+We can further explore the possibility of combining the feature weight vectors by $L_1$-norm combination.
+Learning with $L_1$-norm regularization of parameter combination has previously been studied under the multiple kernel learning setting
+\citep{Rakotomamonjy08simplemkl}, which can be formulated into an equivalent form of learning a weighted $L_2$-norm combination.
+The weight of parameter vector on each spanning tree can be seen as the fitness of the tree to the current learning problem.
+This can be used to select output graph that is most relevant to the current problem.
+We should also design the optimization techniques for $L_1$-norm regularization as current alternative optimization method in \citep{Rakotomamonjy08simplemkl} is not efficient.
+The theoretical properties should also be extended from \rta\ to the new model. 
+
+
+
 
 
 
