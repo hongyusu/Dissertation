@@ -35,7 +35,7 @@ The flat multilabel classification render the difficulty of modeling the complex
 Structured output prediction appears as a natural remedy to the flat multilabel classification.
 The models of this type usually incorporate the output dependency structure into the learning process \citep{lafferty01,taskar02,Taskar04max,THJA04}.
 One problem inherited with structured output learning is the output dependency structure is assumed to be observed.
-However, this cannot be taken as granted as it is difficult to obtain the correct dependency structure for the output variables in many applications \citep{Chickering94learning}.
+However, this cannot be taken as granted since the proper dependency structure for the output variables is either hidden or difficult to retrieve in many applications \citep{Chickering94learning}.
 
 In this thesis, we examine the potential of applying structured output learning to improve the prediction performance in real world multilabel classification problems.
 In addition, we work on the problem of the structured output learning when the output dependency structure is not observed.
@@ -1764,65 +1764,21 @@ In this chapter, the author aims to briefly summarize the implementation for the
 %------------------------------------------------
 \chapter{Conclusion}\label{ch_conclusion}
 
-In this last chapter, the author aims to summerize the main content of the thesis and to discuss the possible directions for further research.
-
-
 
 %------------------------------------------------
 %	section
 %------------------------------------------------
 \section{Discussion}
 
-In this thesis, we study supervised learning in structured output space of which the task is to predict the best values for multiple interdependent variables given an arbitrary input variable.
-In particular, we focus on the problem of structured output learning when the output structure is unknown.
-We propose a learning framework that aims to optimize on a random sample of spanning trees as output structure.
-The novel learning framework is well motivated in terms of margin achieved by training examples, and the performance in terms of generalization error is also guaranteed.
-In addition to the new learning framework, we also develop a new structured output prediction method that is able to predict a directed acyclic graph (DAG) and apply the methods on network influence prediction problem.
-We also tackle the optimization problem of the proposed models for which the exponential sized parameter space and the \nphard\ inference problem can usually be avoided.
+In this thesis, we focus on structured output learning for multilabel classification.
+In particular, we have developed new learning algorithms that incorporates the output dependency structure into learning process.
+The new models gain advantage of modeling label correlation.
+We have examined the performance of the proposed methods in two real world multilabel classification tasks, namely molecular activity prediction and network influence prediction.
+In addition, we have studied the problem of the structured output learning where the output graph is not observed.
+We have designed the new learning framework that is able to learn from a random sample of spanning trees, which widen the applicability of the structured output learning.
+We have also explored the efficient inference algorithm.
+As a result, the proposed model can often avoid the exponential sized parameter and difficult inference problem.
 
-We have posed several research questions at the beginning of the thesis which serve as the guide through the presentation of the work.
-Section~\ref{sc_single} and Section~\ref{sc_multi} introduce the backgrounds of both single-task and multi-task learnings.
-The sections also present several well-established algorithms that are relevant to the thesis.
-Section~\ref{sc_ensemble} discuss a few ensemble approaches that are close related to the learning framework developed in the thesis.
-After the introduction, Chapter~\ref{ch_models} devotes to bringing in novel statistical models for structured output prediction that are developed by the author.
-We will revisit the research questions with the insights and the results we gain from the novel statistical models that are briefly presented in the thesis as well as detailed in the publications.
-In particular, we give the answer to the following questions.
-
-\begin{enumerate}[label=\textbf{Q \Roman*}:]
-\item Is the structured output prediction models more suitable for predicting multiple interdependent variables in structured output space?
-
-Multi-task structured output prediction problem presented in Section~\ref{sc_multi} requires multiple output variables to be predicted at the same time.
-The structured output prediction models are more suitable for the problem as it describes the interdependencies between the output variables and is more efficient compared to the single-task models presented in Section~\ref{sc_single}.
-Besides, we have demonstrated the performance of the structured output prediction models in molecular activity prediction problem presented in \citepub{su10} and in network influence prediction problem presented in \citepub{su14a}.
-
-\item How to tackle the problem of structured output learning without observed output structure?
-
-As it is often difficult to get the output structure that describes the interdependencies of the output variables, we have developed several algorithms which eventually lead to a general learning framework that learns from a random sample of spanning trees.
-In particular, we have developed the following learning algorithms.
-\mve\ which collects and postprocesses the predictions from each spanning tree.
-\amm\ and \mam\ both performs parameter learning based on individual random spanning tree.
-The only difference is that the inference of \amm\ is also computed on individual tree, on the other hand, the inference of \mam\ is based on the consensus graph by pooling edges from all spanning trees.
-Furthermore, \rta\ brings in the joint learning and inference such that all random spanning trees are optimized toward the same global objective.
-
-\item What is the motivation of the proposed structured output learning framework? Can we explain the improvement and guarantee the empirical risk of the proposed models?
-
-The proposed learning framework is designed for structured output prediction problem with unknown output structure.
-Learning with any observed structure can be seen as a special case of learning with a complete graph.
-The idea of learning from a random sample of spanning trees as output graph has been explained in \citepub{su14c} as an approximation to learning with a complete graph in terms of margin achieved on a set of training examples.
-Thus, the proposed new learning framework is well motivated.
-The improvement of the performance can be explained in terms of reconstruction error of the compatibility scores as in \citepub{su14a}.
-\citepub{su14c} also provide the generalization error for the proposed model.
-
-\item Can we efficiently optimize the proposed structured output prediction models?
-
-The optimization problem in structured output prediction is usually difficult to optimize for two reasons, exponential sized parameter space due to the number of possible solutions and the \nphard\ inference problem instantiated as MAP configuration on the general graph.
-To avoid the exponential sized parameter space, we use marginalize dual decomposition technique which reduces the parameter space to polynomial size in terms of the number of edges in the output graph.
-We used different strategies to overcome the \nphard\ inference problem.
-We applied loopy belief propagation for the inference problem defined on the general graph structure with approximate solution.
-We used dynamic programming for the inference problem defined on a tree structure where the exact solution is guaranteed.
-We developed $K$-best inference algorithm in \citepub{su14c} for the inference problem defined on a set of random spanning trees.
-We have also developed \sdp\ inference algorithm for the inference problem defined on directed acyclic graph (DAG).
-\end{enumerate}
 
 
 %------------------------------------------------
@@ -1830,9 +1786,8 @@ We have also developed \sdp\ inference algorithm for the inference problem defin
 %------------------------------------------------
 \section{Future Work}
 
-What has been shown in the thesis is a new learning framework with algorithm instantiations for structured output prediction problems where the structure of the output is not known but is expected to play an important role.
-An immediate extension is to explore its enormous potentials in real world practical data analysis applications with the significant benefit that we do not need to know the output structure as \textit{prior}.
-In addition, since the inference algorithm designed for optimizing over a random sample of spanning tree is tractable both in theoretic analysis and empirical results, we can apply the model on the structure prediction problems for which the output structure is rather complex.
+What has been shown in the thesis is a new learning approach of structured output learning for multilabel classification where the output dependency structure of the multiple output variables is not observed but is assumed to be critical.
+An immediate extension is to explore its various potentials in real world multilabel classification applications where the the dependency structure is difficult to obtain.
 
 With respect to algorithm development and theoretical study, we plan to continue with \rta\ framework that performs joint learning and inference over a random sample of spanning trees.
 In particular, we will explore the possibility of applying $L_1$ norm combination of the feature weight parameter $\vw_{T_t}$ of individual random spanning tree, instead of using convex $L_2$ norm combination. 
