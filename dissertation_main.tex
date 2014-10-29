@@ -24,16 +24,18 @@ In the classical supervised learning setting, the output variable to be predicte
 In machine learning community, it is referred as single-label classification if the output is discrete valued, or as regression if the output is continuous valued.
 Many single-label classification models have been designed and applied in practice, for example, the support vector machines \citep{Boser92,Cortes95support} and the logistic regression \citep{Chen99,Chen00,Goodman03}.
 
-However, many real world problems require multiple interdependent output variables defined in structured output space to be predicted at the same time, known as \textit{multi-task structured output prediction}.
-Otherwise, the problem can be summarized as learning a function for mapping from arbitrary input to arbitrary output.
-In this case, single-task classification approach renders inefficiency and incapability of modeling the interdependency.
-In addition, the interdependency can be given either explicitly as the output graph that connecting multiple output variables (e.g. sequence parsing, network influence prediction, hierarchical document classification), or implicitly with the only assumption that the output variable are correlated (e.g. molecular classification, computer vision).
-Nevertheless, it is crucial to capture the common properties shared between similar output variables in order to achieve good performance and to generalize well.
+Multilabel classification is a natural extension to single-label classification by defining multiple valued output associated with each input instant.
+Problems of this type are prevalent in everyday life.
+For example, movie can be classified as ``action'', ``documentary'' and ``crime''; a news article can be categorized as ``science'', ``drug'' and ``people''; a gene can associate to multiple functions in genomics research; or a surveillant photo can be tagged by both ``car'' and ``building''. 
+The problem is known as flat multilabel classification when the multiple output variables are essentially treated as a ``flat'' vector.
+The flat multilabel classification problem has draw increasing amount of interest from machine learning community \citep{Tsoumakas07multi,Tsoumakas10mining}, and been tackled by many algorithms that aim to exploring the correlation and dependency between multiple output variables in order to make better prediction \citep{Read09classifier,Cheng09combining,Bian12corrlog}.
 
-Most existing methods for structured output prediction do not tackle the situation when the output graph structure is not observed.
-Especially, the learning models built on Markov network over multiple output variables will break down without the observed output structure.
-On the other hand, methods that do not explicitly assume the output structure usually have less power of modeling the interdependency and often struggle in optimization due to the exponential sized searching space.
-
+In multilabel classification problem, multiple interdependent output variables are usually located in a structured output space where the dependency or correlation of the variables is defined by the structure of an output graph (e.g. Markov network).
+The flat multilabel classification render the difficulty of modeling the complex dependency structure.
+Structured output prediction appears as a natural remedy to the flat multilabel classification.
+The models of this type usually incorporate the output dependency structure into the learning process \citep{lafferty01,taskar02,Taskar04max,THJA04}.
+One problem inherited with structured output learning is the output dependency structure is assumed to be observed.
+However, this cannot be taken as granted as it is difficult to obtain the correct dependency structure for the output variables in many applications \citep{Chickering94learning}.
 
 In this thesis, we examine the potential of applying structured output learning to improve the prediction performance in real world multilabel classification problems.
 In addition, we work on the problem of the structured output learning when the output dependency structure is not observed.
@@ -1552,7 +1554,7 @@ It lays the foundation of performing inference on unknown structure to achieve a
 \subsection{Background}
 
 Limiting the applicability of structured output learning methods is the fact that the output structure is assume to be observed.
-It is also difficult to learn the dependency structure from data \citep{Chickering94learning} if it not harder than structured output learning itself.
+It is also difficult to learn the dependency structure from data \citep{Chickering94learning} if it is not harder than structured output learning itself.
 We can instead opt to the \textit{complete graph} by assuming the complete set of pairwise dependency has enough expression power.
 In particular, we can construct a structured output learner with a complete graph as output graph and rely on the optimization algorithm to uncover the hidden ``parameters'' defined on the edges (e.g. edge potentials).
 To understand this, think the edges that are not from the correct output graph will have zero ``parameters'' in the complete graph.
