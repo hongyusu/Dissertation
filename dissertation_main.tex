@@ -24,7 +24,7 @@ In the classical supervised learning setting, the output variable to be predicte
 In machine learning community, it is referred as single-label classification if the output is discrete valued, or as regression if the output is continuous valued.
 Many single-label classification models have been designed and applied in practice, for example, the support vector machines \citep{Boser92,Cortes95support} and the logistic regression \citep{Chen99,Chen00,Goodman03}.
 
-Multilabel classification is a natural extension to single-label classification by defining multiple valued output associated with each input instant.
+Multilabel classification is a natural extension to single-label classification by defining multiple valued output associated with each inputs.
 Problems of this type are prevalent in everyday life.
 For example, movie can be classified as ``action'', ``documentary'' and ``crime''; a news article can be categorized as ``science'', ``drug'' and ``people''; a gene can associate to multiple functions in genomics research; or a surveillant photo can be tagged by both ``car'' and ``building''. 
 The problem is known as flat multilabel classification when the multiple output variables are essentially treated as a ``flat'' vector.
@@ -66,12 +66,12 @@ The contributions of the thesis first include developing new structured output l
 The proposed methods can incorporate the output dependency structure into the learning process.
 The methods are applied in molecular activity prediction task and the network influence prediction task.
 Besides, we tackle the problem of applying structured output learning on multilabel classification where the output dependency structure is not observed.
-We have designed new learning framework that does not required the observed output dependency structure, instead can learn from a random sample of spanning trees as output graph.
+We have designed new learning framework that does not required the observed output dependency structure, instead can learn from a random sample of spanning trees as the output graph.
 
 The thesis is structured as follows.
 In Chapter~\ref{ch_introduction}, the scope of the research is briefly presented with several research questions being proposed which will be answered through this thesis.
-Chapter~\ref{ch_rlc} give the background introduction to the learning problem in classification which is necessary to understand the later part of the thesis.
-In particular, the chapter covers the basic concepts in classification learning include regularized risk minimization in Section~\ref{sc_rrm}, single-label classification in Section~\ref{sc_slc}, ensemble learning in Section~\ref{sc_em}.
+Chapter~\ref{ch_rlc} gives the background introduction to the learning problem in classification which is necessary to understand the later part of the thesis.
+In particular, the chapter covers the basic concepts in classification learning including regularized risk minimization in Section~\ref{sc_rrm}, single-label classification in Section~\ref{sc_slc}, ensemble learning in Section~\ref{sc_em}.
 Chapter~\ref{ch_fmlc} introduces the multilabel classification problem which is the core problem under study in this thesis.
 The chapter also describes the flat multilabel classification approach which is a standard treatment for multilabel classification problem.
 Chapter~\ref{ch_sop} and Chapter~\ref{ch_sopw} present the main contributions of the thesis.
