@@ -3,25 +3,26 @@
 
 
 
-
+%
+%
 \chapter{Introduction}\label{ch_introduction}
 
-This chapter aims to explain the general scope the thesis, to propose several research questions, and to briefly review the contributions of the thesis.
+
 
 %
 %
 \section{Scope of the Thesis}
 
-Machine learning, defined by Arthur Samuel as ``a field of study that gives computers the ability to learn without being explicitly programmed'', has become an active research field in information and computer science during the past few decades.
+Machine learning, defined by Arthur Samuel in $1959$ as ``a field of study that gives computers the ability to learn without being explicitly programmed'', has gained its popularity and become an active research field in information and computer science during the past few decades.
+Machine learning not only brings in intelligent system that generalizes well from previously observed examples, but also is firmly rooted in the statistical learning theory that establishes the conditions to guarantee the good generalization \citep{Vapnik98statistical,Vapnik99an}.
+Machine learning appears in many real world applications, to name but a few, page ranker in web search engine \citep{Richardson06beyond}, email spam filter\citep{Goodman06online}, recommender system in online shopping \citep{Bell07lessons}, optical image recognizer and speech recognizer \citep{Bengio09learning}.
+With increasing availability of large scale data, machine learning is expected to play ans indispensable role in many research fields \citep{Fan13mining}.
 
-\textit{Machine learning}, an active research field in information and computer science, has drawn enormous attentions during the last few decades, not only because it develops intelligent systems that generalize well from previously observed examples; but also because it is rooted from rich statistical learning theories that prove the feasibility and guarantee the performance.
-Machine learning has in practice provided lots of inventions, that people may use many times a day without noticing, from web searching engine to self-driving car, from optical image recognizer to spam filter, from automatic stock exchange to online recommender system.
-
-\textit{Supervised learning}, one of the most important fields in {machine learning}, is usually instantiated as learning a function that is capable of predicting the best value for the output variable $\vy$ given an observed input variable $\vx$.
-The function is learned by utilizing a set of observed input/output pairs known as training examples.
-In the classical supervised learning setting, the value that the output variable $\vy$ can take is often no more than one discrete or continuous number.
-This is often referred as \textit{single-task classification} in machine learning community.
-Many well-designed learning algorithms have been delivered for the problem and achieved remarkable success in many applications.
+Supervised learning, an important paradigm in machine learning, is usually instantiated as learning a function that is capable of predicting the best value for an output variable given an arbitrary input variable.
+The function is learned by exploring a set of observed input/output pairs known as training examples.
+In the classical supervised learning setting, the output variable to be predicted can only take one value.
+In machine learning community, it is referred as single-label classification if the output is discrete valued, or as regression if the output is continuous valued.
+Many single-label classification models have been designed and applied in practice, for example, the support vector machines \citep{Boser92,Cortes95support} and the logistic regression \citep{Chen99,Chen00,Goodman03}.
 
 However, many real world problems require multiple interdependent output variables defined in structured output space to be predicted at the same time, known as \textit{multi-task structured output prediction}.
 Otherwise, the problem can be summarized as learning a function for mapping from arbitrary input to arbitrary output.
