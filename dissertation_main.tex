@@ -6,12 +6,13 @@
 
 \chapter{Introduction}\label{ch_introduction}
 
+This chapter aims to explain the general scope the thesis, to propose several research questions, and to briefly review the contributions of the thesis.
 
 %
 %
 \section{Scope of the Thesis}
 
-In this thesis, we study the \textit{supervised learning} in structured output space, also known as \textit{structured output prediction}.
+Machine learning, as defined by Arthur Samuel ``a field of study that gives computers the ability to learn without being explicitly programmed'', has become an active research field in information and computer science during the past few decades.
 
 \textit{Machine learning}, an active research field in information and computer science, has drawn enormous attentions during the last few decades, not only because it develops intelligent systems that generalize well from previously observed examples; but also because it is rooted from rich statistical learning theories that prove the feasibility and guarantee the performance.
 Machine learning has in practice provided lots of inventions, that people may use many times a day without noticing, from web searching engine to self-driving car, from optical image recognizer to spam filter, from automatic stock exchange to online recommender system.
@@ -32,17 +33,22 @@ Most existing methods for structured output prediction do not tackle the situati
 Especially, the learning models built on Markov network over multiple output variables will break down without the observed output structure.
 On the other hand, methods that do not explicitly assume the output structure usually have less power of modeling the interdependency and often struggle in optimization due to the exponential sized searching space.
 
-In this thesis, we investigate the potentials of developing novel structured output prediction models to improve the prediction performance in real world multi-task classification problems (e.g. molecular activity prediction, network influence prediction).
-In particular, we present the novel structured output prediction models that are capable of learning without predefined structure.
-We focus on the efficiency and the scalability of the proposed structured output prediction models, as the inference problem is often difficult to solve.
-Additionally, our new models are well motivated.
-The theoretical study is able to explain the behaviour and to guarantee the performance of the models.
-In particular, our research questions can be casted as followings:
+
+In this thesis, we examine the potential of applying structured output learning to improve the prediction perforamnce in real world multilabel classification problems.
+In addition, we work on the problem of the structured output learning when the output dependency structure is not observed.
+We investigate the efficiency and the scalability of the inference problems within the proposed learning models as the inference problem of the structured output learning is often difficult to solve.
+Besides, we study the proposed model from the theoretic aspect where we wish to gain better understanding of the behaviour.
+In particular, the research questions can be casted as following:
 \begin{enumerate}[label=\textbf{Q \Roman*}:]
-\item Is the structured output prediction model more suitable for predicting multiple interdependent variables in structured output space?
+\item Is the structured output learning approach 
+
+Is the structured output prediction model more suitable for predicting multiple interdependent variables in structured output space?
+
 \item How to tackle the problem of structured output learning without observed output structure?
+
 \item What is the motivation of the proposed structured output learning framework? Can we explain the improvement and guarantee the empirical risk of the proposed models?
-\item Can we efficiently optimize the proposed structured output prediction models?
+
+\item Can we efficiently tackle the inference problems in the proposed structured output learning models.
 \end{enumerate}
 
 
@@ -51,37 +57,31 @@ In particular, our research questions can be casted as followings:
 %
 \section{Contribution and Outline of the Thesis}
 
-The main contribution of the thesis is to present a learning framework for structured output prediction with both empirical and theoretical guarantee.
-Under the framework, several learning algorithms are proposed.
-Unlike previous structured output learning algorithms, the proposed models do not assume any observed structured on the output variables, and thus largely widen the applicability of the structured output learning.
-Meanwhile, the thesis presents several attractive theoretical properties which support the new learning framework and guarantee the generalization error.
-In addition to the main contribution, the thesis also proposes a new learning algorithm that is capable of predicting a directed acyclic graph and demonstrating the performance on the influence network prediction problem.
-Besides, the thesis also focuses on elegant optimization strategy with which the proposed models often avoid the exponential parameter space and the \nphard\ inference problem.
+The thesis focuses on the statistical learning on multilabel classification problem.
+It broadly reviews several lines of the research in this emerging field.
+The contribution of the thesis includes but is not limited to developing structured output learning methods for multilabel classification problem.
+In particular, we have designed new learning methods that incorporate the output dependency structure into the learning process.
+The methods are applied on molecular activity prediction task and the network influence prediction task.
+Besides, we have worked on the problem of the structured output learning where the output dependency structure is not observed.
+We have designed the learning framework that does not required the observed output graph and can learn from a random sample of spanning trees.
 
 The thesis is structured as follows.
 In Chapter~\ref{ch_introduction}, the scope of the research is briefly explained with several research questions being proposed which will be answered in this thesis.
-Chapter~\ref{ch_background} provides the introduction to the problem settings, learning algorithms, and statistical models that are necessary to understand the rest part of the thesis.
-The chapter starts by introducing in Section~\ref{sc_remp} two fundamental concepts, empirical risk minimization and regularization, in statistical machine learning.
-Section~\ref{sc_single} presents several single task classification algorithms, including 
-perceptron (Section~\ref{sc_perceptron}), 
-logistic regression (Section~\ref{sc_lr}), 
-and \svm\ (Section~\ref{sc_svm}).
-Section~\ref{sc_multi} will extend the previous section by introducing the learning algorithms designed for multiple interdependent variables in structured output space.
-Ensemble models for both single-task and multi-task classification will be briefly covered in Section~\ref{sc_ensemble}.
-Section~\ref{sc_statistics} describes the performance measures and the statistical models that are used for model evaluation and comparison.
+Chapter~\ref{ch_rlc} give the background of learning for classification which is necessary to understand the later part of the thesis.
+The chapter cover the basic concepts in classification learning include risk minimization and regularization in Section~\ref{sc_rrm}, single-label classification in Section~\ref{sc_slc}, ensemble methods in Section~\ref{sc_em}.
+Chapter~\ref{ch_fmlc} introduces the multilabel classification problem which is the problem under study in this thesis.
+One line of research for the problem known as flat multilabel classification is cover in this chapter.
+Chapter~\ref{ch_sop} and Chapter~\ref{ch_sopw} contain the main contribution of the thesis.
+In particular, Chapter~\ref{ch_sop} presents the structured output learning models developed for multilabel classification problem, and Chapter~\ref{ch_sopw} explains the several learning approaches that are developed for structured output learning when the output structured is not observed.
+Chapter~\ref{ch_ecm} covers the evaluation metrics and statistic test methods that are used in the reserach.
+Chapter~\ref{ch_implementation} cover the implementation details of the developed models.
+Chapter~\ref{ch_conclusion} concludes the thesis by answering the proposed research questions and showing the possible future research directions.
 
-Chapter~\ref{ch_models} introduces the novel statistical models developed by the author.
-In particular, Section~\ref{sc_su10} explains the structured output learning model for molecular activity prediction.
-Section~\ref{sc_su11} and Section~\ref{sc_su14a} discuss three ensemble models (\mve, \amm, \mam) that tackle the problem in structured output prediction when the output structure is unknown.
-Section~\ref{sc_su14c} presents \rta\ model that is a major step forward of \mam\ by performing joint learning and inference over a random sample of spanning trees.
-Section~\ref{sc_su14b} introduces network influence prediction problem and presents \spin\ that is capable of predicting a directed acyclic graph.
-Finally, Chapter~\ref{ch_conclusion} concludes the thesis by answering the research questions and pointing out future directions.
-
-In this thesis, the ideas and the formalisms of the proposed statistical models for structured output prediction are explained.
-However, the technical details from the original publications are usually not repeated.
-Furthermore, the notations and the presentations of some proposed models are slightly improved to be better incorporated into a unified framework.
-The background information and the related work of some proposed models are sometimes elaborated in the thesis to help better understand their contributions to the community.
-Empirical evaluations of the proposed models are in nowhere restated, rather, they can be found from the original research articles. 
+The thesis presents the idea and the background of the proposed structured output learning methods.
+The formalisms of the proposed methdos are also briefly explained.
+The technical details can be found from the original research articles in the later part of the thesis.
+The notations and the presentations of some proposed models are slightly improved in order to incorporate the methods into a unified framework.
+Empirical evaluations of the proposed models are in nowhere repeated, rather, they can be found from the original research articles. 
 
 
 
@@ -1404,7 +1404,7 @@ Diffusion scaling has the effect of shrinking the distance to the nodes that are
 %------------------------------------------------
 %
 %------------------------------------------------
-\chapter{Structured Output Prediction with Unknown Structure}
+\chapter{Structured Output Prediction with Unknown Structure} \label{ch_sopw}
 
 Structured output learning (Chapter~\ref{ch_sop}) gains the power of the representation by connecting multiple output variables in to an output graph.
 In this chapter, we extend the structure output prediction model to the scenario where the output graph is hidden, by exploring the potential of learning from a random set of random output graphs.
@@ -1721,7 +1721,7 @@ The test results are often visualized as \textit{$CD$ diagram}.
 %	chapter
 %
 %------------------------------------------------
-\chapter{Implementations} \label{ch_implementations}
+\chapter{Implementations} \label{ch_implementation}
 
 In this thesis, several structured output learning algorithms have been proposed to solve multilabel classification problem.
 Each presented models has been implemented into a software package.
