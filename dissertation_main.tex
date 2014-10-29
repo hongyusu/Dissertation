@@ -1465,7 +1465,7 @@ In addition, we bring in a theory which is based on the reconstruction error of 
 
 %
 %
-\subsection{Background and Introduction}
+\subsection{Background}
 
 We still work with the assumption mode for \mve\ in Section~\ref{sc_su11} in which the base classifier will devise the prediction according to the structure of the output graph.
 In addition, we assume that the base classifier for \amm\ and \mam\ is defined with a Markov network structure.
@@ -1723,12 +1723,31 @@ The test results are often visualized as \textit{$CD$ diagram}.
 %------------------------------------------------
 \chapter{Implementations} \label{ch_implementations}
 
-Developed methods are implemented as software packages and can be located from public domains.
+In this thesis, several structured output learning algorithms have been proposed to solve multilabel classification problem.
+Each presented models has been implemented into a software package.
+In this chapter, the author aims to briefly summarize the implementation for the sake of clarity and link the implementation to public domain.
+
 \begin{enumerate}
-	\item \rta\ for joint learning and inference on a random sample of spanning trees for multilabel classification.
-	\item \spin\ for network influence prediction.
-	\item \mve, \amm, \mam\ for learning an ensemble on a set of structured output learners built from random spanning trees.
-	\item Structured output prediction model for molecular activities classification problem.
+	\item \rta\ developed in \citepub{su14c} is a structured output prediction model for multilabel classification problem. \rta\ performs joint learning and inference on a random sample of spanning trees.
+	\begin{enumerate}
+		\item The inference algorithm is written in \cpp. The parallelization of the inference algorithm is written with \openmp. Other parts of \rta\ are mostly written in \matlab.
+		\item The package can be found from \url{git@github.com:hongyusu/random_spanning_tree_approximation.git}.
+	\end{enumerate}
+	\item \spin\ developed in \citepub{su14a} is a structured output prediction model that is capable of predicting a direct acyclic graph. \spin\ is designed for network influence prediction.
+	\begin{enumerate}
+		\item The major part of the \rta\ is written in \matlab. \sdp\ inference algorithm is written with \cvx\ package designed for convex programming. The data preprocessing with topic model is written in \python\ and \matlab.
+		\item The implementation can be found from \url{git@github.com:hongyusu/SPIN.git}.
+	\end{enumerate}
+	\item \mve\ developed in \citepub{su11} and \citepub{su14b}, \amm\ and \mam\ presented in \citepub{su14b} are ensemble models that combines a set of structured output classifiers built from a set of random spanning trees.
+	\begin{enumerate}
+		\item The codes are written in \matlab.
+		\item The implementation can be found from \url{git@github.com:hongyusu/RandomOutputGraphEnsemble.git}.
+	\end{enumerate}
+	\item The structured output model used in \citepub{su10} for molecular activities classification is a instantiation of \mmcrf\ developed in \cite{rousu06}.
+	\begin{enumerate}
+		\item The code is written in \matlab.
+		\item The implementation can be found from \url{http://research.ics.aalto.fi/kepaco/software.shtml}.
+	\end{enumerate}
 \end{enumerate}
 
 
@@ -1740,6 +1759,10 @@ Developed methods are implemented as software packages and can be located from p
 %
 %------------------------------------------------
 \chapter{Conclusion}\label{ch_conclusion}
+
+In this last chapter, the author aims to summerize the main content of the thesis and to discuss the possible directions for further research.
+
+
 
 %------------------------------------------------
 %	section
