@@ -1775,18 +1775,23 @@ In particular, we focused on multilabel classification where the task is to pred
 As the multiple variables can be ``on'' or ``off'' simultaneously, the central problem in multilabel classification is to explore the label correlation in order to make better prediction.
 The problem has been previously tackled by flat multilabel classification approach which treats the multiple outputs essentially as a ``flat'' vector.
 The flat multilabel classification approach has difficulty of modeling the label correlation.
-Structured output learning approach is a natural remedy to flat multilabel classification.
+The structured output learning approach is a natural remedy to flat multilabel classification.
 The first outcome of the thesis is to extend the structured output learning methods.
 In particular, we have apply the structured output learning on molecular activity classification problem.
 We have also developed \spin\ that is able to predict a directed acyclic graph that connects multiple output variables.
-\spin\ has beed used in network influence prediction problem.
-The methods and the empirical results have demonstrated that structured output learning is an important extension to flat multilabel classification approach for predicting multiple interdependent output variables.
+\spin\ has beed applied in network influence prediction problem.
+It is also useful in predicting other influence or spreading typed problems.
+Both the methods and the empirical results have demonstrated that structured output learning is an important extension to flat multilabel classification approach for predicting multiple interdependent output variables.
 
-The current structured output learning approach rely on representing the label correlation as a output graph.
-The output graph is assumed to be observed.
+The current structured output learning approach rely on representing the label correlation as a output graph which is assumed to be observed.
 The second outcome of the thesis is the new methods for structured output learning when the output dependency structure is not observed.
-The new methods aim to learn from a random set of spanning trees that connect multiple output variables.
+The new methods aim to learn from a random set of spanning trees that connect multiple output variables, thus widen the applicability of the structured output learning.
+Besides, we have studied the behaviour of the proposed methods in terms of reconstruction error of the compatibility score as well as the generalization error which guaranteed the performance of the proposed models.
 
+In addition, we have design the inference algorithms for the proposed structured output learning methods, which can avoid the exponential number of parameter space. 
+
+
+ 
 
 
 
