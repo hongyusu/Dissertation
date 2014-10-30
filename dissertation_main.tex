@@ -134,14 +134,14 @@ The empirical risk minimization strategy is ill-posed which in principle can pro
 Besides, it often leads to \textit{overfitting} when the dimensionality of the feature space is high and the number of training data is limited.
 In other words, underlying true distribution $P(\vx,\vy)$ is difficult to to estimate from a finite sample of training examples.
 Thus, the estimator will generalize poorly on unseen test examples.
-The \textit{regularization theory} provides a framework to alleviate these two difficulties.
+The {regularization theory} \citep{Evgeniou02regularization} provides a framework to alleviate these two difficulties.
 In particular, it suggests to minimize 
  \begin{align*}
 	\Jcal(f) = \Rcal_{emp}(f) + \Omega(f),
 \end{align*}
 where $\Omega(f)$ is the regularization function that controls the complexity of the estimator $f$ by penalizing the norm of the feature weight vector.
 
-In terms of the linear function class, there are varying way to defined the regularization term $\Omega(f)$ among which $L_1$-norm and $L_2$-norm regularization are most popular.
+In terms of the linear function class, there are many ways to define the regularization term $\Omega(f)$ among which $L_1$-norm and $L_2$-norm regularization are most popular.
 The $L_2$-norm regularization, defined by 
 \begin{align*}
 	\Omega(f) = ||\vw||_2=\left(\sum_{i=1}^d|\vw[i]|^2\right)^{\frac{1}{2}},
@@ -153,7 +153,7 @@ The $L_1$-norm regularization, defined by
 	\Omega(f) = ||\vw||_1=\sum_{i=1}^d|\vw[i]|,
 \end{align*}
 provides sparse parameter estimation which means that we obtain a high dimensional weight vector with many zero entries.
-This is a attractive property as the feature selection is incorporated into the learning and the interpretability of the resulting model is often high.
+This is an attractive property as the feature selection is incorporated into the learning and the interpretability of the resulting model is often high.
 The $L_1$-norm regularization has been applied in, for example, \lasso\ \citep{Tibshirani94regression}.
 Besides, other regularization techniques have been widely studied, to name a few, $L_{1,2}$-norm regularization \citep{Argyriou07multitask} and elastic net regularization \citep{Zou05regularizationa}.
 
@@ -166,28 +166,29 @@ Besides, other regularization techniques have been widely studied, to name a few
 In this section, the author will introduce the basic classification problem known as \textit{single-label classification}.
 The author will explain three prominent algorithms in this area: Perceptron, Logistic Regression and Support Vector Machines.
 The optimization techniques and the latest advances of these algorithms will also be briefly discussed.
-The goal is to cover the background that is necessary to understand the algorithms presented in the later part of the dissertation. 
+The goal is to cover the background that is necessary to understand the algorithms presented in the later part of the thesis. 
 
 %
 %
 \subsection{Preliminary and Notations}\label{sc_slc_pn}
-We consider supervised learning problem which assumes an arbitrary input space $\vXcal$, an output space $\Ycal$, and the training samples coming in pairs $(\vx_i,y_i)\in\vXcal\times\Ycal$.
+We consider the supervised learning problem which assumes an arbitrary input space $\vXcal$, an output space $\Ycal$, and the training samples coming in pairs $(\vx_i,y_i)\in\vXcal\times\Ycal$.
 The definition of the output space will decide the type of the learning problem.
 For example, we obtain multiclass classification problem by setting $\Ycal=\{1,\cdots,K\}$ and regression problem by setting $\Ycal=\RR$ where $\RR$ is the set of real numbers.
-In this chapter we focus on standard supervised learning problem also known as \textit{binary classification}, we explicitly assume the output space $\Ycal=\{-1,+1\}$ (instead of $\Ycal=\{0,+1\}$).
+In this chapter we focus on the standard supervised learning problem also known as \textit{binary classification}.
+We explicitly assume the output space $\Ycal=\{-1,+1\}$ (instead of $\Ycal=\{0,+1\}$).
 Additionally, we assume a feature map $\varphib:\vXcal\rightarrow\Fcal$, which embeds the input into some high dimensional feature space $\Fcal=\RR^d$.
 In particular, $\varphib(\vx)$ is a real value vector of $d$ dimension.
-Given a training set of $m$ training examples $\Scal=\{(\vx_1,y_1),\cdots,(\vx_m,y_m)\}$, the goal is to learn from a \textit{hypothesis class} $\Hcal$ a mapping function $f\in\Hcal:\vXcal\rightarrow\Ycal$ that maps an input $\vx\in\vXcal$ to an output $y\in\Ycal$. 
+Given a training set of $m$ training examples $\Scal=\{(\vx_1,y_1),\cdots,(\vx_m,y_m)\}$, the goal is to learn from a {hypothesis class} $\Hcal$ a mapping function $f\in\Hcal:\vXcal\rightarrow\Ycal$ that maps an input $\vx\in\vXcal$ to an output $y\in\Ycal$. 
 
 We consider the hypothesis class to be a set of \textit{linear classifiers} that are parameterized by the weight vector $\vw$ and the bias term $b$ defined as
 \begin{align}
 	f(\vx;\vw,b) = \ip{\vw}{\varphib(\vx)} + b, \label{linearclassifier}
 \end{align}
-where by $\ip{\cdot\,}{\cdot\,}$ we denote the inner product of two vectors
+where $\ip{\cdot\,}{\cdot\,}$ denotes the inner product of two vectors
 \begin{align*}
 	\ip{\vw}{\varphib(\vx)} = \sum_{i=1}^{d}\vw[i]\,\varphib(\vx)[i].
 \end{align*}
-In addition, for any $1\le\rho\in\RR$ we defined the {$L_{\rho}$-norm of vector $\vw$ as
+For any $1\le\rho\in\RR$ we defined the {$L_{\rho}$-norm of vector $\vw$ as
 \begin{align*}
 	\norm{\vw}_{\rho} = \left(\sum_{i=1}^{d}|\vw[i]|^{\rho}\right)^{\frac{1}{\rho}}.
 \end{align*}
