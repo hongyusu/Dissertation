@@ -409,10 +409,11 @@ Instead of maximizing the posteriori (\ref{lr_posteriori}), it is easier to maxi
 	\log P(\vw,b|D;\sigma^2) = -{\frac{\norm{\vw}^2}{\sigma^2}} - \sum_{i=1}^{m}\log{(1+\exponential{-y_i(\ip{\varphib(\vx_i)}{\vw}+b)})}. \label{lr_posteriori_log}
 \end{align}
 
-Many optimization techniques have been proposed \citep{Minka03}, for example, the {Itrative Scaling} method proposed in \citep{Darroch72,Pietra97inducing,Berger97,Goodman02Sequential,Jin03a}.
-the quasi-Newton method discussed in \citep{Minka03}, 
-the truncated Newton method presented in \citep{Komarek05making,Lin2008trust},
-the coordinate descent method proposed in \citep{Huang09iterative}.
+Many optimization techniques have been proposed \citep{Minka03}, for example, 
+the {Itrative Scaling} method \citep{Darroch72,Pietra97inducing,Berger97,Goodman02Sequential,Jin03a},
+the quasi-Newton method \citep{Minka03},
+the truncated Newton method \citep{Komarek05making,Lin2008trust},
+the coordinate descent method \citep{Huang09iterative}.
 There also exists research that aims to optimization the Logistic Regression from its dual representation.
 The first method is developed by \citet{Jaakkola99probabilistic}.
 Later on, \citet{Keerthi05a} proposed the iterative optimization and \citet{Yu11dual} developed the dual coordinate descent method.
