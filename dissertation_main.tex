@@ -1770,30 +1770,26 @@ In this chapter, the author aims to briefly summarize the implementation for the
 %------------------------------------------------
 \section{Discussion}
 
-In this thesis, we studied the supervised learning for classification.
-In particular, we focused on multilabel classification where the task is to prediction multiple interdependent output variables given an input example.
+In this thesis, we have studied the supervised learning for classification.
+In particular, we focused on multilabel classification where the task is to predict multiple interdependent output variables given an input example.
 As the multiple variables can be ``on'' or ``off'' simultaneously, the central problem in multilabel classification is to explore the label correlation in order to make better prediction.
+
 The problem has been previously tackled by flat multilabel classification approach which treats the multiple outputs essentially as a ``flat'' vector.
 The flat multilabel classification approach has difficulty of modeling the label correlation.
 The structured output learning approach is a natural remedy to flat multilabel classification.
 The first outcome of the thesis is to extend the structured output learning methods.
-In particular, we have apply the structured output learning on molecular activity classification problem.
+We have applied the structured output learning on molecular activity classification problem.
 We have also developed \spin\ that is able to predict a directed acyclic graph that connects multiple output variables.
-\spin\ has beed applied in network influence prediction problem.
+\spin\ has been applied in network influence prediction problem.
 It is also useful in predicting other influence or spreading typed problems.
 Both the methods and the empirical results have demonstrated that structured output learning is an important extension to flat multilabel classification approach for predicting multiple interdependent output variables.
 
-The current structured output learning approach rely on representing the label correlation as a output graph which is assumed to be observed.
+The current structured output learning approach rely on representing the label correlation as an output graph which is assumed to be observed.
 The second outcome of the thesis is the new methods for structured output learning when the output dependency structure is not observed.
 The new methods aim to learn from a random set of spanning trees that connect multiple output variables, thus widen the applicability of the structured output learning.
 Besides, we have studied the behaviour of the proposed methods in terms of reconstruction error of the compatibility score as well as the generalization error which guaranteed the performance of the proposed models.
 
-In addition, we have design the inference algorithms for the proposed structured output learning methods, which can avoid the exponential number of parameter space. 
-
-
- 
-
-
+In addition, we have explored the inference algorithms for the proposed structured output learning methods, which can avoid the exponential number of parameter space and provide fast convergence.
 
 
 
@@ -1805,10 +1801,10 @@ In addition, we have design the inference algorithms for the proposed structured
 The work presented in the thesis can be extended along two main directions.
 First, the presented algorithm can be applied into other multilabel classification problems in structured output space.
 Secondly, the algorithm development and theoretic analysis can be continued.
-As the first direction of applying the presented algorithm is clear and more application oriented, we will concentrate on the algorithm development and theory analysis part.
+As the first direction of applying the presented algorithms is clear and application oriented, we will concentrate on the algorithm development and theory analysis part.
 
-As a starting point, we can extend \spin\ model by developing new inference algorithm that is both scalable and has apprimation guarantee.
-Besides, the current research ends with \rta\ method that performs joint learning and inference on a random sample of spanning trees.
+As a starting point, we can extend \spin\ by developing new inference algorithm that is both scalable and with approximation guarantee.
+The current research ends with \rta\ method that performs joint learning and inference on a random sample of spanning trees.
 \rta\ combines the feature weight parameter from each spanning tree using $L_2$-norm convex combination.
 We can further explore the possibility of combining the feature weight vectors by $L_1$-norm combination.
 Learning with $L_1$-norm regularization of parameter combination has previously been studied under the multiple kernel learning setting
