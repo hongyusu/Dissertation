@@ -199,36 +199,36 @@ We use $||\vw||$ to denote the $L_2$-norm of vector $\vw$ in the following part 
 %
 \subsection{Perceptron}\label{sc_perceptron}
 
-The Rosenblatt's Perceptron algorithm \citep{Rosenblatt58,Rosenblatt62} is one type of linear classifiers that is parameterized by a weight vector $\vw$ and a bias term $b$. 
+The Perceptron developed in \citep{Rosenblatt58,Rosenblatt62} is a linear classifiers parameterized by a weight vector $\vw$ and a bias term $b$. 
 The decision boundary, given by 
 \begin{align*}
 	f(\vx;\vw,b) = \ip{\vw}{\varphib(\vx)} + b =0,
 \end{align*}
 will separate the data into two classes.
-The goal of the Perceptron learning is to obtain $\vw$ and $b$ by minimizing the distance of misclassified training examples to the decision boundary.
-
+The parameter $\vw$ and $b$ is obtained by minimizing the distance of misclassified training examples to the decision boundary.
 Assume data point $(\vx_i,y_i)$ is misclassified, the signed geometric distance from $\vx_i$ to decision boundary can be computed according to
 \begin{align*}
 	D(\vx_i;\vw,b) = -\frac{y_i(\ip{\vw}{\varphib(\vx_i)}+b)}{\norm{\vw}}.
 \end{align*}
-Denote by $\vXcal^m$ the set of misclassified examples, the objective function of Perceptron is defined as
-\begin{definition}{Perceptron Objective Function.}\label{perceptron}
+Let $\vXcal^m$ denote the set of misclassified examples, the objective function of the Perceptron is defined as
+\begin{definition}{The Perceptron Objective Function.}\label{perceptron}
 	\begin{align*}
-		\underset{\vw,b}{\minimize} \quad D(\vw,b) = \underset{\vw,b}{\minimize} \left( -\sum_{\vx_i\in\vXcal^{m}}y_i[\ip{\vw}{\varphib(\vx_i)}+b]\right).
+		\underset{\vw,b}{\minimize} \, D(\vw,b) = \underset{\vw,b}{\minimize} \left( -\sum_{\vx_i\in\vXcal^{m}}y_i[\ip{\vw}{\varphib(\vx_i)}+b]\right).
 	\end{align*}
 \end{definition}
-To optimize (Definition~\ref{perceptron}), we first assume $\vXcal^{m}$ is fixed and compute the partial gradient with respect to parameter $\vw$ and $b$
+To optimize (Definition~\ref{perceptron}), we first assume $\vXcal^{m}$ is fixed and compute the partial gradient with respect to the parameter $\vw$ and $b$
 \begin{align*}
 	\frac{\partial D(\vw,b)}{\partial\vw} = -\sum_{\vx_i\in\vXcal^m}{y_i\vx_i},\quad
 	\frac{\partial D(\vw,b)}{\partial b} = -\sum_{\vx_i\in\vXcal^m}{y_i}.
 \end{align*}
-In practice, the Perceptron algorithm uses stochastic gradient descent that iteratively processes one example from training data at a time.
-In each step, the algorithm makes sure the current $\vw$ and $b$ will correctly separate the current training example. 
-Once a misclassified example is visited, it adjusts the parameters according to the update rule
+In practice, the Perceptron uses stochastic gradient descent that iteratively processes one example from training data at a time.
+Once the example is misclassified, the algorithm adjusts the parameters according to the update rule
 \begin{align*}
 	\vw \leftarrow \vw + \eta y_i \vx_i, \quad b \leftarrow b + \eta y_i,
 \end{align*}
-where $\eta$ is the perceptron learning rate.
+where $\eta$ is the Perceptron learning rate.
+
+\iffalse
 \begin{theory}[Perceptron Convergence Theorem \citep{Block62the,Novikoff62}]\label{perceptron_theory}
 	Given a sequence of training examples in pairs $\Scal=\{(\vx_1,y_1),\cdots,(\vx_m,y_m)\}$. 
 	For simplicity, we consider a perceptron without bias term $b$.
@@ -236,7 +236,6 @@ where $\eta$ is the perceptron learning rate.
 	Suppose for some $\gamma>0$ there exists a unit length vector $\norm{\hat{\vw}}=1$ such that $y_i(\ip{\hat{\vw}}{\varphib(\vx_i)})\ge\gamma$ holds for all $i$ (training data $\Scal$ is linearly separable).
 	Then the number of mistakes the Perceptron algorithm makes on the sequence of training data $\Scal$ is at most ${R^2}/{\gamma^2}$.
 \end{theory}
-\iffalse
 \begin{proof}
 	Suppose the $k$'th mistake is made on the $i$'th training example, and current weight vector is $\vw^k$.
 	In addition, we set $\vw^0=\vzero$.
@@ -272,21 +271,23 @@ where $\eta$ is the perceptron learning rate.
 		k\le{R^2}/{\gamma^2}.
 	\end{align*}
 \end{proof}
-\fi
+
 Theory~\ref{perceptron_theory} shows that if the data are linearly separable, the perceptron algorithm will make a finite number of mistakes. 
 In particular, the perceptron algorithm will iterate through the training set and will converge to a vector that well separates all training examples.
 Moreover, the number of mistakes will be bounded by the minimum gap between the positive and negative examples.
 That is the algorithm converges quickly when the gap $\gamma$ is big.
 We have to keep in mind that the convergence theorem does not say anything about the quality of the solution, though it is built based on the assumption that there is a ``gap'' between positive and negative examples.
+\fi
 
-The standard Perceptron algorithm supposes that the data are linearly separable, iterates over the training set, and eventually converges.
-However, the setting is less interesting for most applications where the data might not be linearly separable or it takes too long for the algorithm to converge.
-Therefore, we need to find out the best decision rule given a set of updates.
+It has been shown in \citep{Block62the,Novikoff62} that the Perceptron training will converge by making finite number of mistakes on the training data if the data is linearly separable.
+However, the setting is less interesting for most applications where the data might not be linearly separable or it takes too long for the Perceptron to converge.
+The \textit{Voted Perceptron} and the \textit{Averaged perceptron} developed by \citet{Freund99large} are extensions to the standard Perceptron.
+The algorithms keep track all weight vectors encountered during training as well as their weights.
+The weight can be seen as the ``survival time'' of the weight vector.
+The prediction is composed by weighted majority vote.
+Except for the simplicity, the Perceptron is merely a risk minimization approach.
 
-\textit{Voted Perceptron} developed in \citep{Freund99large} is a straight forward modification of the standard Perceptron.
-Voted Perceptron algorithm keeps track all weight vectors that appears during training phase and their weights.
-The weight can be seen as the ``survival time'' of the weight vector during the Perceptron training.
-The prediction for a new test example $\vx_{ts}$ is computed by 
+\iffalse
 \begin{align}
 	y_{ts} = \sign\left({\sum_{l=1}^{k}c^l(\sign{\ip{\vw^l}{\varphib(\vx_{ts})}+b^{l}}})\right) \label{voted_perceptron_prediction}
 \end{align}
@@ -336,6 +337,7 @@ The prediction for a new test example $\vx_{ts}$ is computed by
 	= \sign\left({{\ip{\sum_{l=1}^{k}c^l\vw^l}{\varphib(\vx_{ts})}+\sum_{l=1}^{k}c^lb^{l}}}\right),
 \end{align*}
 which is more efficient to compute and is extremely similar to (\ref{voted_perceptron_prediction}) except for the inside $\sign$ operation.
+\fi
 
 %
 % logit
