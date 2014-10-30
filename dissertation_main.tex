@@ -612,8 +612,8 @@ Most of the algorithms have improved the classification performance when compare
 For our purposes, the section will focus on bagging and boosting ensemble since both methods are well known approaches and are most related to this thesis.
 
 Ensemble method is original designed for single-label classification.
-It multilabel variants will be briefly presented in Section~\ref{sc_emfmlc}.
-We will develop several new ensemble approaches in the later part of the thesis which are related to but with significant difference to the methods present in this section.
+The multilabel variants will be briefly presented in Section~\ref{sc_emfmlc}.
+Furthermore we will develop several new learning algorithms analog to the ensemble method in the later part of the thesis which are related to but with significant difference to the methods present in this section.
 
 
 
@@ -643,8 +643,8 @@ Adaptive Boosting (\adaboost) developed by \citet{Freund97a} is the very first p
 In addition, \citet{Schapire99improved} proposed a variant of the algorithm which updates the adaptive parameters in order to minimize the exponential loss of the weak learners.
 The exact algorithm is shown in (Algorithm~\ref{adaboost}).
 The fundamental idea of \adaboost\ is to maintain a distribution $D$ over all training examples, and update the distribution in each iteration such that difficult-to-classify examples will get more probability mass for the next iteration (line~\ref{update_d}).
-In particular, the algorithm computes in each iteration a weak learner $f^t(\vx)$ base on all training examples and the current distribution $D^{t}$ (line~\ref{compuet_f}), calculates the weighted training error $\epsilon^k$ for the current weak learner (line~\ref{compute_error}), and computes the adaptive parameter $\alpha^t$ for the current weak learner (line~\ref{compute_alpha}).
-The ensemble is the weighted combination of all weak learners.
+In particular, the algorithm computes in each iteration a weak learner $f^t(\vx)$ base on all training examples and the current distribution $D^{t}$ (line~\ref{compuet_f}), calculates the weighted training error $\epsilon^t$ for the current weak learner (line~\ref{compute_error}), and computes the adaptive parameter $\alpha^t$ for the current weak learner (line~\ref{compute_alpha}).
+The ensemble prediction is the weighted combination of all weak learners
 \begin{align*}
 	H(\vx) = \sign(\sum_{t=1}^T\alpha^tf^t(\vx)).
 \end{align*}
@@ -677,7 +677,7 @@ To see this, we first compute the exponential loss for $\alpha^tf^t(\vx)$ given 
 \end{align*}
 To minimize $\ell_{exp}(\alpha^t,f^t(\vx),D^t)$, we take partial derivative with respect to $\alpha^t$ and set it to zero
 \begin{align*}
-	\frac{\partial\ell_{\exp}(\alpha^t,f^t(\vx),D^t)}{\partial\alpha^t} = -\exp(-\alpha^t)(1-\epsilon^t) + \exp(\alpha^t)\epsilon^t=0
+	\frac{\partial\ell_{\exp}(\alpha^t,f^t(\vx),D^t)}{\partial\alpha^t} = -\exp(-\alpha^t)(1-\epsilon^t) + \exp(\alpha^t)\epsilon^t=0.
 \end{align*}
 Solve it for $\alpha^t$, we get
 \begin{align*}
@@ -691,7 +691,7 @@ It is usually achieved by \textit{reweighing} which initials a uniform distribut
 For learning algorithms that cannot handle training data with specific distribution, we can apply \textit{resampling} which samples training examples in each iteration according to some desired distribution.
 
 Most recently, a new boosting algorithm \deepboosting\ was developed in \citep{Cortes14deep}.
-\deepboosting\ allows the learning algorithm to use complex hypothesis class contain very deep decision trees, by which it extends \adaboost\ that only uses simple hypothesis class of decision tree with depth one.
+\deepboosting\ allows the learning algorithm to use complex hypothesis class contains very deep decision trees, by which it extends \adaboost\ that only uses simple hypothesis class of decision tree with depth one.
 In addition, \citet{Cortes14deep} also developed rich learning bounds for \deepboosting\ optimization problem in terms of the Rademacher complexity theory.
 The new theory advances the previous performance guarantee of \adaboost\ which is build in terms of margins of the training examples \citep{Schapire97boosting,Koltchinskii00empirical}.
 
@@ -728,11 +728,11 @@ When $m$ is large, the probability will approach $37\%$.
 That is around $37\%$ of the training examples will not be represented in any given subset.
 The property of the bootstrap sampling allows us to efficiently estimate the generalization error of the base learner known as \textit{out-of-bag estimation} \citep{Breiman96out,Tibshirani1996bias,Wolpert99an}.
 
-Random Forest developed in \citep{Breiman01random} is an important extension of \bagging.
-The major different from \bagging\ is that randomized feature selection is incorporated in random forest.
-In practice, the random forest algorithm selects in each step a subset of features and constructs conventional random tree classifier within the selected subset of features.
+The Random Forest developed in \citep{Breiman01random} is an important extension of \bagging.
+The major difference from \bagging\ is that randomized feature selection is incorporated in the Random Forest.
+In practice, the Random Forest selects in each step a subset of features and constructs conventional random tree classifier within the selected subset of features.
 The feature split process of decision tree is deterministic given a set of features.
-\citet{Liu08spectrum} proposed \vrtree\ which further extend random forest algorithm by introducing randomness in both feature selection and split processes.
+\citet{Liu08spectrum} proposed \vrtree\ which further extends the Random Forest by introducing randomness in both feature selection and split processes.
 
 
 
