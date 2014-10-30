@@ -343,14 +343,15 @@ which is more efficient to compute and is extremely similar to (\ref{voted_perce
 % logit
 \subsection{Logistic Regression (\lr)}\label{sc_lr}
 
-% general introduction
-The Logistic Regression is another important method in statistical machine learning and is closely related to the Perceptron (Section~\ref{sc_perceptron}) and the Support Vector Machines (Section~\ref{sc_svm}).
-It is in fact a classification model rather than regression \citep{Bishop07}.
+
+The Logistic Regression is a classification model rather than regression \citep{Bishop07}.
+The formalism nicely transits from risk minimization (Section~\ref{sc_rl}) to regularized risk minimization (Section~\ref{sc_rl}).
+The idea of the Logistic Regression is also applied in many multilabel classification algorithms presented in the later part of the thesis (e.g. Section~\ref{sc_iblr}, Section~\ref{sc_corrlog}, Section~\ref{sc_mmmn}).
+
 It models the conditional probability $P(y=+1|\vx)$ for a binary output variable $y\in\Ycal$.
 %Without loss of generality, in the rest part of this section we use $P(\vx)$ to denote above conditional probability of $P(y|\vx)$ when fixing $y=1$.
 To model the probability, we do not restrict to any particular form, as any unknown parameters can be estimated by \textit{Maximum Likelihood Estimation} (\mle).
 However, we are mostly interested in the simple linear model as described in (\ref{linearclassifier}).
-
 % detailed model, decision boundary
 To apply linear model,
 \iffalse
@@ -384,7 +385,7 @@ It is the probabilistic output that makes Logistic Regression no more than a cla
 
 % optimization
 The parameter $\vw$ and $b$ of the Logistic Regression can be obtained by maximizing the probability (likelihood) of the training data.
-The probability of training data $\vx$ with class label $y$ is $P(y|\vx)$.
+%The probability of training data $\vx$ with class label $y$ is $P(y|\vx)$.
 The likelihood of parameters given data can be computed by
 \begin{align}
 	L(\vw,b;D) = \prod_{i=1}^mP(y_i|\vx_i). \label{lr_likelihood}
@@ -408,14 +409,13 @@ Instead of maximizing the posteriori (\ref{lr_posteriori}), it is easier to maxi
 	\log P(\vw,b|D;\sigma^2) = -{\frac{\norm{\vw}^2}{\sigma^2}} - \sum_{i=1}^{m}\log{(1+\exponential{-y_i(\ip{\varphib(\vx_i)}{\vw}+b)})}. \label{lr_posteriori_log}
 \end{align}
 
-Many optimization techniques have been proposed \citep{Minka03}.
-For example, the {Itrative Scaling} method is proposed in \citep{Darroch72,Pietra97inducing,Berger97,Goodman02Sequential,Jin03a}.
-the quasi-Newton method is discussed in \citep{Minka03}, 
-the truncated Newton method is presented in \citep{Komarek05making,Lin2008trust},
-the coordinate descent method is proposed in \citep{Huang09iterative}.
-There also exists research that aims to optimization the model from its dual representation.
+Many optimization techniques have been proposed \citep{Minka03}, for example, the {Itrative Scaling} method proposed in \citep{Darroch72,Pietra97inducing,Berger97,Goodman02Sequential,Jin03a}.
+the quasi-Newton method discussed in \citep{Minka03}, 
+the truncated Newton method presented in \citep{Komarek05making,Lin2008trust},
+the coordinate descent method proposed in \citep{Huang09iterative}.
+There also exists research that aims to optimization the Logistic Regression from its dual representation.
 The first method is developed by \citet{Jaakkola99probabilistic}.
-\citet{Keerthi05a} proposed the iterative optimization and \citet{Yu11dual} developed the dual coordinate descent method.
+Later on, \citet{Keerthi05a} proposed the iterative optimization and \citet{Yu11dual} developed the dual coordinate descent method.
 
 
 
@@ -838,7 +838,7 @@ Since there is no standard way for classification order of microlabels in \cc, E
 
 %
 %
-\subsection{Instant Based Logistic Regression (\iblr)}
+\subsection{Instant Based Logistic Regression (\iblr)} \label{sc_iblr}
 
 \citet{Cheng09combining} developed Instance Based Logistic Regression (\iblr) with an extension to flat multilabel classification.
 \iblr\ is also an instant base learning approach \citep{Aha91instance} as \mlknn.
@@ -921,7 +921,7 @@ are applied in text and speech recognition.
 
 %
 %
-\subsection{Correlated Logistic Regression (\corrlog)}
+\subsection{Correlated Logistic Regression (\corrlog)} \label{sc_corrlog}
 
 Correlated Logistic Regression (\corrlog) developed by \citet{Bian12corrlog} is a model based approach for flat multilabel classification.
 \corrlog\ is a major step forward of \iblr\ by constructing a logistic regression classifier over all microlabels and by modeling pairwise microlabel correlation with a function defined on microlabel pairs.
