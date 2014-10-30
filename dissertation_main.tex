@@ -443,9 +443,9 @@ Later on, optimization algorithms that are based on dual form have been develope
 \subsection{Support Vector Machines (\svm)}	\label{sc_svm}
 
 % some history
-The Support Vector Machines (\svm) is probably the most widely used classification algorithm in many real world applications.
-It is also among the best plug-and-play machine learning algorithms that usually achieves good classification performance.
-In this section we will start the story of \svm\ by introducing the \textit{Maximum-Margin Principle}.
+The Support Vector Machines (\svm) is probably the most widely used single-label classification algorithm in many real world applications.
+Its extensions to multilabel classification problem will be described in the label part of the thesis (e.g. Section~\ref{sc_svmstruct}).
+In this section we will start the story of \svm\ by introducing the \textit{Maximum-Margin Principle}, which is also the basis of many structured output learning models (e.g. Section~\ref{sc_mmmn}, Section~\ref{sc_svmstruct}, Section~\ref{sc_su14b}, Section~\ref{sc_su14c}).
 After that, we will discuss the primal-dual optimization strategy and the kernel methods that allow \svm\ to deal with high dimensionality.
 In the end we will briefly cover the optimization strategies developed for \svm.
 
@@ -608,17 +608,24 @@ In general, the methods train multiple base classifiers and combine them in orde
 Most importantly, there is no requirement for base classifiers to be accuracy as long as they perform better than random guessing.
 %To trace the exact originality of the ensemble methods seems impossible, as the methods involve along well with human society by which it is wiser to take in to account advises from multiple human experts.
 There are several different types of ensemble algorithms, to name a few, bagging \citep{Breiman96bagging}, boosting \citep{Freund97a,Schapire99improved}, stacking \citep{Smyth99linearly}, Bayesian averaging \citep{Freund04generalization}.
-Most of the algorithms have improved the classification performance when compared to their base classifier counterpart, some of them are also supported with theoretical guarantee \citep{Schapire97boosting,Koltchinskii00empirical,Cortes14semble,Cortes14deep}.
-For our purposes, the section will start with and focus on bagging and boosting ensemble since both methods are best known approaches and are most related to this thesis.
-In the later part of the section, we will extend the ensemble methods to structured output space by reviewing several recently established algorithms.
+Most of the algorithms have improved the classification performance when compared to their base classifier counterpart, some of them are also supported with theoretical analysis that guarantees the performance \citep{Schapire97boosting,Koltchinskii00empirical,Cortes14semble,Cortes14deep}.
+For our purposes, the section will focus on bagging and boosting ensemble since both methods are well known approaches and are most related to this thesis.
+
+Ensemble method is original designed for single-label classification.
+It multilabel variants will be briefly presented in Section~\ref{sc_emfmlc}.
+We will develop several new ensemble approaches in the later part of the thesis which are related to but with significant difference to the methods present in this section.
 
 
+
+%
+%
 \subsection{Preliminary and Notations} \label{sc_em_pn}
 
-In addition to the notations introduced in Section~\ref{singlelabel_preliminary} and \ref{multilabel_preliminary}, we assume there is a hypothesis class $\Fcal$ where we generate weak/base hypothesis $f^t(x)\in\Fcal$.
+In addition to the notations introduced in Section~\ref{sc_slc_pn}, we assume there is a hypothesis class $\Fcal$ where we generate weak/base hypothesis $f^t(x)\in\Fcal$.
 By $t$ we intend to index the $t$'th weak hypothesis.
-We denote by $H(x)$ the ensemble framework that is able to combine multiple weak hypotheses and generate a stronger one.
-In many cases, no other information about $f^t(x)$ is available to $H(x)$ except that each weak hypothesis will take in as parameter $x$ and output $y\in\Ycal$ for single label classification ($\vy\in\vYcal$ in multilabel classification respectively).
+We use $H(x)$ to denote the ensemble framework that is able to combine multiple weak hypotheses and generate a stronger one.
+In many cases, no other information about $f^t(x)$ is available to $H(x)$ except that each weak hypothesis will take in as parameter $\vx$ and output $y\in\Ycal$ for single label classification ($\vy\in\vYcal$ in multilabel classification respectively).
+
 
 \subsection{Boosting} \label{sc_boosting}
 
