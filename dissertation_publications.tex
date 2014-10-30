@@ -10,7 +10,7 @@
 \addcontribution{
 
 \citepub{su14a} presents a novel formalism of the network response prediction problem, and proposes a structured output prediction algorithm for the problem.
-The algorithm captures the contextual information and improves several the state-of-the-art models in terms of prediction performance
+The algorithm captures the contextual information and improves several the state-of-the-art models in terms of the prediction performance.
 
 The initial modeling idea was developed jointly by the authors.
 The problem was jointly formulated.
@@ -31,9 +31,9 @@ All author participated in designing and writing the article.
 
 \addcontribution{
 
-The novelty of \citepub{su10} is to develop a structured output prediction model and apply it on drug-bioactivity prediction problem.
-The advanced model can captures the interdependency between cancer cell line targets.
-Thus the model enjoys better prediction performance compared to previous single-task prediction models.
+The novelty of \citepub{su10} is to use a structured output prediction model for multilabel molecular activity classification problem.
+The new model incorporate the correlation of the output variables into the learning process by means of an output graph that connects multiple output variables.
+As a results, the new model surpasses the previous single-label classification approach in terms of the prediction performance.
 
 The original modeling idea was jointly developed.
 The author contribute to the designing of the experiments and executing the algorithm.
@@ -51,7 +51,7 @@ All author participated in writing the articles.
 \addcontribution{
 
 \citepub{su11} presents an ensemble approach for structured output prediction problem with application in molecular activity prediction.
-The model extends \citepub{su10} by tackling the situation where the structure of the output variables is not known, which largely widens the applicability of the structured output prediction models.
+The proposed model extends \citepub{su10} by learning a majority voting ensemble of a set of structured output classifiers built from random output graphs.
 
 The idea of the ensemble learning strategy was jointly developed. 
 In addition, the author contributed mainly to the algorithm design and implementation.
@@ -68,10 +68,11 @@ The article was structured by authors and was written jointly.
 
 \addcontribution{
 
-\citepub{su14b} generalizes \citepub{su11} in several ways.
-By extending \citepub{su11}, the article introduces two other elegant aggregation frameworks for multi-task structured output prediction.
-A theory is also developed in this article  which explains the performance improvement of the proposed model.
-It also extends the field of application from only molecular activity prediction problem to a set of heterogeneous multi-task prediction problems.
+\citepub{su14b} extends \citepub{su11} in several ways.
+It formulates the algorithm proposed in \citepub{su11} as \mve.
+It introduces two other aggregation framework (\amm\ and \mam) which perform inference before or after combining multiple structured output classifiers.
+The theoretical study in \citepub{su14b} explains the performance of the proposed \mam\ model.
+We also evaluate the performance of the proposed models on a set of heterogeneous multilabel prediction problems.
 
 The original idea of generating aggregation strategy for structured output prediction was developed jointly by authors.
 The author designed and implemented the algorithms that bring the idea into practice.
