@@ -467,21 +467,21 @@ A good strategy is to look for a hyperplane that keeps the maximum distance from
 The strategy is often unknown as \textit{Maximum-Margin Principle}.
 To see this, imagining putting a separating hyperplane close to one class of examples which will achieve better classification on the test examples from the other class.
 
-Based on Maximum-Margin Principle, we further denote the \textit{margin} for the $i$'th example by $\gamma_i$ which is defined as the geometric distance from the data point to the separating hyperplane
+Based on Maximum-Margin Principle, we further use $\gamma_i$ to denote the \textit{margin} for the $i$'th example defined as the geometric distance from the data point to the separating hyperplane
 \begin{align*}
 	\gamma_i = \frac{y_i(\ip{\vw}{\varphib(\vx_i)}+b)}{\norm{\vw}}.
 \end{align*}
 We notice if we scale $\vw$ and $b$ with any constant (e.g. $\vw\leftarrow\kappa\vw, b\leftarrow\kappa b, \kappa\in\RR$, ) the margin $\gamma_i$ stays unchanged. 
 We still achieve the same classification performance and generalization power.
 As parameters are invariance to scaling, we set $\norm{\vw}=1$.
-Given a set of training example $S$, we also define the margin with respect to $S$ as the minimum margin of individual training example
+Given a set of training example $S$, we also define the margin with respect to $S$ as the minimum margin achieved by individual training example
 \begin{align*}
 	\gamma = \underset{i\in\{1,\cdots,m\}}{\minimize}\gamma_i.
 \end{align*}
 
 Our goal is to find the separating hyperplane such that it maximizes the margin with respect to all training examples while separating the training examples into two classes.
-Naturally, this corresponds to finding a ``big-gap'' between two classes.
-The max-margin solution is given as \citep{Bishop07}
+Naturally, this corresponds to finding a ``big-gap'' between two classes of examples
+The max-margin solution is given in \citep{Bishop07} as
 \begin{align*}
 	\underset{\vw,b,\gamma}{\maximize} &\quad \gamma\\
 	\st &\quad y_i(\ip{\vw}{\varphib(\vx_i)}+b) \ge \gamma, \, \norm{\vw}=1, \, \forall i\in\{1,\cdots,m\}.
@@ -491,9 +491,9 @@ However, this is very difficult to optimize not only because the constraint $\no
 By replacing $\vw$ with $\frac{\vw}{\gamma}$, we obtain 
 \begin{align*}
 	\underset{\vw,b}{\maximize} &\quad \frac{1}{\norm{\vw}}\\
-	\st &\quad y_i(\ip{\vw}{\varphib(\vx_i)}+b) \ge 1, \, \forall i\in\{1,\cdots,m\},
+	\st &\quad y_i(\ip{\vw}{\varphib(\vx_i)}+b) \ge 1, \, \forall i\in\{1,\cdots,m\}.
 \end{align*}
-which is equivalent to
+This is equivalent to
 \begin{definition}{Primal Hard-Margin \svm\ Optimization Problem.}\label{hardsvmprimal}
 	\begin{align*}
 		\underset{\vw}{\minimize} & \quad\frac{1}{2}\norm{\vw}^2\\
@@ -550,7 +550,7 @@ In particular, we define the \textit{kernel}
 	K(\vx_i,\vx_j) = \ip{\varphib(\vx_i)}{\varphib(\vx_j)}, \label{kernel}
 \end{align}
 where $\varphib(\cdot)$ is some high-dimensional feature map.
-Whenever we need $\ip{\vx_i}{\vx_j}$, we instead use $K(\vx_i,\vx_j)$.
+Whenever we need $\ip{\varphib(\vx_i)}{\varphib(\vx_j)}$, we instead use $K(\vx_i,\vx_j)$.
 Besides, the property of kernel function \citep{Scholkopf02learning} allows us to compute (\ref{kernel}) without explicitly accessing the high dimensional feature map.
 Thus the algorithm can tackle high dimensionality by learning from $\varphib(\cdot)$ at a low computational cost.
 
@@ -578,7 +578,7 @@ The algorithm decomposes the dual variables into an active part (working set) an
 In each iteration, the algorithm updates the variables in working set while keeps the rest unchanged by solving the smaller optimization problem arising from the working set.
 It adds and deletes the same amount of examples in the working set to maintain a constant memory.
 It gains advantage of linear memory requirement with respect to the number of support vectors and the size of the working set by compromising on the convergence time.
-\citep{Joachims98making} has improved this decomposition strategy by applying a shrinking technique which will identify the dual variables that is less likely to change their values.
+\citet{Joachims98making} has improved this decomposition strategy by applying a shrinking technique which will identify the dual variables that is less likely to change their values.
 Thus, the algorithm effectively maintains a good working set that makes much progress towards the object.
 The implementation of the algorithm is well-known as \svmlight.
 The decomposition strategy was further developed by solving in each iteration a smallest as possible optimization that only contains two Lagrangian multipliers, which is known as \textit{Sequential Minimum Optimization} (\smo) \citep{Platt98sequential,Platt99fast}.
