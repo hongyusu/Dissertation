@@ -28,10 +28,10 @@ Multilabel classification is a natural extension to single-label classification 
 Problems of this type are prevalent in everyday life.
 For example, movie can be classified as ``action'', ``documentary'' and ``crime''; a news article can be categorized as ``science'', ``drug'' and ``people''; a gene can associate to multiple functions in genomics research; or a surveillant photo can be tagged by both ``car'' and ``building''. 
 The problem is known as flat multilabel classification when the multiple output variables are essentially treated as a ``flat'' vector.
-The flat multilabel classification problem has draw increasing amount of interest from machine learning community \citep{Tsoumakas07multi,Tsoumakas10mining}, and been tackled by many algorithms that aim to explore the correlation and dependency between multiple output variables in order to make better prediction \citep{Read09classifier,Cheng09combining,Bian12corrlog}.
+The flat multilabel classification problem has draw increasing amount of interest from machine learning community \citep{Tsoumakas07multi,Tsoumakas10mining}, and has been tackled by many algorithms that aim to explore the correlation and dependency between multiple output variables in order to make better prediction \citep{Read09classifier,Cheng09combining,Bian12corrlog}.
 
 In multilabel classification problem, multiple interdependent output variables are usually located in a structured output space where the dependency or correlation of the variables is defined by the structure of an output graph (e.g. Markov network).
-The flat multilabel classification render the difficulty of modeling the complex dependency structure.
+The flat multilabel classification has the difficulty of modeling the complex dependency structure.
 Structured output prediction appears as a natural remedy to the flat multilabel classification.
 The models of this type usually incorporate the output dependency structure into the learning process \citep{lafferty01,taskar02,Taskar04max,THJA04}.
 One problem inherited with structured output learning is the output dependency structure is assumed to be observed.
@@ -40,7 +40,7 @@ However, this cannot be taken as granted since the proper dependency structure f
 In this thesis, we examine the potential of applying structured output learning to improve the prediction performance in real world multilabel classification problems.
 In addition, we work on the problem of the structured output learning when the output dependency structure is not observed.
 We also investigate the efficiency and the scalability of the inference problems in the proposed structured output learning models as the inference problem of the structured output learning is often difficult to solve.
-Besides, we study the proposed models from the theoretic aspect where we wish to gain insights into the behaviour of the proposed models.
+Besides, we study the theoretic aspects of the proposed models in order to gain insights in to the behavior of the models.
 In particular, the research questions can be casted as following:
 \begin{enumerate}[label=\textbf{Q \Roman*}:]
 	
@@ -1787,7 +1787,7 @@ Both the methods and the empirical results have demonstrated that structured out
 The current structured output learning approach rely on representing the label correlation as an output graph which is assumed to be observed.
 The second outcome of the thesis is the new methods for structured output learning when the output dependency structure is not observed.
 The new methods aim to learn from a random set of spanning trees that connect multiple output variables, thus widen the applicability of the structured output learning.
-Besides, we have studied the behaviour of the proposed methods in terms of reconstruction error of the compatibility score as well as the generalization error which guaranteed the performance of the proposed models.
+Besides, we have studied the behavior of the proposed methods in terms of reconstruction error of the compatibility score as well as the generalization error which guaranteed the performance of the proposed models.
 
 In addition, we have explored the inference algorithms for the proposed structured output learning methods, which can avoid the exponential number of parameter space and provide fast convergence.
 
