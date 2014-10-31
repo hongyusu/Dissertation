@@ -751,18 +751,18 @@ Multilabel classification is a natural extension to single-label classification 
 In multilabel classification each input (instant) is simultaneously associated with multiple outputs (labels).
 The research of the multilabel classification has progressed rapidly in the past two decades with many learning algorithms being developed and applied in real world classification tasks.
 In general, there are two lines of research for multilabel classification namely flat multilabel classification and structured output prediction.
-In flat multilabel classification, the multiple labels are essentially treated as a ``flat'' vector of labels.
-The structured output prediction, on the other hand, models the multiple labels via a graph structure that connects labels.
+In flat multilabel classification, the multiple labels are treated essentially as a ``flat'' vector of labels.
+Structured output prediction, on the other hand, models the multiple labels via a graph structure that connects labels.
 This chapter will devote to flat multilabel classification in which we will present several classical algorithm techniques.
-The structured output prediction will be covered in the later part of the thesis.
+The methods for structured output prediction will be covered in the later part of the thesis.
 
 Consider the infeasibility of listing all algorithms for flat multilabel classification, it is easier if we are able to categorize the algorithms into classes.
 In this chapter, we adopt the simple categorization presented in \citep{Tsoumakas07multi,Tsoumakas10mining} which gives us two major algorithm categories namely problem transformation and algorithm adaptation.
 For problem transformation category, we will present the methods that aim to transfer the flat multilabel classification problem into other well studied problem settings (e.g. single-label classification problem, ranking problem).
-For algorithm adaptation category, we will describe the methods that directly modify the popular learning techniques (e.g. \lr\ and ensemble method) to solve the multilabel classification problem.
+For algorithm adaptation category, we will describe the methods that directly modify the popular learning techniques (e.g. the Logistic Regression and the ensemble method) to solve the multilabel classification problem.
 Nevertheless, the present algorithms will explore the inherited difficulties of flat multilabel classification.
 That is the exponential multilabel space and the implicit label correlation.
-Besides, the author realizes that it is impossible to cover every lines of research in the field of flat multilabel classification.
+Besides, the author realized that it is impossible to cover every lines of research in the field of flat multilabel classification.
 Interested readers are pointed out to the recent research review articles, for example, \citep{Tsoumakas07multi,Tsoumakas10mining,Zhang14a}
 
 
@@ -782,7 +782,7 @@ We use $\vy_i[j]$ to denote the $j$'th microlabel in the $i$'th multilabel.
 In addition, we are given a training set consisting of $m$ labeled examples $\Scal=\{(\vx_i,\vy_i)\}_{i=1}^{m}\in\vXcal\times\vYcal$. 
 A pair $(\vx_i,\vy)$, where $\vx_i$ is the training input and $\vy\in\vYcal$ is an arbitrary output, is called \textit{pseudo-example}.
 It is worthy of noticing that pseudo-example $(\vx_i,\vy)$ can be generated from a different distribution that generates training examples $(\vx_i,\vy_i)$.
-The goal is to learn a mapping function $f\in\Hcal:\vXcal\rightarrow\vYcal$ that can compute the multilabel given an arbitrary input such that the predifined loss $\ell$ for the future unseen examples will be minimized.
+The goal is to learn a mapping function $f\in\Hcal:\vXcal\rightarrow\vYcal$ that can compute the multilabel given an arbitrary input such that the predefined loss $\ell$ for the future unseen examples will be minimized.
 The loss function is usually tailored for the learning algorithm.
 
 
