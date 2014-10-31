@@ -22,7 +22,7 @@ Supervised learning, an important paradigm in machine learning, is usually insta
 The function is learned by exploring a set of observed input/output pairs known as training examples.
 In the classical supervised learning setting, the output variable to be predicted can only take one value.
 In machine learning community, it is referred as single-label classification if the output is discrete valued, or as regression if the output is continuous valued.
-Many single-label classification models have been designed and applied in practice, for example, the support vector machines \citep{Boser92,Cortes95support} and the logistic regression \citep{Chen99,Chen00,Goodman03}.
+Many single-label classification models have been designed and applied in practice, for example, Support Vector Machines \citep{Boser92,Cortes95support} and Logistic Regression \citep{Chen99,Chen00,Goodman03}.
 
 Multilabel classification is a natural extension to single-label classification by defining multiple valued output associated with each inputs.
 Problems of this type are prevalent in everyday life.
@@ -164,7 +164,7 @@ Besides, other regularization techniques have been widely studied, to name a few
 \section{Single-Label Classification}\label{sc_slc}
 
 In this section, the author will introduce the basic classification problem known as \textit{single-label classification}.
-The author will explain two prominent algorithms in this area: the Logistic Regression and the Support Vector Machines.
+The author will explain two prominent algorithms in this area: Logistic Regression and Support Vector Machines.
 The optimization techniques and the latest advances of these algorithms will also be briefly discussed.
 The goal is to cover the background that is necessary to understand the algorithms presented in the later part of the thesis. 
 
@@ -346,9 +346,9 @@ which is more efficient to compute and is extremely similar to (\ref{voted_perce
 \subsection{Logistic Regression (\lr)}\label{sc_lr}
 
 
-The Logistic Regression is a classification model rather than regression \citep{Bishop07}.
+Logistic Regression is a classification model rather than regression \citep{Bishop07}.
 The formalism nicely transits from risk minimization (Section~\ref{sc_rl}) to regularized risk minimization (Section~\ref{sc_rl}).
-The idea of the Logistic Regression is also applied in many multilabel classification algorithms presented in the later part of the thesis (e.g. Section~\ref{sc_iblr}, Section~\ref{sc_corrlog}, Section~\ref{sc_mmmn}).
+The idea of Logistic Regression is also applied in many multilabel classification algorithms presented in the later part of the thesis (e.g. Section~\ref{sc_iblr}, Section~\ref{sc_corrlog}, Section~\ref{sc_mmmn}).
 
 It models the conditional probability $P(y=+1|\vx)$ for a binary output variable $y\in\Ycal$.
 %Without loss of generality, in the rest part of this section we use $P(\vx)$ to denote above conditional probability of $P(y|\vx)$ when fixing $y=1$.
@@ -445,7 +445,7 @@ Later on, optimization algorithms that are based on dual form have been develope
 \subsection{Support Vector Machines (\svm)}	\label{sc_svm}
 
 % some history
-The Support Vector Machines (\svm) is probably the most widely used single-label classification algorithm in many real world applications.
+Support Vector Machines (\svm) is probably the most widely used single-label classification algorithm in many real world applications.
 Its extensions to multilabel classification problem will be described in the label part of the thesis (e.g. Section~\ref{sc_svmstruct}).
 In this section we will start the story of \svm\ by introducing the \textit{Maximum-Margin Principle}, which is also the basis of many structured output learning models (e.g. Section~\ref{sc_mmmn}, Section~\ref{sc_svmstruct}, Section~\ref{sc_su14b}, Section~\ref{sc_su14c}).
 After that, we will discuss the primal-dual optimization strategy and the kernel methods that allow \svm\ to deal with high dimensionality.
@@ -759,11 +759,10 @@ The methods for structured output prediction will be covered in the later part o
 Consider the infeasibility of listing all algorithms for flat multilabel classification, it is easier if we are able to categorize the algorithms into classes.
 In this chapter, we adopt the simple categorization presented in \citep{Tsoumakas07multi,Tsoumakas10mining} which gives us two major algorithm categories namely problem transformation and algorithm adaptation.
 For problem transformation category, we will present the methods that aim to transfer the flat multilabel classification problem into other well studied problem settings (e.g. single-label classification problem, ranking problem).
-For algorithm adaptation category, we will describe the methods that directly modify the popular learning techniques (e.g. the Logistic Regression and the ensemble method) to solve the multilabel classification problem.
-Nevertheless, the present algorithms will explore the inherited difficulties of flat multilabel classification.
-That is the exponential multilabel space and the implicit label correlation.
+For algorithm adaptation category, we will describe the methods that directly modify the popular learning techniques (e.g. Logistic Regression and ensemble method) to solve the multilabel classification problem.
+Nevertheless, the present algorithms will explore the inherited difficulties of flat multilabel classification which are the exponential sized multilabel space and the implicit label correlation.
 Besides, the author realized that it is impossible to cover every lines of research in the field of flat multilabel classification.
-Interested readers are pointed out to the recent research review articles, for example, \citep{Tsoumakas07multi,Tsoumakas10mining,Zhang14a}
+Interested readers are pointed out to the recent research review articles, for example, \citep{Tsoumakas07multi,Tsoumakas10mining,Zhang14a}.
 
 
 
@@ -792,7 +791,7 @@ The loss function is usually tailored for the learning algorithm.
 \section{Problem Transformation}
 
 The problem transformation approach aims to transform the flat multilabel classification problem in to other well established problem settings.
-The most typical way is known as \textit{binary relevant} proposed by \citet{Tsoumakas07multi,Tsoumakas10mining}.
+The most typical way is known as \textit{binary relevant} (\br) proposed by \citet{Tsoumakas07multi,Tsoumakas10mining}.
 \br\ amounts to transform the multilabel classification problem into a set of single-label classification problems and to independently learn a single-label classifier for each microlabel.
 We will focus on \br\ in this section.
 Another possibilities include, for example, to transform the multiple labels into label power set \citep{Tsoumakas07random} or to transform the problem into label ranking problem \citep{Elisseeff01akernel,Brinker07case,Furnkranz08multilabel,Chiang12a}.
@@ -805,7 +804,7 @@ However, learning through label ranking will not be discussed into details as it
 \subsection{Multilabel $K$-Nearest Neighbors (\mlknn)} \label{sc_mlknn}
 
 Multilabel $K$-Nearest Neightbors (\mlknn) proposed by \citet{Zhang05a,Zhang07mlknn} is perhaps the most famous binary relevant classifier for flat multilabel classification.
-\mlknn\ is also an instance based learning approach \citep{Aha91instance} that is derived from $K$-Nearest Neightbor (\knn) algorithm designed for single-label classification problem.
+\mlknn\ is also an instance based learning approach \citep{Aha91instance} that is derived from the $K$-Nearest Neightbor (\knn) algorithm designed for single-label classification problem.
 \mlknn\ transforms the flat multilabel classification problem into a set of single-label classification and processes each microlabel independently.
 For each unseen example $\vx$, the \mlknn\ algorithm first identifies the set of $K$-nearest neighbors $N(\vx)$ from the training sets.
 After that the algorithm computes the multilabel $\vy$ of the unseen example $\vx$ by examining the set of labels collected from its $K$-nearest neightbors.
@@ -1175,7 +1174,7 @@ Nevertheless, \mmmn\ improves \crf\ by avoiding partition function and allowing 
 % 
 \subsection{Support Vector Machines for Interdependent and Structured Outputs (\svmstruct)} \label{sc_svmstruct}
 
-The Support Vector Machine for interdependent and structured output space (\svmstruct) is developed in \citep{THJA04,TJTA05}.
+Support Vector Machine for interdependent and structured output space (\svmstruct) is developed in \citep{THJA04,TJTA05}.
 The formalism of \svmstruct\ is quite similar to \mmmn\ described in (Section~\ref{sc_mmmn}).
 Compared to \mmmn\ which scales the margin by the loss function, \svmstruct\ scales the margin errors ({\em slacks}) by the loss function.
 The primal optimization problem of \svmstruct\ can be defined as
