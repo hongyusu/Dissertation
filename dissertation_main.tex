@@ -1473,7 +1473,7 @@ The approach outputs disconnected pairs.
 \section{Random Graph Ensemble (\amm, \mam)} \label{sc_su14a}
 
 We have shown in Section~\ref{sc_su11} that we can construct a majority voting ensemble of structured output learners to tackle the problem during structured output learning when the output graph is not observed.
-We evaluate the method on molecular activity classification problem.
+We have evaluated the method on molecular activity classification problem.
 This section is based on \citepub{su14b} where we aim to present two other aggregation techniques to combine the base structured output classifiers.
 Compare to previously developed \mve, the proposed model (\amm\ and \mam\ respectively) perform inference before or after forming the ensemble.
 We also examine the performance of the proposed models on a set of heterogeneous multilabel datasets from various domains.
@@ -1653,7 +1653,7 @@ The examples in the $i$'th subset is taken as test data of which the labels are 
 The resulting classifier is used to predict the label of each example from the test set $S_i$.
 The performance is evaluated by comparing to the true labels from the test set $S_i$.
 In extreme case where we have $K$ equal to the number of original labeled examples, there will be only one example in each test set.
-This is typically known as \textit{leave-one-out cross-validation} (\loo).
+This is typically known as \textit{leave-one-out} (\loo) {cross-validation} .
 
 Most machine learning algorithms explicitly assume that the training data and the test data are drawn from the same distribution.
 We should make sure that the statistical property of the original labeled data is well preserved when partitioning the original labeled examples into subsets.
@@ -1742,7 +1742,7 @@ The test results are often visualized as \textit{$CD$ diagram}.
 \chapter{Implementations} \label{ch_implementation}
 
 In this thesis, several structured output learning algorithms have been proposed to solve multilabel classification problem.
-Each presented models has been implemented into a software package.
+Each presented model has been implemented into a software package.
 In this chapter, the author aims to briefly summarize the implementation for the sake of clarity and link the implementation to public domain.
 
 \begin{enumerate}
@@ -1756,7 +1756,7 @@ In this chapter, the author aims to briefly summarize the implementation for the
 		\item The major part of the \rta\ is written in \matlab. \sdp\ inference algorithm is written with \cvx\ package designed for convex programming. The data preprocessing with topic model is written in \python\ and \matlab.
 		\item The implementation can be found from \url{git@github.com:hongyusu/SPIN.git}.
 	\end{enumerate}
-	\item \mve\ developed in \citepub{su11} and \citepub{su14b}, \amm\ and \mam\ presented in \citepub{su14b} are ensemble models that combines a set of structured output classifiers built from a set of random spanning trees.
+	\item \mve\ developed in \citepub{su11} and \citepub{su14b} as well as \amm\ and \mam\ presented in \citepub{su14b} are ensemble models that combines a set of structured output classifiers built from random spanning trees.
 	\begin{enumerate}
 		\item The codes are written in \matlab.
 		\item The implementation can be found from \url{git@github.com:hongyusu/RandomOutputGraphEnsemble.git}.
