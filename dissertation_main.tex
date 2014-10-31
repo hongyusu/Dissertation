@@ -1292,7 +1292,7 @@ See \citep{Vishwanathan10graph} for a more comprehensive survey on graph kernels
 To apply structured output learning model described above, we assume the underlying Markov network structure is fully observed.
 In other words, we need to build an output graph with nodes correspond to cell lines and edges correspond to potential statistical dependencies.
 Auxiliary datasets are available for this purpose \citep{Shoemaker06the} which implicitly describes the correlation between the cell lines.
-To build the output graph, we first compute the covariance matrix for cell lines based on auxiliary data, then extracte the network structure by applying the following two methods.
+To build the output graph, we first compute the covariance matrix for cell lines based on auxiliary data, then extract the network structure by applying the following two methods.
 In \text{maximum spanning tree} approach, we take the minimum number of edges that make a connected network whilst maximizing the edge weights.
 In \text{correlation thresholding} approach, we take all edges that exceed a fixed threshold, which typically generates a non-tree graph.
 
