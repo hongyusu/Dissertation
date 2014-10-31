@@ -1521,7 +1521,7 @@ The predicted multilabel from \amm\ is composted by the predicted microlabels
 \end{align*}
 
 % mam
-\amm\ performs the inference to find the max-marginals before combining the base classifiers into ensemble. 
+The \amm\ performs the inference to find the max-marginals before combining the base classifiers into ensemble. 
 On the other hand, the Maximum-of-Average-Marginals (\mam) aggregation first collects the local edge potentials $\psib_E^{(t)}$ from each base classifier, averages them and finally performs inference on the global consensus graph $\hat{G}=(\hat{E},V)$ with averaged edge potentials.
 The \mam\ model can be defined as
 \begin{align*}
@@ -1548,7 +1548,7 @@ The analysis extends the theory on single task ensemble developed by \citet{Brow
 In general, \citepub[Theory 1]{su14b} states that the reconstructive error from \mam\ ensemble is guaranteed to be less than or equal to the average reconstruction error from the base classifiers.
 The improvement can be decomposed into two terms, namely \textit{diversity} and \textit{coherence}.
 The former measures the variability of individual classifiers learned from different perspectives which shares the same argument as the analysis of single task ensemble model \citep{Brown10good}.
-The later measures the correlation of microlabel predictions in which higher correlation lead to better improvements.
+The later measures the correlation of the microlabel predictions in which higher correlation leads to better improvement.
 
 
 
@@ -1556,7 +1556,7 @@ The later measures the correlation of microlabel predictions in which higher cor
 %
 \section{Random Spanning Tree Approximation (\rta)}\label{sc_su14c}
 
-Random Spanning Tree Approximation (\rta) model developed in \citepub{su14c} is a major step forward of \mam.
+The Random Spanning Tree Approximation (\rta) model developed in \citepub{su14c} is a major step forward of \mam.
 Recall that \mam\ generates a set of base learner built on random spanning trees, learns them separately, and combines them via a finial inference step.
 The goal of \rta\ is to bring in joint learning and inference framework such that the random spanning tree learners are optimized simultaneously towards the same objective.
 \citepub{su14c} also provides theoretical analysis to guarantee the performance and the tractability of the inference.
@@ -1569,7 +1569,7 @@ It lays the foundation of performing inference on unknown structure to achieve a
 %
 \subsection{Background}
 
-Limiting the applicability of structured output learning methods is the fact that the output structure is assume to be observed.
+Limiting the applicability of the structured output learning methods is the fact that the output structure is assume to be observed.
 It is also difficult to learn the dependency structure from data \citep{Chickering94learning} if it is not harder than structured output learning itself.
 We can instead opt to the \textit{complete graph} by assuming the complete set of pairwise dependency has enough expression power.
 In particular, we can construct a structured output learner with a complete graph as output graph and rely on the optimization algorithm to uncover the hidden ``parameters'' defined on the edges (e.g. edge potentials).
@@ -1582,7 +1582,7 @@ In terms of the intractability issue of graph inference problem, many techniques
 \citet{Wainwright05map} proposed MAP inference with tree-based and \textit{linear programming} (LP) relaxation.
 Efficient inference on special graph has also been studied in \citep{Globerson07approximate}.
 
-\citepub{su14c} is motivated by well-established Max-Margin Principle presented in Section~\ref{sc_svm}.
+\citepub{su14c} is motivated by well-established Max-Margin Principle (Section~\ref{sc_svm}).
 The work investigates whether the problem of inference over a complete graph in structured output learning can be avoided in a analogous way.
 Start from a sampling results, \citepub[Lemma 3]{su14c} shows that with high probability a big fraction of margin achieved by the complete graph can be obtained by a sample of spanning trees of small size.
 Besides, \citepub[Theorem 5]{su14c} shows the good generalization can also be guaranteed when learning with in stead of complete graph a sample of spanning trees.
@@ -1617,7 +1617,7 @@ However, there is no guarantee the the maximizer of (\ref{rta:maximizer_onetree}
 Therefore, we compute the top $K$-best multilabels for each random spanning tree.
 In total the computation costs $\Theta(Knk)$ time for all spanning trees.
 \citepub[Lemma 7]{su14c} provides a method to retrieve the best multilabel from $K$-best multilabel list in linear time.
-Now the question is to make sure the global violation multilabel is within the $K$-best multilabel list.
+Now the question is to make sure the global violating multilabel is within the $K$-best multilabel list.
 \citepub[Lemma 8]{su14c} guarantees that with high probability the global violation multilabel is in the list and $K$ does not need to be large.
 
 In addition, we derived the marginalized dual representation of Definition~\ref{primalrta}
