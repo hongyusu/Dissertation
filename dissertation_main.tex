@@ -1425,9 +1425,10 @@ Diffusion scaling has the effect of shrinking the distance to the nodes that are
 \chapter{Structured Output Prediction with Unknown Structure} \label{ch_sopw}
 
 Structured output learning (Chapter~\ref{ch_sop}) gains the power of the representation by connecting multiple output variables by an output graph.
-In this chapter, we extend the structure output learning to the scenario where the output graph is hidden, by exploring the potential of learning from a random set of output graphs.
-We start with a majority voting ensemble (\mve) of a set of structured output classifiers in Section~\ref{sc_su11}, and proceed with two aggregation techniques (\amm\ and \mam\ respectively) that performs inference before or after forming the ensemble.
-In Section~\ref{sc_su14c}, we present and discuss the \rta\ method that improves \mam\ by the joint learning and inference on a random set of spanning trees.
+In this chapter, we extend the structure output learning to the scenario where the output graph is hidden, by exploring the potential of learning from a random set of spanning trees.
+In Section~\ref{sc_su11}, we start the discussion by presenting a majority voting ensemble (\mve) that combines a set of structured output classifiers.
+We proceed in Section~\ref{sc_su14b} with two aggregation techniques (\amm\ and \mam\ respectively) that also perform inference before or after forming the ensemble.
+In Section~\ref{sc_su14c}, we present and discuss the \rta\ method that improves \mam\ by performing joint learning and inference on a random set of spanning trees.
 
 
 %
@@ -1435,13 +1436,13 @@ In Section~\ref{sc_su14c}, we present and discuss the \rta\ method that improves
 \section{Graph Labeling Ensemble (\mve)}\label{sc_su11}
 
 We have presented in Section~\ref{sc_su10} a structured output prediction model for multilabel molecular activity prediction problem.
-The model relies on the representation of the cell-line structure which allows us to model the correlation of multiple labels.
+The model relies on the representation of the multiple output variables via a output graph which allows us to explore the label correlation.
 To apply structured output learning, it is assumed the structure of the output graph is fully observed.
-Alternatively in \citepub{su10}, we suppose there exist auxiliary data that encodes the label correlation which can be utilized in order to retrieve the output graph.
+Alternatively in \citepub{su10}, we suppose there exists auxiliary data that encodes the label correlation which can be utilized in order to retrieve the output graph.
 However, we cannot take the availability of the output graph as granted because the underlying dependency structure is often hidden in many real world problems.
 In \citepub{su11}, we explore the potential of constructing an majority voting ensemble of multiple structured output learners and examine the performance of the proposed model on molecular activity classification problem.
 Each structured output learner is built based on a random generated output graph.
-As a results, the proposed model \mve\ is not constraint to the availability of the dependency structure.
+As a results, the proposed model \mve\ is not constraint to the availability of the output dependency structure.
 
 
 
@@ -1451,7 +1452,7 @@ As a results, the proposed model \mve\ is not constraint to the availability of 
 
 We use \mmcrf\ as base classifier trained on a set of random output graphs.
 For each base classifier, a random graph $G_t$ is generated to couple the multiple output labels which are the activities of molecular structure $\vx$ over all cell-lines.
-The base model \mmcrf\ is constructed with training data $S=\{(\vx_i,\vy_i)\}_{i=1}^{m}$ and the output graph $G_t$.
+The base model \mmcrf\ is learnt with training data $S=\{(\vx_i,\vy_i)\}_{i=1}^{m}$ and the output graph $G_t$.
 After ensemble has been generated, the predictions are extracted from each base classifier and are collected for a post-processing step: we compute a majority vote over the graph labeling from the sign on the means of the base classifier's prediction
 \begin{align*}
 	F_j^{\text{\mve}}=\underset{y_j\in\Ycal_j}{\argmax}\,\left(\frac{1}{T}\sum_{i=1}^{T}\ind{F_j^{(t)}(x)=y_j}\right), \forall j\in\{1,\cdots,k\},
@@ -1477,7 +1478,7 @@ We have evaluated the method on molecular activity classification problem.
 This section is based on \citepub{su14b} where we aim to present two other aggregation techniques to combine the base structured output classifiers.
 Compare to previously developed \mve, the proposed model (\amm\ and \mam\ respectively) perform inference before or after forming the ensemble.
 We also examine the performance of the proposed models on a set of heterogeneous multilabel datasets from various domains.
-In addition, we bring in a theory which is based on the reconstruction error of the compatibility score to explains the improvement of \mam\ framework.
+In addition, we bring in a theory which is based on the reconstruction error of the compatibility score to explains the improvement of \mam\ model.
 
 
 
@@ -1485,10 +1486,10 @@ In addition, we bring in a theory which is based on the reconstruction error of 
 %
 \subsection{Background}
 
-We still work with the assumption mode for \mve\ in Section~\ref{sc_su11} in which the base classifier will devise the prediction according to the structure of the output graph.
+We still work with the assumption made for \mve\ in Section~\ref{sc_su11} in which the base classifier will devise the prediction according to the structure of the output graph.
 In addition, we assume that the base classifier for \amm\ and \mam\ is defined with a Markov network structure.
 That is the base classifier compute a compatibility score $\psi(\vx,\vy)$ for the pair $(\vx,\vy)\in\vXcal\times\Ycal$ according to the output graph $G$, indicating how well the input $\vx$ gets along with the output $\vy$.
-The compatibility score is defined as
+The compatibility score $\psi(\vx,\vy)$ is defined as
 \begin{align*}
 	\psi(\vx,\vy) = \ip{\vw}{\phib(\vx,\vy)} = \sum_{e\in E}\ip{\vw}{\phib_e(\vx,\vy_e)}=\sum_{e\in E}\psi_e(\vx,\vy_e),
 \end{align*}
