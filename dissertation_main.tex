@@ -1512,7 +1512,7 @@ We denote the collection of max-marginals by $\tilde{\psib} = (\tilde{\psi}_j(\v
 
 % amm
 Let $\Gcal=\{G^{(1)},\cdots,G^{(T)}\}$ denote a set of random output graphs, and let $\{\tilde{\psib}^{(1)},\cdots,\tilde{\psib}^{(T)}\}$ denote the max-marginal vectors from base classifiers that is built on each output graph.
-The prediction of the Average-of-Max-Marginal aggregation (\amm) on each node is obtained by averaging the max-marginals of base classifiers and choose the maximizing microlabel for the node
+The prediction of the Average-of-Max-Marginal (\amm) aggregation on each node is obtained by averaging the max-marginals of base classifiers and choose the maximizing microlabel for the node
 \begin{align*}
 	F_j^{\text{\amm}}=\underset{u_j\in\Ycal_j}{\argmax}\,\frac{1}{T}\sum_{t=1}^{T}\tilde{\psi}_{j,u_j}^{(t)}(\vx).	\end{align*}
 The predicted multilabel from \amm\ is composted by the predicted microlabels
@@ -1521,8 +1521,8 @@ The predicted multilabel from \amm\ is composted by the predicted microlabels
 \end{align*}
 
 % mam
-\amm\ performs the inference to find the max-marginals before combining the base classifier into ensemble. 
-On the other hand, the Maximum-of-average-marginals (\mam) aggregation first collects the local edge potentials $\psib_E^{(t)}$ from each base classifier, averages them and finally performs inference on the global consensus graph $\hat{G}=(\hat{E},V)$ with averaged edge potentials.
+\amm\ performs the inference to find the max-marginals before combining the base classifiers into ensemble. 
+On the other hand, the Maximum-of-Average-Marginals (\mam) aggregation first collects the local edge potentials $\psib_E^{(t)}$ from each base classifier, averages them and finally performs inference on the global consensus graph $\hat{G}=(\hat{E},V)$ with averaged edge potentials.
 The \mam\ model can be defined as
 \begin{align*}
 	F^{\text{\tiny MAM}}(x) &= \underset{\vy \in \Ycal }{\argmax}\,\sum_{e\in \hat{E}}\frac{1}{T}\sum_{t=1}^{T}\ \psi^{(t)}_e(x,\vy_e)
@@ -1547,7 +1547,8 @@ Besides the proposed algorithm frameworks, we also developed theoretical analysi
 The analysis extends the theory on single task ensemble developed by \citet{Brown10good}.
 In general, \citepub[Theory 1]{su14b} states that the reconstructive error from \mam\ ensemble is guaranteed to be less than or equal to the average reconstruction error from the base classifiers.
 The improvement can be decomposed into two terms, namely \textit{diversity} and \textit{coherence}.
-The former measures the variability of individual classifiers learned from different perspectives which shares the same argument as the analysis of single task ensemble model \citep{Brown10good}, the later measures the correlation of microlabel predictions in which higher correlation lead to better improvements.
+The former measures the variability of individual classifiers learned from different perspectives which shares the same argument as the analysis of single task ensemble model \citep{Brown10good}.
+The later measures the correlation of microlabel predictions in which higher correlation lead to better improvements.
 
 
 
