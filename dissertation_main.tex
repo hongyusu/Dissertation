@@ -222,7 +222,7 @@ To optimize (Definition~\ref{perceptron}), we first assume $\vXcal^{m}$ is fixed
 	\frac{\partial D(\vw,b)}{\partial\vw} = -\sum_{\vx_i\in\vXcal^m}{y_i\vx_i},\quad
 	\frac{\partial D(\vw,b)}{\partial b} = -\sum_{\vx_i\in\vXcal^m}{y_i}.
 \end{align*}
-In practice, the Perceptron uses stochastic gradient descent that iteratively processes one example from training data at a time.
+In practice, the Perceptron uses stochastic gradient descent that iteratively processes one example from the training data at a time.
 Once the example is misclassified, the algorithm adjusts the parameters according to the update rule
 \begin{align*}
 	\vw \leftarrow \vw + \eta y_i \vx_i, \quad b \leftarrow b + \eta y_i,
@@ -806,7 +806,7 @@ However, learning through label ranking will not be discussed into details as it
 Multilabel $K$-Nearest Neightbors (\mlknn) proposed by \citet{Zhang05a,Zhang07mlknn} is perhaps the most famous binary relevant classifier for flat multilabel classification.
 \mlknn\ is also an instance based learning approach \citep{Aha91instance} that is derived from the $K$-Nearest Neightbor (\knn) algorithm designed for single-label classification problem.
 \mlknn\ transforms the flat multilabel classification problem into a set of single-label classification and processes each microlabel independently.
-For each unseen example $\vx$, the \mlknn\ algorithm first identifies the set of $K$-nearest neighbors $N(\vx)$ from the training sets.
+For each unseen example $\vx$, \mlknn\ algorithm first identifies the set of $K$-nearest neighbors $N(\vx)$ from the training sets.
 After that the algorithm computes the multilabel $\vy$ of the unseen example $\vx$ by examining the set of labels collected from its $K$-nearest neightbors.
 
 Mathematically 
@@ -818,10 +818,10 @@ and let $E_{\vx}^l(j)$ denote the event that $0\le l \le K$ neighbors of $x$ hav
 	\vy[j]^* = \underset{b\in\Ycal_j}{\argmax} \, P( H^b_{\vx}(j) | E_{\vx}^{C_{\vx(j)}}(j) )
 	= \underset{b\in\Ycal_j}{\argmax} \, \frac{P( H^b_{\vx}(j) ) P(  E_{\vx}^{C_{\vx(j)}}(j) ) | H^b_{\vx}(j))}{P( E_{\vx}^{C_{\vx(j)}}(j))}.
 \end{align*}
-The prior probability distribution $H^b_{\vx}(j)$ and the likelihood distribution $P( H^b_{\vx}(j) | E_{\vx}^{C_{\vx(j)}}(j) )$ can be estimated from training data in terms of corresponding relative frequencies.
+The prior probability distribution $H^b_{\vx}(j)$ and the likelihood distribution $P( H^b_{\vx}(j) | E_{\vx}^{C_{\vx(j)}}(j) )$ can be estimated from the training data in terms of corresponding relative frequencies.
 
 The central problem with \mlknn\ is that \mlknn\ is ignorant of the label correlations.
-In order to exploit the label dependency, other approaches have been proposed \citep{Cheng09combining,Younes11a}.
+In order to exploit the label dependency, other variants of \mlknn\ have been proposed \citep{Cheng09combining,Younes11a}.
 Besides, there are many algorithm alternatives that also align to the direction of \knn\ typed learning in flat multilabel classification, for example, \citet{Brinker07case,Chiang12a} proposed methods that incorporates \knn\ with ranking model.
 
 
@@ -840,7 +840,7 @@ $S_j$ is built by taking the $j$'th microlabel as output variable and combing th
 Thus, \cc\ takes the label correlation into account by incorporating label information as concatenated features in the input feature space.
 The idea has previously been applied in \citep{Godbole04discriminative}.
 However, the addition label information only takes a small part of the input feature space especially when the origin space is already high.
-In this case, one can only expect to gain additional performance from concatenated label information with high correlation to the output microlabel.
+In this case, one can only expect to gain additional performance from concatenated label information by assuming the correlation to the output microlabel is high.
 
 Besides, \cc\ has been explained in terms of condition probability theory by Probabilistic Classifier Chains (\pcc) presented in \citep{Read09classifier,Dembczynski10bayes}.
 Since there is no standard way for classification order of microlabels in \cc, Ensemble Classifier Chains (\ecc) has been developed in \citep{Read11classifier} which further improves \cc\ by generating and combining multiple chains of classifiers. 
@@ -858,7 +858,7 @@ The central idea of \iblr\ is to take the labels of the neighboring examples as 
 Similar idea has been applied in collective classification \citep{Ghamrawi05collective} and link based classification \citep{Getoor05link, Getoor07introduction}.
 
 In particular, for each unseen example $\vx$, \iblr\ first identifies the set of $K$-nearest neighbors $N_k(\vx)$ from the training sets.
-Then the algorithm builds a logistic regression (\lr) model (\ref{sc_lr}) for each microlabel based on the label information collected from all training examples in $N_k(\vx)$.
+Then the algorithm builds a Logistic Regression (\lr) model (Section~\ref{sc_lr}) for each microlabel based on the label information collected from all examples in $N_k(\vx)$.
 Mathematically \iblr\ defines a posterior probability for the $j$'th microlabel of $\vx$ being labeled as $u_j$ by
 \begin{align*}
 	\pi^{(j)} = P( \vy(\vx)[j]=u_j | N_k(\vx)), u_j\in\Ycal_j.
@@ -883,9 +883,9 @@ $w_0^{(j)}$ is a bias term.
 \section{Algorithm Adaptation}
 
 The central idea of the algorithm adaptation approach is to directly modify the popular single-label learning algorithms and apply them to the multilabel classification problems.
-The approach includes but is not limited to the ensemble typed learning, the \lr\ typed learning, and regularized learning that are described in the following part of the section.
-There also exists methods that are adapted from, for example, the Perceptron \citep{Crammer03afamily} and the Neural Network \citep{Zhang06multilabel}.
-They are not detailed mostly due to the divergence from the main topic of the thesis.
+The approach includes but is not limited to ensemble typed learning, \lr\ typed learning, and the regularized learning that are described in the following part of the section.
+There also exists methods that are modified from, for example, Perceptron \citep{Crammer03afamily} and Neural Network \citep{Zhang06multilabel}.
+They are not detailed in the section due to the divergence from the main topic of the thesis.
 
 
 
