@@ -1048,20 +1048,20 @@ In this section, we will briefly present several related algorithms for structur
 The Perceptron developed by \citet{Rosenblatt58} is one of the oldest learning algorithm in machine learning.
 The Structured Perceptron, as suggested by its name, can be seen as the generalization of the Perceptron algorithm to the structured output space.
 It was firstly proposed in \citep{collins02a, collins02b} with the formalism incredibly similar to the multiclass Perceptron. 
-The model assumes a score function $\ip{\vw}{\phib(\vx,\vy)}$ as the inner product between a joint feature map $\phib(\vx,\vy)$ and some feature weight parameter $\vw$.
-After weight parameter $\vw$ is obtained, one need to solve the \textit{argmax} problem in order to find the best output for a given input $\vx$
+The model assumes a score function $\ip{\vw}{\phib(\vx,\vy)}$ as the inner product between a joint feature map $\phib(\vx,\vy)$ and the feature weight parameter $\vw$.
+After weight parameter $\vw$ is obtained, one need to solve the \textit{argmax} problem to find the best output for a given input $\vx$
 \begin{align}
 	\hat{\vy} = \underset{\vy\in\vYcal}{\argmax} &\, \ip{\vw}{\phib(\vx,\vy)}.  \label{sp_inference}
 \end{align}
 For example, this can be solved by Viterbi decoding \citep{collins02a}.
 
 The weight parameter $\vw$ is learned via the standard Perceptron iterative update by solving the argmax problem (\ref{sp_inference}) in each iteration.
-In particular, the algorithm loops through training examples and updates $\vw$ whenever the predicted label $\hat{\vy_i}$ is different from the true label $\vy_i$ defined by
+In particular, the algorithm loops through the training examples and updates $\vw$ whenever the predicted label $\hat{\vy_i}$ is different from the true label $\vy_i$ defined by
 \begin{align}
 	\vw \leftarrow \vw + \left(\phib(\vx_i,\vy_i) - \phib(\vx_i,\hat{\vy}_i)\right). \label{sp_update}
 \end{align}
 The update usually leads to over-fitting.
-A simple refinement is usually applied the idea of which is also used in ``Average Perceptron'' \citep{Freund99large}.
+A simple refinement is usually applied which is known as ``Average Perceptron'' \citep{Freund99large}.
 
 \iffalse
 The update usually leads to over-fitting and a simple refinement, called "average parameter" similar to \citep{Freund99large}, is shown in (Algorithm~\ref{algorithm_structured_perceptron}).
@@ -1159,7 +1159,7 @@ The primal optimization problem of \mmmn\ in Definition~\ref{def_mmmn} is diffic
 The corresponding dual form is also difficult due to exponential number of dual variables \citep{Taskar04max}.
 By exploring the Markov network structure, the original optimization problem (Definition~\ref{def_mmmn}) can be formulated into factorized dual quadratic programming, as long as the loss function $\vell$ and joint feature map $\phib(\vx,\vy)$ are decomposable over the Markov network.
 
-As the number of parameters is quadratic in the number of training examples and edges in the network, it still cannot fit into standard QP solver. 
+As the number of parameters is quadratic in the number of training examples and the edges in the network, it still cannot fit into standard QP solver. 
 \citep{Taskar04max} developed a coordinate descent method analogous to the Sequential Minimal Optimization (\smo) used for SVM training \citep{Platt98sequential,Platt99fast}.
 Subsequently, other efficient optimization algorithms have been proposed, which include exponential gradient optimization methods from \citet{bartlett04}, extra-gradient methods from \citet{taskar06}, sub-gradient methods from \citet{Ratliff07}, and conditional gradient methods from \citet{rousu06, rousu07}.
 
@@ -1175,7 +1175,7 @@ Nevertheless, \mmmn\ improves \crf\ by avoiding partition function and allowing 
 % 
 \subsection{Support Vector Machines for Interdependent and Structured Outputs (\svmstruct)} \label{sc_svmstruct}
 
-Support Vector Machine for interdependent and structured output space (\svmstruct) is developed in \citep{THJA04,TJTA05}.
+The Support Vector Machine for interdependent and structured output space (\svmstruct) is developed in \citep{THJA04,TJTA05}.
 The formalism of \svmstruct\ is quite similar to \mmmn\ described in (Section~\ref{sc_mmmn}).
 Compared to \mmmn\ which scales the margin by the loss function, \svmstruct\ scales the margin errors ({\em slacks}) by the loss function.
 The primal optimization problem of \svmstruct\ can be defined as
@@ -1225,7 +1225,7 @@ Molecular classification, the goal of which is to predict the anticancer potenti
 Viable molecular structures are scanned, searched, or designed for therapeutic efficacy.
 In particular, expensive preclinical \textit{in vitro} and \textit{in vivo} drug tests can be largely avoided and special efforts can be devoted to few promising candidate molecules, once accurate \textit{in silico} models are available \citep{Burbidg01drug}.
 
-Various machine learning methods have been developed for the task, to name but a few, inductive logic programming \citep{King96structure}, artificial neural network \citep{Bernazzani06predicting}, kernel methods for nonlinear molecular properties \citep{Trotter01drug,Ralaivola05graph,Swamidass05kernel,Ceroni07classification}, and \svm\ based methods for reliable predictions \citep{Trotter01drug,Byvatov03comparison,Xue04effect}.
+Various machine learning methods have been developed for the task, to name but a few, inductive logic programming \citep{King96structure}, artificial neural network \citep{Bernazzani06predicting}, kernel methods for nonlinear molecular property \citep{Trotter01drug,Ralaivola05graph,Swamidass05kernel,Ceroni07classification}, and \svm\ based methods for reliable predictions \citep{Trotter01drug,Byvatov03comparison,Xue04effect}.
 Albeit with the large quantity of the computational models, they only focus on predicting single target variable (e.g. inhibition potential in one cell line). 
 On the other hand, relative larger number of cell lines are often screened at the same time.
 For example in the recent \textit{NCI-60} {Human Tumor Cell Line Screen} project \citep{Shoemaker06the}, thousands of molecular structures are tested agains hundreds of cell lines.
@@ -1235,13 +1235,13 @@ For example in the recent \textit{NCI-60} {Human Tumor Cell Line Screen} project
 
 To efficiently and accurately predict molecular activities in multiple cell lines at the same time, we applied a structured output learning approach in \citepub{su10} which is to our knowledge the first multi-task learning approach for molecular classification problem.
 The algorithm is an instantiation of the structured output learning method \mmcrf\ developed in \citep{rousu06}.
-It can also be seen as a sibling method of \mmmn\ presented in Section~\ref{sc_mmmn}.
+It can also be seen as a sibling method of \mmmn\ \citep{Taskar04max} described in Section~\ref{sc_mmmn}.
 In particular, the model defines a compatibility score through inner product for a molecular structure $\vx$ and the activities in multiple cell lines $\vy$
 \begin{align*}
 	F(\vx,\vy;\vw) = \ip{\vw}{\phib(\vx,\vy)},
 \end{align*}
 where $\vw$ is the feature weight parameter that ensures the molecular structure with correct activities will be scored higher than with incorrect activities.
-$\vw$ are learned by maximizing the minimum loss-scaled margin between correct examples $(\vx_i,\vy_i)$ and incorrect examples $(\vx_i,\vy)$ over the whole training set
+The parameter $\vw$ is learned by maximizing the minimum loss-scaled margin between correct examples $(\vx_i,\vy_i)$ and incorrect pseudo-examples $(\vx_i,\vy)$ over the whole training set
 \begin{align*}
 	\underset{\vw,\vxi_i}{\minimize} & \quad \frac{1}{2}\norm{\vw}^2 + C\sum_{i=1}^{m}\xi_i\\
 	\st &\quad \ip{\vw}{\phib(\vx_i,\vy_i)} - \ip{\vw}{\phib(\vx_i,\vy)} \ge \ell(\vy_i,\vy)-\xi_i,\\
@@ -1255,7 +1255,7 @@ The loss scaled margin optimization will push high-loss pseudo-examples further 
 The model is optimized by conditional gradient optimization \citep{Bertsekas95nonlinear} in marginalized dual space \citep{Taskar04max}, which not only benefits from a polynomial-size parameter space in marginalized dual representation but also enables the kernel function that is capable of dealing with non-linearity of the complex molecular structures.
 
 %Kernel is the classical way of defining the similarity between complex objects.
-In \citepub{su10}, ee used graph kernel to measure the similarity of pair of molecular structures.
+In \citepub{su10}, we used graph kernel to measure the similarity of pair of molecular structures.
 The common way to represent the structure of a molecule is to use an undirected labeled graph $G=(V,E)$, where vertices $V=\{v_1,\cdots,v_n\}$ corresponds to atoms and edge $E=\{e_1,\cdots,e_m\}$ corresponds to the covalent bonds.
 The adjacency matrix $A$ of graph $G$ is defined such that its $(i,j)$'th entry $A_{i,j}$ equals to one if there is an edge between atom $i$ and atom $j$.
 
@@ -1292,10 +1292,10 @@ See \citep{Vishwanathan10graph} for a more comprehensive survey on graph kernels
 %\subsubsection{Generation of Markov Network}
 To apply structured output learning model described above, we assume the underlying Markov network structure is fully observed.
 In other words, we need to build an output graph with nodes correspond to cell lines and edges correspond to potential statistical dependencies.
-Auxiliary datasets are available for this purpose \citep{Shoemaker06the} which implicitly describes the correlation between cell lines.
+Auxiliary datasets are available for this purpose \citep{Shoemaker06the} which implicitly describes the correlation between the cell lines.
 To build the output graph, we first compute the covariance matrix for cell lines based on auxiliary data, then extracte the network structure by applying the following two methods.
-In \textbf{maximum spanning tree} approach, we take the minimum number of edges that make a connected network whilst maximizing the edge weights.
-In \textbf{correlation thresholding} approach, we take all edges that exceed a fixed threshold, which typically generates a non-tree graph.
+In \text{maximum spanning tree} approach, we take the minimum number of edges that make a connected network whilst maximizing the edge weights.
+In \text{correlation thresholding} approach, we take all edges that exceed a fixed threshold, which typically generates a non-tree graph.
 
 
 %
@@ -1350,8 +1350,6 @@ The feature weight parameter $\vw$ is learned through maximum-margin structured 
 \end{align*}
 \end{definition}
 where we use $\Hcal(G)$ to denote the set of directed acyclic graphs of $G$.
-
-% inference
 To solve the above optimization problem, we have to compute the highest-scoring subgraph given an action. 
 In particular, the goal during the training is to find the worst margin violating subgraph which corresponds to solving the loss-augmented maximization problem
 \begin{align*}
@@ -1387,8 +1385,8 @@ As \sdp\ inference is not scalable on large networks, we developed a \greedy\ he
 The proof is given in supplementary material of \citepub{su14a}. 
 As a results, the \greedy\ algorithm starts with an empty vertex set and adds one vertex at a time such that the increment of the score is maximized over all inactivated vertices.
 The iteration ends when the objective cannot be improved.  
-It is worthy noticing that we are not able to give any approximation guarantee for the solutions produced by the \greedy\ algorithm.
-The property of submodularity, which is often used to analyze the greedy algorithm, only holds for the special case of our inference problem.
+It is worthy of noticing that we are not able to give any approximation guarantee for the solutions produced by the \greedy\ algorithm.
+The property of sub-modularity, which is often used to analyze the greedy algorithm, only holds for the special case of our inference problem.
 
 
 \iffalse
@@ -1451,7 +1449,7 @@ As a results, the proposed model \mve\ is not constraint to the availability of 
 \subsection{Methods}
 
 We use \mmcrf\ as base classifier trained on a set of random output graphs.
-For each base classifier, a random graph $G_t$ is generated to couple the multiple output labels which are the activities of molecular structure $\vx$ over all cell-lines.
+For each base classifier, a random graph $G_t$ is generated to couple the multiple output labels which are the activities of molecular structure $\vx$ over all cell lines.
 The base model \mmcrf\ is learnt with training data $S=\{(\vx_i,\vy_i)\}_{i=1}^{m}$ and the output graph $G_t$.
 After ensemble has been generated, the predictions are extracted from each base classifier and are collected for a post-processing step: we compute a majority vote over the graph labeling from the sign on the means of the base classifier's prediction
 \begin{align*}
