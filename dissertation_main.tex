@@ -1800,12 +1800,11 @@ The empirical results demonstrate that the structured output learning outperform
 The current structured output learning approach rely on representing the label correlation as an output graph known as \textit{a-priori}.
 Limiting the applicability of the structured output prediction is the fact that the output graph is often unobserved.
 The second outcome of the thesis is the new methods developed for structured output learning when the output dependency graph is hidden.
+Analog but with significant difference to the ensemble method, the proposed methods combines a set of structured output classifiers.
+In particular, \amm\ and \mam\ perform inference before or after combing the base learners that built on random trees, \rta\ performs joint learning and inference on a random set of spanning tree.
+We have studied the behavior of the proposed methods in terms of reconstruction error of the compatibility score as well as the generalization error which guaranteed the performance of the proposed models.
 
-The new methods aim to learn from a random set of spanning trees that connect multiple output variables, thus widen the applicability of the structured output learning.
-Besides, we have studied the behavior of the proposed methods in terms of reconstruction error of the compatibility score as well as the generalization error which guaranteed the performance of the proposed models.
-
-In addition, we have explored the inference algorithms for the proposed structured output learning methods, which can avoid the exponential number of parameter space and provide fast convergence.
-
+In addition, the developed inference algorithms for the proposed structured output learning models can avoid the exponential parameter space and ensure the efficient learning.
 
 
 %------------------------------------------------
