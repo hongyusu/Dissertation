@@ -164,7 +164,7 @@ Besides, other regularization techniques have been widely studied, to name a few
 \section{Single-Label Classification}\label{sc_slc}
 
 In this section, the author will introduce the basic classification problem known as \textit{single-label classification}.
-The author will explain three prominent algorithms in this area: Perceptron, Logistic Regression and Support Vector Machines.
+The author will explain two prominent algorithms in this area: the Logistic Regression and the Support Vector Machines.
 The optimization techniques and the latest advances of these algorithms will also be briefly discussed.
 The goal is to cover the background that is necessary to understand the algorithms presented in the later part of the thesis. 
 
@@ -197,6 +197,7 @@ We use $||\vw||$ to denote the $L_2$-norm of vector $\vw$ in the following part 
 
 %
 %
+\iffalse
 \subsection{Perceptron}\label{sc_perceptron}
 
 The Perceptron developed in \citep{Rosenblatt58,Rosenblatt62} is a linear classifiers parameterized by a weight vector $\vw$ and a bias term $b$. 
@@ -339,6 +340,7 @@ The prediction for a new test example $\vx_{ts}$ is computed by
 which is more efficient to compute and is extremely similar to (\ref{voted_perceptron_prediction}) except for the inside $\sign$ operation.
 \fi
 
+\fi
 %
 % logit
 \subsection{Logistic Regression (\lr)}\label{sc_lr}
@@ -379,7 +381,7 @@ By putting (\ref{lr_1}) and (\ref{lr_2}) together, we define Logistic Regression
 	\end{align*}
 \end{definition}
 Naturally, we expect the prediction $y=+1$ when $P(y=+1|\vx;\vw,b)\ge0.5$ and $y=-1$, when $P(y=+1|\vx;\vw,b)<0.5$.
-The decision rule is similar to the Perceptron where we predict $y=+1$ when $\ip{\vw}{\varphib(\vx)}+b\ge0$, and $y=-1$ otherwise.
+The decision rule is such that we predict $y=+1$ when $\ip{\vw}{\varphib(\vx)}+b\ge0$, and $y=-1$ otherwise.
 Besides decision boundary, the Logistic Regression can output the class probability as the the ``distance'' of the data point to the decision boundary.
 It is the probabilistic output that makes Logistic Regression no more than a classifier.
 
@@ -883,7 +885,7 @@ $w_0^{(j)}$ is a bias term.
 
 The central idea of the algorithm adaptation approach is to directly modify the popular single-label learning algorithms and apply them to the multilabel classification problems.
 The approach includes but is not limited to the ensemble typed learning, the \lr\ typed learning, and regularized learning that are described in the following part of the section.
-There also exists methods that are adapted from, for example, perceptron \citep{Crammer03afamily} and neural network \citep{Zhang06multilabel}.
+There also exists methods that are adapted from, for example, the Perceptron \citep{Crammer03afamily} and the Neural Network \citep{Zhang06multilabel}.
 They are not detailed mostly due to the divergence from the main topic of the thesis.
 
 
@@ -1035,7 +1037,7 @@ Naturally, $u_i\in\Ycal_i$ and $\vu_e\in\vYcal_e$.
 %
 \section{Related Methods}
 
-In this section, we will briefly present several related algorithms for structured output prediction include Structured Perceptron, Conditional Random Field, Structured \svm, and Max-Margin Markov Network.
+In this section, we will briefly present several related algorithms for structured output prediction include the Structured Perceptron, the Conditional Random Field, the Structured \svm, and the Max-Margin Markov Network.
 
 
 
@@ -1043,18 +1045,18 @@ In this section, we will briefly present several related algorithms for structur
 %
 \subsection{Structured Perceptron}
 
-The Perceptrion developed by \citet{Rosenblatt58} is one of the oldest learning algorithm in machine learning.
-Structured Perceptron, as suggested by its name, can be seen as the generalization of Perceptron algorithm to structured output space.
-It was firstly proposed in \citep{collins02a, collins02b} with the formalism incredibly similar to multiclass Perceptron. 
+The Perceptron developed by \citet{Rosenblatt58} is one of the oldest learning algorithm in machine learning.
+The Structured Perceptron, as suggested by its name, can be seen as the generalization of the Perceptron algorithm to the structured output space.
+It was firstly proposed in \citep{collins02a, collins02b} with the formalism incredibly similar to the multiclass Perceptron. 
 The model assumes a score function $\ip{\vw}{\phib(\vx,\vy)}$ as the inner product between a joint feature map $\phib(\vx,\vy)$ and some feature weight parameter $\vw$.
 After weight parameter $\vw$ is obtained, one need to solve the \textit{argmax} problem in order to find the best output for a given input $\vx$
 \begin{align}
 	\hat{\vy} = \underset{\vy\in\vYcal}{\argmax} &\, \ip{\vw}{\phib(\vx,\vy)}.  \label{sp_inference}
 \end{align}
-This is solved by Viterbi decoding in \citep{collins02a}.
+For example, this can be solved by Viterbi decoding \citep{collins02a}.
 
-The weight parameter $\vw$ is learned via standard Perceptron iterative update by solving argmax problem (\ref{sp_inference}) in each iteration.
-In particular, the algorithm loops through training examples and updates $\vw$ whenever the predicted label $\hat{\vy_i}$ is different from true label $\vy_i$ defined by
+The weight parameter $\vw$ is learned via the standard Perceptron iterative update by solving the argmax problem (\ref{sp_inference}) in each iteration.
+In particular, the algorithm loops through training examples and updates $\vw$ whenever the predicted label $\hat{\vy_i}$ is different from the true label $\vy_i$ defined by
 \begin{align}
 	\vw \leftarrow \vw + \left(\phib(\vx_i,\vy_i) - \phib(\vx_i,\hat{\vy}_i)\right). \label{sp_update}
 \end{align}
@@ -1085,14 +1087,13 @@ The update usually leads to over-fitting and a simple refinement, called "averag
 \end{algorithm}
 \fi
 
-The central problem with Structured Perceptron learning is its loss function.
-In fact, Structured Perceptron tacitly applies $0/1$ loss over output variables defined as
+The central problem with the Structured Perceptron learning is its loss function.
+In fact, the Structured Perceptron tacitly applies $0/1$ loss over output variables defined as
 \begin{align*}
 	\vell(\vy,\hat{\vy})=\ind{\vy\neq\hat{\vy}}.
 \end{align*}
 As a result, it is impossible to distinguish the nearly correct and the completely incorrect output multilabels.
 Both will lead to the same update to the feature weight parameter during the training in (\ref{sp_update}) .
-
 
 
 %
