@@ -382,11 +382,11 @@ By putting (\ref{lr_1}) and (\ref{lr_2}) together, we define Logistic Regression
 \end{definition}
 Naturally, we expect the prediction $y=+1$ when $P(y=+1|\vx;\vw,b)\ge0.5$ and $y=-1$, when $P(y=+1|\vx;\vw,b)<0.5$.
 The decision rule is such that we predict $y=+1$ when $\ip{\vw}{\varphib(\vx)}+b\ge0$, and $y=-1$ otherwise.
-Besides decision boundary, the Logistic Regression can output the class probability as the the ``distance'' of the data point to the decision boundary.
+Besides decision boundary, Logistic Regression can output the class probability as the the ``distance'' of the data point to the decision boundary.
 It is the probabilistic output that makes Logistic Regression no more than a classifier.
 
 % optimization
-The parameter $\vw$ and $b$ of the Logistic Regression can be obtained by maximizing the probability (likelihood) of the training data.
+The parameter $\vw$ and $b$ of Logistic Regression can be obtained by maximizing the probability (likelihood) of the training data.
 %The probability of training data $\vx$ with class label $y$ is $P(y|\vx)$.
 The likelihood of parameters given data can be computed by
 \begin{align}
@@ -398,7 +398,7 @@ To apply maximum likelihood estimation (\mle), it is easier if, instead of maxim
 \end{align}
 
 % logistic regression of other type
-Though \mle\ training of the Logistic Regression can generate a model that fits the training data, it does not guarantee to generalize well on the test data.
+Though \mle\ training of Logistic Regression can generate a model that fits the training data, it does not guarantee to generalize well on the test data.
 To achieve better generalization power, we apply regularization technique as discussed in Section~\ref{ch_rlc}.
 Many regularization methods for Logistic Regression have been proposed \citep{Chen99,Chen00,Goodman03}, among which adding Gaussian prior on weight parameter $\vw$ is one of the standard option.
 In practice, we assume $\vw$ is generated according to a zero-mean spherical Gaussian with variance $\sigma^2$.
@@ -416,7 +416,7 @@ the {Itrative Scaling} method \citep{Darroch72,Pietra97inducing,Berger97,Goodman
 the quasi-Newton method \citep{Minka03},
 the truncated Newton method \citep{Komarek05making,Lin2008trust},
 the coordinate descent method \citep{Huang09iterative}.
-There also exists research that aims to optimization the Logistic Regression from its dual representation.
+There also exists research that aims to optimization Logistic Regression from its dual representation.
 The first method is developed by \citet{Jaakkola99probabilistic}.
 Later on, \citet{Keerthi05a} proposed the iterative optimization and \citet{Yu11dual} developed the dual coordinate descent method.
 
@@ -1036,7 +1036,7 @@ Naturally, $u_i\in\Ycal_i$ and $\vu_e\in\vYcal_e$.
 %
 \section{Related Methods}
 
-In this section, we will briefly present several related algorithms for structured output prediction include the Structured Perceptron, the Conditional Random Field, the Structured \svm, and the Max-Margin Markov Network.
+In this section, we will briefly present several related algorithms for structured output prediction include Structured Perceptron, Conditional Random Field, Structured \svm, and Max-Margin Markov Network.
 
 
 
@@ -1140,7 +1140,7 @@ The compatibility score define by
 can be seen as the affinity of the multilabel $\vy$ to the input $\vx$ according to the Markov network.
 Feature weight parameter $\vw$ in (\ref{mmmn_score}) ensures the example with correct multilabel will reach higher score than with incorrect multilabel.
 To learn the feature weight parameter $\vw$, \mmmn\ defines the margin as the difference in compatibility scores between the correct example $(\vx_i,\vy_i)$ and the psudo-example $(\vx_i,\vy)$.
-Under the Maximum-Margin principle (Section~\ref{sc_svm}), \mmmn\ requires the margin to be at least $\vell(\vy_i,{\vy})$.
+Under Maximum-Margin principle (Section~\ref{sc_svm}), \mmmn\ requires the margin to be at least $\vell(\vy_i,{\vy})$.
 The primal optimization problem of \mmmn\ can be formulated as
 \begin{definition}{\mmmn\ Optimization Problem in Primal.}\label{def_mmmn}
 	\begin{align*}
