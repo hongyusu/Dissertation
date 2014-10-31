@@ -1787,14 +1787,13 @@ In this thesis, we have studied the supervised learning for classification.
 We focused on multilabel classification where the task is to predict multiple interdependent output variables given an input example.
 As the multiple variables can be ``on'' or ``off'' simultaneously, the central problem in multilabel classification is to explore the label correlation in order to make better prediction.
 
-The problem has been previously tackled by flat multilabel classification approach which treats the multiple outputs essentially as a ``flat'' vector.
+The problem has been previously tackled by flat multilabel classification approach in which the multiple outputs are essentially as a ``flat'' vector.
 The flat multilabel classification approach has difficulty of modeling the label correlation.
 The structured output learning approach is a natural remedy to flat multilabel classification.
 The first outcome of the thesis is to extend the structured output learning methods.
-We have applied the structured output learning on molecular activity classification problem.
-We have also developed \spin\ that is able to predict a directed acyclic graph that connects multiple output variables.
-\spin\ has been applied in network influence prediction problem.
-It is also useful in predicting other influence or spreading typed problems.
+We have applied the structured output learning in molecular activity classification problem.
+We have also developed \spin\ that is able to predict a directed acyclic graph that connects multiple output variables, and applied in network response prediction problem.
+\spin\ can be also applied in other influence or spreading types problems.
 Both methods and the empirical results have demonstrated that structured output learning is an important extension to flat multilabel classification approach for predicting multiple interdependent output variables.
 
 The current structured output learning approach rely on representing the label correlation as an output graph which is assumed to be observed.
