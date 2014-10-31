@@ -1797,8 +1797,10 @@ We have also developed \spin\ that is able to predict a directed acyclic graph t
 We examine the performances of both methods.
 The empirical results demonstrate that the structured output learning outperform the flat multilabel classification approach for predicting multiple interdependent output variables in structured output space.
 
-The current structured output learning approach rely on representing the label correlation as an output graph which is assumed to be observed.
-The second outcome of the thesis is the new methods for structured output learning when the output dependency structure is not observed.
+The current structured output learning approach rely on representing the label correlation as an output graph known as \textit{a-priori}.
+Limiting the applicability of the structured output prediction is the fact that the output graph is often unobserved.
+The second outcome of the thesis is the new methods developed for structured output learning when the output dependency graph is hidden.
+
 The new methods aim to learn from a random set of spanning trees that connect multiple output variables, thus widen the applicability of the structured output learning.
 Besides, we have studied the behavior of the proposed methods in terms of reconstruction error of the compatibility score as well as the generalization error which guaranteed the performance of the proposed models.
 
