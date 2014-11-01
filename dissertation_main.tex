@@ -535,7 +535,7 @@ We obtain the following dual optimization problem
 		\st & \quad \sum_{i=1}^{m}\alpha_iy_i=0, \, 0\le\alpha_i\le C, \, \forall i\in\{1,\cdots,m\}.
 	\end{align*}
 \end{definition}
-It is not difficult to verify that according to KKT condition only examples with both $\xi_i=0$ and satisfying equality constraints in (\ref{softsvmconstraint}) will be ``active'' and have dual variable $\alpha_i>0$.
+It is not difficult to verify that according to KKT conditions only examples with both $\xi_i=0$ and satisfying equality constraints in (\ref{softsvmconstraint}) will be ``active'' and have dual variable $\alpha_i>0$.
 These training examples lie on the margin and have $\gamma_i=1$.
 They are called \textit{support vectors} in \svm\ optimization.
 In fact the number of support vectors is usually smaller than the size of the training set.
@@ -607,7 +607,7 @@ There are many other active lines of research on \svm\ optimization that aim to 
 
 Ensemble methods are one of the prominent classification techniques widely used in machine learning community.
 In general, the methods train multiple base classifiers and combine them in order to achiever better classification performance.
-Most importantly, there is no requirement for base classifiers to be accuracy as long as they perform better than random guessing.
+Most importantly, there is no requirement for base classifiers to be accurate as long as they perform better than random guessing.
 %To trace the exact originality of the ensemble methods seems impossible, as the methods involve along well with human society by which it is wiser to take in to account advises from multiple human experts.
 There are several different types of ensemble algorithms, to name a few, bagging \citep{Breiman96bagging}, boosting \citep{Freund97a,Schapire99improved}, stacking \citep{Smyth99linearly}, Bayesian averaging \citep{Freund04generalization}.
 Most of the algorithms have improved the classification performance when compared to their base classifier counterpart, some of them are also supported with theoretical analysis that guarantees the performance \citep{Schapire97boosting,Koltchinskii00empirical,Cortes14semble,Cortes14deep}.
@@ -791,7 +791,7 @@ The loss function is usually tailored for the learning algorithm.
 \section{Problem Transformation}
 
 The problem transformation approach aims to transform the flat multilabel classification problem in to other well established problem settings.
-The most typical way is known as \textit{binary relevant} (\br) proposed by \citet{Tsoumakas07multi,Tsoumakas10mining}.
+The most typical way is known as \textit{binary relevance} (\br) proposed by \citet{Tsoumakas07multi,Tsoumakas10mining}.
 \br\ amounts to transform the multilabel classification problem into a set of single-label classification problems and to independently learn a single-label classifier for each microlabel.
 We will focus on \br\ in this section.
 Another possibilities include, for example, to transform the multiple labels into label power set \citep{Tsoumakas07random} or to transform the problem into label ranking problem \citep{Elisseeff01akernel,Brinker07case,Furnkranz08multilabel,Chiang12a}.
@@ -803,7 +803,7 @@ However, learning through label ranking will not be discussed into details as it
 %
 \subsection{Multilabel $K$-Nearest Neighbors (\mlknn)} \label{sc_mlknn}
 
-Multilabel $K$-Nearest Neightbors (\mlknn) proposed by \citet{Zhang05a,Zhang07mlknn} is perhaps the most famous binary relevant classifier for flat multilabel classification.
+Multilabel $K$-Nearest Neightbors (\mlknn) proposed by \citet{Zhang05a,Zhang07mlknn} is perhaps the most famous binary relevance classifier for flat multilabel classification.
 \mlknn\ is also an instance based learning approach \citep{Aha91instance} that is derived from the $K$-Nearest Neightbor (\knn) algorithm designed for single-label classification problem.
 \mlknn\ transforms the flat multilabel classification problem into a set of single-label classification and processes each microlabel independently.
 For each unseen example $\vx$, \mlknn\ algorithm first identifies the set of $K$-nearest neighbors $N(\vx)$ from the training sets.
@@ -839,7 +839,7 @@ $S_j$ is built by taking the $j$'th microlabel as output variable and combing th
 \end{align*} 
 Thus, \cc\ takes the label correlation into account by incorporating label information as concatenated features in the input feature space.
 The idea has previously been applied in \citep{Godbole04discriminative}.
-However, the addition label information only takes a small part of the input feature space especially when the origin space is already high.
+However, the addition label information only takes a small part of the input feature space especially when the original feature space is already high.
 In this case, one can only expect to gain additional performance from concatenated label information by assuming the correlation to the output microlabel is high.
 
 Besides, \cc\ has been explained in terms of condition probability theory by Probabilistic Classifier Chains (\pcc) presented in \citep{Read09classifier,Dembczynski10bayes}.
@@ -1008,7 +1008,7 @@ Recently, \citet{Paredes12exploit} proposed a method which exploits the informat
 \chapter{Structured Output Prediction} \label{ch_sop}
 
 Structured output prediction is a natural extension to flat multilabel classification presented in Chapter~\ref{ch_fmlc}.
-Unlike flat multilabel classification which takes multiple output variables as a ``flat'' vector, structure output prediction assumes multiple output variables are correlated and locate in the structured output space.
+Unlike flat multilabel classification which takes multiple output variables as a ``flat'' vector, structured output prediction assumes multiple output variables are correlated and locate in the structured output space.
 It builds a graph structure (e.g. chain, tree) to connect multiple output variables by which it gains the advantage of exploring the label correlation compared to flat multilabel classification.
 In this chapter, we will start by introducing several classical structured output learning models developed during the last decade.
 We will present our research of applying the structured output learning on molecular activity prediction problem.
@@ -1422,7 +1422,7 @@ Diffusion scaling has the effect of shrinking the distance to the nodes that are
 \chapter{Structured Output Prediction with Unknown Structure} \label{ch_sopw}
 
 Structured output learning (Chapter~\ref{ch_sop}) gains the power of the representation by connecting multiple output variables by an output graph.
-In this chapter, we extend the structure output learning to the scenario where the output graph is hidden, by exploring the potential of learning from a random set of spanning trees.
+In this chapter, we extend the structured output learning to the scenario where the output graph is hidden, by exploring the potential of learning from a random set of spanning trees.
 In Section~\ref{sc_su11}, we start the discussion by presenting a majority voting ensemble (\mve) that combines a set of structured output classifiers.
 We proceed in Section~\ref{sc_su14b} with two aggregation techniques (\amm\ and \mam\ respectively) that also perform inference before or after forming the ensemble.
 In Section~\ref{sc_su14c}, we present and discuss the \rta\ method that improves \mam\ by performing joint learning and inference on a random set of spanning trees.
@@ -1794,7 +1794,7 @@ The first outcome of the thesis is to extend the structured output learning meth
 We have applied the structured output learning in molecular activity classification problem.
 We have also developed \spin\ that is able to predict a directed acyclic graph that connects multiple output variables, and applied in network response prediction problem.
 \spin\ can be also applied in other influence or spreading types problems.
-We examine the performances of both methods.
+We examine the performance of both methods.
 The empirical results demonstrate that the structured output learning outperform the flat multilabel classification approach for predicting multiple interdependent output variables in structured output space.
 
 The current structured output learning approach rely on representing the label correlation as an output graph known as \textit{a-priori}.
