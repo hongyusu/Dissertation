@@ -24,10 +24,10 @@ In the classical supervised learning setting, the output variable to be predicte
 In machine learning community, it is referred as single-label classification if the output is discrete valued, or as regression if the output is continuous valued.
 Many single-label classification models have been designed and applied in practice, for example, Perceptron \citep{Rosenblatt58,Rosenblatt62}, Logistic Regression \citep{Chen99,Chen00,Goodman03}, Support Vector Machines \citep{Boser92,Cortes95support}.
 
-Multilabel classification is a natural extension to single-label classification by defining multiple valued output associated with each input.
+Multilabel classification is a natural extension to single-label classification by defining multiple outputs associated with each input.
 Problems of this type are prevalent in everyday life.
 For example, a movie can be classified as ``sci-fi'', ``thriller'' and ``crime''; a news article can be categorized as ``science'', ``drug'' and ``people''; a gene can associate to multiple functions in genomics research; or a surveillant photo can be tagged by ``car'', ``building'' and ``road''. 
-The problem is known as flat multilabel classification when the multiple output variables are essentially treated as a ``flat'' vector.
+When the multiple output variables are treated as a ``flat'' vector, the problem is known as flat multilabel classification 
 The flat multilabel classification problem has draw increasing amount of interest from machine learning community \citep{Tsoumakas07multi,Tsoumakas10mining}, and has been tackled by many algorithms that aim to explore the correlation and dependency between multiple output variables in order to make better prediction \citep{Read09classifier,Cheng09combining,Bian12corrlog}.
 
 In multilabel classification problem, multiple interdependent output variables are usually located in a structured output space where the dependency or correlation of the variables is defined by the structure of an output graph (e.g. Markov network).
