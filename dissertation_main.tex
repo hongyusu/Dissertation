@@ -27,12 +27,12 @@ Many single-label classification models have been designed and applied in practi
 Multilabel classification is a natural extension to single-label classification by defining multiple outputs associated with each input.
 Problems of this type are prevalent in everyday life.
 For example, a movie can be classified as ``sci-fi'', ``thriller'' and ``crime''; a news article can be categorized as ``science'', ``drug'' and ``people''; a gene can associate to multiple functions in genomics research; or a surveillant photo can be tagged by ``car'', ``building'' and ``road''. 
-When the multiple output variables are treated as a ``flat'' vector, the problem is known as flat multilabel classification .
+One branch of multilabel classification problem is usually known as flat multilabel classification where the multiple output variables are treated as a ``flat'' vector.
 Flat multilabel classification problem has draw increasing amount of interest from machine learning community \citep{Tsoumakas07multi,Tsoumakas10mining}, and has been tackled by many algorithms that aim to explore the correlation and dependency between multiple output variables in order to make better prediction \citep{Schapire99improved,Zhang05a,Read09classifier,Cheng09combining,Bian12corrlog}.
 
-In structured multilabel classification problem, multiple interdependent output variables are usually located in a structured output space where the dependency or correlation of the variables is defined by the structure of an output graph (e.g. Markov network).
-The flat multilabel classification has the difficulty of modeling the complex dependency structure.
-Structured output prediction appears as a natural remedy to the flat multilabel classification.
+There is another line of research known as structured multilabel classification problem where multiple interdependent output variables are located in a structured output space.
+That is the dependency or the correlation of the variables is defined by the structure of an output graph (e.g. Markov network).
+Incorporating prior structure improves the performance of the classification.
 The models of this type usually incorporate the output dependency structure into the learning process \citep{lafferty01,taskar02,Taskar04max,THJA04}.
 One problem inherited with structured output learning is the output dependency structure is assumed to be observed.
 However, this cannot be taken as granted since the proper dependency structure for the output variables is either hidden or difficult to retrieve in many applications \citep{Chickering94learning}.
