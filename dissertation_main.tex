@@ -26,7 +26,7 @@ Many single-label classification models have been designed and applied in practi
 
 Multilabel classification is a natural extension to single-label classification by defining multiple valued output associated with each input.
 Problems of this type are prevalent in everyday life.
-For example, movie can be classified as ``action'', ``documentary'' and ``crime''; a news article can be categorized as ``science'', ``drug'' and ``people''; a gene can associate to multiple functions in genomics research; or a surveillant photo can be tagged by both ``car'' and ``building''. 
+For example, a movie can be classified as ``sci-fi'', ``thriller'' and ``crime''; a news article can be categorized as ``science'', ``drug'' and ``people''; a gene can associate to multiple functions in genomics research; or a surveillant photo can be tagged by ``car'', ``building'' and ``road''. 
 The problem is known as flat multilabel classification when the multiple output variables are essentially treated as a ``flat'' vector.
 The flat multilabel classification problem has draw increasing amount of interest from machine learning community \citep{Tsoumakas07multi,Tsoumakas10mining}, and has been tackled by many algorithms that aim to explore the correlation and dependency between multiple output variables in order to make better prediction \citep{Read09classifier,Cheng09combining,Bian12corrlog}.
 
@@ -851,7 +851,7 @@ Since there is no standard way for classification order of microlabels in \cc, E
 \subsection{Instant Based Logistic Regression (\iblr)} \label{sc_iblr}
 
 \citet{Cheng09combining} developed Instance Based Logistic Regression (\iblr) with an extension to flat multilabel classification.
-\iblr\ is also an instant base learning approach \citep{Aha91instance} as \mlknn.
+\iblr\ is also an instant base learning approach \citep{Aha91instance} similar to \mlknn.
 It extends \mlknn\ by exploring the label correlation within the neighbors of an instant for posterior inference.
 It is also similar to \cc\ but with major difference.
 The central idea of \iblr\ is to take the labels of the neighboring examples as the only features in order to evaluate the label of current example.
