@@ -103,7 +103,7 @@ Empirical evaluations of the proposed models are in nowhere repeated, rather, th
 %------------------------------------------------
 \section{Regularized Risk Minimization}\label{sc_rrm}
 
-In this section, the author will introduce two fundamental concepts in statistical machine learning, known as \textit{empirical risk minimization} and \textit{regularization}.
+In this section, the author will introduce two fundamental concepts in statistical machine learning, known as \textit{empirical risk minimization} \citep{Vapnik92principles} and \textit{regularization} \citep{Evgeniou99a} .
 Together they give rise to the learning algorithms that will be presented in the following part of the thesis.
 
 \subsection{Empirical Risk Minimization}\label{sc_erm}
@@ -134,12 +134,12 @@ The empirical risk minimization strategy is ill-posed which in principle can pro
 Besides, it often leads to \textit{overfitting} when the dimensionality of the feature space is high and the number of training data is limited.
 In other words, underlying true distribution $P(\vx,\vy)$ is difficult to to estimate from a finite sample of training examples.
 Thus, the estimator will generalize poorly on unseen test examples.
-The {regularization theory} \citep{Evgeniou02regularization} provides a framework to alleviate these two difficulties.
+The {regularization theory} \citep{Evgeniou99a,Evgeniou02regularization} provides a framework to alleviate these two difficulties.
 In particular, it suggests to minimize 
  \begin{align*}
-	\Jcal(f) = \Rcal_{emp}(f) + \Omega(f),
+	\Jcal(f) = \Rcal_{emp}(f) + \lambda\Omega(f),
 \end{align*}
-where $\Omega(f)$ is the regularization function that controls the complexity of the estimator $f$ by penalizing the norm of the feature weight vector.
+where $\Omega(f)$ is the regularization function that controls the complexity of the estimator $f$ by penalizing the norm of the feature weight vector and $\lambda$ is a positive parameter that controls the relative weight between the empirical risk term and the regularization term.
 
 In terms of the linear function class, there are many ways to define the regularization term $\Omega(f)$ among which $L_1$-norm and $L_2$-norm regularization are most popular.
 The $L_2$-norm regularization, defined by 
