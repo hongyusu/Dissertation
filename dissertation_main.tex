@@ -36,8 +36,8 @@ As multiple output variables can be ``on'' and ``off'' simultaneously, various f
 There is another line of research on multilabel classification known as \textit{structured multilabel classification} or \textit{structured output prediction} where we define a complex structure (output graph) over multiple output variables to model the dependency in a more comprehensive way.
 \textit{Hierarchical classification} is one type of structured output prediction in which the prediction needs to be reconciled along the pre-established hierarchical structure on multiple labels \citep{Silla11a}.
 Hierarchical classification is usually applied on the problem with different level of granularity. 
-The hierarchy can be a rooted tree for example in document classification problem \citep{Hao07hierarchicaly,Li07hierarchical,rousu07}, or a directed acyclic graph (\daggraph) with parent-children relationship for example in gene function prediction problem \citep{Barutcuoglu06hierarchical}.
-There exists a large body of work on hierarchical classification from the early work that uses the hierarchical structure heuristically for preprocessing or post-processing \citep{Koller97hierarchically,Dumais00Hierarchical,Liu05support,DeCoro07bayesian} to the recent work that encodes the structure into learning \citep{Cai04hierarchical,cesabianchi05incremental,Gopal12bayesian}.
+The hierarchy can be a rooted tree for example in document classification problem \citep{Hao07hierarchicaly,Li07hierarchical,Rousu06}, or a directed acyclic graph (\daggraph) with parent-children relationship for example in gene function prediction problem \citep{Barutcuoglu06hierarchical}.
+There exists a large body of work on hierarchical classification from the early work that uses the hierarchical structure heuristically for preprocessing or post-processing \citep{Koller97hierarchically,Dumais00Hierarchical,Liu05support,DeCoro07bayesian} to the recent work that encodes the structure into learning \citep{Cai04hierarchical,Cesabianchi05incremental,Rousu06,Gopal12bayesian}.
 
 \textit{Graph labeling classification} is another type of structured output prediction in which the output graph can have arbitrary form (e.g. Markov network).
 Therefore, it does not have a concept ``level'' as in hierarchical classification.
@@ -1168,7 +1168,7 @@ By exploring the Markov network structure, the original optimization problem (De
 
 As the number of parameters is quadratic in the number of training examples and the edges in the network, it still cannot fit into standard QP solver. 
 \citep{Taskar04max} developed a coordinate descent method analogous to the Sequential Minimal Optimization (\smo) used for SVM training \citep{Platt98sequential,Platt99fast}.
-Subsequently, other efficient optimization algorithms have been proposed, which include exponential gradient optimization methods from \citet{bartlett04}, extra-gradient methods from \citet{taskar06}, sub-gradient methods from \citet{Ratliff07}, and conditional gradient methods from \citet{rousu06, rousu07}.
+Subsequently, other efficient optimization algorithms have been proposed, which include exponential gradient optimization methods from \citet{bartlett04}, extra-gradient methods from \citet{taskar06}, sub-gradient methods from \citet{Ratliff07}, and conditional gradient methods from \citet{Rousu06, Rousu07}.
 
 In order to use \mmmn\ in practice, one have to solve the \textit{loss augmented} inference problem defined as
 \begin{align}
@@ -1241,7 +1241,7 @@ For example in the recent \textit{NCI-60} {Human Tumor Cell Line Screen} project
 \subsection{Methods}
 
 To efficiently and accurately predict molecular activities in multiple cell lines at the same time, we applied a structured output learning approach in \citepub{su10} which is to our knowledge the first multi-task learning approach for molecular classification problem.
-The algorithm is an instantiation of the structured output learning method \mmcrf\ developed in \citep{rousu06}.
+The algorithm is an instantiation of the structured output learning method \mmcrf\ developed in \citep{Rousu07}.
 It can also be seen as a sibling method of \mmmn\ \citep{Taskar04max} described in Section~\ref{sc_mmmn}.
 In particular, the model defines a compatibility score through inner product for a molecular structure $\vx$ and the activities in multiple cell lines $\vy$
 \begin{align*}
@@ -1768,7 +1768,7 @@ In this chapter, the author aims to briefly summarize the implementation for the
 		\item The codes are written in \matlab.
 		\item The implementation can be found from \url{git@github.com:hongyusu/RandomOutputGraphEnsemble.git}.
 	\end{enumerate}
-	\item The structured output model used in \citepub{su10} for molecular activities classification is a instantiation of \mmcrf\ developed in \cite{rousu06}.
+	\item The structured output model used in \citepub{su10} for molecular activities classification is a instantiation of \mmcrf\ developed in \cite{Rousu07}.
 	\begin{enumerate}
 		\item The code is written in \matlab.
 		\item The implementation can be found from \url{http://research.ics.aalto.fi/kepaco/software.shtml}.
