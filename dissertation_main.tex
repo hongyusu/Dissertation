@@ -28,12 +28,18 @@ Multilabel classification is a natural extension to single-label classification 
 Problems of this type are prevalent in everyday life.
 For example, a movie can be classified as ``sci-fi'', ``thriller'' and ``crime''; a news article can be categorized as ``science'', ``biology'' and ``drug''; a gene can associate to multiple functions in genomics research; a surveillant photo can be tagged by ``car'', ``building'' and ``road''. 
 When the multiple output variables are treated as a ``flat'' vector, the problem is often known as flat multilabel classification.
-Flat multilabel classification accounts for one branch of multilabel classification and has drawn increasing amount of interest from machine learning community \citep{Tsoumakas07multi,Tsoumakas10mining}.
-As multiple output variables can be ``on'' and ``off'' simultaneously, many flat multilabel classification algorithms have been developed that aim to explore the correlation or the dependency between multiple output variables in order to make better prediction \citep{Schapire99improved,Zhang05a,Read09classifier,Cheng09combining,Bian12corrlog}.
+Flat multilabel classification is one branch of multilabel classification and has drawn increasing amount of interest from machine learning community \citep{Tsoumakas07multi,Tsoumakas10mining}.
+As multiple output variables can be ``on'' and ``off'' simultaneously, various flat multilabel classification algorithms have been developed that aim to explore the correlation or the dependency between multiple output variables in order to make better prediction \citep{Schapire99improved,Zhang05a,Read09classifier,Cheng09combining,Bian12corrlog}.
 
 %Flat multilabel classification has been tackled by many algorithms that aim to explore the correlation or the dependency between multiple output variables in order to make better prediction \citep{Schapire99improved,Zhang05a,Read09classifier,Cheng09combining,Bian12corrlog}.
 
-There is another line of research on multilabel classification known as structured multilabel classification or structured output prediction where we assume complex interdependency on output variables.
+There is another line of research on multilabel classification known as structured multilabel classification or structured output prediction where we define complex structure over multiple output variables.
+Hierarchical classification is one type of structured output prediction in which the prediction needs to be addressed based on the hierarchical structure on multiple labels.
+The hierarchical structure can be for example a rooted tree or a directed acyclic graph (\dag) with parent-children relationship.
+
+
+
+we assume complex interdependency on output variables.
 The interdependency is defined by the structure of an output graph (e.g. Markov network) connecting multiple variables.
 The structured output prediction models usually incorporate the output dependency structure into the learning process in order to improve the classification performance \citep{lafferty01,taskar02,Taskar04max,THJA04}.
 One problem inherited with structured output learning is the output dependency structure is assumed to be observed.
@@ -42,7 +48,7 @@ However, this cannot be taken as granted since the proper dependency structure f
 In this thesis, we examine the potential of applying structured output learning to improve the prediction performance in real world multilabel classification problems.
 In addition, we work on the problem of the structured output learning when the output dependency structure is not observed.
 We also investigate the efficiency and the scalability of the inference problems in the proposed structured output learning models as the inference problem of the structured output learning is often difficult to solve.
-Besides, we study the theoretic aspects of the proposed models in order to gain insights in to the behavior of the models.
+Besides, we study the theoretic aspects of the proposed models in order to gain insights into the behavior of the models.
 In particular, the research questions can be casted as following:
 \begin{itemize}
 	
