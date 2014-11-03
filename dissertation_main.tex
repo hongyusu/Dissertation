@@ -24,18 +24,20 @@ In the classical supervised learning setting, the output variable to be predicte
 In machine learning community, it is referred as single-label classification if the output is discrete valued, or as regression if the output is continuous valued.
 Many single-label classification models have been designed and applied in practice, for example, Perceptron \citep{Rosenblatt58,Rosenblatt62}, Logistic Regression \citep{Chen99,Chen00,Goodman03}, Support Vector Machines \citep{Boser92,Cortes95support}.
 
-Multilabel classification is a natural extension to single-label classification by defining multiple outputs associated with each input.
+\textit{Multilabel classification} is a natural extension to single-label classification by defining multiple outputs associated with each input.
 Problems of this type are prevalent in everyday life.
 For example, a movie can be classified as ``sci-fi'', ``thriller'' and ``crime''; a news article can be categorized as ``science'', ``biology'' and ``drug''; a gene can associate to multiple functions in genomics research; a surveillant photo can be tagged by ``car'', ``building'' and ``road''. 
 When the multiple output variables are treated as a ``flat'' vector, the problem is often known as flat multilabel classification.
-Flat multilabel classification is one branch of multilabel classification and has drawn increasing amount of interest from machine learning community \citep{Tsoumakas07multi,Tsoumakas10mining}.
+\textit{Flat multilabel classification} is one branch of multilabel classification and has drawn increasing amount of interest from machine learning community \citep{Tsoumakas07multi,Tsoumakas10mining}.
 As multiple output variables can be ``on'' and ``off'' simultaneously, various flat multilabel classification algorithms have been developed that aim to explore the correlation or the dependency between multiple output variables in order to make better prediction \citep{Schapire99improved,Zhang05a,Read09classifier,Cheng09combining,Bian12corrlog}.
 
 %Flat multilabel classification has been tackled by many algorithms that aim to explore the correlation or the dependency between multiple output variables in order to make better prediction \citep{Schapire99improved,Zhang05a,Read09classifier,Cheng09combining,Bian12corrlog}.
 
-There is another line of research on multilabel classification known as structured multilabel classification or structured output prediction where we define complex structure over multiple output variables.
-Hierarchical classification is one type of structured output prediction in which the prediction needs to be addressed based on the hierarchical structure defined on multiple labels \citep{Silla11a}.
-The hierarchical structure can be for example a rooted tree or a directed acyclic graph (\dag) with parent-children relationship.
+There is another line of research on multilabel classification known as \textit{structured multilabel classification} or \textit{structured output prediction} where we define complex structure over multiple output variables to model the dependency in a more comprehensive way.
+\textit{Hierarchical classification} is one type of structured output prediction in which the prediction needs to be addressed along the pre-established hierarchical structure defined on multiple labels \citep{Silla11a}.
+The hierarchical structure can be for example a rooted tree in document classification problem \citep{} or a directed acyclic graph (\daggraph) with parent-children relationship in gene function prediction problem \citep{}.
+There exists a large body of work on hierarchical classification
+
 
 
 
@@ -1020,7 +1022,7 @@ Unlike flat multilabel classification which takes multiple output variables as a
 It builds a graph structure (e.g. chain, tree) to connect multiple output variables by which it gains the advantage of exploring the label correlation compared to flat multilabel classification.
 In this chapter, we will start by introducing several classical structured output learning models developed during the last decade.
 We will present our research of applying the structured output learning on molecular activity prediction problem.
-We will also present our new algorithm \spin\ that is capable of predicting a directed acyclic graph and examine the performance on the network influence prediction problem.
+We will also present our new algorithm \spin\ that is capable of predicting a directed acyclic graph (\daggraph) and examine the performance on the network influence prediction problem.
 
 
 
@@ -1800,7 +1802,7 @@ The flat multilabel classification approach has difficulty of modeling the label
 The structured output learning approach is a natural improvement to flat multilabel classification.
 The first outcome of the thesis is to extend the applicability of the structured output learning methods.
 We have applied the structured output learning in molecular activity classification problem.
-We have also developed \spin\ that is able to predict a directed acyclic graph that connects multiple output variables, and applied in network response prediction problem.
+We have also developed \spin\ that is able to predict a directed acyclic graph (\daggraph) that connects multiple output variables, and applied in network response prediction problem.
 \spin\ can be also applied in other influence or spreading types problems.
 We examine the performance of both methods.
 The empirical results demonstrate that the structured output learning outperform the flat multilabel classification approach for predicting multiple interdependent output variables in structured output space.
