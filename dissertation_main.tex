@@ -34,9 +34,10 @@ As multiple output variables can be ``on'' and ``off'' simultaneously, various f
 %Flat multilabel classification has been tackled by many algorithms that aim to explore the correlation or the dependency between multiple output variables in order to make better prediction \citep{Schapire99improved,Zhang05a,Read09classifier,Cheng09combining,Bian12corrlog}.
 
 There is another line of research on multilabel classification known as \textit{structured multilabel classification} or \textit{structured output prediction} where we define a complex structure (output graph) over multiple output variables to model the dependency in a more comprehensive way.
-\textit{Hierarchical classification} is one type of structured output prediction in which the prediction needs to be propagated along the pre-established hierarchical structure defined on multiple labels \citep{Silla11a}.
-The hierarchical structure can be a rooted tree for example in document classification problem \citep{}, or a directed acyclic graph (\daggraph) with parent-children relationship for example in gene function prediction problem \citep{}.
-There exists a large body of work on hierarchical classification from the early work that use the hierarchical information in a heuristic manner \citep{} to the recent work that encodes the  hierarchy into learning process \citep{}.
+\textit{Hierarchical classification} is one type of structured output prediction in which the prediction needs to be reconciled along the pre-established hierarchical structure on multiple labels \citep{Silla11a}.
+Hierarchical classification is usually applied on the problem with different level of granularity. 
+The hierarchy can be a rooted tree for example in document classification problem \citep{Hao07hierarchicaly,Li07hierarchical,rousu07}, or a directed acyclic graph (\daggraph) with parent-children relationship for example in gene function prediction problem \citep{Barutcuoglu06hierarchical}.
+There exists a large body of work on hierarchical classification from the early work that uses the hierarchical structure heuristically for preprocessing or post-processing \citep{Koller97hierarchically,Dumais00Hierarchical,Liu05support,DeCoro07bayesian} to the recent work that encodes the structure into learning \citep{Cai04hierarchical,cesabianchi05incremental,Gopal12bayesian}.
 
 \textit{Graph labeling classification} is another type of structured output prediction in which the output graph can have arbitrary form (e.g. Markov network).
 Therefore, it does not have a concept ``level'' as in hierarchical classification.
