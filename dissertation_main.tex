@@ -1373,6 +1373,7 @@ On the other hand, multiple interdependent molecular activities are often screen
 The first is the scalability in which a set of single-label classifiers need to be built independently in order to predict multiple activities which soon becomes infeasible when large amount of activities need to be predicted.
 The second lies in the fact that the single-label classification approaches have limited power of modeling label correlation such that the complex interdependency between multiple activities can not be addressed in a comprehensive way.
 In \citepub{su10} we investigate the potential of applying structured output learning to deal with the molecular activity classification problem.
+In addition, we construct the output graph for the structured output learning algorithm based on the auxiliary data that reveals the dependency between multiple output variables.
 
 
 
@@ -1433,16 +1434,16 @@ and edges are computed from
 \begin{align*}
 	E_{\times}(G_1,G_2) = \{((v_1,v_2),(u_1,u_2))\in V_{\times}\times V_{\times},(v_1,u_i)\in E_1\wedge (v_2,u_2)\in E_2\}.
 \end{align*}
-The walk kernel can be defined on the adjacency matrix of $G_{\times}$
+The walk kernel can be defined on the adjacency matrix of $G_{\times}$ by
 \begin{align*}
 	K_{wk}(G_1,G_2) = \sum_{i,j=1}^{|V_{\times}|}\left[\sum_{n=0}^{\infty}\lambda^{n}A_{\times}^n\right]_{i,j},
 \end{align*}
-where $0<\lambda<1$.
+where $0<\lambda<1$ is the scaling parameter.
 Using exponential series or geometric series the walk kernel can be compute in cubic time \citep{Gartner03a} by
 \begin{align*}
 	K_{wk}(G_1,G_2) = \ve\tp(\vI-\lambda A_{\times})^{-1}\ve,
 \end{align*}
-where we use $\vI$ to denote the identity matrix and $\ve$ to denote the matrix of ones.
+where $\vI$ denotes the identity matrix and $\ve$ denotes the matrix of ones.
 
 % weighted decomposition kernel and others
 \textit{Weighted Decomposition Kernel} developed in \citep{Menchetti05weighted,Ceroni08classification} is an extension of substructure kernel \citep{Haussler99convolution}.
@@ -1455,7 +1456,7 @@ See \citep{Vishwanathan10graph} for a more comprehensive survey on graph kernels
 To apply structured output learning model described above, we assume the underlying Markov network structure is fully observed.
 In other words, we need to build an output graph with nodes correspond to cell lines and edges correspond to potential statistical dependencies.
 Auxiliary datasets are available for this purpose \citep{Shoemaker06the} which implicitly describes the correlation between the cell lines.
-To build the output graph, we first compute the covariance matrix for cell lines based on auxiliary data, then extract the network structure by applying the following two methods.
+To build the output graph, we first compute the covariance matrix for cell lines based on the auxiliary data, then we extract the network structure by applying the following two methods.
 In \text{maximum spanning tree} approach, we take the minimum number of edges that make a connected network whilst maximizing the edge weights.
 In \text{correlation thresholding} approach, we take all edges that exceed a fixed threshold, which typically generates a non-tree graph.
 
@@ -1465,8 +1466,8 @@ In \text{correlation thresholding} approach, we take all edges that exceed a fix
 %
 \section{Graph Labeling Ensemble (\mve)}\label{sc_su11}
 
-We have presented in Section~\ref{sc_su10} a structured output prediction model for multilabel molecular activity prediction problem.
-The model relies on the representation of the multiple output variables via a output graph which allows us to explore the label correlation.
+We have presented in Section~\ref{sc_su10} a structured output prediction model for multilabel molecular activity classification problem.
+The model relies on the representation of the multiple output variables via an output graph which allows us to explore the label correlation in a more comprehensive way compared to flat multilabel classification approaches.
 To apply structured output learning, it is assumed the structure of the output graph is fully observed.
 Alternatively in \citepub{su10}, we suppose there exists auxiliary data that encodes the label correlation which can be utilized in order to retrieve the output graph.
 However, we cannot take the availability of the output graph as granted because the underlying dependency structure is often hidden in many real world problems.
