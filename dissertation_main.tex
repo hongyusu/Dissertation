@@ -1353,11 +1353,14 @@ Diffusion scaling has the effect of shrinking the distance to the nodes that are
 %------------------------------------------------
 \chapter{Structured Output Prediction with Unobserved Structure} \label{ch_sopw}
 
-Structured output learning (Chapter~\ref{ch_sop}) gains the power of the representation by connecting multiple output variables by an output graph.
-In this chapter, we extend the structured output learning to the scenario where the output graph is hidden, by exploring the potential of learning from a random set of spanning trees.
-In Section~\ref{sc_su11}, we start the discussion by presenting a majority voting ensemble (\mve) that combines a set of structured output classifiers.
+The structured output learning approach (Chapter~\ref{ch_sop}) gains the power of representation by connecting multiple output variables by an output graph.
+In this chapter, we extend the structured output learning to the scenario where the output graph is hidden.
+The proposed models explore the potential of learning from a random set of spanning trees.
+We start our discussion in Section~\ref{sc_su10} by presenting a new approach for multilabel molecular classification problem.
+The propose algorithm first extracts the output graph from the auxiliary dataset and applied established structured output learning algorithm with the extracted output graph.
+In Section~\ref{sc_su11}, we present a majority voting ensemble (\mve) that combines a set of structured output classifiers learnt with different random output graphs.
 We proceed in Section~\ref{sc_su14b} with two aggregation techniques (\amm\ and \mam\ respectively) that also perform inference before or after forming the ensemble.
-In Section~\ref{sc_su14c}, we present and discuss the \rta\ method that improves \mam\ by performing joint learning and inference on a random set of spanning trees.
+In Section~\ref{sc_su14c}, we discuss the \rta\ method that improves the previous approaches by performing joint learning and inference on a random set of spanning trees.
 
 
 
