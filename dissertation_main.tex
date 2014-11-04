@@ -1403,7 +1403,7 @@ In particular, the model defines a compatibility score through inner product for
 	F(\vx,\vy;\vw) = \ip{\vw}{\phib(\vx,\vy)},
 \end{align*}
 where $\vw$ is the feature weight parameter that ensures the molecular structure with correct activities will be scored higher than with incorrect activities.
-The parameter $\vw$ is learned by maximizing the minimum loss-scaled margin between correct examples $(\vx_i,\vy_i)$ and incorrect pseudo-examples $(\vx_i,\vy)$ over the whole training set
+The parameter $\vw$ is learned by maximizing the minimum loss-scaled margin between correct examples $(\vx_i,\vy_i)$ and incorrect pseudo-examples $(\vx_i,\vy)$ over the whole training set, which amounts to solving the following optimization problem
 \begin{align*}
 	\underset{\vw,\vxi_i}{\minimize} & \quad \frac{1}{2}\norm{\vw}^2 + C\sum_{i=1}^{m}\xi_i\\
 	\st &\quad \ip{\vw}{\phib(\vx_i,\vy_i)} - \ip{\vw}{\phib(\vx_i,\vy)} \ge \ell(\vy_i,\vy)-\xi_i,\\
