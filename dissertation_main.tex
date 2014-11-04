@@ -1619,7 +1619,7 @@ Start from a sampling results, \citepub[Lemma 3]{su14c} shows that with high pro
 Besides, \citepub[Theorem 5]{su14c} shows the good generalization error can also be guaranteed when learning with instead of complete graph a sample of spanning trees.
 
 Thus, in addition to \citepub[Theory 1]{su14b}, we further provide the theoretical justification of \mam\ that constructs a set of base classifiers trained on random spanning trees. 
-Besides, \citepub[Theorem 5]{su14c} suggests we should, instead of optimizing the margin separatly on each spanning tree as in \mam, optimize the joint margin from all spanning trees.
+Besides, \citepub[Theorem 5]{su14c} suggests we should, instead of optimizing the margin separatly on each spanning tree similar as in \mam, optimize the joint margin from all spanning trees.
 This strategy leads to the learning model presented in the following section.
 
 \subsection{Methods}
@@ -1635,7 +1635,7 @@ For each example $(\vx_i,\vy_i)$, the goal of optimization is to maximize the jo
 \end{definition}
 where $\phib_{T_t}(\vx,\vy)$ is the feature map that is local on each tree $T_t$, $\xi_i$ is the margin slack allocated for each $\vx_i$, and $C$ is the slack parameter that controls the amount of regularization.
 
-The key for the optimization is to solve the '$\argmax$' problem efficiently.
+The key for the optimization is to solve the argmax problem efficiently.
 This is a \nphard\ problem in practice, as the size of the multilabel space is exponential in terms of the number of microlabels.
 In \citepub{su14c}, we have developed a $K$-best inference algorithm working in $\Theta(Knk)$ time per data point, where $k$ is the number of microlabels and $K$ is the number of best multilabels we compute from each random spanning tree.
 
