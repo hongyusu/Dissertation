@@ -1414,10 +1414,10 @@ where $\ell(\vy_i,\vy)$ is the loss function defined as
 	\ell(\vy_i,\vy) = \sum_{j=1}^{k}\ind{\vy_i[j]\neq \vy[j]}.
 \end{align*}
 The loss scaled margin optimization will push high-loss pseudo-examples further away from the correct example than the low-loss pseudo-examples.
-The model is optimized by conditional gradient optimization \citep{Bertsekas95nonlinear} in marginalized dual space \citep{Taskar04max}, which not only benefits from a polynomial-size parameter space in marginalized dual representation but also enables the kernel function that is capable of dealing with non-linearity of the complex molecular structures.
+The model is optimized by conditional gradient optimization \citep{Bertsekas95nonlinear} in marginalized dual space \citep{Taskar04max}, which not only benefits from a polynomial-size parameter space but also enables the kernel function that is capable of dealing with non-linearity of the complex molecular structures.
 
 %Kernel is the classical way of defining the similarity between complex objects.
-In \citepub{su10}, we used graph kernel to measure the similarity of pair of molecular structures.
+In \citepub{su10} we used graph kernel to measure the similarity of pair of molecular structures.
 The common way to represent the structure of a molecule is to use an undirected labeled graph $G=(V,E)$, where vertices $V=\{v_1,\cdots,v_n\}$ corresponds to atoms and edge $E=\{e_1,\cdots,e_m\}$ corresponds to the covalent bonds.
 The adjacency matrix $A$ of graph $G$ is defined such that its $(i,j)$'th entry $A_{i,j}$ equals to one if there is an edge between atom $i$ and atom $j$.
 
