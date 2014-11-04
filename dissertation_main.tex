@@ -1356,9 +1356,9 @@ Diffusion scaling has the effect of shrinking the distance to the nodes that are
 The structured output learning approach (Chapter~\ref{ch_sop}) gains the power of representation by connecting multiple output variables by an output graph.
 In this chapter, we extend the structured output learning to the scenario where the output graph is hidden.
 The proposed models explore the potential of learning from a random set of spanning trees.
-We start our discussion in Section~\ref{sc_su10} by presenting a new approach for multilabel molecular classification problem.
+We start our discussion in Section~\ref{sc_su10} by presenting a new approach for multilabel molecular activity classification problem.
 The propose algorithm first extracts the output graph from the auxiliary dataset and applied established structured output learning algorithm with the extracted output graph.
-In Section~\ref{sc_su11}, we present a majority voting ensemble (\mve) that combines a set of structured output classifiers learnt with different random output graphs.
+In Section~\ref{sc_su11}, we present a majority voting ensemble (\mve) that combines a set of structured output classifiers learnt from different random output graphs.
 We proceed in Section~\ref{sc_su14b} with two aggregation techniques (\amm\ and \mam\ respectively) that also perform inference before or after forming the ensemble.
 In Section~\ref{sc_su14c}, we discuss the \rta\ method that improves the previous approaches by performing joint learning and inference on a random set of spanning trees.
 
@@ -1368,12 +1368,11 @@ In Section~\ref{sc_su14c}, we discuss the \rta\ method that improves the previou
 %
 \section{Structured Output Prediction for Molecular Activity Classification} \label{sc_su10}
 
-The molecular activity classification problem has long been tackled with single-label classification approaches \citep{Dutt12classification}.
-On the other hand, multiple interdependent molecular activities are often screened simultaneously \citep{Shoemaker06the}, which poses two challenges for single-label classification approaches.
-The first is about scalability which a set of single-label classifiers need to be built independently in order to predict multiple activities.
-This soon becomes infeasible when large amount of activities need to be predicted.
-The second lies in the fact the single-label classification approach cannot model label correlation.
-In \citepub{su10} we investigate the potential of using structured output learning to tackle the molecular activity classification problem.
+The molecular activity classification problem has long been tackled under the single-label classification setting \citep{Menchetti05weighted,Singh12qsar,Dutt12classification}.
+On the other hand, multiple interdependent molecular activities are often screened simultaneously in drug research \citep{Shoemaker06the} which poses two challenges for single-label classification.
+The first is the scalability in which a set of single-label classifiers need to be built independently in order to predict multiple activities which soon becomes infeasible when large amount of activities need to be predicted.
+The second lies in the fact that the single-label classification approaches have limited power of modeling label correlation such that the complex interdependency between multiple activities can not be addressed in a comprehensive way.
+In \citepub{su10} we investigate the potential of applying structured output learning to deal with the molecular activity classification problem.
 
 
 
@@ -1381,11 +1380,11 @@ In \citepub{su10} we investigate the potential of using structured output learni
 %
 \subsection{Background}
 
-Molecular classification, the goal of which is to predict the anticancer potentials of the drug-like molecules, is one crucial step in drug discovery and has draw enormous attention from machine learning community.
+Molecular classification, the goal of which is to predict the anticancer potentials of the drug-like molecules, is one crucial step in drug discovery and has draw enormous attention from machine learning community \citep{Singh12qsar,Dutt12classification}.
 Viable molecular structures are scanned, searched, or designed for therapeutic efficacy.
 In particular, expensive preclinical \textit{in vitro} and \textit{in vivo} drug tests can be largely avoided and special efforts can be devoted to few promising candidate molecules, once accurate \textit{in silico} models are available \citep{Burbidg01drug}.
 
-Various machine learning methods have been developed for the task, to name but a few, inductive logic programming \citep{King96structure}, artificial neural network \citep{Bernazzani06predicting}, kernel methods for nonlinear molecular property \citep{Trotter01drug,Ralaivola05graph,Swamidass05kernel,Ceroni07classification}, and \svm\ based methods for reliable predictions \citep{Trotter01drug,Byvatov03comparison,Xue04effect}.
+Various machine learning methods have been developed for the task, to name but a few, inductive logic programming \citep{King96structure}, artificial neural network \citep{Bernazzani06predicting}, kernel methods for nonlinear molecular properties \citep{Trotter01drug,Ralaivola05graph,Swamidass05kernel,Ceroni07classification}, and \svm\ based methods for reliable predictions \citep{Trotter01drug,Byvatov03comparison,Xue04effect}.
 Albeit with the large quantity of the computational models, they only focus on predicting single target variable (e.g. inhibition potential in one cell line). 
 On the other hand, relative larger number of cell lines are often screened at the same time.
 For example in the recent \textit{NCI-60} {Human Tumor Cell Line Screen} project \citep{Shoemaker06the}, thousands of molecular structures are tested agains hundreds of cell lines.
