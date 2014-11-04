@@ -1363,6 +1363,104 @@ In Section~\ref{sc_su14c}, we present and discuss the \rta\ method that improves
 
 %
 %
+\section{Structured Output Prediction for Molecular Activity Classification} \label{sc_su10}
+
+The molecular activity classification problem has long been tackled with single-label classification approaches \citep{Dutt12classification}.
+On the other hand, multiple interdependent molecular activities are often screened simultaneously \citep{Shoemaker06the}, which poses two challenges for single-label classification approaches.
+The first is about scalability which a set of single-label classifiers need to be built independently in order to predict multiple activities.
+This soon becomes infeasible when large amount of activities need to be predicted.
+The second lies in the fact the single-label classification approach cannot model label correlation.
+In \citepub{su10} we investigate the potential of using structured output learning to tackle the molecular activity classification problem.
+
+
+
+%
+%
+\subsection{Background}
+
+Molecular classification, the goal of which is to predict the anticancer potentials of the drug-like molecules, is one crucial step in drug discovery and has draw enormous attention from machine learning community.
+Viable molecular structures are scanned, searched, or designed for therapeutic efficacy.
+In particular, expensive preclinical \textit{in vitro} and \textit{in vivo} drug tests can be largely avoided and special efforts can be devoted to few promising candidate molecules, once accurate \textit{in silico} models are available \citep{Burbidg01drug}.
+
+Various machine learning methods have been developed for the task, to name but a few, inductive logic programming \citep{King96structure}, artificial neural network \citep{Bernazzani06predicting}, kernel methods for nonlinear molecular property \citep{Trotter01drug,Ralaivola05graph,Swamidass05kernel,Ceroni07classification}, and \svm\ based methods for reliable predictions \citep{Trotter01drug,Byvatov03comparison,Xue04effect}.
+Albeit with the large quantity of the computational models, they only focus on predicting single target variable (e.g. inhibition potential in one cell line). 
+On the other hand, relative larger number of cell lines are often screened at the same time.
+For example in the recent \textit{NCI-60} {Human Tumor Cell Line Screen} project \citep{Shoemaker06the}, thousands of molecular structures are tested agains hundreds of cell lines.
+
+
+
+%
+%
+\subsection{Methods}
+
+To efficiently and accurately predict molecular activities in multiple cell lines at the same time, we applied a structured output learning approach in \citepub{su10} which is to our knowledge the first multi-task learning approach for molecular classification problem.
+The algorithm is an instantiation of the structured output learning method \mmcrf\ developed in \citep{Rousu07}.
+It can also be seen as a sibling method of \mmmn\ \citep{Taskar04max} described in Section~\ref{sc_mmmn}.
+In particular, the model defines a compatibility score through inner product for a molecular structure $\vx$ and the activities in multiple cell lines $\vy$
+\begin{align*}
+	F(\vx,\vy;\vw) = \ip{\vw}{\phib(\vx,\vy)},
+\end{align*}
+where $\vw$ is the feature weight parameter that ensures the molecular structure with correct activities will be scored higher than with incorrect activities.
+The parameter $\vw$ is learned by maximizing the minimum loss-scaled margin between correct examples $(\vx_i,\vy_i)$ and incorrect pseudo-examples $(\vx_i,\vy)$ over the whole training set
+\begin{align*}
+	\underset{\vw,\vxi_i}{\minimize} & \quad \frac{1}{2}\norm{\vw}^2 + C\sum_{i=1}^{m}\xi_i\\
+	\st &\quad \ip{\vw}{\phib(\vx_i,\vy_i)} - \ip{\vw}{\phib(\vx_i,\vy)} \ge \ell(\vy_i,\vy)-\xi_i,\\
+	&\quad \xi_i>0, \forall i\in\{1,\cdots,m\}, \forall \vy\in\Ycal,
+\end{align*}
+where $\ell(\vy_i,\vy)$ is the loss function defined as
+\begin{align*}
+	\ell(\vy_i,\vy) = \sum_{j=1}^{k}\ind{\vy_i[j]\neq \vy[j]}.
+\end{align*}
+The loss scaled margin optimization will push high-loss pseudo-examples further away from the correct example than the low-loss pseudo-examples.
+The model is optimized by conditional gradient optimization \citep{Bertsekas95nonlinear} in marginalized dual space \citep{Taskar04max}, which not only benefits from a polynomial-size parameter space in marginalized dual representation but also enables the kernel function that is capable of dealing with non-linearity of the complex molecular structures.
+
+%Kernel is the classical way of defining the similarity between complex objects.
+In \citepub{su10}, we used graph kernel to measure the similarity of pair of molecular structures.
+The common way to represent the structure of a molecule is to use an undirected labeled graph $G=(V,E)$, where vertices $V=\{v_1,\cdots,v_n\}$ corresponds to atoms and edge $E=\{e_1,\cdots,e_m\}$ corresponds to the covalent bonds.
+The adjacency matrix $A$ of graph $G$ is defined such that its $(i,j)$'th entry $A_{i,j}$ equals to one if there is an edge between atom $i$ and atom $j$.
+
+% walk kernel
+\textit{Walk Kernel} \citep{Kashima03marginalized,Gartner03a} computes the sum of matching walks in a pair of graphs. 
+The contribution of each matching walk is down scaled exponentially according to its length.  
+We denote by $w_m$ a walk of length $m$ in graph $G$ such that there exists a edge for each pair of vertices $(v_i,v_{i+1})$ for all $i\in\{1,\cdots,m-1\}$.
+In addition, we denote by $G_{\times}(G_1,G_2)$ the direct product graph of two graph $G_1$ and $G_2$, of which the vertices of a product graph are computed from 
+\begin{align*}
+	V_{\times}(G_1,G_2) = \{(v_1,v_2)\in V_1\times V_2, label(v_1)=label(v_2)\},
+\end{align*}
+and edges are computed from
+\begin{align*}
+	E_{\times}(G_1,G_2) = \{((v_1,v_2),(u_1,u_2))\in V_{\times}\times V_{\times},(v_1,u_i)\in E_1\wedge (v_2,u_2)\in E_2\}.
+\end{align*}
+The walk kernel can be defined on the adjacency matrix of $G_{\times}$
+\begin{align*}
+	K_{wk}(G_1,G_2) = \sum_{i,j=1}^{|V_{\times}|}\left[\sum_{n=0}^{\infty}\lambda^{n}A_{\times}^n\right]_{i,j},
+\end{align*}
+where $0<\lambda<1$.
+Using exponential series or geometric series the walk kernel can be compute in cubic time \citep{Gartner03a} by
+\begin{align*}
+	K_{wk}(G_1,G_2) = \ve\tp(\vI-\lambda A_{\times})^{-1}\ve,
+\end{align*}
+where we use $\vI$ to denote the identity matrix and $\ve$ to denote the matrix of ones.
+
+% weighted decomposition kernel and others
+\textit{Weighted Decomposition Kernel} developed in \citep{Menchetti05weighted,Ceroni08classification} is an extension of substructure kernel \citep{Haussler99convolution}.
+The kernel weights identical part in two graph with contextual information.
+It evaluates the matching subgraphs (\textit{contextor}) in the neighborhood of an atom (\textit{selector}).
+We also used \textit{Tanimoto Kernel} \citep{Ralaivola05graph} on a finite set of molecular fingerprints \citep{Wang09pubchem}.
+See \citep{Vishwanathan10graph} for a more comprehensive survey on graph kernels.
+
+%\subsubsection{Generation of Markov Network}
+To apply structured output learning model described above, we assume the underlying Markov network structure is fully observed.
+In other words, we need to build an output graph with nodes correspond to cell lines and edges correspond to potential statistical dependencies.
+Auxiliary datasets are available for this purpose \citep{Shoemaker06the} which implicitly describes the correlation between the cell lines.
+To build the output graph, we first compute the covariance matrix for cell lines based on auxiliary data, then extract the network structure by applying the following two methods.
+In \text{maximum spanning tree} approach, we take the minimum number of edges that make a connected network whilst maximizing the edge weights.
+In \text{correlation thresholding} approach, we take all edges that exceed a fixed threshold, which typically generates a non-tree graph.
+
+
+
+%
+%
 \section{Graph Labeling Ensemble (\mve)}\label{sc_su11}
 
 We have presented in Section~\ref{sc_su10} a structured output prediction model for multilabel molecular activity prediction problem.
