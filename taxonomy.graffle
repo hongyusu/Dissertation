@@ -57,7 +57,7 @@
 	<array>
 		<dict>
 			<key>Bounds</key>
-			<string>{{523.84939085297117, 337.15494546360839}, {112.5, 44.487998962402344}}</string>
+			<string>{{408.89713898043806, 321.51757184261004}, {112.5, 44.487998962402344}}</string>
 			<key>Class</key>
 			<string>ShapedGraphic</string>
 			<key>FontInfo</key>
@@ -96,7 +96,7 @@ Graph Labeling}</string>
 		</dict>
 		<dict>
 			<key>Bounds</key>
-			<string>{{523.84938076076264, 282.52720336618847}, {112.5, 44.487998962402344}}</string>
+			<string>{{408.89712888822953, 266.88982974519013}, {112.5, 44.487998962402344}}</string>
 			<key>Class</key>
 			<string>ShapedGraphic</string>
 			<key>FontInfo</key>
@@ -135,7 +135,7 @@ Hierarchical Classification}</string>
 		</dict>
 		<dict>
 			<key>Bounds</key>
-			<string>{{523.84938237203085, 227.8994626701876}, {112.5, 44.487998962402344}}</string>
+			<string>{{408.89713049949773, 212.26208904918929}, {112.5, 44.487998962402344}}</string>
 			<key>Class</key>
 			<string>ShapedGraphic</string>
 			<key>FontInfo</key>
@@ -174,7 +174,7 @@ Algorithm Adaptation}</string>
 		</dict>
 		<dict>
 			<key>Bounds</key>
-			<string>{{523.84936673338098, 173.27172004665468}, {112.5, 44.487998962402344}}</string>
+			<string>{{408.89711486084786, 157.63434642565636}, {112.5, 44.487998962402344}}</string>
 			<key>Class</key>
 			<string>ShapedGraphic</string>
 			<key>FontInfo</key>
@@ -213,7 +213,7 @@ Problem Transformation}</string>
 		</dict>
 		<dict>
 			<key>Bounds</key>
-			<string>{{389, 308}, {112.5, 44.487998962402344}}</string>
+			<string>{{260.10835398665478, 292.36262637900165}, {112.5, 44.487998962402344}}</string>
 			<key>Class</key>
 			<string>ShapedGraphic</string>
 			<key>FontInfo</key>
@@ -252,7 +252,7 @@ Structured Output Prediction}</string>
 		</dict>
 		<dict>
 			<key>Bounds</key>
-			<string>{{389, 202.99996948242188}, {112.5, 44.487998962402344}}</string>
+			<string>{{260.10835398665478, 187.36259586142356}, {112.5, 44.487998962402344}}</string>
 			<key>Class</key>
 			<string>ShapedGraphic</string>
 			<key>FontInfo</key>
@@ -291,7 +291,7 @@ Flat Multilabel classification}</string>
 		</dict>
 		<dict>
 			<key>Bounds</key>
-			<string>{{248.2855871324806, 255.24399008240661}, {108, 45}}</string>
+			<string>{{119.39394111913539, 239.60661646140829}, {108, 45}}</string>
 			<key>Class</key>
 			<string>ShapedGraphic</string>
 			<key>FontInfo</key>
@@ -347,8 +347,8 @@ Multilabel Classification}</string>
 			<integer>1169</integer>
 			<key>Points</key>
 			<array>
-				<string>{356.75510475064124, 257.80037054929113}</string>
-				<string>{388.53089667925019, 246.16589438171931}</string>
+				<string>{227.87397056321436, 246.22904292123542}</string>
+				<string>{276.36914731212784, 232.09568537661607}</string>
 			</array>
 			<key>Style</key>
 			<dict>
@@ -387,8 +387,8 @@ Multilabel Classification}</string>
 			<integer>1171</integer>
 			<key>Points</key>
 			<array>
-				<string>{356.75510474989414, 297.68760557882553}</string>
-				<string>{388.53089662794213, 309.32207937316326}</string>
+				<string>{225.72726640028924, 284.80557650293383}</string>
+				<string>{259.62517165780599, 299.50839144538281}</string>
 			</array>
 			<key>Style</key>
 			<dict>
@@ -427,8 +427,8 @@ Multilabel Classification}</string>
 			<integer>1172</integer>
 			<key>Points</key>
 			<array>
-				<string>{501.98829246123449, 212.74506219729281}</string>
-				<string>{523.36111448929694, 208.03683256481597}</string>
+				<string>{373.09869263844456, 198.28762980988097}</string>
+				<string>{408.40685396420662, 191.2441071491601}</string>
 			</array>
 			<key>Style</key>
 			<dict>
@@ -467,8 +467,8 @@ Multilabel Classification}</string>
 			<integer>1173</integer>
 			<key>Points</key>
 			<array>
-				<string>{501.99144261133529, 235.87884138320965}</string>
-				<string>{523.35736119310752, 239.88338916675559}</string>
+				<string>{373.10151751508465, 219.08748839735864}</string>
+				<string>{408.40402247743407, 224.98598353403804}</string>
 			</array>
 			<key>Style</key>
 			<dict>
@@ -507,8 +507,8 @@ Multilabel Classification}</string>
 			<integer>1177</integer>
 			<key>Points</key>
 			<array>
-				<string>{501.98874571086378, 342.49010392234408}</string>
-				<string>{523.36073406258549, 347.10288832903149}</string>
+				<string>{373.09905142638695, 325.70737487357155}</string>
+				<string>{408.40651647414893, 332.61492669226044}</string>
 			</array>
 			<key>Style</key>
 			<dict>
@@ -547,8 +547,8 @@ Multilabel Classification}</string>
 			<integer>1178</integer>
 			<key>Points</key>
 			<array>
-				<string>{501.99148936534846, 319.63898210502106}</string>
-				<string>{523.35831756575715, 315.64550948254231}</string>
+				<string>{373.10120586530525, 304.90749071992639}</string>
+				<string>{408.40433498583775, 298.87307741713812}</string>
 			</array>
 			<key>Style</key>
 			<dict>
@@ -620,7 +620,7 @@ Multilabel Classification}</string>
 	<key>MasterSheets</key>
 	<array/>
 	<key>ModificationDate</key>
-	<string>2014-11-04 10:46:50 +0000</string>
+	<string>2014-11-04 11:03:03 +0000</string>
 	<key>Modifier</key>
 	<string>Hongyu Su</string>
 	<key>NotesVisible</key>
@@ -710,7 +710,7 @@ Multilabel Classification}</string>
 		<key>SidebarWidth</key>
 		<integer>138</integer>
 		<key>VisibleRegion</key>
-		<string>{{0.60606061481794615, 32.727273200169087}, {925.45455882700367, 480.0000069358133}}</string>
+		<string>{{0.60606061481794615, 0.60606061481794615}, {925.45455882700367, 480.00000693581336}}</string>
 		<key>Zoom</key>
 		<real>1.6499999761581421</real>
 		<key>ZoomValues</key>
