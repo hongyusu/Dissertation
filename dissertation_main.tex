@@ -36,12 +36,15 @@ As multiple output variables can be ``on'' and ``off'' simultaneously, various f
 There is another line of research on multilabel classification known as \textit{structured multilabel classification} or \textit{structured output prediction} where we define a complex structure (output graph) over multiple output variables to model the dependency in a more comprehensive way.
 \textit{Hierarchical classification} is one type of structured output prediction in which the prediction needs to be reconciled along the pre-established hierarchical structure on multiple labels \citep{Silla11a}.
 Hierarchical classification is usually applied on the problem with different level of granularity. 
-The hierarchy can be a rooted tree for example in document classification problem \citep{Hao07hierarchicaly,Li07hierarchical,Rousu06}, or a directed acyclic graph (\daggraph) with parent-children relationship for example in gene function prediction problem \citep{Barutcuoglu06hierarchical}.
+The hierarchy can be either a rooted tree for example in document classification problem \citep{Hao07hierarchicaly,Li07hierarchical,Rousu06}, or a directed acyclic graph (\daggraph) with parent-children relationship for example in gene function prediction problem \citep{Barutcuoglu06hierarchical}.
 There exists a large body of work on hierarchical classification from the early work that uses the hierarchical structure heuristically for preprocessing or post-processing \citep{Koller97hierarchically,Dumais00Hierarchical,Liu05support,DeCoro07bayesian} to the recent work that encodes the structure into learning \citep{Cai04hierarchical,Cesabianchi05incremental,Rousu06,Gopal12bayesian}.
 
-\textit{Graph labeling} is another type of structured output prediction in which the output graph can take arbitrary form (e.g. Markov network).
-It is not necessary to have hierarchical structure and does not have a concept of ``level'' as in hierarchical classification.
-The structured output prediction models often directly incorporate the output graph into learning and use the dependency or the correlation to improve the classification performance \citep{lafferty01,taskar02,Taskar04max,THJA04}.
+\textit{Graph labeling} is another type of structured output prediction in which the output graph often takes more general form and does not have the concept of ``level'' compared to hierarchical classification.
+The output graph structure can be for example a sequence \citep{collins02a} or a Markov network \citep{Taskar04max}.
+The graph labeling approach often directly incorporates the output graph into learning and uses the dependency or the correlation to improve the classification performance \citep{collins02a,lafferty01,taskar02,Taskar04max,THJA04,Rousu07}.
+Figure~\ref{} illustrates the taxonomy of the multilabel classification.
+However it is worthy of mentioning that there is no clear line drawn between different taxonomies as some learning algorithms might belong to different categories for example the algorithms proposed in \citep{THJA04,Rousu06}.
+
 
 One problem inherited with structured output learning is the output dependency structure is assumed to be pre-established.
 However, this cannot be taken as granted since the proper dependency structure for the output variables is either hidden or difficult to retrieve in many applications \citep{Chickering94learning}.
