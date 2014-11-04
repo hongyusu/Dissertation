@@ -43,12 +43,12 @@ There exists a large body of work on hierarchical classification from the early 
 The output graph structure can be for example a sequence \citep{collins02a} or a Markov network \citep{Taskar04max}.
 The graph labeling approach often directly incorporates the output graph into learning and uses the dependency or the correlation to improve the classification performance \citep{collins02a,lafferty01,taskar02,Taskar04max,THJA04,Rousu07}.
 Figure~\ref{} illustrates the taxonomy of the multilabel classification.
-However it is worthy of mentioning that there is no clear line drawn between different taxonomies as some learning algorithms might belong to different categories for example the algorithms proposed in \citep{THJA04,Rousu06}.
+However it is worthy of mentioning that there is no clear line drawn between different taxonomies as some learning algorithms might belong to different categories, for example the algorithms proposed in \citep{THJA04,Rousu06}.
+In addition, we focus on the graph labeling approach in this thesis.
+Without loss of generality, when we use the term ``structured output prediction'' we explicitly means ``graph labeling'' in the following part of the thesis.
 
-
-One problem inherited with structured output learning is the output dependency structure is assumed to be pre-established.
+One inherited with structured output learning is the output dependency structure is assumed to be pre-established.
 However, this cannot be taken as granted since the proper dependency structure for the output variables is either hidden or difficult to retrieve in many applications \citep{Chickering94learning}.
-
 In this thesis, we examine the potential of applying structured output learning to improve the prediction performance in real world multilabel classification problems.
 In addition, we work on the problem of the structured output learning when the output dependency structure is not observed.
 We also investigate the efficiency and the scalability of the inference problems in the proposed structured output learning models as the inference problem of the structured output learning is often difficult to solve.
