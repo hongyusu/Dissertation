@@ -1482,7 +1482,7 @@ As a results, the proposed model (\mve) is not constraint to the availability of
 \subsection{Methods}
 
 We use \mmcrf\ as base classifier trained on a set of random output graphs.
-For each base classifier, a random graph $G_t$ is generated to couple the multiple output labels which are the activities of molecular structure $\vx$ over all cell lines.
+In particular, a random graph $G_t$ is generated for each base classifier to couple the multiple output labels which are the activities of the molecular structure $\vx$ over all cell lines.
 The base model \mmcrf\ is learnt with training data $S=\{(\vx_i,\vy_i)\}_{i=1}^{m}$ and the output graph $G_t$.
 After ensemble has been generated, the predictions are extracted from each base classifier and are collected for a post-processing step: we compute a majority vote over the graph labeling from the sign on the means of the base classifier's prediction
 \begin{align*}
@@ -1490,13 +1490,13 @@ After ensemble has been generated, the predictions are extracted from each base 
 \end{align*}
 where by $T$ we denote the size of the ensemble, and by $F^{(t)}(\vx)=\{F^{(t)}_j(x)\}_{j=1}^{k}$ we denote the predicted multilabel from the $t$'th base classifier.
 In words, the ensemble prediction on each microlabel is the most frequently appearing prediction among the base classifiers.
-It is also worthy of noticing that the \mve\ framework is not restrict to base classifier \mmcrf\ and can be extended with any structured output learning models as long as they incorporate the output structure into learning process and make predictions based on the structure.
+It is also worthy of noticing that the \mve\ framework is not restricted to base classifier \mmcrf\ and can be extended with any structured output learning models as long as they incorporate the output structure into learning process and make predictions based on the output structure.
 
 In addition, we designed two approaches to generate random output graphs.
-In \textbf{random spanning tree} approach, we first generate a random correlation matrix and extract the spanning tree out from the matrix.
+In \text{random spanning tree} approach, we first generate a random correlation matrix and extract the spanning tree out from the matrix.
 The approach eventually generates a tree structure connecting all vertices.
-In \textbf{random pairing} approach, we randomly draw two vertices at a time and couple the two with an edge.
-The approach outputs disconnected pairs.
+In \text{random pairing} approach, we randomly draw two vertices at a time and couple the two with an edge.
+The approach outputs a set of disconnected pairs.
 
 
 
@@ -1528,7 +1528,7 @@ where we use $\psi_e(\vx,\vy_e)$ to denote edge compatibility score (\textit{edg
 $\vw$ is the feature weight parameter which ensures input $\vx$ with correct output $\vy$ achieves higher compatibility score than with incorrect output.
 
 % edge potential
-In addition, we assume we have access to the edge potentials between input and edge labels for each base classifiers
+In addition, we assume that we have access to the edge potentials between the input and the edge labels for each base classifiers
 \begin{align*}
 	\psib_E^{(t)} = (\psi_e^{(t)}(\vx,\vu_e))_{e\in E^{(t)},\vu_e\in\Ycal_e}.
 \end{align*}
