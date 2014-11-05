@@ -1777,7 +1777,7 @@ The test results are often visualized as \textit{$CD$ diagram}.
 
 The main contributions of this thesis are the new structured output learning algorithms for multilabel classification.
 To make sure the empirical results are reproducible, each presented algorithm has been implemented as a software package.
-In this chapter, the author aims to summarize the implementations and point out the link with which the algorithms can be located.
+In this chapter, the author aims to summarize the implementations and point out the links with which the algorithms can be located.
 
 \begin{enumerate}
 	\item \rta\ developed in \citepub{su14c} is a structured output learning algorithm for multilabel classification when the output graph is hidden. \rta\ performs joint learning and inference on a random sample of spanning trees.
@@ -1786,9 +1786,9 @@ In this chapter, the author aims to summarize the implementations and point out 
 		\item The package can be found from \url{http://git@github.com:hongyusu/random_spanning_tree_approximation.git}.
 	\end{enumerate}
 	
-	\item \spin\ developed in \citepub{su14a} is a structured output learning algorithm for multilabel classification with observed output graph. \spin\ can predict a direct acyclic graph. \spin\ is applied to network influence prediction problem within the context of social network analysis.
+	\item \spin\ developed in \citepub{su14a} is a structured output learning algorithm for multilabel classification with observed output graph. \spin\ can predict a direct acyclic graph (\daggraph). \spin\ is applied to network influence prediction problem within the context of social network analysis.
 	\begin{enumerate}
-		\item The major part of the \rta\ is implemented in \matlab. \sdp\ inference algorithm is implemented with \cvx\ package designed for convex programming. The data preprocessing with topic model is implemented in \python\ and \matlab.
+		\item The major part of the \spin\ is implemented in \matlab. \sdp\ inference algorithm is implemented with \cvx\ package designed for convex programming. The data preprocessing with Latent Dirichlet allocation (\lda) \citep{Blei03latent} is implemented in \python\ and \matlab.
 		\item The package can be found from \url{http://git@github.com:hongyusu/SPIN.git}.
 	\end{enumerate}
 	
@@ -1798,10 +1798,10 @@ In this chapter, the author aims to summarize the implementations and point out 
 		\item The package can be located from \url{http://git@github.com:hongyusu/RandomOutputGraphEnsemble.git}.
 	\end{enumerate}
 	
-	\item The structured output model used in \citepub{su10} for molecular activities classification is a instantiation of \mmcrf\ developed in \cite{Rousu07}.
+	\item The structured output learning algorithm used in \citepub{su10} for multilabel molecular activities classification problem is an instantiation of \mmcrf\ developed in \citep{Rousu07}.
 	\begin{enumerate}
 		\item The code is implemented in \matlab.
-		\item The implementation can be found from \url{http://research.ics.aalto.fi/kepaco/software.shtml}.
+		\item The package can be found from \url{http://research.ics.aalto.fi/kepaco/software.shtml}.
 	\end{enumerate}
 \end{enumerate}
 
