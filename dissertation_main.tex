@@ -160,9 +160,9 @@ In other words, underlying true distribution $P(\vx,\vy)$ is difficult to to est
 Thus, the estimator will generalize poorly on unseen test examples.
 The {regularization theory} \citep{Evgeniou99a,Evgeniou02regularization} provides a framework to alleviate these two difficulties.
 In particular, it suggests to minimize 
- \begin{align*}
-	\Jcal(f) = \Rcal_{emp}(f) + \lambda\Omega(f),
-\end{align*}
+ \begin{align}
+	\Jcal(f) = \Rcal_{emp}(f) + \lambda\Omega(f), \label{rl}
+\end{align}
 where $\Omega(f)$ is the regularization function that controls the complexity of the estimator $f$ by penalizing the norm of the feature weight vector and $\lambda$ is a positive parameter that controls the relative weight between the empirical risk term and the regularization term.
 
 In terms of the linear function class, there are many ways to define the regularization term $\Omega(f)$ among which $L_1$-norm and $L_2$-norm regularization are most popular.
@@ -376,9 +376,9 @@ which is more efficient to compute and is extremely similar to (\ref{voted_perce
 Logistic Regression is a classification model rather than regression \citep{Bishop07}.
 The formalism nicely transits from risk minimization (Section~\ref{sc_rl}) to regularized risk minimization (Section~\ref{sc_rl}).
 The model has been extended to other classification algorithms presented in the later part of the thesis (e.g., \iblr\ in Section~\ref{sc_iblr}, \corrlog\ in Section~\ref{sc_corrlog}).
-Besides, the idea of Logistic Regression, the odd-ratio type learning in particular, is also the building block of e.g., \mmmn\ in Section~\ref{sc_mmmn} and many algorithms developed in this thesis.
+Besides, the idea of Logistic Regression, the odd-ratio type learning in particular, is also the building block of, e.g., \mmmn\ in Section~\ref{sc_mmmn} and many algorithms developed in this thesis.
 
-It models the conditional probability $P(y=+1|\vx)$ for a binary output variable $y\in\Ycal$.
+Logistic Regression models the conditional probability $P(y=+1|\vx)$ for a binary output variable $y\in\Ycal$.
 %Without loss of generality, in the rest part of this section we use $P(\vx)$ to denote above conditional probability of $P(y|\vx)$ when fixing $y=1$.
 To model the probability, we do not restrict to any particular form, as any unknown parameters can be estimated by \textit{Maximum Likelihood Estimation} (\mle).
 However, we are mostly interested in the simple linear model as described in (\ref{linearclassifier}).
@@ -390,7 +390,7 @@ Another choice is to let $\log P(y=+1|\vx)$ be a linear function of $\vx$.
 However, the problem is the log-likelihood ranges from zero to infinite but the linear function is unbounded.
 The choice in Logistic Regression is to use 
 \fi
-we compute the logistic transformation of the original probability function
+we compute the logistic transformation of the original conditional probability by
 \begin{align*}
 	\log\frac{P(y=+1|\vx)}{1-P(y=+1|\vx)} = \ip{\vw}{\varphib(\vx)} + b.
 \end{align*}
@@ -408,27 +408,28 @@ By putting (\ref{lr_1}) and (\ref{lr_2}) together, we define Logistic Regression
 		P(y|\vx;\vw,b) = \frac{1}{1+\exponential{-y(\ip{\vw}{\varphib(\vx)}-b)}}.
 	\end{align*}
 \end{definition}
-Naturally, we expect the prediction $y=+1$ when $P(y=+1|\vx;\vw,b)\ge0.5$ and $y=-1$, when $P(y=+1|\vx;\vw,b)<0.5$.
+We predict $y=+1$ when $P(y=+1|\vx;\vw,b)\ge0.5$, and $y=-1$ when $P(y=+1|\vx;\vw,b)<0.5$.
 The decision rule is such that we predict $y=+1$ when $\ip{\vw}{\varphib(\vx)}+b\ge0$, and $y=-1$ otherwise.
-Besides decision boundary, Logistic Regression can output the class probability as the the ``distance'' of the data point to the decision boundary.
+Besides the decision boundary, Logistic Regression can output the class probability as the the ``distance'' of the data point to the decision boundary.
 It is the probabilistic output that makes Logistic Regression no more than a classifier.
 
 % optimization
-The parameter $\vw$ and $b$ of Logistic Regression can be obtained by maximizing the probability (likelihood) of the training data.
+The parameter $\vw$ and $b$ can be obtained by maximizing the probability (likelihood) of the training data.
 %The probability of training data $\vx$ with class label $y$ is $P(y|\vx)$.
 The likelihood of parameters given data can be computed by
 \begin{align}
 	L(\vw,b;D) = \prod_{i=1}^mP(y_i|\vx_i). \label{lr_likelihood}
 \end{align}
-To apply maximum likelihood estimation (\mle), it is easier if, instead of maximizing the likelihood, we maximize the log-likelihood, which turns the product (\ref{lr_likelihood}) into sum
+To apply \mle, it is easier if, instead of maximizing the likelihood, we maximize the log-likelihood, which turns the product (\ref{lr_likelihood}) into sum
 \begin{align}
 	\log L(\vw,b|D) = \sum_{i=1}^{m}\log P(y_i|\vx_i) = -\sum_{i=1}^{m}\log (1+\exponential{-y_i(\ip{\varphib(\vx_i)}{\vw}+b)}) \label{lr_likelihood_sum}.
 \end{align}
 
 % logistic regression of other type
-\mle\ training of Logistic Regression can generate a model that fits the training data, it does not guarantee to generalize well on the test data.
+\mle\ can generate a model that fits the training data.
+However, there is no guarantee that the model generalize well on the test data.
 To achieve better generalization power, we apply the regularization technique as discussed in Section~\ref{ch_rlc}.
-Many regularization methods for Logistic Regression have been proposed \citep{Chen99,Chen00,Goodman03}, among which adding Gaussian prior on weight parameter $\vw$ is one of the standard option.
+Many regularization methods for Logistic Regression have been proposed \citep{Chen99,Chen00,Goodman03} among which adding Gaussian prior on weight parameter $\vw$ is one of the standard option.
 In practice, we assume $\vw$ is generated according to a zero-mean spherical Gaussian with variance $\sigma^2$.
 Thus, the \mle\ problem (\ref{lr_likelihood_sum}) is transformed into \textit{Maximum A-Posteriori} (\map) problem of the following form
 \begin{align}
@@ -438,6 +439,7 @@ Instead of maximizing the posteriori (\ref{lr_posteriori}), it is easier to maxi
 \begin{align}
 	\log P(\vw,b|D;\sigma^2) = -{\frac{\norm{\vw}^2}{\sigma^2}} - \sum_{i=1}^{m}\log{(1+\exponential{-y_i(\ip{\varphib(\vx_i)}{\vw}+b)})}. \label{lr_posteriori_log}
 \end{align}
+In fact, (\ref{lr_posteriori_log}) is an instantiation of regularization risk minimization described in (\ref{rl}).
 
 Many optimization techniques have been proposed \citep{Minka03}, for example, 
 the {Itrative Scaling} method \citep{Darroch72,Pietra97inducing,Berger97,Goodman02Sequential,Jin03a},
