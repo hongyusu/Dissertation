@@ -475,14 +475,14 @@ Later on, optimization algorithms that are based on dual form have been develope
 \subsection{Support Vector Machines (\svm)}	\label{sc_svm}
 
 % some history
-Support Vector Machines (\svm) is probably the most widely used single-label classification algorithm in many real world applications.
-Its extensions to multilabel classification problem will be described in the label part of the thesis (e.g., Section~\ref{sc_svmstruct}).
-In this section we will start the story of \svm\ by introducing the \textit{Maximum-Margin Principle}, which is also the basis of many structured output learning models (e.g., Section~\ref{sc_mmmn}, Section~\ref{sc_svmstruct}, Section~\ref{sc_su14b}, Section~\ref{sc_su14c}).
-After that, we will discuss the primal-dual optimization strategy and the kernel methods that allow \svm\ to deal with high dimensionality.
+Support Vector Machines (\svm) is probably the most widely used single-label classification algorithm in machine learning.
+Its extensions for multilabel classification will be described in the later part of the thesis (e.g., \svmstruct\ in Section~\ref{sc_svmstruct}).
+We will start this section by introducing \textit{Maximum-Margin Principle}, which is also the basis of many structured output learning models (e.g., \mmmn\ in Section~\ref{sc_mmmn}, \svmstruct\ in Section~\ref{sc_svmstruct}, \spin\ in Section~\ref{sc_su14a}, \rta\ in Section~\ref{sc_su14c}).
+After that, we will discuss the primal-dual optimization strategy and the kernel methods that allow \svm\ to deal with high dimensionality of the input feature space.
 In the end we will briefly cover the optimization strategies developed for \svm.
 
-The algorithm framework of \svm\ was first introduced in \citep{Boser92,Cortes95support}.
-Theory and algorithm are detailed in the book chapters \citep{Scholkopf02learning,taylor04,Bishop07}.
+The framework of \svm\ was first introduced in \citep{Boser92,Cortes95support}.
+Theory and algorithm details are also presented in the book chapters \citep{Scholkopf02learning,taylor04,Bishop07}.
 % hard margin svm
 We begin our discussion by considering a very simple case where we assume the data are linearly separable.
 That is there is a hyperplane in the feature space which separates the training data into two classes.
