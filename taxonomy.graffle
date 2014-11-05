@@ -14,7 +14,7 @@
 	<key>BackgroundGraphic</key>
 	<dict>
 		<key>Bounds</key>
-		<string>{{0, 0}, {1543, 808}}</string>
+		<string>{{0, 0}, {1300, 736}}</string>
 		<key>Class</key>
 		<string>SolidGraphic</string>
 		<key>ID</key>
@@ -38,7 +38,7 @@
 	<key>CanvasOrigin</key>
 	<string>{0, 0}</string>
 	<key>CanvasSize</key>
-	<string>{1543, 808}</string>
+	<string>{1300, 736}</string>
 	<key>ColumnAlign</key>
 	<integer>1</integer>
 	<key>ColumnSpacing</key>
@@ -48,7 +48,7 @@
 	<key>Creator</key>
 	<string>Hongyu Su</string>
 	<key>DisplayScale</key>
-	<string>1 0/72 in = 1 0/72 in</string>
+	<string>1 0/72 in = 1.0000 in</string>
 	<key>FileType</key>
 	<string>flat</string>
 	<key>GraphDocumentVersion</key>
@@ -284,7 +284,7 @@ Structured Output Prediction}</string>
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\qc
 
 \f0\fs26 \cf0 \expnd0\expndtw0\kerning0
-Flat Multilabel classification}</string>
+Flat Multilabel Classification}</string>
 				<key>VerticalPad</key>
 				<integer>0</integer>
 			</dict>
@@ -347,8 +347,8 @@ Multilabel Classification}</string>
 			<integer>1169</integer>
 			<key>Points</key>
 			<array>
-				<string>{227.87397056321436, 246.22904292123542}</string>
-				<string>{276.36914731212784, 232.09568537661607}</string>
+				<string>{227.86751088008282, 243.65493155662324}</string>
+				<string>{262.15209434815728, 232.04180735674319}</string>
 			</array>
 			<key>Style</key>
 			<dict>
@@ -387,8 +387,8 @@ Multilabel Classification}</string>
 			<integer>1171</integer>
 			<key>Points</key>
 			<array>
-				<string>{225.72726640028924, 284.80557650293383}</string>
-				<string>{259.62517165780599, 299.50839144538281}</string>
+				<string>{227.85937546246703, 283.48359836398015}</string>
+				<string>{259.63337273631009, 295.95448330017035}</string>
 			</array>
 			<key>Style</key>
 			<dict>
@@ -427,8 +427,8 @@ Multilabel Classification}</string>
 			<integer>1172</integer>
 			<key>Points</key>
 			<array>
-				<string>{373.09869263844456, 198.28762980988097}</string>
-				<string>{408.40685396420662, 191.2441071491601}</string>
+				<string>{373.09867429576553, 198.27656510174893}</string>
+				<string>{408.40682410377377, 191.22615715736742}</string>
 			</array>
 			<key>Style</key>
 			<dict>
@@ -467,8 +467,8 @@ Multilabel Classification}</string>
 			<integer>1173</integer>
 			<key>Points</key>
 			<array>
-				<string>{373.10151751508465, 219.08748839735864}</string>
-				<string>{408.40402247743407, 224.98598353403804}</string>
+				<string>{373.10150441805979, 219.09675948979341}</string>
+				<string>{408.404001168462, 225.00102258444144}</string>
 			</array>
 			<key>Style</key>
 			<dict>
@@ -507,8 +507,8 @@ Multilabel Classification}</string>
 			<integer>1177</integer>
 			<key>Points</key>
 			<array>
-				<string>{373.09905142638695, 325.70737487357155}</string>
-				<string>{408.40651647414893, 332.61492669226044}</string>
+				<string>{373.09903373853683, 325.71822668948869}</string>
+				<string>{408.40648767079585, 332.63253113753586}</string>
 			</array>
 			<key>Style</key>
 			<dict>
@@ -547,8 +547,8 @@ Multilabel Classification}</string>
 			<integer>1178</integer>
 			<key>Points</key>
 			<array>
-				<string>{373.10120586530525, 304.90749071992639}</string>
-				<string>{408.40433498583775, 298.87307741713812}</string>
+				<string>{373.10119215078618, 304.89800652795748}</string>
+				<string>{408.40431275087536, 298.8576925388121}</string>
 			</array>
 			<key>Style</key>
 			<dict>
@@ -620,7 +620,7 @@ Multilabel Classification}</string>
 	<key>MasterSheets</key>
 	<array/>
 	<key>ModificationDate</key>
-	<string>2014-11-04 11:03:03 +0000</string>
+	<string>2014-11-05 11:12:26 +0000</string>
 	<key>Modifier</key>
 	<string>Hongyu Su</string>
 	<key>NotesVisible</key>
@@ -690,7 +690,7 @@ Multilabel Classification}</string>
 	<key>UseEntirePage</key>
 	<false/>
 	<key>VPages</key>
-	<integer>2</integer>
+	<integer>1</integer>
 	<key>WindowInfo</key>
 	<dict>
 		<key>CurrentSheet</key>
@@ -698,7 +698,7 @@ Multilabel Classification}</string>
 		<key>ExpandedCanvases</key>
 		<array/>
 		<key>Frame</key>
-		<string>{{718, 186}, {1683, 904}}</string>
+		<string>{{0, 45}, {1440, 832}}</string>
 		<key>ListView</key>
 		<false/>
 		<key>OutlineWidth</key>
@@ -710,7 +710,7 @@ Multilabel Classification}</string>
 		<key>SidebarWidth</key>
 		<integer>138</integer>
 		<key>VisibleRegion</key>
-		<string>{{0.60606061481794615, 0.60606061481794615}, {925.45455882700367, 480.00000693581336}}</string>
+		<string>{{0.60606061481794615, 0.60606061481794615}, {786.6666780336941, 445.45455189119042}}</string>
 		<key>Zoom</key>
 		<real>1.6499999761581421</real>
 		<key>ZoomValues</key>

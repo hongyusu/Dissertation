@@ -18,7 +18,7 @@ Machine learning not only brings in intelligent system that generalizes well fro
 Machine learning appears in many real world applications, to name but a few, page ranker in web search engine \citep{Richardson06beyond}, email spam filter \citep{Goodman06online}, recommender system in online shopping \citep{Bell07lessons}, optical image recognizer and speech recognizer \citep{Bengio09learning}.
 With increasing availability of large scale data, machine learning is expected to play an indispensable role in many research fields \citep{Fan13mining}.
 
-Supervised learning, an important paradigm in machine learning, is usually instantiated as learning a function that is capable of predicting the best value for an output variable given an arbitrary input variable.
+Supervised learning, an important paradigm in machine learning, is usually instantiated as learning a function that is capable of predicting the best value for an output variable given an input variable.
 The function is learned by exploring a set of observed input/output pairs known as training examples.
 In the classical supervised learning setting, the output variable to be predicted can only take one value.
 In machine learning community, this is referred as single-label classification if the output is discrete valued, or as regression if the output is continuous valued.
@@ -30,14 +30,14 @@ For example, a movie can be classified as ``sci-fi'', ``thriller'' and ``crime''
 When the multiple output variables are treated as a ``flat'' vector, the problem is often known as \textit{flat multilabel classification}.
 \text{Flat multilabel classification} is one branch of multilabel classification and has drawn increasing amount of interest from machine learning community \citep{Tsoumakas07multi,Tsoumakas10mining}.
 As multiple output variables can be ``on'' and ``off'' simultaneously, various flat multilabel classification algorithms have been developed and aim to explore the correlation or the dependency between multiple output variables in order to make better prediction.
-In particular, \citet{Tsoumakas07multi} summerized the established flat multilabel classification algorithms into two categories: problem transformation approach for example in \citep{Zhang05a,Read09classifier,Cheng09combining} and algorithm adaptation approach for example in \citep{Schapire99improved,Bian12corrlog}
+In particular, \citet{Tsoumakas07multi} summerized the established flat multilabel classification algorithms into two categories: problem transformation approaches such as \citep{Zhang05a,Read09classifier,Cheng09combining} and algorithm adaptation approaches such as \citep{Schapire99improved,Bian12corrlog}
 
 %Flat multilabel classification has been tackled by many algorithms that aim to explore the correlation or the dependency between multiple output variables in order to make better prediction \citep{Schapire99improved,Zhang05a,Read09classifier,Cheng09combining,Bian12corrlog}.
 
 There is another line of research on multilabel classification known as \textit{structured output prediction} where a complex structure (output graph) is defined on multiple output variables to model the dependency in a more comprehensive way.
 \textit{Hierarchical classification} is one type of structured output prediction in which the prediction needs to be reconciled along the pre-established hierarchical structure \citep{Silla11a}.
-Hierarchical classification is usually applied on the problem with different level of granularity. 
-The hierarchy can be either a rooted tree for example in document classification problem \citep{Hao07hierarchicaly,Li07hierarchical,Rousu06}, or a directed acyclic graph (\daggraph) with parent-children relationship for example in gene function prediction problem \citep{Barutcuoglu06hierarchical}.
+Hierarchical classification is usually applied to the problem with different level of granularity. 
+The hierarchy can be either a rooted tree such as in document classification problem \citep{Hao07hierarchicaly,Li07hierarchical,Rousu06}, or a directed acyclic graph (\daggraph) with parent-children relationship such as in gene function prediction problem \citep{Barutcuoglu06hierarchical}.
 There exists a large body of work on hierarchical classification from the early one that uses the hierarchical structure heuristically for preprocessing or post-processing \citep{Koller97hierarchically,Dumais00Hierarchical,Liu05support,DeCoro07bayesian} to the recent one that encodes the structure into learning \citep{Cai04hierarchical,Cesabianchi05incremental,Rousu06,Gopal12bayesian}.
 
 \textit{Graph labeling} is another type of structured output prediction in which the output graph often takes more general form and does not require the concept of ``level'' compared to hierarchical classification.
@@ -48,7 +48,7 @@ However, this cannot be taken as granted since the proper dependency structure f
 
 Figure~\ref{multilabel_taxonomy} illustrates the taxonomy of the multilabel classification.
 However it is worthy of mentioning that there is no clear line drawn between different categories.
-In particular, some hierarchical classification algorithms can also belong to graph labeling category, for example the one developed in \citep{THJA04,Rousu06}.
+In particular, some hierarchical classification algorithms can also belong to graph labeling category, for instance, the ones developed in \citep{THJA04,Rousu06}.
 As we focus on graph labeling of structured output prediction, we will explicitly use ``structured output prediction'' to refer to ``graph labeling'' in the following part of the thesis.
 
 \begin{figure}
@@ -60,21 +60,21 @@ As we focus on graph labeling of structured output prediction, we will explicitl
 \end{center}
 \end{figure}
 
-In this thesis, we extend the applicability of structured output learning by developing new learning algorithms and applying them on real world multilabel classification problems.
+In this thesis, we extend the applicability of structured output learning by developing new learning algorithms and applying them to real world multilabel classification problems.
 In addition, we work on the problem of the structured output learning when the output dependency structure is not observed.
 The models thus created are not restricted to the availability of the output graph and can be applied to wider range of multilabel classification problems.
-We also investigate the efficiency and the scalability of the inference problems in the proposed structured output learning models as they are often difficult to solve.
-Besides, we study the theoretic aspects of the proposed models in order to gain insights into the behavior of the models.
+We also investigate the efficiency and the scalability of the inference problems in the proposed structured output learning models.
+Besides, we study the theoretic aspects of the proposed models to explain the behavior and to guarantee the generalization error.
 In particular, the research questions can be casted as following:
 \begin{itemize}
 	
-\item In terms of multilabel classification, is the structured output learning approach more appropriate compared to flat multilabel classification approach which does not model the output dependency structure?
+\item In terms of multilabel classification, is the structured output learning approach more appropriate compared to the flat multilabel classification approach?
 
 \item How to apply the structured output learning on multilabel classification problem when the dependency structure is not observed.
 
 \item Can we understand the behavior of the proposed structured output prediction models from theoretical aspect? 
 
-\item Can we efficiently tackle the inference problems of the proposed structured output learning models.
+\item Can we efficiently tackle the inference problems of the proposed structured output learning methods.
 
 \end{itemize}
 
@@ -84,12 +84,13 @@ In particular, the research questions can be casted as following:
 %
 \section{Contributions and Organization}
 
-The thesis focuses on the statistical learning on multilabel classification problem.
-It broadly reviews several lines of the research in this emerging field.
-The contributions of the thesis first lie in the development of the new structured output learning methods for multilabel classification problems.
-The proposed method incorporate the output dependency structure into the learning process and is applied on the network response prediction problem.
-Besides, we tackle the problem of applying structured output learning on multilabel classification where the output dependency structure is not observed.
-We have designed new learning framework that does not required the observed output dependency structure such that the proposed models can learn from a random sample of spanning trees as the output graph.
+The contributions of the thesis are statistical learning algorithms that widen the applicability of the structured output learning.
+The thesis starts by reviewing several lines of research in classification learning.
+The first contribution is to developed new structured output learning algorithms for multilabel classification problem when the output graph is known as \textit{a-priori}.
+The proposed method can predict a directed acyclic graph (\daggraph) from an observed network and is applied to network response problem within the context of social network analysis.
+The second contribution is to developed learning framework for structured output learning when the output graph is not observed.
+The proposed methods are not restructured to the availability of the output and can learn from a set of random output graphs.
+In addition, we also theoretically study the proposed model in order to explain the behavior and to guarantee the generalization error.
 
 The thesis is structured as follows.
 In Chapter~\ref{ch_introduction}, the scope of the research is briefly presented with several research questions being proposed which will be answered through this thesis.
@@ -371,7 +372,7 @@ which is more efficient to compute and is extremely similar to (\ref{voted_perce
 
 Logistic Regression is a classification model rather than regression \citep{Bishop07}.
 The formalism nicely transits from risk minimization (Section~\ref{sc_rl}) to regularized risk minimization (Section~\ref{sc_rl}).
-The idea of Logistic Regression is also applied in many multilabel classification algorithms presented in the later part of the thesis (e.g. Section~\ref{sc_iblr}, Section~\ref{sc_corrlog}, Section~\ref{sc_mmmn}).
+The idea of Logistic Regression is also applied in many multilabel classification algorithms presented in the later part of the thesis (e.g., Section~\ref{sc_iblr}, Section~\ref{sc_corrlog}, Section~\ref{sc_mmmn}).
 
 It models the conditional probability $P(y=+1|\vx)$ for a binary output variable $y\in\Ycal$.
 %Without loss of generality, in the rest part of this section we use $P(\vx)$ to denote above conditional probability of $P(y|\vx)$ when fixing $y=1$.
@@ -469,8 +470,8 @@ Later on, optimization algorithms that are based on dual form have been develope
 
 % some history
 Support Vector Machines (\svm) is probably the most widely used single-label classification algorithm in many real world applications.
-Its extensions to multilabel classification problem will be described in the label part of the thesis (e.g. Section~\ref{sc_svmstruct}).
-In this section we will start the story of \svm\ by introducing the \textit{Maximum-Margin Principle}, which is also the basis of many structured output learning models (e.g. Section~\ref{sc_mmmn}, Section~\ref{sc_svmstruct}, Section~\ref{sc_su14b}, Section~\ref{sc_su14c}).
+Its extensions to multilabel classification problem will be described in the label part of the thesis (e.g., Section~\ref{sc_svmstruct}).
+In this section we will start the story of \svm\ by introducing the \textit{Maximum-Margin Principle}, which is also the basis of many structured output learning models (e.g., Section~\ref{sc_mmmn}, Section~\ref{sc_svmstruct}, Section~\ref{sc_su14b}, Section~\ref{sc_su14c}).
 After that, we will discuss the primal-dual optimization strategy and the kernel methods that allow \svm\ to deal with high dimensionality.
 In the end we will briefly cover the optimization strategies developed for \svm.
 
@@ -496,7 +497,7 @@ Based on Maximum-Margin Principle, we further use $\gamma_i$ to denote the \text
 \begin{align*}
 	\gamma_i = \frac{y_i(\ip{\vw}{\varphib(\vx_i)}+b)}{\norm{\vw}}.
 \end{align*}
-We notice if we scale $\vw$ and $b$ with any constant (e.g. $\vw\leftarrow\kappa\vw, b\leftarrow\kappa b, \kappa\in\RR$, ) the margin $\gamma_i$ stays unchanged. 
+We notice if we scale $\vw$ and $b$ with any constant (e.g., $\vw\leftarrow\kappa\vw, b\leftarrow\kappa b, \kappa\in\RR$, ) the margin $\gamma_i$ stays unchanged. 
 We still achieve the same classification performance and generalization power.
 As parameters are invariance to scaling, we set $\norm{\vw}=1$.
 Given a set of training example $S$, we also define the margin with respect to $S$ as the minimum margin achieved by individual training example
@@ -772,7 +773,7 @@ The feature split process of decision tree is deterministic given a set of featu
 
 Multilabel classification is a natural extension to single-label classification presented in Section~\ref{sc_slc}.
 In multilabel classification each input (instant) is simultaneously associated with multiple outputs (labels).
-The research of the multilabel classification has progressed rapidly in the past two decades with many learning algorithms being developed and applied in real world classification tasks.
+The research of the multilabel classification has progressed rapidly in the past two decades with many learning algorithms being developed and applied to real world classification tasks.
 In general, there are two lines of research for multilabel classification namely flat multilabel classification and structured output prediction.
 In flat multilabel classification, the multiple labels are treated essentially as a ``flat'' vector of labels.
 Structured output prediction, on the other hand, models the multiple labels via a graph structure that connects labels.
@@ -781,8 +782,8 @@ The methods for structured output prediction will be covered in the later part o
 
 Consider the infeasibility of listing all algorithms for flat multilabel classification, it is easier if we are able to categorize the algorithms into classes.
 In this chapter, we adopt the simple categorization presented in \citep{Tsoumakas07multi,Tsoumakas10mining} which gives us two major algorithm categories namely problem transformation and algorithm adaptation.
-For problem transformation category, we will present the methods that aim to transfer the flat multilabel classification problem into other well studied problem settings (e.g. single-label classification problem, ranking problem).
-For algorithm adaptation category, we will describe the methods that directly modify the popular learning techniques (e.g. Logistic Regression and ensemble method) to solve the multilabel classification problem.
+For problem transformation category, we will present the methods that aim to transfer the flat multilabel classification problem into other well studied problem settings (e.g., single-label classification problem, ranking problem).
+For algorithm adaptation category, we will describe the methods that directly modify the popular learning techniques (e.g., Logistic Regression and ensemble method) to solve the multilabel classification problem.
 Nevertheless, the present algorithms will explore the inherited difficulties of flat multilabel classification which are the exponential sized multilabel space and the implicit label correlation.
 Besides, the author realized that it is impossible to cover every lines of research in the field of flat multilabel classification.
 Interested readers are pointed out to the recent research review articles, for example, \citep{Tsoumakas07multi,Tsoumakas10mining,Zhang14a}.
@@ -948,8 +949,8 @@ The returned prediction $H(x)$ is the combination of base learners $f^t(x)$ weig
 Other ensemble flat multilabel classification methods based on boosting or bagging are also developed in \citep{Wang07simple,Yan07model,Kocev13tree}.
 Most recently, three other learning algorithms with performance guarantee are proposed in \citep{Cortes14semble}.
 Besides, there are quite a few ensemble approaches that are adapted from single label ensemble methods and are dedicated to solve real world classification problems.
-For example, \citep{Collins05distrimnative,Zeman05improving,Sagae06parsing,Zhang09kbest} are applied in natural language processing, and \citep{Fiscus97a,Benesty08speech,Petrov10products}
-are applied in text and speech recognition.
+For example, \citep{Collins05distrimnative,Zeman05improving,Sagae06parsing,Zhang09kbest} are applied to natural language processing, and \citep{Fiscus97a,Benesty08speech,Petrov10products}
+are applied to text and speech recognition.
 
 
 %
@@ -1032,9 +1033,9 @@ Recently, \citet{Paredes12exploit} proposed a method which exploits the informat
 
 Structured output prediction is a natural extension to flat multilabel classification presented in Chapter~\ref{ch_fmlc}.
 Unlike flat multilabel classification which takes multiple output variables as a ``flat'' vector, structured output prediction assumes multiple output variables are correlated and locate in the structured output space.
-It builds a graph structure (e.g. chain, tree) to connect multiple output variables by which it gains the advantage of exploring the label correlation compared to flat multilabel classification.
+It builds a graph structure (e.g., chain, tree) to connect multiple output variables by which it gains the advantage of exploring the label correlation compared to flat multilabel classification.
 In this chapter, we will start by introducing several classical structured output learning models developed during the last decade.
-We will present our research of applying the structured output learning on molecular activity prediction problem.
+We will present our research of applying the structured output learning to molecular activity prediction problem.
 We will also present our new algorithm \spin\ that is capable of predicting a directed acyclic graph (\daggraph) and examine the performance on the network influence prediction problem.
 
 
@@ -1043,7 +1044,7 @@ We will also present our new algorithm \spin\ that is capable of predicting a di
 %
 \section{Preliminaries}
 
-Multilabel classification deals with multiple interdependent output variables (e.g. $\vy\in\vYcal$).
+Multilabel classification deals with multiple interdependent output variables (e.g., $\vy\in\vYcal$).
 The problem is known as \textit{structured output prediction} when these variables are located in structured output space.
 That is the label correlation is described by an \textit{output graph} that connects multiple labels.
 In particular, we define the output graph $G=(E,V)$ by a node set $V=\{1,\cdots,k\}$ corresponding to the microlabels $\{y_1,\cdots,y_k\}$ and a edge set $E=V\times V$ representing the dependency between pair of microlabels.
@@ -1241,7 +1242,7 @@ We provides a semidefinite programming algorithm \sdp\ with approximation guaran
 \subsection{Background}
 
 With the extensive availability of the large scale networks, there are tremendous interest in studying the phenomena of the network influence, in particular, the structure, the function and the influence dynamics. 
-The outcome of the network influence research have been widely applied in many areas, to name but a few, spreadness of pathogens or infectious diseases \citep{Hethcote00the,Anderson02infectious}, diffusion of medical and technology innovation \citep{Strang98diffusion,Rogers03the}, opinion and news formation \citep{Adar04implicit,Gruhl04information,Adar05tracking,Leskovec07cascading,Nowell08tracing,Leskovec09meme}, viral market \citep{Domingos01mining,Kempe03maximizing,Liben-Nowell03the}.
+The outcome of the network influence research have been widely applied to many areas, to name but a few, spreadness of pathogens or infectious diseases \citep{Hethcote00the,Anderson02infectious}, diffusion of medical and technology innovation \citep{Strang98diffusion,Rogers03the}, opinion and news formation \citep{Adar04implicit,Gruhl04information,Adar05tracking,Leskovec07cascading,Nowell08tracing,Leskovec09meme}, viral market \citep{Domingos01mining,Kempe03maximizing,Liben-Nowell03the}.
 
 In the field of studying network influence, one primary interest is to discover the latent structures that reveal the dynamics of influences.
 In general, the problem can be defined into two different ways depending on the availability of the underlying network structure.
@@ -1250,7 +1251,7 @@ The instantiation of the setting can be, for example, online news agents sharing
 In this case, the task is to infer network structure in terms of edges connecting nodes given a set of action cascade.
 %With early work on independent cascade and linear threshold model \citep{Kempe03maximizing},
 Many algorithms are designed to solve the problem in this setting from \netinf\ \citep{GomezRodriguez10inferring}, \netrate\ \citep{Rodrigues11unconvering}, \kernelcascade\ \citep{Du12learning} to the most recent work about two stage model for inferring influence \citep{Du14influence}, inference algorithm using cascade without timestamp \citep{Amin14learning}, and general framework of inferring diffusion structure \citep{Daneshmand14estimating}.
-On the other hand, we argue the problem is unnecessarily hard as in many cases the structure of the network is fully observed (e.g. friendship network, citation network).
+On the other hand, we argue the problem is unnecessarily hard as in many cases the structure of the network is fully observed (e.g., friendship network, citation network).
 There are also related research that aim to discover the hidden variables in the network \citep{Lovrek08prediction,Goyal10learning}
 
 However, none of them consider the property of the action.
@@ -1269,7 +1270,7 @@ We approach the problem by structured output learning, where we define a computa
 \end{align*}
 It is intuitive that the action $\va$ with correct response network $\Gva$ will achieve high score than with any incorrect response network $\Gva'$.
 The joint feature map $\phib(\va,\Gva)$ is composed by the tensor product between action feature $\varphib(\va)$ and the features of the response network $\Upsilonb(\Gva)$.
-In particular, $\varphib(\va)$ can be a bag-of-words features of the action (e.g. blog post) and $\Upsilonb(\Gva)$ can be vector of edges and labels of the response network $\Gva$.
+In particular, $\varphib(\va)$ can be a bag-of-words features of the action (e.g., blog post) and $\Upsilonb(\Gva)$ can be vector of edges and labels of the response network $\Gva$.
 
 % optimization
 The feature weight parameter $\vw$ is learned through maximum-margin structured output learning by solving the following optimization problem
@@ -1386,7 +1387,7 @@ Viable molecular structures are scanned, searched, or designed for therapeutic e
 In particular, expensive preclinical \textit{in vitro} and \textit{in vivo} drug tests can be largely avoided and special efforts can be devoted to few promising candidate molecules, once accurate \textit{in silico} models are available \citep{Burbidg01drug}.
 
 Various machine learning methods have been developed for the task, to name but a few, inductive logic programming \citep{King96structure}, artificial neural network \citep{Bernazzani06predicting}, kernel methods for nonlinear molecular properties \citep{Trotter01drug,Ralaivola05graph,Swamidass05kernel,Ceroni07classification}, and \svm\ based methods for reliable predictions \citep{Trotter01drug,Byvatov03comparison,Xue04effect}.
-Albeit with the large quantity of the computational models, they only focus on predicting single target variable (e.g. inhibition potential in one cell line). 
+Albeit with the large quantity of the computational models, they only focus on predicting single target variable (e.g., inhibition potential in one cell line). 
 On the other hand, relative larger number of cell lines are often screened at the same time.
 For example in the recent \textit{NCI-60} {Human Tumor Cell Line Screen} project \citep{Shoemaker06the}, thousands of molecular structures are tested agains hundreds of cell lines.
 
@@ -1603,7 +1604,7 @@ It lays the foundation of performing inference on unknown structure to achieve f
 Limiting the applicability of the structured output learning methods is the fact that the output structure is assume to be observed.
 It is also difficult to learn the dependency structure from data \citep{Chickering94learning} if it is not harder than structured output learning itself.
 We can instead opt to the \textit{complete graph} by assuming the complete set of pairwise dependency has enough expression power.
-In particular, we can construct a structured output learner with a complete graph as output graph and rely on the optimization algorithm to uncover the hidden ``parameters'' defined on the edges (e.g. edge potentials).
+In particular, we can construct a structured output learner with a complete graph as output graph and rely on the optimization algorithm to uncover the hidden ``parameters'' defined on the edges (e.g., edge potentials).
 To understand this, think the edges that are not from the correct output graph will have zero ``parameters'' in the complete graph.
 
 Structured output learning with complete graph is not an easier problem as the inference is \nphard\ in nature.
@@ -1826,8 +1827,8 @@ The flat multilabel classification approach has difficulty of modeling the label
 The structured output learning approach is a natural improvement to flat multilabel classification.
 The first outcome of the thesis is to extend the applicability of the structured output learning methods.
 We have applied the structured output learning in molecular activity classification problem.
-We have also developed \spin\ that is able to predict a directed acyclic graph (\daggraph) that connects multiple output variables, and applied in network response prediction problem.
-\spin\ can be also applied in other influence or spreading types problems.
+We have also developed \spin\ that is able to predict a directed acyclic graph (\daggraph) that connects multiple output variables, and applied to network response prediction problem.
+\spin\ can be also applied to other influence or spreading types problems.
 We examine the performance of both methods.
 The empirical results demonstrate that the structured output learning outperform the flat multilabel classification approach for predicting multiple interdependent output variables in structured output space.
 
@@ -1847,7 +1848,7 @@ In addition, the developed inference algorithms for the proposed structured outp
 \section{Future Work}
 
 The work presented in the thesis can be extended along two main directions.
-First, the presented algorithm can be applied into other multilabel classification problems in structured output space.
+First, the presented algorithm can be applied to other multilabel classification problems in structured output space.
 Secondly, the algorithm development and theoretic analysis can be continued.
 As the first direction of applying the presented algorithms is clear and application oriented, we will concentrate on the algorithm development and theory analysis part.
 
