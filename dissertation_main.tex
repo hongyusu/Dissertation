@@ -1830,14 +1830,22 @@ We have also developed \spin\ that is able to predict a directed acyclic graph (
 \spin\ can be also applied to other influence or spreading type problems.
 The empirical results demonstrate that the structured output learning approach outperforms the previous flat multilabel classification approach for multilabel classification problem with observed output graph.
 
-The current structured output learning approach rely on representing the label correlation as an output graph known as \textit{a-priori}.
-Limiting the applicability of the structured output prediction is the fact that the output graph is often unobserved.
-The second outcome of the thesis is the new methods developed for structured output learning when the output dependency graph is hidden.
-Analog but with significant difference to the ensemble method, the proposed methods combines a set of structured output classifiers.
-In particular, \amm\ and \mam\ perform inference before or after combing the base learners that built on random trees, \rta\ performs joint learning and inference on a random set of spanning tree.
+Current structured output learning approach builds an output graph connecting multiple output variables to model the label dependency in a comprehensive manner.
+Limiting the applicability of the structured output learning is the fact that the output graph is assume to be observed as \textit{a-priori}.
+The second outcome of the thesis is to developed new learning algorithms for structured output learning when the output graph is hidden.
+Analog but with significant difference to ensemble method, the proposed models aim to combines a set of structured output learners.
+Each base learner is built on a random output graph.
+In particular, \mve\ combines the based learner predictions by majority voting, while \amm\ and \mam\ also perform inference before or after combining the base learners.
+In addition, \rta\ is designed based on theoretical study which performs max-margin learning on a random set of spanning trees.
+The joint learning and inference in \rta\ ensures the set of random spanning trees are optimized simultaneously towards the same global objective.
+
+
 We have studied the behavior of the proposed methods in terms of reconstruction error of the compatibility score as well as the generalization error which guaranteed the performance of the proposed models.
 
 In addition, the developed inference algorithms for the proposed structured output learning models can avoid the exponential parameter space and ensure the efficient learning.
+
+It lays the foundation of performing inference on unknown structure to achieve fast optimization and accurate prediction with attainable computational efforts.
+
 
 
 %------------------------------------------------
