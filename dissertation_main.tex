@@ -1819,33 +1819,28 @@ In this chapter, the author aims to briefly summarize the implementation for the
 \section{Discussion}
 
 In this thesis, we have studied the supervised learning for classification.
-We focused on multilabel classification where the task is to predict multiple interdependent output variables given an input example.
-As the multiple variables can be ``on'' or ``off'' simultaneously, the central problem in multilabel classification is to explore the label correlation in order to make better prediction.
+Especially, we focused on multilabel classification where the task is to predict multiple interdependent output variables given an input example.
+As the multiple output variables can be ``on'' or ``off'' simultaneously, the central problem in multilabel classification is to explore the label correlation in order to make better prediction.
+The problem has been previously tackled by flat multilabel classification approach which treats the multiple variables at a ``flat'' vector.
+The approach has difficulty of model label dependency.
+Structured output learning arises as a natural extension to flat multilabel classification in which the label dependency is modeled by an output graph connecting labels.
 
-The problem has been previously tackled by flat multilabel classification approach in which the multiple outputs are essentially treated as a ``flat'' vector.
-The flat multilabel classification approach has difficulty of modeling the label correlation.
-The structured output learning approach alleviates the problem via a output graph connecting multiple output labels.
-The first outcome of the thesis is to extend the applicability of the structured output learning methods.
-We have also developed \spin\ that is able to predict a directed acyclic graph (\daggraph) out from an observed network, and applied the model to network response prediction problem.
-\spin\ can be also applied to other influence or spreading type problems.
-The empirical results demonstrate that the structured output learning approach outperforms the previous flat multilabel classification approach for multilabel classification problem with observed output graph.
+The first outcome of the thesis is a new structured output learning algorithms for multilabel classification when the output graph is observed.
+In particular, the proposed algorithm \spin\ can predict a directed acyclic graph from an observed network that best ``responses'' to an input example.
+The empirical evaluation on network response prediction problem within the context of social network analysis demonstrates that the proposed model outperforms the previous flat multilabel classification approaches.
+The study not only widens the applicability of the structured output learning, but also it demonstrates the accurate prediction can be achieved by structured output learning when the output dependency structured can be obtained and utilized during learning.
 
-Current structured output learning approach builds an output graph connecting multiple output variables to model the label dependency in a comprehensive manner.
+Meanwhile, we realize that current structured output learning approach relies an output graph connecting multiple output variables in order to model the label dependency in a comprehensive manner.
 Limiting the applicability of the structured output learning is the fact that the output graph is assume to be observed as \textit{a-priori}.
-The second outcome of the thesis is to developed new learning algorithms for structured output learning when the output graph is hidden.
+The second outcome of the thesis is to developed new learning algorithms for structured output learning that are not constrained to the availability of the output graph.
 Analog but with significant difference to ensemble method, the proposed models aim to combines a set of structured output learners.
 Each base learner is built on a random output graph.
 In particular, \mve\ combines the based learner predictions by majority voting, while \amm\ and \mam\ also perform inference before or after combining the base learners.
 In addition, \rta\ is designed based on theoretical study which performs max-margin learning on a random set of spanning trees.
-The joint learning and inference in \rta\ ensures the set of random spanning trees are optimized simultaneously towards the same global objective.
+The joint learning and inference in \rta\ ensures the set of random spanning tree learners are optimized simultaneously towards the same global objective.
+\rta\ also lays the foundation of performing inference on unknown structure to achieve fast optimization and accurate prediction with attainable computational efforts.
 
-
-We have studied the behavior of the proposed methods in terms of reconstruction error of the compatibility score as well as the generalization error which guaranteed the performance of the proposed models.
-
-In addition, the developed inference algorithms for the proposed structured output learning models can avoid the exponential parameter space and ensure the efficient learning.
-
-It lays the foundation of performing inference on unknown structure to achieve fast optimization and accurate prediction with attainable computational efforts.
-
+Besides the proposed structured output learning models, the third outcome of the thesis is the theoretical studies which not only explain the improvement in terms of prediction performance obtained by the new models but also provide the generalization error analysis.
 
 
 %------------------------------------------------
