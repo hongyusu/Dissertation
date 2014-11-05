@@ -1775,9 +1775,9 @@ The test results are often visualized as \textit{$CD$ diagram}.
 %------------------------------------------------
 \chapter{Implementations} \label{ch_implementation}
 
-In this thesis, several structured output learning algorithms have been proposed to solve multilabel classification problem.
-Each presented model has been implemented into a software package.
-In this chapter, the author aims to briefly summarize the implementation for the sake of clarity and link the implementation to public domain.
+The main contribution of this thesis is to develop new structured output learning algorithms for multilabel classification.
+To make sure the empirical results are reproducible, each presented algorithm has been implemented as a software package.
+In this chapter, the author aims to summarize the implementations and point out the address by which the algorithms can be located.
 
 \begin{enumerate}
 	\item \rta\ developed in \citepub{su14c} is a structured output prediction model for multilabel classification problem. \rta\ performs joint learning and inference on a random sample of spanning trees.
@@ -1832,7 +1832,7 @@ The study not only widens the applicability of the structured output learning, b
 
 Meanwhile, we realize that current structured output learning approach relies an output graph connecting multiple output variables in order to model the label dependency in a comprehensive manner.
 Limiting the applicability of the structured output learning is the fact that the output graph is assume to be observed as \textit{a-priori}.
-The second outcome of the thesis is to developed new learning algorithms for structured output learning that are not constrained to the availability of the output graph.
+The second outcome of the thesis is to developed new learning algorithms for structured output learning that are no longer constrained to the availability of the output graph.
 Analog but with significant difference to ensemble method, the proposed models aim to combines a set of structured output learners.
 Each base learner is built on a random output graph.
 In particular, \mve\ combines the based learner predictions by majority voting, while \amm\ and \mam\ also perform inference before or after combining the base learners.
