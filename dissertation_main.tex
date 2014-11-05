@@ -379,7 +379,7 @@ It models the conditional probability $P(y=+1|\vx)$ for a binary output variable
 To model the probability, we do not restrict to any particular form, as any unknown parameters can be estimated by \textit{Maximum Likelihood Estimation} (\mle).
 However, we are mostly interested in the simple linear model as described in (\ref{linearclassifier}).
 % detailed model, decision boundary
-To apply linear model,
+To apply the linear model,
 \iffalse
 the first choice is to let $P(y=+1|\vx)$ be a linear function of $\vx$, while the problem is the linear function is unbounded but the probability $P(\vx)\in[0,1]$.
 Another choice is to let $\log P(y=+1|\vx)$ be a linear function of $\vx$. 
@@ -422,8 +422,8 @@ To apply maximum likelihood estimation (\mle), it is easier if, instead of maxim
 \end{align}
 
 % logistic regression of other type
-Though \mle\ training of Logistic Regression can generate a model that fits the training data, it does not guarantee to generalize well on the test data.
-To achieve better generalization power, we apply regularization technique as discussed in Section~\ref{ch_rlc}.
+\mle\ training of Logistic Regression can generate a model that fits the training data, it does not guarantee to generalize well on the test data.
+To achieve better generalization power, we apply the regularization technique as discussed in Section~\ref{ch_rlc}.
 Many regularization methods for Logistic Regression have been proposed \citep{Chen99,Chen00,Goodman03}, among which adding Gaussian prior on weight parameter $\vw$ is one of the standard option.
 In practice, we assume $\vw$ is generated according to a zero-mean spherical Gaussian with variance $\sigma^2$.
 Thus, the \mle\ problem (\ref{lr_likelihood_sum}) is transformed into \textit{Maximum A-Posteriori} (\map) problem of the following form
@@ -1670,8 +1670,8 @@ which not only works with a polynomial sized parameter space but also enables ke
 %------------------------------------------------
 \chapter{Evaluation and Comparison Methods} \label{ch_ecm}
 
-In this chapter, the author will briefly introduce the performance measures and statistical tests that are involved in the research. 
-These methods enable us to quantitatively evaluate the performance of the proposed models and to measure the significancy comparing to other well established methods.
+In this chapter, the author will briefly discuss the performance metrics and the statistical test methods that are involved in the research. 
+These methods enable us to quantitatively examine the performance of the proposed models and to measure the significancy comparing to other well established methods.
 
 %------------------------------------------------
 %
