@@ -43,12 +43,12 @@ There exists a large body of work on hierarchical classification from the early 
 \textit{Graph labeling} is another type of structured output prediction in which the output graph often takes more general form and does not require the concept of ``level'' compared to hierarchical classification.
 The approach can be applied to wider range of problems, to name but few, using sequence structure in speech tagging problem \citep{collins02a}, using Markov network structure in action recognition problem \citep{Wang11hidden}. 
 The graph labeling approach often directly incorporates the output graph into learning and uses the dependency or the correlation to improve the classification performance \citep{collins02a,lafferty01,taskar02,Taskar04max,THJA04,Rousu07}.
-For graph label or structured output learning in general, one inherited problem is the output dependency structure is assumed to be pre-established.
+For graph labeling or structured output learning in general, one inherited problem is the output dependency structure is assumed to be pre-established.
 However, this cannot be taken as granted since the proper dependency structure for the output variables is either hidden or difficult to retrieve in many applications \citep{Chickering94learning}.
 
 Figure~\ref{multilabel_taxonomy} illustrates the taxonomy of the multilabel classification.
 However it is worthy of mentioning that there is no clear line drawn between different categories.
-In particular, some hierarchical classification algorithms can also belong to graph labeling category, for example \citep{THJA04,Rousu06}.
+In particular, some hierarchical classification algorithms can also belong to graph labeling category, for example the one developed in \citep{THJA04,Rousu06}.
 As we focus on graph labeling of structured output prediction, we will explicitly use ``structured output prediction'' to refer to ``graph labeling'' in the following part of the thesis.
 
 \begin{figure}
@@ -63,7 +63,7 @@ As we focus on graph labeling of structured output prediction, we will explicitl
 In this thesis, we extend the applicability of structured output learning by developing new learning algorithms and applying them on real world multilabel classification problems.
 In addition, we work on the problem of the structured output learning when the output dependency structure is not observed.
 The models thus created are not restricted to the availability of the output graph and can be applied to wider range of multilabel classification problems.
-We also investigate the efficiency and the scalability of the inference problems in the proposed structured output learning models as the inference problem of the structured output learning is often difficult to solve.
+We also investigate the efficiency and the scalability of the inference problems in the proposed structured output learning models as they are often difficult to solve.
 Besides, we study the theoretic aspects of the proposed models in order to gain insights into the behavior of the models.
 In particular, the research questions can be casted as following:
 \begin{itemize}
