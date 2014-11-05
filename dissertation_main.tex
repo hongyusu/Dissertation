@@ -84,13 +84,13 @@ In particular, the research questions can be casted as following:
 %
 \section{Contributions and Organization}
 
-The contributions of the thesis are statistical learning algorithms that widen the applicability of the structured output learning.
+The contributions of the thesis are the statistical learning algorithms that widen the applicability of the structured output learning.
 The thesis starts by reviewing several lines of research in classification learning.
 The first contribution is to developed new structured output learning algorithms for multilabel classification problem when the output graph is known as \textit{a-priori}.
 The proposed method can predict a directed acyclic graph (\daggraph) from an observed network and is applied to network response problem within the context of social network analysis.
-The second contribution is to developed learning framework for structured output learning when the output graph is not observed.
-The proposed methods are not restructured to the availability of the output and can learn from a set of random output graphs.
-In addition, we also theoretically study the proposed model in order to explain the behavior and to guarantee the generalization error.
+The second contribution is to develop new learning approaches for structured output learning when the output graph is not observed.
+The proposed methods are not restructured to the availability of the output graph and can learn from a set of random output graphs.
+In addition, the presented theoretical studies explain the behavior of the proposed models and guarantee the generalization error.
 
 The thesis is structured as follows.
 In Chapter~\ref{ch_introduction}, the scope of the research is briefly presented with several research questions being proposed which will be answered through this thesis.
@@ -99,7 +99,7 @@ In particular, the chapter covers the basic concepts in classification learning 
 Chapter~\ref{ch_fmlc} introduces the multilabel classification problem which is the core problem under study in this thesis.
 The chapter also describes the flat multilabel classification approach which is a standard treatment for the multilabel classification problem.
 Chapter~\ref{ch_sop} and Chapter~\ref{ch_sopw} present the main contributions of the thesis.
-In particular, Chapter~\ref{ch_sop} presents the structured output learning models developed for the multilabel classification problem, which extends the flat multilabel classification approach described in the previous chapter.
+In particular, Chapter~\ref{ch_sop} presents the structured output learning models developed for the multilabel classification problem when pre-established output graph, which extend the flat multilabel classification approaches described in the previous chapter.
 Chapter~\ref{ch_sopw} discusses several learning methods developed for structured output learning when the output dependency structure is not observed.
 Chapter~\ref{ch_ecm} covers the evaluation metrics and statistic test methods that are used in the research.
 Chapter~\ref{ch_implementation} describes the implementation details of the developed models.
@@ -1822,15 +1822,13 @@ In this thesis, we have studied the supervised learning for classification.
 We focused on multilabel classification where the task is to predict multiple interdependent output variables given an input example.
 As the multiple variables can be ``on'' or ``off'' simultaneously, the central problem in multilabel classification is to explore the label correlation in order to make better prediction.
 
-The problem has been previously tackled by flat multilabel classification approach in which the multiple outputs are essentially as a ``flat'' vector.
+The problem has been previously tackled by flat multilabel classification approach in which the multiple outputs are essentially treated as a ``flat'' vector.
 The flat multilabel classification approach has difficulty of modeling the label correlation.
-The structured output learning approach is a natural improvement to flat multilabel classification.
+The structured output learning approach alleviates the problem via a output graph connecting multiple output labels.
 The first outcome of the thesis is to extend the applicability of the structured output learning methods.
-We have applied the structured output learning in molecular activity classification problem.
-We have also developed \spin\ that is able to predict a directed acyclic graph (\daggraph) that connects multiple output variables, and applied to network response prediction problem.
-\spin\ can be also applied to other influence or spreading types problems.
-We examine the performance of both methods.
-The empirical results demonstrate that the structured output learning outperform the flat multilabel classification approach for predicting multiple interdependent output variables in structured output space.
+We have also developed \spin\ that is able to predict a directed acyclic graph (\daggraph) out from an observed network, and applied the model to network response prediction problem.
+\spin\ can be also applied to other influence or spreading type problems.
+The empirical results demonstrate that the structured output learning approach outperforms the previous flat multilabel classification approach for multilabel classification problem with observed output graph.
 
 The current structured output learning approach rely on representing the label correlation as an output graph known as \textit{a-priori}.
 Limiting the applicability of the structured output prediction is the fact that the output graph is often unobserved.
@@ -1848,8 +1846,8 @@ In addition, the developed inference algorithms for the proposed structured outp
 \section{Future Work}
 
 The work presented in the thesis can be extended along two main directions.
-First, the presented algorithm can be applied to other multilabel classification problems in structured output space.
-Secondly, the algorithm development and theoretic analysis can be continued.
+First, the algorithms developed in this thesis can be applied to other multilabel classification problems, with or without pre-established output dependency structures.
+Secondly, the algorithm development and theoretic analysis can be further continued.
 As the first direction of applying the presented algorithms is clear and application oriented, we will concentrate on the algorithm development and theory analysis part.
 
 As a starting point, we can extend \spin\ by developing new inference algorithm that is both scalable and with approximation guarantee.
