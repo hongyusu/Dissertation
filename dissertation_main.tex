@@ -190,7 +190,7 @@ Besides, other regularization techniques have been widely studied, to name a few
 In this section, the author will introduce the basic classification problem known as \textit{single-label classification}.
 The author will explain two prominent algorithms in this area: Logistic Regression and Support Vector Machines.
 The optimization techniques and the latest advances of these algorithms will also be briefly discussed.
-The goal is to cover the background that is necessary to understand the algorithms presented in the later part of the thesis. 
+The goal is to provide the background that is necessary to understand the algorithms presented in the later part of this thesis. 
 
 %
 %
@@ -201,8 +201,8 @@ For example, we obtain multiclass classification problem by setting $\Ycal=\{1,\
 In this chapter we focus on the standard supervised learning problem also known as \textit{binary classification}.
 We explicitly assume the output space $\Ycal=\{-1,+1\}$ (instead of $\Ycal=\{0,+1\}$).
 Additionally, we assume a feature map $\varphib:\vXcal\rightarrow\Fcal$, which embeds the input into some high dimensional feature space $\Fcal=\RR^d$.
-In particular, $\varphib(\vx)$ is a real value vector of $d$ dimension.
-Given a training set of $m$ training examples $\Scal=\{(\vx_1,y_1),\cdots,(\vx_m,y_m)\}$, the goal is to learn from a {hypothesis class} $\Hcal$ a mapping function $f\in\Hcal:\vXcal\rightarrow\Ycal$ that maps an input $\vx\in\vXcal$ to an output $y\in\Ycal$. 
+In particular, $\varphib(\vx)$ is a real value vector of $d$ dimensions.
+Given a training set of $m$ training examples $\Scal=\{(\vx_1,y_1),\cdots,(\vx_m,y_m)\}$, the goal is to learn a mapping function $f\in\Hcal:\vXcal\rightarrow\Ycal$ from a {hypothesis class} $\Hcal$ that maps an input $\vx\in\vXcal$ to an output $y\in\Ycal$. 
 
 We consider the hypothesis class to be a set of \textit{linear classifiers} that are parameterized by the weight vector $\vw$ and the bias term $b$ defined as
 \begin{align}
@@ -216,7 +216,7 @@ For any $1\le\rho\in\RR$ we defined the {$L_{\rho}$-norm of vector $\vw$ as
 \begin{align*}
 	\norm{\vw}_{\rho} = \left(\sum_{i=1}^{d}|\vw[i]|^{\rho}\right)^{\frac{1}{\rho}}.
 \end{align*}
-We use $||\vw||$ to denote the $L_2$-norm of vector $\vw$ in the following part of the thesis for the convenience of the presentation.
+Without loss of generality, we use $||\vw||$ to denote the $L_2$-norm of vector $\vw$ in the following part of the thesis for the convenience of the presentation.
 
 
 %
@@ -365,14 +365,18 @@ which is more efficient to compute and is extremely similar to (\ref{voted_perce
 \fi
 
 \fi
-%
-% logit
-\subsection{Logistic Regression (\lr)}\label{sc_lr}
 
+
+
+
+%
+% 
+\subsection{Logistic Regression (\lr)}\label{sc_lr}
 
 Logistic Regression is a classification model rather than regression \citep{Bishop07}.
 The formalism nicely transits from risk minimization (Section~\ref{sc_rl}) to regularized risk minimization (Section~\ref{sc_rl}).
-The idea of Logistic Regression is also applied in many multilabel classification algorithms presented in the later part of the thesis (e.g., Section~\ref{sc_iblr}, Section~\ref{sc_corrlog}, Section~\ref{sc_mmmn}).
+The model has been extended to other classification algorithms presented in the later part of the thesis (e.g., \iblr\ in Section~\ref{sc_iblr}, \corrlog\ in Section~\ref{sc_corrlog}).
+Besides, the idea of Logistic Regression, the odd-ratio type learning in particular, is also the building block of e.g., \mmmn\ in Section~\ref{sc_mmmn} and many algorithms developed in this thesis.
 
 It models the conditional probability $P(y=+1|\vx)$ for a binary output variable $y\in\Ycal$.
 %Without loss of generality, in the rest part of this section we use $P(\vx)$ to denote above conditional probability of $P(y|\vx)$ when fixing $y=1$.
