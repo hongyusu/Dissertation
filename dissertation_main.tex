@@ -1625,7 +1625,7 @@ The later measures the correlation of the microlabel predictions in which higher
 \section{Random Spanning Tree Approximation (\rta)}\label{sc_su14c}
 
 Random Spanning Tree Approximation (\rta) developed in \citepub{su14c} is a major step forward of \mam.
-\rta brings in joint learning and inference framework such that the base learners from individual random spanning trees are optimized simultaneously towards the same objective.
+\rta\ brings in joint learning and inference framework such that the base learners from individual random spanning trees are optimized simultaneously towards the same objective.
 \citepub{su14c} also provides theoretical analysis to guarantee the performance and the tractable inference.
 Besides, \rta\ explores the potential of tackling the intractable graph inference problem with a set of random spanning trees.
 It lays the foundation of performing inference on unknown structure to achieve fast optimization and accurate prediction with attainable computational efforts.
@@ -1636,20 +1636,20 @@ It lays the foundation of performing inference on unknown structure to achieve f
 %
 \subsection{Background}
 
-Limiting the applicability of the structured output learning methods is the fact that the output structure is assume to be observed.
+Limiting the applicability of structured output learning is the fact that the output graph is assume to be observed.
 It is also difficult to learn the dependency structure from data \citep{Chickering94learning} if it is not harder than structured output learning itself.
-We can instead opt to the \textit{complete graph} by assuming the complete set of pairwise dependency has enough expression power.
-In particular, we can construct a structured output learner with a complete graph as output graph and rely on the optimization algorithm to uncover the hidden ``parameters'' defined on the edges (e.g., edge potentials).
-To understand this, think the edges that are not from the correct output graph will have zero ``parameters'' in the complete graph.
+We can instead resort to the \textit{complete graph} by assuming the complete set of pairwise dependency has enough expression power.
+In particular, we construct a structured output learner with a complete graph as the output graph and rely on the optimization algorithm to reveal the hidden ``parameters'' defined on the edges (e.g., edge potentials).
+To see this, imaging the edges that are not from the correct output graph will have zero ``parameters'' in the complete graph.
 
-Structured output learning with complete graph is not an easier problem as the inference is \nphard\ in nature.
+Structured output learning on complete graph is not an easier problem as the inference is \nphard\ in nature.
 The inference problem is often instantiated as finding the \textit{Maximum A-Posteriori} (\map) configuration on a graph structured probability distribution.
 In terms of the intractability issue of graph inference problem, many techniques have been proposed but with important differences.
-\citet{Jordan04semiefinite} developed semi-definite programming convex relaxation for inference on graph with cycles.
+\citet{Jordan04semiefinite} developed the semi-definite programming convex relaxation for the inference on graph with cycles.
 \citet{Wainwright05map} proposed \map\ inference with tree-based and \textit{linear programming} (\lp) relaxation.
-Efficient inference on special graph has also been studied in \citep{Globerson07approximate}.
+Efficient inference algorithms on special graph have also been studied in \citep{Globerson07approximate}.
 
-\citepub{su14c} is motivated by well-established Max-Margin Principle (Section~\ref{sc_svm}).
+\citepub{su14c} is motivated by well-established Max-Margin Principle as described in Section~\ref{sc_svm}.
 The work investigates whether the problem of inference over a complete graph in structured output learning can be avoided in a analogous way.
 Start from a sampling results, \citepub[Lemma 3]{su14c} shows that with high probability a big fraction of margin achieved by the complete graph can be obtained by a sample of spanning trees of small size.
 Besides, \citepub[Theorem 5]{su14c} shows the good generalization error can also be guaranteed when learning with instead of complete graph a sample of spanning trees.
