@@ -137,7 +137,7 @@ In addition, we are provided with examples in pair $(\vx,\vy)\in\vXcal\times\vYc
 A \textit{hypothesis class} $\Hcal$ is a set of functions that the learning algorithm is allowed to search against.
 The basic goal for \textit{statistical learning} is to provide from a hypothesis class $\Hcal$ an \textit{estimator} $f\in\Hcal:\vXcal\rightarrow\vYcal$ that predicts the value of $\vy$ given an input $\vx$.
 
-To measure the goodness of the estimator, we define a loss function (risk function) $\Lcal(\vy,f(\vx))$ between the true value $\vy$ and the predicted value $f(\vx)$.
+To measure the goodness of the estimator, we define a loss function (risk function) $\Lcal(\vy,f(\vx)):\RR\times\RR\rightarrow\RR^+$ between the true value $\vy$ and the predicted value $f(\vx)$.
 Popular loss functions used in machine learning include \textit{Hamming Loss} (e.g., \svmstruct\ in Section~\ref{sc_svmstruct})
 \begin{align*}
 	\Lcal(\vy,f(\vx)) = \ind{\vy=f(\vx)},
