@@ -1661,7 +1661,7 @@ This strategy leads to the learning model presented in the following section.
 \subsection{Methods}
 
 Let $\Tcal=\{T_1,\cdots,T_n\}$ denote a sample of $n$ random spanning trees, and $\{\vw_{T_t}|T_t\in\Tcal\}$ denote the feature weight parameter to be learner on each tree.
-For each example $(\vx_i,\vy_i)$, the goal of optimization is to maximize the joint margin from all spanning trees between correct training examples and the pseudo-examples $(\vx_i,\vy)$ defined as
+For each example $(\vx_i,\vy_i)$, the goal of optimization is to maximize the joint margin from all spanning trees between the correct training examples and the pseudo-examples $(\vx_i,\vy)$ defined as
 \begin{definition}{\bf Primal $L_2$-norm Random Tree Approximation (\rta).}\label{primalrta}
 	\begin{align*}
 		\underset{\vw_{T_t},\xi_i}{\minimize} & \quad \frac{1}{2}\sum_{t=1}^{n}\norm{\vw_{T_t}}^2 + C\sum_{i=1}^{m}\xi_i\\
@@ -1679,7 +1679,7 @@ It is known that the exact solution for the inference problem on individual tree
 \begin{align}
 	\hat{\vy}_{T_t}(x) = \underset{\vy\in\Ycal}{\argmax}\, F_{\vw_{T_t}}(x,\vy)\ =\ \underset{\vy\in\Ycal}{\argmax}\, \langle \vw_{T_t}, \phib_{T_t}(x,\vy)\rangle, \label{rta:maximizer_onetree}
 \end{align}
-can be solved in $\Theta(k)$ time by \textit{dynamic programming} algorithm also known as \textit{max-product} or \textit{min-sum} algorithm.
+can be solved in $\Theta(k)$ time by \textit{dynamic programming} algorithm also known as \textit{max-product} or \textit{min-sum}.
 However, there is no guarantee the the maximizer of (\ref{rta:maximizer_onetree}) is also the global maximizer of Definition~\ref{primalrta} over the set of random spanning trees.
 Therefore, we compute the top $K$-best multilabels for each random spanning tree.
 In total the computation costs $\Theta(Knk)$ time for all spanning trees.
