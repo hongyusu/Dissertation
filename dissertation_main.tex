@@ -158,9 +158,7 @@ Popular loss functions used in machine learning include \textit{Hamming Loss} (e
 \begin{align*}
 	\Lcal(\vy,f(\vx)) = \log(1+\exp(\vy f(\vx))).
 \end{align*}
-\iffalse
 
-\fi
 With loss function, we compute the \textit{true risk} of the estimator $f$ over all examples from domain $\vXcal\times\vYcal$ by
 \begin{align}
 	\Rcal(f) = \int_{(\vx,\vy)\in\vXcal\times\vYcal}\Lcal(\vy,f(\vx))P(\vx,\vy)\,d_{\vx}d_{\vy} \label{true_risk}.
