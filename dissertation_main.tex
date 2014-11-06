@@ -138,23 +138,23 @@ A \textit{hypothesis class} $\Hcal$ is a set of functions that the learning algo
 The basic goal for \textit{statistical learning} is to provide from a hypothesis class $\Hcal$ an \textit{estimator} $f\in\Hcal:\vXcal\rightarrow\vYcal$ that predicts the value of $\vy$ given an input $\vx$.
 
 To measure the goodness of the estimator, we define a loss function (risk function) $\Lcal(\vy,f(\vx))$ between the true value $\vy$ and the predicted value $f(\vx)$.
-Popular loss functions used in machine learning include \textit{Hamming Loss} (e.g. \svmstruct\ in Section~\ref{sc_svmsruct})
+Popular loss functions used in machine learning include \textit{Hamming Loss} (e.g., \svmstruct\ in Section~\ref{sc_svmstruct})
 \begin{align*}
 	\Lcal(\vy,f(\vx)) = \ind{\vy=f(\vx)},
 \end{align*}
-\textit{Hinge Loss} (e.g. \svm\ in Section~\ref{sc_svm})
+\textit{Hinge Loss} (e.g., \svm\ in Section~\ref{sc_svm})
 \begin{align*}
 	\Lcal(\vy,f(\vx)) = \maximize (0,1-\vy f(\vx)),
 \end{align*}
-\textit{Square Error Loss} (e.g. Ridge Regression)
+\textit{Square Error Loss} (e.g., Ridge Regression)
 \begin{align*}
 	\Lcal(\vy,f(\vx)) = (\vy, f(\vx))^2,
 \end{align*}
-\textit{Exponential Loss} (e.g. \adaboost\ in Section~\ref{sc_adaboost})
+\textit{Exponential Loss} (e.g., \adaboost\ in Section~\ref{sc_adaboost})
 \begin{align*}
 	\Lcal(\vy,f(\vx)) = \exp(\vy f(\vx)),
 \end{align*}
-\textit{Logistic Loss} (e.g. Logistic Regression in Section~\ref{sc_lr})
+\textit{Logistic Loss} (e.g., Logistic Regression in Section~\ref{sc_lr})
 \begin{align*}
 	\Lcal(\vy,f(\vx)) = \log(1+\exp(\vy f(\vx))).
 \end{align*}
