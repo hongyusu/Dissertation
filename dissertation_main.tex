@@ -192,15 +192,18 @@ The author will explain two prominent algorithms in this area: Logistic Regressi
 The optimization techniques and the latest advances of these algorithms will also be briefly discussed.
 The goal is to provide the background that is necessary to understand the algorithms presented in the later part of this thesis. 
 
+
+
 %
 %
 \subsection{Preliminaries}\label{sc_slc_pn}
+
 We consider the supervised learning problem which assumes an arbitrary input space $\vXcal$, an output space $\Ycal$, and the training samples coming in pairs $(\vx_i,y_i)\in\vXcal\times\Ycal$.
 The definition of the output space will decide the type of the learning problem.
 For example, we obtain multiclass classification problem by setting $\Ycal=\{1,\cdots,K\}$ and regression problem by setting $\Ycal=\RR$ where $\RR$ is the set of real numbers.
 In this chapter we focus on the standard supervised learning problem also known as \textit{binary classification}.
 We explicitly assume the output space $\Ycal=\{-1,+1\}$ (instead of $\Ycal=\{0,+1\}$).
-Additionally, we assume a feature map $\varphib:\vXcal\rightarrow\Fcal$, which embeds the input into some high dimensional feature space $\Fcal=\RR^d$.
+Additionally, we assume a feature map $\varphib:\vXcal\rightarrow\vFcal$, which embeds the input into some high dimensional feature space $\vFcal=\RR^d$.
 In particular, $\varphib(\vx)$ is a real value vector of $d$ dimensions.
 Given a training set of $m$ training examples $\Scal=\{(\vx_1,y_1),\cdots,(\vx_m,y_m)\}$, the goal is to learn a mapping function $f\in\Hcal:\vXcal\rightarrow\Ycal$ from a {hypothesis class} $\Hcal$ that maps an input $\vx\in\vXcal$ to an output $y\in\Ycal$. 
 
