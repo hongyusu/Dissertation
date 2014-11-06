@@ -1679,12 +1679,12 @@ It is known that the exact solution for the inference problem on individual tree
 \begin{align}
 	\hat{\vy}_{T_t}(x) = \underset{\vy\in\Ycal}{\argmax}\, F_{\vw_{T_t}}(x,\vy)\ =\ \underset{\vy\in\Ycal}{\argmax}\, \langle \vw_{T_t}, \phib_{T_t}(x,\vy)\rangle, \label{rta:maximizer_onetree}
 \end{align}
-can be solved in $\Theta(k)$ time by \textit{dynamic programming} algorithm also known as \textit{max-product} or \textit{min-sum}.
-However, there is no guarantee the the maximizer of (\ref{rta:maximizer_onetree}) is also the global maximizer of Definition~\ref{primalrta} over the set of random spanning trees.
+can be solved in $\Theta(k)$ time by \textit{dynamic programming} algorithm also known as \textit{max-product} or \textit{min-sum} algorithm.
+However, there is no guarantee that the maximizer of (\ref{rta:maximizer_onetree}) is also the global maximizer of Definition~\ref{primalrta} over the set of random spanning trees.
 Therefore, we compute the top $K$-best multilabels for each random spanning tree.
 In total the computation costs $\Theta(Knk)$ time for all spanning trees.
 \citepub[Lemma 7]{su14c} provides a method to retrieve the best multilabel from $K$-best multilabel list in linear time.
-Now the question is to make sure the global violating multilabel is within the $K$-best multilabel list.
+Now the we need to make sure the global violating multilabel is within the $K$-best multilabel list.
 \citepub[Lemma 8]{su14c} guarantees that with high probability the global violation multilabel is in the list and $K$ does not need to be large.
 
 In addition, we derived the marginalized dual representation of Definition~\ref{primalrta}
