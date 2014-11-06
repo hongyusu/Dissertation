@@ -591,22 +591,21 @@ hold for any $c_i\in\RR$ and nonempty set $\Xcal$.
 \textit{Mercer's Theorem} \citep{taylor04} has shown that every positive semidefinite symmetric function is a kernel.
 % rkhs
 \begin{definition}{Reproduced Kernel Hilbert Space.} \label{rkhs}
-	For any kernel $K$ on space $\Xcal$, there always exists a Reproduced Kernel Hilbert Space (RKHS) $\Fcal$ and a mapping function $\varphib:\Xcal\rightarrow\Fcal$ such that $K(\vx_i,\vx_j)=\ip{\varphib(\vx_i)}{\varphib(\vy_i)}$ holds for any $\vx\in\Xcal$.
+	For any kernel function $K$ defined on space $\Xcal$, there always exists a Reproduced Kernel Hilbert Space (RKHS) $\Fcal$ and a mapping function $\varphib:\Xcal\rightarrow\Fcal$ such that $K(\vx_i,\vx_j)=\ip{\varphib(\vx_i)}{\varphib(\vy_i)}$ holds for any $\vx\in\Xcal$.
 \end{definition}
-Definition~\ref{rkhs} suggests any kernel function can be represented as the inner product in some feature space $\Fcal$.
+Definition~\ref{rkhs} shows any kernel function can be represented as the inner product in some feature space $\Fcal$.
 Kernel function enables us to operate in high dimensional feature space $\Fcal$ without ever computing the exact coordinate or evaluating the inner product explicitly in that space.
 Instead, the kernel function can be computed based on the inner product in the original space $\Xcal$.
-It is worthy of noticing that the feature space corresponding to kernel functions can be infinite dimensional. 
 
-Kernel functions that heavily used in practice include the \textit{linear kernel}
+Kernel functions that heavily used in practice include \textit{linear kernel}
 \begin{align*}
 	K(\vx_i,\vx_j) = \ip{\vx_i}{\vx_j},
 \end{align*}
-the \textit{polynomial kernel}
+\textit{polynomial kernel}
 \begin{align*}
 	K(\vx_i,\vx_j) = (\ip{\vx_i}{\vx_j} + b)^k,
 \end{align*}
-where $b$ is the bias term and $d$ is the degree of polynomial, and the \textit{Gaussian kernel} (\rbf)
+where $b$ is the bias term and $d$ is the degree of polynomial, and \textit{Gaussian kernel} (\rbf)
 \begin{align*}
 	K(\vx_i,\vx_j) = \exp{\left(\frac{\norm{{\vx_i}-{\vx_j}}^2}{2\sigma^2}\right)},
 \end{align*}

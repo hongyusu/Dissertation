@@ -1,4 +1,7 @@
 
+
+git commit -m 'buid pdf' .
+
 maintextname='dissertation'
 
 bibtex $maintextname
