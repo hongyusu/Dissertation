@@ -140,23 +140,23 @@ The basic goal for \textit{statistical learning} is to provide from a hypothesis
 To measure the goodness of the estimator, we define a loss function (risk function) $\Lcal(\vy,f(\vx)):\RR\times\RR\rightarrow\RR^+$ between the true value $\vy$ and the predicted value $f(\vx)$.
 Popular loss functions used in machine learning include \textit{Hamming Loss} (e.g., \svmstruct\ in Section~\ref{sc_svmstruct})
 \begin{align*}
-	\Lcal(\vy,f(\vx)) = \ind{\vy=f(\vx)},
+	\Lcal_{0/1}(\vy,f(\vx)) = \ind{\vy=f(\vx)},
 \end{align*}
 \textit{Hinge Loss} (e.g., \svm\ in Section~\ref{sc_svm})
 \begin{align*}
-	\Lcal(\vy,f(\vx)) = \maximize (0,1-\vy f(\vx)),
+	\Lcal_{h}(\vy,f(\vx)) = \maximize (0,1-\vy f(\vx)),
 \end{align*}
 \textit{Square Error Loss} (e.g., Ridge Regression)
 \begin{align*}
-	\Lcal(\vy,f(\vx)) = (\vy, f(\vx))^2,
+	\Lcal_{s}(\vy,f(\vx)) = (\vy, f(\vx))^2,
 \end{align*}
 \textit{Exponential Loss} (e.g., \adaboost\ in Section~\ref{sc_boosting})
 \begin{align*}
-	\Lcal(\vy,f(\vx)) = \exp(\vy f(\vx)),
+	\Lcal_{exp}(\vy,f(\vx)) = \exp(\vy f(\vx)),
 \end{align*}
 \textit{Logistic Loss} (e.g., Logistic Regression in Section~\ref{sc_lr})
 \begin{align*}
-	\Lcal(\vy,f(\vx)) = \log(1+\exp(\vy f(\vx))).
+	\Lcal_{log}(\vy,f(\vx)) = \log(1+\exp(\vy f(\vx))).
 \end{align*}
 
 With loss function, we compute the \textit{true risk} of the estimator $f$ over all examples from domain $\vXcal\times\vYcal$ by
@@ -164,7 +164,8 @@ With loss function, we compute the \textit{true risk} of the estimator $f$ over 
 	\Rcal(f) = \int_{(\vx,\vy)\in\vXcal\times\vYcal}\Lcal(\vy,f(\vx))P(\vx,\vy)\,d_{\vx}d_{\vy} \label{true_risk}.
 \end{align}
 As a results, we should search for an estimator $f$ that minimizes the true risk defined by (\ref{true_risk}).
-However, the distribution $P(\vx,\vy)$ that generates the examples is unknown by which it is impossible to compute (\ref{true_risk}) directly.
+However, the distribution $P(\vx,\vy)$ that generates the examples is unknown.
+It is impossible to compute (\ref{true_risk}) directly.
 Instead, we are given a random sample of $m$ examples, denoted by $S=\{(\vx_1,\vy_1),\cdots,(\vx_m,\vy_m)\}$, called \textit{training data}.
 \textit{Empirical risk} is defined as the average error made by estimator $f$ on the training data $S$ of finite size
 \begin{align}
