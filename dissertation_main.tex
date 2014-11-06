@@ -1407,7 +1407,8 @@ In Section~\ref{sc_su14c}, we present the \rta\ method that improves the previou
 
 The molecular activity classification problem has long been tackled under the single-label classification setting \citep{Menchetti05weighted,Singh12qsar,Dutt12classification}.
 On the other hand, multiple interdependent molecular activities are often screened simultaneously in drug research \citep{Shoemaker06the} which poses two challenges for single-label classification.
-The first is scalability in which a set of single-label classifiers need to be built independently in order to predict multiple activities which soon becomes infeasible when large amount of activities need to be predicted.
+The first is scalability in which a set of single-label classifiers need to be built independently in order to predict multiple molecular activities.
+This soon becomes infeasible when large amount of activities need to be predicted.
 The second lies in the fact that the single-label classification approaches have limited power of modeling label correlation such that the complex interdependency between multiple activities can not be addressed in a comprehensive way.
 In \citepub{su10} we investigate the potential of applying structured output learning to deal with the molecular activity classification problem.
 In addition, we construct the output graph for the structured output learning algorithm based on the auxiliary data that reveals the dependency between multiple output variables.
