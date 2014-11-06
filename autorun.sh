@@ -1,6 +1,5 @@
 
 
-git commit -m 'buid pdf' .
 
 maintextname='dissertation'
 
@@ -21,3 +20,4 @@ echo 'Number of references:'
 cat ${maintextname}.bib|grep '@'|wc -l
 
 
+git commit -m 'buid pdf' .
