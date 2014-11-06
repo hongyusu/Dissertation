@@ -190,13 +190,13 @@ where $\Omega(f)$ is the regularization function that controls the complexity of
 In terms of the linear function class, there are many ways to define the regularization term $\Omega(f)$ among which $L_1$-norm and $L_2$-norm regularization are most popular.
 The $L_2$-norm regularization, defined by 
 \begin{align*}
-	\Omega(f) = ||\vw||_2=\left(\sum_{i=1}^d|\vw[i]|^2\right)^{\frac{1}{2}},
+	\Omega_{L_2}(f) = ||\vw||_2=\left(\sum_{i=1}^d|\vw[i]|^2\right)^{\frac{1}{2}},
 \end{align*} 
 controls the complexity of the estimator $f$ and provides a smooth solution.
 It has been applied in, for example, Ridge Regression \citep{Hoerl00ridge}, Logistic Regression \citep{Chen00}, Support Vector Machines \citep{Cortes95support}.
 The $L_1$-norm regularization, defined by
 \begin{align*}
-	\Omega(f) = ||\vw||_1=\sum_{i=1}^d|\vw[i]|,
+	\Omega_{L_1}(f) = ||\vw||_1=\sum_{i=1}^d|\vw[i]|,
 \end{align*}
 provides sparse parameter estimation which means that we obtain a high dimensional weight vector with many zero entries.
 This is an attractive property as the feature selection is incorporated into the learning and the interpretability of the resulting model is often high.
