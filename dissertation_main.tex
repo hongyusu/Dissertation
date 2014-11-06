@@ -610,14 +610,14 @@ where $b$ is the bias term and $d$ is the degree of polynomial, and \textit{Gaus
 	K(\vx_i,\vx_j) = \exp{\left(\frac{\norm{{\vx_i}-{\vx_j}}^2}{2\sigma^2}\right)},
 \end{align*}
 where $\sigma$ is the Gaussian width parameter.
-\begin{definition}{Kernel Matrix,}
+\begin{definition}{Kernel Matrix.}
 	Given a kernel function $K$ and a nonempty set $\Scal$, the $m\times m$ matrix $\hat{K}=(K(\vx_i,\vx_j))_{i,j}$ is called Kernel matrix (Gram matrix) of kernel function $K$ with respect to $\Scal$.
 \end{definition}
 Kernel matrix is usually normalized by
 \begin{align*}
-	\hat{K}\hat{K}(\vx_i,\vx_j) = \frac{\hat{K}(\vx_i,\vx_j)}{\sqrt{\hat{K}(\vx_i,\vx_i)\hat{K}(\vx_j,\vx_j)}}
+	\hat{K}(\vx_i,\vx_j) = \frac{\hat{K}(\vx_i,\vx_j)}{\sqrt{\hat{K}(\vx_i,\vx_i)\hat{K}(\vx_j,\vx_j)}}
 \end{align*}
-to make sure the elements of the matrix lie on the unit hypersphere.
+to make sure the elements of the kernel matrix lie on the unit hypersphere.
 
 
 % optimization of support vector machine,, original approach
