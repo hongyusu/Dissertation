@@ -577,31 +577,49 @@ As the weight vector can be expressed as the linear combination of the training 
 \end{align*}
 the evaluation can be done efficiently by maintaining a small set of non-zero $\alpha$s.
 
-In addition, we notice that to work out (Definition~\ref{softsvmdual}) it is not necessary to work on the explicit representation of $\vx$, as only the value of the inner product $\ip{\varphib(\vx_i)}{\varphib(\vx_j)}$ is needed.
-As the algorithm can be represented entirely in terms of the inner product, we can also replace the inner product with $\ip{\varphib(\vx_i)}{\varphib(\vx_j)}$.
-In particular, we define the \textit{kernel}
-\begin{align}
-	K(\vx_i,\vx_j) = \ip{\varphib(\vx_i)}{\varphib(\vx_j)}, \label{kernel}
-\end{align}
-where $\varphib(\cdot)$ is some high-dimensional feature map.
-Whenever we need $\ip{\varphib(\vx_i)}{\varphib(\vx_j)}$, we instead use $K(\vx_i,\vx_j)$.
-Besides, the property of kernel function \citep{Scholkopf02learning} allows us to compute (\ref{kernel}) without explicitly accessing the high dimensional feature map.
-Thus the algorithm can tackle high dimensionality by learning from $\varphib(\cdot)$ at a low computational cost.
+In order to solve the optimization problem in (Definition~\ref{softsvmdual}), it is not necessary to work with the explicit feature space of $\varphib(\vx)$ as only the result of the inner product $\ip{\varphib(\vx_i)}{\varphib(\vx_j)}$ is required.
+This suggests that the data can be radically represented through pairwise similarities.
+In particular, we defined a function $K:\Xcal\times\Xcal\rightarrow\RR$ such that the training data $\Scal$ is represented through a $m\times m$ matrix of pairwise similarities.
+% kernel function
+\begin{definition}{Kernel Function.}
+ 	A function $K:\Fcal\times\Fcal\rightarrow\RR$ is called kernel if it is symmetric and positive semidefinite. That is 
+\begin{align*}
+	K(\vx_i,\vx_j) = K(\vx_j,\vx_i)\quad \text{and}\, \sum_{\vx_i,\vx_j\in\Xcal}c_ic_jK(\vx_i,\vx_i)\ge0
+\end{align*}
+hold for any $c_i\in\RR$ and nonempty set $\Xcal$.
+\end{definition}
+\textit{Mercer's Theorem} \citep{taylor04} has shown that every positive semidefinite symmetric function is a kernel.
+% rkhs
+\begin{definition}{Reproduced Kernel Hilbert Space.} \label{rkhs}
+	For any kernel $K$ on space $\Xcal$, there always exists a Reproduced Kernel Hilbert Space (RKHS) $\Fcal$ and a mapping function $\varphib:\Xcal\rightarrow\Fcal$ such that $K(\vx_i,\vx_j)=\ip{\varphib(\vx_i)}{\varphib(\vy_i)}$ holds for any $\vx\in\Xcal$.
+\end{definition}
+Definition~\ref{rkhs} suggests any kernel function can be represented as the inner product in some feature space $\Fcal$.
+Kernel function enables us to operate in high dimensional feature space $\Fcal$ without ever computing the exact coordinate or evaluating the inner product explicitly in that space.
+Instead, the kernel function can be computed based on the inner product in the original space $\Xcal$.
+It is worthy of noticing that the feature space corresponding to kernel functions can be infinite dimensional. 
 
-In addition, according to \textit{Mercer's Theorem} \citep{taylor04}, every positive semidefinite symmetric function is a kernel.
 Kernel functions that heavily used in practice include the \textit{linear kernel}
 \begin{align*}
-	K(\vx_i,\vx_j) = \ip{\varphib(\vx_i)}{\varphib(\vx_j)},
+	K(\vx_i,\vx_j) = \ip{\vx_i}{\vx_j},
 \end{align*}
 the \textit{polynomial kernel}
 \begin{align*}
-	K(\vx_i,\vx_j) = (\ip{\varphib(\vx_i)}{\varphib(\vx_j)} + b)^k,
+	K(\vx_i,\vx_j) = (\ip{\vx_i}{\vx_j} + b)^k,
 \end{align*}
 where $b$ is the bias term and $d$ is the degree of polynomial, and the \textit{Gaussian kernel} (\rbf)
 \begin{align*}
-	K(\vx_i,\vx_j) = \exp{\left(\frac{\norm{{\varphib(\vx_i)}-{\varphib(\vx_j)}}^2}{2\sigma^2}\right)},
+	K(\vx_i,\vx_j) = \exp{\left(\frac{\norm{{\vx_i}-{\vx_j}}^2}{2\sigma^2}\right)},
 \end{align*}
 where $\sigma$ is the Gaussian width parameter.
+\begin{definition}{Kernel Matrix,}
+	Given a kernel function $K$ and a nonempty set $\Scal$, the $m\times m$ matrix $\hat{K}=(K(\vx_i,\vx_j))_{i,j}$ is called Kernel matrix (Gram matrix) of kernel function $K$ with respect to $\Scal$.
+\end{definition}
+Kernel matrix is usually normalized by
+\begin{align*}
+	\hat{K}\hat{K}(\vx_i,\vx_j) = \frac{\hat{K}(\vx_i,\vx_j)}{\sqrt{\hat{K}(\vx_i,\vx_i)\hat{K}(\vx_j,\vx_j)}}
+\end{align*}
+to make sure the elements of the matrix lie on the unit hypersphere.
+
 
 % optimization of support vector machine,, original approach
 The optimization techniques for solving \svm\ have been intensively studied.
