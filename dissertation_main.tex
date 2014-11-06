@@ -1408,11 +1408,10 @@ In Section~\ref{sc_su14c}, we present the \rta\ method that improves the previou
 The molecular activity classification problem has long been tackled under the single-label classification setting \citep{Menchetti05weighted,Singh12qsar,Dutt12classification}.
 On the other hand, multiple interdependent molecular activities are often screened simultaneously in drug research \citep{Shoemaker06the} which poses two challenges for single-label classification.
 The first is scalability in which a set of single-label classifiers need to be built independently in order to predict multiple molecular activities.
-This soon becomes infeasible when large amount of activities need to be predicted.
-The second lies in the fact that the single-label classification approaches have limited power of modeling label correlation such that the complex interdependency between multiple activities can not be addressed in a comprehensive way.
+This soon becomes infeasible when large number of activities need to be predicted.
+The second problem lies in the fact that the single-label classification approach has limited power of modeling label correlation such that the complex interdependencies between multiple activities can not be addressed in a comprehensive way.
 In \citepub{su10} we investigate the potential of applying structured output learning to deal with the molecular activity classification problem.
-In addition, we construct the output graph for the structured output learning algorithm based on the auxiliary data that reveals the dependency between multiple output variables.
-
+In addition, the output graph is extracted from auxiliary datasets that reveals the dependences between multiple labels.
 
 
 %
@@ -1434,7 +1433,7 @@ For example in the recent \textit{NCI-60} {Human Tumor Cell Line Screen} project
 %
 \subsection{Methods}
 
-To efficiently and accurately predict molecular activities in multiple cell lines at the same time, we applied a structured output learning approach in \citepub{su10} which is to our knowledge the first multi-task learning approach for molecular classification problem.
+To efficiently and accurately predict molecular activities in multiple cell lines at the same time, we applied a structured output learning approach in \citepub{su10} which is to our knowledge the first multilabel learning approach for molecular classification problem.
 The algorithm is an instantiation of the structured output learning method \mmcrf\ developed in \citep{Rousu07}.
 It can also be seen as a sibling method of \mmmn\ \citep{Taskar04max} described in Section~\ref{sc_mmmn}.
 In particular, the model defines a compatibility score through inner product for a molecular structure $\vx$ and the activities in multiple cell lines $\vy$
@@ -1456,15 +1455,15 @@ The loss scaled margin optimization will push high-loss pseudo-examples further 
 The model is optimized by conditional gradient optimization \citep{Bertsekas95nonlinear} in marginalized dual space \citep{Taskar04max}, which not only benefits from a polynomial-size parameter space but also enables the kernel function that is capable of dealing with non-linearity of the complex molecular structures.
 
 %Kernel is the classical way of defining the similarity between complex objects.
-In \citepub{su10} we used graph kernel to measure the similarity of pair of molecular structures.
+In \citepub{su10} we use graph kernel to measure the similarity between pair of molecular structures.
 The common way to represent the structure of a molecule is to use an undirected labeled graph $G=(V,E)$, where vertices $V=\{v_1,\cdots,v_n\}$ corresponds to atoms and edge $E=\{e_1,\cdots,e_m\}$ corresponds to the covalent bonds.
-The adjacency matrix $A$ of graph $G$ is defined such that its $(i,j)$'th entry $A_{i,j}$ equals to one if there is an edge between atom $i$ and atom $j$.
+The adjacency matrix $A$ of graph $G$ is defined such that the $(i,j)$'th entry $A_{i,j}$ equals to one if there is an edge between atom $i$ and atom $j$.
 
 % walk kernel
 \textit{Walk Kernel} \citep{Kashima03marginalized,Gartner03a} computes the sum of matching walks in a pair of graphs. 
 The contribution of each matching walk is down scaled exponentially according to its length.  
-We denote by $w_m$ a walk of length $m$ in graph $G$ such that there exists a edge for each pair of vertices $(v_i,v_{i+1})$ for all $i\in\{1,\cdots,m-1\}$.
-In addition, we denote by $G_{\times}(G_1,G_2)$ the direct product graph of two graph $G_1$ and $G_2$, of which the vertices of a product graph are computed from 
+Let $w_m$ denote a walk of length $m$ in graph $G$ such that there exists an edge for each pair of vertices $(v_i,v_{i+1})$ for all $i\in\{1,\cdots,m-1\}$.
+In addition, we denote by $G_{\times}(G_1,G_2)$ the direct product graph of two graph $G_1$ and $G_2$, of which the vertices of the product graph are computed from 
 \begin{align*}
 	V_{\times}(G_1,G_2) = \{(v_1,v_2)\in V_1\times V_2, label(v_1)=label(v_2)\},
 \end{align*}
@@ -1477,7 +1476,7 @@ The walk kernel can be defined on the adjacency matrix of $G_{\times}$ by
 	K_{wk}(G_1,G_2) = \sum_{i,j=1}^{|V_{\times}|}\left[\sum_{n=0}^{\infty}\lambda^{n}A_{\times}^n\right]_{i,j},
 \end{align*}
 where $0<\lambda<1$ is the scaling parameter.
-Using exponential series or geometric series the walk kernel can be compute in cubic time \citep{Gartner03a} by
+Using exponential series or geometric series walk kernel can be compute in cubic time \citep{Gartner03a} by
 \begin{align*}
 	K_{wk}(G_1,G_2) = \ve\tp(\vI-\lambda A_{\times})^{-1}\ve,
 \end{align*}
@@ -1491,7 +1490,7 @@ We also used \textit{Tanimoto Kernel} \citep{Ralaivola05graph} on a finite set o
 See \citep{Vishwanathan10graph} for a more comprehensive survey on graph kernels.
 
 %\subsubsection{Generation of Markov Network}
-To apply structured output learning model described above, we assume the underlying Markov network structure is fully observed.
+To apply structured output learning model described above, we assume the underlying Markov network structure is observed.
 In other words, we need to build an output graph with nodes correspond to cell lines and edges correspond to potential statistical dependencies.
 Auxiliary datasets are available for this purpose \citep{Shoemaker06the} which implicitly describes the correlation between the cell lines.
 To build the output graph, we first compute the covariance matrix for cell lines based on the auxiliary data, then we extract the network structure by applying the following two methods.
