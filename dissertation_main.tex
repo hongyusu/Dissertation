@@ -1628,7 +1628,7 @@ Random Spanning Tree Approximation (\rta) developed in \citepub{su14c} is a majo
 \rta\ brings in joint learning and inference framework such that the base learners from individual random spanning trees are optimized simultaneously towards the same objective.
 \citepub{su14c} also provides theoretical analysis to guarantee the performance and the tractable inference.
 Besides, \rta\ explores the potential of tackling the intractable graph inference problem with a set of random spanning trees.
-It lays the foundation of performing inference on unknown structure to achieve fast optimization and accurate prediction with attainable computational efforts.
+It lays the foundation of performing inference on unknown structure to achieve fast optimization, accurate prediction with attainable computational efforts.
 
 
 
@@ -1644,7 +1644,7 @@ To see this, imaging the edges that are not from the correct output graph will h
 
 Structured output learning on complete graph is not an easier problem as the inference is \nphard\ in nature.
 The inference problem is often instantiated as finding the \textit{Maximum A-Posteriori} (\map) configuration on a graph structured probability distribution.
-In terms of the intractability issue of graph inference problem, many techniques have been proposed but with important differences.
+In terms of the intractability issue of the graph inference problem, many techniques have been proposed but with important differences.
 \citet{Jordan04semiefinite} developed the semi-definite programming convex relaxation for the inference on graph with cycles.
 \citet{Wainwright05map} proposed \map\ inference with tree-based and \textit{linear programming} (\lp) relaxation.
 Efficient inference algorithms on special graph have also been studied in \citep{Globerson07approximate}.
@@ -1652,10 +1652,10 @@ Efficient inference algorithms on special graph have also been studied in \citep
 \citepub{su14c} is motivated by well-established Max-Margin Principle as described in Section~\ref{sc_svm}.
 The work investigates whether the problem of inference over a complete graph in structured output learning can be avoided in a analogous way.
 Start from a sampling results, \citepub[Lemma 3]{su14c} shows that with high probability a big fraction of margin achieved by the complete graph can be obtained by a sample of spanning trees of small size.
-Besides, \citepub[Theorem 5]{su14c} shows the good generalization error can also be guaranteed when learning with instead of complete graph a sample of spanning trees.
+Besides, \citepub[Theorem 5]{su14c} shows the good generalization error can also be guaranteed when learning with, instead of a complete graph, a sample of spanning trees.
 
-Thus, in addition to \citepub[Theory 1]{su14b}, we further provide the theoretical justification of \mam\ that constructs a set of base classifiers trained on random spanning trees. 
-Besides, \citepub[Theorem 5]{su14c} suggests we should, instead of optimizing the margin separatly on each spanning tree similar as in \mam, optimize the joint margin from all spanning trees.
+Thus, in addition to \citepub[Theory 1]{su14b}, we further provide the theoretical justification of constructing a set of base classifiers trained on random spanning trees. 
+Besides, \citepub[Theorem 5]{su14c} suggests we should, instead of optimizing the margin separately on each spanning tree in \mam, optimize the joint margin from all spanning trees.
 This strategy leads to the learning model presented in the following section.
 
 \subsection{Methods}
