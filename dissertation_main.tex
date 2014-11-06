@@ -789,6 +789,15 @@ When $m$ is large, the probability will approach $37\%$.
 That is around $37\%$ of the training examples will not appear in a given training set.
 The property of the bootstrap sampling allows us to efficiently estimate the generalization error of the base learner known as \textit{out-of-bag estimation} \citep{Breiman96out,Tibshirani1996bias,Wolpert99an}.
 
+\iffalse
+The Random Forest developed in \citep{Breiman01random} is an important extension of \bagging.
+The major difference from \bagging\ is that randomized feature selection is incorporated in Random Forest.
+Random Forest selects in each step a subset of features and constructs conventional decision tree classifier within the selected subset of features.
+The feature split process of decision tree is deterministic given a set of features.
+\citet{Liu08spectrum} proposed \vrtree\ which further extends the Random Forest by introducing randomness in both feature selection and split processes.
+\fi
+
+
 
 
 %------------------------------------------------
