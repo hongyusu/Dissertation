@@ -138,24 +138,24 @@ A \textit{hypothesis class} $\Hcal$ is a set of functions that the learning algo
 The basic goal for \textit{statistical learning} is to provide from a hypothesis class $\Hcal$ an \textit{estimator} $f\in\Hcal:\vXcal\rightarrow\Ycal$ that predicts the value of $y$ given an input $\vx$.
 
 To measure the goodness of the estimator, we define a loss function $\Lcal(y,f(\vx)):\Ycal\times\Ycal\rightarrow\RR^+$ as a monatomic bounded function between the true value $y$ and the predicted value $f(\vx)$.
-Popular loss functions used in machine learning include for instance, 
-\textit{Hinge Loss} in e.g., Support Vector Machines \citep{Boser92,Cortes95support}
+Popular loss functions used in machine learning include, for example,
+\textit{Hinge Loss} in Support Vector Machines \citep{Boser92,Cortes95support}
 \begin{align*}
 	\Lcal_{hinge}(y,f(\vx)) = \maximize (0,1-y f(\vx)),\, \Ycal=[-1,+1],
 \end{align*}
-\textit{Hamming Loss} in e.g. structured \svm\ \citep{THJA04,TJTA05}
+\textit{Hamming Loss} in structured \svm\ \citep{THJA04,TJTA05}
 \begin{align*}
 	\Lcal_{0/1}(y,f(\vx)) = \ind{y=f(\vx)},\, \Ycal = \ZZ,
 \end{align*}
-\textit{Squared Loss} in e.g., Ridge Regression \citep{Hoerl00ridge}
+\textit{Squared Loss} in Ridge Regression \citep{Hoerl00ridge}
 \begin{align*}
 	\Lcal_{squared}(y,f(\vx)) = (y-f(\vx))^2,\, \Ycal=\RR,
 \end{align*}
-\textit{Exponential Loss} in e.g., in \adaboost\ \citep{Schapire99improved}
+\textit{Exponential Loss} in \adaboost\ \citep{Schapire99improved}
 \begin{align*}
 	\Lcal_{exp}(y,f(\vx)) = \exp(-y f(\vx)),\, \Ycal=\RR,
 \end{align*}
-\textit{Logistic Loss} in e.g., in Logistic Regression \citep{Chen99}
+\textit{Logistic Loss} in Logistic Regression \citep{Chen99}
 \begin{align*}
 	\Lcal_{log}(y,f(\vx)) = \log(1+\exp(-y f(\vx))),\, \Ycal=[-1,+1].
 \end{align*}
