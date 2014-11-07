@@ -150,9 +150,9 @@ Popular loss functions used in machine learning include, for example,
 	\Lcal_{squared}(y,f(\vx)) = (y-f(\vx))^2,\, \Ycal=\RR,
 \end{align*}
 \textit{Exponential Loss} in \adaboost\ \citep{Schapire99improved}
-\begin{align*}
-	\Lcal_{exp}(y,f(\vx)) = \exp(-y f(\vx)),\, \Ycal=\RR,
-\end{align*}
+\begin{align}
+	\Lcal_{exp}(y,f(\vx)) = \exp(-y f(\vx)),\, \Ycal=\RR, \label{exp_loss}
+\end{align}
 \textit{Logistic Loss} in Logistic Regression \citep{Chen99}
 \begin{align}
 	\Lcal_{log}(y,f(\vx)) = \log(1+\exp(-y f(\vx))),\, \Ycal=[-1,+1]. \label{log_loss}
@@ -704,30 +704,33 @@ Moreover, in the later part of the thesis, we will develop several new learning 
 In addition to the notations introduced in Section~\ref{sc_slc_pn}, we assume there is a hypothesis class $\Hcal'$ where we generate weak/base hypothesis $f^t(x)\in\Hcal'$.
 We use $t$ to index the $t$'th weak hypothesis.
 $H(x)$ denotes the ensemble framework that is able to combine multiple weak hypotheses and generate a stronger one.
-In many cases, no other information about $f^t(x)$ is available to $H(x)$ except that each weak hypothesis will take in a parameter $\vx$ and output $y\in\Ycal$ in single-label classification setting, or $\vy\in\vYcal$ in multilabel classification setting respectively.
+In many cases, no other information about $f^t(x)$ is available to $H(x)$ except that each weak hypothesis will take in a parameter $\vx$ and output $y\in\Ycal$ ($\vy\in\vYcal$ resp.) in single-label (multilabel resp.) classification.
 
 
 \subsection{Boosting} \label{sc_boosting}
 
 \textit{Boosting} corresponds to a learning framework or a family of algorithms that take in a weak classifier and tuning it into a strong one.
-We begin our discussion from the notion of  \textit{concept class}.
+We begin our discussion from  \textit{concept class}.
 A \textit{concept} is a boolean function over domain $\vXcal$, and a \textit{concept class} is a class of concepts.
 % TODO: an illustrative example
 A concept class is \textit{strongly learnable} if there exists a polynomial learning algorithm that achieves high accuracy with high probability for all concepts in the class.
 On the other hand, a concept class is \textit{weakly learnable} if the learning algorithm achieves arbitrary high accuracy where the only requirement is that the learning algorithm finds a function that performs better than coin flip.
-The concept of learnability were proposed in \citep{Kearns94cryptographic} together with the question whether the strong learnability and the weak learnability are equivalent which is known as \textit{hypothesis boosting problem}.
+The concept of learnability was proposed in \citep{Kearns94cryptographic} together with the question whether the strong learnability and the weak learnability are equivalent which is known as \textit{hypothesis boosting problem}.
 Finding a weak learner which performs better than random guessing is easy in practice, but finding a strong learner is usually difficult.
-\citet{Schapire90the} has proved that two classes of learnability are equal which lays the foundation of the boosting algorithm that aim to convert a weak learning algorithm into a strong one that achieves high performance.
+\citet{Schapire90the} has proved that two classes of learnability are equal which lays the foundation of the boosting algorithm that aim to tune a weak learning algorithm into a strong one that achieves high performance.
 
 Adaptive Boosting (\adaboost) developed by \citet{Freund97a} is the very first practical boosting algorithm and is the most influential one.
-In addition, \citet{Schapire99improved} proposed a variant of the algorithm which updates the adaptive parameters in order to minimize the exponential loss of the weak learners.
-The exact algorithm is shown in (Algorithm~\ref{adaboost}).
+In addition, \citet{Schapire99improved} proposed a variant of the algorithm which updates the adaptive parameters in order to minimize the exponential loss (\ref{exp_loss}) of the weak learners.
+The algorithm is shown in (Algorithm~\ref{adaboost}).
 The fundamental idea of \adaboost\ is to maintain a distribution $D$ over all training examples, and update the distribution in each iteration such that difficult-to-classify examples will get more probability mass for the next iteration (line~\ref{update_d}).
-In particular, the algorithm computes in each iteration a weak learner $f^t(\vx)$ base on all training examples and the current distribution $D^{t}$ (line~\ref{compuet_f}), calculates the weighted training error $\epsilon^t$ for the current weak learner (line~\ref{compute_error}), and computes the adaptive parameter $\alpha^t$ for the current weak learner (line~\ref{compute_alpha}).
-The ensemble prediction is the weighted combination of all weak learners
+Particularly, in each iteration the algorithm computes a weak learner $f^t(\vx)$ base on all training examples and the current distribution $D^{t}$ (line~\ref{compuet_f}), calculates the weighted training error $\epsilon^t$ (line~\ref{compute_error}), and computes the adaptive parameter $\alpha^t$ (line~\ref{compute_alpha}).
+The ensemble prediction is the weighted combination of all weak learners (line~\ref{adaboost_prediction}).
+
+\iffalse
 \begin{align*}
 	H(\vx) = \sign(\sum_{t=1}^T\alpha^tf^t(\vx)).
 \end{align*}
+\fi
 \begin{algorithm}
 \caption{\adaboost}
 \label{adaboost}
@@ -737,43 +740,41 @@ The ensemble prediction is the weighted combination of all weak learners
 	\STATE Initialize $D^0(i)=\frac{1}{m},i\in\{1,\cdots,m\}$
 	\FOR{$t=1\cdots T$}
 		\STATE $f^t(\vx)\leftarrow\Wcal(\Scal,D^{i-1})$ \label{compuet_f}
-		\STATE $y_i = f^t(\vx_i),\forall i\in\{1,\cdots,m\}$
-		\STATE $\epsilon^t = \sum_{i=1}^{m}D^t(i)\ind{y_i\neq\hat{y}_i}$ \label{compute_error}
+		%\STATE $y_i = f^t(\vx_i),\forall i\in\{1,\cdots,m\}$
+		\STATE $\epsilon^t = \sum_{i=1}^{m}D^t(i)\ind{y_i\neq f^t(\vx_i)}$ \label{compute_error}
 		\STATE $\alpha^{t} = \frac{1}{2}\ln\left(\frac{1-\epsilon^t}{\epsilon^t}\right)$ \label{compute_alpha}
-		\STATE $Z=\sum_{i=1}^{m}D^{t-1}(i)\exp(-\alpha^ty_i\hat{y}_i)$
-		\STATE $D^t(i) = \frac{1}{Z}D^{t-1}(i)\exp(-\alpha^ty_i\hat{y}_i),\forall i\in\{1,\cdots,m\}$ \label{update_d}
+		\STATE $Z=\sum_{i=1}^{m}D^{t-1}(i)\exp(-\alpha^ty_if^t(\vx_i))$
+		\STATE $D^t(i) = \frac{1}{Z}D^{t-1}(i)\exp(-\alpha^ty_if^t(\vx_i)),\forall i\in\{1,\cdots,m\}$ \label{update_d}
 	\ENDFOR
-	\RETURN $H(\vx) = \sign(\sum_{t=1}^T\alpha^tf^t(\vx))$
+	\RETURN $H(\vx) = \sign(\sum_{t=1}^T\alpha^tf^t(\vx))$ \label{adaboost_prediction}
 \end{algorithmic}
 \end{algorithm}
 
 For each weak learner $f^t(\vx)$, the strategy of updating adaptive parameter $\alpha^t$ is to ensure that the exponential loss of $\alpha^tf^t(\vx)$ is minimized.
 To see this, we first compute the exponential loss for $\alpha^tf^t(\vx)$ given current distribution $D^t$ over training example and adaptive parameter for $f^t(\vx)$
 \begin{align*}
-	\ell_{exp}&(\alpha^t,f^t(\vx),D^t) \\
-	&= \sum_{i=1}^mD^t(i)\exp(-\hatf(\vx_i)\alpha^tf^t(\vx_i))\\
-	&=\exp(-\alpha^t)\sum_{i=1}^mD^t(i)\ind{\hatf(\vx_i)=f(\vx_i)} + \exp(\alpha^t)\sum_{i=1}^mD^t(i)\ind{\hatf(\vx_i)\neq f(\vx_i)}\\
+	\Lcal_{exp}&(y,\alpha^tf^t(\vx);D^t) \\
+	&= \sum_{i=1}^mD^t(i)\exp(-y_i\alpha^tf^t(\vx_i))\\
+	&=\exp(-\alpha^t)\sum_{i=1}^mD^t(i)\ind{y_i=f(\vx_i)} + \exp(\alpha^t)\sum_{i=1}^mD^t(i)\ind{y_i\neq f(\vx_i)}\\
 	&=\exp(-\alpha^t)(1-\epsilon^t) + \exp(\alpha^t)\epsilon^t.
 \end{align*}
-To minimize $\ell_{exp}(\alpha^t,f^t(\vx),D^t)$, we take partial derivative with respect to $\alpha^t$ and set it to zero
+To minimize $\Lcal_{exp}(y,\alpha^tf^t(\vx);D^t)$, we take partial derivative with respect to $\alpha^t$ and set it to zero
 \begin{align*}
-	\frac{\partial\ell_{\exp}(\alpha^t,f^t(\vx),D^t)}{\partial\alpha^t} = -\exp(-\alpha^t)(1-\epsilon^t) + \exp(\alpha^t)\epsilon^t=0.
+	\frac{\partial\Lcal_{exp}(y,\alpha^tf^t(\vx);D^t)}{\partial\alpha^t} = -\exp(-\alpha^t)(1-\epsilon^t) + \exp(\alpha^t)\epsilon^t=0.
 \end{align*}
 Solve it for $\alpha^t$, we get
 \begin{align*}
 	\alpha^{t} = \frac{1}{2}\ln\left(\frac{1-\epsilon^t}{\epsilon^t}\right).
 \end{align*}
-Thus the rule for updating $\alpha^t$ will make sure the exponential loss of $\alpha^tf^t(\vx)$ will be minimized.
 
-It is worth noticing that the \adaboost\ algorithm describe in (algorithm~\ref{adaboost}) requires the learning algorithm $\Wcal$ capable of learning from some specific distribution.
-The distribution will reflect the difficulty of the training examples during the learning.
-It is usually achieved by \textit{reweighing} which initials a uniform distribution over training examples and updates the distribution after each iteration.
-For learning algorithms that cannot handle training data with specific distribution, we can apply \textit{resampling} which samples training examples in each iteration according to some desired distribution.
+It is worthy of noticing that \adaboost\ described in (algorithm~\ref{adaboost}) requires the learning algorithm $\Wcal$ work with a distribution over all training examples.
+The distribution is usually generated by \textit{reweighing} which initials a uniform distribution over training examples and updates the distribution after each iteration.
+For the learning algorithms that cannot work with distribution, we can apply \textit{resampling} which samples training examples in each iteration according to some desired distribution.
 
-Most recently, a new boosting algorithm \deepboosting\ was developed in \citep{Cortes14deep}.
-\deepboosting\ allows the learning algorithm to use complex hypothesis class contains very deep decision trees, by which it extends \adaboost\ that only uses simple hypothesis class of decision tree with depth one.
-In addition, \citet{Cortes14deep} also developed rich learning bounds for \deepboosting\ optimization problem in terms of the Rademacher complexity theory.
-The new theory advances the previous performance guarantee of \adaboost\ which is build in terms of margins of the training examples \citep{Schapire97boosting,Koltchinskii00empirical}.
+A new boosting algorithm \deepboosting\ is recently developed in \citep{Cortes14deep} which allows the base learning algorithm to use complex hypothesis class.
+The theoretic analysis of \deepboosting\ also advances the previous performance guarantee of \adaboost\ which is built in terms of margin of the training examples \citep{Schapire97boosting,Koltchinskii00empirical}.
+
+
 
 
 \subsection{Bootstrap Aggregating} \label{sc_ba}
