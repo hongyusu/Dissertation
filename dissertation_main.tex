@@ -178,32 +178,32 @@ The strategy is known as \textit{empirical risk minimization} \citep{Vapnik92pri
 
 \subsection{Regularized Learning}\label{sc_rl}
 
-The empirical risk minimization strategy is ill-posed which in principle can provide infinity number of estimators with the same empirical risk on the same training data.
-Besides, it often leads to \textit{overfitting} when the dimensionality of the feature space is high and the number of training data is limited.
+Empirical risk minimization is ill-posed which in principle can provide infinity number of estimators with the same empirical risk on the same training data.
+Besides, it often leads to \textit{overfitting} when the dimensionality of the feature space is high and the number of training examples is limited.
 In other words, underlying true distribution $P(\vx,y)$ is difficult to to estimate from a finite sample of training examples.
-Thus, the estimator will generalize poorly on unseen test examples.
-The {regularization theory} \citep{Evgeniou99a,Evgeniou02regularization} provides a framework to alleviate these two difficulties.
+As a result, the estimator will generalize poorly on unseen test examples.
+The {regularization theory} \citep{Evgeniou99a,Evgeniou02regularization} provides a framework to alleviate these two problems.
 In particular, it suggests to minimize 
  \begin{align}
 	\Jcal(f) = \Rcal_{emp}(f) + \lambda\Omega(f), \label{rl}
 \end{align}
-where $\Omega(f)$ is the regularization function that controls the complexity of the estimator $f$ by penalizing the norm of the feature weight vector and $\lambda$ is a positive parameter that controls the relative weight between the empirical risk term and the regularization term.
+where $\Omega(f)$ is the regularization function that controls the complexity of the estimator $f$ by penalizing the norm of the feature weight vector, $\lambda$ is a positive parameter that controls the relative weight between the empirical risk term and the regularization term.
 
-In terms of the linear function class, there are many ways to define the regularization term $\Omega(f)$ among which $L_1$-norm and $L_2$-norm regularization are most popular.
+In terms of the linear function class, there are many ways to define the regularization term among which $L_1$-norm and $L_2$-norm regularization are most popular.
 The $L_2$-norm regularization, defined by 
 \begin{align*}
 	\Omega_{L_2}(f) = ||\vw||_2=\left(\sum_{i=1}^d|\vw[i]|^2\right)^{\frac{1}{2}},
 \end{align*} 
 controls the complexity of the estimator $f$ and provides a smooth solution.
 It has been applied in, for example, Ridge Regression \citep{Hoerl00ridge}, Logistic Regression \citep{Chen00}, Support Vector Machines \citep{Cortes95support}.
-The $L_1$-norm regularization, defined by
+On the other hand, the $L_1$-norm regularization, defined by
 \begin{align*}
 	\Omega_{L_1}(f) = ||\vw||_1=\sum_{i=1}^d|\vw[i]|,
 \end{align*}
-provides sparse parameter estimation which means that we obtain a high dimensional weight vector with many zero entries.
+provides sparse parameter estimation such that we obtain a high dimensional weight vector with many zero entries.
 This is an attractive property as the feature selection is incorporated into the learning and the interpretability of the resulting model is often high.
 The $L_1$-norm regularization has been applied in, for example, \lasso\ \citep{Tibshirani94regression}.
-Besides, other regularization techniques have been widely studied, to name a few, $L_{1,2}$-norm regularization \citep{Argyriou07multitask} and elastic net regularization \citep{Zou05regularizationa}.
+Besides, other regularization techniques have been widely studied, to name a few, $L_{1,2}$-norm regularization \citep{Argyriou07multitask}, elastic net regularization \citep{Zou05regularizationa}.
 
 
 %------------------------------------------------
