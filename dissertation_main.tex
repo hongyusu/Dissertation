@@ -452,7 +452,7 @@ To apply \mle, it is easier if, instead of maximizing the likelihood, we maximiz
 % logistic regression of other type
 \mle\ can generate a model that fits the training data.
 However, there is no guarantee that the model generalize well on the test data.
-To achieve better generalization power, we apply the regularization technique as discussed in Section~\ref{ch_rlc}.
+To achieve better generalization power, we apply the regularization technique as discussed in Section~\ref{sc_rl}.
 Many regularization methods for Logistic Regression have been proposed \citep{Chen99,Chen00,Goodman03} among which adding Gaussian prior on weight parameter $\vw$ is one of the standard option.
 In practice, we assume $\vw$ is generated according to a zero-mean spherical Gaussian with variance $\sigma^2$.
 Thus, the \mle\ problem (\ref{lr_likelihood_sum}) is transformed into \textit{Maximum A-Posteriori} (\map) problem of the following form
