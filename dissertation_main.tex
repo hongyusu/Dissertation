@@ -526,7 +526,7 @@ Based on Maximum-Margin Principle, we further use $\gamma_i$ to denote the \text
 \begin{align*}
 	\gamma_i = \frac{y_i(\ip{\vw}{\varphib(\vx_i)}+b)}{\norm{\vw}}.
 \end{align*}
-We notice if we scale $\vw$ and $b$ with by constant (e.g., $\vw\leftarrow\kappa\vw, b\leftarrow\kappa b, \kappa\in\RR$, ) the margin $\gamma_i$ stays unchanged. 
+We notice if we scale $\vw$ and $b$ by constant $\kappa$ (e.g., $\vw\leftarrow\kappa\vw, b\leftarrow\kappa b, \kappa\in\RR$, ) the margin $\gamma_i$ stays unchanged. 
 We still achieve the same classification performance and generalization power.
 As parameters are invariance to scaling, we set $\norm{\vw}=1$.
 Given a set of training example $S$, we also define the margin with respect to $S$ as the minimum margin achieved by individual training example
