@@ -515,7 +515,7 @@ Additionally, we assume the {separating hyperplane} has a simple linear form des
 	f(\vx)=\ip{\vw}{\varphib(\vx)} + b = 0.
 \end{align*}
 As a result, we have $y_i=-1$ if $f(\vx_i)<0$ and $y_i=+1$ otherwise.
-Given $\vw$ that achieves correct separation on the training data, we can decide the label of a test example $\vx_{ts}$ by the decision rule $y_{ts}=\sign(f(\vx_{ts}))$.
+Given $\vw$ that achieves correct separation on the training data, we can decide the label of a test example $\vx_{ts}$ by decision rule $y_{ts}=\sign(f(\vx_{ts}))$.
 
 There can be infinite number of separating hyperplanes that solves the separation problem on the training data which is also suggested by empirical risk minimization strategy in Section~\ref{sc_erm}. 
 We wish to find the one that also generalizes well on the test data.
