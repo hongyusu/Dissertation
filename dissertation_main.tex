@@ -42,8 +42,8 @@ There exists a large body of work on hierarchical classification from the early 
 
 \textit{Graph labeling} is another type of structured output prediction in which the output graph often takes more general form and does not require the concept of ``level'' compared to hierarchical classification.
 The approach can be applied to wider range of problems, to name but few, speech tagging problem with sequence structure \citep{collins02a}, action recognition problem with Markov network structure \citep{Wang11hidden}. 
-The graph labeling approach often directly incorporates the output graph into learning and uses the dependency or the correlation to improve the classification performance \citep{collins02a,lafferty01,taskar02,Taskar04max,THJA04,Rousu07}.
-For graph labeling or structured output learning in general, one inherited problem is the output dependency structure is assumed to be pre-established.
+The graph labeling approach often directly incorporates the output graph into learning and uses the label correlation to improve the classification performance \citep{collins02a,lafferty01,taskar02,Taskar04max,THJA04,Rousu07}.
+For graph labeling or structured output learning in general, one inherited problem is the output graph is assumed to be observed as a-priori.
 However, this cannot be taken as granted since the proper dependency structure for the output variables is either hidden or difficult to retrieve in many applications \citep{Chickering94learning}.
 
 Figure~\ref{multilabel_taxonomy} illustrates the taxonomy of the multilabel classification.
