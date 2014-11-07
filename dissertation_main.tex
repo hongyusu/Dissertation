@@ -139,13 +139,13 @@ The basic goal for \textit{statistical learning} is to provide from a hypothesis
 
 To measure the goodness of the estimator, we define a loss function $\Lcal(y,f(\vx)):\Ycal\times\Ycal\rightarrow\RR^+$ as a bounded function between the true value $y$ and the predicted value $f(\vx)$.
 Popular loss functions used in machine learning include for instance, 
-\textit{Hinge Loss} in e.g., Support Vector Machines (\svm) \citep{Boser92,Cortes95support}
+\textit{Hinge Loss} in e.g., Support Vector Machines \citep{Boser92,Cortes95support}
 \begin{align*}
-	\Lcal_{hinge}(y,f(\vx)) = \maximize (0,1-y f(\vx)),\, \Ycal=[0,1],
+	\Lcal_{hinge}(y,f(\vx)) = \maximize (0,1-y f(\vx)),\, \Ycal=[-1,+1],
 \end{align*}
 \textit{Hamming Loss} in e.g. structured \svm\ \citep{THJA04,TJTA05}
 \begin{align*}
-	\Lcal_{0/1}(y,f(\vx)) = \ind{y=f(\vx)},
+	\Lcal_{0/1}(y,f(\vx)) = \ind{y=f(\vx)},\, \Ycal = \ZZ,
 \end{align*}
 \textit{Squared Loss} in e.g., Ridge Regression \citep{Hoerl00ridge}
 \begin{align*}
