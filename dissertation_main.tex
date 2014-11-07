@@ -142,36 +142,36 @@ Loss function is bounded.
 Popular loss functions used in machine learning include for instance, 
 \textit{Hinge Loss} used in e.g., Support Vector Machines (\svm) \citep{Boser92,Cortes95support}
 \begin{align*}
-	\Lcal_{hinge}(\vy,f(\vx)) = \maximize (0,1-\vy f(\vx)),
+	\Lcal_{hinge}(y,f(\vx)) = \maximize (0,1-y f(\vx)),
 \end{align*}
 \textit{Hamming Loss} used in e.g. structured \svm\ \citep{THJA04,TJTA05}
 \begin{align*}
-	\Lcal_{0/1}(\vy,f(\vx)) = \ind{\vy=f(\vx)},
+	\Lcal_{0/1}(y,f(\vx)) = \ind{y=f(\vx)},
 \end{align*}
 \textit{Square Error Loss} applied in e.g., Ridge Regression by \citet{Hoerl00ridge}
 \begin{align*}
-	\Lcal_{square}(\vy,f(\vx)) = (\vy, f(\vx))^2,
+	\Lcal_{square}(y,f(\vx)) = (y, f(\vx))^2,
 \end{align*}
 \textit{Exponential Loss} used in e.g., in \adaboost\ \citep{Schapire99improved}
 \begin{align*}
-	\Lcal_{exp}(\vy,f(\vx)) = \exp(\vy f(\vx)),
+	\Lcal_{exp}(y,f(\vx)) = \exp(y f(\vx)),
 \end{align*}
 \textit{Logistic Loss} used in e.g., in Logistic Regression \citep{Chen99}
 \begin{align*}
-	\Lcal_{log}(\vy,f(\vx)) = \log(1+\exp(\vy f(\vx))).
+	\Lcal_{log}(y,f(\vx)) = \log(1+\exp(y f(\vx))).
 \end{align*}
 
-With loss function, we compute the \textit{true risk} of the estimator $f$ over all examples from domain $\vXcal\times\vYcal$ by
+With loss function, we compute the \textit{true risk} of the estimator $f$ over all examples from domain $\vXcal\times\Ycal$ by
 \begin{align}
-	\Rcal(f) = \int_{(\vx,\vy)\in\vXcal\times\vYcal}\Lcal(\vy,f(\vx))P(\vx,\vy)\,d_{\vx}d_{\vy} \label{true_risk}.
+	\Rcal(f) = \int_{(\vx,y)\in\vXcal\times\vYcal}\Lcal(y,f(\vx))P(\vx,y)\,d_{\vx}d_{y} \label{true_risk}.
 \end{align}
 As a results, we should search for an estimator $f$ that minimizes the true risk defined by (\ref{true_risk}).
-However, the distribution $P(\vx,\vy)$ that generates the examples is unknown.
+However, the distribution $P(\vx,y)$ that generates the examples is unknown.
 It is impossible to compute (\ref{true_risk}) directly.
-Instead, we are given a random sample of $m$ examples, denoted by $S=\{(\vx_1,\vy_1),\cdots,(\vx_m,\vy_m)\}$, called \textit{training data}.
+Instead, we are given a random sample of $m$ examples, denoted by $S=\{(\vx_1,y_1),\cdots,(\vx_m,y_m)\}$, called \textit{training data}.
 \textit{Empirical risk} is defined as the average error made by estimator $f$ on the training data $S$ of finite size
 \begin{align}
-	\Rcal_{emp}(f) = \frac{1}{m}\sum_{i=1}^{m}\Lcal(\vy_i,f(\vx_i)) \label{empirical_risk}.
+	\Rcal_{emp}(f) = \frac{1}{m}\sum_{i=1}^{m}\Lcal(y_i,f(\vx_i)) \label{empirical_risk}.
 \end{align}
 This suggests the learning algorithm should search for an estimator $f$ to minimize the empirical risk defined in (\ref{empirical_risk}).
 The strategy is known in machine learning community as \textit{empirical risk minimization} \citep{Vapnik92principles}.
@@ -180,7 +180,7 @@ The strategy is known in machine learning community as \textit{empirical risk mi
 
 The empirical risk minimization strategy is ill-posed which in principle can provide infinity number of estimators with the same empirical risk on the same training data.
 Besides, it often leads to \textit{overfitting} when the dimensionality of the feature space is high and the number of training data is limited.
-In other words, underlying true distribution $P(\vx,\vy)$ is difficult to to estimate from a finite sample of training examples.
+In other words, underlying true distribution $P(\vx,y)$ is difficult to to estimate from a finite sample of training examples.
 Thus, the estimator will generalize poorly on unseen test examples.
 The {regularization theory} \citep{Evgeniou99a,Evgeniou02regularization} provides a framework to alleviate these two difficulties.
 In particular, it suggests to minimize 
