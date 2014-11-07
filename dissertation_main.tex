@@ -138,9 +138,9 @@ Additionally, we denote the set of real numbers by $\RR$ and the set of integers
 To measure the goodness of the estimator, we define a loss function $\Lcal(y,f(\vx)):\Ycal\times\Ycal\rightarrow\RR^+$ as a monatomic bounded function between the true value $y$ and the predicted value $f(\vx)$.
 Popular loss functions used in machine learning include, for example,
 \textit{Hinge Loss} in Support Vector Machines \citep{Cortes95support}
-\begin{align*}
-	\Lcal_{hinge}(y,f(\vx)) = \maximize (0,1-y f(\vx)),\, \Ycal=[-1,+1],
-\end{align*}
+\begin{align}
+	\Lcal_{hinge}(y,f(\vx)) = \maximize (0,1-y f(\vx)),\, \Ycal=[-1,+1], \label{hinge_loss}
+\end{align}
 \textit{Hamming Loss} in structured \svm\ \citep{THJA04}
 \begin{align*}
 	\Lcal_{0/1}(y,f(\vx)) = \ind{y=f(\vx)},\, \Ycal = \ZZ,
@@ -557,8 +557,8 @@ This is equivalent to
 		\st & \quad y_i(\ip{\vw}{\varphib(\vx_i)} + b) \ge 1, \forall i\in\{1,\cdots,m\},
 	\end{align*}
 \end{definition}
-where the goal is to find the weight vector of minimum norm that corresponds to maximize the margin between two class of examples.
-The constraints states that the training data should be correctly separated.
+where the goal is to find the weight vector of minimum norm that corresponds to maximize the margin between two classes of examples.
+The constraints state that the training data should be correctly separated.
 
 % soft margin svm
 We do not use Definition~\ref{hardsvmprimal} in practice for two reasons. 
@@ -580,7 +580,7 @@ This can be defined by
 		\st & \quad y_i(\ip{\vw}{\varphib(\vx_i)} + b) \ge 1-\xi_i, \xi_i\ge 0, \forall i\in\{1,\cdots,m\}.
 	\end{align*}
 \end{definition}
-Definition~\ref{softsvmprimal} is another instantiation of regularized risk minimization (\ref{rl}) with $L_1$-norm regularization and hinge loss.
+Definition~\ref{softsvmprimal} is another instantiation of regularized risk minimization (\ref{rl}) with $L_2$-norm regularization (\ref{l2_norm}) and hinge loss (\ref{hinge_loss}).
 
 % dual, kernel svm
 Optimization problem is usually transformed into dual form by introducing for each constraint a \textit{Lagrangian multiplier} (dual variable) $\alpha$.
