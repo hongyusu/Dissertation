@@ -605,7 +605,7 @@ This suggests that the data can be radically represented through pairwise simila
 In particular, we defined a function $K:\Xcal\times\Xcal\rightarrow\RR$ such that the training data $\Scal$ is represented through a $m\times m$ matrix of pairwise similarities.
 % kernel function
 \begin{definition}{Kernel Function.}
- 	A function $K:\Fcal\times\Fcal\rightarrow\RR$ is called kernel if it is symmetric and positive semidefinite. That is 
+ 	A function $K:\vXcal\times\vXcal\rightarrow\RR$ is called kernel if it is symmetric and positive semidefinite. That is 
 \begin{align*}
 	K(\vx_i,\vx_j) = K(\vx_j,\vx_i)\quad \text{and}\, \sum_{\vx_i,\vx_j\in\Xcal}c_ic_jK(\vx_i,\vx_i)\ge0
 \end{align*}
@@ -614,10 +614,10 @@ hold for any $c_i\in\RR$ and nonempty set $\Xcal$.
 \textit{Mercer's Theorem} \citep{taylor04} has shown that every positive semidefinite symmetric function is a kernel.
 % rkhs
 \begin{definition}{Reproduced Kernel Hilbert Space.} \label{rkhs}
-	For any kernel function $K$ defined on space $\Xcal$, there always exists a Reproduced Kernel Hilbert Space (RKHS) $\Fcal$ and a mapping function $\varphib:\Xcal\rightarrow\Fcal$ such that $K(\vx_i,\vx_j)=\ip{\varphib(\vx_i)}{\varphib(\vy_i)}$ holds for any $\vx\in\Xcal$.
+	For any kernel function $K$ defined on space $\Xcal$, there always exists a Reproduced Kernel Hilbert Space (RKHS) $\vFcal$ and a mapping function $\varphib:\Xcal\rightarrow\vFcal$ such that $K(\vx_i,\vx_j)=\ip{\varphib(\vx_i)}{\varphib(\vy_i)}$ holds for any $\vx\in\Xcal$.
 \end{definition}
-Definition~\ref{rkhs} shows any kernel function can be represented as the inner product in some feature space $\Fcal$.
-Kernel function enables us to operate in high dimensional feature space $\Fcal$ without ever computing the exact coordinate or evaluating the inner product explicitly in that space.
+Definition~\ref{rkhs} shows any kernel function can be represented as the inner product in some feature space $\vFcal$.
+Kernel function enables us to operate in high dimensional feature space $\vFcal$ without ever computing the exact coordinate or evaluating the inner product explicitly in that space.
 Instead, the kernel function can be computed based on the inner product in the original space $\Xcal$.
 
 Kernel functions that heavily used in practice include \textit{linear kernel}
