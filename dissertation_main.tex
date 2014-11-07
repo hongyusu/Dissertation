@@ -154,9 +154,9 @@ Popular loss functions used in machine learning include, for example,
 	\Lcal_{exp}(y,f(\vx)) = \exp(-y f(\vx)),\, \Ycal=\RR,
 \end{align*}
 \textit{Logistic Loss} in Logistic Regression \citep{Chen99}
-\begin{align*}
-	\Lcal_{log}(y,f(\vx)) = \log(1+\exp(-y f(\vx))),\, \Ycal=[-1,+1].
-\end{align*}
+\begin{align}
+	\Lcal_{log}(y,f(\vx)) = \log(1+\exp(-y f(\vx))),\, \Ycal=[-1,+1]. \label{log_loss}
+\end{align}
 We will study the loss functions with the corresponding learning models into detail in the following part of the thesis.
 
 With loss function, we compute the \textit{true risk} of the estimator $f$ over all examples from domain $\vXcal\times\Ycal$ by
@@ -190,7 +190,7 @@ where $\Omega(f)$ is the regularization function that controls the complexity of
 In terms of the linear function class, there are many ways to define the regularization term among which $L_1$-norm and $L_2$-norm regularization are most popular.
 The $L_2$-norm regularization, defined by 
 \begin{align*}
-	\Omega_{L_2}(f) = ||\vw||_2=\left(\sum_{i=1}^d|\vw[i]|^2\right)^{\frac{1}{2}},
+	\Omega_{L_2}(f) = ||\vw||_2=\left(\sum_{i=1}^d|\vw[i]|^2\right)^{\frac{1}{2}}, \label_{l2_norm}
 \end{align*} 
 controls the complexity of the estimator $f$ and provides a smooth solution.
 It has been applied in, for example, Ridge Regression \citep{Hoerl00ridge}, Logistic Regression \citep{Chen00}, Support Vector Machines \citep{Cortes95support}.
@@ -463,7 +463,7 @@ Instead of maximizing the posteriori (\ref{lr_posteriori}), it is easier to maxi
 \begin{align}
 	\log P(\vw,b|D;\sigma^2) = -{\frac{\norm{\vw}^2}{\sigma^2}} - \sum_{i=1}^{m}\log{(1+\exponential{-y_i(\ip{\varphib(\vx_i)}{\vw}+b)})}. \label{lr_posteriori_log}
 \end{align}
-In fact, (\ref{lr_posteriori_log}) is an instantiation of regularization risk minimization described in (\ref{rl}).
+In fact, (\ref{lr_posteriori_log}) is an instantiation of regularization risk minimization described in (\ref{rl}) with $L_2$-norm regularization (\ref{l2_norm}) and exponential loss function (\ref{exp_loss}).
 
 Many optimization techniques have been proposed \citep{Minka03}, for example, 
 the {Itrative Scaling} method \citep{Darroch72,Pietra97inducing,Berger97,Goodman02Sequential,Jin03a},
