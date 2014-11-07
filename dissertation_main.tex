@@ -149,15 +149,15 @@ Popular loss functions used in machine learning include for instance,
 \end{align*}
 \textit{Squared Loss} in e.g., Ridge Regression \citep{Hoerl00ridge}
 \begin{align*}
-	\Lcal_{squared}(y,f(\vx)) = (y, f(\vx))^2,\, \Ycal=\RR,
+	\Lcal_{squared}(y,f(\vx)) = (y-f(\vx))^2,\, \Ycal=\RR,
 \end{align*}
 \textit{Exponential Loss} in e.g., in \adaboost\ \citep{Schapire99improved}
 \begin{align*}
-	\Lcal_{exp}(y,f(\vx)) = \exp(-y f(\vx)),\, \Ycal=\RR
+	\Lcal_{exp}(y,f(\vx)) = \exp(-y f(\vx)),\, \Ycal=\RR,
 \end{align*}
 \textit{Logistic Loss} in e.g., in Logistic Regression \citep{Chen99}
 \begin{align*}
-	\Lcal_{log}(y,f(\vx)) = \log(1+\exp(-y f(\vx))),\, \Ycal=\RR.
+	\Lcal_{log}(y,f(\vx)) = \log(1+\exp(-y f(\vx))),\, \Ycal=[-1,+1].
 \end{align*}
 
 With loss function, we compute the \textit{true risk} of the estimator $f$ over all examples from domain $\vXcal\times\Ycal$ by
