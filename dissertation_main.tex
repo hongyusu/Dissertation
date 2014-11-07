@@ -139,11 +139,11 @@ The basic goal for \textit{statistical learning} is to provide from a hypothesis
 
 To measure the goodness of the estimator, we define a loss function $\Lcal(y,f(\vx)):\Ycal\times\Ycal\rightarrow\RR^+$ as a monatomic bounded function between the true value $y$ and the predicted value $f(\vx)$.
 Popular loss functions used in machine learning include, for example,
-\textit{Hinge Loss} in Support Vector Machines \citep{Boser92,Cortes95support}
+\textit{Hinge Loss} in Support Vector Machines \citep{Cortes95support}
 \begin{align*}
 	\Lcal_{hinge}(y,f(\vx)) = \maximize (0,1-y f(\vx)),\, \Ycal=[-1,+1],
 \end{align*}
-\textit{Hamming Loss} in structured \svm\ \citep{THJA04,TJTA05}
+\textit{Hamming Loss} in structured \svm\ \citep{THJA04}
 \begin{align*}
 	\Lcal_{0/1}(y,f(\vx)) = \ind{y=f(\vx)},\, \Ycal = \ZZ,
 \end{align*}
@@ -166,15 +166,15 @@ With loss function, we compute the \textit{true risk} of the estimator $f$ over 
 	\Rcal(f) = \int_{(\vx,y)\in\vXcal\times\vYcal}\Lcal(y,f(\vx))P(\vx,y)\,d_{\vx}d_{y} \label{true_risk}.
 \end{align}
 As a results, we should search for an estimator $f$ that minimizes the true risk defined by (\ref{true_risk}).
-However, the distribution $P(\vx,y)$ that generates the examples is unknown.
+However, the distribution $P(\vx,y)$ that generates examples is unknown.
 It is impossible to compute (\ref{true_risk}) directly.
 Instead, we are given a random sample of $m$ examples, denoted by $S=\{(\vx_1,y_1),\cdots,(\vx_m,y_m)\}$, called \textit{training data}.
-\textit{Empirical risk} is defined as the average error made by estimator $f$ on the training data $S$ of finite size
+\textit{Empirical risk} is defined as the average error of the estimator $f$ on the training data $S$ of finite size
 \begin{align}
 	\Rcal_{emp}(f) = \frac{1}{m}\sum_{i=1}^{m}\Lcal(y_i,f(\vx_i)) \label{empirical_risk}.
 \end{align}
 This suggests the learning algorithm should search for an estimator $f$ to minimize the empirical risk defined in (\ref{empirical_risk}).
-The strategy is known in machine learning community as \textit{empirical risk minimization} \citep{Vapnik92principles}.
+The strategy is known as \textit{empirical risk minimization} \citep{Vapnik92principles} in machine learning community.
 
 \subsection{Regularized Learning}\label{sc_rl}
 
