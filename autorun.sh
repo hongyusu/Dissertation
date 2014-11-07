@@ -19,5 +19,3 @@ rm dissertation_abstract.log
 echo 'Number of references:'
 cat ${maintextname}.bib|grep '@'|wc -l
 
-
-git commit -m 'buid pdf' .

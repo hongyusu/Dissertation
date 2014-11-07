@@ -684,17 +684,16 @@ There are many other active lines of research on \svm\ optimization that aim to 
 %------------------------------------------------
 \section{Ensemble Methods} \label{sc_em}
 
-Ensemble methods are one of the prominent classification techniques widely used in machine learning community.
-In general, the methods train multiple base classifiers and combine them in order to achiever better classification performance.
-Most importantly, there is no requirement for base classifiers to be accurate as long as they perform better than random guessing.
-%To trace the exact originality of the ensemble methods seems impossible, as the methods involve along well with human society by which it is wiser to take in to account advises from multiple human experts.
-There are several different types of ensemble algorithms, to name a few, bagging \citep{Breiman96bagging}, boosting \citep{Freund97a,Schapire99improved}, stacking \citep{Smyth99linearly}, Bayesian averaging \citep{Freund04generalization}.
-Most of the algorithms have improved the classification performance when compared to their base classifier counterpart, some of them are also supported with theoretical analysis that guarantees the performance \citep{Schapire97boosting,Koltchinskii00empirical,Cortes14semble,Cortes14deep}.
-For our purposes, the section will focus on bagging and boosting ensemble since both methods are well known approaches and are most related to this thesis.
+Ensemble methods are general classification techniques in machine learning.
+The methods train several base classifiers and combine them in order to achiever more accurate prediction.
+Most importantly, there is no requirement for the base classifiers to be accurate as long as they perform better than random guessing.
+There are several variants of ensemble methods, to name a few, bagging \citep{Breiman96bagging}, boosting \citep{Freund97a,Schapire99improved}, stacking \citep{Smyth99linearly}, Bayesian averaging \citep{Freund04generalization}.
+Ensemble methods have improved the classification performance when compared to their base learner counterpart, some of them are also supported with the theoretical analysis that guarantees the performance \citep{Schapire97boosting,Koltchinskii00empirical,Cortes14semble,Cortes14deep}.
+This section will devote to bagging and boosting since both methods are extensively studied and are most related to this thesis.
 
-Ensemble method is original designed for single-label classification.
-The multilabel variants will be briefly presented in Section~\ref{sc_emfmlc}.
-Moreover, we develop several new learning algorithms in the later part of the thesis which are analog but with significant difference to the ensemble methods presented in this section.
+Ensemble methods and their theories are primarily developed for single-label classification.
+The extensions for the multilabel classification problem will be briefly covered in Section~\ref{sc_emfmlc}.
+Moreover, in the later part of the thesis, we will develop several new learning algorithms which are analog but with significant difference to the methods presented in this section.
 
 
 
@@ -702,10 +701,10 @@ Moreover, we develop several new learning algorithms in the later part of the th
 %
 \subsection{Preliminaries} \label{sc_em_pn}
 
-In addition to the notations introduced in Section~\ref{sc_slc_pn}, we assume there is a hypothesis class $\Fcal$ where we generate weak/base hypothesis $f^t(x)\in\Fcal$.
-By $t$ we intend to index the $t$'th weak hypothesis.
-We use $H(x)$ to denote the ensemble framework that is able to combine multiple weak hypotheses and generate a stronger one.
-In many cases, no other information about $f^t(x)$ is available to $H(x)$ except that each weak hypothesis will take in as parameter $\vx$ and output $y\in\Ycal$ for single label classification ($\vy\in\vYcal$ in multilabel classification respectively).
+In addition to the notations introduced in Section~\ref{sc_slc_pn}, we assume there is a hypothesis class $\Hcal'$ where we generate weak/base hypothesis $f^t(x)\in\Hcal'$.
+We use $t$ to index the $t$'th weak hypothesis.
+$H(x)$ denotes the ensemble framework that is able to combine multiple weak hypotheses and generate a stronger one.
+In many cases, no other information about $f^t(x)$ is available to $H(x)$ except that each weak hypothesis will take in a parameter $\vx$ and output $y\in\Ycal$ in single-label classification setting, or $\vy\in\vYcal$ in multilabel classification setting respectively.
 
 
 \subsection{Boosting} \label{sc_boosting}
