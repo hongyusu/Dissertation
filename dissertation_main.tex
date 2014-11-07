@@ -140,23 +140,23 @@ The basic goal for \textit{statistical learning} is to provide from a hypothesis
 To measure the goodness of the estimator, we define a loss function (risk function) $\Lcal(y,f(\vx)):\Ycal\times\Ycal\rightarrow\RR^+$ between the true value $y$ and the predicted value $f(\vx)$.
 Loss function is bounded.
 Popular loss functions used in machine learning include for instance, 
-\textit{Hinge Loss} used in e.g., Support Vector Machines (\svm) \citep{Boser92,Cortes95support}
+\textit{Hinge Loss} in e.g., Support Vector Machines (\svm) \citep{Boser92,Cortes95support}
 \begin{align*}
 	\Lcal_{hinge}(y,f(\vx)) = \maximize (0,1-y f(\vx)),
 \end{align*}
-\textit{Hamming Loss} used in e.g. structured \svm\ \citep{THJA04,TJTA05}
+\textit{Hamming Loss} in e.g. structured \svm\ \citep{THJA04,TJTA05}
 \begin{align*}
 	\Lcal_{0/1}(y,f(\vx)) = \ind{y=f(\vx)},
 \end{align*}
-\textit{Squared Loss} applied in e.g., Ridge Regression by \citet{Hoerl00ridge}
+\textit{Squared Loss} in e.g., Ridge Regression \citep{Hoerl00ridge}
 \begin{align*}
 	\Lcal_{squared}(y,f(\vx)) = (y, f(\vx))^2,
 \end{align*}
-\textit{Exponential Loss} used in e.g., in \adaboost\ \citep{Schapire99improved}
+\textit{Exponential Loss} in e.g., in \adaboost\ \citep{Schapire99improved}
 \begin{align*}
 	\Lcal_{exp}(y,f(\vx)) = \exp(y f(\vx)),
 \end{align*}
-\textit{Logistic Loss} used in e.g., in Logistic Regression \citep{Chen99}
+\textit{Logistic Loss} in e.g., in Logistic Regression \citep{Chen99}
 \begin{align*}
 	\Lcal_{log}(y,f(\vx)) = \log(1+\exp(y f(\vx))).
 \end{align*}
