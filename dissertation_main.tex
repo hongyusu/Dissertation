@@ -1199,7 +1199,7 @@ Apply similar regularization technique as used on \lr\ in Section~\ref{sc_lr}, t
 \begin{align}
 	L(\vw) = \sum_{i=1}^{m}\left[\ip{\vw}{\phib(\vx_i,\vy_i)}-\log{\sum_{\vy'\in\vYcal}{\exp{\ip{\vw}{\phib(\vx_i,\vy')}}}}\right] - \frac{1}{\sigma^2}\norm{\vw}^2. \label{crf_inference}
 \end{align}
-The optimization problem derived from (\ref{crf_inference}) is solved in \citep{lafferty01} by Improved Iterative Scaling algorithm (\iis) \citep{Pietra97inducing}.
+The optimization problem derived from (\ref{crf_inference}) is solved in \citep{lafferty01} by improved iterative scaling algorithm (\iis) \citep{Pietra97inducing}.
 In order to make \crf\ work in practice, one has to make sure that the partition function (\ref{crf_partition_function}) can be computed efficiently.
 
 
@@ -1880,13 +1880,13 @@ In this thesis, we have studied the supervised learning for classification.
 Especially, we focused on multilabel classification where the task is to predict multiple interdependent output variables given an input example.
 As the multiple output variables can be ``on'' or ``off'' simultaneously, the central problem in multilabel classification is to explore the label correlation in order to make better prediction.
 The problem has been previously tackled by flat multilabel classification approach which treats the multiple variables at a ``flat'' vector.
-The approach has difficulty of model label dependency.
+The approach has difficulty of modeling label dependency.
 Structured output learning arises as a natural extension to flat multilabel classification in which the label dependency is modeled by an output graph connecting labels.
 
-The first outcome of the thesis is a new structured output learning algorithms for multilabel classification when the output graph is observed.
+The first outcome of the thesis is a new structured output learning algorithms for multilabel classification with observed output graph.
 In particular, the proposed algorithm \spin\ can predict a directed acyclic graph from an observed network that best ``responses'' to an input example.
-The empirical evaluation on network response prediction problem within the context of social network analysis demonstrates that the proposed model outperforms the previous flat multilabel classification approaches.
-The study not only widens the applicability of the structured output learning, but also it demonstrates the accurate prediction can be achieved by structured output learning when the output dependency structured can be obtained and utilized during learning.
+The empirical evaluation on the network response prediction problem within the context of social network analysis demonstrates that the proposed model outperforms the previous flat multilabel classification approaches.
+The study not only widens the applicability of the structured output learning, but also demonstrates the accurate prediction can be achieved by structured output learning when the output dependency structured can be obtained and utilized during learning.
 
 Meanwhile, we realize that current structured output learning approach relies an output graph connecting multiple output variables in order to model the label dependency in a comprehensive manner.
 Limiting the applicability of the structured output learning is the fact that the output graph is assume to be observed as \textit{a-priori}.
