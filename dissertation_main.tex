@@ -137,11 +137,11 @@ In addition, we are provided with examples in pair $(\vx,y)\in\vXcal\times\Ycal$
 A \textit{hypothesis class} $\Hcal$ is a set of functions that the learning algorithm is allowed to search against.
 The basic goal for \textit{statistical learning} is to provide from a hypothesis class $\Hcal$ an \textit{estimator} $f\in\Hcal:\vXcal\rightarrow\Ycal$ that predicts the value of $y$ given an input $\vx$.
 
-To measure the goodness of the estimator, we define a loss function $\Lcal(y,f(\vx)):\Ycal\times\Ycal\rightarrow\RR^+$ between the true value $y$ and the predicted value $f(\vx)$.
+To measure the goodness of the estimator, we define a loss function $\Lcal(y,f(\vx)):\Ycal\times\Ycal\rightarrow\RR^+$ as a bounded function between the true value $y$ and the predicted value $f(\vx)$.
 Popular loss functions used in machine learning include for instance, 
 \textit{Hinge Loss} in e.g., Support Vector Machines (\svm) \citep{Boser92,Cortes95support}
 \begin{align*}
-	\Lcal_{hinge}(y,f(\vx)) = \maximize (0,1-y f(\vx)),
+	\Lcal_{hinge}(y,f(\vx)) = \maximize (0,1-y f(\vx)), \Ycal=[0,1],
 \end{align*}
 \textit{Hamming Loss} in e.g. structured \svm\ \citep{THJA04,TJTA05}
 \begin{align*}
@@ -159,7 +159,6 @@ Popular loss functions used in machine learning include for instance,
 \begin{align*}
 	\Lcal_{log}(y,f(\vx)) = \log(1+\exp(y f(\vx))).
 \end{align*}
-Loss functions are bounded.
 
 With loss function, we compute the \textit{true risk} of the estimator $f$ over all examples from domain $\vXcal\times\Ycal$ by
 \begin{align}
