@@ -138,23 +138,25 @@ A \textit{hypothesis class} $\Hcal$ is a set of functions that the learning algo
 The basic goal for \textit{statistical learning} is to provide from a hypothesis class $\Hcal$ an \textit{estimator} $f\in\Hcal:\vXcal\rightarrow\Ycal$ that predicts the value of $y$ given an input $\vx$.
 
 To measure the goodness of the estimator, we define a loss function (risk function) $\Lcal(y,f(\vx)):\Ycal\times\Ycal\rightarrow\RR^+$ between the true value $y$ and the predicted value $f(\vx)$.
-Popular loss functions used in machine learning include \textit{Hamming Loss} (e.g., in \svmstruct\ of Section~\ref{sc_svmstruct})
-\begin{align*}
-	\Lcal_{0/1}(\vy,f(\vx)) = \ind{\vy=f(\vx)},
-\end{align*}
-\textit{Hinge Loss} (e.g., in \svm\ of Section~\ref{sc_svm})
+Loss function is bounded.
+Popular loss functions used in machine learning include for instance, 
+\textit{Hinge Loss} which is a non-differentiable non-smooth function used in e.g., Support Vector Machines (\svm) \citep{Boser92,Cortes95support}
 \begin{align*}
 	\Lcal_{hinge}(\vy,f(\vx)) = \maximize (0,1-\vy f(\vx)),
 \end{align*}
-\textit{Square Error Loss} (e.g., in Ridge Regression by \citet{Hoerl00ridge})
+\textit{Hamming Loss} which is non-differentiable non-smooth function used in e.g. structured \svm\ \citep{THJA04,TJTA05}
+\begin{align*}
+	\Lcal_{0/1}(\vy,f(\vx)) = \ind{\vy=f(\vx)},
+\end{align*}
+\textit{Square Error Loss} which is a differentiable and smooth function applied in e.g., Ridge Regression by \citet{Hoerl00ridge}
 \begin{align*}
 	\Lcal_{square}(\vy,f(\vx)) = (\vy, f(\vx))^2,
 \end{align*}
-\textit{Exponential Loss} (e.g., in \adaboost\ of Section~\ref{sc_boosting})
+\textit{Exponential Loss} which is a differentiable and smooth function used in e.g., in \adaboost\ \citep{Schapire99improved}
 \begin{align*}
 	\Lcal_{exp}(\vy,f(\vx)) = \exp(\vy f(\vx)),
 \end{align*}
-\textit{Logistic Loss} (e.g., in Logistic Regression of Section~\ref{sc_lr})
+\textit{Logistic Loss} which is a differentiable and smooth function used in e.g., in Logistic Regression \citep{Chen99}
 \begin{align*}
 	\Lcal_{log}(\vy,f(\vx)) = \log(1+\exp(\vy f(\vx))).
 \end{align*}
