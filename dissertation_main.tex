@@ -1914,13 +1914,12 @@ As the first direction of applying the presented algorithms is clear and applica
 
 As a starting point, we can extend \spin\ by developing new inference algorithm that is both scalable and with approximation guarantee.
 The current research ends with \rta\ method that performs joint learning and inference on a random sample of spanning trees.
-\rta\ combines the feature weight parameter from each spanning tree using $L_2$-norm convex combination.
-We can further explore the possibility of combining the feature weight vectors by $L_1$-norm combination.
-Learning with $L_1$-norm regularization of parameter combination has previously been studied under the multiple kernel learning setting
-\citep{Rakotomamonjy08simplemkl}, which can be formulated into an equivalent form of learning a weighted $L_2$-norm combination.
-The weight of parameter vector on each spanning tree can be seen as the fitness of the tree to the current learning problem.
+\rta\ combines the feature weight parameter from each spanning tree via a $L_2$-norm convex combination.
+This can be further extended by applying $L_1$-norm combination.
+Learning with $L_1$-norm regularization of parameter combination has been previously studied in the setting of multiple kernel learning \citep{Rakotomamonjy08simplemkl}, which can be formulated into an equivalent form of learning a weighted $L_2$-norm combination.
+The weight of the parameter vector on each spanning tree can be explained as the fitness of the tree to the current training data.
 This can be used to select output graph that is most relevant to the current problem.
-We should also design the optimization techniques for $L_1$-norm regularization as current alternative optimization method in \citep{Rakotomamonjy08simplemkl} is not efficient.
+We should also design the optimization techniques for $L_1$-norm regularization as current alternative optimization approach in \citep{Rakotomamonjy08simplemkl} is not efficient.
 The theoretical properties should also be extended from \rta\ to the new model. 
 
 
