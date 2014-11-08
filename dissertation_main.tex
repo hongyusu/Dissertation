@@ -1209,8 +1209,8 @@ In order to make \crf\ work in practice, one has to make sure that the partition
 \subsection{Max-Margin Markov Network (\mmmn)} \label{sc_mmmn}
 
 \citet{Taskar04max} designed Max-Margin Markov Network (\mmmn) that combines the framework of kernel based discriminative learning and probabilistic graphical model.
-\mmmn\ is extended from \svm\ (Section~\ref{sc_svm}) to structured output space.
-It also improves \crf\ (Section~\ref{sc_crf}) in terms that the evaluation of the partition function (\ref{crf_partition_function}) can be avoided by introducing the odd-ratio typed learning that is not dissimilar to \lr\ (Section~\ref{sc_lr}).
+\mmmn\ extends \svm\ (Section~\ref{sc_svm}) to structured output space.
+It also improves \crf\ (Section~\ref{sc_crf}) by which the evaluation of the partition function (\ref{crf_partition_function}) can be avoided by introducing the odd-ratio typed learning that is not dissimilar to \lr\ (Section~\ref{sc_lr}).
 
 \mmmn\ defined a log-linear Markov network over multiple output labels which explores the correlation in the label space.
 The compatibility score define by 
@@ -1250,11 +1250,21 @@ To compute (\ref{mmmninference}) efficiently, the loss function need to be decom
 Nevertheless, \mmmn\ improves \crf\ by avoiding partition function and allowing complex loss function.
 
 
+
+%
+%
+\subsection{Max-Margin Conditional Random Fields (\mmcrf)}
+
+Max-Margin conditional random field (\mmcrf) is a structured output prediction methods developed in \citep{Rousu07}.
+\mmcrf\ is a sibling method of \mmmn\ in which it extends \mmmn\ with a general and efficient optimization strategy. 
+\mmcrf is applied in \citepub{su10} where the task is to predict multiple interdependent molecular activities.
+
+
 %
 % 
 \subsection{Support Vector Machines for Interdependent and Structured Outputs (\svmstruct)} \label{sc_svmstruct}
 
-Support Vector Machine for interdependent and structured output space (\svmstruct) is developed in \citep{THJA04,TJTA05}.
+Support Vector Machines for interdependent and structured output space (\svmstruct) is developed in \citep{THJA04,TJTA05}.
 The formalism of \svmstruct\ is quite similar to \mmmn\ described in (Section~\ref{sc_mmmn}).
 Compared to \mmmn\ which scales the margin by the loss function, \svmstruct\ scales the margin errors ({\em slacks}) by the loss function.
 The primal optimization problem of \svmstruct\ can be defined as
