@@ -1692,7 +1692,7 @@ For each example $(\vx_i,\vy_i)$, the goal of optimization is to maximize the jo
 where $\phib_{T_t}(\vx,\vy)$ is the feature map that is local on each tree $T_t$, $\xi_i$ is the margin slack allocated for each $\vx_i$, and $C$ is the slack parameter that controls the amount of regularization.
 
 The key for the optimization is to solve the argmax problem efficiently.
-This is a \nphard\ problem in practice, as the size of the multilabel space is exponential in terms of the number of microlabels.
+This is a \nphard\ problem in practice, as the size of the multilabel space is exponential in the number of microlabels.
 In \citepub{su14c}, we have developed a $K$-best inference algorithm working in $\Theta(Knk)$ time per data point, where $k$ is the number of microlabels and $K$ is the number of best multilabels we compute from each random spanning tree.
 
 It is known that the exact solution for the inference problem on individual tree $T_t$ is tractable \citep{Koller09probabilistic} for which 
