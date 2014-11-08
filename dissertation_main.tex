@@ -1257,7 +1257,21 @@ Nevertheless, \mmmn\ improves \crf\ by avoiding partition function and allowing 
 
 Max-Margin conditional random field (\mmcrf) is a structured output prediction methods developed in \citep{Rousu07}.
 \mmcrf\ is a sibling method of \mmmn\ in which it extends \mmmn\ with a general and efficient optimization strategy. 
-\mmcrf is applied in \citepub{su10} where the task is to predict multiple interdependent molecular activities.
+\mmcrf\ is applied in \citepub{su10} where the task is to predict multiple interdependent molecular activities.
+
+In particular, \mmcrf\ uses exponential family to model the condition probability of a multiple output labels given a input example
+\begin{align*}
+	P(\vy|\vx) \propto \exp(\ip{\vw}{\phib(\vx,\vy)}) = \prod_{e\in E}\exp(\ip{\vw_e}{\phib_e(\vx,\vy_e)}),
+\end{align*}
+where $\phib_e(\vx,\vy_e)=\varphib(\vx)\otimes\Gamma_e(\vy_e)$ is the tensor product of the input feature and the output feature of a pair of microlabels with respect to edge $e\in E$ in the output Markov network $G$.
+In order to obtain $\vw$, we need to solve the primal optimization problem that is not dissimilar to (Definition~\ref{def_mmmn}).
+After the feature weight parameter $\vw$ is found, we need to solve the argmax problem to obtain the prediction
+\begin{align}
+	\hat{\vy} = \underset{\vy\in\vYcal/\vy_i}{\argmax} \, \ip{\vw}{\phib(\vx_i,\vy)}.\label{mmcrfinference}
+\end{align}
+
+To solve the optimization problem, \mmcrf\ uses conditional gradient optimization \citep{Bertsekas95nonlinear} in marginalized dual space \citep{Taskar04max}, which not only benefits from a polynomial-size parameter space but also enables the kernel function that is capable of dealing with non-linearity of the complex molecular structures.
+The inference problem (Definition~\ref{mmcrfinference}) is solved by loopy belief propagation (\lbp) on a general graph which is an instantiation of message-passing algorithm \citep{Wainwright08graphical}.
 
 
 %
@@ -1471,7 +1485,10 @@ In particular, the model defines a compatibility score through inner product for
 	F(\vx,\vy;\vw) = \ip{\vw}{\phib(\vx,\vy)},
 \end{align*}
 where $\vw$ is the feature weight parameter that ensures the molecular structure with correct activities will be scored higher than with incorrect activities.
-The parameter $\vw$ is learned by maximizing the minimum loss-scaled margin between correct examples $(\vx_i,\vy_i)$ and incorrect pseudo-examples $(\vx_i,\vy)$ over the whole training set, which amounts to solving the following optimization problem
+The parameter $\vw$ is learned by maximizing the minimum loss-scaled margin between correct examples $(\vx_i,\vy_i)$ and incorrect pseudo-examples $(\vx_i,\vy)$ over the whole training set, which amounts to solving the optimization problem in (Definition~\ref{def_mmmn})
+
+\iffalse
+following optimization problem
 \begin{align*}
 	\underset{\vw,\vxi_i}{\minimize} & \quad \frac{1}{2}\norm{\vw}^2 + C\sum_{i=1}^{m}\xi_i\\
 	\st &\quad \ip{\vw}{\phib(\vx_i,\vy_i)} - \ip{\vw}{\phib(\vx_i,\vy)} \ge \ell(\vy_i,\vy)-\xi_i,\\
@@ -1482,7 +1499,7 @@ where $\ell(\vy_i,\vy)$ is the loss function defined as
 	\ell(\vy_i,\vy) = \sum_{j=1}^{k}\ind{\vy_i[j]\neq \vy[j]}.
 \end{align*}
 The loss scaled margin optimization will push high-loss pseudo-examples further away from the correct example than the low-loss pseudo-examples.
-The model is optimized by conditional gradient optimization \citep{Bertsekas95nonlinear} in marginalized dual space \citep{Taskar04max}, which not only benefits from a polynomial-size parameter space but also enables the kernel function that is capable of dealing with non-linearity of the complex molecular structures.
+\fi
 
 %Kernel is the classical way of defining the similarity between complex objects.
 In \citepub{su10} we use graph kernel to measure the similarity between pair of molecular structures.
