@@ -1271,7 +1271,7 @@ After the feature weight parameter $\vw$ is found, we need to solve the argmax p
 \end{align}
 
 To solve the optimization problem, \mmcrf\ uses conditional gradient optimization \citep{Bertsekas95nonlinear} in marginalized dual space \citep{Taskar04max}, which not only benefits from a polynomial-size parameter space but also enables the kernel function that is capable of dealing with non-linearity of the complex molecular structures.
-The inference problem (Definition~\ref{mmcrfinference}) is solved by loopy belief propagation (\lbp) on a general graph which is an instantiation of message-passing algorithm \citep{Wainwright08graphical}.
+The inference problem (Definition~\ref{mmcrfinference}) is solved by loopy belief propagation (\lbp) on general graph which is an instantiation of the message-passing algorithm developed by \cite{Wainwright08graphical}.
 
 
 %

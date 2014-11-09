@@ -16,6 +16,9 @@ pdflatex dissertation_abstract
 rm dissertation_abstract.aux
 rm dissertation_abstract.log
 
+
+git commit -m 'minor revision from chong' .
+
 echo 'Number of references:'
 cat ${maintextname}.bib|grep '@'|wc -l
 
