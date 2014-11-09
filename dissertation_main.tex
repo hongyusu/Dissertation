@@ -1552,10 +1552,10 @@ In \text{correlation thresholding} approach, we take all edges that exceed a fix
 
 We have presented in Section~\ref{sc_su10} a structured output learning approach for multilabel molecular classification problem.
 The model relies on the representation of the multiple output variables through an output graph which allows us to explore the label correlation in a more comprehensive way compared to previous approaches.
-To apply structured output learning, it is assumed the structure of the output graph is fully observed.
-Alternatively in \citepub{su10}, there exists auxiliary data that encodes the label correlation which can be utilized in order to retrieve the output graph.
+To apply structured output learning, it is assumed that the structure of the output graph is fully observed.
+Alternatively in \citepub{su10}, there exists auxiliary datasets that encode the label correlation which can be exploited in order to retrieve the output graph.
 However, we cannot take the availability of the output graph for granted because the underlying dependency structure is often hidden in many real world applications.
-In \citepub{su11}, we explore the potential of constructing a majority voting ensemble of multiple structured output learners and examine the performance of the proposed model on molecular activity classification problem.
+In \citepub{su11}, we explore the potential of constructing a majority voting ensemble of multiple structured output learners and examine the performance of the proposed model on molecular classification problem.
 Each structured output learner is built based on a random generated output graph.
 As a result, the proposed model (\mve) is not constrained to the availability of the output dependency structure.
 
