@@ -1567,14 +1567,14 @@ As a result, the proposed model (\mve) is not constrained to the availability of
 
 We use \mmcrf\ as base classifier trained on a set of random output graphs.
 In particular, a random graph $G_t$ is generated for each base classifier to couple the multiple output labels which are the activities of the molecular structure $\vx$ over all cell lines.
-The base model \mmcrf\ is learnt with training data $S=\{(\vx_i,\vy_i)\}_{i=1}^{m}$ and the output graph $G_t$.
-After ensemble has been generated, the predictions are extracted from each base classifier and are collected for a post-processing step: we compute a majority vote over the graph labeling from the sign on the means of the base classifier's prediction
+The base model \mmcrf\ is learnt with the training data $S=\{(\vx_i,\vy_i)\}_{i=1}^{m}$ and the output graph $G_t$.
+After the base learners have been generated, the predictions are extracted from each base classifier and are collected for a post-processing step: we compute a majority vote over the graph labeling from the sign on the means of the base classifier's prediction
 \begin{align*}
 	F_j^{\text{\mve}}=\underset{y_j\in\Ycal_j}{\argmax}\,\left(\frac{1}{T}\sum_{i=1}^{T}\ind{F_j^{(t)}(x)=y_j}\right), \forall j\in\{1,\cdots,k\},
 \end{align*}
-where by $T$ we denote the size of the ensemble, and by $F^{(t)}(\vx)=\{F^{(t)}_j(x)\}_{j=1}^{k}$ we denote the predicted multilabel from the $t$'th base classifier.
+where $T$ denotes the size of the ensemble which is also the number of random output graphs, and $F^{(t)}(\vx)=\{F^{(t)}_j(x)\}_{j=1}^{k}$ denotes the predicted multilabel from the $t$'th base learner.
 In words, the ensemble prediction on each microlabel is the most frequently appearing prediction among the base classifiers.
-It is also worth pointing out that the \mve\ framework is not restricted to base classifier \mmcrf\ and can be extended with any structured output learning models as long as they incorporate the output structure into learning process and make predictions based on the output structure.
+It is also worth pointing out that the \mve\ framework is not restricted to the base learner \mmcrf\ and can be extended with any other structured output learning methods as long as the methods incorporate the output structure and make predictions based on the structure.
 
 In addition, we designed two approaches to generate random output graphs.
 In \text{random spanning tree} approach, we first generate a random correlation matrix and extract the spanning tree out from the matrix.
