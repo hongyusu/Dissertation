@@ -1241,7 +1241,7 @@ Nevertheless, \mmmn\ improves \crf\ by avoiding the partition function and allow
 %
 \subsection{Max-Margin Conditional Random Fields (\mmcrf)} \label{sc_mmcrf}
 
-Max-Margin conditional random field (\mmcrf) is a structured output prediction methods developed in \citep{Rousu07}.
+Max-Margin conditional random field (\mmcrf) is a structured output learning method developed in \citep{Rousu07}.
 \mmcrf\ is a sibling method of \mmmn\ in which it extends \mmmn\ with a general and efficient optimization strategy. 
 \mmcrf\ is applied in \citepub{su10} where the task is to predict multiple interdependent molecular activities.
 
@@ -1257,7 +1257,8 @@ After the feature weight parameter $\vw$ is found, we need to solve the argmax p
 \end{align}
 
 To solve the optimization problem, \mmcrf\ uses conditional gradient optimization \citep{Bertsekas95nonlinear} in marginalized dual space \citep{Taskar04max}, which not only benefits from a polynomial-size parameter space but also enables the kernel function that is capable of dealing with non-linearity of the complex molecular structures.
-The inference problem (Definition~\ref{mmcrfinference}) is solved by loopy belief propagation (\lbp) on general graph which is an instantiation of the message-passing algorithm developed by \cite{Wainwright08graphical}.
+The inference problem (\ref{mmcrfinference}) is solved by loopy belief propagation (\lbp) on general graph which is an instantiation of the message-passing algorithm developed by \cite{Wainwright08graphical}.
+
 
 
 %
@@ -1293,7 +1294,7 @@ To find the most violating constraint, we need to compute the loss-augmented inf
 The loss function appears as a multiplicative term making (\ref{svmstructinference}) not decomposable over the Markov network.
 This gives an intractable inference problem in general.
 In exchange of intractability, \svmstruct\ can work with complex loss functions which do not assume any property of decomposition.
-The generality of the loss function can be seen as an advantage compared to \crf\ and \mmmn.
+The generality of the loss function can be seen as an advantage compared to \crf, \mmmn, and \mmcrf.
 
 
 
