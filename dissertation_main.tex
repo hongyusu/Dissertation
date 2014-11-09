@@ -141,9 +141,9 @@ Popular loss functions used in machine learning include, for example,
 \begin{align}
 	\Lcal_{hinge}(y,f(\vx)) = \maximize (0,1-y f(\vx)),\, \Ycal=[-1,+1], \label{hinge_loss}
 \end{align}
-\textit{Hamming Loss} in structured \svm\ \citep{THJA04}
+\textit{$0/1$ Loss} in structured \svm\ \citep{THJA04}
 \begin{align}
-	\Lcal_{0/1}(y,f(\vx)) = \ind{y=f(\vx)},\, \Ycal = \ZZ, \label{hamming_loss}
+	\Lcal_{0/1}(y,f(\vx)) = \ind{y=f(\vx)},\, \Ycal = \ZZ, \label{one_loss}
 \end{align}
 \textit{Squared Loss} in Ridge Regression \citep{Hoerl00ridge}
 \begin{align*}
@@ -1730,7 +1730,7 @@ For each example $(\vx_i,\vy_i)$, the goal of optimization is to maximize the jo
 \end{definition}
 \noindent
 where $\phib_{T_t}(\vx,\vy)$ is the feature map that is local on each tree $T_t$, $\xi_i$ is the margin slack allocated for each $\vx_i$, and $C$ is the slack parameter that controls the amount of regularization.
-Definition~\ref{primalrta} is an instantiation of the regularized learning (Section~\ref{rl}) in terms of the $L_2$-norm regularization (\ref{l2_norm}) and the hamming loss (\ref{hamming_loss}).
+Definition~\ref{primalrta} is an instantiation of the regularized learning (Section~\ref{rl}) in terms of the $L_2$-norm regularization (\ref{l2_norm}) and the $0/1$ loss (\ref{one_loss}).
 
 The key for the optimization is to solve the argmax problem efficiently.
 This is an \nphard\ problem in practice, as the size of the multilabel space is exponential in the number of microlabels.
@@ -1788,10 +1788,10 @@ This is typically known as \textit{leave-one-out} (\loo) {cross-validation} .
 Most machine learning algorithms explicitly assume that the training data and the test data are drawn from the same distribution.
 We should make sure that the statistical property of the original labeled data is well preserved when partitioning the original labeled examples into subsets.
 In single-label classification problem we can easily preserve the label distribution if we randomly sample labeled examples without replacement from the origin dataset.
-However, it is not clear on how to preserve label distribution under multilabel classification setting.
+However, it is not clear on how to preserve label distribution under the multilabel classification setting.
 To this end, we use \textit{stratification} (\textit{stratified sampling}) method where we first group the labeled examples into equivalent classes based on the number of positive labels they have. 
-Each class is then randomly split into $K$ local fold, after that local folds are merged to create $K$ global fold.
-The stratification scheme ensures that smaller classes also have representations in all folds. 
+Each class is then randomly split into $K$ local folds, after that local folds are merged to create $K$ global folds.
+The stratification scheme ensures that the smaller classes also have representations in all folds. 
 
 After partitioning the original data into training set and test set, we adopt several well-known performance measures in order to quantitively evaluate the performance of different classifiers.
 We report \textit{multilabel accuracy} (\textit{0/1 accuracy}) which counts the percentage of multilabel predictions which have all of the microlabel being correct.
@@ -1825,7 +1825,7 @@ To serve as a starting point, we assume a very basic setting where we already ha
 It is straight forward to compare the performance of the algorithms in terms of the performance metrics and choose the best model based on the value of the metric without resorting to any statistical methods.
 We only assume that the metrics accurately reveal the performance of the algorithms.
 However, when a new learning algorithm is proposed, it is usually evaluated over multiple datasets to rule out the probability that it performs well on one particular dataset by chance.
-Statistical evaluation of experimental results have been considered as an essential part of comparison steps in such complicate scenarios.
+Statistical evaluation of experimental results have been considered as an essential part of the comparison steps in such complicate scenarios.
 We will base our discuss on \citep{Demsar06statistical,Garcia08an} in the following part of the section.
 
 We first consider the case where we want to compare two learning algorithms over multiple datasets.
@@ -1837,24 +1837,24 @@ Paired t-test is problematic due to commensurability.
 Besides, the result will not be significant unless the sample size is larger enough.
 \citet{Demsar06statistical} proposed Wilcoxon signed-ranks test which is a non-parametric alternative to the paired t-test to compared two algorithms over multiple datasets.
 Meanwhile, sign-test is also proposed in \citep{Demsar06statistical}.
-As the setting is not very interesting for our purpose, we will not expand our discussion on the details.
+As the setting is not very interesting for our purpose, we will not expand our discussion in detail.
 
-Secondly, we will consider a more common situation where we want to compare multiple learning algorithms over many datasets.
+Secondly, we consider a more common situation where we want to compare multiple learning algorithms over many datasets.
 In practice, we want to answer the question, for example, whether algorithm A is significantly better than algorithm C, and algorithm C outperforms algorithm B in a significant manner.
-In statistics, this amounts to multiple hypothesis test.
-The common way is to use repeat-measures ANOVA \citep{Fisher59statistical} with post-hoc Tukey test \citep{Turkey49comparing}. 
+This amounts to multiple hypothesis test in statistics.
+The common way is to use repeat-measures \anova\ \citep{Fisher59statistical} with post-hoc Tukey test \citep{Turkey49comparing}. 
 The test procedure is based on two assumptions: the first is known as \textit{normality}, meaning samples are drawn from normal distributions; the second is known as \textit{sphericity}, meaning samples should have equal variant.
-It is not difficult to see that the ANOVA is ill-posed as none the assumptions are met within the context of comparing the performance of learning algorithms over datasets.
+It is not difficult to see that \anova\ is ill-posed as none of the assumptions are met within the context of comparing the performance of multiple learning algorithms over datasets.
 
-To alleviate the problems, \citet{Demsar06statistical} suggest to use Friedman test \citep{Friedman37the,Friedman40Comparison} with post-hoc Nemenyi test \citep{Nemenyi63distribution}.
-The goal of the test procedure is to examine whether a pair of algorithms are significantly different from each other under multiple hypothesis test settings.
+To tackle the problems, \citet{Demsar06statistical} suggest to use Friedman test \citep{Friedman37the,Friedman40Comparison} with post-hoc Nemenyi test \citep{Nemenyi63distribution}.
+The goal of the test procedure is to examine whether a pair of algorithms are significantly different from each other under the multiple hypothesis test setting.
 To perform Friedman test, we first compute the average rank $R_j$ of the $j$'th algorithms.
 The Friedman test then compares the average ranks and under null-hypothesis states that the average ranks are equal.
 The test statistics can be computed according to the procedure discussed in \citep{Demsar06statistical}.
-If null-hypothesis is rejected, we can proceed with post-hoc Nemenyi test to compare algorithms with each other.
-In particular, we can compute the \textit{critical different} ($CD$) and state that the performance of two classifiers are significantly different if the corresponding average rank differs by at least $CD$.
+If null-hypothesis is rejected, we can proceed with post-hoc Nemenyi test to compare the algorithms with each other.
+In particular, we can compute \textit{critical different} ($CD$) and state that the performance of two classifiers are significantly different if the corresponding average rank differs by at least $CD$.
 As the post-hoc Nemenyi test is usually conservative and has little statistical power, we sometimes use Bonferroni-Dunn test \citep{Dunn61mulitple} to compare the learning algorithms against the selected control which is usually the newly proposed algorithm.
-The test results are often visualized as \textit{$CD$ diagram}.
+The test result is often visualized as a \textit{$CD$ diagram}.
 
 
 
