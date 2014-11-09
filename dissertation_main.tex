@@ -1477,9 +1477,9 @@ For example in the recent \textit{NCI-60} {Human Tumor Cell Line Screen} project
 %
 \subsection{Methods}
 
-To efficiently and accurately predict molecular activities in multiple cell lines at the same time, we applied a structured output learning approach in \citepub{su10} which to our knowledge is the first multilabel learning approach for molecular classification problem.
-The algorithm is an instantiation of the structured output learning method \mmcrf\ developed in \citep{Rousu07}.
-It can also be seen as a sibling method of \mmmn\ \citep{Taskar04max} described in Section~\ref{sc_mmmn}.
+To efficiently and accurately predict molecular activities in multiple cell lines at the same time, we applied a structured output learning approach in \citepub{su10} which to our knowledge is the first multilabel learning approach for the molecular classification problem.
+The algorithm is an instantiation of the structured output learning method \mmcrf\ \citep{Rousu07} described in Section~\ref{sc_mmcrf}.
+It is also a sibling method of \mmmn\ \citep{Taskar04max} described in Section~\ref{sc_mmmn}.
 In particular, the model defines a compatibility score through inner product for a molecular structure $\vx$ and the activities in multiple cell lines $\vy$
 \begin{align*}
 	F(\vx,\vy;\vw) = \ip{\vw}{\phib(\vx,\vy)},
