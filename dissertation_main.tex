@@ -1503,22 +1503,22 @@ The loss scaled margin optimization will push high-loss pseudo-examples further 
 
 %Kernel is the classical way of defining the similarity between complex objects.
 As \mmcrf\ kernelizes input, we use graph kernel to measure the similarity between pair of molecular structures in \citepub{su10} .
-The common way to represent the structure of a molecule is to use an undirected labeled graph $G=(V,E)$, where vertices $V=\{v_1,\cdots,v_n\}$ corresponds to atoms and edge $E=\{e_1,\cdots,e_m\}$ corresponds to the covalent bonds.
+The common way to represent the structure of a molecule is to use an undirected labeled graph $G=(V,E)$, where vertices $V=\{v_1,\cdots,v_n\}$ corresponds to atoms and edges $E=\{e_1,\cdots,e_m\}$ corresponds to the covalent bonds.
 The adjacency matrix $A$ of graph $G$ is defined such that the $(i,j)$'th entry $A_{i,j}$ equals to one if there is an edge between atom $i$ and atom $j$.
 
 % walk kernel
 \textit{Walk Kernel} \citep{Kashima03marginalized,Gartner03a} computes the sum of matching walks in a pair of graphs. 
 The contribution of each matching walk is down scaled exponentially according to its length.  
 Let $w_m$ denote a walk of length $m$ in graph $G$ such that there exists an edge for each pair of vertices $(v_i,v_{i+1})$ for all $i\in\{1,\cdots,m-1\}$.
-In addition, we denote by $G_{\times}(G_1,G_2)$ the direct product graph of two graphs $G_1$ and $G_2$, of which the vertices of the product graph are computed from 
+In addition, we denote by $G_{\times}(G_1,G_2)$ the direct product graph of two graphs $G_1$ and $G_2$, of which the vertices of $G_{\times}$ are computed from 
 \begin{align*}
-	V_{\times}(G_1,G_2) = \{(v_1,v_2)\in V_1\times V_2, label(v_1)=label(v_2)\},
+	V_{\times}(G_1,G_2) = \{(v_1,v_2)\in V_1\times V_2,\, label(v_1)=label(v_2)\},
 \end{align*}
 and edges are computed from
 \begin{align*}
-	E_{\times}(G_1,G_2) = \{((v_1,v_2),(u_1,u_2))\in V_{\times}\times V_{\times},(v_1,u_i)\in E_1\wedge (v_2,u_2)\in E_2\}.
+	E_{\times}(G_1,G_2) = \{((v_1,v_2),(u_1,u_2))\in V_{\times}\times V_{\times},\, (v_1,u_i)\in E_1\wedge (v_2,u_2)\in E_2\}.
 \end{align*}
-The walk kernel can be defined on the adjacency matrix of $G_{\times}$ by
+The walk kernel can be defined on the adjacency matrix $A_{times}$ of the product graph $G_{\times}$ by
 \begin{align*}
 	K_{wk}(G_1,G_2) = \sum_{i,j=1}^{|V_{\times}|}\left[\sum_{n=0}^{\infty}\lambda^{n}A_{\times}^n\right]_{i,j},
 \end{align*}
