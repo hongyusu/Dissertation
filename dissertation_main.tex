@@ -1434,9 +1434,9 @@ Diffusion scaling has the effect of shrinking the distance to the nodes that are
 %------------------------------------------------
 \chapter{Structured Output Prediction with Unknown Output Graph} \label{ch_sopw}
 
-Structured output learning builds an output graph connecting multilabel interdependent output variables to model the label dependency in a comprehensive manner. 
-Limiting the applicability is the fact that the output graph needs to be known as a-priori.
-In this chapter, we aim to develop new structured output learning algorithms that is not constrained to the availability of the output graph structure.
+Structured output learning builds an output graph connecting multilabel interdependent output variables to model label correlation in a comprehensive manner. 
+The applicability of structured output learning is limited due to the fact that the output graph needs to be known as a-priori.
+In this chapter, we aim to develop new structured output learning algorithms that are not constrained to the availability of the output graph structure.
 As a result, structured output learning can be applied to wide range of multilabel classification problems.
 In Section~\ref{sc_su10}, we study structured output learning in multilabel molecular activity classification problem where we build the output graph from auxiliary datasets.
 In Section~\ref{sc_su11}, we present a majority voting ensemble (\mve) that combines a set of structured output learners built from a set of random output graphs.
@@ -1450,12 +1450,12 @@ In Section~\ref{sc_su14c}, we present the \rta\ model that improves the previous
 \section{Structured Output Prediction for Molecular Activity Classification} \label{sc_su10}
 
 The molecular activity classification problem has long been tackled under the single-label classification setting \citep{Menchetti05weighted,Singh12qsar,Dutt12classification}.
-On the other hand, multiple interdependent molecular activities are often screened simultaneously in drug research \citep{Shoemaker06the} which poses two challenges for single-label classification.
+On the other hand, multiple interdependent molecular activities are often screened simultaneously in drug research \citep{Shoemaker06the}, which poses two challenges for single-label classification.
 The first is scalability in which a set of single-label classifiers needs to be built independently in order to predict multiple molecular activities.
 This soon becomes infeasible when large number of activities need to be predicted.
-The second problem lies in the fact that the single-label classification approach has limited power of modeling label correlation such that the complex interdependencies between multiple activities can not be addressed in a comprehensive way.
+The second problem lies in the fact that the single-label classification approach has limited power of modeling label correlation such that the complex interdependencies between multiple activities (labels) can not be addressed in a comprehensive manner.
 In \citepub{su10} we investigate the potential of applying structured output learning to molecular activity classification problem.
-In addition, the output graph is extracted from auxiliary datasets which reveals the dependences between multiple labels.
+In addition, the output graph is extracted from the auxiliary datasets which reveals the correlation between multiple output labels.
 
 
 %
