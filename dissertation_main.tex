@@ -85,7 +85,7 @@ The first contribution is to developed a new structured output learning algorith
 The proposed method can predict a directed acyclic graph (\daggraph) from an observed network and has applied to network response prediction problem within the context of social network analysis.
 For the general multilabel classification problem without pre-established output graph, we develop several new algorithms that combine a set of structured output learners built on random output graphs.
 In addition, we developed a joint learning and inference framework that is based on Max-Margin learning on a random sample of spanning trees.
-Thus, the proposed methods are not constraint to the availability of the output graphs.
+Thus, the proposed methods are not constrained to the availability of the output graphs.
 Moreover, the theoretic analysis explains the behavior of the proposed models and guarantee the generalization error.
 
 The thesis is structured as follows.
@@ -1116,7 +1116,7 @@ In particular, we define the output graph $G=(E,V)$ by a node set $V=\{1,\cdots,
 For each edge $e=(j,j')\in E$, we use $\vy_e$ to denote the edge label of edge $\ve$ with respect to multilabel $\vy$ by concatenating the head label $y_j$ and the tail label $y_{j'}$, with the edge label domain $\vy_e\in\vYcal_e=\Ycal_j\times\Ycal_{j'}$.
 By $\vy_{i,e}$, we denote the edge label of example pair $(\vx_i,\vy_i)$ on edge $\ve$.
 Thus, given a training example $(\vx_i,\vy_i)$ and the output graph $G$, we can uniquely identify the node label $y_i$ and the edge label $\vy_{i,e}$ on the graph.
-In addition, we denote the possible label of node $i$ by $u_i$ and the possible label of edge $\ve$ by $\vu_{e}$ where $u_i$ and $\vu_{e}$ do not constraint to any multilabel $\vy$.
+In addition, we denote the possible label of node $i$ by $u_i$ and the possible label of edge $\ve$ by $\vu_{e}$ where $u_i$ and $\vu_{e}$ do not constrain to any multilabel $\vy$.
 Naturally, $u_i\in\Ycal_i$ and $\vu_e\in\vYcal_e$.
 
 
@@ -1878,17 +1878,17 @@ In this chapter, the author aims to summarize the implementations and to point o
 \begin{enumerate}
 	\item \rta\ developed in \citepub{su14c} is a structured output learning algorithm for multilabel classification with unknown output graph. \rta\ performs joint learning and inference on a random sample of spanning trees.
 	\begin{enumerate}
-		\item The inference algorithm is implemented in \cpp. The parallelization of the inference algorithm is implemented in \cpp\ with \openmp. Other parts of \rta\ are mostly implemented in \matlab.
+		\item The learning framework is implemented in \matlab. The inference algorithm is implemented in \cpp. The parallelization of the inference algorithm is implemented with \openmp. Other parts of \rta\ are mostly implemented in \matlab.
 		\item The package can be found from \url{http://git@github.com:hongyusu/random_spanning_tree_approximation.git}.
 	\end{enumerate}
 	
-	\item \spin\ developed in \citepub{su14a} is a structured output learning algorithm for multilabel classification with observed output graph. \spin\ can predict a direct acyclic graph (\daggraph). \spin\ is applied to network response prediction problem within the context of social network analysis.
+	\item \spin\ developed in \citepub{su14a} is a structured output learning algorithm for multilabel classification with observed output graph. \spin\ can predict a direct acyclic graph (\daggraph). \spin\ has been applied to network response prediction problem within the context of social network analysis.
 	\begin{enumerate}
 		\item The major part of the \spin\ is implemented in \matlab. \sdp\ inference algorithm is implemented with \cvx\ package designed for convex programming. The data preprocessing with Latent Dirichlet allocation (\lda) \citep{Blei03latent} is implemented in \python\ and \matlab.
 		\item The package can be found from \url{http://git@github.com:hongyusu/SPIN.git}.
 	\end{enumerate}
 	
-	\item \mve\ presented in \citepub{su11} and \citepub{su14b} as well as \amm\ and \mam\ developed in \citepub{su14b} are the structured output learning algorithms that are not constraint to the availability of the output graph. The algorithms combine a set of structured output learners built on a set of random output graphs.
+	\item \mve\ presented in \citepub{su11} and \citepub{su14b} as well as \amm\ and \mam\ developed in \citepub{su14b} are the structured output learning algorithms that are not constrained to the availability of the output graph. The algorithms combine a set of structured output learners built on a set of random output graphs.
 	\begin{enumerate}
 		\item The code is implemented in \matlab.
 		\item The package can be located from \url{http://git@github.com:hongyusu/RandomOutputGraphEnsemble.git}.
