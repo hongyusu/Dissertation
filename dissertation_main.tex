@@ -1478,14 +1478,14 @@ For example in the recent \textit{NCI-60} {Human Tumor Cell Line Screen} project
 \subsection{Methods}
 
 To efficiently and accurately predict molecular activities in multiple cell lines at the same time, we applied a structured output learning approach in \citepub{su10} which to our knowledge is the first multilabel learning approach for the molecular classification problem.
-The algorithm is an instantiation of the structured output learning method \mmcrf\ \citep{Rousu07} described in Section~\ref{sc_mmcrf}.
+The algorithm is an instantiation of \mmcrf\ \citep{Rousu07} described in Section~\ref{sc_mmcrf}.
 It is also a sibling method of \mmmn\ \citep{Taskar04max} described in Section~\ref{sc_mmmn}.
-In particular, the model defines a compatibility score through inner product for a molecular structure $\vx$ and the activities in multiple cell lines $\vy$
+In particular, the model defines a compatibility score through the inner product of a molecular structure $\vx$ and the activities in multiple cell lines $\vy$
 \begin{align*}
 	F(\vx,\vy;\vw) = \ip{\vw}{\phib(\vx,\vy)},
 \end{align*}
-where $\vw$ is the feature weight parameter that ensures the molecular structure with correct activities will be scored higher than with incorrect activities.
-The parameter $\vw$ is learned by maximizing the minimum loss-scaled margin between correct examples $(\vx_i,\vy_i)$ and incorrect pseudo-examples $(\vx_i,\vy)$ over the whole training set, which amounts to solving the optimization problem in (Definition~\ref{def_mmmn})
+where $\vw$ is the feature weight parameter which ensures that the molecular structure with correct activities will be scored higher than with incorrect activities.
+$\vw$ is learned by maximizing the minimum loss-scaled margin between correct examples $(\vx_i,\vy_i)$ and incorrect pseudo-examples $(\vx_i,\vy)$ over the whole training set, which amounts to solving the optimization problem that is not dissimilar to (Definition~\ref{def_mmmn})
 
 \iffalse
 following optimization problem
