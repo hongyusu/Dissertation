@@ -26,7 +26,7 @@ Many single-label classification models have been designed and applied in practi
 
 \textit{Multilabel classification} is a natural extension to single-label classification by defining multiple interdependent output variables associated with each input.
 This type of problems are prevalent in everyday life.
-For example, a movie can be classified as ``sci-fi'', ``thriller'' and ``crime''; a news article can be categorized as ``science'', ``biology'' and ``drug''; a gene can associate to multiple functions in genomics research; a surveillant photo can be tagged by ``car'', ``building'' and ``road''. 
+For example, a movie can be classified as ``sci-fi'', ``thriller'' and ``crime''; a news article can be categorized as ``science'', ``biology'' and ``drug''; a gene can be associated with multiple functions in genomics research; a surveillant photo can be tagged by ``car'', ``building'' and ``road''. 
 When the multiple output variables are treated as a ``flat'' vector, the problem is often known as \textit{flat multilabel classification}.
 \text{Flat multilabel classification} is one branch of multilabel classification and has drawn increasing amount of interest from machine learning community \citep{Tsoumakas07multi,Tsoumakas10mining}.
 As multiple output variables can be ``on'' and ``off'' simultaneously, various flat multilabel classification algorithms have been developed and aim to explore the correlation or the dependency between multiple output variables in order to make better prediction.
@@ -41,14 +41,14 @@ The hierarchy can be either a rooted tree such as in document classification pro
 There exists a large body of work on hierarchical classification from the early one that uses the hierarchical structure heuristically for preprocessing or post-processing \citep{Koller97hierarchically,Dumais00Hierarchical,Liu05support,DeCoro07bayesian} to the recent one that encodes the structure into learning \citep{Cai04hierarchical,Cesabianchi05incremental,Rousu06,Gopal12bayesian}.
 
 \textit{Graph labeling} is another type of structured output prediction in which the output graph often takes more general form and does not require the concept of ``level'' compared to hierarchical classification.
-The approach can be applied to wider range of problems, to name but few, speech tagging problem with sequence structure \citep{collins02a}, action recognition problem with Markov network structure \citep{Wang11hidden}. 
+The approach can be applied to wider range of problems, to name but a few, speech tagging problem with sequence structure \citep{collins02a}, action recognition problem with Markov network structure \citep{Wang11hidden}. 
 The graph labeling approach often directly incorporates the output graph into learning and uses the label correlation to improve the classification performance \citep{collins02a,lafferty01,taskar02,Taskar04max,THJA04,Rousu07}.
 For graph labeling or structured output learning in general, one inherited problem is the output graph is assumed to be observed as a-priori.
-However, this cannot be taken as granted since the proper dependency structure for the output variables is either hidden or difficult to retrieve in many applications \citep{Chickering94learning}.
+However, this cannot be taken for granted since the proper dependency structure for the output variables is either hidden or difficult to retrieve in many applications \citep{Chickering94learning}.
 
 Figure~\ref{multilabel_taxonomy} illustrates the taxonomy of multilabel classification.
-However it is worthy of mentioning that there is no clear line drawn between different categories.
-In particular, some hierarchical classification algorithms can also belong to graph labeling category, for instance, the ones developed in \citep{THJA04,Rousu06}.
+However it is worth pointing out that there is no clear line drawn between different categories.
+In particular, some hierarchical classification algorithms can also belong to graph labeling category, for instance, those developed in \citep{THJA04,Rousu06}.
 As we focus on graph labeling of structured output prediction, we will explicitly use ``structured output prediction'' to refer to ``graph labeling'' in the following part of the thesis for the convenient of presentation.
 
 \begin{figure}
@@ -176,7 +176,7 @@ The strategy is known as \textit{empirical risk minimization} \citep{Vapnik92pri
 
 \subsection{Regularized Learning}\label{sc_rl}
 
-Empirical risk minimization is ill-posed which can provide infinity number of estimators with the same empirical risk on the same training data.
+Empirical risk minimization is ill-posed, which can provide infinity number of estimators with the same empirical risk on the same training data.
 Besides, it often leads to \textit{overfitting} when the dimensionality of the feature space is high and the number of training examples is limited.
 In other words, underlying true distribution $P(\vx,y)$ is difficult to to estimate from a finite sample of training examples.
 As a result, the estimator will generalize poorly on unseen test examples.
@@ -201,7 +201,7 @@ On the other hand, the $L_1$-norm regularization, defined by
 provides sparse parameter estimation such that we obtain a high dimensional weight vector with many zero entries.
 This is an attractive property as the feature selection is incorporated into the learning and the interpretability of the resulting model is often high.
 The $L_1$-norm regularization has been applied in, for example, \lasso\ \citep{Tibshirani94regression}.
-Besides, other regularization techniques have been widely studied, to name a few, $L_{1,2}$-norm regularization \citep{Argyriou07multitask}, elastic net regularization \citep{Zou05regularizationa}.
+Besides, other regularization techniques have been widely studied, to name but a few, $L_{1,2}$-norm regularization \citep{Argyriou07multitask}, elastic net regularization \citep{Zou05regularizationa}.
 
 
 %------------------------------------------------
@@ -324,7 +324,7 @@ where $\eta$ is the Perceptron learning rate.
 Theory~\ref{perceptron_theory} shows that if the data are linearly separable, the perceptron algorithm will make a finite number of mistakes. 
 In particular, the perceptron algorithm will iterate through the training set and will converge to a vector that well separates all training examples.
 Moreover, the number of mistakes will be bounded by the minimum gap between the positive and negative examples.
-That is the algorithm converges quickly when the gap $\gamma$ is big.
+That is, the algorithm converges quickly when the gap $\gamma$ is big.
 We have to keep in mind that the convergence theorem does not say anything about the quality of the solution, though it is built based on the assumption that there is a ``gap'' between positive and negative examples.
 \fi
 
@@ -397,7 +397,7 @@ which is more efficient to compute and is extremely similar to (\ref{voted_perce
 % 
 \subsection{Logistic Regression (\lr)}\label{sc_lr}
 
-Logistic Regression is a classification model rather than regression \citep{Bishop07}.
+Logistic Regression is a classification model rather than a regression model \citep{Bishop07}.
 The formalism nicely transits from risk minimization (Section~\ref{sc_rl}) to regularized risk minimization (Section~\ref{sc_rl}).
 The model has been extended to other classification algorithms presented in the later part of the thesis (e.g., \iblr\ in Section~\ref{sc_iblr}, \corrlog\ in Section~\ref{sc_corrlog}).
 Besides, the idea of Logistic Regression, the odd-ratio type learning in particular, is also the building block of, e.g., \mmmn\ in Section~\ref{sc_mmmn} and many algorithms developed in this thesis.
@@ -470,7 +470,7 @@ the {itrative scaling} method \citep{Darroch72,Pietra97inducing,Berger97,Goodman
 the quasi-Newton method \citep{Minka03},
 the truncated Newton method \citep{Komarek05making,Lin2008trust},
 the coordinate descent method \citep{Huang09iterative}.
-There also exists the line of research that aims to optimization Logistic Regression from its dual representation.
+There also exists the line of research that aims to optimize Logistic Regression from its dual representation.
 The first method is developed by \citet{Jaakkola99probabilistic}.
 Later on, \citet{Keerthi05a} proposed the iterative optimization and \citet{Yu11dual} developed the dual coordinate descent method.
 
@@ -502,7 +502,7 @@ Later on, optimization algorithms that are based on dual form have been develope
 Support Vector Machines (\svm) is probably the most widely used single-label classification algorithm in machine learning.
 Its extensions for multilabel classification will be described in the later part of the thesis (e.g., \svmstruct\ in Section~\ref{sc_svmstruct}).
 We will start this section by introducing \textit{Maximum-Margin Principle}, which is also the basis of many structured output learning models (e.g., \mmmn\ in Section~\ref{sc_mmmn}, \spin\ in Section~\ref{sc_su14a}, \rta\ in Section~\ref{sc_su14c}).
-After that, we will discuss the formalism of \svm, the primal-dual optimization strategy, and the kernel methods that allow \svm\ to deal with high dimensionality of the input feature space.
+After that, we will discuss the formalism of \svm, the primal-dual optimization strategy, and the kernel methods which allow \svm\ to deal with high dimensionality of the input feature space.
 In the end we will briefly cover the optimization strategies developed for \svm.
 
 The framework of \svm\ was first introduced in \citep{Cortes95support}.
@@ -515,7 +515,7 @@ Additionally, we assume the {separating hyperplane} has a simple linear form des
 	f(\vx)=\ip{\vw}{\varphib(\vx)} + b = 0.
 \end{align*}
 As a result, we have $y_i=-1$ if $f(\vx_i)<0$ and $y_i=+1$ otherwise.
-Given $\vw$ that achieves correct separation on the training data, we can decide the label of a test example $\vx_{ts}$ by decision rule $y_{ts}=\sign(f(\vx_{ts}))$.
+Given that $\vw$ achieves correct separation on the training data, we can decide the label of a test example $\vx_{ts}$ by decision rule $y_{ts}=\sign(f(\vx_{ts}))$.
 
 There can be infinite number of separating hyperplanes that solves the separation problem on the training data which is also suggested by empirical risk minimization strategy in Section~\ref{sc_erm}. 
 We wish to find the one that also generalizes well on the test data.
@@ -568,11 +568,11 @@ Therefore, we relax the constraints by introducing a \textit{margin slack} param
 \begin{align}
 	y_i(\ip{\vw}{\varphib(\vx_i)} + b) \ge 1-\xi_i, \xi_i\ge 0, \forall i\in\{1,\cdots,m\}. \label{softsvmconstraint}
 \end{align}
-$\xi_i$ will allow example have margin less than $1$.
+$\xi_i$ will allow example to have margin less than $1$.
 In particular, with $\xi_i=0$ the data point $x_i$ is correctly classified, and lies either on the margin or on the correct side.
 With $0<\xi_i\le 1$ the data point is correctly classified and lies between margin and separating hyperplane.
 With $\xi_i>1$ the data point is misclassified locating on the other side of the hyperplane.
-With margin slack parameter, the new goal is to maximize the margin while penalizing the data points that either lies on the wrong side of the hyperplane or has margin less than one.
+With margin slack parameter, the new goal is to maximize the margin while penalize the data points which either lie on the wrong side of the hyperplane or have margin less than one.
 This can be defined by
 \begin{definition}{Primal Soft-Margin \svm\ Optimization Problem.}\label{softsvmprimal}
 	\begin{align*}
@@ -605,7 +605,7 @@ This suggests that the data can be radically represented through pairwise simila
 In particular, we defined a function $K:\Xcal\times\Xcal\rightarrow\RR$ such that the training data $\Scal$ is represented through a $m\times m$ matrix of pairwise similarities.
 % kernel function
 \begin{definition}{Kernel Function.}
- 	A function $K:\vXcal\times\vXcal\rightarrow\RR$ is called kernel if it is symmetric and positive semidefinite. That is 
+ 	A function $K:\vXcal\times\vXcal\rightarrow\RR$ is called kernel if it is symmetric and positive semidefinite. That is, 
 \begin{align*}
 	K(\vx_i,\vx_j) = K(\vx_j,\vx_i)\quad \text{and}\, \sum_{\vx_i,\vx_j\in\Xcal}c_ic_jK(\vx_i,\vx_i)\ge0
 \end{align*}
@@ -644,7 +644,7 @@ to make sure the elements of the kernel matrix lie on the unit hypersphere.
 
 The optimization techniques for solving \svm\ optimization problem have been intensively studied.
 For example, ``chunking'' methods \citep{Vapnik82estimation,Perezcruz04double}, decomposition methods \citep{Osuna97an,Joachims98making}, {Sequential Minimum Optimization} (\smo) \citep{Platt98sequential,Platt99fast}, ``digesting'' methods \citep{Decoste02support}.
-Recent research aims to scale \svm\ learning on very large dataset.
+Recent research aims to scale \svm\ learning on very large datasets.
 For example, representing the training data with a small set of landmark points \citep{Pavlov00towards,Boley04training,Yu05making,Zhang08improved}, greedy method for basis selection \citep{Keerthi06building}, online \svm\ solver \citep{Bordes05fast}, approximating kernel \svm\ objective function \citep{Zhang12scaling, Le13fast}, approximating kernel matrix with low-rank matrix \citep{Smola00sparse,Fine02efficient,Drineas05on,Si14memory}.
 
 
@@ -654,7 +654,7 @@ For example, representing the training data with a small set of landmark points 
 The optimization techniques for solving \svm\ have been intensively studied.
 A ``chunking'' method was developed in \citep{Vapnik82estimation} which takes the advantage that the \svm\ solution only depends on the nonzero Lagrangian multipliers.
 The method breaks down the original optimization problem into a set of smaller problems, and in each iteration solves a small problem which contains the nonzero Lagrangian multipliers from last step and a fixed number of worst examples that violate the constraints.
-Following the similar idea, \citet{Osuna97an} proposed a decomposition strategy to solve \svm\ on very large dataset.
+Following the similar idea, \citet{Osuna97an} proposed a decomposition strategy to solve \svm\ on very large datasets.
 The algorithm decomposes the dual variables into an active part (working set) and an inactive part.
 In each iteration, the algorithm updates the variables in working set while keeps the rest unchanged by solving the smaller optimization problem arising from the working set.
 It adds and deletes the same amount of examples in the working set to maintain a constant memory.
@@ -687,13 +687,13 @@ There are many other active lines of research on \svm\ optimization that aim to 
 Ensemble methods are general classification techniques in machine learning.
 The methods train several base classifiers and combine them in order to achiever more accurate prediction.
 Most importantly, there is no requirement for the base classifiers to be accurate as long as they perform better than random guessing.
-There are several variants of ensemble methods, to name a few, bagging \citep{Breiman96bagging}, boosting \citep{Freund97a,Schapire99improved}, stacking \citep{Smyth99linearly}, Bayesian averaging \citep{Freund04generalization}.
+There are several variants of ensemble methods, to name but a few, bagging \citep{Breiman96bagging}, boosting \citep{Freund97a,Schapire99improved}, stacking \citep{Smyth99linearly}, Bayesian averaging \citep{Freund04generalization}.
 Ensemble methods have improved the classification performance when compared to their base learner counterpart, some of them are also supported with the theoretical analysis that guarantees the performance \citep{Schapire97boosting,Koltchinskii00empirical,Cortes14semble,Cortes14deep}.
 This section will devote to bagging and boosting since both methods are extensively studied and are most related to this thesis.
 
 Ensemble methods and their theories are primarily developed for single-label classification.
 The extensions for the multilabel classification problem will be briefly covered in Section~\ref{sc_emfmlc}.
-Moreover, in the later part of the thesis, we will develop several new learning algorithms which are analog but with significant difference to the methods presented in this section.
+Moreover, we will develop several new learning algorithms in the later part of the thesis, which are related to the ensemble methods presented in this section but with significant difference.
 
 
 
@@ -717,7 +717,7 @@ A concept class is \textit{strongly learnable} if there exists a polynomial lear
 On the other hand, a concept class is \textit{weakly learnable} if the learning algorithm achieves arbitrary high accuracy where the only requirement is that the learning algorithm finds a function that performs better than coin flip.
 The concept of learnability was proposed in \citep{Kearns94cryptographic} together with the question whether the strong learnability and the weak learnability are equivalent which is known as \textit{hypothesis boosting problem}.
 Finding a weak learner which performs better than random guessing is easy in practice, but finding a strong learner is usually difficult.
-\citet{Schapire90the} has proved that two classes of learnability are equal which lays the foundation of the boosting algorithm that aim to tune a weak learning algorithm into a strong one that achieves high performance.
+\citet{Schapire90the} has proved that two classes of learnability are equal which lays the foundation of the boosting algorithm that aims to tune a weak learning algorithm into a strong one that achieves high performance.
 
 Adaptive Boosting (\adaboost) developed by \citet{Freund97a} is the very first practical boosting algorithm and is the most influential one.
 In addition, \citet{Schapire99improved} proposed a variant of the algorithm which updates the adaptive parameters in order to minimize the exponential loss (\ref{exp_loss}) of the weak learners.
@@ -767,7 +767,7 @@ Solve it for $\alpha^t$, we get
 	\alpha^{t} = \frac{1}{2}\ln\left(\frac{1-\epsilon^t}{\epsilon^t}\right).
 \end{align*}
 
-It is worthy of noticing that \adaboost\ described in (algorithm~\ref{adaboost}) requires the learning algorithm $\Wcal$ work with a distribution defined on the training examples.
+It is worth pointing out that \adaboost\ described in (algorithm~\ref{adaboost}) requires the learning algorithm $\Wcal$ work with some specific distributions defined on the training examples.
 The distribution is usually generated by \textit{reweighing} which initializes a uniform distribution over training examples and updates the distribution in each iteration.
 For the learning algorithms that cannot work with distribution, \textit{resampling} is often applied which samples the training examples according to some desired distribution to generate a new set of training data in each iteration.
 
@@ -803,10 +803,10 @@ The goal of \bagging\ is to exploit the independency by adding randomness into t
 Given a training set of $m$ training examples, a subset of the same size is generated by sampling with replacement $m$ time from the original training set.
 The sampling procedure is then repeated $T$ time in order to generate $T$ subsets for constructing base learners.
 Note that the sampled subsets will be similar as they are sampled from the same training set.
-However, they will not be too similar which each subset will only cover around $63\%$ of the origin training data under the condition that $m$ is large.
+However, they will not be too similar in which each subset will only cover around $63\%$ of the origin training data under the condition that $m$ is large.
 To see this, consider the probability that the $i$'th training examples is not sampled once is $(1-\frac{1}{m})$, and the probability that it is not sampled at all is $(1-\frac{1}{m})^m$.
 When $m$ is large, the probability will approach $37\%$. 
-That is around $37\%$ of the training examples will not appear in any given training set.
+That is, around $37\%$ of the training examples will not appear in any given training set.
 The property of the bootstrap sampling also allows us to efficiently estimate the generalization error of the base learner known as \textit{out-of-bag estimation} \citep{Breiman96out,Tibshirani1996bias,Wolpert99an}.
 
 \iffalse
@@ -860,7 +860,7 @@ A vector $\vy=(y_1,\cdots,y_k)\in\vYcal$ is called \textit{multilabel} and its e
 We use $\vy_i[j]$ to denote the $j$'th microlabel in the $i$'th multilabel.
 In addition, we are given a training set consisting of $m$ labeled examples $\Scal=\{(\vx_i,\vy_i)\}_{i=1}^{m}\in\vXcal\times\vYcal$. 
 A pair $(\vx_i,\vy)$, where $\vx_i$ is the training input and $\vy\in\vYcal$ is an arbitrary output, is called \textit{pseudo-example}.
-It is worthy of noticing that pseudo-example $(\vx_i,\vy)$ can be generated from a different distribution that generates training examples $(\vx_i,\vy_i)$.
+It is worth pointing out that pseudo-example $(\vx_i,\vy)$ can be generated from a different distribution that generates training examples $(\vx_i,\vy_i)$.
 The goal is to learn a mapping function $f\in\Hcal:\vXcal\rightarrow\vYcal$ that can compute the multilabel given an arbitrary input such that the predefined loss $\ell$ for the future unseen examples will be minimized.
 The loss function is usually tailored for the learning algorithm.
 
@@ -1102,7 +1102,7 @@ We will also present our new algorithm \spin\ that is capable of predicting a di
 
 Multilabel classification deals with multiple interdependent output variables (e.g., $\vy\in\vYcal$).
 The problem is known as \textit{structured output prediction} when these variables are located in structured output space.
-That is the label correlation is described by an \textit{output graph} that connects multiple labels.
+That is, the label correlation is described by an \textit{output graph} that connects multiple labels.
 In particular, we define the output graph $G=(E,V)$ by a node set $V=\{1,\cdots,k\}$ corresponding to the microlabels $\{y_1,\cdots,y_k\}$ and a edge set $E=V\times V$ representing the dependency between pair of microlabels.
 For each edge $e=(j,j')\in E$, we use $\vy_e$ to denote the edge label of edge $\ve$ with respect to multilabel $\vy$ by concatenating the head label $y_j$ and the tail label $y_{j'}$, with the edge label domain $\vy_e\in\vYcal_e=\Ycal_j\times\Ycal_{j'}$.
 By $\vy_{i,e}$, we denote the edge label of example pair $(\vx_i,\vy_i)$ on edge $\ve$.
@@ -1397,7 +1397,7 @@ As \sdp\ inference is not scalable on large networks, we developed a \greedy\ he
 The proof is given in supplementary material of \citepub{su14a}. 
 As a results, the \greedy\ algorithm starts with an empty vertex set and adds one vertex at a time such that the increment of the score is maximized over all inactivated vertices.
 The iteration ends when the objective cannot be improved.  
-It is worthy of noticing that we are not able to give any approximation guarantee for the solutions produced by the \greedy\ algorithm.
+It is worth pointing out that we are not able to give any approximation guarantee for the solutions produced by the \greedy\ algorithm.
 The property of sub-modularity, which is often used to analyze the greedy algorithm, only holds for the special case of our inference problem.
 
 
@@ -1554,7 +1554,7 @@ We have presented in Section~\ref{sc_su10} a structured output prediction model 
 The model relies on the representation of the multiple output variables via an output graph which allows us to explore the label correlation in a more comprehensive way compared to previous approaches.
 To apply structured output learning, it is assumed the structure of the output graph is fully observed.
 Alternatively in \citepub{su10}, there exists auxiliary data that encodes the label correlation which can be utilized in order to retrieve the output graph.
-However, we cannot take the availability of the output graph as granted because the underlying dependency structure is often hidden in many real world applications.
+However, we cannot take the availability of the output graph for granted because the underlying dependency structure is often hidden in many real world applications.
 In \citepub{su11}, we explore the potential of constructing an majority voting ensemble of multiple structured output learners and examine the performance of the proposed model on molecular activity classification problem.
 Each structured output learner is built based on a random generated output graph.
 As a results, the proposed model (\mve) is not constraint to the availability of the output dependency structure.
@@ -1574,7 +1574,7 @@ After ensemble has been generated, the predictions are extracted from each base 
 \end{align*}
 where by $T$ we denote the size of the ensemble, and by $F^{(t)}(\vx)=\{F^{(t)}_j(x)\}_{j=1}^{k}$ we denote the predicted multilabel from the $t$'th base classifier.
 In words, the ensemble prediction on each microlabel is the most frequently appearing prediction among the base classifiers.
-It is also worthy of noticing that the \mve\ framework is not restricted to base classifier \mmcrf\ and can be extended with any structured output learning models as long as they incorporate the output structure into learning process and make predictions based on the output structure.
+It is also worth pointing out that the \mve\ framework is not restricted to base classifier \mmcrf\ and can be extended with any structured output learning models as long as they incorporate the output structure into learning process and make predictions based on the output structure.
 
 In addition, we designed two approaches to generate random output graphs.
 In \text{random spanning tree} approach, we first generate a random correlation matrix and extract the spanning tree out from the matrix.
@@ -1603,7 +1603,7 @@ In addition, we bring in a theory which is based on the reconstruction error of 
 
 We still work with the assumption made for \mve\ in Section~\ref{sc_su11} in which the base classifier will devise the prediction according to the structure of the output graph.
 In addition, we assume that the base classifier for \amm\ and \mam\ is defined with a Markov network structure.
-That is the base classifier compute a compatibility score $\psi(\vx,\vy)$ for the pair $(\vx,\vy)\in\vXcal\times\Ycal$ according to the output graph $G$, indicating how well the input $\vx$ gets along with the output $\vy$.
+That is, the base classifier compute a compatibility score $\psi(\vx,\vy)$ for the pair $(\vx,\vy)\in\vXcal\times\Ycal$ according to the output graph $G$, indicating how well the input $\vx$ gets along with the output $\vy$.
 The compatibility score $\psi(\vx,\vy)$ is defined as
 \begin{align*}
 	\psi(\vx,\vy) = \ip{\vw}{\phib(\vx,\vy)} = \sum_{e\in E}\ip{\vw}{\phib_e(\vx,\vy_e)}=\sum_{e\in E}\psi_e(\vx,\vy_e),
@@ -1762,7 +1762,7 @@ These methods enable us to quantitatively examine the performance of the propose
 
 It is often difficult and expensive to obtain labeled data. 
 In order to maximize the outcomes of the valuable labeled data, the common approach adopted by machine learning community is known as \textit{$K$-fold cross-validation}.
-In particular, the origin set of labeled examples are partitioned into $K$ disjoint subsets of same size denoted by $\{S_1,\cdots,S_K\}$.
+In particular, the origin set of labeled examples are partitioned into $K$ disjoint subsets of the same size denoted by $\{S_1,\cdots,S_K\}$.
 The cross-validation framework will repeat training and test procedures $K$ times.
 In the $i$'th iteration, the method uses $K-1$ subsets of labeled examples $\cup_{j\in\{1,\cdots,K\}/i}S_j$ to build a training set in order to construct a classifier.
 The examples in the $i$'th subset is taken as test data of which the labels are assumed to be unknown to the classifier.
