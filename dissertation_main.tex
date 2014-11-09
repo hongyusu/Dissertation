@@ -1151,30 +1151,6 @@ In particular, the algorithm loops through the training examples and updates $\v
 The update usually leads to over-fitting.
 A simple refinement is usually applied which is known as ``Average Perceptron'' \citep{Freund99large}.
 
-\iffalse
-The update usually leads to over-fitting and a simple refinement, called "average parameter" similar to \citep{Freund99large}, is shown in (Algorithm~\ref{algorithm_structured_perceptron}).
-\begin{algorithm}
-\caption{Structured Perceptron with Parameter Averaging}
-\label{algorithm_structured_perceptron}
-\begin{algorithmic}[1]
-	\REQUIRE Training sample $\lbrace (\vx_i,\vy_i)\rbrace_{i=1}^m$
-	\ENSURE Weight parameter $\vw$
-	\STATE $\vw^{t,i}=[0,\cdots,0],\,\forall t\in\{1,\cdots,T\},\,\forall i\in\{1,\cdots,m\}$
-	%\STATE $c = 1$
-	\FOR{$t=1\cdots T$}
-		\FOR{$i=1\cdots m$}
-			\STATE $\hat{\vy} = \underset{\vy\in\vYcal}{\argmax} \quad \ip{\vw^{t-1,i-1}}{\phib(\vx_i,\vy)}$
-			\IF{$\hat{\vy}\neq\vy$}
-				\STATE $\vw^{t,i} = \vw^{t-1,i-1} + \phib(\vx_i,\vy_i) - \phib(\vx_i,\hat{\vy}_i)$
-			\ENDIF
-			%\STATE $c=c+1$
-		\ENDFOR
-	\ENDFOR
-	\RETURN $\vw = \frac{1}{Tm}\sum_{t=1}^{T}\sum_{i=1}^{m}\vw^{t,i}$
-\end{algorithmic}
-\end{algorithm}
-\fi
-
 The central problem with the Structured Perceptron learning is its loss function.
 In fact, the Structured Perceptron tacitly applies $0/1$ loss over output variables defined as
 \begin{align*}

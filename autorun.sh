@@ -17,7 +17,6 @@ rm dissertation_abstract.aux
 rm dissertation_abstract.log
 
 
-git commit -m 'minor revisions everywhere' .
 
 echo 'Number of references:'
 cat ${maintextname}.bib|grep '@'|wc -l
