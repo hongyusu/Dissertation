@@ -1672,10 +1672,10 @@ The later measures the correlation of the microlabel predictions in which higher
 \section{Random Spanning Tree Approximation (\rta)}\label{sc_su14c}
 
 Random Spanning Tree Approximation (\rta) developed in \citepub{su14c} is a major step forward of \mam.
-\rta\ brings in joint learning and inference framework such that the base learners from individual random spanning trees are optimized simultaneously towards the same objective.
+\rta\ brings in joint learning and inference framework such that the base learners from individual random spanning trees are optimized simultaneously towards the same global objective.
 \citepub{su14c} also provides theoretical analysis to guarantee the performance and the tractable inference.
 Besides, \rta\ explores the potential of tackling the intractable graph inference problem with a set of random spanning trees.
-It lays the foundation of performing inference on unknown structure to achieve fast optimization, accurate prediction with attainable computational efforts.
+It lays the foundation of performing inference on unknown structure in order to achieve fast optimization, accurate prediction with attainable computational efforts.
 
 
 
@@ -1698,16 +1698,16 @@ Efficient inference algorithms on special graph have also been studied in \citep
 
 \citepub{su14c} is motivated by well-established Max-Margin Principle as described in Section~\ref{sc_svm}.
 The work investigates whether the problem of inference over a complete graph in structured output learning can be avoided in a analogous way.
-Start from a sampling results, \citepub[Lemma 3]{su14c} shows that with high probability a big fraction of margin achieved by the complete graph can be obtained by a sample of spanning trees of small size.
-Besides, \citepub[Theorem 5]{su14c} shows the good generalization error can also be guaranteed when learning with, instead of a complete graph, a sample of spanning trees.
+Start from a sampling results, \citepub[Lemma 3]{su14c} shows that with high probability a big fraction of margin achieved by the complete graph can be obtained by a random sample of spanning trees of a small size.
+Besides, \citepub[Theorem 5]{su14c} shows that good generalization error can also be guaranteed when learning with, instead of a complete graph, a random sample of spanning trees.
 
-Thus, in addition to \citepub[Theory 1]{su14b}, we further provide the theoretical justification of constructing a set of base classifiers trained on random spanning trees. 
-Besides, \citepub[Theorem 5]{su14c} suggests we should, instead of optimizing the margin separately on each spanning tree as in \mam, optimize the joint margin from all spanning trees.
-This strategy leads to the learning model presented in the following section.
+Thus, in addition to \citepub[Theory 1]{su14b}, we further provide the theoretical justification of constructing a set of base classifiers trained on a random sample of spanning trees. 
+Besides, \citepub[Theorem 5]{su14c} suggests we should, instead of optimizing the margin separately on each spanning tree similar to that in \mam, optimize the joint margin from all spanning trees.
+The strategy leads to the learning model presented in the following section.
 
 \subsection{Methods}
 
-Let $\Tcal=\{T_1,\cdots,T_n\}$ denote a sample of $n$ random spanning trees, and $\{\vw_{T_t}|T_t\in\Tcal\}$ denote the feature weight parameter to be learner on each tree.
+Let $\Tcal=\{T_1,\cdots,T_n\}$ denote a sample of $n$ random spanning trees, and $\{\vw_{T_t}|T_t\in\Tcal\}$ denote the feature weight parameters to be learner on each tree.
 For each example $(\vx_i,\vy_i)$, the goal of optimization is to maximize the joint margin from all spanning trees between the correct training examples and the pseudo-examples $(\vx_i,\vy)$ defined as
 \begin{definition}{\bf Primal $L_2$-norm Random Tree Approximation (\rta).}\label{primalrta}
 	\begin{align*}
@@ -1717,6 +1717,7 @@ For each example $(\vx_i,\vy_i)$, the goal of optimization is to maximize the jo
 	\end{align*}
 \end{definition}
 where $\phib_{T_t}(\vx,\vy)$ is the feature map that is local on each tree $T_t$, $\xi_i$ is the margin slack allocated for each $\vx_i$, and $C$ is the slack parameter that controls the amount of regularization.
+Definition~\ref{primalrta} is an instantiation of the regularized learning (Section~\ref{rl}) with $L_2$-norm regularization (\ref{l2norm}) and hamming loss (\ref{hamming_loss}).
 
 The key for the optimization is to solve the argmax problem efficiently.
 This is an \nphard\ problem in practice, as the size of the multilabel space is exponential in the number of microlabels.
