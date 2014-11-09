@@ -942,7 +942,7 @@ Since there is no standard way for classification order of microlabels in \cc, E
 \iblr\ is also an instant base learning approach \citep{Aha91instance} similar to \mlknn.
 It extends \mlknn\ by exploring the label correlation within the neighbors of an instant for posterior inference.
 It is also similar to \cc\ but with major differences.
-The central idea of \iblr\ is to take the labels of the neighboring examples as the only features in order to evaluate the label of current example.
+The central idea of \iblr\ is to take the labels of the neighboring examples as the only features in order to evaluate the label of the current example.
 Similar idea has been applied in collective classification \citep{Ghamrawi05collective} and link based classification \citep{Getoor05link, Getoor07introduction}.
 
 In particular, for each unseen example $\vx$, \iblr\ first identifies the set of $K$-nearest neighbors $N_k(\vx)$ from the training sets.
@@ -1959,8 +1959,8 @@ The current research ends with \rta\ method that performs joint learning and inf
 This can be further extended by applying $L_1$-norm combination.
 Learning with $L_1$-norm regularization of parameter combination has been previously studied in the setting of multiple kernel learning \citep{Rakotomamonjy08simplemkl}, which can be formulated into an equivalent form of learning a weighted $L_2$-norm combination.
 The weight of the parameter vector on each spanning tree can be explained as the fitness of the tree to the current training data.
-This can be used to select output graph that is most relevant to the current problem.
-We should also design the optimization techniques for $L_1$-norm regularization as current alternative optimization approach in \citep{Rakotomamonjy08simplemkl} is not efficient.
+This can be used to select the output graphs that are relevant to the current training data.
+We should also design the optimization techniques for $L_1$-norm regularization as the current alternative optimization approach proposed in \citep{Rakotomamonjy08simplemkl} is not efficient.
 The theoretical properties should also be extended from \rta\ to the new model. 
 
 
