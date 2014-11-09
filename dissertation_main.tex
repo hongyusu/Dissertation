@@ -1717,7 +1717,7 @@ For each example $(\vx_i,\vy_i)$, the goal of optimization is to maximize the jo
 	\end{align*}
 \end{definition}
 where $\phib_{T_t}(\vx,\vy)$ is the feature map that is local on each tree $T_t$, $\xi_i$ is the margin slack allocated for each $\vx_i$, and $C$ is the slack parameter that controls the amount of regularization.
-Definition~\ref{primalrta} is an instantiation of the regularized learning (Section~\ref{rl}) with $L_2$-norm regularization (\ref{l2norm}) and hamming loss (\ref{hamming_loss}).
+Definition~\ref{primalrta} is an instantiation of the regularized learning (Section~\ref{rl}) with $L_2$-norm regularization (\ref{l2_norm}) and hamming loss (\ref{hamming_loss}).
 
 The key for the optimization is to solve the argmax problem efficiently.
 This is an \nphard\ problem in practice, as the size of the multilabel space is exponential in the number of microlabels.
