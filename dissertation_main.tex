@@ -1522,8 +1522,8 @@ The walk kernel can be defined on the adjacency matrix $A_{\times}$ of the produ
 \begin{align*}
 	K_{wk}(G_1,G_2) = \sum_{i,j=1}^{|V_{\times}|}\left[\sum_{n=0}^{\infty}\lambda^{n}A_{\times}^n\right]_{i,j},
 \end{align*}
-where $0<\lambda<1$ is the scaling parameter.
-Using exponential series or geometric series walk kernel can be computed in cubic time \citep{Gartner03a} by
+where $0<\lambda\le1$ is the scaling parameter.
+Using exponential series or geometric series, walk kernel can be computed in cubic time \citep{Gartner03a} with respect to the number of the vertices $V_{\times}$
 \begin{align*}
 	K_{wk}(G_1,G_2) = \ve\tp(\vI-\lambda A_{\times})^{-1}\ve,
 \end{align*}
@@ -1531,17 +1531,17 @@ where $\vI$ denotes the identity matrix and $\ve$ denotes the matrix of ones.
 
 % weighted decomposition kernel and others
 \textit{Weighted Decomposition Kernel} developed in \citep{Menchetti05weighted,Ceroni08classification} is an extension of substructure kernel \citep{Haussler99convolution}.
-The kernel weights identical part in two graphs with contextual information.
+The kernel aims to weight the identical part in two graphs with contextual information.
 It evaluates the matching subgraphs (\textit{contextor}) in the neighborhood of an atom (\textit{selector}).
 We also used \textit{Tanimoto Kernel} \citep{Ralaivola05graph} on a finite set of molecular fingerprints \citep{Wang09pubchem}.
 See \citep{Vishwanathan10graph} for a more comprehensive survey on graph kernels.
 
 %\subsubsection{Generation of Markov Network}
-To apply structured output learning model described above, we assume the underlying Markov network structure is observed.
+To apply the structured output learning model described above, we assume the underlying Markov network structure is observed.
 In other words, we need to build an output graph with nodes correspond to cell lines and edges correspond to potential statistical dependencies.
-Auxiliary datasets are available for this purpose \citep{Shoemaker06the} which implicitly describes the correlation between the cell lines.
-To build the output graph, we first compute the covariance matrix for cell lines based on the auxiliary data, then we extract the network structure by applying the following two methods.
-In \text{maximum spanning tree} approach, we take the minimum number of edges that make a connected network whilst maximizing the edge weights.
+There exists auxiliary datasets \citep{Shoemaker06the} for this purpose, which implicitly describe the correlations between the cell lines.
+To build the output graph, we first compute the covariance matrix of cell lines from the auxiliary data, then extract the network structure by applying the following two methods.
+In \text{maximum spanning tree} approach, we take the minimum number of edges that make a connected network whilst maximize the edge weights.
 In \text{correlation thresholding} approach, we take all edges that exceed a fixed threshold, which typically generates a non-tree graph.
 
 
