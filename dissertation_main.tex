@@ -1588,12 +1588,12 @@ The approach outputs a set of disconnected pairs.
 %
 \section{Random Graph Ensemble (\amm, \mam)} \label{sc_su14b}
 
-We have shown in Section~\ref{sc_su11} that we can construct a majority voting ensemble of structured output learners to tackle the problem during structured output learning when the output graph is not observed.
-We have evaluated the method on molecular activity classification problem.
-This section is based on \citepub{su14b} where we aim to present two other aggregation techniques to combine the base structured output classifiers.
-Compare to previously developed \mve, the proposed model (\amm\ and \mam\ respectively) perform inference before or after forming the ensemble.
+We have shown in Section~\ref{sc_su11} that we can construct a majority voting ensemble of a set of structured output learners to tackle the problem during structured output learning when the output graph is not observed.
+We have evaluated the method on molecular classification problem.
+This section is based on \citepub{su14b} where we aim to present two other aggregation techniques to combine the base learners.
+Compare to previously developed \mve, the proposed model (\amm\ and \mam\ respectively) also perform inference before or after forming the ensemble.
 We also examine the performance of the proposed models on a set of heterogeneous multilabel datasets from various domains.
-In addition, we bring in a theory which is based on the reconstruction error of the compatibility score to explains the improvement of \mam\ model.
+In addition, we bring in a theory which is based on the reconstruction error of the compatibility score to explains the improvement of \mam.
 
 
 
@@ -1603,20 +1603,20 @@ In addition, we bring in a theory which is based on the reconstruction error of 
 
 We still work with the assumption made for \mve\ in Section~\ref{sc_su11} in which the base classifier will devise the prediction according to the structure of the output graph.
 In addition, we assume that the base classifier for \amm\ and \mam\ is defined with a Markov network structure.
-That is, the base classifier compute a compatibility score $\psi(\vx,\vy)$ for the pair $(\vx,\vy)\in\vXcal\times\Ycal$ according to the output graph $G$, indicating how well the input $\vx$ gets along with the output $\vy$.
+That is, the base classifier computes a compatibility score $\psi(\vx,\vy)$ for the pair $(\vx,\vy)\in\vXcal\times\Ycal$ according to the output graph $G$, indicating how well the input $\vx$ gets along with the output $\vy$.
 The compatibility score $\psi(\vx,\vy)$ is defined as
 \begin{align*}
 	\psi(\vx,\vy) = \ip{\vw}{\phib(\vx,\vy)} = \sum_{e\in E}\ip{\vw}{\phib_e(\vx,\vy_e)}=\sum_{e\in E}\psi_e(\vx,\vy_e),
 \end{align*}
-where we use $\psi_e(\vx,\vy_e)$ to denote edge compatibility score (\textit{edge potential}) between input $\vx$ and edge label $\vy_e$ on edge $e$.
-$\vw$ is the feature weight parameter which ensures input $\vx$ with correct output $\vy$ achieves higher compatibility score than with incorrect output.
+where $\psi_e(\vx,\vy_e)$ denotes the edge compatibility score (\textit{edge potential}) between input $\vx$ and edge label $\vy_e$ on edge $e$.
+$\vw$ is the feature weight parameter which ensures that the input $\vx$ with correct output $\vy$ will achieve higher compatibility score than with incorrect output.
 
 % edge potential
 In addition, we assume that we have access to the edge potentials between the input and the edge labels for each base classifiers
 \begin{align*}
 	\psib_E^{(t)} = (\psi_e^{(t)}(\vx,\vu_e))_{e\in E^{(t)},\vu_e\in\Ycal_e}.
 \end{align*}
-With edge compatibility scores, we can infer the max-marginal of the $i$'th node which is the score incurred by assigning label $u_i\in\Ycal_i$ to the $i$'th node \citep{Wainwright05map} defined by
+With edge compatibility scores, we can infer the \textit{max-marginal} of the $i$'th node which is the score incurred by assigning label $u_i\in\Ycal_i$ to the $i$'th node \citep{Wainwright05map} defined by
 \begin{align*}
 	\tilde{\psi}_j(\vx,u_j) = \underset{\vy\in\Ycal,y_j=u_j}{\maximize}\sum_{e\in E}\psi_e(\vx,\vy_e).
 \end{align*}
@@ -1636,15 +1636,15 @@ The predicted multilabel from \amm\ is composted by the predicted microlabels
 \end{align*}
 
 % mam
-The \amm\ performs the inference to find the max-marginals before combining the base classifiers into ensemble. 
-On the other hand, the Maximum-of-Average-Marginals (\mam) aggregation first collects the local edge potentials $\psib_E^{(t)}$ from each base classifier, averages them and finally performs inference on the global consensus graph $\hat{G}=(\hat{E},V)$ with averaged edge potentials.
-The \mam\ model can be defined as
+\amm\ performs inference to find the max-marginals before combining the base classifiers into ensemble. 
+On the other hand, Maximum-of-Average-Marginals (\mam) aggregation first collects the local edge potentials $\psib_E^{(t)}$ from each base classifier, averages them and finally performs inference on the global consensus graph $\hat{G}=(\hat{E},V)$ with the averaged edge potentials.
+The \mam\ model is defined as
 \begin{align*}
 	F^{\text{\tiny MAM}}(x) &= \underset{\vy \in \Ycal }{\argmax}\,\sum_{e\in \hat{E}}\frac{1}{T}\sum_{t=1}^{T}\ \psi^{(t)}_e(x,\vy_e)
 	%\vy^* &= \underset{\vy}{\argmax}\, \frac{1}{T}\sum_{t=1}^{T}\sum_{e\in E_t}{w^t_e}^T\varphib_e(x,\vy)
 	= \underset{\vy \in \Ycal}{\argmax}\, \frac{1}{T} \sum_{t=1}^T \sum_{e\in \hat{E}} \ip{\vw_e^{(t)}}{\phib_e(x,\vy_e)}. %\label{ensemble3}
 \end{align*}
-\citepub[Lemma 1]{su14b} allows us to simplify the computation of \mam\ in terms of dual variables and kernels.
+In addition, \citepub[Lemma 1]{su14b} allows us to simplify the computation of \mam\ in terms of dual variables and kernels.
 \iffalse
 As a result, the \mam\ ensemble can be equivalently stated as
 \begin{align*}
@@ -1658,11 +1658,11 @@ where by $\bar\mu(i,e,\vu_e)=\frac{1}{T}\sum_{t=1}^T\mu^{(t)}(i,e,\vu_e)$ we den
 \end{align*}
 \fi
 
-Besides the proposed algorithm frameworks, we also developed theoretical analysis to explain the improvement of \mam\ ensemble.
-The analysis extends the theory on single task ensemble developed by \citet{Brown10good}.
+Besides the proposed algorithm frameworks, we also develope theoretical analysis to explain the improvement of \mam\ ensemble.
+The analysis extends the theory on single-label ensemble developed by \citet{Brown10good}.
 In general, \citepub[Theory 1]{su14b} states that the reconstructive error from \mam\ ensemble is guaranteed to be less than or equal to the average reconstruction error from the base classifiers.
 The improvement can be decomposed into two terms, namely \textit{diversity} and \textit{coherence}.
-The former measures the variability of individual classifiers learned from different perspectives which shares the same argument as the analysis of single task ensemble model \citep{Brown10good}.
+The former measures the variability of individual classifiers learned from different perspectives which shares the same argument as the analysis of single-label ensemble \citep{Brown10good}.
 The later measures the correlation of the microlabel predictions in which higher correlation leads to better improvement.
 
 
