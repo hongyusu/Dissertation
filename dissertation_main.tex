@@ -1249,7 +1249,7 @@ In particular, \mmcrf\ uses exponential family to model the condition probabilit
 \begin{align*}
 	P(\vy|\vx) \propto \exp(\ip{\vw}{\phib(\vx,\vy)}) = \prod_{e\in E}\exp(\ip{\vw_e}{\phib_e(\vx,\vy_e)}),
 \end{align*}
-where $\phib_e(\vx,\vy_e)=\varphib(\vx)\otimes\Gamma_e(\vy_e)$ is the tensor product of the input feature and the output feature of a pair of microlabels with respect to edge $e\in E$ in the output Markov network $G$.
+where $\phib_e(\vx,\vy_e)=\varphib(\vx)\otimes\Upsilonb_e(\vy_e)$ is the tensor product of the input feature and the output feature of a pair of microlabels with respect to edge $e\in E$ in the output Markov network $G$.
 In order to obtain $\vw$, we need to solve the primal optimization problem that is not dissimilar to (Definition~\ref{def_mmmn}).
 After the feature weight parameter $\vw$ is found, we need to solve the argmax problem to obtain the prediction
 \begin{align}
@@ -1302,21 +1302,21 @@ The generality of the loss function can be seen as an advantage compared to \crf
 %
 \section{\spin\ for Network Response Prediction} \label{sc_su14a}
 
-\citepub{su14a} presents a structured output learning model for network influence prediction problem.
-The proposed model, \spin, is \textit{context-sensitive} which is different from the previous the state-of-the-art methods which only model the influence in terms of the network connectivity.
+\citepub{su14a} presents a structured output learning model for the network influence prediction problem.
+The proposed model, \spin, is \textit{context-sensitive} which is different from previous the state-of-the-art methods which only model the influence in terms of the network connectivity.
 The inference problem of \spin\ is \nphard\ in general.
-We provides a semidefinite programming algorithm \sdp\ with approximation guarantee as well as fast \greedy\ heuristics.
+We provides a semidefinite programming algorithm \sdp\ with approximation guarantee as well as a fast \greedy\ heuristics.
 
 \subsection{Background}
 
 With the extensive availability of the large scale networks, there are tremendous interest in studying the phenomena of the network influence, in particular, the structure, the function and the influence dynamics. 
-The outcome of the network influence research have been widely applied to many areas, to name but a few, spreadness of pathogens or infectious diseases \citep{Hethcote00the,Anderson02infectious}, diffusion of medical and technology innovation \citep{Strang98diffusion,Rogers03the}, opinion and news formation \citep{Adar04implicit,Gruhl04information,Adar05tracking,Leskovec07cascading,Nowell08tracing,Leskovec09meme}, viral market \citep{Domingos01mining,Kempe03maximizing,Liben-Nowell03the}.
+The outcome of the network influence research have been widely applied to many areas, to name but a few, spreadness of pathogens or infectious diseases \citep{Hethcote00the,Anderson02infectious}, diffusion of medical and technology innovations \citep{Strang98diffusion,Rogers03the}, opinion and news formation \citep{Adar04implicit,Gruhl04information,Adar05tracking,Leskovec07cascading,Nowell08tracing,Leskovec09meme}, viral market \citep{Domingos01mining,Kempe03maximizing,Liben-Nowell03the}.
 
-In the field of studying network influence, one primary interest is to discover the latent structures that reveal the dynamics of influences.
+In the field of studying the network influence, one primary interest is to discover the latent structures that reveal the dynamics of influences.
 In general, the problem can be defined into two different ways depending on the availability of the underlying network structure.
 On one hand, one would assume that the underlying structure is hidden or incomplete and the only observation is a cascade of actions.
 The instantiation of the setting can be, for example, online news agents sharing information but not physically connected; or in epidemiological study where people are affected by pathogens through various ways.
-In this case, the task is to infer network structure in terms of edges connecting nodes given a set of action cascade.
+In this case, the task is to infer the network structure in terms of edges connecting nodes given a set of action cascade.
 %With early work on independent cascade and linear threshold model \citep{Kempe03maximizing},
 Many algorithms are designed to solve the problem in this setting from \netinf\ \citep{GomezRodriguez10inferring}, \netrate\ \citep{Rodrigues11unconvering}, \kernelcascade\ \citep{Du12learning} to the most recent work about two stage model for inferring influence \citep{Du14influence}, inference algorithm using cascade without timestamp \citep{Amin14learning}, and general framework of inferring diffusion structure \citep{Daneshmand14estimating}.
 On the other hand, we argue the problem is unnecessarily hard as in many cases the structure of the network is fully observed (e.g., friendship network, citation network).
@@ -1332,16 +1332,16 @@ We propose the following definition of the network influence problem
 
 %
 \subsection{Methods}
-We approach the problem by structured output learning, where we define a computability score as an inner product of the action $\va$ and the response network $\Gva$
+We approach the problem by structured output learning, where we define a computability score as the inner product between an action $\va$ and a response network $\Gva$
 \begin{align*}
 	F(\va,\Gva;\vw) = \ip{\va}{\phib(\va,\Gva)}.
 \end{align*}
-It is intuitive that the action $\va$ with correct response network $\Gva$ will achieve high score than with any incorrect response network $\Gva'$.
-The joint feature map $\phib(\va,\Gva)$ is composed by the tensor product between action feature $\varphib(\va)$ and the features of the response network $\Upsilonb(\Gva)$.
+Intuitively, the action $\va$ with the correct response network $\Gva$ will achieve high score than with any incorrect response network $\Gva'$.
+The joint feature map $\phib(\va,\Gva)$ is composed by the tensor product between the action feature $\varphib(\va)$ and the features of the response network $\Upsilonb(\Gva)$.
 In particular, $\varphib(\va)$ can be a bag-of-words features of the action (e.g., blog post) and $\Upsilonb(\Gva)$ can be vector of edges and labels of the response network $\Gva$.
 
 % optimization
-The feature weight parameter $\vw$ is learned through maximum-margin structured output learning by solving the following optimization problem
+The feature weight parameter $\vw$ is learned through the maximum-margin structured output learning by solving the following optimization problem
 \begin{definition}{Primal \spin\ Optimization Problem.}
 \begin{align*}
 	\underset{\vw,\vxi_i}{\minimize} &\quad \frac{1}{2}\norm{\vw}^2+C\sum_{i=1}^{m}\xi_i\\
@@ -1350,7 +1350,7 @@ The feature weight parameter $\vw$ is learned through maximum-margin structured 
 \end{align*}
 \end{definition}
 \noindent
-where we use $\Hcal(G)$ to denote the set of directed acyclic graphs of $G$.
+where $\Hcal(G)$ denotes the set of directed acyclic graphs of $G$.
 To solve the above optimization problem, we have to compute the highest-scoring subgraph given an action. 
 In particular, the goal during the training is to find the worst margin violating subgraph which corresponds to solving the loss-augmented maximization problem
 \begin{align*}
@@ -1360,32 +1360,33 @@ The goal during the prediction is to find the subgraph with maximum compatibilit
 \begin{align}
 	H^*(\va_i) = \underset{H\in\Hcal(G)}{\argmax}\, F(\va_i,H;\vw) \label{spin_inference}.
 \end{align}
-As the two problems are different only in terms of the definition of the score, we explain our inference algorithm based on (\ref{spin_inference}) by writing the problem explicitly in terms of weight vectors and the feature maps
+As the two problems are different only in terms of the definition of the score, we explain our inference algorithm based on (\ref{spin_inference}) by writing the problem explicitly in terms of the weight vectors and the feature maps
 \begin{align}
 	H^*(\va_i) &= \underset{H\in\Hcal(G)}{\argmax}\, \ip{\vw}{\varphib(\va)\otimes\Upsilonb(H)} \nonumber \\
 	&= \underset{H\in\Hcal(G)}{\argmax}\, \sum_{e\in E^H}s_{\vy_e}(e,\va), \label{spin_np}
 \end{align}
-where we denote by $s_{\vy_e}(e,\va) = \sum_{i}\vw_{i,e,\vy_e}\varphib(\va)$ the score of edge $e$ with edge label $\vy_e$.
+where $s_{\vy_e}(e,\va) = \sum_{i}\vw_{i,e,\vy_e}\varphib(\va)$ denotes the score of edge $e$ with edge label $\vy_e$.
 
 We have proved the \nphardness\ of (\ref{spin_np}) by forming a reduction from the \maxcut\ problem \citep{Garey90computers}.
 In addition, we proposed two algorithms to solve (\ref{spin_np}).
-The first is called {\sdp\ inference} which introduces for each node $u\in V$ a binary variable $x_u\in\{-1,+1\}$ and transfer the inference problem into an integer quadratic program (\iqp) problem.
-The \iqp\ is then tackled by similar technique introduced in \citep{Geomans1995improved}, such that each variable $x_u$ is relaxed to a vector $\vv_u\in\RR^n$ and the relaxed problem is solved by semidefinite programming (\sdp). 
+The first is called {\sdp\ inference} which introduces for each node $u\in V$ a binary variable $x_u\in\{-1,+1\}$ and transfers the inference problem into an integer quadratic program (\iqp) problem.
+The \iqp\ is then tackled by the similar technique proposed in \citep{Geomans1995improved} such that each variable $x_u$ is relaxed to a vector $\vv_u\in\RR^n$ and the relaxed problem is solved by semidefinite programming (\sdp). 
 The resulting vector is rounded back into binary value by incomplete Cholesky decomposition.
 The benefit from \sdp\ inference algorithm is the approximation guarantee. 
 %If we denote by $Z^*$ ($Z_R$, and $Z$ respectively) the optimal value achieved by \iqp\ (the relaxed problem, and the \sdp\ inference respectively), we have $Z_R\ge Z^*$ and $E[Z]\ge(\alpha-\epsilon)Z_R$ where $\alpha\ge0.796$.
 In particular, the proposed \sdp\ inference algorithm is a $0.796$ approximation of the original \iqp.
 
-As \sdp\ inference is not scalable on large networks, we developed a \greedy\ heuristic base on observation stated as the following lemma:
+As \sdp\ inference is not scalable on large networks, we developed a \greedy\ heuristic based on the observation stated as the following lemma:
 \begin{lemma}
-	The inference problem (\ref{spin_np}) can be stated equivalently as a function of activated vertices
+	The inference problem (\ref{spin_np}) can be stated equivalently as a function of the activated vertices
 	\begin{align*}
 		H^{*}(\va) = \underset{{H \in {\cal H}(G)}}{\argmax} \sum_{ \substack{v_i\in V^H_{\p}}}F_m(v_i). \nonumber 
 	\end{align*}
 \end{lemma}
-The proof is given in supplementary material of \citepub{su14a}. 
-As a result, the \greedy\ algorithm starts with an empty vertex set and adds one vertex at a time such that the increment of the score is maximized over all inactivated vertices.
-The iteration ends when the objective cannot be improved.  
+\noindent
+The proof is given in the supplementary material of \citepub{su14a}. 
+As a result, the \greedy\ algorithm starts with an empty vertex set and adds one vertex in each iteration such that the increment of the score is maximized over all inactivated vertices.
+The procedure ends when the objective cannot be improved.  
 It is worth pointing out that we are not able to give any approximation guarantee for the solutions produced by the \greedy\ algorithm.
 The property of sub-modularity, which is often used to analyze the greedy algorithm, only holds for the special case of our inference problem.
 
