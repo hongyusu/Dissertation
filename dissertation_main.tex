@@ -14,9 +14,9 @@
 \section{Scope of the Thesis}
 
 Machine learning, defined by Arthur Samuel in $1959$ as ``a field of study that gives computers the ability to learn without being explicitly programmed'', has gained its popularity and become an active research field in information and computer science during the past few decades.
-Machine learning not only brings in intelligent system that generalizes well from previously observed examples, but also is firmly rooted in the statistical learning theory that establishes the conditions to guarantee the good generalization \citep{Vapnik98statistical,Vapnik99an}.
+Machine learning not only brings in intelligent systems that generalize well from previously observed examples, but also is firmly rooted in the statistical learning theory that establishes the conditions to guarantee the good generalization \citep{Vapnik98statistical,Vapnik99an}.
 Machine learning appears in many real world applications, to name but a few, page ranker in web search engine \citep{Richardson06beyond}, email spam filter \citep{Goodman06online}, recommender system in online shopping \citep{Bell07lessons}, optical image recognizer and speech recognizer \citep{Bengio09learning}.
-With increasing availability of large scale data, machine learning is expected to play an indispensable role in many research fields \citep{Fan13mining}.
+With increasing availability of the large scale data, machine learning is expected to play an indispensable role in many research fields \citep{Fan13mining}.
 
 Supervised learning, an important paradigm in machine learning, is usually instantiated as learning a function that is capable of predicting the best value for an output variable given an input variable.
 The function is learned by exploring a set of observed input/output pairs known as training examples.
@@ -29,12 +29,12 @@ This type of problems are prevalent in everyday life.
 For example, a movie can be classified as ``sci-fi'', ``thriller'' and ``crime''; a news article can be categorized as ``science'', ``biology'' and ``drug''; a gene can be associated with multiple functions in genomics research; a surveillant photo can be tagged by ``car'', ``building'' and ``road''. 
 When the multiple output variables are treated as a ``flat'' vector, the problem is often known as \textit{flat multilabel classification}.
 \text{Flat multilabel classification} is one branch of multilabel classification and has drawn increasing amount of interest from machine learning community \citep{Tsoumakas07multi,Tsoumakas10mining}.
-As multiple output variables can be ``on'' and ``off'' simultaneously, various flat multilabel classification algorithms have been developed and aim to explore the correlation or the dependency between multiple output variables in order to make better prediction.
+As multiple output variables can be ``on'' and ``off'' simultaneously, various flat multilabel classification algorithms have been developed and aim to explore the correlation between multiple output variables in order to make accurate prediction.
 In particular, \citet{Tsoumakas07multi} summerized the established flat multilabel classification algorithms into two categories: problem transformation approaches such as \citep{Zhang05a,Read09classifier,Cheng09combining} and algorithm adaptation approaches such as \citep{Schapire99improved,Bian12corrlog}
 
 %Flat multilabel classification has been tackled by many algorithms that aim to explore the correlation or the dependency between multiple output variables in order to make better prediction \citep{Schapire99improved,Zhang05a,Read09classifier,Cheng09combining,Bian12corrlog}.
 
-There is another line of research on multilabel classification known as \textit{structured output prediction} where a complex structure (output graph) is defined on multiple output variables to model the dependency in a more comprehensive way.
+There exists another line of research on multilabel classification known as \textit{structured output prediction} where a complex structure (output graph) is defined on multiple output variables to model the dependency in a more comprehensive way.
 \textit{Hierarchical classification} is one type of structured output prediction in which the prediction needs to be reconciled along the pre-established hierarchical structure \citep{Silla11a}.
 Hierarchical classification is usually applied to the problem with different level of granularity. 
 The hierarchy can be either a rooted tree such as in document classification problem \citep{Hao07hierarchicaly,Li07hierarchical,Rousu06}, or a directed acyclic graph (\daggraph) with parent-children relationship such as in gene function prediction problem \citep{Barutcuoglu06hierarchical}.
@@ -42,7 +42,7 @@ There exists a large body of work on hierarchical classification from the early 
 
 \textit{Graph labeling} is another type of structured output prediction in which the output graph often takes more general form and does not require the concept of ``level'' compared to hierarchical classification.
 The approach can be applied to wider range of problems, to name but a few, speech tagging problem with sequence structure \citep{collins02a}, action recognition problem with Markov network structure \citep{Wang11hidden}. 
-The graph labeling approach often directly incorporates the output graph into learning and uses the label correlation to improve the classification performance \citep{collins02a,lafferty01,taskar02,Taskar04max,THJA04,Rousu07}.
+The graph labeling approach often directly incorporates the output graph into learning and exploits the label correlation to improve the classification performance \citep{collins02a,lafferty01,taskar02,Taskar04max,THJA04,Rousu07}.
 For graph labeling or structured output learning in general, one inherited problem is the output graph is assumed to be observed as a-priori.
 However, this cannot be taken for granted since the proper dependency structure for the output variables is either hidden or difficult to retrieve in many applications \citep{Chickering94learning}.
 
@@ -176,9 +176,10 @@ The strategy is known as \textit{empirical risk minimization} \citep{Vapnik92pri
 
 \subsection{Regularized Learning}\label{sc_rl}
 
-Empirical risk minimization is ill-posed, which can provide infinity number of estimators with the same empirical risk on the same training data.
+Empirical risk minimization is ill-posed.
+Given training data, the strategy would provide infinity number of estimators with the same empirical risk.
 Besides, it often leads to \textit{overfitting} when the dimensionality of the feature space is high and the number of training examples is limited.
-In other words, underlying true distribution $P(\vx,y)$ is difficult to to estimate from a finite sample of training examples.
+In other words, underlying true distribution $P(\vx,y)$ is difficult to estimate from a finite sample of training examples.
 As a result, the estimator will generalize poorly on unseen test examples.
 The {regularization theory} \citep{Evgeniou99a,Evgeniou02regularization} provides a framework to alleviate these two problems.
 In particular, it suggests to minimize 
