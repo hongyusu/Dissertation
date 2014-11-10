@@ -137,23 +137,23 @@ Additionally, we denote the set of real numbers by $\RR$ and the set of integers
 
 To measure the goodness of the estimator, we define a loss function $\Lcal(y,f(\vx)):\Ycal\times\Ycal\rightarrow\RR^+$ as a monatomic bounded function between the true value $y$ and the predicted value $f(\vx)$.
 Popular loss functions used in machine learning include,
-\textit{Hinge Loss} e.g., in Support Vector Machines \citep{Cortes95support}
+\textit{Hinge Loss}, e.g., in Support Vector Machines \citep{Cortes95support}
 \begin{align}
 	\Lcal_{hinge}(y,f(\vx)) = \maximize (0,1-y f(\vx)),\, \Ycal=[-1,+1], \label{hinge_loss}
 \end{align}
-\textit{$0/1$ Loss} e.g., in structured \svm\ \citep{THJA04}
+\textit{$0/1$ Loss}, e.g., in structured \svm\ \citep{THJA04}
 \begin{align}
 	\Lcal_{0/1}(y,f(\vx)) = \ind{y=f(\vx)},\, \Ycal = \ZZ, \label{one_loss}
 \end{align}
-\textit{Squared Loss} e.g., in Ridge Regression \citep{Hoerl00ridge}
+\textit{Squared Loss}, e.g., in Ridge Regression \citep{Hoerl00ridge}
 \begin{align*}
 	\Lcal_{squared}(y,f(\vx)) = (y-f(\vx))^2,\, \Ycal=\RR,
 \end{align*}
-\textit{Exponential Loss} e.g., in \adaboost\ \citep{Schapire99improved}
+\textit{Exponential Loss}, e.g., in \adaboost\ \citep{Schapire99improved}
 \begin{align}
 	\Lcal_{exp}(y,f(\vx)) = \exp(-y f(\vx)),\, \Ycal=\RR, \label{exp_loss}
 \end{align}
-\textit{Logistic Loss} e.g., in Logistic Regression \citep{Chen99}
+\textit{Logistic Loss}, e.g., in Logistic Regression \citep{Chen99}
 \begin{align}
 	\Lcal_{log}(y,f(\vx)) = \log(1+\exp(-y f(\vx))),\, \Ycal=[-1,+1]. \label{log_loss}
 \end{align}
