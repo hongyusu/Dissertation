@@ -846,11 +846,11 @@ The methods for structured output prediction will be covered in the later part o
 
 Consider the infeasibility of listing all algorithms for flat multilabel classification, it is easier if we are able to categorize the algorithms into classes.
 In this chapter, we adopt the simple categorization presented in \citep{Tsoumakas07multi,Tsoumakas10mining} which gives us two major algorithm categories, namely problem transformation and algorithm adaptation.
-For problem transformation category, we will present the methods which aim to transfer the flat multilabel classification problem into other well studied problem settings (e.g., single-label classification problem, ranking problem).
-For algorithm adaptation category, we will describe the methods which directly modify the popular learning techniques (e.g., Logistic Regression and ensemble method) to solve the multilabel classification problem.
+For the problem transformation category, we will present the methods which aim to transfer the flat multilabel classification problem into other well studied problems (e.g., single-label classification, label ranking).
+For the algorithm adaptation category, we will describe the methods which directly modify the established learning techniques (e.g., Logistic Regression, ensemble method) to solve the multilabel classification problem.
 Nevertheless, the present algorithms will explore the inherited difficulties of flat multilabel classification which are the exponential sized multilabel space and the implicit label correlation.
 Besides, the author realized that it is impossible to cover every lines of research in the field of flat multilabel classification.
-Interested readers are pointed out to the recent research review articles, for example, \citep{Tsoumakas07multi,Tsoumakas10mining,Zhang14a}.
+Interested readers are pointed out to the recent research survey articles \citep{Tsoumakas07multi,Tsoumakas10mining,Zhang14a}.
 
 
 
@@ -861,15 +861,15 @@ Interested readers are pointed out to the recent research review articles, for e
 
 We borrow most notations from the single-label classification setting described in Section~\ref{sc_slc_pn}.
 In particular, we examine the following \textit{multilabel classification} problem.
-We assume data are drawn from a domain $\vXcal\times\vYcal$, where $\vXcal$ is a set of inputs (instants) and $\vYcal$ is the set of outputs (multilabels).
+We assume that data are drawn from a domain $\vXcal\times\vYcal$, where $\vXcal$ is a set of inputs (instants) and $\vYcal$ is the set of outputs (multilabels).
 $\vYcal = \Ycal_1\times\cdots\times\Ycal_k$ is composed by a Cartesian product of $k$ sets $\Ycal_i=\{-1,+1\}$.
 We retain a single-label classification setting by letting $k=1$.
 A vector $\vy=(y_1,\cdots,y_k)\in\vYcal$ is called \textit{multilabel} and its element $y_j$ is called \textit{microlabel}.
-We use $\vy_i[j]$ to denote the $j$'th microlabel in the $i$'th multilabel.
+$\vy_i[j]$ denotes the $j$'th microlabel in the $i$'th multilabel.
 In addition, we are given a training set consisting of $m$ labeled examples $\Scal=\{(\vx_i,\vy_i)\}_{i=1}^{m}\in\vXcal\times\vYcal$. 
-A pair $(\vx_i,\vy)$, where $\vx_i$ is the training input and $\vy\in\vYcal$ is an arbitrary output, is called \textit{pseudo-example}.
+A pair $(\vx_i,\vy)$, where $\vx_i$ is a training input and $\vy\in\vYcal$ is an arbitrary output, is called \textit{pseudo-example}.
 It is worth pointing out that pseudo-example $(\vx_i,\vy)$ can be generated from a different distribution that generates training examples $(\vx_i,\vy_i)$.
-The goal is to learn a mapping function $f\in\Hcal:\vXcal\rightarrow\vYcal$ that can compute the multilabel given an arbitrary input such that the predefined loss $\ell$ for the future unseen examples will be minimized.
+The goal is to learn a mapping function $f\in\Hcal:\vXcal\rightarrow\vYcal$ which can compute the multilabel given an arbitrary input such that the predefined loss $\ell$ for the future unseen examples will be minimized.
 The loss function is usually tailored for the learning algorithm.
 
 
@@ -878,12 +878,12 @@ The loss function is usually tailored for the learning algorithm.
 %
 \section{Problem Transformation}
 
-The problem transformation approach aims to transform the flat multilabel classification problem in to other well established problem settings.
+The problem transformation approach aims to transform the flat multilabel classification problem into other well established problems.
 The most typical way is known as \textit{binary relevance} (\br) proposed by \citet{Tsoumakas07multi,Tsoumakas10mining}.
-\br\ amounts to transform the multilabel classification problem into a set of single-label classification problems and to independently learn a single-label classifier for each microlabel.
-We will focus on \br\ in this section.
-Another possibilities include, for example, to transform the multiple labels into label power set \citep{Tsoumakas07random} or to transform the problem into label ranking problem \citep{Elisseeff01akernel,Brinker07case,Furnkranz08multilabel,Chiang12a}.
+\br\ amounts to transforming the multilabel classification problem into a set of single-label classification problems and to independently learning a single-label classifier for each subproblem.
+Other types of transformations include, for example, to transform into label power set problem \citep{Tsoumakas07random}, to transform into label ranking problem \citep{Elisseeff01akernel,Brinker07case,Furnkranz08multilabel,Chiang12a}.
 However, learning through label ranking will not be discussed in detail as it slightly diverges from the main scope of the thesis.
+We will focus on \br\ in this section.
 
 
 
@@ -892,10 +892,10 @@ However, learning through label ranking will not be discussed in detail as it sl
 \subsection{Multilabel $K$-Nearest Neighbors (\mlknn)} \label{sc_mlknn}
 
 Multilabel $K$-Nearest Neightbors (\mlknn) proposed by \citet{Zhang05a,Zhang07mlknn} is perhaps the most famous binary relevance classifier for flat multilabel classification.
-\mlknn\ is also an instance based learning approach \citep{Aha91instance} that is derived from the $K$-Nearest Neightbor (\knn) algorithm designed for single-label classification problem.
-\mlknn\ transforms the flat multilabel classification problem into a set of single-label classification and processes one microlabel independently.
+\mlknn\ is also an instance based learning approach \citep{Aha91instance} that is derived from the $K$-Nearest Neightbor (\knn) algorithm designed for the single-label classification problem.
+\mlknn\ transforms the flat multilabel classification problem into a set of single-label classification problems and processes each microlabel independently.
 For each unseen example $\vx$, \mlknn\ algorithm first identifies the set of $K$-nearest neighbors $N(\vx)$ from the training sets.
-After that the algorithm computes the multilabel $\vy$ of the unseen example $\vx$ by examining the set of labels collected from its $K$-nearest neightbors.
+After that, the algorithm computes the multilabel $\vy$ of the unseen example $\vx$ by examining the set of labels collected from its $K$-nearest neightbors.
 
 Mathematically 
 let $C_{\vx}(j)$ denote the number of the neighbors of $\vx$ with $j$'th label being ``$+1$'',
@@ -930,7 +930,7 @@ The idea has previously been applied in \citep{Godbole04discriminative}.
 However, the addition label information only takes a small part of the input feature space especially when the original feature space is already high.
 In this case, one can only expect to gain additional performance from concatenated label information by assuming the correlation to the output microlabel is high.
 
-Besides, \cc\ has been explained in terms of condition probability theory by Probabilistic Classifier Chains (\pcc) presented in \citep{Read09classifier,Dembczynski10bayes}.
+\cc\ has been explained in terms of condition probability theory by Probabilistic Classifier Chains (\pcc) presented in \citep{Read09classifier,Dembczynski10bayes}.
 Since there is no standard way for classification order of microlabels in \cc, Ensemble Classifier Chains (\ecc) has been developed in \citep{Read11classifier} which further improves \cc\ by generating and combining multiple chains of classifiers. 
 
 
