@@ -20,7 +20,7 @@ With increasing availability of the large scale data, machine learning is expect
 
 Supervised learning, an important paradigm in machine learning, is usually instantiated as learning a function that is capable of predicting the best value for an output variable given an input variable.
 The function is learned by exploring a set of observed input/output pairs known as training examples.
-In the classical supervised learning setting, the output variable to be predicted can only take one value.
+In the classical supervised learning setting, there is only one variable to be predicted.
 In machine learning community, this is referred as single-label classification if the output is discrete valued, or as regression if the output is continuous valued.
 Many single-label classification models have been designed and applied in practice, for example, Perceptron \citep{Rosenblatt58}, Logistic Regression \citep{Chen99}, Support Vector Machines \citep{Cortes95support}.
 
@@ -30,7 +30,7 @@ For example, a movie can be classified as ``sci-fi'', ``thriller'' and ``crime''
 When the multiple output variables are treated as a ``flat'' vector, the problem is often known as \textit{flat multilabel classification}.
 \text{Flat multilabel classification} is one branch of multilabel classification and has drawn increasing amount of interest from machine learning community \citep{Tsoumakas07multi,Tsoumakas10mining}.
 As multiple output variables can be ``on'' and ``off'' simultaneously, various flat multilabel classification algorithms have been developed and aim to explore the correlation between multiple output variables in order to make accurate prediction.
-In particular, \citet{Tsoumakas07multi} summerized the established flat multilabel classification algorithms into two categories: problem transformation approaches such as \citep{Zhang05a,Read09classifier,Cheng09combining} and algorithm adaptation approaches such as \citep{Schapire99improved,Bian12corrlog}
+In particular, \citet{Tsoumakas07multi} summerized the established flat multilabel classification algorithms into two categories: problem transformation approaches \citep{Zhang05a,Read09classifier,Cheng09combining} and algorithm adaptation approaches \citep{Schapire99improved,Bian12corrlog}
 
 %Flat multilabel classification has been tackled by many algorithms that aim to explore the correlation or the dependency between multiple output variables in order to make better prediction \citep{Schapire99improved,Zhang05a,Read09classifier,Cheng09combining,Bian12corrlog}.
 
