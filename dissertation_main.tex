@@ -761,7 +761,7 @@ The ensemble prediction is the weighted combination of all weak learners (line~\
 \end{algorithm}
 
 For each weak learner $f^t(\vx)$, the strategy of updating adaptive parameter $\alpha^t$ is to ensure that the exponential loss of $\alpha^tf^t(\vx)$ is minimized.
-To see this, we first compute the exponential loss for $\alpha^tf^t(\vx)$ given current distribution $D^t$ over training example and adaptive parameter for $f^t(\vx)$
+To see this, we first compute the exponential loss for $\alpha^tf^t(\vx)$ given current distribution $D^t$ and adaptive parameter $\alpha^t$
 \begin{align*}
 	\Lcal_{exp}&(y,\alpha^tf^t(\vx);D^t) \\
 	&= \sum_{i=1}^mD^t(i)\exp(-y_i\alpha^tf^t(\vx_i))\\
