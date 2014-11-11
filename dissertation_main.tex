@@ -418,7 +418,7 @@ The choice in Logistic Regression is to use
 \fi
 we compute the logistic transformation of the original conditional probability by
 \begin{align*}
-	\log\frac{P(y=+1|\vx)}{1-P(y=+1|\vx)} = \log\frac{P(y=+1|\vx)}{P(y=-1|\vx)} = \ip{\vw}{\varphib(\vx)} + b.
+	\log\frac{P(y=+1|\vx)}{P(y=-1|\vx)} = \ip{\vw}{\varphib(\vx)} + b.
 \end{align*}
 Solving for $P(y=+1|\vx)$ results in 
 \begin{align}
@@ -838,11 +838,11 @@ The feature split process of decision tree is deterministic given a set of featu
 
 Multilabel classification is a natural extension to single-label classification presented in Section~\ref{sc_slc}.
 In multilabel classification each input (instant) is simultaneously associated with multiple outputs (labels).
-The research of the multilabel classification has progressed rapidly in the past two decades with many learning algorithms being developed and applied to real world classification tasks.
+The research of the multilabel classification has progressed rapidly in the past two decades with many learning algorithms being developed and applied to real world classification problems \citep{lafferty01,taskar02,Taskar04max,THJA04,Rousu07}.
 In general, there are two lines of research for multilabel classification, namely flat multilabel classification and structured output prediction.
 In flat multilabel classification, the multiple labels are treated essentially as a ``flat'' vector of labels.
 Structured output prediction, on the other hand, models the multiple labels via a graph structure that connects labels.
-This chapter will be devoted to flat multilabel classification in which several classical algorithm techniques will be presented.
+This chapter will be devoted to flat multilabel classification in which several well established algorithm techniques will be presented.
 The methods for structured output prediction will be covered in the later part of the thesis.
 
 Consider the infeasibility of listing all algorithms for flat multilabel classification, it is easier if we are able to categorize the algorithms into classes.
@@ -1100,7 +1100,7 @@ Recently, \citet{Paredes12exploit} proposed a method which exploits the informat
 Structured output prediction is a natural extension to flat multilabel classification presented in Chapter~\ref{ch_fmlc}.
 Unlike flat multilabel classification which takes multiple interdependent output variables as a ``flat'' vector, structured output prediction assumes that multiple output variables are correlated and locate in the structured output space.
 It builds a graph (e.g., chain, tree) to connect multiple output variables by which it gains the advantage of exploiting the label correlation compared to flat multilabel classification.
-In this chapter, we will start by introducing several classical structured output learning models developed during the last decade.
+In this chapter, we will start by introducing several well established structured output learning models developed during the last decade.
 We will present our new algorithm \spin\ that is capable of predicting a directed acyclic graph (\daggraph) and examine the performance on the network response prediction problem.
 
 
