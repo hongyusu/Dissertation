@@ -1542,13 +1542,13 @@ In \text{correlation thresholding} approach, we take all edges that exceed a fix
 %
 \section{Graph Labeling Ensemble (\mve)}\label{sc_su11}
 
-We have presented in Section~\ref{sc_su10} a structured output learning approach for multilabel molecular classification problem.
-The model relies on the representation of the multiple output variables through an output graph which allows us to explore the label correlation in a more comprehensive way compared to previous approaches.
-To apply structured output learning, it is assumed that the structure of the output graph is fully observed.
+%We have presented in Section~\ref{sc_su10} a structured output learning approach for multilabel molecular classification problem.
+The structured output learning approach relies on the representation of the multiple output variables through an output graph which allows us to exploit the label correlation in a more comprehensive way compared to previous approaches.
+To apply structured output learning, it is assumed that the structure of the output graph is observed as a-priori.
 Alternatively in \citepub{su10}, there exists auxiliary datasets that encode the label correlation which can be exploited in order to retrieve the output graph.
 However, we cannot take the availability of the output graph for granted because the underlying dependency structure is often hidden in many real world applications.
 In \citepub{su11}, we explore the potential of constructing a majority voting ensemble of multiple structured output learners and examine the performance of the proposed model on molecular classification problem.
-Each structured output learner is built based on a random generated output graph.
+Each structured output learner is built based on a randomly generated output graph.
 As a result, the proposed model (\mve) is not constrained to the availability of the output dependency structure.
 
 
@@ -1585,7 +1585,8 @@ We have evaluated the method on molecular classification problem.
 This section is based on \citepub{su14b} where we aim to present two other aggregation techniques to combine the base learners.
 Compare to previously developed \mve, the proposed model (\amm\ and \mam\ respectively) also perform inference before or after forming the ensemble.
 We also examine the performance of the proposed models on a set of heterogeneous multilabel datasets from various domains.
-In addition, we bring in a theory which is based on the reconstruction error of the compatibility score to explains the improvement of \mam.
+In addition, we study the improvement of \mam\ in terms of the reconstruction error of the compatibility score.
+%In addition, we bring in a theory which is based on the reconstruction error of the compatibility score to explains the improvement of \mam.
 
 
 
@@ -1681,7 +1682,7 @@ We can instead resort to the \textit{complete graph} by assuming the complete se
 In particular, we construct a structured output learner with a complete graph as the output graph and rely on the optimization algorithm to reveal the hidden ``parameters'' defined on the edges (e.g., edge potentials).
 To see this, imagine the edges which are not from the correct output graph will have zero ``parameters'' in the complete graph.
 
-Structured output learning on complete graph is not an easier problem as the inference is \nphard\ in nature.
+Structured output learning on complete graph is not an easy problem as the inference is \nphard\ in nature.
 The inference problem is often instantiated as finding the \textit{Maximum A-Posteriori} (\map) configuration on a graph structured probability distribution.
 In terms of the intractability issue of the graph inference problem, many techniques have been proposed but with important differences.
 \citet{Jordan04semiefinite} developed the semi-definite programming convex relaxation for the inference on graph with cycles.
@@ -1689,7 +1690,7 @@ In terms of the intractability issue of the graph inference problem, many techni
 Efficient inference algorithms on special graph have also been studied in \citep{Globerson07approximate}.
 
 \citepub{su14c} is motivated by well-established Max-Margin Principle as described in Section~\ref{sc_svm}.
-The work investigates whether the problem of inference over a complete graph in structured output learning can be avoided in a analogous way.
+The work investigates whether the problem of inference over a complete graph in structured output learning can be avoided by exploring the properties of the Max-Margin Principle.
 Start from a sampling results, \citepub[Lemma 3]{su14c} shows that with high probability a big fraction of margin achieved by the complete graph can be obtained by a random sample of spanning trees of a small size.
 Besides, \citepub[Theorem 5]{su14c} shows that good generalization error can also be guaranteed when learning with, instead of a complete graph, a random sample of spanning trees.
 
@@ -1873,11 +1874,12 @@ In this chapter, the author aims to summarize the implementations and to point o
 		\item The code is implemented in \matlab.
 		\item The package can be located from \url{http://git@github.com:hongyusu/RandomOutputGraphEnsemble.git}.
 	\end{enumerate}
-	
+	\iffalse
 	\item The structured output learning algorithm used in \citepub{su10} for multilabel molecular activities classification problem is an instantiation of \mmcrf\ \citep{Rousu07}.
 	\begin{enumerate}
 		\item The code is implemented in \matlab.
 		\item The package can be found from \url{http://research.ics.aalto.fi/kepaco/software.shtml}.
+		\fi
 	\end{enumerate}
 \end{enumerate}
 
