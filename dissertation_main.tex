@@ -530,9 +530,9 @@ Based on Maximum-Margin Principle, we further use $\gamma_i$ to denote the \text
 \begin{align*}
 	\gamma_i = \frac{y_i(\ip{\vw}{\varphib(\vx_i)}+b)}{\norm{\vw}}.
 \end{align*}
-We notice if we scale $\vw$ and $b$ by any constant $\kappa\in\RR$ (e.g., $\vw\leftarrow\kappa\vw, b\leftarrow\kappa b) the margin $\gamma_i$ stays unchanged. 
+We notice if we scale $\vw$ and $b$ by any constant $\kappa\in\RR$ (e.g., $\vw\leftarrow\kappa\vw, b\leftarrow\kappa b$) the margin $\gamma_i$ stays unchanged. 
 We still achieve the same classification performance and generalization power.
-As parameters are invariance to scaling, we set $\norm{\vw}=1$.
+As the parameters are invariance to scaling, we set $\norm{\vw}=1$.
 Given a set of training example $S$, we also define the margin with respect to $S$ as the minimum margin achieved by individual training example
 \begin{align*}
 	\gamma = \underset{i\in\{1,\cdots,m\}}{\minimize}\gamma_i.
@@ -540,7 +540,7 @@ Given a set of training example $S$, we also define the margin with respect to $
 
 Our goal is to find the separating hyperplane such that it maximizes the margin with respect to all training examples while separating the training examples into two classes.
 This corresponds to finding a ``big gap'' between two classes of examples in the feature space.
-The max-margin solution is given in \citep{Bishop07} as
+The maximum-margin solution is given in \citep{Bishop07} as
 \begin{align*}
 	\underset{\vw,b,\gamma}{\maximize} &\quad \gamma\\
 	\st &\quad y_i(\ip{\vw}{\varphib(\vx_i)}+b) \ge \gamma, \, \norm{\vw}=1, \, \forall i\in\{1,\cdots,m\}.
@@ -562,7 +562,7 @@ This is equivalent to
 	\end{align*}
 \end{definition}
 \noindent
-where the goal is to find the weight vector of minimum norm that corresponds to maximize the margin between two classes of examples.
+where the goal is to find the weight vector of minimum norm which corresponds to maximize the margin between two classes of examples.
 The constraints state that the training data should be correctly separated.
 
 % soft margin svm
@@ -575,18 +575,18 @@ Therefore, we relax the constraints by introducing a \textit{margin slack} param
 \end{align}
 $\xi_i$ will allow example to have margin less than $1$.
 In particular, with $\xi_i=0$ the data point $x_i$ is correctly classified, and lies either on the margin or on the correct side.
-With $0<\xi_i\le 1$ the data point is correctly classified and lies between margin and separating hyperplane.
-With $\xi_i>1$ the data point is misclassified locating on the other side of the hyperplane.
-With margin slack parameter, the new goal is to maximize the margin while penalize the data points which either lie on the wrong side of the hyperplane or have margin less than one.
+With $0<\xi_i\le 1$ the data point is correctly classified and lies between the margin and the separating hyperplane.
+With $\xi_i>1$ the data point is misclassified locating on the other side of the separating hyperplane.
+With the margin slack parameters, the new goal is to maximize the margin while penalize the data points which either lie on the wrong side of the hyperplane or have margin less than one.
 This can be defined by
 \begin{definition}{Primal Soft-Margin \svm\ Optimization Problem.}\label{softsvmprimal}
 	\begin{align*}
-		\underset{\vw,\xi}{\minimize} & \quad\frac{1}{2}\norm{\vw}^2 + C\sum_{i=1}^{m}\xi_i\\
+		\underset{\vw,\xi_i}{\minimize} & \quad\frac{1}{2}\norm{\vw}^2 + C\sum_{i=1}^{m}\xi_i\\
 		\st & \quad y_i(\ip{\vw}{\varphib(\vx_i)} + b) \ge 1-\xi_i, \xi_i\ge 0, \forall i\in\{1,\cdots,m\}.
 	\end{align*}
 \end{definition}
 \noindent
-Definition~\ref{softsvmprimal} is another instantiation of regularized risk minimization (\ref{rl}) with $L_2$-norm regularization (\ref{l2_norm}) and hinge loss (\ref{hinge_loss}).
+Definition~\ref{softsvmprimal} is another instantiation of the regularized risk minimization (\ref{rl}) with $L_2$-norm regularization (\ref{l2_norm}) and hinge loss (\ref{hinge_loss}).
 % dual, kernel svm
 The above optimization problem is usually transformed into dual form by introducing for each constraint a \textit{Lagrangian multiplier} (dual variable) $\alpha$.
 We obtain the following dual optimization problem
@@ -597,17 +597,17 @@ We obtain the following dual optimization problem
 	\end{align*}
 \end{definition}
 \noindent
-It is not difficult to verify that according to Karush-Kuhn Tucher (\kkt) conditions only examples with $\xi_i=0$ and satisfying equality constraints (\ref{softsvmconstraint}) will be ``active'' and have dual variable $\alpha_i>0$.
+It is not difficult to verify that according to Karush-Kuhn Tucher (\kkt) conditions only examples with $\xi_i=0$ and satisfying the equality constraints (\ref{softsvmconstraint}) will be ``active'' and have dual variable $\alpha_i>0$.
 These examples lie on the margin and have $\gamma_i=1$.
 They are called \textit{support vectors} in \svm\ optimization.
-In fact the number of support vectors is usually smaller than the size of the training set.
+In fact the number of the support vectors is usually smaller than the size of the training data.
 As the weight vector can be expressed as the linear combination of the training examples \citep{taylor04}
 \begin{align*}
 	\vw = \sum_{i=1}^{m}\alpha_iy_i\varphib(\vx_i),
 \end{align*}
 the evaluation can be done efficiently by maintaining a small set of non-zero $\alpha$s.
 
-In order to solve the optimization problem in (Definition~\ref{softsvmdual}), it is not necessary to work with the explicit feature space of $\varphib(\vx)$ as only the result of the inner product $\ip{\varphib(\vx_i)}{\varphib(\vx_j)}$ is required.
+In order to solve the optimization problem in Definition~\ref{softsvmdual}, it is not necessary to work with the explicit feature space of $\varphib(\vx)$ as only the result of the inner product $\ip{\varphib(\vx_i)}{\varphib(\vx_j)}$ is required.
 This suggests that the data can be radically represented through pairwise similarities.
 In particular, we defined a function $K:\Xcal\times\Xcal\rightarrow\RR$ such that the training data $\Scal$ is represented through a $m\times m$ matrix of pairwise similarities.
 % kernel function
@@ -625,7 +625,7 @@ hold for any $c_i\in\RR$ and nonempty set $\Xcal$.
 	For any kernel function $K$ defined on space $\Xcal$, there always exists a Reproduced Kernel Hilbert Space (RKHS) $\vFcal$ and a mapping function $\varphib:\Xcal\rightarrow\vFcal$ such that $K(\vx_i,\vx_j)=\ip{\varphib(\vx_i)}{\varphib(\vy_i)}$ holds for any $\vx\in\Xcal$.
 \end{definition}
 \noindent
-Definition~\ref{rkhs} shows any kernel function can be represented as the inner product in some feature space $\vFcal$.
+Definition~\ref{rkhs} shows that any kernel function can be represented as an inner product in some feature space $\vFcal$.
 Kernel function enables us to operate in high dimensional feature space $\vFcal$ without ever computing the exact coordinate or evaluating the inner product explicitly in that space.
 Instead, the kernel function can be computed based on the inner product in the original space $\Xcal$.
 
@@ -699,7 +699,7 @@ The methods train several base classifiers and combine them in order to achiever
 Most importantly, there is no requirement for the base classifiers to be accurate as long as they perform better than random guessing.
 There are several variants of ensemble methods, to name but a few, bagging \citep{Breiman96bagging}, boosting \citep{Freund97a,Schapire99improved}, stacking \citep{Smyth99linearly}, Bayesian averaging \citep{Freund04generalization}.
 Ensemble methods have improved the classification performance when compared to their base learner counterpart, some of them are also supported with the theoretical analysis that guarantees the performance \citep{Schapire97boosting,Koltchinskii00empirical,Cortes14semble,Cortes14deep}.
-This section will be devoted to bagging and boosting since both methods are extensively studied and are most related to this thesis.
+This section will be devoted to bagging and boosting since both methods are extensively studied and are most relevant to this thesis.
 
 Ensemble methods and their theories are primarily developed for single-label classification.
 The extensions for the multilabel classification problem will be briefly covered in Section~\ref{sc_emfmlc}.
@@ -719,7 +719,7 @@ In many cases, no other information about $f^t(x)$ is available to $H(x)$ except
 
 \subsection{Boosting} \label{sc_boosting}
 
-\textit{Boosting} corresponds to a learning framework or a family of algorithms that take in a weak classifier and tuning it into a strong one.
+\textit{Boosting} corresponds to a learning framework or a family of algorithms that takes in a weak classifier and tuning it into a strong one.
 We begin our discussion from  \textit{concept class}.
 A \textit{concept} is a boolean function over domain $\vXcal$, and a \textit{concept class} is a class of concepts.
 % TODO: an illustrative example
@@ -727,12 +727,12 @@ A concept class is \textit{strongly learnable} if there exists a polynomial lear
 On the other hand, a concept class is \textit{weakly learnable} if the learning algorithm achieves arbitrary high accuracy where the only requirement is that the learning algorithm finds a function that performs better than coin flip.
 The concept of learnability was proposed in \citep{Kearns94cryptographic} together with the question whether the strong learnability and the weak learnability are equivalent which is known as \textit{hypothesis boosting problem}.
 Finding a weak learner which performs better than random guessing is easy in practice, but finding a strong learner is usually difficult.
-\citet{Schapire90the} has proved that two classes of learnability are equal which lays the foundation of the boosting algorithm that aims to tune a weak learning algorithm into a strong one that achieves high performance.
+\citet{Schapire90the} has proved that two classes of learnability are equal which lays the foundation of the boosting algorithm which aims to tune a weak learning algorithm into a strong one that achieves high performance.
 
 Adaptive Boosting (\adaboost) developed by \citet{Freund97a} is the very first practical boosting algorithm and is the most influential one.
-In addition, \citet{Schapire99improved} proposed a variant of the algorithm which updates the adaptive parameters in order to minimize the exponential loss (\ref{exp_loss}) of the weak learners.
+In addition, \citet{Schapire99improved} proposed a variant of the algorithm which updates the adaptive parameters in order to minimize the exponential loss (\ref{exp_loss}) of the weak learner.
 The algorithm is shown in (Algorithm~\ref{adaboost}).
-The fundamental idea of \adaboost\ is to maintain a distribution $D$ over all training examples, and update the distribution in each iteration such that difficult-to-classify examples will get more probability mass for the next iteration (line~\ref{update_d}).
+The fundamental idea of \adaboost\ is to maintain a distribution $D$ over all training examples, and update the distribution in each iteration such that the difficult-to-classify examples will get more probability mass for the next iteration (line~\ref{update_d}).
 Particularly, in each iteration the algorithm computes a weak learner $f^t(\vx)$ base on all training examples and the current distribution $D^{t}$ (line~\ref{compuet_f}), calculates the weighted training error $\epsilon^t$ (line~\ref{compute_error}), and computes the adaptive parameter $\alpha^t$ (line~\ref{compute_alpha}).
 The ensemble prediction is the weighted combination of all weak learners (line~\ref{adaboost_prediction}).
 
@@ -811,7 +811,7 @@ The goal of \bagging\ is to exploit the independency by adding randomness into t
 
 \bagging\ uses bootstrap sampling \citep{Efron1994introduction} to generate subsets of training examples.
 Given a training set of $m$ training examples, a subset of the same size is generated by sampling with replacement $m$ time from the original training set.
-The sampling procedure is then repeated $T$ time in order to generate $T$ subsets for constructing base learners.
+The sampling procedure is then repeated $T$ times in order to generate $T$ subsets for constructing base learners.
 Note that the sampled subsets will be similar since they are sampled from the same training set.
 However, they will not be too similar in which each subset will only cover around $63\%$ of the origin training data under the condition that $m$ is large.
 To see this, consider the probability that the $i$'th training examples is not sampled once is $(1-\frac{1}{m})$, and the probability that it is not sampled at all is $(1-\frac{1}{m})^m$.
