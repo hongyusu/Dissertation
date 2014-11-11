@@ -1099,7 +1099,7 @@ Recently, \citet{Paredes12exploit} proposed a method which exploits the informat
 
 Structured output prediction is a natural extension to flat multilabel classification presented in Chapter~\ref{ch_fmlc}.
 Unlike flat multilabel classification which takes multiple interdependent output variables as a ``flat'' vector, structured output prediction assumes that multiple output variables are correlated and locate in the structured output space.
-It builds a graph (e.g., chain, tree) to connect multiple output variables by which it gains the advantage of exploiting the label correlation compared to flat multilabel classification.
+The method assumes that there exists an output graph (e.g., chain, tree) to connect multiple output variables by which it gains the advantage of exploiting the label correlation compared to flat multilabel classification.
 In this chapter, we will start by introducing several well established structured output learning models developed during the last decade.
 We will present our new algorithm \spin\ that is capable of predicting a directed acyclic graph (\daggraph) and examine the performance on the network response prediction problem.
 
@@ -1133,7 +1133,7 @@ In this section, we will briefly present several related algorithms for structur
 %
 \subsection{Structured Perceptron}
 
-Perceptron developed by \citet{Rosenblatt58} is one of the oldest learning algorithm in machine learning.
+Perceptron developed by \citet{Rosenblatt58} is one of the oldest learning algorithms in machine learning.
 The structured Perceptron, as suggested by its name, can be seen as the generalization of the Perceptron algorithm to the structured output space.
 It was proposed in \citep{collins02a, collins02b} with the formalism quite similar to multiclass Perceptron. 
 The model assumes a score function $\ip{\vw}{\phib(\vx,\vy)}$ as the inner product between a joint feature map $\phib(\vx,\vy)$ and the feature weight parameter $\vw$.
@@ -1141,7 +1141,7 @@ After weight parameter $\vw$ is obtained, one needs to solve the {argmax} proble
 \begin{align}
 	\hat{\vy} = \underset{\vy\in\vYcal}{\argmax} &\, \ip{\vw}{\phib(\vx,\vy)}.  \label{sp_inference}
 \end{align}
-For example, (\ref{sp_inference}) can be solved by Viterbi decoding \citep{collins02a}.
+For example, (\ref{sp_inference}) is solved in \citep{collins02a} by Viterbi decoding.
 
 The weight parameter $\vw$ is learned via the standard Perceptron iterative update by solving the argmax problem (\ref{sp_inference}) in each iteration.
 In particular, the algorithm loops through the training examples and updates $\vw$ whenever the predicted multilabel $\hat{\vy_i}$ is different from the true multilabel $\vy_i$.
@@ -1163,7 +1163,7 @@ Both will lead to the same update to the feature weight parameter (\ref{sp_updat
 \subsection{Conditional Random Field (\crf)} \label{sc_crf}
 
 Condition Random Field (\crf) developed in \citep{lafferty01,taskar02} is a discriminative framework that constructs a conditional model $P(\vy|\vx)$ from input variable $\vx\in\vXcal$ and output variables $\vy\in\vYcal$.
-It optimizes a log-loss which is analogue to $0/1$ loss over the structured output space.
+It optimizes the log-loss which is analogue to $0/1$ loss over the structured output space.
 
 Mathematically, let $Y=\{\vy_1,\cdots,\vy_m\}$ denote a set of output random variables and $X=\{\vx_1,\cdots,\vx_m\}$ denote a set of input random variables to condition on.
 Let $G=(E,V)$ be an output graph such that $\vy = (y_v)_{v\in V}$.
@@ -1178,7 +1178,7 @@ $Z_{\vx,\vw}$ sums over all possible multilabels
 \end{align}
 Thus, when conditioned on $\vx$, the random variables $y_v$ obey the Markov property with respect to output graph $G$.
 
-Apply similar regularization technique as used on \lr\ in Section~\ref{sc_lr}, the feature weight parameter $\vw$ can be solved by introducing a Gaussian prior and maximizing the logarithm of the resulting \textit{Maximize A-Posteriori} (\map) problem \citep{taskar02} defined as
+Applying similar regularization technique as used on \lr\ in Section~\ref{sc_lr}, the feature weight parameter $\vw$ can be solved by introducing a Gaussian prior and maximizing the logarithm of the resulting \textit{Maximize A-Posteriori} (\map) problem \citep{taskar02} defined as
 \begin{align}
 	L(\vw) = \sum_{i=1}^{m}\left[\ip{\vw}{\phib(\vx_i,\vy_i)}-\log{\sum_{\vy'\in\vYcal}{\exp{\ip{\vw}{\phib(\vx_i,\vy')}}}}\right] - \frac{1}{\sigma^2}\norm{\vw}^2. \label{crf_inference}
 \end{align}
@@ -1243,7 +1243,7 @@ Nevertheless, \mmmn\ improves \crf\ by avoiding the partition function and allow
 \subsection{Max-Margin Conditional Random Fields (\mmcrf)} \label{sc_mmcrf}
 
 Max-Margin conditional random field (\mmcrf) is a structured output learning method developed in \citep{Rousu07}.
-\mmcrf\ is a sibling method of \mmmn\ in which it extends \mmmn\ with a general and efficient optimization strategy. 
+It extends \mmmn\ by the tensor product as the joint feature map, as well as by a general and efficient optimization strategy. 
 \mmcrf\ is applied in \citepub{su10} where the task is to predict multiple interdependent molecular activities.
 
 In particular, \mmcrf\ uses exponential family to model the condition probability of a multiple output labels given a input example
@@ -1303,7 +1303,7 @@ The generality of the loss function can be seen as an advantage compared to \crf
 %
 \section{\spin\ for Network Response Prediction} \label{sc_su14a}
 
-\citepub{su14a} presents a structured output learning model for the network influence prediction problem.
+\citepub{su14a} proposes the network response prediction problem and presents a structured output learning model for the problem.
 The proposed model, \spin, is \textit{context-sensitive} which is different from previous the state-of-the-art methods which only model the influence in terms of the network connectivity.
 The inference problem of \spin\ is \nphard\ in general.
 We provides a semidefinite programming algorithm \sdp\ with approximation guarantee as well as a fast \greedy\ heuristics.
