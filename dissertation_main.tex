@@ -1423,13 +1423,13 @@ Diffusion scaling has the effect of shrinking the distance to the nodes that are
 %------------------------------------------------
 %
 %------------------------------------------------
-\chapter{Structured Output Prediction with Unknown Output Graph} \label{ch_sopw}
+\chapter{Structured Output Prediction with Unknown Output Graphs} \label{ch_sopw}
 
-Structured output learning builds an output graph connecting multilabel interdependent output variables to model label correlation in a comprehensive manner. 
+Structured output learning relies on an output graph connecting multilabel interdependent output variables to exploit the label correlation.
 The applicability of structured output learning is limited due to the fact that the output graph needs to be known as a-priori.
 In this chapter, we aim to develop new structured output learning algorithms that are not constrained to the availability of the output graph structure.
 As a result, structured output learning can be applied to wide range of multilabel classification problems.
-In Section~\ref{sc_su10}, we study structured output learning in multilabel molecular activity classification problem where we build the output graph from auxiliary datasets.
+In Section~\ref{sc_su10}, we study structured output learning in multilabel molecular classification problem where we build the output graph from auxiliary datasets.
 In Section~\ref{sc_su11}, we present a majority voting ensemble (\mve) that combines a set of structured output learners built from a set of random output graphs.
 We proceed in Section~\ref{sc_su14b} with two aggregation techniques (\amm\ and \mam\ respectively) which perform inference before or after combining multiple structured output learners.
 In Section~\ref{sc_su14c}, we present the \rta\ model that improves the previous approaches by performing joint learning and inference on a random set of spanning trees.
@@ -1453,7 +1453,7 @@ In addition, the output graph is extracted from the auxiliary datasets which rev
 %
 \subsection{Background}
 
-Molecular classification, the goal of which is to predict the anti-cancer potentials of the drug-like molecules, is one crucial step in drug discovery and has drawn enormous attention from machine learning community \citep{Singh12qsar,Dutt12classification}.
+Molecular classification, the goal of which is to predict the anti-cancer potentials of the drug-like molecules, is one crucial step in drug discovery and has gained its popularity from machine learning community \citep{Singh12qsar,Dutt12classification}.
 Viable molecular structures are scanned, searched, or designed for therapeutic efficacy.
 In particular, expensive preclinical \textit{in vitro} and \textit{in vivo} drug tests can be largely avoided and special efforts can be devoted to few promising candidate molecules, once accurate \textit{in silico} models are available \citep{Burbidg01drug}.
 
@@ -1470,7 +1470,7 @@ For example in the recent \textit{NCI-60} {Human Tumor Cell Line Screen} project
 
 To efficiently and accurately predict molecular activities in multiple cell lines at the same time, we applied a structured output learning approach in \citepub{su10} which to our knowledge is the first multilabel learning approach for the molecular classification problem.
 The algorithm is an instantiation of \mmcrf\ \citep{Rousu07} described in Section~\ref{sc_mmcrf}.
-It is also a sibling method of \mmmn\ \citep{Taskar04max} described in Section~\ref{sc_mmmn}.
+%It is also a sibling method of \mmmn\ \citep{Taskar04max} described in Section~\ref{sc_mmmn}.
 In particular, the model defines a compatibility score through the inner product of a molecular structure $\vx$ and the activities in multiple cell lines $\vy$
 \begin{align*}
 	F(\vx,\vy;\vw) = \ip{\vw}{\phib(\vx,\vy)},
@@ -1528,8 +1528,9 @@ We also used \textit{Tanimoto Kernel} \citep{Ralaivola05graph} on a finite set o
 See \citep{Vishwanathan10graph} for a more comprehensive survey on graph kernels.
 
 %\subsubsection{Generation of Markov Network}
-To apply the structured output learning model described above, we assume the underlying Markov network structure is observed.
-In other words, we need to build an output graph with nodes correspond to cell lines and edges correspond to potential statistical dependencies.
+To apply the structured output learning method described above, we assume the output graph is observed.
+However, it is not the case in molecular classification problem.
+We need to build an output graph with nodes correspond to cell lines and edges correspond to potential statistical dependencies.
 There exists auxiliary datasets \citep{Shoemaker06the} for this purpose, which implicitly describe the correlations between the cell lines.
 To build the output graph, we first compute the covariance matrix of cell lines from the auxiliary data, then extract the network structure by applying the following two methods.
 In \text{maximum spanning tree} approach, we take the minimum number of edges that make a connected network whilst maximize the edge weights.
