@@ -1082,10 +1082,10 @@ The optimization problem of \mtl\ is defined as
 \noindent
 where the objective is to minimize the empirical error $\ell(\vy_{i,t},\ip{\va_t}{\ip{U}{\phib(\vx_i)}})$ and to keep a small proportion of the non-zero element in $\va_t$.
 $C$ is the parameter to balance these two aspects.
-As (Definition~\ref{mtl_opt}) is non-convex and the second term is non-smooth, it is transformed into an equivalent form and solved by an alternative optimization approach.
+As Definition~\ref{mtl_opt} is non-convex and the second term is non-smooth, it is transformed into an equivalent form and solved by an alternative optimization approach.
 
-An extension of \mtl\ algorithm was proposed in \citep{Argyriou08convex} which introduced a nonlinear generalization using kernel methods.
-In addition, similar but not identical algorithms \citep{Argyriou08an,Jacob09cluster} are also proposed which assume that the tasks form clusters such that task specific weight vectors should be similar within the clusters.
+An extension of \mtl\ was proposed in \citep{Argyriou08convex} which introduces a nonlinear generalization using kernel methods.
+In addition, \citet{Argyriou08an,Jacob09cluster} developed several similar but not identical algorithms which assume that the microlabels form clusters such that label specific weight vectors should be similar within the clusters.
 Recently, \citet{Paredes12exploit} proposed a method which exploits the information between unrelated microlabels, based on a similar assumption that microlabels of different groups tend not to share any features.
 
 
