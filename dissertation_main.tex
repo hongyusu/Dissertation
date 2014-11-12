@@ -1057,7 +1057,7 @@ Thus, \corrlog\ examines the pairwise label correlation by augmenting joint pred
 
 Multitask Feature Learning (\mtl) proposed by \citet{Argyriou07multitask} is another algorithm designed for flat multilabel classification.
 \mtl\ is quite different from other learning approaches discussed in the previous sections.
-In particular, \mtl\ is based on the assumption that different microlabels are related such that they share a common underlying feature representations.
+In particular, \mtl\ is based on the assumption that different microlabels are related such that they share a common underlying feature representation.
 Similar assumption is also applied in \citep{Caruana97multitask,Baxter00a,BenDavide03exploiting}.
 
 Denote by $f_t(\vx)$ the label specific function for the $t$'th microlabel.
@@ -1082,7 +1082,7 @@ The optimization problem of \mtl\ is defined as
 \noindent
 where the objective is to minimize the empirical error $\ell(\vy_{i,t},\ip{\va_t}{\ip{U}{\phib(\vx_i)}})$ and to keep a small proportion of the non-zero element in $\va_t$.
 $C$ is the parameter to balance these two aspects.
-As Definition~\ref{mtl_opt} is non-convex and the second term is non-smooth, it is transformed into an equivalent form and solved by an alternative optimization approach.
+Definition~\ref{mtl_opt} is non-convex and the second term is non-smooth, it is transformed into an equivalent form and solved by an alternative optimization approach.
 
 An extension of \mtl\ was proposed in \citep{Argyriou08convex} which introduces a nonlinear generalization using kernel methods.
 In addition, \citet{Argyriou08an,Jacob09cluster} developed several similar but not identical algorithms which assume that the microlabels form clusters such that label specific weight vectors should be similar within the clusters.
