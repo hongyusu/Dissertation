@@ -865,7 +865,7 @@ We borrow most notations from the single-label classification setting described 
 In particular, we examine the following \textit{multilabel classification} problem.
 We assume that data are drawn from a domain $\vXcal\times\vYcal$, where $\vXcal$ is a set of inputs (instants) and $\vYcal$ is the set of outputs (multilabels).
 $\vYcal = \Ycal_1\times\cdots\times\Ycal_k$ is composed by a Cartesian product of $k$ sets $\Ycal_i=\{-1,+1\}$.
-We retain a single-label classification setting by letting $k=1$.
+We retain a single-label classification problem by setting $k=1$.
 A vector $\vy=(y_1,\cdots,y_k)\in\vYcal$ is called \textit{multilabel} and its element $y_j$ is called \textit{microlabel}.
 $\vy_i[j]$ denotes the $j$'th microlabel in the $i$'th multilabel.
 In addition, we are given a training set consisting of $m$ labeled examples $\Scal=\{(\vx_i,\vy_i)\}_{i=1}^{m}\in\vXcal\times\vYcal$. 
@@ -910,9 +910,9 @@ and let $E_{\vx}^l(j)$ denote the event that $0\le l \le K$ neighbors of $x$ hav
 \end{align*}
 The prior probability distribution $H^b_{\vx}(j)$ and the likelihood distribution $P( H^b_{\vx}(j) | E_{\vx}^{C_{\vx(j)}}(j) )$ can be estimated from the training data in terms of corresponding relative frequencies.
 
-The central problem with \mlknn\ is that \mlknn\ is ignorant of the label correlations.
-In order to exploit the label dependency, other variants of \mlknn\ have been proposed \citep{Cheng09combining,Younes11a}.
-Besides, there are many algorithm alternatives that also align to the direction of \knn\ typed learning in flat multilabel classification, for example, \citet{Brinker07case,Chiang12a} proposed methods that incorporates \knn\ with ranking model.
+The central problem with \mlknn\ is that \mlknn\ is ignorant of the label correlation.
+In order to exploit the label correlation, other variants of \mlknn\ have been proposed \citep{Cheng09combining,Younes11a}.
+Besides, there are many algorithm alternatives which also align to the direction of \knn\ typed learning in flat multilabel classification, for example, methods that incorporates \knn\ with ranking model were proposed in \citep{Brinker07case,Chiang12a}.
 
 
 %
