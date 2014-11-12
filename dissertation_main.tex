@@ -1905,11 +1905,11 @@ Structured output learning arises as a natural extension to flat multilabel clas
 The first outcome of the thesis is a new structured output learning algorithms for multilabel classification when the output graph is observed.
 In particular, the proposed algorithm \spin\ can predict a directed acyclic graph (\daggraph) from an observed underlying network that best ``responds'' to an input example.
 The empirical evaluation on the network response prediction problem within the context of social network analysis demonstrates that the proposed model outperforms several flat multilabel classification approaches.
-The study shows that accurate prediction can be achieved by structured output learning when the output dependency structured can be obtained and utilized during learning.
+The study shows that accurate prediction can be achieved by structured output learning when the output dependency structure can be obtained and utilized during learning.
 
 Meanwhile, we realize that the current structured output learning approach relies on an output graph connecting multiple output variables in order to exploit the label correlations.
 The applicability of the structured output learning is limited due to the fact that the output graph is assume to be known as \textit{a-priori}.
-The second outcome of the thesis is that we have proposed several learning algorithms for structured output learning which are no longer constrained to the availability of the output graph.
+The second outcome of the thesis is that we have proposed several algorithms for structured output learning which are no longer constrained to the availability of the output graph.
 Analog but with significant differences to the previously established ensemble methods, the proposed algorithms aim to combines a set of structured output learners.
 Each base learner is built on a random output graph.
 In particular, \mve\ combines the predictions from the based learners by majority voting, while \amm\ and \mam\ also perform inference before or after combining the base learners.
@@ -1927,19 +1927,19 @@ Besides the proposed structured output learning models, the thesis contains the 
 \section{Future Work}
 
 The work presented in the thesis can be extended along two main directions.
-First, the algorithms developed in this thesis can be applied to other multilabel classification problems, with or without pre-established output dependency structures.
-Secondly, the algorithm development and theoretic analysis can be continued.
-As the first direction of applying the presented algorithms is clear and application oriented, we will concentrate on the algorithm development and theoretic analysis part.
+First, the algorithms developed in this thesis can be applied to many other multilabel classification problems, with or without pre-established output graph.
+Secondly, the algorithm development and theoretic analysis can be extended.
+As the first direction of applying the proposed algorithms is clear and application oriented, we will concentrate on the algorithm development and theoretic analysis part.
 
 As a starting point, we can extend \spin\ by developing new inference algorithm that is both scalable and with approximation guarantee.
 The current research ends with \rta\ method that performs joint learning and inference on a random sample of spanning trees.
 \rta\ combines the feature weight parameter from each spanning tree via a $L_2$-norm convex combination.
-This can be further extended by applying $L_1$-norm combination.
-Learning with $L_1$-norm regularization of parameter combination has been previously studied in the setting of multiple kernel learning \citep{Rakotomamonjy08simplemkl}, which can be formulated into an equivalent form of learning a weighted $L_2$-norm combination.
+Alternatively, the weight parameters can be put together by applying $L_1$-norm combination.
+Learning with $L_1$-norm regularization of parameter combination has been previously studied under the multiple kernel learning setting \citep{Rakotomamonjy08simplemkl}, which can be formulated into an equivalent form of learning a weighted $L_2$-norm combination.
 The weight of the parameter vector on each spanning tree can be explained as the fitness of the tree to the current training data.
 This can be used to select the output graphs that are relevant to the current training data.
-We should also design the optimization techniques for $L_1$-norm regularization as the current alternative optimization approach proposed by \citet{Rakotomamonjy08simplemkl} is not efficient.
-The theoretical properties should also be extended from \rta\ to the new model. 
+We can also design the optimization techniques for $L_1$-norm regularization as the current alternative optimization strategy proposed by \citet{Rakotomamonjy08simplemkl} is not efficient.
+The theoretical properties can also be extended from \rta\ to the new model. 
 
 
 
