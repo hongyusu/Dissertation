@@ -1856,17 +1856,17 @@ The test result is often visualized as a \textit{$CD$ diagram}.
 \chapter{Implementations} \label{ch_implementation}
 
 The main contributions of this thesis are the new structured output learning algorithms for multilabel classification.
-In addition, each presented algorithm has been implemented as a software package.
-In this chapter, the author aims to summarize the implementations and to point out the locations where the algorithms can be found.
+Additionally, the presented algorithms have been implemented as software packages.
+In this chapter, the author aims to briefly discuss the implementations and point out the locations where the algorithms can be found.
 
 \begin{enumerate}
-	\item \rta\ developed in \citepub{su14c} is a structured output learning algorithm for multilabel classification with unknown output graph. \rta\ performs joint learning and inference on a random sample of spanning trees.
+	\item \rta, developed in \citepub{su14c}, is a structured output learning algorithm for multilabel classification with unknown output graph. \rta\ performs joint learning and inference on a random sample of spanning trees.
 	\begin{enumerate}
 		\item The learning framework is implemented in \matlab. The inference algorithm is implemented in \cpp. The parallelization of the inference algorithm is implemented with \openmp. Other parts of \rta\ are mostly implemented in \matlab.
 		\item The package can be found from \url{http://git@github.com:hongyusu/random_spanning_tree_approximation.git}.
 	\end{enumerate}
 	
-	\item \spin\ developed in \citepub{su14a} is a structured output learning algorithm for multilabel classification with observed output graph. \spin\ can predict a direct acyclic graph (\daggraph). \spin\ has been applied to network response prediction problem within the context of social network analysis.
+	\item \spin, developed in \citepub{su14a}, is a structured output learning algorithm for multilabel classification with observed output graph. \spin\ can predict a direct acyclic graph (\daggraph). \spin\ has been applied to network response prediction problem within the context of social network analysis.
 	\begin{enumerate}
 		\item The major part of the \spin\ is implemented in \matlab. \sdp\ inference algorithm is implemented with \cvx\ package designed for convex programming. The data preprocessing with Latent Dirichlet allocation (\lda) \citep{Blei03latent} is implemented in \python\ and \matlab.
 		\item The package can be found from \url{http://git@github.com:hongyusu/SPIN.git}.
