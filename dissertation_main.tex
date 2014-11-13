@@ -13,7 +13,7 @@
 %
 \section{Scope of the Thesis}
 
-\textit{Machine learning}, defined by Arthur Samuel in $1959$ as ``a field of study that gives computers the ability to learn without being explicitly programmed'', has gained in popularity and become an active research field in information and computer science during the last few decades.
+\textit{Machine learning}, defined by Arthur Samuel in $1959$ as ``a field of study that gives computers the ability to learn without being explicitly programmed'', has gained in popularity and become an active research field in computer science during the last few decades.
 Machine learning not only produces intelligent systems that generalize well from previously observed examples, but is also firmly rooted in statistical learning theory that establishes the conditions guaranteeing good generalization \citep{Vapnik98statistical,Vapnik99an}.
 Machine learning appears in many real world applications, to name but a few, ranking web page in internet search \citep{Richardson06beyond}, spam filtering in email \citep{Goodman06online}, recommender systems for online shopping \citep{Bell07lessons}, and image and speech recognitions \citep{Bengio09learning}.
 With the increasing availability of large scale datasets, machine learning is expected to play an indispensable role in many research fields \citep{Fan13mining}.
@@ -159,7 +159,7 @@ and \textit{Logistic Loss} in Logistic Regression \citep{Chen99}
 \begin{align}
 	\Lcal_{log}(y,f(\vx)) = \log(1+\exp(-y f(\vx))),\, \Ycal=[-1,+1]. \label{log_loss}
 \end{align}
-We will study the loss functions with the corresponding learning algorithms in detail in the following part of this thesis.
+We will study loss functions with corresponding learning algorithms in detail in the following part of this thesis.
 
 The \textit{true risk} of an estimator $f$ over all examples from a domain $\vXcal\times\Ycal$ is then defined as
 \begin{align}
@@ -177,17 +177,17 @@ This suggests that the learning algorithm should search for an estimator to mini
 \subsection{Regularized Learning}\label{sc_rl}
 
 The empirical risk minimization strategy is ill-posed as it will provide infinite number of estimators with the same empirical risk on the same training data.
-Besides, it quite often leads to \textit{overfitting} particularly when the dimensionality of the feature space is high and the number of training examples is relatively small.
+Besides, it quite often leads to \textit{overfitting}, in particular when the dimensionality of the feature space is high and the number of training examples is relatively small.
 That is, the underlying true distribution $P(\vx,y)$ is difficult to estimate based on a finite sample of training examples.
 As a result, the estimator will generalize poorly on unseen test examples.
-The {regularization theory} \citep{Evgeniou99a,Evgeniou02regularization} provides a framework to tackle those two problems.
+Regularization theory \citep{Evgeniou99a,Evgeniou02regularization} provides a framework to tackle those two problems.
 In particular, it suggests to minimize 
  \begin{align}
 	\Jcal(f) = \Rcal_{emp}(f) + \lambda\Omega(f), \label{rl}
 \end{align}
 where $\Omega(f)$ is a regularization function that controls the complexity of the estimator by penalizing the norm of the feature weight vector, $\lambda$ is a positive parameter that controls the relative weight between the empirical risk term and the regularization term.
 
-For linear function class, there are several ways to define the regularization term among which $L_1$-norm and $L_2$-norm regularization are most popular.
+For the linear function class, there are several ways to define the regularization term including  the $L_1$-norm and the $L_2$-norm regularization.
 The $L_2$-norm regularization, defined by 
 \begin{align}
 	\Omega_{L_2}(f) = ||\vw||_2=\left(\sum_{i=1}^d|\vw[i]|^2\right)^{\frac{1}{2}}, \label{l2_norm}
@@ -198,10 +198,10 @@ On the other hand, the $L_1$-norm regularization, defined by
 \begin{align*}
 	\Omega_{L_1}(f) = ||\vw||_1=\sum_{i=1}^d|\vw[i]|,
 \end{align*}
-provides sparse parameter estimations such that we obtain a high dimensional weight vector with many zero entries.
-This is an attractive property as feature selection is incorporated into the learning process and the resulting model is usually easy to interpret.
+provides sparse parameter estimations such that we obtain a high dimensional feature weight vector with many zero entries.
+This is an attractive property as \textit{feature selection} is incorporated into the learning process and the resulting model is usually easy to interpret.
 The $L_1$-norm regularization has been applied in, for example, \lasso\ \citep{Tibshirani94regression}.
-Many other regularization techniques have been widely studied, to name but a few, $L_{1,2}$-norm regularization \citep{Argyriou07multitask}, and elastic net regularization \citep{Zou05regularizationa}.
+Many other regularization techniques have been widely studied, for example, $L_{1,2}$-norm regularization \citep{Argyriou07multitask}, and elastic net regularization \citep{Zou05regularizationa}.
 
 
 %------------------------------------------------
