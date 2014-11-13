@@ -138,71 +138,70 @@ A \textit{hypothesis class} $\Hcal$ is a set of functions that a learning algori
 The goal of statistical learning is to provide an \textit{estimator} $f\in\Hcal:\vXcal\rightarrow\Ycal$ which predicts the best value of an output $y$ given an input $\vx$.
 
 We use \textit{loss function} $\Lcal(y,f(\vx)):\Ycal\times\Ycal\rightarrow\RR^+$ to measure the goodness of an estimator, which is a monotonic bounded function between a true value $y$ and an estimated value $f(\vx)$.
-Popular loss functions used in machine learning include,
-\textit{Hinge Loss}, for instance, in Support Vector Machines \citep{Cortes95support}
+There are many ways of defining the loss function including, for example,
+\textit{Hinge Loss} in Support Vector Machines \citep{Cortes95support}
 \begin{align}
 	\Lcal_{hinge}(y,f(\vx)) = \maximize (0,1-y f(\vx)),\, \Ycal=[-1,+1], \label{hinge_loss}
 \end{align}
-\textit{$0/1$ Loss}, for instance, in structured \svm\ \citep{THJA04}
+\textit{$0/1$ Loss} in structured \svm\ \citep{THJA04}
 \begin{align}
 	\Lcal_{0/1}(y,f(\vx)) = \ind{y=f(\vx)},\, \Ycal = \{-1,+1\}^k, \label{one_loss}
 \end{align}
-\textit{Squared Loss}, for instance, in Ridge Regression \citep{Hoerl00ridge}
+\textit{Squared Loss} in Ridge Regression \citep{Hoerl00ridge}
 \begin{align*}
 	\Lcal_{squared}(y,f(\vx)) = (y-f(\vx))^2,\, \Ycal=\RR,
 \end{align*}
-\textit{Exponential Loss}, for instance, in \adaboost\ \citep{Schapire99improved}
+\textit{Exponential Loss} in \adaboost\ \citep{Schapire99improved}
 \begin{align}
 	\Lcal_{exp}(y,f(\vx)) = \exp(-y f(\vx)),\, \Ycal=\RR, \label{exp_loss}
 \end{align}
-\textit{Logistic Loss}, for instance, in Logistic Regression \citep{Chen99}
+and \textit{Logistic Loss} in Logistic Regression \citep{Chen99}
 \begin{align}
 	\Lcal_{log}(y,f(\vx)) = \log(1+\exp(-y f(\vx))),\, \Ycal=[-1,+1]. \label{log_loss}
 \end{align}
 We will study the loss functions with the corresponding learning algorithms in detail in the following part of this thesis.
 
-The \textit{true risk} of an estimator $f$ over all examples from domain $\vXcal\times\Ycal$ can be computed by
+The \textit{true risk} of an estimator $f$ over all examples from a domain $\vXcal\times\Ycal$ is then defined as
 \begin{align}
 	\Rcal(f) = \int_{(\vx,y)\in\vXcal\times\vYcal}\Lcal(y,f(\vx))P(\vx,y)\,d_{\vx}d_{y} \label{true_risk}.
 \end{align}
-As a result, the learning algorithm should search for an estimator $f\in\Hcal$ which minimizes the true risk defined by (\ref{true_risk}).
-As the distribution $P(\vx,y)$ is unknown, it is impossible to directly compute the true risk (\ref{true_risk}).
+As a result, the learning algorithm should search for an estimator $f\in\Hcal$ which minimizes the true risk (\ref{true_risk}).
+However, it is impossible to compute the true risk (\ref{true_risk}) directly, as the distribution $P(\vx,y)$ is unknown.
 Instead we are given a random sample of $m$ examples, denoted by $S=\{(\vx_1,y_1),\cdots,(\vx_m,y_m)\}$, called \textit{training data}.
-The \textit{Empirical risk} of an estimator $f\in\Hcal$ is defined as the average error made by the estimator $f$ on a training data $S$ of finite size
+The \textit{Empirical risk} of an estimator $f\in\Hcal$ is defined as the average error made by the estimator on a training data $S$ of finite size
 \begin{align}
 	\Rcal_{emp}(f) = \frac{1}{m}\sum_{i=1}^{m}\Lcal(y_i,f(\vx_i)) \label{empirical_risk}.
 \end{align}
-This suggests that the learning algorithm should search for an estimator to minimize the empirical risk (\ref{empirical_risk}), which is called \textit{empirical risk minimization} \citep{Vapnik92principles} in machine learning.
+This suggests that the learning algorithm should search for an estimator to minimize the empirical risk (\ref{empirical_risk}), which is called {empirical risk minimization} \citep{Vapnik92principles} in machine learning.
 
 \subsection{Regularized Learning}\label{sc_rl}
 
-Empirical risk minimization is an ill-posed strategy.
-Given training data, the strategy would provide infinite number of estimators with the same empirical risk.
-Besides, it often leads to \textit{overfitting} when the dimensionality of the feature space is high and the number of training examples is limited.
-In other words, the underlying true distribution $P(\vx,y)$ is difficult to estimate from a finite sample of training examples.
+The empirical risk minimization strategy is ill-posed as it will provide infinite number of estimators with the same empirical risk on the same training data.
+Besides, it quite often leads to \textit{overfitting} particularly when the dimensionality of the feature space is high and the number of training examples is relatively small.
+That is, the underlying true distribution $P(\vx,y)$ is difficult to estimate based on a finite sample of training examples.
 As a result, the estimator will generalize poorly on unseen test examples.
-The {regularization theory} \citep{Evgeniou99a,Evgeniou02regularization} provides a framework to deal with these two problems.
+The {regularization theory} \citep{Evgeniou99a,Evgeniou02regularization} provides a framework to tackle those two problems.
 In particular, it suggests to minimize 
  \begin{align}
 	\Jcal(f) = \Rcal_{emp}(f) + \lambda\Omega(f), \label{rl}
 \end{align}
-where $\Omega(f)$ is the regularization function that controls the complexity of the estimator $f$ by penalizing the norm of the feature weight vector, $\lambda$ is a positive parameter that controls the relative weight between the empirical risk term and the regularization term.
+where $\Omega(f)$ is a regularization function that controls the complexity of the estimator by penalizing the norm of the feature weight vector, $\lambda$ is a positive parameter that controls the relative weight between the empirical risk term and the regularization term.
 
-In terms of the linear function class, there are several ways to define the regularization term among which $L_1$-norm and $L_2$-norm regularization are most popular.
+For linear function class, there are several ways to define the regularization term among which $L_1$-norm and $L_2$-norm regularization are most popular.
 The $L_2$-norm regularization, defined by 
 \begin{align}
 	\Omega_{L_2}(f) = ||\vw||_2=\left(\sum_{i=1}^d|\vw[i]|^2\right)^{\frac{1}{2}}, \label{l2_norm}
 \end{align} 
 controls the complexity of the estimator $f$ and provides a smooth solution.
-It has been applied in, for example, Ridge Regression \citep{Hoerl00ridge}, Logistic Regression \citep{Chen00}, Support Vector Machines \citep{Cortes95support}.
+It has been applied in, for example, Ridge Regression \citep{Hoerl00ridge}, Logistic Regression \citep{Chen00}, and Support Vector Machines \citep{Cortes95support}.
 On the other hand, the $L_1$-norm regularization, defined by
 \begin{align*}
 	\Omega_{L_1}(f) = ||\vw||_1=\sum_{i=1}^d|\vw[i]|,
 \end{align*}
-provides sparse parameter estimation such that we obtain a high dimensional weight vector with many zero entries.
-This is an attractive property as feature selection is incorporated into the learning process and the interpretability of the resulting model is often high.
+provides sparse parameter estimations such that we obtain a high dimensional weight vector with many zero entries.
+This is an attractive property as feature selection is incorporated into the learning process and the resulting model is usually easy to interpret.
 The $L_1$-norm regularization has been applied in, for example, \lasso\ \citep{Tibshirani94regression}.
-Besides, other regularization techniques have been widely studied, to name but a few, $L_{1,2}$-norm regularization \citep{Argyriou07multitask}, elastic net regularization \citep{Zou05regularizationa}.
+Many other regularization techniques have been widely studied, to name but a few, $L_{1,2}$-norm regularization \citep{Argyriou07multitask}, and elastic net regularization \citep{Zou05regularizationa}.
 
 
 %------------------------------------------------
