@@ -137,7 +137,7 @@ In addition, we are provided with paired examples $(\vx,y)\in\vXcal\times\Ycal$ 
 A \textit{hypothesis class} $\Hcal$ is a set of functions that a learning algorithm is allowed to search against.
 The goal of statistical learning is to provide an \textit{estimator} $f\in\Hcal:\vXcal\rightarrow\Ycal$ which predicts the best value of an output $y$ given an input $\vx$.
 
-We use \textit{loss function} $\Lcal(y,f(\vx)):\Ycal\times\Ycal\rightarrow\RR^+$ to measure the goodness of the estimator, which is a monotonic bounded function between a true value $y$ and an estimated value $f(\vx)$.
+We use \textit{loss function} $\Lcal(y,f(\vx)):\Ycal\times\Ycal\rightarrow\RR^+$ to measure the goodness of an estimator, which is a monotonic bounded function between a true value $y$ and an estimated value $f(\vx)$.
 Popular loss functions used in machine learning include,
 \textit{Hinge Loss}, for instance, in Support Vector Machines \citep{Cortes95support}
 \begin{align}
@@ -165,14 +165,14 @@ The \textit{true risk} of an estimator $f$ over all examples from domain $\vXcal
 \begin{align}
 	\Rcal(f) = \int_{(\vx,y)\in\vXcal\times\vYcal}\Lcal(y,f(\vx))P(\vx,y)\,d_{\vx}d_{y} \label{true_risk}.
 \end{align}
-Naturally, the learning algorithm should search for an estimator $f\in\Hcal$ which minimizes the true risk defined by (\ref{true_risk}).
+As a result, the learning algorithm should search for an estimator $f\in\Hcal$ which minimizes the true risk defined by (\ref{true_risk}).
 As the distribution $P(\vx,y)$ is unknown, it is impossible to directly compute the true risk (\ref{true_risk}).
 Instead we are given a random sample of $m$ examples, denoted by $S=\{(\vx_1,y_1),\cdots,(\vx_m,y_m)\}$, called \textit{training data}.
-The \textit{Empirical risk} of an estimator $f\in\Hcal$ is defined as the average error of the estimator $f$ on a training data $S$ of finite size
+The \textit{Empirical risk} of an estimator $f\in\Hcal$ is defined as the average error made by the estimator $f$ on a training data $S$ of finite size
 \begin{align}
 	\Rcal_{emp}(f) = \frac{1}{m}\sum_{i=1}^{m}\Lcal(y_i,f(\vx_i)) \label{empirical_risk}.
 \end{align}
-This suggests that the learning algorithm should search for an estimator $f$ to minimize the empirical risk (\ref{empirical_risk}), which is called \textit{empirical risk minimization} \citep{Vapnik92principles} in machine learning.
+This suggests that the learning algorithm should search for an estimator to minimize the empirical risk (\ref{empirical_risk}), which is called \textit{empirical risk minimization} \citep{Vapnik92principles} in machine learning.
 
 \subsection{Regularized Learning}\label{sc_rl}
 
