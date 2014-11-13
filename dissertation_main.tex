@@ -714,29 +714,28 @@ Moreover, we will present several new learning algorithms in the latter part of 
 %
 \subsection{Preliminaries} \label{sc_em_pn}
 
-In addition to the notations introduced in Section~\ref{sc_slc_pn}, we assume there is a hypothesis class $\Hcal'$ where we generate weak/base hypothesis $f^t(x)\in\Hcal'$.
+In addition to the notations introduced in Section~\ref{sc_slc_pn}, we assume there is a hypothesis class $\Hcal'$ where we generate weak/base hypotheses $f^t(x)\in\Hcal'$.
 We use $t$ to index the $t$'th weak hypothesis.
-$H(x)$ denotes the ensemble framework that is able to combine multiple weak hypotheses and generate a stronger one.
-In many cases, no other information about $f^t(x)$ is available to $H(x)$ except that each weak hypothesis will take in a parameter $\vx$ and output $y\in\Ycal$ ($\vy\in\vYcal$ resp.) in single-label (multi-label resp.) classification.
+Let $H(x)$ denote the ensemble framework which combines multiple weak hypotheses and generate a stronger one.
+In many cases, no other information about $f^t(x)$ is available to $H(x)$ except that each weak hypothesis will take in a parameter $\vx$ and generate an output $y\in\Ycal$.
 
 
 \subsection{Boosting} \label{sc_boosting}
 
 \textit{Boosting} corresponds to a learning framework or a family of algorithms that takes in a weak classifier and tuning it into a strong one.
-We begin our discussion from  \textit{concept class}.
+We begin our discussion from \textit{concept class}.
 A \textit{concept} is a boolean function over domain $\vXcal$, and a \textit{concept class} is a class of concepts.
-% TODO: an illustrative example
-A concept class is \textit{strongly learnable} if there exists a polynomial learning algorithm that achieves high accuracy with high probability for all concepts in the class.
-On the other hand, a concept class is \textit{weakly learnable} if the learning algorithm achieves arbitrary high accuracy where the only requirement is that the learning algorithm finds a function that performs better than coin flip.
+A concept class is \textit{strongly learnable} if there exists a polynomial learning algorithm which achieves a high accuracy with a high probability for all concepts in the class.
+On the other hand, a concept class is \textit{weakly learnable} if the learning algorithm achieves an arbitrary high accuracy where the only requirement is that the learning algorithm finds a function which performs better than coin flip.
 The concept of learnability was proposed in \citep{Kearns94cryptographic} together with the question whether the strong learnability and the weak learnability are equivalent which is known as \textit{hypothesis boosting problem}.
 Finding a weak learner which performs better than random guessing is easy in practice, but finding a strong learner is usually difficult.
-\citet{Schapire90the} has proved that two classes of learnability are equal which lays the foundation of the boosting algorithm which aims to tune a weak learning algorithm into a strong one that achieves high performance.
+\citet{Schapire90the} has proved that the two classes of learnability are equivalent which lays the foundation of the boosting algorithm that tunes a weak learning algorithm into a strong one.
 
 Adaptive Boosting (\adaboost) developed by \citet{Freund97a} is the very first practical boosting algorithm and is the most influential one.
-In addition, \citet{Schapire99improved} proposed a variant of the algorithm which updates the adaptive parameters in order to minimize the exponential loss (\ref{exp_loss}) of the weak learner.
+In addition, \citet{Schapire99improved} proposed a variant of the algorithm which updates adaptive parameters in order to minimize the exponential loss (\ref{exp_loss}) of each weak learner.
 The algorithm is shown in (Algorithm~\ref{adaboost}).
-The fundamental idea of \adaboost\ is to maintain a distribution $D$ over all training examples, and update the distribution in each iteration such that the difficult-to-classify examples will get more probability mass for the next iteration (line~\ref{update_d}).
-Particularly, in each iteration the algorithm computes a weak learner $f^t(\vx)$ base on all training examples and the current distribution $D^{t}$ (line~\ref{compuet_f}), calculates the weighted training error $\epsilon^t$ (line~\ref{compute_error}), and computes the adaptive parameter $\alpha^t$ (line~\ref{compute_alpha}).
+The central idea of \adaboost\ is to maintain a distribution $D$ over all training examples, and update the distribution in each iteration such that the difficult-to-classify examples will get more probability mass for the next iteration (line~\ref{update_d}).
+Particularly, in each iteration, the algorithm computes a weak learner $f^t(\vx)$ base on all training examples and the current distribution $D^{t}$ (line~\ref{compuet_f}), calculates the weighted training error $\epsilon^t$ (line~\ref{compute_error}), and computes the adaptive parameter $\alpha^t$ (line~\ref{compute_alpha}).
 The ensemble prediction is the weighted combination of all weak learners (line~\ref{adaboost_prediction}).
 
 \iffalse
@@ -763,8 +762,8 @@ The ensemble prediction is the weighted combination of all weak learners (line~\
 \end{algorithmic}
 \end{algorithm}
 
-For each weak learner $f^t(\vx)$, the strategy of updating adaptive parameter $\alpha^t$ is to ensure that the exponential loss of $\alpha^tf^t(\vx)$ is minimized.
-To see this, we first compute the exponential loss for $\alpha^tf^t(\vx)$ given current distribution $D^t$ and adaptive parameter $\alpha^t$
+For each weak learner $f^t(\vx)$, the strategy of updating the adaptive parameter $\alpha^t$ is to ensure that the exponential loss of $\alpha^tf^t(\vx)$ is minimized.
+To see this, we first compute the exponential loss for $\alpha^tf^t(\vx)$ given the current distribution $D^t$ and the adaptive parameter $\alpha^t$
 \begin{align*}
 	\Lcal_{exp}&(y,\alpha^tf^t(\vx);D^t) \\
 	&= \sum_{i=1}^mD^t(i)\exp(-y_i\alpha^tf^t(\vx_i))\\
@@ -780,9 +779,9 @@ Solve it for $\alpha^t$, we get
 	\alpha^{t} = \frac{1}{2}\ln\left(\frac{1-\epsilon^t}{\epsilon^t}\right).
 \end{align*}
 
-It is worth pointing out that \adaboost\ described in (algorithm~\ref{adaboost}) requires the learning algorithm $\Wcal$ work with some specific distributions defined on the training examples.
-The distribution is usually generated by \textit{reweighing} which initializes a uniform distribution over training examples and updates the distribution in each iteration.
-For the learning algorithms that cannot work with distribution, \textit{resampling} is often applied which samples the training examples according to some desired distribution to generate a new set of training data in each iteration.
+It is worth pointing out that \adaboost\ described in (algorithm~\ref{adaboost}) requires the learning algorithm $\Wcal$ work with some specific distribution defined on the training examples.
+The distribution is usually generated by \textit{reweighing} which initializes a uniform distribution over all training examples and updates the distribution in each iteration.
+For the learning algorithms that cannot work with distributions, \textit{resampling} is often applied which samples the training examples according to some desired distribution to generate a new set of training data in each iteration.
 
 \deepboosting, developed by \citet{Cortes14deep}, improves \adaboost\ by allowing base learning algorithm to use complex hypothesis class.
 The theoretic analysis of \deepboosting\ also advances the previous performance guarantee of \adaboost\ \citep{Schapire97boosting,Koltchinskii00empirical}.
