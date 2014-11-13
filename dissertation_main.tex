@@ -13,62 +13,62 @@
 %
 \section{Scope of the Thesis}
 
-Machine learning, defined by Arthur Samuel in $1959$ as ``a field of study that gives computers the ability to learn without being explicitly programmed'', has gained its popularity and become an active research field in information and computer science during the past few decades.
-Machine learning not only brings in intelligent systems that generalize well from previously observed examples, but also is firmly rooted in the statistical learning theory that establishes the conditions to guarantee the good generalization \citep{Vapnik98statistical,Vapnik99an}.
-Machine learning appears in many real world applications, to name but a few, page ranker in web search engine \citep{Richardson06beyond}, email spam filter \citep{Goodman06online}, recommender system in online shopping \citep{Bell07lessons}, optical image recognizer and speech recognizer \citep{Bengio09learning}.
-With increasing availability of the large scale data, machine learning is expected to play an indispensable role in many research fields \citep{Fan13mining}.
+\textit{Machine learning}, defined by Arthur Samuel in $1959$ as ``a field of study that gives computers the ability to learn without being explicitly programmed'', has gained in popularity and become an active research field in information and computer science during the last few decades.
+Machine learning not only produces intelligent systems that generalize well from previously observed examples, but is also firmly rooted in statistical learning theory that establishes the conditions guaranteeing good generalization \citep{Vapnik98statistical,Vapnik99an}.
+Machine learning appears in many real world applications, to name but a few, ranking web page in internet search \citep{Richardson06beyond}, spam filtering in email \citep{Goodman06online}, recommender systems for online shopping \citep{Bell07lessons}, and image and speech recognitions \citep{Bengio09learning}.
+With the increasing availability of large scale datasets, machine learning is expected to play an indispensable role in many research fields \citep{Fan13mining}.
 
-Supervised learning, an important paradigm in machine learning, is usually instantiated as learning a function that is capable of predicting the best value for an output variable given an input variable.
+\textit{Supervised learning}, an important paradigm in machine learning, is usually defined as learning a function that is capable of predicting the best value for an output variable given an input variable.
 The function is learned by exploring a set of observed input/output pairs known as training examples.
 In the classical supervised learning setting, there is only one variable to be predicted.
-In machine learning community, this is referred as single-label classification if the output is discrete valued, or as regression if the output is continuous valued.
-Many single-label classification models have been designed and applied in practice, for example, Perceptron \citep{Rosenblatt58}, Logistic Regression \citep{Chen99}, Support Vector Machines \citep{Cortes95support}.
+This is called \texit{single-label classification} if the output variable is discrete, or \texit{regression} if the output variable is continuous.
+Many single-label classification models have been designed and applied in practice, for example, the Perceptron \citep{Rosenblatt58}, Logistic Regression \citep{Chen99}, and Support Vector Machines \citep{Cortes95support}.
 
 \textit{Multilabel classification} is a natural extension to single-label classification by defining multiple interdependent output variables associated with each input.
-This type of problems are prevalent in everyday life.
-For example, a movie can be classified as ``sci-fi'', ``thriller'' and ``crime''; a news article can be categorized as ``science'', ``biology'' and ``drug''; a gene can be associated with multiple functions in genomics research; a surveillant photo can be tagged by ``car'', ``building'' and ``road''. 
-When the multiple output variables are treated as a ``flat'' vector, the problem is often known as \textit{flat multilabel classification}.
-\text{Flat multilabel classification} is one branch of multilabel classification and has drawn increasing amount of interest from machine learning community \citep{Tsoumakas07multi,Tsoumakas10mining}.
-As multiple output variables can be ``on'' and ``off'' simultaneously, various flat multilabel classification algorithms have been developed and aim to explore the correlation between multiple output variables in order to make accurate prediction.
-In particular, \citet{Tsoumakas07multi} summerized the established flat multilabel classification algorithms into two categories: problem transformation approaches \citep{Zhang05a,Read09classifier,Cheng09combining} and algorithm adaptation approaches \citep{Schapire99improved,Bian12corrlog}
+These type of problems are prevalent in everyday life.
+For example, a movie can be classified as ``sci-fi'', ``thriller'' and ``crime''; a news article can be categorized as ``science'', ``drug discovery'' and ``genomics''; a gene can be associated with multiple functions in genomics research; a surveillance photo can be tagged with ``car'', ``building'' and ``road''. 
+When multiple output variables are treated as a ``flat'' vector, the problem is often called \textit{flat multi-label classification}.
+Flat multi-label classification is one branch of multi-label classification that has drawn increasing amount of interest from the machine learning community \citep{Tsoumakas07multi,Tsoumakas10mining}.
+As multiple output variables can be ``on'' and ``off'' simultaneously, various flat multi-label classification algorithms have been developed that aim to explore the correlation between multiple output variables in order to make accurate predictions.
+In particular, \citet{Tsoumakas07multi} summarized the established flat multi-label classification algorithms into two categories: problem transformation approaches \citep{Zhang05a,Read09classifier,Cheng09combining} and algorithm adaptation approaches \citep{Schapire99improved,Bian12corrlog}
 
-%Flat multilabel classification has been tackled by many algorithms that aim to explore the correlation or the dependency between multiple output variables in order to make better prediction \citep{Schapire99improved,Zhang05a,Read09classifier,Cheng09combining,Bian12corrlog}.
+%Flat multi-label classification has been tackled by many algorithms that aim to explore the correlation or the dependency between multiple output variables in order to make better prediction \citep{Schapire99improved,Zhang05a,Read09classifier,Cheng09combining,Bian12corrlog}.
 
-There exists another line of research on multilabel classification known as \textit{structured output prediction} where a complex structure (output graph) is defined on multiple output variables to model the dependency in a more comprehensive way.
-\textit{Hierarchical classification} is one type of structured output prediction in which the prediction needs to be reconciled along the pre-established hierarchical structure \citep{Silla11a}.
+There exists another line of research in multi-label classification known as \textit{structured output prediction} where a complex structure (output graph) is defined on multiple output variables to model dependencies in a more comprehensive way.
+\textit{Hierarchical classification} is one type of structured output prediction in which the prediction needs to be reconciled along a pre-established hierarchical structure \citep{Silla11a}.
 Hierarchical classification is usually applied to the problem with different level of granularity. 
-The hierarchy can be either a rooted tree such as in document classification problem \citep{Hao07hierarchicaly,Li07hierarchical,Rousu06}, or a directed acyclic graph (\daggraph) with parent-children relationship such as in gene function prediction problem \citep{Barutcuoglu06hierarchical}.
-There exists a large body of work on hierarchical classification from the early one that uses the hierarchical structure heuristically for preprocessing or post-processing \citep{Koller97hierarchically,Dumais00Hierarchical,Liu05support,DeCoro07bayesian} to the recent one that encodes the structure into learning \citep{Cai04hierarchical,Cesabianchi05incremental,Rousu06,Gopal12bayesian}.
+The hierarchy can be either a rooted tree such as in the document classification problem \citep{Hao07hierarchicaly,Li07hierarchical,Rousu06}, or a directed acyclic graph (\daggraph) with parent-children relationships such as in the gene function prediction problem \citep{Barutcuoglu06hierarchical}.
+There exists a large body of work on hierarchical classification from the early approaches which use the hierarchical structure heuristically for preprocessing or post-processing \citep{Koller97hierarchically,Dumais00Hierarchical,Liu05support,DeCoro07bayesian} to the recent approaches which encodes the structure into learning \citep{Cai04hierarchical,Cesabianchi05incremental,Rousu06,Gopal12bayesian}.
 
-\textit{Graph labeling} is another type of structured output prediction in which the output graph often takes more general form and does not require the concept of ``level'' compared to hierarchical classification.
-The approach can be applied to wider range of problems, to name but a few, speech tagging problem with sequence structure \citep{collins02a}, action recognition problem with Markov network structure \citep{Wang11hidden}. 
-The graph labeling approach often directly incorporates the output graph into learning and exploits the label correlation to improve the classification performance \citep{collins02a,lafferty01,taskar02,Taskar04max,THJA04,Rousu07}.
-For graph labeling or structured output learning in general, one inherited problem is the output graph is assumed to be observed as \textit{a-priori}.
+\textit{Graph labeling} is another type of structured output prediction in which the output graph often takes a more general form and does not require the concept of ``level'' compared to hierarchical classification.
+The approach can be applied to a wider range of problems, for example, speech tagging with sequence structure \citep{collins02a}, and action recognition with Markov network structure \citep{Wang11hidden}. 
+The graph labeling approach often directly incorporates the output graph into learning and exploits the correlation between labels to improve classification performance \citep{collins02a,lafferty01,taskar02,Taskar04max,THJA04,Rousu07}.
+For graph labeling or structured output learning in general, one inherited problem is the output graph is assumed to be observed \textit{apriori}.
 However, this cannot be taken for granted since the proper dependency structure for the output variables is either hidden or difficult to retrieve in many applications \citep{Chickering94learning}.
 
-Figure~\ref{multilabel_taxonomy} illustrates the taxonomy of multilabel classification.
+Figure~\ref{multi-label_taxonomy} illustrates the taxonomy of multi-label classification.
 However it is worth pointing out that there is no clear line drawn between different categories.
-In particular, some hierarchical classification algorithms can also belong to graph labeling category, for instance, those developed in \citep{THJA04,Rousu06}.
-As we focus on graph labeling of structured output prediction, we will explicitly use ``structured output prediction'' to refer to ``graph labeling'' in the following part of the thesis for the convenient of presentation.
+In particular, some hierarchical classification algorithms can also belong to the graph labeling category, for example, those developed by \citet{THJA04,Rousu06}.
+As we focus on graph labeling in structured output prediction, we will explicitly use ``structured output prediction'' to refer to ``graph labeling'' throughout the thesis.
 
 \begin{figure}
 \begin{center}
 	\centering
 	\includegraphics[width=10.5cm]{./taxonomy.pdf}
-	\caption{The taxonomy of multilabel classification.}
-	\label{multilabel_taxonomy}
+	\caption{The taxonomy of multi-label classification.}
+	\label{multi-label_taxonomy}
 \end{center}
 \end{figure}
 
-In this thesis, we extend the applicability of structured output learning by developing new learning algorithms and applying them to real world multilabel classification problems.
-In addition, we work on the problem of the structured output learning when the output dependency structure is not observed.
-The models thus created are not restricted to the availability of the output graph and can be applied to wider range of multilabel classification problems.
-We also investigate the efficiency and the scalability of the inference problems in the proposed structured output learning models.
-Besides, we study the theoretic aspects of the proposed models to explain the behavior and to guarantee the generalization error.
-The research questions can be casted as follows.
+In this thesis, we extend the applicability of structured output learning by developing new learning algorithms and applying them to real world multi-label classification problems.
+In addition, we work on the problem of structured output learning when the output dependency structure is not observed.
+The models thus created are not restricted to the availability of the output graph and can therefore be applied to a wider range of multi-label classification problems.
+We also investigate the efficiency and the scalability of the inference algorithms in the proposed structured output learning models.
+Finally, we study the theoretic aspect of the proposed methods.
+The research questions can be summarized as follows.
 \begin{itemize}
-\item Should we tackle the multilabel classification problems with structured output learning other than the flat multilabel classification approaches?
-\item How to apply structured output learning to the multilabel classification problems when the output graph is not observed?
+\item Should we tackle the multi-label classification problems with structured output learning rather than using flat multi-label classification approaches?
+\item How to apply structured output learning to the multi-label classification problems when the output graph is not observed?
 \item Can we provide any theory to explain the behavior of the proposed structured output learning models and to guarantee the performance?
 \item Can we efficiently solve the inference problems of the proposed structured output learning models?
 \end{itemize}
@@ -79,34 +79,32 @@ The research questions can be casted as follows.
 %
 \section{Contributions and Organization}
 
-The contributions of the thesis are the statistical learning algorithms that widen the applicability of the structured output learning.
+The contributions of the thesis are several statistical learning algorithms that widen the applicability of structured output learning.
 The thesis starts by reviewing several lines of research in classification learning.
-The first contribution is to developed a new structured output learning algorithm for the multilabel classification problem with observed output graph.
-The proposed method can predict a directed acyclic graph (\daggraph) from an observed network and has applied to network response prediction problem within the context of social network analysis.
-For the general multilabel classification problem without pre-established output graph, we develop several new algorithms that combine a set of structured output learners built on a collection of random output graphs.
-In addition, we developed a joint learning and inference framework that is based on Max-Margin learning on a random sample of spanning trees.
-Thus, the proposed methods are not constrained to the availability of the output graphs.
-Moreover, the theoretic analysis explains the behavior of the proposed models and guarantee the generalization error.
+The first contribution is to develop a new structured output learning algorithm for the multi-label classification problem with an observed output graph.
+The proposed algorithm can predict a directed acyclic graph (\daggraph) from an observed underlying network which best responses to an input.
+The algorithm has applied to network response prediction within the context of social network analysis.
+For the general multi-label classification problem in which the output graph is not known \textit{apriori}, we develop several new algorithms that combine a set of structured output learners built on a collection of random output graphs.
+In addition, we develope a joint learning and inference framework that is based on Max-Margin learning on a random sample of spanning trees.
+Thus, the proposed methods are not constrained by the availability of the output graphs.
+Moreover, we provide the theoretic studies which not only explain the intuition behind the formalisms but also guarantee the generalization error of the proposed models.
 
-The thesis is structured as follows.
-In Chapter~\ref{ch_introduction}, the scope of the research is briefly presented with several research questions being proposed which will be answered through this thesis.
-Chapter~\ref{ch_rlc} gives the background introduction to the learning problem in terms of classification which is necessary to understand the later part of the thesis.
-Particularly, the chapter covers the basic concepts in classification learning including regularized risk minimization in Section~\ref{sc_rrm}, single-label classification in Section~\ref{sc_slc}, ensemble learning in Section~\ref{sc_em}.
-Chapter~\ref{ch_fmlc} introduces the multilabel classification problem which is the core problem under study in this thesis.
-The chapter also describes the flat multilabel classification approach which is a standard treatment for the multilabel classification problem.
+The remaining part of this thesis is structured as follows.
+Chapter~\ref{ch_rlc} gives the background information to the learning problem in terms of classification, covering the basic concepts in classification learning including regularized risk minimization in Section~\ref{sc_rrm}, single-label classification in Section~\ref{sc_slc}, and ensemble learning in Section~\ref{sc_em}.
+Chapter~\ref{ch_fmlc} introduces the multi-label classification problem which is the core problem under study in this thesis.
+The chapter also describes the flat multi-label classification approach which is a standard treatment for the multi-label classification problem.
 Chapter~\ref{ch_sop} and Chapter~\ref{ch_sopw} present the main contributions of the thesis.
-In particular, Chapter~\ref{ch_sop} presents the structured output learning models developed for the multilabel classification problem with observed output graph.
-The presented methods extend the flat multilabel classification approaches described in the previous chapter.
+In particular, Chapter~\ref{ch_sop} presents the structured output learning models developed for the multi-label classification problem with an observed output graph.
+The methods presented extend the flat multi-label classification approaches described in the previous chapter.
 Chapter~\ref{ch_sopw} discusses several learning methods developed for structured output learning when the output dependency structure is not observed.
-Chapter~\ref{ch_ecm} covers the evaluation metrics and statistic test methods that are used in the research.
 Chapter~\ref{ch_implementation} describes the implementation details of the developed models.
-Chapter~\ref{ch_conclusion} concludes the thesis and points out the future research directions.
+Chapter~\ref{ch_conclusion} concludes the thesis and details the future research directions.
 
 The thesis presents the idea and the background of the proposed structured output learning methods.
 The formalisms of the proposed methods are also briefly explained.
-The technical details can be found from the original research articles in the later part of the thesis.
-The notations and the presentations of some proposed models are slightly improved in order to incorporate the methods into a unified framework.
-Empirical evaluations of the proposed models are in nowhere repeated, rather, they can be found from the original research articles in the later part of the thesis.
+The technical details can be found in the original research articles in the latter part of the thesis.
+The notation and the presentation of some of the proposed models are slightly improved in order to incorporate the methods into a unified framework.
+Empirical evaluations of the proposed models are not repeated, rather, they can be found from the original research articles in the latter part of the thesis.
 
 
 
@@ -134,7 +132,7 @@ The definition of the output space $\Ycal$ will decide the type of the learning 
 We obtain, for example, 
 multiclass classification problem by setting $\Ycal=\{1,\cdots,K\}$, regression problem by setting $\Ycal=\RR$ where $\RR$ is the set of real numbers, 
 binary classification problem by setting $\Ycal=\{-1,+1\}$, 
-multilabel binary classification problem by setting $\Ycal = \{-1,+1\}^k$.
+multi-label binary classification problem by setting $\Ycal = \{-1,+1\}^k$.
 In addition, we are provided with examples in pair $(\vx,y)\in\vXcal\times\Ycal$ generated by sampling according to the distribution $P(\vx,y)$.
 A \textit{hypothesis class} $\Hcal$ is a set of functions that the learning algorithm is allowed to search against.
 The basic goal for \textit{statistical learning} is to provide an \textit{estimator} $f\in\Hcal:\vXcal\rightarrow\Ycal$ from a hypothesis class $\Hcal$ which predicts the value of the output $y$ given an input $\vx$.
@@ -504,7 +502,7 @@ Later on, optimization algorithms that are based on dual form have been develope
 
 % some history
 Support Vector Machines (\svm) is probably the most widely used single-label classification algorithm in machine learning.
-Its extensions for multilabel classification will be described in the later part of the thesis (e.g., \svmstruct\ in Section~\ref{sc_svmstruct}).
+Its extensions for multi-label classification will be described in the later part of the thesis (e.g., \svmstruct\ in Section~\ref{sc_svmstruct}).
 We will start this section by introducing \textit{Maximum-Margin Principle}, which is also the basis of many structured output learning models (e.g., \mmmn\ in Section~\ref{sc_mmmn}, \spin\ in Section~\ref{sc_su14a}, \rta\ in Section~\ref{sc_su14c}).
 After that, we will discuss the formalism of \svm, the primal-dual optimization strategy, and the kernel methods which allow \svm\ to deal with high dimensionality of the input feature space.
 In the end we will briefly cover the optimization strategies developed for \svm.
@@ -702,7 +700,7 @@ Ensemble methods have improved the classification performance when compared to t
 This section will be devoted to bagging and boosting since both methods are extensively studied and are most relevant to this thesis.
 
 Ensemble methods and their theories are primarily developed for single-label classification.
-The extensions for the multilabel classification problem will be briefly covered in Section~\ref{sc_emfmlc}.
+The extensions for the multi-label classification problem will be briefly covered in Section~\ref{sc_emfmlc}.
 Moreover, we will develop several new learning algorithms in the later part of the thesis, which are related to the ensemble methods presented in this section but with significant differences.
 
 
@@ -714,7 +712,7 @@ Moreover, we will develop several new learning algorithms in the later part of t
 In addition to the notations introduced in Section~\ref{sc_slc_pn}, we assume there is a hypothesis class $\Hcal'$ where we generate weak/base hypothesis $f^t(x)\in\Hcal'$.
 We use $t$ to index the $t$'th weak hypothesis.
 $H(x)$ denotes the ensemble framework that is able to combine multiple weak hypotheses and generate a stronger one.
-In many cases, no other information about $f^t(x)$ is available to $H(x)$ except that each weak hypothesis will take in a parameter $\vx$ and output $y\in\Ycal$ ($\vy\in\vYcal$ resp.) in single-label (multilabel resp.) classification.
+In many cases, no other information about $f^t(x)$ is available to $H(x)$ except that each weak hypothesis will take in a parameter $\vx$ and output $y\in\Ycal$ ($\vy\in\vYcal$ resp.) in single-label (multi-label resp.) classification.
 
 
 \subsection{Boosting} \label{sc_boosting}
@@ -838,20 +836,20 @@ The feature split process of decision tree is deterministic given a set of featu
 \chapter{Multilabel Classification} \label{ch_fmlc}
 
 Multilabel classification is a natural extension to single-label classification presented in Section~\ref{sc_slc}.
-In multilabel classification each input (instant) is simultaneously associated with multiple outputs (labels).
-The research of the multilabel classification has progressed rapidly in the past two decades with many learning algorithms being developed and applied to real world classification problems \citep{lafferty01,taskar02,Taskar04max,THJA04,Rousu07}.
-In general, there are two lines of research for multilabel classification, namely flat multilabel classification and structured output prediction.
-In flat multilabel classification, the multiple labels are treated essentially as a ``flat'' vector of labels.
+In multi-label classification each input (instant) is simultaneously associated with multiple outputs (labels).
+The research of the multi-label classification has progressed rapidly in the last two decades with many learning algorithms being developed and applied to real world classification problems \citep{lafferty01,taskar02,Taskar04max,THJA04,Rousu07}.
+In general, there are two lines of research for multi-label classification, namely flat multi-label classification and structured output prediction.
+In flat multi-label classification, the multiple labels are treated essentially as a ``flat'' vector of labels.
 Structured output prediction, on the other hand, models the multiple labels via a graph structure that connects labels.
-This chapter will be devoted to flat multilabel classification in which several well established algorithm techniques will be presented.
+This chapter will be devoted to flat multi-label classification in which several well established algorithm techniques will be presented.
 The methods for structured output prediction will be covered in the later part of the thesis.
 
-Consider the infeasibility of listing all algorithms for flat multilabel classification, it is easier if we are able to categorize the algorithms into classes.
+Consider the infeasibility of listing all algorithms for flat multi-label classification, it is easier if we are able to categorize the algorithms into classes.
 In this chapter, we adopt the simple categorization presented in \citep{Tsoumakas07multi,Tsoumakas10mining} which gives us two major algorithm categories, namely problem transformation and algorithm adaptation.
-For the problem transformation category, we will present the methods which aim to transfer the flat multilabel classification problem into other well studied problems (e.g., single-label classification, label ranking).
-For the algorithm adaptation category, we will describe the methods which directly modify the established learning techniques (e.g., Logistic Regression, ensemble method) to solve the multilabel classification problem.
-Nevertheless, the present algorithms will explore the inherited difficulties of flat multilabel classification which are the exponential sized multilabel space and the implicit label correlation.
-Besides, the author realized that it is impossible to cover every lines of research in the field of flat multilabel classification.
+For the problem transformation category, we will present the methods which aim to transfer the flat multi-label classification problem into other well studied problems (e.g., single-label classification, label ranking).
+For the algorithm adaptation category, we will describe the methods which directly modify the established learning techniques (e.g., Logistic Regression, ensemble method) to solve the multi-label classification problem.
+Nevertheless, the present algorithms will explore the inherited difficulties of flat multi-label classification which are the exponential sized multi-label space and the implicit label correlation.
+Besides, the author realized that it is impossible to cover every lines of research in the field of flat multi-label classification.
 Interested readers are pointed out to the recent research survey articles \citep{Tsoumakas07multi,Tsoumakas10mining,Zhang14a}.
 
 
@@ -862,16 +860,16 @@ Interested readers are pointed out to the recent research survey articles \citep
 \section{Preliminaries} \label{sc_mlc_pn}
 
 We borrow most notations from the single-label classification setting described in Section~\ref{sc_slc_pn}.
-In particular, we examine the following \textit{multilabel classification} problem.
-We assume that data are drawn from a domain $\vXcal\times\vYcal$, where $\vXcal$ is the set of inputs (instants) and $\vYcal$ is the set of outputs (multilabels).
+In particular, we examine the following \textit{multi-label classification} problem.
+We assume that data are drawn from a domain $\vXcal\times\vYcal$, where $\vXcal$ is the set of inputs (instants) and $\vYcal$ is the set of outputs (multi-labels).
 $\vYcal = \Ycal_1\times\cdots\times\Ycal_k$ is composed by a Cartesian product of $k$ sets $\Ycal_i=\{-1,+1\}$.
 We retain a single-label classification problem by setting $k=1$.
-A vector $\vy=(y_1,\cdots,y_k)\in\vYcal$ is called \textit{multilabel} and its element $y_j$ is called \textit{microlabel}.
-$\vy_i[j]$ denotes the $j$'th microlabel in the $i$'th multilabel.
+A vector $\vy=(y_1,\cdots,y_k)\in\vYcal$ is called \textit{multi-label} and its element $y_j$ is called \textit{microlabel}.
+$\vy_i[j]$ denotes the $j$'th microlabel in the $i$'th multi-label.
 In addition, we are given a training set consisting of $m$ labeled examples $\Scal=\{(\vx_i,\vy_i)\}_{i=1}^{m}\in\vXcal\times\vYcal$. 
 A pair $(\vx_i,\vy)$, where $\vx_i$ is a training input and $\vy\in\vYcal$ is an arbitrary output, is called \textit{pseudo-example}.
 It is worth pointing out that pseudo-example $(\vx_i,\vy)$ can be generated from a different distribution that generates training examples $(\vx_i,\vy_i)$.
-The goal is to learn a mapping function $f\in\Hcal:\vXcal\rightarrow\vYcal$ which can compute the multilabel given an arbitrary input such that the predefined loss $\ell$ for the future unseen examples will be minimized.
+The goal is to learn a mapping function $f\in\Hcal:\vXcal\rightarrow\vYcal$ which can compute the multi-label given an arbitrary input such that the predefined loss $\ell$ for the future unseen examples will be minimized.
 The loss function is usually tailored for the learning algorithm.
 
 
@@ -880,10 +878,10 @@ The loss function is usually tailored for the learning algorithm.
 %
 \section{Problem Transformation}
 
-The problem transformation approach aims to transform the flat multilabel classification problem into other well established problems.
+The problem transformation approach aims to transform the flat multi-label classification problem into other well established problems.
 The most typical way is known as \textit{binary relevance} (\br) proposed by \citet{Tsoumakas07multi,Tsoumakas10mining}.
-\br\ amounts to transforming the multilabel classification problem into a set of single-label classification problems and to independently learning a single-label classifier for each subproblem.
-Other types of transformations include, for example, to transform into label power set problem \citep{Tsoumakas07random}, to transform into label ranking problem \citep{Elisseeff01akernel,Brinker07case,Furnkranz08multilabel,Chiang12a}.
+\br\ amounts to transforming the multi-label classification problem into a set of single-label classification problems and to independently learning a single-label classifier for each subproblem.
+Other types of transformations include, for example, to transform into label power set problem \citep{Tsoumakas07random}, to transform into label ranking problem \citep{Elisseeff01akernel,Brinker07case,Furnkranz08multi-label,Chiang12a}.
 However, learning through label ranking will not be discussed in detail as it slightly diverges from the main scope of the thesis.
 We will focus on \br\ in this section.
 
@@ -893,11 +891,11 @@ We will focus on \br\ in this section.
 %
 \subsection{Multilabel $K$-Nearest Neighbors (\mlknn)} \label{sc_mlknn}
 
-Multilabel $K$-Nearest Neightbors (\mlknn) proposed by \citet{Zhang05a,Zhang07mlknn} is perhaps the most famous binary relevance classifier for flat multilabel classification.
+Multilabel $K$-Nearest Neightbors (\mlknn) proposed by \citet{Zhang05a,Zhang07mlknn} is perhaps the most famous binary relevance classifier for flat multi-label classification.
 \mlknn\ is also an instance based learning approach \citep{Aha91instance} that is derived from the $K$-Nearest Neightbor (\knn) algorithm designed for the single-label classification problem.
-\mlknn\ transforms the flat multilabel classification problem into a set of single-label classification problems and processes each microlabel independently.
+\mlknn\ transforms the flat multi-label classification problem into a set of single-label classification problems and processes each microlabel independently.
 For each unseen example $\vx$, \mlknn\ algorithm first identifies the set of $K$-nearest neighbors $N(\vx)$ from the training sets.
-After that, the algorithm computes the multilabel $\vy$ of the unseen example $\vx$ by examining the set of labels collected from its $K$-nearest neightbors.
+After that, the algorithm computes the multi-label $\vy$ of the unseen example $\vx$ by examining the set of labels collected from its $K$-nearest neightbors.
 
 Mathematically 
 let $C_{\vx}(j)$ denote the number of the neighbors of $\vx$ with $j$'th label being ``$+1$'',
@@ -912,14 +910,14 @@ The prior probability distribution $H^b_{\vx}(j)$ and the likelihood distributio
 
 The central problem with \mlknn\ is that \mlknn\ is ignorant of the label correlation.
 In order to exploit the label correlation, other variants of \mlknn\ have been proposed \citep{Cheng09combining,Younes11a}.
-Besides, there are many algorithm alternatives which also align to the direction of \knn\ typed learning in flat multilabel classification, for example, methods that incorporates \knn\ with ranking model were proposed in \citep{Brinker07case,Chiang12a}.
+Besides, there are many algorithm alternatives which also align to the direction of \knn\ typed learning in flat multi-label classification, for example, methods that incorporates \knn\ with ranking model were proposed in \citep{Brinker07case,Chiang12a}.
 
 
 %
 %
 \subsection{Classifier Chains (\cc)}
 
-Classification Chains (\cc) developed in \citep{Read09classifier,Read11classifier} is another problem transformation approach for flat multilabel classification.
+Classification Chains (\cc) developed in \citep{Read09classifier,Read11classifier} is another problem transformation approach for flat multi-label classification.
 \cc\ involves $k$ binary transformations and forms a chain of $k$ binary classifiers $h=\{h_1,\cdots,h_k\}$.
 The $j$'th classifier $h_j$ is responsible for learning and predicting the $j$'th microlabel.
 In particular, for each microlabel $\vy[j]$, \cc\ first constructs a new training data $S_j$ then learns a classifier $h_j$ via arbitrary single-label classifier.
@@ -940,7 +938,7 @@ Since there is no standard way for classification order of microlabels in \cc, E
 %
 \subsection{Instant Based Logistic Regression (\iblr)} \label{sc_iblr}
 
-\citet{Cheng09combining} developed Instance Based Logistic Regression (\iblr) with an extension to flat multilabel classification.
+\citet{Cheng09combining} developed Instance Based Logistic Regression (\iblr) with an extension to flat multi-label classification.
 \iblr\ is also an instant base learning approach \citep{Aha91instance} similar to \mlknn.
 It extends \mlknn\ by exploring the label correlation within the neighbors of an instant for posterior inference.
 It is also similar to \cc\ but with major differences.
@@ -972,9 +970,9 @@ $w_0^{(j)}$ is a bias term.
 %
 \section{Algorithm Adaptation}
 
-The central idea of the algorithm adaptation approach is to directly modify the popular single-label learning algorithms and apply them to the multilabel classification problems.
+The central idea of the algorithm adaptation approach is to directly modify the popular single-label learning algorithms and apply them to the multi-label classification problems.
 The approach includes but is not limited to ensemble typed learning, \lr\ typed learning, and the regularized learning which are described in the following part of the section.
-There also exists methods which are modified from, for example, Perceptron \citep{Crammer03afamily} and Neural Network \citep{Zhang06multilabel}.
+There also exists methods which are modified from, for example, Perceptron \citep{Crammer03afamily} and Neural Network \citep{Zhang06multi-label}.
 They are not explained in detail in the section due to the divergence from the main topic of the thesis.
 
 
@@ -984,11 +982,11 @@ They are not explained in detail in the section due to the divergence from the m
 \subsection{Ensemble Methods for Flat Multilabel Classification} \label{sc_emfmlc}
 
 As it is straightforward to combine multiple scalar output variables, the ensemble methods have been initially developed for single-label classification \citep{Breiman96bagging,Freund97a} or regression  \citep{Breiman96bagging} tasks.
-However, it is not immediately apparent how to combine vector valued outputs in flat multilabel space.
+However, it is not immediately apparent how to combine vector valued outputs in flat multi-label space.
 
-\adaboostmh\ is the multilabel variance of original \adaboost\ algorithm proposed by \citet{Schapire99improved}, which is further developed by \citet{Esuli2008boosting}.
+\adaboostmh\ is the multi-label variance of original \adaboost\ algorithm proposed by \citet{Schapire99improved}, which is further developed by \citet{Esuli2008boosting}.
 The core idea of \adaboostmh\ is to adopt hamming loss instead of 0/1 loss. 
-In particular, the algorithm reduces from a multilabel classification problem to a set of single label classification problems by replacing each training example $(\vx_i,\vy_i)$ with $k$ examples $\{(\vx_i,\vy_i[l])\}_{l=1}^k$.
+In particular, the algorithm reduces from a multi-label classification problem to a set of single label classification problems by replacing each training example $(\vx_i,\vy_i)$ with $k$ examples $\{(\vx_i,\vy_i[l])\}_{l=1}^k$.
 The algorithm is detailed in (Algorithm~\ref{adaboostmh}).
 In particular, it maintains a distribution over all examples and labels.
 In each iteration, the algorithm takes in the distribution and all training examples, generates a weak learner $f^k(\vx)$ (line~\ref{mh_compuet_f}), computes hamming loss (line~\ref{mh_compute_error}), computes the adaptive parameter $\alpha^t$ (line~\ref{mh_compute_alpha}), and update the distribution (line~\ref{mh_update_d}).
@@ -1012,7 +1010,7 @@ The returned prediction $H(x)$ is the combination of base learners $f^t(x)$ weig
 \end{algorithmic}
 \end{algorithm}
 
-Other ensemble flat multilabel classification methods based on boosting or bagging are also developed in \citep{Wang07simple,Yan07model,Kocev13tree}.
+Other ensemble flat multi-label classification methods based on boosting or bagging are also developed in \citep{Wang07simple,Yan07model,Kocev13tree}.
 Most recently, three other learning algorithms with performance guarantee are proposed in \citep{Cortes14semble}.
 Besides, there are quite a few ensemble approaches which are adapted from single label ensemble methods and are dedicated to solve real world classification problems.
 For example, \citep{Collins05distrimnative,Zeman05improving,Sagae06parsing,Zhang09kbest} are applied to natural language processing, and \citep{Fiscus97a,Benesty08speech,Petrov10products}
@@ -1023,7 +1021,7 @@ are applied to text and speech recognition.
 %
 \subsection{Correlated Logistic Regression (\corrlog)} \label{sc_corrlog}
 
-Correlated Logistic Regression (\corrlog) developed by \citet{Bian12corrlog} is a model based approach for flat multilabel classification.
+Correlated Logistic Regression (\corrlog) developed by \citet{Bian12corrlog} is a model based approach for flat multi-label classification.
 \corrlog\ is a major step forward of \iblr\ by constructing a logistic regression classifier over all microlabels and by modeling pairwise microlabel correlation with a function defined on microlabel pairs.
 
 In fact, \corrlog\ is derived from Independent Logistic Regression (\ilrs) model. 
@@ -1055,7 +1053,7 @@ Thus, \corrlog\ examines the pairwise label correlation by augmenting joint pred
 %
 \subsection{Multitask Feature Learning (\mtl)} \label{sc_mtl}
 
-Multitask Feature Learning (\mtl) proposed by \citet{Argyriou07multitask} is another algorithm designed for flat multilabel classification.
+Multitask Feature Learning (\mtl) proposed by \citet{Argyriou07multitask} is another algorithm designed for flat multi-label classification.
 \mtl\ is quite different from other learning approaches discussed in the previous sections.
 In particular, \mtl\ is based on the assumption that different microlabels are related such that they share a common underlying feature representation.
 Similar assumption is also applied in \citep{Caruana97multitask,Baxter00a,BenDavide03exploiting}.
@@ -1098,9 +1096,9 @@ Recently, \citet{Paredes12exploit} proposed a method which exploits the informat
 %------------------------------------------------
 \chapter{Structured Output Prediction} \label{ch_sop}
 
-Structured output prediction is a natural extension to flat multilabel classification presented in Chapter~\ref{ch_fmlc}.
-Unlike flat multilabel classification which takes multiple interdependent output variables as a ``flat'' vector, structured output prediction assumes that multiple output variables are correlated and locate in the structured output space.
-The method assumes that there exists an output graph (e.g., chain, tree) to connect multiple output variables by which it gains the advantage of exploiting the label correlation compared to flat multilabel classification.
+Structured output prediction is a natural extension to flat multi-label classification presented in Chapter~\ref{ch_fmlc}.
+Unlike flat multi-label classification which takes multiple interdependent output variables as a ``flat'' vector, structured output prediction assumes that multiple output variables are correlated and locate in the structured output space.
+The method assumes that there exists an output graph (e.g., chain, tree) to connect multiple output variables by which it gains the advantage of exploiting the label correlation compared to flat multi-label classification.
 In this chapter, we will start by introducing several well established structured output learning models developed during the last decade.
 We will present our new algorithm \spin\ that is capable of predicting a directed acyclic graph (\daggraph) and examine the performance on the network response prediction problem.
 
@@ -1114,10 +1112,10 @@ Multilabel classification deals with multiple interdependent output variables, $
 The problem is known as \textit{structured output prediction} when these variables are located in a structured output space.
 That is, the label correlation is described by an \textit{output graph} that connects multiple labels.
 In particular, we define the output graph $G=(E,V)$ by a node set $V=\{1,\cdots,k\}$ which corresponds to the microlabels $\{y_1,\cdots,y_k\}$ and an edge set $E=V\times V$ which represents the dependency between pair of microlabels.
-For each edge $e=(j,j')\in E$, we use $\vy_e$ to denote the edge label of edge $\ve$ with respect to multilabel $\vy$ by concatenating the head label $y_j$ and the tail label $y_{j'}$, with the edge label domain $\vy_e\in\vYcal_e=\Ycal_j\times\Ycal_{j'}$.
+For each edge $e=(j,j')\in E$, we use $\vy_e$ to denote the edge label of edge $\ve$ with respect to multi-label $\vy$ by concatenating the head label $y_j$ and the tail label $y_{j'}$, with the edge label domain $\vy_e\in\vYcal_e=\Ycal_j\times\Ycal_{j'}$.
 By $\vy_{i,e}$, we denote the edge label of one example $(\vx_i,\vy_i)$ on edge $\ve$.
 Thus, given a training example $(\vx_i,\vy_i)$ and the output graph $G$, we can uniquely identify the node label $y_i$ and the edge label $\vy_{i,e}$ on the graph.
-In addition, we denote the possible label of node $i$ by $u_i$ and the possible label of edge $\ve$ by $\vu_{e}$ where $u_i$ and $\vu_{e}$ do not constrain to any multilabel $\vy$.
+In addition, we denote the possible label of node $i$ by $u_i$ and the possible label of edge $\ve$ by $\vu_{e}$ where $u_i$ and $\vu_{e}$ do not constrain to any multi-label $\vy$.
 Naturally, $u_i\in\Ycal_i$ and $\vu_e\in\vYcal_e$.
 
 
@@ -1145,7 +1143,7 @@ After weight parameter $\vw$ is obtained, one needs to solve the {argmax} proble
 For example, (\ref{sp_inference}) is solved in \citep{collins02a} by Viterbi decoding.
 
 The weight parameter $\vw$ is learned via the standard Perceptron iterative update by solving the argmax problem (\ref{sp_inference}) in each iteration.
-In particular, the algorithm loops through the training examples and updates $\vw$ whenever the predicted multilabel $\hat{\vy_i}$ is different from the true multilabel $\vy_i$.
+In particular, the algorithm loops through the training examples and updates $\vw$ whenever the predicted multi-label $\hat{\vy_i}$ is different from the true multi-label $\vy_i$.
 The update is defined by
 \begin{align}
 	\vw \leftarrow \vw + \left(\phib(\vx_i,\vy_i) - \phib(\vx_i,\hat{\vy}_i)\right). \label{sp_update}
@@ -1154,8 +1152,8 @@ The update usually leads to over-fitting.
 A simple refinement is usually applied which is similar to the average Perceptron \citep{Freund99large}.
 
 The central problem with the structured Perceptron learning is its loss function.
-In fact, the structured Perceptron tacitly applies $0/1$ loss (\ref{one_loss}) on output multilabels.
-As a result, it is impossible to distinguish the nearly correct and the completely incorrect output multilabels.
+In fact, the structured Perceptron tacitly applies $0/1$ loss (\ref{one_loss}) on output multi-labels.
+As a result, it is impossible to distinguish the nearly correct and the completely incorrect output multi-labels.
 Both will lead to the same update to the feature weight parameter (\ref{sp_update}) during the training.
 
 
@@ -1173,7 +1171,7 @@ A \textit{Conditional Random Field} (\crf) defines the conditional probability d
 	P(\vy|\vx) &= \frac{1}{Z_{\vx,\vw}}\exp{\ip{\vw}{\phib(\vx,\vy)}},
 \end{align*}
 where $\phib(\vx,\vy)$ is the joint feature map and $Z_{\vx,\vw}$ is the partition function dependent on $\vx$.
-$Z_{\vx,\vw}$ sums over all possible multilabels 
+$Z_{\vx,\vw}$ sums over all possible multi-labels 
 \begin{align}
 	Z_{\vx,\vw} &= \sum_{\vy'\in\Ycal}\exp{\ip{\vw}{\phib(\vx,\vy')}}. \label{crf_partition_function}
 \end{align}
@@ -1201,8 +1199,8 @@ The compatibility score defined by
 \begin{align}
 	F(\vx,\vy;\vw) = \ip{\vw}{\phib(\vx,\vy)} \label{mmmn_score}
 \end{align}
-can be seen as the affinity of the multilabel $\vy$ to the input $\vx$ according to the Markov network.
-Feature weight parameter $\vw$ in (\ref{mmmn_score}) ensures the example with correct multilabel will reach higher score than with incorrect multilabel.
+can be seen as the affinity of the multi-label $\vy$ to the input $\vx$ according to the Markov network.
+Feature weight parameter $\vw$ in (\ref{mmmn_score}) ensures the example with correct multi-label will reach higher score than with incorrect multi-label.
 To learn the feature weight parameter $\vw$, \mmmn\ defines the margin as the difference in compatibility scores between the correct example $(\vx_i,\vy_i)$ and the psudo-example $(\vx_i,\vy)$.
 Under Maximum-Margin principle (Section~\ref{sc_svm}), \mmmn\ requires the margin to be at least $\vell(\vy_i,{\vy})$.
 
@@ -1215,9 +1213,9 @@ The primal optimization problem of \mmmn\ can be formulated as
 	\end{align*}
 \end{definition}
 \noindent
-where $\xi_i$ is the slack allotted to each example to make sure solution can always be found, $\vell(\vy_i,\vy)$ is the loss function between the correct multilabel $\vy_i$ and the incorrect multilabel $\vy$, $C$ is the slack parameter that controls the amount of regularization in the model.
+where $\xi_i$ is the slack allotted to each example to make sure solution can always be found, $\vell(\vy_i,\vy)$ is the loss function between the correct multi-label $\vy_i$ and the incorrect multi-label $\vy$, $C$ is the slack parameter that controls the amount of regularization in the model.
 For each example $\vx_i$, the optimization calls for maximizing the margin between the correct label $\vy_i$ and incorrect labels $\vy$.
-The margin is scaled by the loss function $\vell(\vy_i,{\vy})$ such that the completely incorrect multilabel will incur bigger loss than the nearly correct multilabel.
+The margin is scaled by the loss function $\vell(\vy_i,{\vy})$ such that the completely incorrect multi-label will incur bigger loss than the nearly correct multi-label.
 The loss scaled margin optimization will push the high-loss pseudo-examples further away from the correct example than the low-loss pseudo-examples.
 Definition~\ref{def_mmmn} is an instantiation of the regularized learning (\ref{rl}) with $L_2$-norm regularization and hamming loss.
 
@@ -1281,7 +1279,7 @@ The primal optimization problem of \svmstruct\ can be defined as
 \noindent
 where $\xi_i$ is the slack allotted to each example, $\vell(\vy_i,\vy)$ is the loss function between pseudo-label and the correct label, and $C$ is the slack parameter that controls the amount of regularization in the model.
 The interpretation of Definition~\ref{def_svmstruct} is also similar to that of Definition~\ref{def_mmmn}.
-Besides, \citet{THJA04} suggest that \mmmn\ will work hard on the pseudo-examples $(\vx_i,\vy)$ which incur big loss though they may not even close to be confusable to the true multilabel $\vy_i$.
+Besides, \citet{THJA04} suggest that \mmmn\ will work hard on the pseudo-examples $(\vx_i,\vy)$ which incur big loss though they may not even close to be confusable to the true multi-label $\vy_i$.
 
 On the other hand, the optimization techniques employed by \svmstruct\ differ significantly compared to \mmmn.
 \svmstruct\ will have to work with the exponential number of constraints as the optimization is not decomposable over the Markov network.
@@ -1426,11 +1424,11 @@ Diffusion scaling has the effect of shrinking the distance to the nodes that are
 %------------------------------------------------
 \chapter{Structured Output Prediction with Unknown Output Graphs} \label{ch_sopw}
 
-Structured output learning relies on an output graph connecting multilabel interdependent output variables to exploit the label correlation.
+Structured output learning relies on an output graph connecting multi-label interdependent output variables to exploit the label correlation.
 The applicability of structured output learning is limited due to the fact that the output graph needs to be known as \textit{a-priori}.
 In this chapter, we aim to develop new structured output learning algorithms that are not constrained to the availability of the output graph structure.
-As a result, structured output learning can be applied to wide range of multilabel classification problems.
-In Section~\ref{sc_su10}, we study structured output learning in multilabel molecular classification problem where we build the output graph from auxiliary datasets.
+As a result, structured output learning can be applied to wide range of multi-label classification problems.
+In Section~\ref{sc_su10}, we study structured output learning in multi-label molecular classification problem where we build the output graph from auxiliary datasets.
 In Section~\ref{sc_su11}, we present a majority voting ensemble (\mve) that combines a set of structured output learners built from a collection of random output graphs.
 We proceed in Section~\ref{sc_su14b} with two aggregation techniques (\amm\ and \mam\ respectively) which perform inference before or after combining multiple structured output learners.
 In Section~\ref{sc_su14c}, we present the \rta\ model that improves the previous approaches by performing joint learning and inference on a random set of spanning trees.
@@ -1454,7 +1452,7 @@ In addition, the output graph is extracted from the auxiliary datasets which rev
 %
 \subsection{Background}
 
-Molecular classification, the goal of which is to predict the anti-cancer potentials of the drug-like molecules, is one crucial step in drug discovery and has gained its popularity from machine learning community \citep{Singh12qsar,Dutt12classification}.
+Molecular classification, the goal of which is to predict the anti-cancer potentials of the drug-like molecules, is one crucial step in drug discovery and has gained in popularity from machine learning community \citep{Singh12qsar,Dutt12classification}.
 Viable molecular structures are scanned, searched, or designed for therapeutic efficacy.
 In particular, expensive preclinical \textit{in vitro} and \textit{in vivo} drug tests can be largely avoided and special efforts can be devoted to few promising candidate molecules, once accurate \textit{in silico} models are available \citep{Burbidg01drug}.
 
@@ -1469,7 +1467,7 @@ For example in the recent \textit{NCI-60} {Human Tumor Cell Line Screen} project
 %
 \subsection{Methods}
 
-To efficiently and accurately predict molecular activities in multiple cell lines at the same time, we applied a structured output learning approach in \citepub{su10} which to our knowledge is the first multilabel learning approach for the molecular classification problem.
+To efficiently and accurately predict molecular activities in multiple cell lines at the same time, we applied a structured output learning approach in \citepub{su10} which to our knowledge is the first multi-label learning approach for the molecular classification problem.
 The algorithm is an instantiation of \mmcrf\ \citep{Rousu07} described in Section~\ref{sc_mmcrf}.
 %It is also a sibling method of \mmmn\ \citep{Taskar04max} described in Section~\ref{sc_mmmn}.
 In particular, the model defines a compatibility score through the inner product of a molecular structure $\vx$ and the activities in multiple cell lines $\vy$
@@ -1543,7 +1541,7 @@ In \text{correlation thresholding} approach, we take all edges that exceed a fix
 %
 \section{Graph Labeling Ensemble (\mve)}\label{sc_su11}
 
-%We have presented in Section~\ref{sc_su10} a structured output learning approach for multilabel molecular classification problem.
+%We have presented in Section~\ref{sc_su10} a structured output learning approach for multi-label molecular classification problem.
 The structured output learning approach relies on the representation of the multiple output variables through an output graph which allows us to exploit the label correlation in a more comprehensive way compared to previous approaches.
 To apply structured output learning, it is assumed that the structure of the output graph is observed as \textit{a-priori}.
 Alternatively in \citepub{su10}, there exists auxiliary datasets that encode the label correlation which can be exploited in order to retrieve the output graph.
@@ -1565,7 +1563,7 @@ After the base learners have been generated, the predictions are extracted from 
 \begin{align*}
 	F_j^{\text{\mve}}=\underset{y_j\in\Ycal_j}{\argmax}\,\left(\frac{1}{T}\sum_{i=1}^{T}\ind{F_j^{(t)}(x)=y_j}\right), \forall j\in\{1,\cdots,k\},
 \end{align*}
-where $T$ denotes the size of the ensemble which is also the number of random output graphs, and $F^{(t)}(\vx)=\{F^{(t)}_j(x)\}_{j=1}^{k}$ denotes the predicted multilabel from the $t$'th base learner.
+where $T$ denotes the size of the ensemble which is also the number of random output graphs, and $F^{(t)}(\vx)=\{F^{(t)}_j(x)\}_{j=1}^{k}$ denotes the predicted multi-label from the $t$'th base learner.
 In words, the ensemble prediction on each microlabel is the most frequently appearing prediction among the base classifiers.
 It is also worth pointing out that the \mve\ framework is not restricted to the base learner \mmcrf\ and can be extended with any other structured output learning methods as long as the methods incorporate the output structure and make predictions based on the structure.
 
@@ -1585,7 +1583,7 @@ We have shown in Section~\ref{sc_su11} that we can construct a majority voting e
 We have evaluated the method on molecular classification problem.
 This section is based on \citepub{su14b} where we aim to present two other aggregation techniques to combine the base learners.
 Compare to previously developed \mve, the proposed model (\amm\ and \mam\ respectively) also perform inference before or after forming the ensemble.
-We also examine the performance of the proposed models on a set of heterogeneous multilabel datasets from various domains.
+We also examine the performance of the proposed models on a set of heterogeneous multi-label datasets from various domains.
 In addition, we study the improvement of \mam\ in terms of the reconstruction error of the compatibility score.
 %In addition, we bring in a theory which is based on the reconstruction error of the compatibility score to explains the improvement of \mam.
 
@@ -1614,7 +1612,7 @@ With edge compatibility scores, we can infer the \textit{max-marginal} of the $i
 \begin{align*}
 	\tilde{\psi}_j(\vx,u_j) = \underset{\vy\in\Ycal,y_j=u_j}{\maximize}\sum_{e\in E}\psi_e(\vx,\vy_e).
 \end{align*}
-In words, the max-marginal is the maximum score of the multilabel consistent with $y_i=u_i$.
+In words, the max-marginal is the maximum score of the multi-label consistent with $y_i=u_i$.
 We denote the collection of max-marginals by $\tilde{\psib} = (\tilde{\psi}_j(\vx,u_j))_{j\in V,u_j\in\Ycal_j}$.
 
 \subsection{Methods}
@@ -1624,7 +1622,7 @@ Let $\Gcal=\{G^{(1)},\cdots,G^{(T)}\}$ denote a set of random output graphs, and
 The prediction of the Average-of-Max-Marginal (\amm) aggregation on each node is obtained by averaging the max-marginals of base classifiers and choose the maximizing microlabel for the node
 \begin{align*}
 	F_j^{\text{\amm}}=\underset{u_j\in\Ycal_j}{\argmax}\,\frac{1}{T}\sum_{t=1}^{T}\tilde{\psi}_{j,u_j}^{(t)}(\vx).	\end{align*}
-The predicted multilabel from \amm\ is composted by the predicted microlabels
+The predicted multi-label from \amm\ is composted by the predicted microlabels
 \begin{align*}
 	F^{\text{\amm}}=\left(F_j^{\text{\amm}}\right)_{j\in V}.
 \end{align*}
@@ -1714,8 +1712,8 @@ where $\phib_{T_t}(\vx,\vy)$ is the feature map that is local on each tree $T_t$
 Definition~\ref{primalrta} is an instantiation of the regularized learning (Section~\ref{rl}) in terms of the $L_2$-norm regularization (\ref{l2_norm}) and the $0/1$ loss (\ref{one_loss}).
 
 The key for the optimization is to solve the argmax problem efficiently.
-This is an \nphard\ problem in practice, as the size of the multilabel space is exponential in the number of microlabels.
-In \citepub{su14c}, we have developed a $K$-best inference algorithm working in $\Theta(Knk)$ time per data point, where $k$ is the number of microlabels and $K$ is the number of best multilabels we compute from each random spanning tree.
+This is an \nphard\ problem in practice, as the size of the multi-label space is exponential in the number of microlabels.
+In \citepub{su14c}, we have developed a $K$-best inference algorithm working in $\Theta(Knk)$ time per data point, where $k$ is the number of microlabels and $K$ is the number of best multi-labels we compute from each random spanning tree.
 
 It is known that the exact solution for the inference problem on individual tree $T_t$ is tractable \citep{Koller09probabilistic} for which 
 \begin{align}
@@ -1723,11 +1721,11 @@ It is known that the exact solution for the inference problem on individual tree
 \end{align}
 can be solved in $\Theta(k)$ time by \textit{dynamic programming} algorithm also known as \textit{max-product} or \textit{min-sum} algorithm.
 However, there is no guarantee that the maximizer of (\ref{rta:maximizer_onetree}) is also the global maximizer of Definition~\ref{primalrta} over the set of random spanning trees.
-Therefore, we compute the top $K$-best multilabels for each random spanning tree.
+Therefore, we compute the top $K$-best multi-labels for each random spanning tree.
 In total the computation costs $\Theta(Knk)$ time for all spanning trees.
-\citepub[Lemma 7]{su14c} provides a method to retrieve the best multilabel from $K$-best multilabel list in linear time.
-We still need to make sure that the global maximizer is within the $K$-best multilabel list.
-\citepub[Lemma 8]{su14c} guarantees that with high probability the global violating multilabel is in the list and $K$ does not need to be large.
+\citepub[Lemma 7]{su14c} provides a method to retrieve the best multi-label from $K$-best multi-label list in linear time.
+We still need to make sure that the global maximizer is within the $K$-best multi-label list.
+\citepub[Lemma 8]{su14c} guarantees that with high probability the global violating multi-label is in the list and $K$ does not need to be large.
 
 In addition, we derived the marginalized dual representation of the primal optimization problem in Definition~\ref{primalrta},
 \iffalse
@@ -1770,18 +1768,18 @@ This is typically known as \textit{leave-one-out} (\loo) {cross-validation} .
 Most machine learning algorithms explicitly assume that the training data and the test data are drawn from the same distribution.
 We should make sure that the statistical property of the original labeled data is well preserved when partitioning the original labeled examples into subsets.
 In single-label classification problem we can easily preserve the label distribution if we randomly sample labeled examples without replacement from the origin dataset.
-However, it is not clear on how to preserve label distribution under the multilabel classification setting.
+However, it is not clear on how to preserve label distribution under the multi-label classification setting.
 To this end, we use \textit{stratification} (\textit{stratified sampling}) method where we first group the labeled examples into equivalent classes based on the number of positive labels they have. 
 Each class is then randomly split into $K$ local folds, after that local folds are merged to create $K$ global folds.
 The stratification scheme ensures that the smaller classes also have representations in all folds. 
 
 After partitioning the original data into training set and test set, we adopt several well-known performance measures in order to quantitively evaluate the performance of different classifiers.
-We report \textit{multilabel accuracy} (\textit{0/1 accuracy}) which counts the percentage of multilabel predictions which have all of the microlabel being correct.
-The counterpart is often known as \textit{multilabel loss} (\textit{0/1 loss}) defined as
+We report \textit{multi-label accuracy} (\textit{0/1 accuracy}) which counts the percentage of multi-label predictions which have all of the microlabel being correct.
+The counterpart is often known as \textit{multi-label loss} (\textit{0/1 loss}) defined as
 \begin{align*}
 	\ell_{0/1} = \frac{1}{m}\sum_{i=1}^{m}\ind{\vy_i \neq \hat{\vy}_i},
 \end{align*}
-where by $\vy_i$ we denote the predicted multilabel of the $i$'th example $\vx_i$, and by $\hat{\vy}_i$ we denote ground true multilabel.
+where by $\vy_i$ we denote the predicted multi-label of the $i$'th example $\vx_i$, and by $\hat{\vy}_i$ we denote ground true multi-label.
 We also report \textit{microlabel accuracy} as the proportion of microlabel being correct, of which the counterpart is often known as \textit{hamming loss} defined as
 \begin{align*}
 	\ell_{h} = \frac{1}{mk}\sum_{i=1}^{m}\sum_{j=1}^{k}\ind{\vy_i[j] \neq \hat{\vy}_i[j]}.
@@ -1854,18 +1852,18 @@ The test result is often visualized as a \textit{$CD$ diagram}.
 %------------------------------------------------
 \chapter{Implementations} \label{ch_implementation}
 
-The main contributions of this thesis are the new structured output learning algorithms for multilabel classification.
+The main contributions of this thesis are the new structured output learning algorithms for multi-label classification.
 Additionally, the presented algorithms have been implemented as software packages.
 In this chapter, the author aims to briefly discuss the implementations and point out the locations where the algorithms can be found.
 
 \begin{enumerate}
-	\item \rta, developed in \citepub{su14c}, is a structured output learning algorithm for multilabel classification with unknown output graph. \rta\ performs joint learning and inference on a random sample of spanning trees.
+	\item \rta, developed in \citepub{su14c}, is a structured output learning algorithm for multi-label classification with unknown output graph. \rta\ performs joint learning and inference on a random sample of spanning trees.
 	\begin{enumerate}
 		\item The learning framework is implemented in \matlab. The inference algorithm is implemented in \cpp. The parallelization of the inference algorithm is implemented with \openmp. Other parts of \rta\ are mostly implemented in \matlab.
 		\item The package can be found from \url{http://git@github.com:hongyusu/random_spanning_tree_approximation.git}.
 	\end{enumerate}
 	
-	\item \spin, developed in \citepub{su14a}, is a structured output learning algorithm for multilabel classification with observed output graph. \spin\ can predict a direct acyclic graph (\daggraph). The algorithm has been applied to the network response prediction problem within the context of social network analysis.
+	\item \spin, developed in \citepub{su14a}, is a structured output learning algorithm for multi-label classification with observed output graph. \spin\ can predict a direct acyclic graph (\daggraph). The algorithm has been applied to the network response prediction problem within the context of social network analysis.
 	\begin{enumerate}
 		\item The learning framework of \spin\ is implemented in \matlab. \sdp\ inference algorithm is implemented with \cvx\ toolbox which is designed for convex programming. The data preprocessing with Latent Dirichlet Allocation (\lda) \citep{Blei03latent} is implemented in \python\ and \matlab.
 		\item The package can be found from \url{http://git@github.com:hongyusu/SPIN.git}.
@@ -1895,15 +1893,15 @@ In this chapter, the author aims to briefly discuss the implementations and poin
 \section{Discussion}
 
 In this thesis, we have studied the supervised learning for classification.
-Especially, we focused on the multilabel classification problem where the task is to predict multiple interdependent output variables given an input example.
-As the multiple output variables can be ``on'' or ``off'' simultaneously, the central problem in multilabel classification is to exploit the label correlations in order to make accurate prediction.
-The problem has been previously tackled by the flat multilabel classification approach which treats the multiple output variables essentially as a ``flat'' vector.
+Especially, we focused on the multi-label classification problem where the task is to predict multiple interdependent output variables given an input example.
+As the multiple output variables can be ``on'' or ``off'' simultaneously, the central problem in multi-label classification is to exploit the label correlations in order to make accurate prediction.
+The problem has been previously tackled by the flat multi-label classification approach which treats the multiple output variables essentially as a ``flat'' vector.
 The approach has difficulty of modeling the label correlations.
-Structured output learning arises as a natural extension to flat multilabel classification in which the label correlations are modeled by an output graph connecting multiple labels.
+Structured output learning arises as a natural extension to flat multi-label classification in which the label correlations are modeled by an output graph connecting multiple labels.
 
-The first outcome of the thesis is a new structured output learning algorithms for multilabel classification when the output graph is observed.
+The first outcome of the thesis is a new structured output learning algorithms for multi-label classification when the output graph is observed.
 In particular, the proposed algorithm \spin\ can predict a directed acyclic graph (\daggraph) from an observed underlying network which best ``responds'' to an input example.
-The empirical evaluation on the network response prediction problem within the context of social network analysis shows that the proposed model outperforms several flat multilabel classification approaches.
+The empirical evaluation on the network response prediction problem within the context of social network analysis shows that the proposed model outperforms several flat multi-label classification approaches.
 The study demonstrates that accurate prediction can be achieved by structured output learning when the output graph can be obtained and utilized during learning.
 
 Meanwhile, we realize that the current structured output learning approach relies on an output graph connecting multiple output variables in order to exploit the label correlations.
@@ -1926,7 +1924,7 @@ In addition to the practical learning algorithms, the thesis also contributes to
 \section{Future Work}
 
 The work presented in the thesis can be extended along two main directions.
-First, the algorithms developed in this thesis can be applied to many other multilabel classification problems in which the output graph does not need to be observed but is believed to play an important role during learning.
+First, the algorithms developed in this thesis can be applied to many other multi-label classification problems in which the output graph does not need to be observed but is believed to play an important role during learning.
 Secondly, the development of the learning algorithms and the theoretical studies are readily to be continued.
 As the first direction is straight-forward and application oriented, we will focus on the second direction.
 
