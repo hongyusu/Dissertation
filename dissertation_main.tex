@@ -513,12 +513,12 @@ Additionally, we assume the {separating hyperplane} has a simple linear form (\r
 As a result, we predict $y_i=+1$ if $f(\vx_i)\ge0$ and $y_i=-1$ otherwise.
 Given that a feature weight parameter $\vw$ achieves a correct separation on the training data, we can decide the label of a unseen test example $\vx_{ts}$ by the decision rule $y_{ts}=\sign(f(\vx_{ts}))$.
 
-There can be infinite number of separating hyperplanes that solves the separation problem on the training data which is also suggested by empirical risk minimization strategy in Section~\ref{sc_erm}. 
-We wish to find the one that also generalizes well on the test data.
-A good strategy is to look for a hyperplane that keeps the maximum distance from the examples of two classes, which is often known as \textit{Maximum-Margin Principle}.
-To see this, imagine putting a separating hyperplane close to one class of examples which will achieve better classification on the test examples from the other class.
+There can be infinite number of separating hyperplanes that solves the separation problem on the same training data, which is also suggested by the empirical risk minimization strategy presented in Section~\ref{sc_erm}. 
+We wish to find the hyperplane which also generalizes well on the test data.
+A good strategy is to look for a hyperplane that keeps the maximum distance from the examples of two classes, which is known as \textit{Maximum-Margin Principle}.
+To see this, imagine putting a separating hyperplane close to one class of examples, which will achieve better classification performance for the test examples from the other class.
 
-Based on Maximum-Margin Principle, we further use $\gamma_i$ to denote the \textit{margin} for the $i$'th example defined as the geometric distance from the data point to the separating hyperplane
+We further use $\gamma_i$ to denote the \textit{margin} of the $i$'th example defined as the geometric distance from the data point to the separating hyperplane
 \begin{align*}
 	\gamma_i = \frac{y_i(\ip{\vw}{\varphib(\vx_i)}+b)}{\norm{\vw}}.
 \end{align*}
