@@ -1665,11 +1665,10 @@ The later measures the correlation of the microlabel predictions in which higher
 %
 \section{Random Spanning Tree Approximation (\rta)}\label{sc_su14c}
 
-Random Spanning Tree Approximation (\rta) developed in \citepub{su14c} is a major step forward of \mam.
-\rta\ brings in joint learning and inference framework such that the base learners from individual random spanning trees are optimized simultaneously towards the same global objective.
-\citepub{su14c} also provides theoretical analysis to guarantee the performance and the tractable inference.
-Besides, \rta\ explores the potential of tackling the intractable graph inference problem with a set of random spanning trees.
-It lays the foundation of performing inference on unknown structure in order to achieve fast optimization, accurate prediction with attainable computational efforts.
+\citepub{su14c} presents Random Spanning Tree Approximation (\rta) for structured output learning with unknown output graph.
+\rta\ is a major step forward of \mam\ by bringing in a joint learning and inference framework such that the base learners built from a collection of random spanning trees are optimized simultaneously towards the same global objective.
+\citepub{su14c} also presents the theoretical studies which not only explain the intuition behind the learning model but also provide the generalization error analysis.
+Meanwhile, \rta\ lays the foundation of tackling the intractability of graph inference on unknown graph structure in which fast optimization and accurate prediction can be achieved with attainable computational efforts.
 
 
 
@@ -1915,7 +1914,7 @@ In particular, \mve\ applies majority vote to directly combine the predictions f
 Meanwhile, we have developed \rta\ based on the theoretical study.
 The proposed model performs max-margin learning on a random sample of spanning trees.
 The joint learning and inference in \rta\ ensures that the base learners, which are built from a set of random spanning trees, are optimized simultaneously towards the same global objective.
-\rta\ also lays the foundation of performing graph inference on unknown graph structure in which fast optimization and accurate prediction can be guaranteed with attainable computational efforts.
+\rta\ has also laid the foundation of tackling the intractability of graph inference on unknown graph structure in which fast optimization and accurate prediction can be achieved with attainable computational efforts.
 
 In addition to the practical learning algorithms, the thesis also contributes to the theoretical studies which not only explain the intuition behind the formalisms but also guarantee the generalization in the performance of the proposed algorithms.
 
