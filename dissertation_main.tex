@@ -1919,34 +1919,25 @@ The joint learning and inference in \rta\ ensures that the base learners, which 
 
 In addition to the practical learning algorithms, the thesis also contributes to the theoretical studies which not only explain the intuition behind the formalisms but also guarantee the generalization in the performance of the proposed algorithms.
 
+
+
 %------------------------------------------------
 %	section
 %------------------------------------------------
 \section{Future Work}
 
 The work presented in the thesis can be extended along two main directions.
-First, the algorithms developed in this thesis can be applied to many other multilabel classification problems, with or without pre-established output graph.
-Secondly, the algorithm development and theoretic analysis can be extended.
-As the first direction of applying the proposed algorithms is clear and application oriented, we will concentrate on the algorithm development and theoretic analysis part.
+First, the algorithms developed in this thesis can be applied to many other multilabel classification problems in which the output does not need to be observed but is believed to play an important role during learning.
+Secondly, the development of the learning algorithms and the theoretical studies are readily to be continued.
+As the first direction is straight-forward and application oriented, we will focus on the second one and explain it in detail.
 
-As a starting point, we can extend \spin\ by developing new inference algorithm that is both scalable and with approximation guarantee.
-The current research ends with \rta\ method that performs joint learning and inference on a random sample of spanning trees.
-\rta\ combines the feature weight parameter from each spanning tree via a $L_2$-norm convex combination.
-Alternatively, the weight parameters can be put together by applying $L_1$-norm combination.
-Learning with $L_1$-norm regularization of parameter combination has been previously studied under the multiple kernel learning setting \citep{Rakotomamonjy08simplemkl}, which can be formulated into an equivalent form of learning a weighted $L_2$-norm combination.
-The weight of the parameter vector on each spanning tree can be explained as the fitness of the tree to the current training data.
-This can be used to select the output graphs that are relevant to the current training data.
-We also need to design new optimization techniques for $L_1$-norm regularization as the current alternative optimization strategy proposed by \citet{Rakotomamonjy08simplemkl} is not efficient.
-Meanwhile, the theoretical properties should be extended from \rta\ to the new model. 
-
-
-
-
-
-
-
-
-
+To serve as a starting point, the inference algorithm for \spin\ can be further developed, which not only needs to be scaled to large social network datasets but also should have approximation guarantee.
+The research on structured output learning with unknown output graph should also be continued.
+In particular, we plan to investigate the possibility of learning the feature weight parameters defined on random spanning trees through $L_1$ combination.
+Learning with $L_1$-norm regularized parameter combination has been previously studied in multiple kernel learning \citep{Rakotomamonjy08simplemkl}, which can be formulated into an equivalent form of learning a weighted $L_2$-norm combination.
+The additional weight can be seen as the fitness of the spanning tree to the current training data, which can be used to select the most relevant tree structures.
+We need to study the corresponding optimization problem as the current alternative optimization algorithm proposed by \citet{Rakotomamonjy08simplemkl} is not efficient.
+The theoretical properties of \rta\ (e.g. generalization error bound) should also be extended to the new algorithms.
 
 
 %% Examples of article references, remove these from your manuscript!
