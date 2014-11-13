@@ -83,7 +83,7 @@ The contributions of the thesis are the statistical learning algorithms that wid
 The thesis starts by reviewing several lines of research in classification learning.
 The first contribution is to developed a new structured output learning algorithm for the multilabel classification problem with observed output graph.
 The proposed method can predict a directed acyclic graph (\daggraph) from an observed network and has applied to network response prediction problem within the context of social network analysis.
-For the general multilabel classification problem without pre-established output graph, we develop several new algorithms that combine a set of structured output learners built on random output graphs.
+For the general multilabel classification problem without pre-established output graph, we develop several new algorithms that combine a set of structured output learners built on a collection of random output graphs.
 In addition, we developed a joint learning and inference framework that is based on Max-Margin learning on a random sample of spanning trees.
 Thus, the proposed methods are not constrained to the availability of the output graphs.
 Moreover, the theoretic analysis explains the behavior of the proposed models and guarantee the generalization error.
@@ -533,7 +533,7 @@ Based on Maximum-Margin Principle, we further use $\gamma_i$ to denote the \text
 We notice if we scale $\vw$ and $b$ by any constant $\kappa\in\RR$ (e.g., $\vw\leftarrow\kappa\vw, b\leftarrow\kappa b$) the margin $\gamma_i$ stays unchanged. 
 We still achieve the same classification performance and generalization power.
 As the parameters are invariance to scaling, we set $\norm{\vw}=1$.
-Given a set of training example $S$, we also define the margin with respect to $S$ as the minimum margin achieved by individual training example
+Given a collection of training example $S$, we also define the margin with respect to $S$ as the minimum margin achieved by individual training example
 \begin{align*}
 	\gamma = \underset{i\in\{1,\cdots,m\}}{\minimize}\gamma_i.
 \end{align*}
@@ -863,7 +863,7 @@ Interested readers are pointed out to the recent research survey articles \citep
 
 We borrow most notations from the single-label classification setting described in Section~\ref{sc_slc_pn}.
 In particular, we examine the following \textit{multilabel classification} problem.
-We assume that data are drawn from a domain $\vXcal\times\vYcal$, where $\vXcal$ is a set of inputs (instants) and $\vYcal$ is the set of outputs (multilabels).
+We assume that data are drawn from a domain $\vXcal\times\vYcal$, where $\vXcal$ is the set of inputs (instants) and $\vYcal$ is the set of outputs (multilabels).
 $\vYcal = \Ycal_1\times\cdots\times\Ycal_k$ is composed by a Cartesian product of $k$ sets $\Ycal_i=\{-1,+1\}$.
 We retain a single-label classification problem by setting $k=1$.
 A vector $\vy=(y_1,\cdots,y_k)\in\vYcal$ is called \textit{multilabel} and its element $y_j$ is called \textit{microlabel}.
@@ -1027,7 +1027,7 @@ Correlated Logistic Regression (\corrlog) developed by \citet{Bian12corrlog} is 
 \corrlog\ is a major step forward of \iblr\ by constructing a logistic regression classifier over all microlabels and by modeling pairwise microlabel correlation with a function defined on microlabel pairs.
 
 In fact, \corrlog\ is derived from Independent Logistic Regression (\ilrs) model. 
-Given an arbitrary training example and label $(\vx,\vy)$, we can construct a set of independent logistic regreesion classifiers, one for each microlabel.
+Given an arbitrary training example and label $(\vx,\vy)$, we can construct a set of independent logistic regression classifiers, one for each microlabel.
 The posteriori probability can be computed by
 \begin{align}
 	P_{\text{\ilrs}}(\vy|\vx) 
@@ -1318,7 +1318,7 @@ In the field of studying the network influence, one primary interest is to disco
 In general, the problem can be defined into two different ways depending on the availability of the underlying network structure.
 On one hand, one would assume that the underlying structure is hidden or incomplete and the only observation is a cascade of actions.
 The instantiation of the setting can be, for example, online news agents sharing information but not physically connected; or in epidemiological study where people are affected by pathogens through various ways.
-In this case, the task is to infer the network structure in terms of edges connecting nodes given a set of action cascade.
+In this case, the task is to infer the network structure in terms of edges connecting nodes given a collection of action cascade.
 %With early work on independent cascade and linear threshold model \citep{Kempe03maximizing},
 Many algorithms are designed to solve the problem in this setting from \netinf\ \citep{GomezRodriguez10inferring}, \netrate\ \citep{Rodrigues11unconvering}, \kernelcascade\ \citep{Du12learning} to the most recent work about two stage model for inferring influence \citep{Du14influence}, inference algorithm using cascade without timestamp \citep{Amin14learning}, and general framework of inferring diffusion structure \citep{Daneshmand14estimating}.
 On the other hand, we argue the problem is unnecessarily hard as in many cases the structure of the network is fully observed (e.g., friendship network, citation network).
@@ -1431,7 +1431,7 @@ The applicability of structured output learning is limited due to the fact that 
 In this chapter, we aim to develop new structured output learning algorithms that are not constrained to the availability of the output graph structure.
 As a result, structured output learning can be applied to wide range of multilabel classification problems.
 In Section~\ref{sc_su10}, we study structured output learning in multilabel molecular classification problem where we build the output graph from auxiliary datasets.
-In Section~\ref{sc_su11}, we present a majority voting ensemble (\mve) that combines a set of structured output learners built from a set of random output graphs.
+In Section~\ref{sc_su11}, we present a majority voting ensemble (\mve) that combines a set of structured output learners built from a collection of random output graphs.
 We proceed in Section~\ref{sc_su14b} with two aggregation techniques (\amm\ and \mam\ respectively) which perform inference before or after combining multiple structured output learners.
 In Section~\ref{sc_su14c}, we present the \rta\ model that improves the previous approaches by performing joint learning and inference on a random set of spanning trees.
 
@@ -1558,7 +1558,7 @@ As a result, the proposed model (\mve) is not constrained to the availability of
 %
 \subsection{Methods}
 
-We use \mmcrf\ as base classifier trained on a set of random output graphs.
+We use \mmcrf\ as base classifier trained on a collection of random output graphs.
 In particular, a random graph $G_t$ is generated for each base classifier to couple the multiple output labels which are the activities of the molecular structure $\vx$ over all cell lines.
 The base model \mmcrf\ is learnt with the training data $S=\{(\vx_i,\vy_i)\}_{i=1}^{m}$ and the output graph $G_t$.
 After the base learners have been generated, the predictions are extracted from each base classifier and are collected for a post-processing step: we compute a majority vote over the graph labeling from the sign on the means of the base classifier's prediction
@@ -1872,7 +1872,7 @@ In this chapter, the author aims to briefly discuss the implementations and poin
 		\item The package can be found from \url{http://git@github.com:hongyusu/SPIN.git}.
 	\end{enumerate}
 	
-	\item \mve\ presented in \citepub{su11} as well as \amm\ and \mam\ presented in \citepub{su14b} are the structured output learning algorithms that are not constrained to the availability of the output graph. The algorithms combine a set of structured output learners built on a set of random output graphs.
+	\item \mve\ presented in \citepub{su11} as well as \amm\ and \mam\ presented in \citepub{su14b} are the structured output learning algorithms that are not constrained to the availability of the output graph. The algorithms combine a set of structured output learners built on a collection of random output graphs.
 	\begin{enumerate}
 		\item The learning framework is mostly implemented in \matlab.
 		\item The package can be located from \url{http://git@github.com:hongyusu/RandomOutputGraphEnsemble.git}.
