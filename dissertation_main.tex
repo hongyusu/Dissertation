@@ -187,14 +187,14 @@ In particular, it suggests to minimize
 \end{align}
 where $\Omega(f)$ is a regularization function that controls the complexity of the estimator by penalizing the norm of the feature weight vector, $\lambda$ is a positive parameter that controls the relative weight between the empirical risk term and the regularization term.
 
-For the linear function class, there are several ways to define the regularization term including  the $L_1$-norm and the $L_2$-norm regularization.
-The $L_2$-norm regularization, defined by 
+For the linear function class, there are several ways to define the regularization term including, for example, $L_1$-norm and $L_2$-norm regularization.
+$L_2$-norm regularization, defined by 
 \begin{align}
 	\Omega_{L_2}(f) = ||\vw||_2=\left(\sum_{i=1}^d|\vw[i]|^2\right)^{\frac{1}{2}}, \label{l2_norm}
 \end{align} 
 controls the complexity of the estimator $f$ and provides a smooth solution.
 It has been applied in, for example, Ridge Regression \citep{Hoerl00ridge}, Logistic Regression \citep{Chen00}, and Support Vector Machines \citep{Cortes95support}.
-On the other hand, the $L_1$-norm regularization, defined by
+On the other hand, $L_1$-norm regularization, defined by
 \begin{align*}
 	\Omega_{L_1}(f) = ||\vw||_1=\sum_{i=1}^d|\vw[i]|,
 \end{align*}
@@ -461,7 +461,7 @@ Instead of maximizing the posteriori (\ref{lr_posteriori}), it is easier to maxi
 \begin{align}
 	\log P(\vw,b|D;\sigma^2) = -{\frac{\norm{\vw}^2}{\sigma^2}} - \sum_{i=1}^{m}\log{(1+\exponential{-y_i(\ip{\varphib(\vx_i)}{\vw}+b)})}. \label{lr_posteriori_log}
 \end{align}
-In fact, (\ref{lr_posteriori_log}) is an instantiation of the regularization risk minimization strategy described in (\ref{rl}) with the $L_2$-norm regularization (\ref{l2_norm}) and logistic loss (\ref{log_loss}).
+In fact, (\ref{lr_posteriori_log}) is an instantiation of the regularization risk minimization strategy described in (\ref{rl}) with $L_2$-norm regularization (\ref{l2_norm}) and logistic loss (\ref{log_loss}).
 
 Many optimization techniques have been proposed \citep{Minka03}, for example, 
 the {itrative scaling} method \citep{Darroch72,Pietra97inducing,Berger97,Goodman02Sequential,Jin03a},
