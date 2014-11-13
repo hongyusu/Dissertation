@@ -1908,18 +1908,14 @@ The empirical evaluation on the network response prediction problem within the c
 The study demonstrates that accurate prediction can be achieved by structured output learning when the output graph can be obtained and utilized during learning.
 
 Meanwhile, we realize that the current structured output learning approach relies on an output graph connecting multiple output variables in order to exploit the label correlations.
-The applicability of the structured output learning is limited due to the fact that the output graph is assume to be known as \textit{a-priori}.
+Thus, the applicability of the structured output learning is limited due to the fact that the output graph needs to be known as \textit{a-priori}.
 The second outcome of the thesis is that we have proposed several algorithms for structured output learning which are no longer constrained to the availability of the output graph.
-Analog but with significant differences to the previously established ensemble methods, the proposed algorithms aim to combines a set of structured output learners.
-Each base learner is built on a random output graph.
-In particular, \mve\ combines the predictions from the based learners by majority voting, while \amm\ and \mam\ also perform inference before or after combining the base learners.
-In addition, \rta\ is derived from theoretical study.
-The model performs max-margin learning on a random sample of spanning trees.
-The joint learning and inference in \rta\ ensures that the base learners built from a set of random spanning trees are optimized simultaneously towards the same global objective.
-\rta\ also lays the foundation of performing inference on unknown graph structure to achieve fast optimization and accurate prediction with attainable computational efforts.
-
-Besides the proposed structured output learning models, the thesis contains the theoretical studies which not only explain the improvement of the prediction performance obtained by the proposed algorithms but also provide the generalization error analysis.
-
+Analog but with significant differences to the previously established ensemble methods, the proposed algorithms aim to combines a set of structured output learners which are built on a collection of random output graphs.
+In particular, \mve\ applies majority vote to directly combine the predictions from the base learners, while \amm\ and \mam\ perform additional inference on the output graphs before or after combining the base learners.
+Meanwhile, we have developed \rta\ based on the theoretical study.
+The proposed model performs max-margin learning on a random sample of spanning trees.
+The joint learning and inference in \rta\ ensures that the base learners, which are built from a set of random spanning trees, are optimized simultaneously towards the same global objective.
+\rta\ also lays the foundation of performing graph inference on unknown graph structure in which fast optimization and accurate prediction can be guaranteed with attainable computational efforts.
 
 %------------------------------------------------
 %	section
