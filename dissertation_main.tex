@@ -654,7 +654,7 @@ representing training data with a small set of landmark points \citep{Pavlov00to
 greedy method for basis selection \citep{Keerthi06building}, 
 online \svm\ solver \citep{Bordes05fast}, 
 approximating the objective function of \svm\ \citep{Zhang12scaling, Le13fast}, 
-approximating kernel matrix with a low-rank matrix \citep{Smola00sparse,Fine02efficient,Drineas05on,Si14memory}.
+and approximating kernel matrix with a low-rank matrix \citep{Smola00sparse,Fine02efficient,Drineas05on,Si14memory}.
 
 
 
@@ -695,14 +695,18 @@ There are many other active lines of research on \svm\ optimization that aim to 
 
 Ensemble methods are general classification techniques in machine learning.
 The methods train several base classifiers and combine them in order to achiever more accurate prediction.
-Most importantly, there is no requirement for the base classifiers to be accurate as long as they perform better than random guessing.
-There are several variants of ensemble methods, to name but a few, bagging \citep{Breiman96bagging}, boosting \citep{Freund97a,Schapire99improved}, stacking \citep{Smyth99linearly}, Bayesian averaging \citep{Freund04generalization}.
-Ensemble methods have improved the classification performance when compared to their base learner counterpart, some of them are also supported with the theoretical analysis that guarantees the performance \citep{Schapire97boosting,Koltchinskii00empirical,Cortes14semble,Cortes14deep}.
-This section will be devoted to bagging and boosting since both methods are extensively studied and are most relevant to this thesis.
+Most importantly, there is no requirement for base classifiers to be accurate as long as they perform better than random guessing.
+There are several variants for ensemble methods, to name but a few, 
+bagging \citep{Breiman96bagging}, 
+boosting \citep{Freund97a,Schapire99improved}, 
+stacking \citep{Smyth99linearly}, 
+and Bayesian averaging \citep{Freund04generalization}.
+Ensemble methods have improved the classification performance when compared to their base learner counterpart, some of them are also supported with the theoretical analysis which guarantees the performance \citep{Schapire97boosting,Koltchinskii00empirical,Cortes14semble,Cortes14deep}.
+This section will be devoted to bagging and boosting as both methods are extensively studied and are quite relevant to this thesis.
 
 Ensemble methods and their theories are primarily developed for single-label classification.
-The extensions for the multi-label classification problem will be briefly covered in Section~\ref{sc_emfmlc}.
-Moreover, we will develop several new learning algorithms in the latter part of the thesis, which are related to the ensemble methods presented in this section but with significant differences.
+The extensions for multi-label classification will be briefly presented in Section~\ref{sc_emfmlc}.
+Moreover, we will present several new learning algorithms in the latter part of the thesis, which are related to the ensemble methods presented in this section but with significant differences.
 
 
 
