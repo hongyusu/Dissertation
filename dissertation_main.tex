@@ -497,21 +497,21 @@ Later on, optimization algorithms that are based on dual form have been develope
 % some history
 Support Vector Machines (\svm) is probably the most widely used single-label classification algorithm in machine learning.
 Its extensions for multi-label classification will be described in the latter part of the thesis (e.g., \svmstruct\ in Section~\ref{sc_svmstruct}).
-We will start this section by introducing \textit{Maximum-Margin Principle}, which is also the basis of many structured output learning models (e.g., \mmmn\ in Section~\ref{sc_mmmn}, \spin\ in Section~\ref{sc_su14a}, \rta\ in Section~\ref{sc_su14c}).
-After that, we will discuss the formalism of \svm, the primal-dual optimization strategy, and the kernel methods which allow \svm\ to deal with high dimensionality of the input feature space.
-In the end we will briefly cover the optimization strategies developed for \svm.
+In this section, we first introduce \textit{Maximum-Margin Principle} which is also the basis of many structured output learning models, for example,  \mmmn\ in Section~\ref{sc_mmmn}, \spin\ in Section~\ref{sc_su14a}, and \rta\ in Section~\ref{sc_su14c}.
+After that, we will discuss the formalism of \svm, the primal-dual optimization strategy, and kernel methods which allow \svm\ to deal with the high dimensionality of the input feature space.
+In the end we will briefly present the optimization strategies developed for \svm.
 
-The framework of \svm\ was first introduced by \citep{Cortes95support}.
-The theory and the algorithm details are also presented in the book chapters \citep{Scholkopf02learning,taylor04,Bishop07}.
+The framework of \svm\ was originally introduced by \citep{Cortes95support}.
+The theory and the algorithm details of \svm\ are also presented in book chapters \citep{Scholkopf02learning,taylor04,Bishop07}.
 % hard margin svm
-We begin our discussion by considering a very simple case where we assume the data are linearly separable.
-There exists a hyperplane in the feature space which separates the training data into two classes.
-Additionally, we assume the {separating hyperplane} has a simple linear form described in (\ref{linearclassifier}) as
+We begin our discussion by considering a very simple case where we assume the training data are linearly separable.
+There exists a \textit{hyperplane} in the feature space which separates the training data into two classes.
+Additionally, we assume the {separating hyperplane} has a simple linear form (\ref{linearclassifier}) as
 \begin{align*}
 	f(\vx)=\ip{\vw}{\varphib(\vx)} + b = 0.
 \end{align*}
-As a result, we have $y_i=-1$ if $f(\vx_i)<0$ and $y_i=+1$ otherwise.
-Given that $\vw$ achieves correct separation on the training data, we can decide the label of a test example $\vx_{ts}$ by the decision rule $y_{ts}=\sign(f(\vx_{ts}))$.
+As a result, we predict $y_i=+1$ if $f(\vx_i)\ge0$ and $y_i=-1$ otherwise.
+Given that a feature weight parameter $\vw$ achieves a correct separation on the training data, we can decide the label of a unseen test example $\vx_{ts}$ by the decision rule $y_{ts}=\sign(f(\vx_{ts}))$.
 
 There can be infinite number of separating hyperplanes that solves the separation problem on the training data which is also suggested by empirical risk minimization strategy in Section~\ref{sc_erm}. 
 We wish to find the one that also generalizes well on the test data.
