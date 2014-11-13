@@ -219,12 +219,11 @@ The goal is to provide background information that is necessary to understand th
 %
 \subsection{Preliminaries}\label{sc_slc_pn}
 
-In this chapter we focus on the standard supervised learning problem also known as \textit{binary classification}.
-We explicitly assume the output space $\Ycal=\{-1,+1\}$ (instead of $\Ycal=\{0,+1\}$).
-Additionally, we assume a feature map $\varphib:\vXcal\rightarrow\vFcal$, which embeds the input into some high dimensional feature space $\vFcal=\RR^d$.
-In particular, $\varphib(\vx)$ is a real value vector of $d$ dimensions.
+In this section, we focus on the standard supervised learning problem also known as \textit{binary classification}, by explicitly assuming the output space $\Ycal=\{-1,+1\}$.
+Additionally, we assume a feature map $\varphib:\vXcal\rightarrow\vFcal$, which embeds an input into some high dimensional feature space $\vFcal=\RR^d$.
+In particular, $\varphib(\vx)$ is a vector of real values in $d$ dimensions.
 %Given a training set of $m$ training examples $\Scal=\{(\vx_1,y_1),\cdots,(\vx_m,y_m)\}$, the goal is to learn a mapping function $f\in\Hcal:\vXcal\rightarrow\Ycal$ from a {hypothesis class} $\Hcal$ that maps an input $\vx\in\vXcal$ to an output $y\in\Ycal$. 
-We consider the hypothesis class to be a set of \textit{linear classifiers} that are parameterized by the weight vector $\vw$ and the bias term $b$ defined as
+We consider the hypothesis class to be a set of \textit{linear classifiers} that is parameterized by a weight vector $\vw$ and a bias term $b$ defined as
 \begin{align}
 	f(\vx;\vw,b) = \ip{\vw}{\varphib(\vx)} + b, \label{linearclassifier}
 \end{align}
@@ -232,11 +231,12 @@ where $\ip{\cdot\,}{\cdot\,}$ denotes the inner product of two vectors
 \begin{align*}
 	\ip{\vw}{\varphib(\vx)} = \sum_{i=1}^{d}\vw[i]\,\varphib(\vx)[i].
 \end{align*}
-For any $1\le\rho\in\RR$ we defined the {$L_{\rho}$-norm of vector $\vw$ as
+For any $1\le\rho\in\RR$, the {$L_{\rho}$-norm of a vector $\vw$ is defined as
 \begin{align*}
 	\norm{\vw}_{\rho} = \left(\sum_{i=1}^{d}|\vw[i]|^{\rho}\right)^{\frac{1}{\rho}}.
 \end{align*}
-For the convenience of the presentation, we use $||\vw||$ to denote the $L_2$-norm of vector $\vw$ in the following part of the thesis.
+For the convenience of presentation, we will explicitly use $||\vw||$ to refer to the $L_2$-norm of $\vw$ throughout the thesis.
+
 
 
 %
@@ -396,13 +396,13 @@ which is more efficient to compute and is extremely similar to (\ref{voted_perce
 
 Logistic Regression is a classification model rather than a regression model \citep{Bishop07}.
 The formalism nicely transits from risk minimization (Section~\ref{sc_rl}) to regularized risk minimization (Section~\ref{sc_rl}).
-The model has been extended to other classification algorithms presented in the latter part of the thesis (e.g., \iblr\ in Section~\ref{sc_iblr}, \corrlog\ in Section~\ref{sc_corrlog}).
-Besides, the idea of Logistic Regression, the odd-ratio type learning in particular, is also the building block of, e.g., \mmmn\ in Section~\ref{sc_mmmn} and many algorithms developed in this thesis.
+Logistic Regression has been extended to many other classification algorithms presented in the latter part of the thesis, for example, \iblr\ in Section~\ref{sc_iblr}, and \corrlog\ in Section~\ref{sc_corrlog}).
+The central idea of Logistic Regression, the odd-ratio type learning in particular, is also the building block of, for example, \mmmn\ in Section~\ref{sc_mmmn} and many other algorithms developed in this thesis.
 
 Logistic Regression models the conditional probability $P(y=+1|\vx)$ for a binary output variable $y\in\Ycal$.
 %Without loss of generality, in the rest part of this section we use $P(\vx)$ to denote above conditional probability of $P(y|\vx)$ when fixing $y=1$.
 To model the probability, we do not restrict to any particular form, as any unknown parameters can be estimated by \textit{Maximum Likelihood Estimation} (\mle).
-However, we are mostly interested in the simple linear model as described in (\ref{linearclassifier}).
+However, we are most interested in a simple linear model as described in (\ref{linearclassifier}).
 % detailed model, decision boundary
 To apply the linear model,
 \iffalse
@@ -415,7 +415,7 @@ we compute the logistic transformation of the original conditional probability b
 \begin{align*}
 	\log\frac{P(y=+1|\vx)}{P(y=-1|\vx)} = \ip{\vw}{\varphib(\vx)} + b.
 \end{align*}
-Solving for $P(y=+1|\vx)$ results in 
+Solving for $P(y=+1|\vx)$, we obain
 \begin{align}
 	P(y=+1|\vx;\vw,b) = \frac{1}{1+\exponential{-\ip{\vw}{\varphib(\vx)}-b}}. \label{lr_1}
 \end{align}
@@ -423,16 +423,16 @@ We can also compute
 \begin{align}
 	P(y=-1|\vx;\vw,b)=1-P(y=+1|\vx;\vw,b)=\frac{1}{1+\exponential{\ip{\vw}{\varphib(\vx)}+b}}. \label{lr_2}
 \end{align}
-By putting (\ref{lr_1}) and (\ref{lr_2}) together, we define Logistic Regression as
-\begin{definition}{Logistic Regression.} \label{logistic_regression}
+Putting (\ref{lr_1}) and (\ref{lr_2}) together, we define Logistic Regression as
+\begin{definition}{Logistic Regression (\lr).} \label{logistic_regression}
 	\begin{align*}
 		P(y|\vx;\vw,b) = \frac{1}{1+\exponential{-y(\ip{\vw}{\varphib(\vx)}-b)}}.
 	\end{align*}
 \end{definition}
 \noindent
-We predict $y=+1$ when $P(y=+1|\vx;\vw,b)\ge0.5$, and $y=-1$ when $P(y=+1|\vx;\vw,b)<0.5$.
+We predict $y=+1$ when $P(y=+1|\vx;\vw,b)\ge0.5$, and $y=-1$ otherwise.
 The decision rule is such that we predict $y=+1$ when $\ip{\vw}{\varphib(\vx)}+b\ge0$, and $y=-1$ otherwise.
-Besides the decision boundary, Logistic Regression can output the class probability as the the ``distance'' of the data point to the decision boundary.
+Besides the decision boundary, Logistic Regression can output the class probability of a data point as the the ``distance'' of the data point to the decision boundary.
 It is the probabilistic output that makes Logistic Regression no more than a classifier.
 
 % optimization
@@ -448,12 +448,12 @@ To apply \mle, it is easier if, instead of maximizing the likelihood, we maximiz
 \end{align}
 
 % logistic regression of other type
-\mle\ can generate a model that fits the training data.
-However, there is no guarantee that the model generalize well on the test data.
-To achieve better generalization power, we apply the regularization technique as discussed in Section~\ref{sc_rl}.
-Many regularization methods for Logistic Regression have been proposed \citep{Chen99,Chen00,Goodman03} among which adding Gaussian prior on the weight parameter $\vw$ is one of the standard options.
+\mle\ can generate a \lr\ model that fits the training data.
+However, there is no guarantee that the model also generalize well on unseen test data.
+To achieve better generalization power, we apply the regularization technique presented in Section~\ref{sc_rl}.
+Many regularization methods for \lr\ have been developed \citep{Chen99,Chen00,Goodman03} among which adding Gaussian prior on weight parameter $\vw$ is a standard option.
 In practice, we assume $\vw$ is generated according to a zero-mean spherical Gaussian with variance $\sigma^2$.
-Thus, the \mle\ problem (\ref{lr_likelihood_sum}) is transformed into \textit{Maximum A-Posteriori} (\map) problem of the following form
+Thus, the \mle\ problem (\ref{lr_likelihood_sum}) is transformed into the \textit{Maximum A-Posteriori} (\map) problem of the following form
 \begin{align}
 	P(\vw,b|D;\sigma^2) = P(\vw|\sigma^2)\prod_{i=1}^mP(y_i|\varphib(\vx_i))=\exponential{-\frac{\norm{\vw}^2}{\sigma^2}}\prod_{i=1}^{m}{\frac{1}{1+\exponential{-y_i(\ip{\varphib(\vx_i)}{\vw}+b)}}}. \label{lr_posteriori}
 \end{align}
@@ -461,16 +461,14 @@ Instead of maximizing the posteriori (\ref{lr_posteriori}), it is easier to maxi
 \begin{align}
 	\log P(\vw,b|D;\sigma^2) = -{\frac{\norm{\vw}^2}{\sigma^2}} - \sum_{i=1}^{m}\log{(1+\exponential{-y_i(\ip{\varphib(\vx_i)}{\vw}+b)})}. \label{lr_posteriori_log}
 \end{align}
-In fact, (\ref{lr_posteriori_log}) is an instantiation of the regularization risk minimization described in (\ref{rl}) with $L_2$-norm regularization (\ref{l2_norm}) and logistic loss function (\ref{log_loss}).
+In fact, (\ref{lr_posteriori_log}) is an instantiation of the regularization risk minimization strategy described in (\ref{rl}) with the $L_2$-norm regularization (\ref{l2_norm}) and logistic loss (\ref{log_loss}).
 
 Many optimization techniques have been proposed \citep{Minka03}, for example, 
 the {itrative scaling} method \citep{Darroch72,Pietra97inducing,Berger97,Goodman02Sequential,Jin03a},
 the quasi-Newton method \citep{Minka03},
 the truncated Newton method \citep{Komarek05making,Lin2008trust},
-the coordinate descent method \citep{Huang09iterative}.
-There also exists a line of research that aims to optimize Logistic Regression from its dual representation.
-The first method is developed by \citet{Jaakkola99probabilistic}.
-Later on, \citet{Keerthi05a} proposed the iterative optimization method and \citet{Yu11dual} developed the dual coordinate descent method.
+and the coordinate descent method \citep{Huang09iterative}.
+There also exists a line of research that aims to optimize \lr\ from the dual representation \citep{Jaakkola99probabilistic,Keerthi05a,Yu11dual}.
 
 
 
