@@ -1927,13 +1927,13 @@ In addition to the practical learning algorithms, the thesis also contributes to
 \section{Future Work}
 
 The work presented in the thesis can be extended along two main directions.
-First, the algorithms developed in this thesis can be applied to many other multilabel classification problems in which the output does not need to be observed but is believed to play an important role during learning.
+First, the algorithms developed in this thesis can be applied to many other multilabel classification problems in which the output graph does not need to be observed but is believed to play an important role during learning.
 Secondly, the development of the learning algorithms and the theoretical studies are readily to be continued.
-As the first direction is straight-forward and application oriented, we will focus on the second one and explain it in detail.
+As the first direction is straight-forward and application oriented, we will focus on the second direction.
 
-To serve as a starting point, the inference algorithm for \spin\ can be further developed, which not only needs to be scaled to large social network datasets but also should have approximation guarantee.
+To serve as a starting point, the inference algorithm for \spin\ can be further developed, which not only needs to be scalable to large social network data but also should have approximation guarantee.
 The research on structured output learning with unknown output graph should also be continued.
-In particular, we plan to investigate the possibility of learning the feature weight parameters defined on random spanning trees through $L_1$ combination.
+In particular, we plan to investigate the possibility of learning the feature weight parameters defined on random spanning trees through $L_1$ norm combination.
 Learning with $L_1$-norm regularized parameter combination has been previously studied in multiple kernel learning \citep{Rakotomamonjy08simplemkl}, which can be formulated into an equivalent form of learning a weighted $L_2$-norm combination.
 The additional weight can be seen as the fitness of the spanning tree to the current training data, which can be used to select the most relevant tree structures.
 We need to study the corresponding optimization problem as the current alternative optimization algorithm proposed by \citet{Rakotomamonjy08simplemkl} is not efficient.
