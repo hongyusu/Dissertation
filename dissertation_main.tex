@@ -209,9 +209,9 @@ Many other regularization techniques have been widely studied, for example, $L_{
 %------------------------------------------------
 \section{Single-Label Classification}\label{sc_slc}
 
-In this section, the author will introduce the basic classification problem known as \textit{single-label classification} and explain two prominent algorithms in this area: Logistic Regression and Support Vector Machines.
-The optimization techniques and the latest advances of these algorithms will also be briefly discussed.
-The goal is to provide the background that is necessary to understand the algorithms presented in the later part of this thesis. 
+In this section, the author will introduce the basic classification problem known as {single-label classification}, and explain two prominent algorithms in this area, namely Logistic Regression and Support Vector Machines.
+Optimization techniques and the latest advances of these two algorithms will also be briefly discussed.
+The goal is to provide background information that is necessary to understand the algorithms presented in the latter part of this thesis. 
 
 
 
@@ -396,7 +396,7 @@ which is more efficient to compute and is extremely similar to (\ref{voted_perce
 
 Logistic Regression is a classification model rather than a regression model \citep{Bishop07}.
 The formalism nicely transits from risk minimization (Section~\ref{sc_rl}) to regularized risk minimization (Section~\ref{sc_rl}).
-The model has been extended to other classification algorithms presented in the later part of the thesis (e.g., \iblr\ in Section~\ref{sc_iblr}, \corrlog\ in Section~\ref{sc_corrlog}).
+The model has been extended to other classification algorithms presented in the latter part of the thesis (e.g., \iblr\ in Section~\ref{sc_iblr}, \corrlog\ in Section~\ref{sc_corrlog}).
 Besides, the idea of Logistic Regression, the odd-ratio type learning in particular, is also the building block of, e.g., \mmmn\ in Section~\ref{sc_mmmn} and many algorithms developed in this thesis.
 
 Logistic Regression models the conditional probability $P(y=+1|\vx)$ for a binary output variable $y\in\Ycal$.
@@ -498,7 +498,7 @@ Later on, optimization algorithms that are based on dual form have been develope
 
 % some history
 Support Vector Machines (\svm) is probably the most widely used single-label classification algorithm in machine learning.
-Its extensions for multi-label classification will be described in the later part of the thesis (e.g., \svmstruct\ in Section~\ref{sc_svmstruct}).
+Its extensions for multi-label classification will be described in the latter part of the thesis (e.g., \svmstruct\ in Section~\ref{sc_svmstruct}).
 We will start this section by introducing \textit{Maximum-Margin Principle}, which is also the basis of many structured output learning models (e.g., \mmmn\ in Section~\ref{sc_mmmn}, \spin\ in Section~\ref{sc_su14a}, \rta\ in Section~\ref{sc_su14c}).
 After that, we will discuss the formalism of \svm, the primal-dual optimization strategy, and the kernel methods which allow \svm\ to deal with high dimensionality of the input feature space.
 In the end we will briefly cover the optimization strategies developed for \svm.
@@ -697,7 +697,7 @@ This section will be devoted to bagging and boosting since both methods are exte
 
 Ensemble methods and their theories are primarily developed for single-label classification.
 The extensions for the multi-label classification problem will be briefly covered in Section~\ref{sc_emfmlc}.
-Moreover, we will develop several new learning algorithms in the later part of the thesis, which are related to the ensemble methods presented in this section but with significant differences.
+Moreover, we will develop several new learning algorithms in the latter part of the thesis, which are related to the ensemble methods presented in this section but with significant differences.
 
 
 
@@ -838,7 +838,7 @@ In general, there are two lines of research for multi-label classification, name
 In flat multi-label classification, the multiple labels are treated essentially as a ``flat'' vector of labels.
 Structured output prediction, on the other hand, models the multiple labels via a graph structure that connects labels.
 This chapter will be devoted to flat multi-label classification in which several well established algorithm techniques will be presented.
-The methods for structured output prediction will be covered in the later part of the thesis.
+The methods for structured output prediction will be covered in the latter part of the thesis.
 
 Consider the infeasibility of listing all algorithms for flat multi-label classification, it is easier if we are able to categorize the algorithms into classes.
 In this chapter, we adopt the simple categorization presented in \citep{Tsoumakas07multi,Tsoumakas10mining} which gives us two major algorithm categories, namely problem transformation and algorithm adaptation.
@@ -1651,7 +1651,7 @@ The analysis extends the theory on single-label ensemble developed by \citet{Bro
 In general, \citepub[Theory 1]{su14b} states that the reconstructive error from \mam\ ensemble is guaranteed to be less than or equal to the average reconstruction error from the base classifiers.
 The improvement can be decomposed into two terms, namely \textit{diversity} and \textit{coherence}.
 The former measures the variability of individual classifiers learned from different perspectives which shares the same argument as the analysis of single-label ensemble \citep{Brown10good}.
-The later measures the correlation of the microlabel predictions in which higher correlation leads to better improvement.
+The latter measures the correlation of the microlabel predictions in which higher correlation leads to better improvement.
 
 
 
