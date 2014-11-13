@@ -530,9 +530,9 @@ Given a collection of training example $S$, we also define the margin with respe
 	\gamma = \underset{i\in\{1,\cdots,m\}}{\minimize}\gamma_i.
 \end{align*}
 
-Our goal is to find the separating hyperplane such that it maximizes the margin with respect to all training examples while separating the training examples into two classes.
-This corresponds to finding a ``big gap'' between two classes of examples in the feature space.
-The maximum-margin solution is given in \citep{Bishop07} as
+Based on Maximum-Margin Principle, the goal of learning is to find the separating hyperplane such that it maximizes the margin with respect to all training examples while separating the training examples into two classes.
+This corresponds to finding a ``big gap'' between the examples of two classes in the feature space.
+The corresponding optimization problem is given in \citep{Bishop07} as
 \begin{align*}
 	\underset{\vw,b,\gamma}{\maximize} &\quad \gamma\\
 	\st &\quad y_i(\ip{\vw}{\varphib(\vx_i)}+b) \ge \gamma, \, \norm{\vw}=1, \, \forall i\in\{1,\cdots,m\}.
@@ -554,22 +554,23 @@ This is equivalent to
 	\end{align*}
 \end{definition}
 \noindent
-where the goal is to find the weight vector of minimum norm which corresponds to maximize the margin between two classes of examples.
+where the goal is to find a weight vector of minimum norm which corresponds to maximize the margin between the examples of two classes.
 The constraints state that the training data should be correctly separated.
 
 % soft margin svm
 We do not use Definition~\ref{hardsvmprimal} in practice for two reasons. 
-First, many real world data are not linearly separable, where the solution to the optimization problem in Definition~\ref{hardsvmprimal} does not always exist.
-Secondly, the data usually come with noises and errors and we do not want the resulting classifier to over-fit the training data.
+First, many real world data is not linearly separable, where the solution to the optimization problem in Definition~\ref{hardsvmprimal} does not always exist.
+Secondly, the data usually comes with noises and errors.
+We do not want the resulting classifier to over-fit the training data.
 Therefore, we relax the constraints by introducing a \textit{margin slack} parameter $\xi_i$ for each training example $x_i$ and rewrite the constraints as 
 \begin{align}
 	y_i(\ip{\vw}{\varphib(\vx_i)} + b) \ge 1-\xi_i, \xi_i\ge 0, \forall i\in\{1,\cdots,m\}. \label{softsvmconstraint}
 \end{align}
-$\xi_i$ will allow example to have margin less than $1$.
-In particular, with $\xi_i=0$ the data point $x_i$ is correctly classified, and lies either on the margin or on the correct side.
-With $0<\xi_i\le 1$ the data point is correctly classified and lies between the margin and the separating hyperplane.
-With $\xi_i>1$ the data point is misclassified locating on the other side of the separating hyperplane.
-With the margin slack parameters, the new goal is to maximize the margin while penalize the data points which either lie on the wrong side of the hyperplane or have margin less than one.
+$\xi_i$ will allow the data point to have a margin less than $1$.
+In particular, with $\xi_i=0$, the data point $x_i$ is correctly classified, and lies either on the margin or on the correct side.
+With $0<\xi_i\le 1$, the data point is correctly classified and lies between the margin and the separating hyperplane.
+With $\xi_i>1$, the data point is misclassified locating on the other side of the separating hyperplane.
+Now the new goal is to maximize the margin while penalize the data points which either lie on the wrong side of the hyperplane or have a margin less than one.
 This can be defined by
 \begin{definition}{Primal Soft-Margin \svm\ Optimization Problem.}\label{softsvmprimal}
 	\begin{align*}
@@ -578,10 +579,10 @@ This can be defined by
 	\end{align*}
 \end{definition}
 \noindent
-Definition~\ref{softsvmprimal} is another instantiation of the regularized risk minimization (\ref{rl}) with $L_2$-norm regularization (\ref{l2_norm}) and hinge loss (\ref{hinge_loss}).
+Definition~\ref{softsvmprimal} is an instantiation of the regularized risk minimization strategy (\ref{rl}) with $L_2$-norm regularization (\ref{l2_norm}) and hinge loss (\ref{hinge_loss}).
 % dual, kernel svm
-The above optimization problem is usually transformed into dual form by introducing for each constraint a \textit{Lagrangian multiplier} (dual variable) $\alpha$.
-We obtain the following dual optimization problem
+The optimization problem is usually transformed into a dual form by introducing for each constraint a \textit{Lagrangian multiplier} (dual variable) $\alpha$.
+We defined the dual optimization problem as
 \begin{definition}{Dual Soft-Margin \svm\ Optimization Problem.}\label{softsvmdual}
 	\begin{align*}
 		\underset{\valpha}{\maximize} & \quad\sum_{i=1}^{m}\alpha_i -\frac{1}{2}\sum_{i=1}^{m}\sum_{i=1}^{m}\alpha_i\alpha_jy_iy_j\ip{\varphib(\vx_i)}{\varphib(\vx_j)}\\
@@ -589,22 +590,21 @@ We obtain the following dual optimization problem
 	\end{align*}
 \end{definition}
 \noindent
-It is not difficult to verify that according to Karush-Kuhn Tucher (\kkt) conditions only examples with $\xi_i=0$ and satisfying the equality constraints (\ref{softsvmconstraint}) will be ``active'' and have dual variable $\alpha_i>0$.
-These examples lie on the margin and have $\gamma_i=1$.
-They are called \textit{support vectors} in \svm\ optimization.
-In fact the number of the support vectors is usually smaller than the size of the training data.
-As the weight vector can be expressed as the linear combination of the training examples \citep{taylor04}
+It is not difficult to verify that according to Karush-Kuhn Tucher (\kkt) conditions only examples with $\xi_i=0$ and satisfying the equality constraints (\ref{softsvmconstraint}) will be ``active'', have a dual variable $\alpha_i>0$, and lie on the margin ($\gamma_i=1$).
+They are called \textit{support vectors} during the optimization of \svm.
+In fact the number of support vectors is usually smaller than the size of the training data.
+As the weight vector can be expressed as a linear combination of training examples \citep{taylor04}
 \begin{align*}
 	\vw = \sum_{i=1}^{m}\alpha_iy_i\varphib(\vx_i),
 \end{align*}
 the evaluation can be done efficiently by maintaining a small set of non-zero $\alpha$s.
 
-In order to solve the optimization problem in Definition~\ref{softsvmdual}, it is not necessary to work with the explicit feature space of $\varphib(\vx)$ as only the result of the inner product $\ip{\varphib(\vx_i)}{\varphib(\vx_j)}$ is required.
-This suggests that the data can be radically represented through pairwise similarities.
-In particular, we defined a function $K:\Xcal\times\Xcal\rightarrow\RR$ such that the training data $\Scal$ is represented through a $m\times m$ matrix of pairwise similarities.
+In order to solve the optimization problem in Definition~\ref{softsvmdual}, it is not necessary to work in the feature space of $\varphib(\vx)$ as only the result of the inner product $\ip{\varphib(\vx_i)}{\varphib(\vx_j)}$ is required.
+This suggests that training data can be radically represented through pairwise similarities.
+In particular, we defined a function $K:\Xcal\times\Xcal\rightarrow\RR$ such that training data $\Scal$ is represented through a $m\times m$ matrix of pairwise similarities.
 % kernel function
 \begin{definition}{Kernel Function.}
- 	A function $K:\vXcal\times\vXcal\rightarrow\RR$ is called kernel if it is symmetric and positive semidefinite. That is, 
+ 	A function $K:\vXcal\times\vXcal\rightarrow\RR$ is called a \textit{kernel} if it is symmetric and positive semidefinite. That is, 
 \begin{align*}
 	K(\vx_i,\vx_j) = K(\vx_j,\vx_i)\quad \text{and}\, \sum_{\vx_i,\vx_j\in\Xcal}c_ic_jK(\vx_i,\vx_i)\ge0
 \end{align*}
@@ -614,14 +614,14 @@ hold for any $c_i\in\RR$ and nonempty set $\Xcal$.
 \textit{Mercer's Theorem} \citep{taylor04} has shown that every positive semidefinite symmetric function is a kernel.
 % rkhs
 \begin{definition}{Reproduced Kernel Hilbert Space.} \label{rkhs}
-	For any kernel function $K$ defined on space $\Xcal$, there always exists a Reproduced Kernel Hilbert Space (RKHS) $\vFcal$ and a mapping function $\varphib:\Xcal\rightarrow\vFcal$ such that $K(\vx_i,\vx_j)=\ip{\varphib(\vx_i)}{\varphib(\vy_i)}$ holds for any $\vx\in\Xcal$.
+	For any kernel function $K$ defined on a space $\Xcal$, there always exists a \textit{Reproduced Kernel Hilbert Space} (RKHS) $\vFcal$ and a mapping function $\varphib:\Xcal\rightarrow\vFcal$ such that $K(\vx_i,\vx_j)=\ip{\varphib(\vx_i)}{\varphib(\vy_i)}$ holds for any $\vx\in\Xcal$.
 \end{definition}
 \noindent
 Definition~\ref{rkhs} shows that any kernel function can be represented as an inner product in some feature space $\vFcal$.
-Kernel function enables us to operate in high dimensional feature space $\vFcal$ without ever computing the exact coordinate or evaluating the inner product explicitly in that space.
-Instead, the kernel function can be computed based on the inner product in the original space $\Xcal$.
+Kernel enables us to work in a high dimensional feature space $\vFcal$ without ever computing the exact coordinate or evaluating the inner product explicitly in that space.
+Instead, kernel can be computed based on the inner product in the original space $\Xcal$.
 
-Kernel functions that heavily used in practice include \textit{linear kernel}
+Kernel functions that are heavily used in practice include \textit{linear kernel}
 \begin{align*}
 	K(\vx_i,\vx_j) = \ip{\vx_i}{\vx_j},
 \end{align*}
@@ -629,25 +629,32 @@ Kernel functions that heavily used in practice include \textit{linear kernel}
 \begin{align*}
 	K(\vx_i,\vx_j) = (\ip{\vx_i}{\vx_j} + b)^d,
 \end{align*}
-where $b$ is the bias term and $d$ is the degree of polynomial, and \textit{Gaussian kernel} (\rbf)
+where $b$ is a bias term and $d$ is the degree of polynomial, and \textit{Gaussian kernel} (\rbf)
 \begin{align*}
 	K(\vx_i,\vx_j) = \exp{\left(\frac{\norm{{\vx_i}-{\vx_j}}^2}{2\sigma^2}\right)},
 \end{align*}
 where $\sigma$ is the Gaussian width parameter.
 \begin{definition}{Kernel Matrix.}
-	Given a kernel function $K$ and a nonempty set $\Scal$, the $m\times m$ matrix $\hat{K}=(K(\vx_i,\vx_j))_{i,j}$ is called Kernel matrix (Gram matrix) of kernel function $K$ with respect to $\Scal$.
+	Given a kernel $K$ and a nonempty set $\Scal$, an $m\times m$ matrix $\hat{K}=(K(\vx_i,\vx_j))_{i,j}$ is called \textit{Kernel matrix} (Gram matrix) of kernel $K$ with respect to $\Scal$.
 \end{definition}
 \noindent
 Kernel matrix is usually normalized by
 \begin{align*}
 	\hat{K}(\vx_i,\vx_j) = \frac{\hat{K}(\vx_i,\vx_j)}{\sqrt{\hat{K}(\vx_i,\vx_i)\hat{K}(\vx_j,\vx_j)}}
 \end{align*}
-to make sure the elements of the kernel matrix lie on the unit hypersphere.
+to make sure that all elements in kernel matrix lie on a unit hypersphere.
 
-The optimization techniques for solving \svm\ optimization problem have been intensively studied.
-For example, ``chunking'' methods \citep{Vapnik82estimation,Perezcruz04double}, decomposition methods \citep{Osuna97an,Joachims98making}, {Sequential Minimum Optimization} (\smo) \citep{Platt98sequential,Platt99fast}, ``digesting'' methods \citep{Decoste02support}.
-Recent research aims to scale \svm\ learning on very large datasets.
-For example, representing the training data with a small set of landmark points \citep{Pavlov00towards,Boley04training,Yu05making,Zhang08improved}, greedy method for basis selection \citep{Keerthi06building}, online \svm\ solver \citep{Bordes05fast}, approximating kernel \svm\ objective function \citep{Zhang12scaling, Le13fast}, approximating kernel matrix with low-rank matrix \citep{Smola00sparse,Fine02efficient,Drineas05on,Si14memory}.
+The algorithms for solving the optimization problem of \svm\ have been intensively studied, for example, 
+the ``chunking'' method \citep{Vapnik82estimation,Perezcruz04double}, 
+the decomposition method \citep{Osuna97an,Joachims98making}, 
+{Sequential Minimum Optimization} (\smo) \citep{Platt98sequential,Platt99fast}, 
+and the ``digesting'' method \citep{Decoste02support}.
+There are some recent studies that aim to scale \svm\ learning on very large datasets, for example, 
+representing training data with a small set of landmark points \citep{Pavlov00towards,Boley04training,Yu05making,Zhang08improved}, 
+greedy method for basis selection \citep{Keerthi06building}, 
+online \svm\ solver \citep{Bordes05fast}, 
+approximating the objective function of \svm\ \citep{Zhang12scaling, Le13fast}, 
+approximating kernel matrix with a low-rank matrix \citep{Smola00sparse,Fine02efficient,Drineas05on,Si14memory}.
 
 
 
