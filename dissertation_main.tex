@@ -1244,11 +1244,11 @@ Max-Margin conditional random field (\mmcrf) is a structured output learning met
 It extends \mmmn\ by defining the joint feature map as a tensor product between the input and the output feature map, and by developing an efficient optimization strategy. 
 \mmcrf\ is applied in \citepub{su10} where the task is to reliably predict multiple interdependent molecular activities.
 
-In particular, \mmcrf\ uses exponential family to model the condition probability of a multiple output labels given a input example
+In particular, \mmcrf\ uses the exponential family to model the conditional probability of multiple labels given an input example
 \begin{align*}
 	P(\vy|\vx) \propto \exp(\ip{\vw}{\phib(\vx,\vy)}) = \prod_{e\in E}\exp(\ip{\vw_e}{\phib_e(\vx,\vy_e)}),
 \end{align*}
-where $\phib_e(\vx,\vy_e)=\varphib(\vx)\otimes\Upsilonb_e(\vy_e)$ is the tensor product of the input feature and the output feature of a pair of microlabels with respect to edge $e\in E$ in the output Markov network $G$.
+where $\phib_e(\vx,\vy_e)=\varphib(\vx)\otimes\Upsilonb_e(\vy_e)$ is the tensor product of an input feature and an output feature of a multilabel $\vy$ on an edge $e\in E$ in an output Markov network $G$.
 In order to obtain $\vw$, we need to solve the primal optimization problem that is not dissimilar to (Definition~\ref{def_mmmn}).
 After the feature weight parameter $\vw$ is found, we need to solve the argmax problem to obtain the prediction
 \begin{align}
