@@ -1213,28 +1213,26 @@ To learn the feature weight parameter $\vw$, we need to solve the following prim
 \end{definition}
 \noindent
 where $\xi_i$ is the slack allotted to each example to make sure the solution can always be found, $\vell(\vy_i,\vy)$ is the loss function between a correct multilabel $\vy_i$ and an incorrect multilabel $\vy$, $C$ is the slack parameter that controls the amount of regularization in the model.
-The optimization problem is an instantiation of the regularized risk minimization (\ref{rl}) with the hamming loss and the $L_2$-norm regularization (\ref{l2_norm}).
 
-For each example $\vx_i$, the optimization calls for maximizing the margin between the correct label $\vy_i$ and incorrect labels $\vy$.
+For each example $\vx_i$, the optimization calls for maximizing the margin between the correct label $\vy_i$ and any incorrect labels $\vy$.
 The margin is scaled by the loss function $\vell(\vy_i,{\vy})$ such that the completely incorrect multilabel will incur bigger loss than the nearly correct multilabel.
 The loss scaled margin optimization will push the high-loss pseudo-examples further away from the correct example than the low-loss pseudo-examples.
-Definition~\ref{def_mmmn} is an instantiation of the regularized learning (\ref{rl}) with $L_2$-norm regularization and hamming loss.
-
+Definition~\ref{def_mmmn} is an instantiation of the regularized risk minimization (\ref{rl}) with the hamming loss and the $L_2$-norm regularization (\ref{l2_norm}).
 
 The primal optimization problem of \mmmn\ in Definition~\ref{def_mmmn} is difficult to solve as there are exponential number of constraints, one for each pseudo-example $(\vx_i,\vy)$.
 The corresponding dual form is also difficult due to the exponential number of dual variables \citep{Taskar04max}.
-By exploring the Markov network structure, the original optimization problem (Definition~\ref{def_mmmn}) can be formulated into the factorized dual quadratic programming, as long as the loss function $\vell$ and joint feature map $\phib(\vx,\vy)$ are decomposable over the Markov network.
+By exploring the Markov network structure, the original optimization problem (Definition~\ref{def_mmmn}) can be formulated into a factorized dual quadratic programming, as long as the loss function $\vell$ and the joint feature map $\phib(\vx,\vy)$ are decomposable over the Markov network.
 
-As the number of parameters is quadratic in the number of training examples and the edges in the network, it still cannot fit into the standard QP solver. 
+As the number of parameters is quadratic in the number of training examples and the edges of the Markov network, it still cannot fit into the standard Quadratic Programming (\qp) solver. 
 \citet{Taskar04max} developed a coordinate descent method analogous to Sequential Minimal Optimization (\smo) used for SVM training \citep{Platt98sequential,Platt99fast}.
-Subsequently, other efficient optimization algorithms have been proposed, for example, exponential gradient optimization methods in \citet{bartlett04}, extra-gradient methods in \citet{taskar06}, sub-gradient methods in \citet{Ratliff07}, conditional gradient methods in \citet{Rousu06, Rousu07}.
+Many other efficient optimization algorithms have been proposed, for example, exponential gradient optimization methods in \citep{bartlett04}, extra-gradient methods in \citep{taskar06}, sub-gradient methods in \citet{Ratliff07}, and conditional gradient methods in \citep{Rousu06, Rousu07}.
 
 In order to use \mmmn\ in practice, one have to solve the \textit{loss augmented} inference problem defined as
 \begin{align}
 	\hat{\vy} = \underset{\vy\in\vYcal/\vy_i}{\argmax} &\, \ip{\vw}{\phib(\vx_i,\vy)} + \vell(\vy_i,\vy) \label{mmmninference}.
 \end{align} 
 To compute (\ref{mmmninference}) efficiently, the loss function need to be decomposable over the Markov network.
-Nevertheless, \mmmn\ improves \crf\ by avoiding the partition function and allowing complex loss functions.
+Nevertheless, \mmmn\ improves \crf\ by avoiding the evaluation of the partition function and allowing complex loss functions to be defined.
 
 
 
