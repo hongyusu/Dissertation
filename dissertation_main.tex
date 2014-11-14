@@ -1169,19 +1169,19 @@ Let $G=(E,V)$ denote an output graph such that $\vy = (y_v)_{v\in V}$.
 \begin{align*}
 	P(\vy|\vx) &= \frac{1}{Z_{\vx,\vw}}\exp{\ip{\vw}{\phib(\vx,\vy)}},
 \end{align*}
-where $\phib(\vx,\vy)$ is a joint feature map and $Z_{\vx,\vw}$ is the partition function dependent on $\vx$.
-$Z_{\vx,\vw}$ sums over all possible multilabels 
+where $\phib(\vx,\vy)$ is a joint feature map. 
+$Z_{\vx,\vw}$ is a partition function dependent on $\vx$ that sums over all possible multilabels 
 \begin{align}
 	Z_{\vx,\vw} &= \sum_{\vy'\in\Ycal}\exp{\ip{\vw}{\phib(\vx,\vy')}}. \label{crf_partition_function}
 \end{align}
-Thus, when conditioned on $\vx$, random variables $y_v$ obey Markov property with respect to the output graph $G$.
+Thus, when conditioned on $\vx$, random variables $y_v$ obey the Markov property with respect to the output graph $G$.
 
-Applying similar regularization technique as used on \lr\ in Section~\ref{sc_lr}, the feature weight parameter $\vw$ can be solved by introducing a Gaussian prior and maximizing the logarithm of the resulting \textit{Maximize A-Posteriori} (\map) problem \citep{taskar02} defined as
+Applying the similar regularization technique as applied to Logistic Regression in Section~\ref{sc_lr}, the feature weight parameter $\vw$ can be solved by introducing a Gaussian prior and maximizing the logarithm of the resulting \textit{Maximize A-Posteriori} (\map) problem \citep{taskar02} defined as
 \begin{align}
 	L(\vw) = \sum_{i=1}^{m}\left[\ip{\vw}{\phib(\vx_i,\vy_i)}-\log{\sum_{\vy'\in\vYcal}{\exp{\ip{\vw}{\phib(\vx_i,\vy')}}}}\right] - \frac{1}{\sigma^2}\norm{\vw}^2. \label{crf_inference}
 \end{align}
-The optimization problem derived from (\ref{crf_inference}) is solved in \citep{lafferty01} by improved iterative scaling algorithm (\iis) \citep{Pietra97inducing}.
-In order to make \crf\ work in practice, one also need to make sure that the partition function (\ref{crf_partition_function}) can be computed efficiently.
+The optimization problem derived from (\ref{crf_inference}) is solved in \citep{lafferty01} by the improved iterative scaling algorithm (\iis) \citep{Pietra97inducing}.
+In order to make \crf\ work in practice, one also need to make sure that the partition function (\ref{crf_partition_function}) can be evaluated efficiently.
 
 
 
