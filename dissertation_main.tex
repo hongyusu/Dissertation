@@ -1054,7 +1054,7 @@ Thus, \corrlog\ examines the pairwise label correlations by augmenting the joint
 \subsection{Multitask Feature Learning (\mtl)} \label{sc_mtl}
 
 Multitask Feature Learning (\mtl) developed by \citet{Argyriou07multitask} is another algorithm designed for flat multilabel classification.
-\mtl\ is quite different from other learning approaches discussed in the previous sections.
+\mtl\ is quite different the flat multilabel classification algorithms discussed in the previous sections.
 In particular, \mtl\ is based on the assumption that different microlabels are related such that they share a common underlying feature representation.
 Similar assumptions are also applied in \citep{Caruana97multitask,Baxter00a,BenDavide03exploiting}.
 
@@ -1066,10 +1066,10 @@ $f_t(\vx)$ can be expressed as
 where $\va_t\in\RR^d$ is the weight parameter for the $t$'th microlabel.
 $h(\vx)$ is a linear feature mapping function defined as
 \begin{align*}
-	h(\vx)[i] = \ip{\vu_i}{\phib(\vx)},
+	h(\vx) = \ip{U}{\phib(\vx)},
 \end{align*}
-where $\phib(\vx)\in\RR^d$ is in the original feature space.
-We further use $A$ to denote the matrix composed by $\va_{t}$, and $U$ to denote the matrix composed by $\vu_i$.
+where $\phib(\vx)\in\RR^d$ is in the original feature space and $U\in\RR^{d\times d}$ is square matrix.
+We further use $A$ to denote the matrix composed by $\va_{t}$.
 \mtl\ assumes that microlabels share a small set of features in which $A$ is supposed to be sparse with many entries equal to zero.
 The optimization problem of \mtl\ is defined as
 \begin{definition}{\mtl\ Optimization Problem in Primal}\label{mtl_opt}
