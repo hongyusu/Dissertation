@@ -1161,20 +1161,20 @@ Both will lead to the same update to the feature weight parameter (\ref{sp_updat
 \subsection{Conditional Random Field (\crf)} \label{sc_crf}
 
 Condition Random Field (\crf) developed in \citep{lafferty01,taskar02} is a discriminative framework that constructs a conditional probability $P(\vy|\vx)$ for an input variable $\vx\in\vXcal$ and an output variables $\vy\in\vYcal$.
-It optimizes the log-loss which is analogue to the $0/1$ loss in the structured output space.
+It optimizes the log-loss which is analogue to the $0/1$ loss in a structured output space.
 
 Mathematically, let $Y=\{\vy_1,\cdots,\vy_m\}$ denote a set of output random variables and $X=\{\vx_1,\cdots,\vx_m\}$ denote a set of input random variables to condition on.
-Let $G=(E,V)$ be an output graph such that $\vy = (y_v)_{v\in V}$.
-A \textit{Conditional Random Field} (\crf) defines the conditional probability distribution
+Let $G=(E,V)$ denote an output graph such that $\vy = (y_v)_{v\in V}$.
+\textit{Conditional Random Field} (\crf) defines a conditional probability distribution
 \begin{align*}
 	P(\vy|\vx) &= \frac{1}{Z_{\vx,\vw}}\exp{\ip{\vw}{\phib(\vx,\vy)}},
 \end{align*}
-where $\phib(\vx,\vy)$ is the joint feature map and $Z_{\vx,\vw}$ is the partition function dependent on $\vx$.
+where $\phib(\vx,\vy)$ is a joint feature map and $Z_{\vx,\vw}$ is the partition function dependent on $\vx$.
 $Z_{\vx,\vw}$ sums over all possible multilabels 
 \begin{align}
 	Z_{\vx,\vw} &= \sum_{\vy'\in\Ycal}\exp{\ip{\vw}{\phib(\vx,\vy')}}. \label{crf_partition_function}
 \end{align}
-Thus, when conditioned on $\vx$, the random variables $y_v$ obey the Markov property with respect to output graph $G$.
+Thus, when conditioned on $\vx$, random variables $y_v$ obey Markov property with respect to the output graph $G$.
 
 Applying similar regularization technique as used on \lr\ in Section~\ref{sc_lr}, the feature weight parameter $\vw$ can be solved by introducing a Gaussian prior and maximizing the logarithm of the resulting \textit{Maximize A-Posteriori} (\map) problem \citep{taskar02} defined as
 \begin{align}
