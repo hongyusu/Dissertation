@@ -930,10 +930,10 @@ For the $j$'th microlabel $\vy[j]$, \cc\ first constructs a new training data $S
 \end{align*}
 A classifier $h_j$ is built by applying any single-label classification algorithm on $S_j$.
 
-Thus, \cc\ takes the correlation between labels into consideration by incorporating label information as concatenated features in the input feature space.
-The idea has been previously applied in \citep{Godbole04discriminative}.
-However, the additional label information only takes a small part of the input feature space especially when the dimension of the original feature space is already high.
-As a results, \cc\ makes a strong assumption of a high correlation between the output microlabel and the concatenated microlabels.
+Thus, \cc\ takes the correlation between labels into consideration by incorporating label information as concatenated features in the new input feature space.
+The idea is not new which has been previously applied in \citep{Godbole04discriminative}.
+\cc\ mades a strong assumption of a high correlation between the output microlabel and the concatenated microlabels.
+The central problem of \cc\ is that the additional label information only takes a small part of the input feature space especially when the dimension of the original feature space is already high.
 
 Probabilistic Classifier Chains (\pcc) developed in \citep{Read09classifier,Dembczynski10bayes} extends \cc\ by analyzing the algorithm with condition probability theory.
 As there is no standard way for the classification order of microlabels in \cc, Ensemble Classifier Chains (\ecc) has been developed in \citep{Read11classifier} which improves \cc\ by generating and combining multiple chains of classifiers. 
