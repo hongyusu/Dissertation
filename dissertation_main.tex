@@ -1180,7 +1180,7 @@ Applying the similar regularization technique as applied to Logistic Regression 
 \begin{align}
 	L(\vw) = \sum_{i=1}^{m}\left[\ip{\vw}{\phib(\vx_i,\vy_i)}-\log{\sum_{\vy'\in\vYcal}{\exp{\ip{\vw}{\phib(\vx_i,\vy')}}}}\right] - \frac{1}{\sigma^2}\norm{\vw}^2. \label{crf_inference}
 \end{align}
-The optimization problem derived from (\ref{crf_inference}) is an instantiation of the regularized risk minimization (\ref{rl}) with the log loss (\ref{log_loss}) and $L_2$-norm regularization.
+The optimization problem derived from (\ref{crf_inference}) is an instantiation of the regularized risk minimization (\ref{rl}) with log-loss and the $L_2$-norm regularization.
 It is solved in \citep{lafferty01} by the improved iterative scaling algorithm (\iis) \citep{Pietra97inducing}.
 In order to make \crf\ work in practice, one also need to make sure that the partition function (\ref{crf_partition_function}) can be evaluated efficiently.
 
@@ -1190,7 +1190,7 @@ In order to make \crf\ work in practice, one also need to make sure that the par
 % 
 \subsection{Max-Margin Markov Network (\mmmn)} \label{sc_mmmn}
 
-\citet{Taskar04max} designed Max-Margin Markov Network (\mmmn) that combines the framework of kernel based discriminative learning and probabilistic graphical model.
+\citet{Taskar04max} proposed Max-Margin Markov Network (\mmmn) that combines the framework of kernel based discriminative learning and probabilistic graphical model.
 \mmmn\ extends \svm\ (Section~\ref{sc_svm}) to the structured output space.
 It also improves \crf\ (Section~\ref{sc_crf}) by which the evaluation of the partition function (\ref{crf_partition_function}) can be avoided by introducing the odd-ratio typed learning that is not dissimilar to \lr\ (Section~\ref{sc_lr}).
 
