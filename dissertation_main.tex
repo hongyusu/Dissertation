@@ -1079,7 +1079,7 @@ The optimization problem of \mtl\ is defined as
 \end{definition}
 \noindent
 The optimization problem is an instantiation of regularized risk minimization (\ref{rl}) with hamming loss and $L_{2,1}$-norm regularization.
-$C$ is a non-negative parameter that control the balance of the regularization term and the risk minimization term.
+$C$ is a positive parameter that controls the balance of the regularization term and the risk minimization term.
 Definition~\ref{mtl_opt} is non-convex and the second term is non-smooth, the optimization is transformed into an equivalent form which is then solved by an alternative optimization approach \citep{Argyriou07multitask}.
 
 An extension of \mtl\ is developed in \citep{Argyriou08convex} which introduces a nonlinear generalization using kernel methods.
