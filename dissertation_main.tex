@@ -1096,11 +1096,11 @@ Recently, \citet{Paredes12exploit} proposed a method that exploits the informati
 %------------------------------------------------
 \chapter{Structured Output Prediction} \label{ch_sop}
 
-Structured output prediction is a natural extension to flat multilabel classification presented in Chapter~\ref{ch_fmlc}.
-Unlike flat multilabel classification which takes multiple interdependent output variables as a ``flat'' vector, structured output prediction assumes that multiple output variables are correlated and locate in the structured output space.
-The method assumes that there exists an output graph (e.g., chain, tree) to connect multiple output variables by which it gains the advantage of exploiting the label correlation compared to flat multilabel classification.
-In this chapter, we will start by introducing several well established structured output learning models developed during the last decade.
-We will present our new algorithm \spin\ that is capable of predicting a directed acyclic graph (\daggraph) and examine the performance on the network response prediction problem.
+Structured output prediction is a natural extension to flat multilabel classification (Chapter~\ref{ch_fmlc}).
+Unlike flat multilabel classification which takes multiple interdependent output variables as a ``flat'' vector, structured output prediction assumes that multiple output variables are correlated and located in a structured output space.
+It assumes that there exists an output graph (e.g., chain, tree) connecting multiple output variables by which the correlation between labels can be utilized. 
+In this chapter, we will start by introducing several structured output learning algorithms developed during the last decade.
+We will present our new algorithm \spin\ that is capable of predicting a directed acyclic graph (\daggraph) that best ``responses'' to an input, and examine the performance on the network response prediction problem within the context of social network analysis.
 
 
 
