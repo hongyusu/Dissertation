@@ -896,13 +896,13 @@ We will focus on \br\ in this section.
 \subsection{Multilabel $K$-Nearest Neighbors (\mlknn)} \label{sc_mlknn}
 
 Multilabel $K$-Nearest Neightbors (\mlknn) proposed by \citet{Zhang05a,Zhang07mlknn} is perhaps the most famous binary relevance classifier for flat multilabel classification.
-\mlknn\ is also an instance based learning approach \citep{Aha91instance} that is derived from the $K$-Nearest Neightbor (\knn) algorithm designed for the single-label classification problem.
+\mlknn\ is also an instance based learning approach \citep{Aha91instance} which is derived from the $K$-Nearest Neightbor (\knn) algorithm designed for single-label classification.
 \mlknn\ transforms the flat multilabel classification problem into a set of single-label classification problems and processes each microlabel independently.
-For each unseen example $\vx$, \mlknn\ algorithm first identifies the set of $K$-nearest neighbors $N(\vx)$ from the training sets.
-After that, the algorithm computes the multilabel $\vy$ of the unseen example $\vx$ by examining the set of labels collected from its $K$-nearest neightbors.
+For each unseen example $\vx$, \mlknn\ algorithm first identifies a set of $K$-nearest neighbors $N(\vx)$ from all training examples.
+After that, the algorithm predicts the multilabel $\vy$ of the unseen example $\vx$ by examining the set of labels collected from its $K$-nearest neightbors.
 
-Mathematically 
-let $C_{\vx}(j)$ denote the number of the neighbors of $\vx$ with $j$'th label being ``$+1$'',
+Mathematically,
+let $C_{\vx}(j)$ denote the number of neighbors of $\vx$ with $j$'th label being ``$+1$'',
 let $H^b_{\vx}(j)$ denote the event that the $j$'th label of $\vx$ is $b\in\Ycal_j$,
 and let $E_{\vx}^l(j)$ denote the event that $0\le l \le K$ neighbors of $x$ have the $j$'th label being ``$+1$''.
 \mlknn\ processes each microlabel at a time and determines the value of the microlabel by examining the following Maximize A-Posteriori (\map) problem
@@ -910,11 +910,12 @@ and let $E_{\vx}^l(j)$ denote the event that $0\le l \le K$ neighbors of $x$ hav
 	\vy[j]^* = \underset{b\in\Ycal_j}{\argmax} \, P( H^b_{\vx}(j) | E_{\vx}^{C_{\vx(j)}}(j) )
 	= \underset{b\in\Ycal_j}{\argmax} \, \frac{P( H^b_{\vx}(j) ) P(  E_{\vx}^{C_{\vx(j)}}(j) ) | H^b_{\vx}(j))}{P( E_{\vx}^{C_{\vx(j)}}(j))}.
 \end{align*}
-The prior probability distribution $H^b_{\vx}(j)$ and the likelihood distribution $P( H^b_{\vx}(j) | E_{\vx}^{C_{\vx(j)}}(j) )$ can be estimated from the training data in terms of corresponding relative frequencies.
+The prior probability distribution $H^b_{\vx}(j)$ and the likelihood distribution $P( H^b_{\vx}(j) | E_{\vx}^{C_{\vx(j)}}(j) )$ can be estimated from the training data in terms of relative frequencies.
 
-The central problem with \mlknn\ is that \mlknn\ is ignorant of the label correlation.
-In order to exploit the label correlation, other variants of \mlknn\ have been proposed \citep{Cheng09combining,Younes11a}.
-Besides, there are many algorithm alternatives which also align to the direction of \knn\ typed learning in flat multilabel classification, for example, methods that incorporates \knn\ with ranking model were proposed in \citep{Brinker07case,Chiang12a}.
+The central problem with \mlknn\ is that the algorithm ignores the correlation between labels.
+In order to utilize the correlation between labels, many other variants of \mlknn\ have been proposed \citep{Cheng09combining,Younes11a}.
+There also exists many alternatives which align to the direction of \knn\ typed learning for flat multilabel classification, for example, methods that incorporates \knn\ with label ranking \citep{Brinker07case,Chiang12a}.
+
 
 
 %
@@ -924,18 +925,18 @@ Besides, there are many algorithm alternatives which also align to the direction
 Classification Chains (\cc) developed in \citep{Read09classifier,Read11classifier} is another problem transformation approach for flat multilabel classification.
 \cc\ involves $k$ binary transformations and forms a chain of $k$ binary classifiers $h=\{h_1,\cdots,h_k\}$.
 The $j$'th classifier $h_j$ is responsible for learning and predicting the $j$'th microlabel.
-In particular, for each microlabel $\vy[j]$, \cc\ first constructs a new training data $S_j$ then learns a classifier $h_j$ via arbitrary single-label classifier.
-$S_j$ is built by taking the $j$'th microlabel as output variable and combing the feature space of $\vx$ and all $j-1$ prior microlabels as the input feature which is defined by
+In particular, for each microlabel $\vy[j]$, \cc\ first constructs a new training data $S_j$, then learns a classifier $h_j$ with an arbitrary single-label classifier.
+$S_j$ is built by taking the $j$'th microlabel as the output variable and combing the feature space of $\vx$ with all $j-1$ prior microlabels as the input feature, which is defined by
 \begin{align*}
 	S_j = \{((\vx_i[1],\cdots,\vx_i[d],\vy_i[1],\cdots,\vy_i[j-1]),\vy_i[j])\}_{i=1}^{m}.
 \end{align*} 
-Thus, \cc\ takes the label correlation into account by incorporating label information as concatenated features in the input feature space.
-The idea has previously been applied in \citep{Godbole04discriminative}.
-However, the addition label information only takes a small part of the input feature space especially when the original feature space is already high.
-In this case, one can only expect to gain additional performance from concatenated label information by assuming the correlation to the output microlabel is high.
+Thus, \cc\ takes the correlation between labels into account by incorporating label information as concatenated features in the input feature space.
+The idea has been previously applied in \citep{Godbole04discriminative}.
+However, the additional label information only takes a small part of the input feature space especially when the dimension of the original feature space is already high.
+As a results, \cc\ makes a strong assumption of a high correlation between the output microlabel and the concatenated microlabels.
 
-\cc\ has been explained in terms of condition probability theory by Probabilistic Classifier Chains (\pcc) presented in \citep{Read09classifier,Dembczynski10bayes}.
-Since there is no standard way for classification order of microlabels in \cc, Ensemble Classifier Chains (\ecc) has been developed in \citep{Read11classifier} which further improves \cc\ by generating and combining multiple chains of classifiers. 
+Probabilistic Classifier Chains (\pcc) developed in \citep{Read09classifier,Dembczynski10bayes} extends \cc\ by analyzing the algorithm with condition probability theory.
+As there is no standard way for the classification order of microlabels in \cc, Ensemble Classifier Chains (\ecc) has been developed in \citep{Read11classifier} which improves \cc\ by generating and combining multiple chains of classifiers. 
 
 
 %
