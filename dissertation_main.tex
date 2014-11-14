@@ -1134,13 +1134,13 @@ In this section, we will briefly present several related algorithms for structur
 
 The Perceptron developed by \citet{Rosenblatt58} is one of the oldest algorithms in machine learning.
 The structured Perceptron, as suggested by its name, is a generalization of the Perceptron algorithm to structured output space.
-It was proposed in \citep{collins02a, collins02b} with the formalism quite similar to Multiclass Perceptron. 
-The model assumes a score function $\ip{\vw}{\phib(\vx,\vy)}$ as the inner product between a joint feature map $\phib(\vx,\vy)$ and the feature weight parameter $\vw$.
-After the feature weight parameter $\vw$ is obtained, one needs to solve the {argmax} problem to find the best output for a given input $\vx$ defined as
+It was proposed in \citep{collins02a, collins02b} with the formalism quite similar to the multiclass Perceptron. 
+The model assumes a score function $\ip{\vw}{\phib(\vx,\vy)}$ as an inner product between a joint feature map $\phib(\vx,\vy)$ and a feature weight parameter $\vw$.
+After the feature weight parameter $\vw$ is obtained, one needs to solve the {argmax} problem to find the best output for a given input $\vx$, which is defined as
 \begin{align}
-	\hat{\vy} = \underset{\vy\in\vYcal}{\argmax} &\, \ip{\vw}{\phib(\vx,\vy)}, \label{sp_inference}
+	\hat{\vy} = \underset{\vy\in\vYcal}{\argmax} &\, \ip{\vw}{\phib(\vx,\vy)}. \label{sp_inference}
 \end{align}
-which is solved in \citep{collins02a} by Viterbi decoding.
+The argmax problem is solved in \citep{collins02a} by Viterbi decoding.
 
 The weight parameter $\vw$ is learned through the standard Perceptron iterative update by solving the argmax problem (\ref{sp_inference}) in each iteration.
 In particular, the algorithm loops through all training examples and updates $\vw$ whenever the predicted multilabel $\hat{\vy_i}$ is different from the true multilabel $\vy_i$.
@@ -1149,19 +1149,19 @@ The update is defined by
 	\vw \leftarrow \vw + \left(\phib(\vx_i,\vy_i) - \phib(\vx_i,\hat{\vy}_i)\right). \label{sp_update}
 \end{align}
 The update usually leads to over-fitting.
-A simple refinement is usually applied which is similar to the averaged Perceptron algorithm \citep{Freund99large}.
+A simple refinement is usually applied which is similar to the averaged Perceptron \citep{Freund99large}.
 
-The central problem with the structured Perceptron learning is its loss function.
-In fact, the structured Perceptron tacitly applies $0/1$ loss (\ref{one_loss}) on multilabels, with which it is impossible to distinguish a nearly correct and a completely incorrect multilabel.
-Both microlabels will lead to the same update to the feature weight parameter (\ref{sp_update}) during learning.
+The central problem with the structured Perceptron is the loss function.
+In fact, the structured Perceptron tacitly applies $0/1$ loss (\ref{one_loss}) on multilabels, with which it is impossible to distinguish a nearly correct multilabel and a completely incorrect one.
+Both will lead to the same update to the feature weight parameter (\ref{sp_update}) during learning.
 
 
 %
 % 
 \subsection{Conditional Random Field (\crf)} \label{sc_crf}
 
-Condition Random Field (\crf) developed in \citep{lafferty01,taskar02} is a discriminative framework that constructs a conditional model $P(\vy|\vx)$ from input variable $\vx\in\vXcal$ and output variables $\vy\in\vYcal$.
-It optimizes the log-loss which is analogue to $0/1$ loss over the structured output space.
+Condition Random Field (\crf) developed in \citep{lafferty01,taskar02} is a discriminative framework that constructs a conditional probability $P(\vy|\vx)$ for an input variable $\vx\in\vXcal$ and an output variables $\vy\in\vYcal$.
+It optimizes the log-loss which is analogue to the $0/1$ loss in the structured output space.
 
 Mathematically, let $Y=\{\vy_1,\cdots,\vy_m\}$ denote a set of output random variables and $X=\{\vx_1,\cdots,\vx_m\}$ denote a set of input random variables to condition on.
 Let $G=(E,V)$ be an output graph such that $\vy = (y_v)_{v\in V}$.
