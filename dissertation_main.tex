@@ -1064,27 +1064,27 @@ $f_t(\vx)$ can be expressed as
 	f_t(\vx) = \ip{\va_t}{h(\vx)} = \sum_{i=1}^{d}\va_{t}[i]h(\vx)[i],
 \end{align*}
 where $\va_t\in\RR^d$ is the weight parameter for the $t$'th microlabel.
-$h(\phib(\vx))$ is a linear feature mapping function defined as
+$h(\vx)$ is a linear feature mapping function defined as
 \begin{align*}
 	h(\vx)[i] = \ip{\vu_i}{\phib(\vx)},
 \end{align*}
-where $\phib(\vx)\in\RR^d$ is in the original feature space and $\vu_i\in\RR^{d}$ is a linear feature map.
+where $\phib(\vx)\in\RR^d$ is in the original feature space.
 We further use $A$ to denote the matrix composed by $\va_{t}$, and $U$ to denote the matrix composed by $\vu_i$.
-\mtl\ assumes that microlabels share a small set of features where $A$ is supposed to be sparse with many entries equal to zero.
+\mtl\ assumes that microlabels share a small set of features in which $A$ is supposed to be sparse with many entries equal to zero.
 The optimization problem of \mtl\ is defined as
 \begin{definition}{\mtl\ Optimization Problem in Primal}\label{mtl_opt}
 	\begin{align*}
-		\underset{\substack{U\in\RR^{d\times d}\\A\in\RR^{d\times T}}}{\minimize} \left\{\sum_{t=1}^{T}\sum_{i=1}^{m}\ell(\vy_{i,t},\ip{\va_t}{\ip{U}{\phib(\vx_i)}})+C\norm{A}_{2,1}^2\right\},
+		\underset{\substack{U\in\RR^{d\times d}\\A\in\RR^{d\times T}}}{\minimize} \left\{\sum_{t=1}^{T}\sum_{i=1}^{m}\ell(\vy_{i,t},\ip{\va_t}{\ip{U}{\phib(\vx_i)}})+C\norm{A}_{2,1}^2\right\}.
 	\end{align*}
 \end{definition}
 \noindent
-where the objective is to minimize the empirical error $\ell(\vy_{i,t},\ip{\va_t}{\ip{U}{\phib(\vx_i)}})$ and to keep a small proportion of the non-zero element in $\va_t$.
-$C$ is the parameter to balance these two aspects.
-Definition~\ref{mtl_opt} is non-convex and the second term is non-smooth, it is transformed into an equivalent form and solved by an alternative optimization approach.
+The optimization problem is another instantiation of regularized risk minimization (\ref{rl}) with hamming loss and $L_{2,1}$ loss.
+$C$ is a non-negative parameter that control the balance of the regularization term and the risk minimization term.
+Definition~\ref{mtl_opt} is non-convex and the second term is non-smooth, the optimization is transformed into an equivalent form which is then solved by an alternative optimization approach \citep{Argyriou07multitask}.
 
-An extension of \mtl\ was proposed in \citep{Argyriou08convex} which introduces a nonlinear generalization using kernel methods.
-In addition, \citet{Argyriou08an,Jacob09cluster} developed several similar but not identical algorithms which assume that the microlabels form clusters such that label specific weight vectors should be similar within the clusters.
-Recently, \citet{Paredes12exploit} proposed a method which exploits the information between unrelated microlabels, based on a similar assumption that microlabels of different groups tend not to share any features.
+An extension of \mtl\ is developed in \citep{Argyriou08convex} which introduces a nonlinear generalization using kernel methods.
+In addition, \citet{Argyriou08an,Jacob09cluster} have developed several similar but not identical algorithms which assume that microlabels form clusters such that label specific weight vectors should be similar within the clusters.
+Recently, \citet{Paredes12exploit} proposed a method that exploits the information between unrelated microlabels based on a similar assumption that microlabels of different groups tend not to share any features.
 
 
 
@@ -1699,7 +1699,7 @@ The strategy leads to the learning model presented in the following section.
 \subsection{Methods}
 
 Let $\Tcal=\{T_1,\cdots,T_n\}$ denote a sample of $n$ random spanning trees, and $\{\vw_{T_t}|T_t\in\Tcal\}$ denote the feature weight parameters to be learner on each tree.
-For each example $(\vx_i,\vy_i)$, the goal of optimization is to maximize the joint margin from all spanning trees between the correct training examples and the pseudo-examples $(\vx_i,\vy)$ defined as
+For each example $(\vx_i,\vy_i)$, the goal of the optimization is to maximize the joint margin from all spanning trees between the correct training examples and the pseudo-examples $(\vx_i,\vy)$ defined as
 \begin{definition}{\bf Primal $L_2$-norm Random Tree Approximation (\rta).}\label{primalrta}
 	\begin{align*}
 		\underset{\vw_{T_t},\xi_i}{\minimize} & \quad \frac{1}{2}\sum_{t=1}^{n}\norm{\vw_{T_t}}^2 + C\sum_{i=1}^{m}\xi_i\\
