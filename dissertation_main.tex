@@ -1248,15 +1248,15 @@ In particular, \mmcrf\ uses the exponential family to model the conditional prob
 \begin{align*}
 	P(\vy|\vx) \propto \exp(\ip{\vw}{\phib(\vx,\vy)}) = \prod_{e\in E}\exp(\ip{\vw_e}{\phib_e(\vx,\vy_e)}),
 \end{align*}
-where $\phib_e(\vx,\vy_e)=\varphib(\vx)\otimes\Upsilonb_e(\vy_e)$ is the tensor product between an input feature map and an output feature of a multilabel $\vy$ on an edge $e\in E$ in an output Markov network $G$.
-In order to obtain $\vw$, we need to solve the primal optimization problem that is not dissimilar to (Definition~\ref{def_mmmn}).
-After the feature weight parameter $\vw$ is found, we need to solve the argmax problem to obtain the prediction
+where $\phib_e(\vx,\vy_e)=\varphib(\vx)\otimes\Upsilonb_e(\vy_e)$ is the tensor product between an input feature map and an output feature map which is the label of an edge $e\in E$ in an output Markov network $G$ with respect to a multilabel $\vy$. 
+In order to obtain $\vw$, one needs to solve the primal optimization problem that is not dissimilar to Definition~\ref{def_mmmn}.
+After the feature weight parameter $\vw$ is obtained, the prediction of an input example can be computed by solving the following argmax problem
 \begin{align}
 	\hat{\vy} = \underset{\vy\in\vYcal/\vy_i}{\argmax} \, \ip{\vw}{\phib(\vx_i,\vy)}.\label{mmcrfinference}
 \end{align}
 
-To solve the optimization problem, \mmcrf\ uses conditional gradient optimization \citep{Bertsekas95nonlinear} in marginalized dual space \citep{Taskar04max}, which not only benefits from a polynomial-size parameter space but also enables the kernel function that is capable of dealing with non-linearity of the complex molecular structures.
-The inference problem (\ref{mmcrfinference}) is solved by loopy belief propagation (\lbp) on general graph which is an instantiation of the message-passing algorithm developed by \cite{Wainwright08graphical}.
+To solve the optimization problem, \mmcrf\ uses the conditional gradient optimization \citep{Bertsekas95nonlinear} in the marginalized dual space \citep{Taskar04max}, which not only benefits from a polynomial-size parameter space but also enables kernel methods that can deal with the non-linearity of complex molecular structures.
+The inference problem (\ref{mmcrfinference}) is solved by loopy belief propagation (\lbp) which is an instantiation of the message-passing algorithm developed in \citep{Wainwright08graphical}.
 
 
 
