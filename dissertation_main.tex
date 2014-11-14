@@ -975,10 +975,8 @@ $\alpha_i^{(j)}$ is the regression coefficient.
 %
 \section{Algorithm Adaptation}
 
-The central idea of the algorithm adaptation approach is to directly modify the popular single-label learning algorithms and apply them to the multilabel classification problems.
-The approach includes but is not limited to ensemble typed learning, \lr\ typed learning, and the regularized learning which are described in the following part of the section.
-There also exists methods which are modified from, for example, Perceptron \citep{Crammer03afamily} and Neural Network \citep{Zhang06multilabel}.
-They are not explained in detail in the section due to the divergence from the main topic of the thesis.
+The idea of algorithm adaptation is to directly modify popular single-label classification algorithms (e.g., ensemble methods, Logistic Regression) to multilabel classification problems.
+There also exists other methods in algorithm adaptation \citep{Crammer03afamily, Zhang06multilabel}, which are not explained in detail in this section due to the divergence from the main scope of this thesis.
 
 
 
@@ -986,16 +984,16 @@ They are not explained in detail in the section due to the divergence from the m
 %
 \subsection{Ensemble Methods for Flat Multilabel Classification} \label{sc_emfmlc}
 
-As it is straightforward to combine multiple scalar output variables, the ensemble methods have been initially developed for single-label classification \citep{Breiman96bagging,Freund97a} or regression  \citep{Breiman96bagging} tasks.
-However, it is not immediately apparent how to combine vector valued outputs in flat multilabel space.
+Ensemble methods have been initially developed for single-label classification \citep{Breiman96bagging,Freund97a} or regression \citep{Breiman96bagging}, as it is straightforward to combine multiple scalar output variables
+However, it is not immediately clear how to combine vector valued outputs in flat multilabel classification.
 
-\adaboostmh\ is the multilabel variance of original \adaboost\ algorithm proposed by \citet{Schapire99improved}, which is further developed by \citet{Esuli2008boosting}.
-The core idea of \adaboostmh\ is to adopt hamming loss instead of 0/1 loss. 
-In particular, the algorithm reduces from a multilabel classification problem to a set of single label classification problems by replacing each training example $(\vx_i,\vy_i)$ with $k$ examples $\{(\vx_i,\vy_i[l])\}_{l=1}^k$.
-The algorithm is detailed in (Algorithm~\ref{adaboostmh}).
+\adaboostmh\ is a multilabel variance of the \adaboost\ algorithm \citep{Schapire99improved,Esuli2008boosting}.
+The core idea of \adaboostmh\ is to apply hamming loss instead of 0/1 loss. 
+In particular, the algorithm reduces from a multilabel classification problem to a single-label classification problems by replacing each training example $(\vx_i,\vy_i)$ with $k$ examples $\{(\vx_i,\vy_i[l])\}_{l=1}^k$.
+The algorithm is described in Algorithm~\ref{adaboostmh}.
 In particular, it maintains a distribution over all examples and labels.
-In each iteration, the algorithm takes in the distribution and all training examples, generates a weak learner $f^k(\vx)$ (line~\ref{mh_compuet_f}), computes hamming loss (line~\ref{mh_compute_error}), computes the adaptive parameter $\alpha^t$ (line~\ref{mh_compute_alpha}), and update the distribution (line~\ref{mh_update_d}).
-The returned prediction $H(x)$ is the combination of base learners $f^t(x)$ weighted by $\alpha^t$.
+In each iteration, the algorithm takes in the distribution and all training examples, generates a weak learner $f^k(\vx)$ (line~\ref{mh_compuet_f}), computes the hamming loss (line~\ref{mh_compute_error}), computes the adaptive parameter $\alpha^t$ (line~\ref{mh_compute_alpha}), and update the distribution (line~\ref{mh_update_d}).
+The prediction $H(x)$ is the weighted combination of base learners $f^t(x)$ by adapter parameters $\alpha^t$.
 \begin{algorithm}
 \caption{\adaboostmh}
 \label{adaboostmh}
@@ -1015,11 +1013,8 @@ The returned prediction $H(x)$ is the combination of base learners $f^t(x)$ weig
 \end{algorithmic}
 \end{algorithm}
 
-Other ensemble flat multilabel classification methods based on boosting or bagging are also developed in \citep{Wang07simple,Yan07model,Kocev13tree}.
-Most recently, three other learning algorithms with performance guarantee are proposed in \citep{Cortes14semble}.
-Besides, there are quite a few ensemble approaches which are adapted from single label ensemble methods and are dedicated to solve real world classification problems.
-For example, \citep{Collins05distrimnative,Zeman05improving,Sagae06parsing,Zhang09kbest} are applied to natural language processing, and \citep{Fiscus97a,Benesty08speech,Petrov10products}
-are applied to text and speech recognition.
+Besides \adaboostmh, some other ensemble methods for multilabel classification have also been developed that are based on boosting or bagging \citep{Wang07simple,Yan07model,Kocev13tree}.
+In addition, there are large body of work which aim to apply ensemble methods to solve real world classification problems, for example, natural language processing \citep{Collins05distrimnative,Zeman05improving,Sagae06parsing,Zhang09kbest}, and text and speech recognition \citep{Fiscus97a,Benesty08speech,Petrov10products}.
 
 
 %
@@ -1027,30 +1022,30 @@ are applied to text and speech recognition.
 \subsection{Correlated Logistic Regression (\corrlog)} \label{sc_corrlog}
 
 Correlated Logistic Regression (\corrlog) developed by \citet{Bian12corrlog} is a model based approach for flat multilabel classification.
-\corrlog\ is a major step forward of \iblr\ by constructing a logistic regression classifier over all microlabels and by modeling pairwise microlabel correlation with a function defined on microlabel pairs.
+\corrlog\ is a major step forward of \iblr\ by constructing a logistic regression classifier over all microlabels and by modeling the pairwise correlation of labels with a function defined on the pairs of microlabels.
 
-In fact, \corrlog\ is derived from Independent Logistic Regression (\ilrs) model. 
-Given an arbitrary training example and label $(\vx,\vy)$, we can construct a set of independent logistic regression classifiers, one for each microlabel.
+In fact, \corrlog\ is derived from Independent Logistic Regression (\ilrs). 
+Given a pair of an arbitrary training example and a label $(\vx,\vy)$, we can construct a set of \ilrs classifiers, one for each microlabel.
 The posteriori probability can be computed by
 \begin{align}
 	P_{\text{\ilrs}}(\vy|\vx) 
 	= \prod_{j=1}^{k}P_{\text{\lr}}(\vy[j]|\vx)
 	= \prod_{j=1}^{k}\frac{\exp(\vy[j]\vw^{\tp}\vx)}{\exp(\vw^{\tp}\vx)+\exp(-\vw^{\tp}\vx)}, \label{ilrs}
 \end{align}
-where $j$ is the index that iterates over all microlabels. 
-The bias term as in Definition~\ref{logistic_regression} is omitted which is equvilent to augment $\vx$ with a constant term \citep{Bian12corrlog}.
-Otherwise, (\ref{ilrs}) can be derived into Definition~\ref{logistic_regression} by replacing $\vw$ with $\frac{\vw}{2}$.
-\ilrs\ has the problem of ignoring the label correlation and overfitting the training data when the number of microlabel $k$ is high.
-To reveal label correlation, \corrlog\ augments the posteriori probability (\ref{ilrs}) by a function $Q(\vy)$ defined on the set of microlabels as
+where $j$ is the index that iterates over microlabels. 
+The bias term as that appears in Definition~\ref{logistic_regression} is omitted which is equivalent to augmenting $\vx$ with a constant term \citep{Bian12corrlog}.
+Otherwise, (\ref{ilrs}) can be derived into the same form of Definition~\ref{logistic_regression} by replacing $\vw$ with $\frac{\vw}{2}$.
+\ilrs\ has the problem of ignoring the correlation between labels and overfitting the training data when the number of microlabels is high.
+To alleviate the problems, \corrlog\ augments the posteriori probability (\ref{ilrs}) by a function $Q(\vy)$ defined on pairs of microlabels as
 \begin{align}
 	Q(\vy) = \exp\left\{\sum_{k<j}\alpha_{k,j}\vy[k]\vy[j]\right\}. \label{ilrs_augment}
 \end{align}
-Put together (\ref{ilrs}) and (\ref{ilrs_augment}), the formalism of \corrlog\ can be defined as
+Putting together (\ref{ilrs}) and (\ref{ilrs_augment}), \corrlog\ can be defined as
 \begin{align*}
 	P_{\text{\corrlog}}(\vy|\vx) &\propto P_{\text{\ilrs}}(\vy|\vx) Q(\vy) \\
 		&=\exp\left\{ \sum_{j=1}^{m}\vy(x)[j]\vw^{\tp}\vx + \sum_{k<j}\alpha_{kj}\vy(\vx)[k]\vy(\vx)[j] \right\}.
 \end{align*}
-Thus, \corrlog\ examines the pairwise label correlation by augmenting joint prediction with a quadratic term $Q(\vy)$ built from microlabel pairs.
+Thus, \corrlog\ examines the pairwise label correlations by augmenting the joint prediction with a quadratic term $Q(\vy)$ built from pairs of microlabels.
 
 
 
