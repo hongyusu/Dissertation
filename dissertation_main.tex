@@ -1053,22 +1053,22 @@ Thus, \corrlog\ examines the pairwise label correlations by augmenting the joint
 %
 \subsection{Multitask Feature Learning (\mtl)} \label{sc_mtl}
 
-Multitask Feature Learning (\mtl) proposed by \citet{Argyriou07multitask} is another algorithm designed for flat multilabel classification.
+Multitask Feature Learning (\mtl) developed by \citet{Argyriou07multitask} is another algorithm designed for flat multilabel classification.
 \mtl\ is quite different from other learning approaches discussed in the previous sections.
 In particular, \mtl\ is based on the assumption that different microlabels are related such that they share a common underlying feature representation.
-Similar assumption is also applied in \citep{Caruana97multitask,Baxter00a,BenDavide03exploiting}.
+Similar assumptions are also applied in \citep{Caruana97multitask,Baxter00a,BenDavide03exploiting}.
 
-Denote by $f_t(\vx)$ the label specific function for the $t$'th microlabel.
+Let $f_t(\vx)$ denote a label specific function for the $t$'th microlabel.
 $f_t(\vx)$ can be expressed as
 \begin{align*}
-	f_t(\vx) = \ip{\va_t}{h(\phib(\vx))} = \sum_{i=1}^{d}\va_{t}[i]h(\phib(\vx))[i],
+	f_t(\vx) = \ip{\va_t}{h(\vx)} = \sum_{i=1}^{d}\va_{t}[i]h(\vx)[i],
 \end{align*}
 where $\va_t\in\RR^d$ is the weight parameter for the $t$'th microlabel.
-$h(\phib(\vx))$ is a linear feature mapping composed by
+$h(\phib(\vx))$ is a linear feature mapping function defined as
 \begin{align*}
-	h(\phib(\vx))[i] = \ip{\vu_i}{\phib(\vx)},
+	h(\vx)[i] = \ip{\vu_i}{\phib(\vx)},
 \end{align*}
-where $\phib(\vx)\in\RR^d$ is in original feature space and $\vu_i\in\RR^{d}$ is a linear feature map.
+where $\phib(\vx)\in\RR^d$ is in the original feature space and $\vu_i\in\RR^{d}$ is a linear feature map.
 We further use $A$ to denote the matrix composed by $\va_{t}$, and $U$ to denote the matrix composed by $\vu_i$.
 \mtl\ assumes that microlabels share a small set of features where $A$ is supposed to be sparse with many entries equal to zero.
 The optimization problem of \mtl\ is defined as
