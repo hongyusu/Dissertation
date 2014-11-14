@@ -924,11 +924,12 @@ There also exists many alternatives which align to the direction of \knn\ typed 
 
 Classification Chains (\cc) developed in \citep{Read09classifier,Read11classifier} is another problem transformation approach for flat multilabel classification.
 \cc\ involves $k$ binary transformations and forms a chain of $k$ binary classifiers $h=\{h_1,\cdots,h_k\}$, in which the $j$'th classifier $h_j$ is built for predicting the $j$'th microlabel.
-In particular, for each microlabel $\vy[j]$, \cc\ first constructs a new training data $S_j$, then learns a classifier $h_j$ with an arbitrary single-label classifier.
-$S_j$ is built by taking the $j$'th microlabel as the output variable and combing the feature space of $\vx$ with all $j-1$ prior microlabels as the input feature, which is defined by
+For each microlabel $\vy[j]$, \cc\ first constructs a new training data $S_j$ by taking the $j$'th microlabel as the output variable and combing the feature space of $\vx$ with all $j-1$ prior microlabels as input features, which is defined by
 \begin{align*}
 	S_j = \{((\vx_i[1],\cdots,\vx_i[d],\vy_i[1],\cdots,\vy_i[j-1]),\vy_i[j])\}_{i=1}^{m}.
-\end{align*} 
+\end{align*}
+A classifier $h_j$ is built by applying any single-label classifciation algorithm on $S_j$.
+
 Thus, \cc\ takes the correlation between labels into account by incorporating label information as concatenated features in the input feature space.
 The idea has been previously applied in \citep{Godbole04discriminative}.
 However, the additional label information only takes a small part of the input feature space especially when the dimension of the original feature space is already high.
