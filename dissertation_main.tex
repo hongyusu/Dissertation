@@ -923,8 +923,7 @@ There also exists many alternatives which align to the direction of \knn\ typed 
 \subsection{Classifier Chains (\cc)}
 
 Classification Chains (\cc) developed in \citep{Read09classifier,Read11classifier} is another problem transformation approach for flat multilabel classification.
-\cc\ involves $k$ binary transformations and forms a chain of $k$ binary classifiers $h=\{h_1,\cdots,h_k\}$.
-The $j$'th classifier $h_j$ is responsible for learning and predicting the $j$'th microlabel.
+\cc\ involves $k$ binary transformations and forms a chain of $k$ binary classifiers $h=\{h_1,\cdots,h_k\}$, in which the $j$'th classifier $h_j$ is built for predicting the $j$'th microlabel.
 In particular, for each microlabel $\vy[j]$, \cc\ first constructs a new training data $S_j$, then learns a classifier $h_j$ with an arbitrary single-label classifier.
 $S_j$ is built by taking the $j$'th microlabel as the output variable and combing the feature space of $\vx$ with all $j-1$ prior microlabels as the input feature, which is defined by
 \begin{align*}
