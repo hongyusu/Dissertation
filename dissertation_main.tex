@@ -1190,21 +1190,21 @@ In order to make \crf\ work in practice, one also need to make sure that the par
 % 
 \subsection{Max-Margin Markov Network (\mmmn)} \label{sc_mmmn}
 
-\citet{Taskar04max} proposed Max-Margin Markov Network (\mmmn) that combines the framework of kernel based discriminative learning and probabilistic graphical model.
+\citet{Taskar04max} proposed Max-Margin Markov Network (\mmmn) that combines the framework of the kernel based discriminative learning and the probabilistic graphical model.
 \mmmn\ extends \svm\ (Section~\ref{sc_svm}) to the structured output space.
-It also improves \crf\ (Section~\ref{sc_crf}) by which the evaluation of the partition function (\ref{crf_partition_function}) can be avoided by introducing the odd-ratio typed learning that is not dissimilar to \lr\ (Section~\ref{sc_lr}).
+It also improves \crf\ (Section~\ref{sc_crf}) by which the evaluation of the partition function (\ref{crf_partition_function}) can be avoided by introducing the odd-ratio typed learning that is not dissimilar to Logistic Regression presented in Section~\ref{sc_lr}.
 
-\mmmn\ defined a log-linear Markov network over multiple output labels which exploits the correlation in the label space.
+\mmmn\ defined a log-linear Markov network over multiple labels which exploits the correlation between labels.
 The compatibility score defined by 
 \begin{align}
 	F(\vx,\vy;\vw) = \ip{\vw}{\phib(\vx,\vy)} \label{mmmn_score}
 \end{align}
-can be seen as the affinity of the multilabel $\vy$ to the input $\vx$ according to the Markov network.
-Feature weight parameter $\vw$ in (\ref{mmmn_score}) ensures the example with correct multilabel will reach higher score than with incorrect multilabel.
-To learn the feature weight parameter $\vw$, \mmmn\ defines the margin as the difference in compatibility scores between the correct example $(\vx_i,\vy_i)$ and the psudo-example $(\vx_i,\vy)$.
-Under Maximum-Margin principle (Section~\ref{sc_svm}), \mmmn\ requires the margin to be at least $\vell(\vy_i,{\vy})$.
+can be seen as the affinity of a multilabel $\vy$ to an input $\vx$ according to an output graph.
+The feature weight parameter $\vw$ in (\ref{mmmn_score}) ensures the example with the correct multilabel will reach a higher score than with any incorrect multilabels.
+\mmmn\ defines a margin as the difference of compatibility scores between the correct example $(\vx_i,\vy_i)$ and the psudo-example $(\vx_i,\vy)$.
+Under the Maximum-Margin principle in Section~\ref{sc_svm}, \mmmn\ requires the margin to be at least $\vell(\vy_i,{\vy})$.
 
-The primal optimization problem of \mmmn\ can be formulated as
+To learn the feature weight parameter $\vw$, we need to solve the following primal optimization problem
 \begin{definition}{\mmmn\ Optimization Problem in Primal.}\label{def_mmmn}
 	\begin{align*}
 		\underset{\vw,\vxi_i}{\minimize} & \quad\frac{1}{2}\norm{\vw}^2 + C\sum_{i=1}^{m}\xi_i \\
