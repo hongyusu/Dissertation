@@ -1248,7 +1248,7 @@ In particular, \mmcrf\ uses the exponential family to model the conditional prob
 \begin{align*}
 	P(\vy|\vx) \propto \exp(\ip{\vw}{\phib(\vx,\vy)}) = \prod_{e\in E}\exp(\ip{\vw_e}{\phib_e(\vx,\vy_e)}),
 \end{align*}
-where $\phib_e(\vx,\vy_e)=\varphib(\vx)\otimes\Upsilonb_e(\vy_e)$ is the tensor product of an input feature and an output feature of a multilabel $\vy$ on an edge $e\in E$ in an output Markov network $G$.
+where $\phib_e(\vx,\vy_e)=\varphib(\vx)\otimes\Upsilonb_e(\vy_e)$ is the tensor product between an input feature map and an output feature of a multilabel $\vy$ on an edge $e\in E$ in an output Markov network $G$.
 In order to obtain $\vw$, we need to solve the primal optimization problem that is not dissimilar to (Definition~\ref{def_mmmn}).
 After the feature weight parameter $\vw$ is found, we need to solve the argmax problem to obtain the prediction
 \begin{align}
