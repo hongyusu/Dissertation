@@ -1176,7 +1176,7 @@ $Z_{\vx,\vw}$ is a partition function dependent on $\vx$ that sums over all poss
 \end{align}
 Thus, when conditioned on $\vx$, random variables $y_v$ obey the Markov property with respect to the output graph $G$.
 
-Applying the similar regularization technique as to Logistic Regression in Section~\ref{sc_lr}, the feature weight parameter $\vw$ can be solved by introducing a Gaussian prior and maximizing the logarithm of the resulting \textit{Maximize A-Posteriori} (\map) problem \citep{taskar02} defined as
+Applying the similar regularization technique as applied to Logistic Regression in Section~\ref{sc_lr}, the feature weight parameter $\vw$ can be solved by introducing a Gaussian prior and maximizing the logarithm of the resulting \textit{Maximize A-Posteriori} (\map) problem \citep{taskar02} defined as
 \begin{align}
 	L(\vw) = \sum_{i=1}^{m}\left[\ip{\vw}{\phib(\vx_i,\vy_i)}-\log{\sum_{\vy'\in\vYcal}{\exp{\ip{\vw}{\phib(\vx_i,\vy')}}}}\right] - \frac{1}{\sigma^2}\norm{\vw}^2. \label{crf_inference}
 \end{align}
