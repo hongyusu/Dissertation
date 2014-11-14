@@ -939,35 +939,35 @@ Probabilistic Classifier Chains (\pcc) developed in \citep{Read09classifier,Demb
 As there is no standard way for the classification order of microlabels in \cc, Ensemble Classifier Chains (\ecc) has been developed in \citep{Read11classifier} which improves \cc\ by generating and combining multiple chains of classifiers. 
 
 
+
 %
 %
 \subsection{Instant Based Logistic Regression (\iblr)} \label{sc_iblr}
 
 \citet{Cheng09combining} developed Instance Based Logistic Regression (\iblr) with an extension to flat multilabel classification.
-\iblr\ is also an instant base learning approach \citep{Aha91instance} similar to \mlknn.
-It extends \mlknn\ by exploring the label correlation within the neighbors of an instant for posterior inference.
-It is also similar to \cc\ but with major differences.
-The central idea of \iblr\ is to take the labels of the neighboring examples as the only features in order to evaluate the label of the current example.
-Similar idea has been applied in collective classification \citep{Ghamrawi05collective} and link based classification \citep{Getoor05link, Getoor07introduction}.
+\iblr\ is also an instant base learning approach \citep{Aha91instance} that is similar to \mlknn.
+It extends \mlknn\ by exploring the correlation between labels within the neighbors of an instant for posterior inference.
+%It is also similar to \cc\ but with major differences.
+The central idea of \iblr\ is to take the labels of examples in the neighbor as the only features to predict the label of the current example.
+Similar ideas have been applied in collective classification \citep{Ghamrawi05collective} and link based classification \citep{Getoor05link, Getoor07introduction}.
 
-In particular, for each unseen example $\vx$, \iblr\ first identifies the set of $K$-nearest neighbors $N_k(\vx)$ from the training sets.
-Then the algorithm builds a Logistic Regression (\lr) model (Section~\ref{sc_lr}) for each microlabel based on the label information collected from all examples in $N_k(\vx)$.
-Mathematically \iblr\ defines a posterior probability for the $j$'th microlabel of $\vx$ being labeled as $u_j$ by
+In particular, for each unseen example $\vx$, \iblr\ first identifies the set of $K$-nearest neighbors $N_k(\vx)$ from training examples.
+The algorithm builds a Logistic Regression model (Section~\ref{sc_lr}) for each microlabel based on the label information collected from all examples in $N_k(\vx)$.
+Mathematically \iblr\ defines a posterior probability of the $j$'th microlabel of $\vx$ being labeled as $u_j$ by
 \begin{align*}
 	\pi^{(j)} = P( \vy(\vx)[j]=u_j | N_k(\vx)), u_j\in\Ycal_j.
 \end{align*}
-It constructs a logistic regression classifier for $\pi^{(j)}$ which can be derived from the following 
+It constructs a Logistic Regression classifier for $\pi^{(j)}$ which can be derived from the following 
 \begin{align*}
 	\log\frac{\pi^{(j)}}{1-\pi^{(j)}} = w_0^{(j)} + \sum_{i=1}^{k}\alpha_i^{(j)}\cdot w_{i}^{(j)}(\vx),
 \end{align*}
-where $i$ is the index that iterates over all microlabels.
-$w_i^{(j)}(\vx)$ defined by 
+where $i$ iterates over all microlabels.
+$w_i^{(j)}(\vx)$ is defined by 
 \begin{align*}
 	w_i^{(j)}(\vx) = \sum_{\vx'\in N_k(\vx)}K(\vx',\vx)\cdot \vy(\vx')[i]
 \end{align*}
-collects the $i'$th microlabel from each neighbor $\vx'\in N_k(\vx)$ and weights the microlabel according to the similarity between $\vx$ and $\vx'$ encoded in $K(\vx',\vx)$.
-$\alpha_i^{(j)}$ is the regression coefficient of the $i$'th microlabel information from the neighbors of $\vx$ to the $j$'th microlabel of example $\vx$.
-$w_0^{(j)}$ is a bias term.
+which collects the $i'$th microlabel from each neighbor $\vx'\in N_k(\vx)$ and weights the microlabels according to the similarity between $\vx$ and $\vx'$ encoded in $K(\vx',\vx)$.
+$\alpha_i^{(j)}$ is the regression coefficient.
 
 
 
