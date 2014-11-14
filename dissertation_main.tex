@@ -1180,7 +1180,7 @@ Applying the similar regularization technique as to Logistic Regression in Secti
 \begin{align}
 	L(\vw) = \sum_{i=1}^{m}\left[\ip{\vw}{\phib(\vx_i,\vy_i)}-\log{\sum_{\vy'\in\vYcal}{\exp{\ip{\vw}{\phib(\vx_i,\vy')}}}}\right] - \frac{1}{\sigma^2}\norm{\vw}^2. \label{crf_inference}
 \end{align}
-The optimization problem derived from (\ref{crf_inference}) is an instantiation of the regularized risk minimization (\ref{lr}) with the exponential loss (\ref{exp_loss}) and $L_2$-norm regularization.
+The optimization problem derived from (\ref{crf_inference}) is an instantiation of the regularized risk minimization (\ref{lr}) with the log loss (\ref{log_loss}) and $L_2$-norm regularization.
 It is solved in \citep{lafferty01} by the improved iterative scaling algorithm (\iis) \citep{Pietra97inducing}.
 In order to make \crf\ work in practice, one also need to make sure that the partition function (\ref{crf_partition_function}) can be evaluated efficiently.
 
