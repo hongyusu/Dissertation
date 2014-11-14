@@ -24,7 +24,7 @@ In the classical supervised learning setting, there is only one variable to be p
 This is called \textit{single-label classification} if the output variable is discrete, or \textit{regression} if the output variable is continuous.
 Many single-label classification models have been designed and applied in practice, for example, the Perceptron \citep{Rosenblatt58}, Logistic Regression \citep{Chen99}, and Support Vector Machines \citep{Cortes95support}.
 
-\textit{Multilabel classification} is a natural extension to single-label classification by defining multiple interdependent output variables associated with each input.
+\textit{Multi-label classification} is a natural extension to single-label classification by defining multiple interdependent output variables associated with each input.
 These type of problems are prevalent in everyday life.
 For example, a movie can be classified as ``sci-fi'', ``thriller'' and ``crime''; a news article can be categorized as ``science'', ``drug discovery'' and ``genomics''; a gene can be associated with multiple functions in genomics research; a surveillance photo can be tagged with ``car'', ``building'' and ``road''. 
 When multiple output variables are treated as a ``flat'' vector, the problem is often called \textit{flat multi-label classification}.
@@ -819,7 +819,7 @@ However, they will not be too similar in which each subset will only cover aroun
 To see this, consider the probability that the $i$'th training examples is not sampled once is $(1-\frac{1}{m})$, and the probability that it is not sampled at all is $(1-\frac{1}{m})^m$.
 When $m$ is large, this probability will approach $37\%$. 
 That is, around $37\%$ of training examples will not appear in any sampled training set.
-The property of bootstrap sampling also allows us to efficiently estimate the generalization error of the base learner known as \textit{out-of-bag estimation} \citep{Breiman96out,Tibshirani1996bias,Wolpert99an}.
+The property of Bootstrap Sampling also allows us to efficiently estimate the generalization error of the base learner known as \textit{out-of-bag estimation} \citep{Breiman96out,Tibshirani1996bias,Wolpert99an}.
 
 \iffalse
 The Random Forest developed in \citep{Breiman01random} is an important extension of \bagging.
@@ -837,24 +837,25 @@ The feature split process of decision tree is deterministic given a set of featu
 %	chapter
 %
 %------------------------------------------------
-\chapter{Multilabel Classification} \label{ch_fmlc}
+\chapter{Multi-label Classification} \label{ch_fmlc}
 
-Multilabel classification is a natural extension to single-label classification presented in Section~\ref{sc_slc}.
-In multi-label classification each input (instant) is simultaneously associated with multiple outputs (labels).
-The research of the multi-label classification has progressed rapidly in the last two decades with many learning algorithms being developed and applied to real world classification problems \citep{lafferty01,taskar02,Taskar04max,THJA04,Rousu07}.
+Multi-label classification is a natural extension to single-label classification presented in Section~\ref{sc_slc}.
+In multi-label classification, each input (instant) is simultaneously associated with multiple outputs (labels).
+The research of multi-label classification has progressed rapidly in the last two decades with many learning algorithms being developed and applied to real world classification problems \citep{lafferty01,taskar02,Taskar04max,THJA04,Rousu07}.
 In general, there are two lines of research for multi-label classification, namely flat multi-label classification and structured output prediction.
-In flat multi-label classification, the multiple labels are treated essentially as a ``flat'' vector of labels.
-Structured output prediction, on the other hand, models the multiple labels via a graph structure that connects labels.
-This chapter will be devoted to flat multi-label classification in which several well established algorithm techniques will be presented.
-The methods for structured output prediction will be covered in the latter part of the thesis.
+In flat multi-label classification, multiple interdependent labels are treated essentially as a ``flat'' vector of labels.
+Structured output prediction, on the other hand, models the correlation between multiple labels with a graph structure that connects labels.
+This chapter will be devoted to flat multi-label classification in which several well-established algorithms will be presented.
+Structured output prediction will be covered in the latter part of the thesis.
 
 Consider the infeasibility of listing all algorithms for flat multi-label classification, it is easier if we are able to categorize the algorithms into classes.
-In this chapter, we adopt the simple categorization presented in \citep{Tsoumakas07multi,Tsoumakas10mining} which gives us two major algorithm categories, namely problem transformation and algorithm adaptation.
-For the problem transformation category, we will present the methods which aim to transfer the flat multi-label classification problem into other well studied problems (e.g., single-label classification, label ranking).
-For the algorithm adaptation category, we will describe the methods which directly modify the established learning techniques (e.g., Logistic Regression, ensemble method) to solve the multi-label classification problem.
-Nevertheless, the present algorithms will explore the inherited difficulties of flat multi-label classification which are the exponential sized multi-label space and the implicit label correlation.
-Besides, the author realized that it is impossible to cover every lines of research in the field of flat multi-label classification.
-Interested readers are pointed out to the recent research survey articles \citep{Tsoumakas07multi,Tsoumakas10mining,Zhang14a}.
+In this chapter, we adopt the simple categorization presented by \citet{Tsoumakas07multi,Tsoumakas10mining} which gives us two major algorithm categories, namely problem transformation and algorithm adaptation.
+For the problem transformation category, we will present the methods which aim to transfer the flat multi-label classification problem into other well studied problems, for example, single-label classification, and label ranking.
+For the algorithm adaptation category, we will describe the methods which directly modify established learning techniques (e.g., Logistic Regression, ensemble method) to solve the multi-label classification problem.
+Nevertheless, the present algorithms will explore the inherited difficulties of flat multi-label classification which are 
+Nevertheless, the presented algorithms will aim to tackle the difficulties of flat multilabel classification, namely the exponential sized multi-label space and the implicit correlation between multiple labels.
+It is impossible to cover every lines of research in the field of flat multi-label classification.
+Readers are pointed out to recent research survey articles by \citet{Tsoumakas07multi,Tsoumakas10mining,Zhang14a}.
 
 
 
@@ -893,9 +894,9 @@ We will focus on \br\ in this section.
 
 %
 %
-\subsection{Multilabel $K$-Nearest Neighbors (\mlknn)} \label{sc_mlknn}
+\subsection{Multi-label $K$-Nearest Neighbors (\mlknn)} \label{sc_mlknn}
 
-Multilabel $K$-Nearest Neightbors (\mlknn) proposed by \citet{Zhang05a,Zhang07mlknn} is perhaps the most famous binary relevance classifier for flat multi-label classification.
+Multi-label $K$-Nearest Neightbors (\mlknn) proposed by \citet{Zhang05a,Zhang07mlknn} is perhaps the most famous binary relevance classifier for flat multi-label classification.
 \mlknn\ is also an instance based learning approach \citep{Aha91instance} that is derived from the $K$-Nearest Neightbor (\knn) algorithm designed for the single-label classification problem.
 \mlknn\ transforms the flat multi-label classification problem into a set of single-label classification problems and processes each microlabel independently.
 For each unseen example $\vx$, \mlknn\ algorithm first identifies the set of $K$-nearest neighbors $N(\vx)$ from the training sets.
@@ -983,7 +984,7 @@ They are not explained in detail in the section due to the divergence from the m
 
 %
 %
-\subsection{Ensemble Methods for Flat Multilabel Classification} \label{sc_emfmlc}
+\subsection{Ensemble Methods for Flat Multi-label Classification} \label{sc_emfmlc}
 
 As it is straightforward to combine multiple scalar output variables, the ensemble methods have been initially developed for single-label classification \citep{Breiman96bagging,Freund97a} or regression  \citep{Breiman96bagging} tasks.
 However, it is not immediately apparent how to combine vector valued outputs in flat multi-label space.
@@ -1112,7 +1113,7 @@ We will present our new algorithm \spin\ that is capable of predicting a directe
 %
 \section{Preliminaries}
 
-Multilabel classification deals with multiple interdependent output variables, $\vy\in\vYcal$.
+Multi-label classification deals with multiple interdependent output variables, $\vy\in\vYcal$.
 The problem is known as \textit{structured output prediction} when these variables are located in a structured output space.
 That is, the label correlation is described by an \textit{output graph} that connects multiple labels.
 In particular, we define the output graph $G=(E,V)$ by a node set $V=\{1,\cdots,k\}$ which corresponds to the microlabels $\{y_1,\cdots,y_k\}$ and an edge set $E=V\times V$ which represents the dependency between pair of microlabels.
