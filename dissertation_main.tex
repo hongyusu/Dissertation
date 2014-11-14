@@ -1097,10 +1097,10 @@ Recently, \citet{Paredes12exploit} proposed a method that exploits the informati
 \chapter{Structured Output Prediction} \label{ch_sop}
 
 Structured output prediction is a natural extension to flat multilabel classification (Chapter~\ref{ch_fmlc}).
-Unlike flat multilabel classification which takes multiple interdependent output variables as a ``flat'' vector, structured output prediction assumes that multiple output variables are correlated and located in a structured output space.
-It assumes that there exists an output graph (e.g., chain, tree) connecting multiple output variables by which the correlation between labels can be utilized. 
+Unlike flat multilabel classification which takes multiple interdependent output variables essentially as a ``flat'' vector, structured output prediction assumes that multiple output variables are correlated and located in a structured output space.
+It assumes that there exists an output graph (e.g., chain, tree) connecting multiple output variables by which the correlation between labels can be utilized during learning.
 In this chapter, we will start by introducing several structured output learning algorithms developed during the last decade.
-We will present our new algorithm \spin\ that is capable of predicting a directed acyclic graph (\daggraph) that best ``responses'' to an input, and examine the performance on the network response prediction problem within the context of social network analysis.
+We will present our new algorithm \spin\ that is capable of predicting a directed acyclic graph (\daggraph) which best ``responses'' to an input, and examine the performance on the network response prediction problem within the context of social network analysis.
 
 
 
@@ -1109,13 +1109,13 @@ We will present our new algorithm \spin\ that is capable of predicting a directe
 \section{Preliminaries}
 
 Multilabel classification deals with multiple interdependent output variables, $\vy\in\vYcal$.
-The problem is known as \textit{structured output prediction} when these variables are located in a structured output space.
-That is, the label correlation is described by an \textit{output graph} that connects multiple labels.
-In particular, we define the output graph $G=(E,V)$ by a node set $V=\{1,\cdots,k\}$ which corresponds to the microlabels $\{y_1,\cdots,y_k\}$ and an edge set $E=V\times V$ which represents the dependency between pair of microlabels.
-For each edge $e=(j,j')\in E$, we use $\vy_e$ to denote the edge label of edge $\ve$ with respect to multilabel $\vy$ by concatenating the head label $y_j$ and the tail label $y_{j'}$, with the edge label domain $\vy_e\in\vYcal_e=\Ycal_j\times\Ycal_{j'}$.
-By $\vy_{i,e}$, we denote the edge label of one example $(\vx_i,\vy_i)$ on edge $\ve$.
-Thus, given a training example $(\vx_i,\vy_i)$ and the output graph $G$, we can uniquely identify the node label $y_i$ and the edge label $\vy_{i,e}$ on the graph.
-In addition, we denote the possible label of node $i$ by $u_i$ and the possible label of edge $\ve$ by $\vu_{e}$ where $u_i$ and $\vu_{e}$ do not constrain to any multilabel $\vy$.
+The problem is called as {structured output prediction} when these variables are located in a structured output space.
+That is, the correlation between labels is described by an {output graph} connecting multiple labels.
+In particular, we define the output graph $G=(E,V)$ by a node set $V=\{1,\cdots,k\}$ which corresponds to the microlabels $\{y_1,\cdots,y_k\}$ and an edge set $E=V\times V$ which represents the correlation between pair of microlabels.
+For each edge $e=(j,j')\in E$, we use $\vy_e$ to denote the label of the edge $\ve$ with respect to a multilabel $\vy$ by concatenating the head label $y_j$ and the tail label $y_{j'}$, with an edge label domain $\vy_e\in\vYcal_e=\Ycal_j\times\Ycal_{j'}$.
+We use $\vy_{i,e}$ to denote the edge label of an example $(\vx_i,\vy_i)$ on an edge $\ve$.
+Thus, given a training example $(\vx_i,\vy_i)$ and an output graph $G$, we can uniquely identify the node label $y_i$ and the edge label $\vy_{i,e}$ of the output graph.
+In addition, we denote the possible label of a node $i$ by $u_i$ and the possible label of an edge $\ve$ by $\vu_{e}$ where $u_i$ and $\vu_{e}$ are not constrained to any multilabel $\vy$.
 Naturally, $u_i\in\Ycal_i$ and $\vu_e\in\vYcal_e$.
 
 
