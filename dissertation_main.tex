@@ -1203,7 +1203,6 @@ can be seen as the affinity of a multilabel $\vy$ to an input $\vx$ according to
 The feature weight parameter $\vw$ in (\ref{mmmn_score}) ensures the example with the correct multilabel will reach a higher score than with any incorrect multilabels.
 \mmmn\ defines a margin as the difference of compatibility scores between the correct example $(\vx_i,\vy_i)$ and the psudo-example $(\vx_i,\vy)$.
 Under the Maximum-Margin principle in Section~\ref{sc_svm}, \mmmn\ requires the margin to be at least $\vell(\vy_i,{\vy})$.
-
 To learn the feature weight parameter $\vw$, we need to solve the following primal optimization problem
 \begin{definition}{\mmmn\ Optimization Problem in Primal.}\label{def_mmmn}
 	\begin{align*}
@@ -1213,7 +1212,9 @@ To learn the feature weight parameter $\vw$, we need to solve the following prim
 	\end{align*}
 \end{definition}
 \noindent
-where $\xi_i$ is the slack allotted to each example to make sure solution can always be found, $\vell(\vy_i,\vy)$ is the loss function between the correct multilabel $\vy_i$ and the incorrect multilabel $\vy$, $C$ is the slack parameter that controls the amount of regularization in the model.
+where $\xi_i$ is the slack allotted to each example to make sure the solution can always be found, $\vell(\vy_i,\vy)$ is the loss function between a correct multilabel $\vy_i$ and an incorrect multilabel $\vy$, $C$ is the slack parameter that controls the amount of regularization in the model.
+The optimization problem is an instantiation of the regularized risk minimization (\ref{rl}) with the hamming loss and the $L_2$-norm regularization (\ref{l2_norm}).
+
 For each example $\vx_i$, the optimization calls for maximizing the margin between the correct label $\vy_i$ and incorrect labels $\vy$.
 The margin is scaled by the loss function $\vell(\vy_i,{\vy})$ such that the completely incorrect multilabel will incur bigger loss than the nearly correct multilabel.
 The loss scaled margin optimization will push the high-loss pseudo-examples further away from the correct example than the low-loss pseudo-examples.
