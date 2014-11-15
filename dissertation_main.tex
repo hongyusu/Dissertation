@@ -1614,19 +1614,19 @@ We use $\tilde{\psib} = (\tilde{\psi}_j(\vx,u_j))_{j\in V,u_j\in\Ycal_j}$ to den
 \subsection{Methods}
 
 % amm
-Let $\Gcal=\{G^{(1)},\cdots,G^{(T)}\}$ denote a set of random output graphs, and let $\{\tilde{\psib}^{(1)},\cdots,\tilde{\psib}^{(T)}\}$ denote the max-marginal vectors from base classifiers that is built on each output graph.
-The prediction of the Average-of-Max-Marginal (\amm) aggregation on each node is obtained by averaging the max-marginals of base classifiers and choose the maximizing microlabel for the node
+Let $\Gcal=\{G^{(1)},\cdots,G^{(T)}\}$ denote a set of random output graphs, and let $\{\tilde{\psib}^{(1)},\cdots,\tilde{\psib}^{(T)}\}$ denote the max-marginal vectors from base classifiers built on a collection of random output graphs.
+The prediction of the Average-of-Max-Marginal (\amm) aggregation on the $j$'th node is obtained by averaging the max-marginals from base classifiers and choose the maximizing microlabel for the node 
 \begin{align*}
 	F_j^{\text{\amm}}=\underset{u_j\in\Ycal_j}{\argmax}\,\frac{1}{T}\sum_{t=1}^{T}\tilde{\psi}_{j,u_j}^{(t)}(\vx).	\end{align*}
-The predicted multilabel from \amm\ is composted by the predicted microlabels
+The predicted multilabel by \amm\ is composted by predicted microlabels
 \begin{align*}
 	F^{\text{\amm}}=\left(F_j^{\text{\amm}}\right)_{j\in V}.
 \end{align*}
 
 % mam
-\amm\ performs inference to find the max-marginals before combining the base classifiers into ensemble. 
-On the other hand, Maximum-of-Average-Marginals (\mam) aggregation first collects the local edge potentials $\psib_E^{(t)}$ from each base classifier, averages them and finally performs inference on the global consensus graph $\hat{G}=(\hat{E},V)$ with the averaged edge potentials.
-The \mam\ model is defined as
+\amm\ performs inference to find max-marginals before combining base classifiers. 
+On the other hand, the Maximum-of-Average-Marginals (\mam) aggregation first collects local edge potentials $\psib_E^{(t)}$ from each base classifier, averages them and performs a finial inference on a global consensus graph $\hat{G}=(\hat{E},V)$ with averaged edge potentials.
+\mam\ is defined as
 \begin{align*}
 	F^{\text{\tiny MAM}}(x) &= \underset{\vy \in \Ycal }{\argmax}\,\sum_{e\in \hat{E}}\frac{1}{T}\sum_{t=1}^{T}\ \psi^{(t)}_e(x,\vy_e)
 	%\vy^* &= \underset{\vy}{\argmax}\, \frac{1}{T}\sum_{t=1}^{T}\sum_{e\in E_t}{w^t_e}^T\varphib_e(x,\vy)
