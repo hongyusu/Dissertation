@@ -1567,7 +1567,7 @@ It is also worth pointing out that \mve\ is not restricted to the base learner \
 
 In addition, we design two approaches to generate the random output graphs.
 In \text{random spanning tree} approach, we first generate a random correlation matrix and extract a spanning tree out from the matrix.
-This approach eventually outputs a tree structure connecting all vertices.
+This approach outputs a tree structure connecting all vertices.
 In \text{random pairing} approach, we randomly draw two vertices at a time and couple the two with an edge.
 This approach outputs a set of disconnected pairs.
 
@@ -1577,13 +1577,11 @@ This approach outputs a set of disconnected pairs.
 %
 \section{Random Graph Ensemble (\amm, \mam)} \label{sc_su14b}
 
-We have shown in Section~\ref{sc_su11} that we can construct a majority voting ensemble of a set of structured output learners to tackle the problem during structured output learning when the output graph is not observed.
-We have evaluated the method on molecular classification problem.
-This section is based on \citepub{su14b} where we aim to present two other aggregation techniques to combine the base learners.
-Compare to previously developed \mve, the proposed model (\amm\ and \mam\ respectively) also perform inference before or after forming the ensemble.
-We also examine the performance of the proposed models on a set of heterogeneous multilabel datasets from various domains.
-In addition, we study the improvement of \mam\ in terms of the reconstruction error of the compatibility score.
-%In addition, we bring in a theory which is based on the reconstruction error of the compatibility score to explains the improvement of \mam.
+Section~\ref{sc_su11} has shown that the prediction performance of the molecular classification problem can be improved by applying majority voting to combine the predictions from multiple structured output learners built on a collection of random output graphs.
+This section is based on \citepub{su14b} in which we present two aggregation techniques to combine multiple structured output learners. 
+the proposed model, namely \amm\ and \mam, also perform inference before or after combining the base learners.
+The performance of the proposed models is evaluated on a set of heterogeneous multilabel datasets from a variety of domains.
+In addition, we study the performance of \mam\ in terms of the reconstruction error of the compatibility score.
 
 
 
@@ -1591,27 +1589,27 @@ In addition, we study the improvement of \mam\ in terms of the reconstruction er
 %
 \subsection{Background}
 
-We still work with the assumption made for \mve\ in Section~\ref{sc_su11} in which the base classifier will devise the prediction according to the structure of the output graph.
-In addition, we assume that the base classifier for \amm\ and \mam\ is defined with a Markov network structure.
-That is, the base classifier computes a compatibility score $\psi(\vx,\vy)$ for the pair $(\vx,\vy)\in\vXcal\times\Ycal$ according to the output graph $G$, indicating how well the input $\vx$ gets along with the output $\vy$.
+We still work with the assumption made for \mve\ in Section~\ref{sc_su11} in which the structure of the output graph is incorporated during learning and the prediction is made accordingly.
+In addition, we assume that the base learner for \amm\ and \mam\ is defined on a Markov network.
+That is, the base learner computes a compatibility score $\psi(\vx,\vy)$ for $(\vx,\vy)\in\vXcal\times\Ycal$ according to the output graph $G$, indicating how well an input $\vx$ gets along with an output $\vy$.
 The compatibility score $\psi(\vx,\vy)$ is defined as
 \begin{align*}
 	\psi(\vx,\vy) = \ip{\vw}{\phib(\vx,\vy)} = \sum_{e\in E}\ip{\vw}{\phib_e(\vx,\vy_e)}=\sum_{e\in E}\psi_e(\vx,\vy_e),
 \end{align*}
-where $\psi_e(\vx,\vy_e)$ denotes the edge compatibility score (\textit{edge potential}) between input $\vx$ and edge label $\vy_e$ on edge $e$.
-$\vw$ is the feature weight parameter which ensures that the input $\vx$ with correct output $\vy$ will achieve higher compatibility score than with incorrect output.
+where $\psi_e(\vx,\vy_e)$ denotes the edge compatibility score (\textit{edge potential}) between an input $\vx$ and the edge label $\vy_e$ of an edge $e$.
+$\vw$ is the feature weight parameter which ensures that an input $\vx$ with the correct output $\vy$ will achieve higher compatibility score than with any incorrect outputs.
 
 % edge potential
-In addition, we assume that we have access to the edge potentials between the input and the edge labels for each base classifiers
+In addition, we assume that we have access to the edge potentials of each base classifier 
 \begin{align*}
 	\psib_E^{(t)} = (\psi_e^{(t)}(\vx,\vu_e))_{e\in E^{(t)},\vu_e\in\Ycal_e}.
 \end{align*}
-With edge compatibility scores, we can infer the \textit{max-marginal} of the $i$'th node which is the score incurred by assigning label $u_i\in\Ycal_i$ to the $i$'th node \citep{Wainwright05map} defined by
+With edge compatibility scores, we can infer the \textit{max-marginal} \citep{Wainwright05map} of the $i$'th node which is the score incurred by assigning a label $u_i\in\Ycal_i$ to the $i$'th node defined by
 \begin{align*}
 	\tilde{\psi}_j(\vx,u_j) = \underset{\vy\in\Ycal,y_j=u_j}{\maximize}\sum_{e\in E}\psi_e(\vx,\vy_e).
 \end{align*}
-In words, the max-marginal is the maximum score of the multilabel consistent with $y_i=u_i$.
-We denote the collection of max-marginals by $\tilde{\psib} = (\tilde{\psi}_j(\vx,u_j))_{j\in V,u_j\in\Ycal_j}$.
+In words, the max-marginal is the maximum score of a multilabel consistent with $y_i=u_i$.
+We use $\tilde{\psib} = (\tilde{\psi}_j(\vx,u_j))_{j\in V,u_j\in\Ycal_j}$ to denote a collection of max-marginals.
 
 \subsection{Methods}
 
