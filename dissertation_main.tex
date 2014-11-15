@@ -1456,9 +1456,9 @@ To apply structured output learning, we extract output graphs from several auxil
 
 Molecular classification, the goal of which is to predict the anti-cancer potentials of drug-like molecules, is a crucial step in drug discovery and has gained in popularity from machine learning community \citep{Singh12qsar,Dutt12classification}.
 Viable molecular structures are scanned, searched, or designed for therapeutic efficacy.
-In particular, expensive preclinical \textit{in vitro} and \textit{in vivo} drug tests can be largely avoided by which special efforts can be devoted to few promising candidate molecules, once accurate \textit{in silico} models are available \citep{Burbidg01drug}.
+In particular, expensive preclinical \textit{in vitro} and \textit{in vivo} drug tests can be largely avoided and special efforts can be devoted to few promising candidate molecules, once accurate \textit{in silico} models are available \citep{Burbidg01drug}.
 
-A variety of machine learning methods have been developed for this task, to name but a few, inductive logic programming \citep{King96structure}, artificial neural network \citep{Bernazzani06predicting}, kernel methods for nonlinear molecular properties \citep{Trotter01drug,Ralaivola05graph,Swamidass05kernel,Ceroni07classification}, and \svm\ based methods for reliable predictions \citep{Trotter01drug,Byvatov03comparison,Xue04effect}.
+A variety of machine learning methods have been developed for this task, to name but a few, inductive logic programming \citep{King96structure}, artificial neural network \citep{Bernazzani06predicting}, kernel methods for nonlinear molecular properties \citep{Trotter01drug,Ralaivola05graph,Swamidass05kernel,Ceroni07classification}, and \svm\ based methods \citep{Trotter01drug,Byvatov03comparison,Xue04effect}.
 Albeit with a large quantity of the developed methods, they only focus on predicting a single output variable (e.g., the inhibition potential of a molecule in a target cell line). 
 On the other hand, a large number of interdependent molecular activities are often screened at the same time in the field of drug research.
 For example, in the recent \textit{NCI-60} {Human Tumor Cell Line Screen} project \citep{Shoemaker06the}, thousands of molecular structures are tested agains hundreds of target cell lines.
@@ -1469,15 +1469,15 @@ For example, in the recent \textit{NCI-60} {Human Tumor Cell Line Screen} projec
 %
 \subsection{Methods}
 
-To efficiently and accurately predict molecular activities in multiple cell lines at the same time, we applied a structured output learning approach in \citepub{su10} which to our knowledge is the first multilabel learning approach for the molecular classification problem.
-The algorithm is an instantiation of \mmcrf\ \citep{Rousu07} described in Section~\ref{sc_mmcrf}.
+To efficiently and accurately predict molecular activities in multiple cell lines at the same time, we applied a structured output learning approach in \citepub{su10}, which is to our knowledge the first multilabel classification approach for the molecular classification problem.
+The algorithm is an instantiation of \mmcrf\ \citep{Rousu07} presented in Section~\ref{sc_mmcrf}.
 %It is also a sibling method of \mmmn\ \citep{Taskar04max} described in Section~\ref{sc_mmmn}.
-In particular, the model defines a compatibility score through the inner product of a molecular structure $\vx$ and the activities in multiple cell lines $\vy$
+In particular, the model defines a compatibility score through the inner product of a molecular structure $\vx$ and the activities in multiple target cell lines $\vy$
 \begin{align*}
 	F(\vx,\vy;\vw) = \ip{\vw}{\phib(\vx,\vy)},
 \end{align*}
-where $\vw$ is the feature weight parameter which ensures that the molecular structure with correct activities will be scored higher than with incorrect activities.
-$\vw$ is learned by maximizing the minimum loss-scaled margin between correct examples $(\vx_i,\vy_i)$ and incorrect pseudo-examples $(\vx_i,\vy)$ over the whole training set, which amounts to solving the optimization problem that is not dissimilar to (Definition~\ref{def_mmmn})
+where $\vw$ is the feature weight parameter to ensure that a molecule with correct activities will be scored higher than with incorrect activities.
+$\vw$ is obtained by maximizing the minimum loss-scaled margin between correct examples $(\vx_i,\vy_i)$ and incorrect pseudo-examples $(\vx_i,\vy)$ over all training examples, which amounts to solving the optimization problem that is not dissimilar to Definition~\ref{def_mmmn}.
 
 \iffalse
 following optimization problem
