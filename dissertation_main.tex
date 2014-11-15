@@ -1887,29 +1887,29 @@ In this chapter, the author aims to briefly discuss the implementations and poin
 %------------------------------------------------
 \section{Discussion}
 
-In this thesis, we have studied the supervised learning for classification.
+In this thesis, we have studied supervised learning for classification.
 Especially, we focused on the multilabel classification problem where the task is to predict multiple interdependent output variables given an input example.
-As the multiple output variables can be ``on'' or ``off'' simultaneously, the central problem in multilabel classification is to exploit the label correlations in order to make accurate prediction.
-The problem has been previously tackled by the flat multilabel classification approach which treats the multiple output variables essentially as a ``flat'' vector.
-The approach has difficulty of modeling the label correlations.
-Structured output learning arises as a natural extension to flat multilabel classification in which the label correlations are modeled by an output graph connecting multiple labels.
+As the multiple output variables can be ``on'' or ``off'' simultaneously, the central problem in multilabel classification is how to best exploit the correlation of labels in order to make accurate prediction.
+The problem has previously been tackled by the flat multilabel classification approaches which treats multiple output variables essentially as a ``flat'' vector.
+The approaches have difficulty of modeling the correlation between labels.
+Structured output learning arises as a natural extension to flat multilabel classification in which the correlation between labels are modeled by an output graph connecting labels.
 
-The first outcome of the thesis is a new structured output learning algorithms for multilabel classification when the output graph is observed.
-In particular, the proposed algorithm \spin\ can predict a directed acyclic graph (\daggraph) from an observed underlying network which best ``responds'' to an input example.
+The first outcome of the thesis is a new structured output learning algorithm for multilabel classification in which the output graph is observed.
+In particular, the proposed algorithm \spin\ can predict a directed acyclic graph (\daggraph) from an observed underlying network which best ``responds'' to an input.
 The empirical evaluation on the network response prediction problem within the context of social network analysis shows that the proposed model outperforms several flat multilabel classification approaches.
 The study demonstrates that accurate prediction can be achieved by structured output learning when the output graph can be obtained and utilized during learning.
 
-Meanwhile, we realize that the current structured output learning approach relies on an output graph connecting multiple output variables in order to exploit the label correlations.
-Thus, the applicability of the structured output learning is limited due to the fact that the output graph needs to be known as \textit{a-priori}.
+Meanwhile, we realize that the current structured output learning approaches rely on an output graph connecting multiple output variables in order to exploit the correlation between labels.
+Thus, the applicability of structured output learning is limited due to the fact that the output graph needs to be known \textit{apriori}.
 The second outcome of the thesis is that we have proposed several algorithms for structured output learning which are no longer constrained to the availability of the output graph.
 Analog but with significant differences to the previously established ensemble methods, the proposed algorithms aim to combines a set of structured output learners which are built on a collection of random output graphs.
-In particular, \mve\ applies majority vote to directly combine the predictions from the base learners, while \amm\ and \mam\ perform additional inference on the output graphs before or after combining the base learners.
+In particular, \mve\ uses majority vote to directly combine the predictions from base learners, while \amm\ and \mam\ perform additional inference on the output graph before or after combining base learners.
 Meanwhile, we have developed \rta\ based on the theoretical study.
 The proposed model performs max-margin learning on a random sample of spanning trees.
-The joint learning and inference in \rta\ ensures that the base learners, which are built from a set of random spanning trees, are optimized simultaneously towards the same global objective.
-\rta\ has also laid the foundation of tackling the intractability of graph inference on unknown graph structure in which fast optimization and accurate prediction can be achieved with attainable computational efforts.
+The joint learning and inference in \rta\ ensures that the base learners, which are built from a set of random spanning trees, are optimized simultaneously towards a same global objective.
+\rta\ has also laid the foundation of tackling the intractability of the graph inference on any unknown graph structures in which fast optimization and accurate prediction can be achieved with attainable computational efforts.
 
-In addition to the practical learning algorithms, the thesis also contributes to the theoretical studies which not only explain the intuition behind the formalisms but also guarantee the generalization in the performance of the proposed algorithms.
+In addition to the practical learning algorithms, the thesis also contributes to the theoretical studies which not only explain the intuition behind the formalisms but also guarantee the generalization of the performance of the proposed algorithms.
 
 
 
@@ -1925,8 +1925,8 @@ As the first direction is straight-forward and application oriented, we will foc
 
 To serve as a starting point, the inference algorithm for \spin\ can be further developed, which not only needs to be scalable to large social network data but also should have approximation guarantee.
 The research on structured output learning with unknown output graph should also be continued.
-In particular, we plan to investigate the possibility of learning the feature weight parameters defined on random spanning trees through $L_1$ norm combination.
-Learning with $L_1$-norm regularized parameter combination has been previously studied in multiple kernel learning \citep{Rakotomamonjy08simplemkl}, which can be formulated into an equivalent form of learning a weighted $L_2$-norm combination.
+In particular, we plan to investigate the possibility of learning the feature weight parameters defined on random spanning trees through a $L_1$ norm combination.
+Learning with the $L_1$-norm regularized parameter combination has been previously studied in multiple kernel learning \citep{Rakotomamonjy08simplemkl}, which can be formulated into an equivalent form of learning a weighted $L_2$-norm combination.
 The additional weight can be seen as the fitness of the spanning tree to the current training data, which can be used to select the most relevant tree structures.
 We need to study the corresponding optimization problem as the current alternative optimization algorithm proposed by \citet{Rakotomamonjy08simplemkl} is not efficient.
 The theoretical properties of \rta\ (e.g. generalization error bound) should also be extended to the new algorithms.
