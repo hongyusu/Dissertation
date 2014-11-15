@@ -1494,9 +1494,9 @@ The loss scaled margin optimization will push high-loss pseudo-examples further 
 \fi
 
 %Kernel is the classical way of defining the similarity between complex objects.
-As \mmcrf\ kernelizes input, we use graph kernel to measure the similarity between pair of molecular structures in \citepub{su10} .
-The common way to represent the structure of a molecule is to use an undirected labeled graph $G=(V,E)$, where vertices $V=\{v_1,\cdots,v_n\}$ corresponds to atoms and edges $E=\{e_1,\cdots,e_m\}$ corresponds to the covalent bonds.
-The adjacency matrix $A$ of graph $G$ is defined such that the $(i,j)$'th entry $A_{i,j}$ equals to one if there is an edge between atom $i$ and atom $j$.
+As \mmcrf\ kernelizes input, we use graph kernel to measure the similarity between a pair of molecular structures.
+The common way to represent the structure of a molecule is to use an undirected labeled graph $G=(V,E)$ with a set of vertices $V=\{v_1,\cdots,v_n\}$ corresponds to atoms and a set of edges $E=\{e_1,\cdots,e_m\}$ corresponds to covalent bonds.
+The adjacency matrix $A$ of a graph $G$ is defined such that the $(i,j)$'th entry $A_{i,j}$ equals to one if there is an edge between the $i$'th atom and the $j$'th atom.
 
 % walk kernel
 \textit{Walk Kernel} \citep{Kashima03marginalized,Gartner03a} computes the sum of matching walks in a pair of graphs. 
