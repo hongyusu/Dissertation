@@ -1554,22 +1554,22 @@ We also examine the classification performance on the molecular classification p
 %
 \subsection{Methods}
 
-We use \mmcrf\ as base classifier trained on a collection of random output graphs.
-In particular, a random graph $G_t$ is generated for each base classifier to couple the multiple output labels which are the activities of the molecular structure $\vx$ over all cell lines.
-The base model \mmcrf\ is learnt with the training data $S=\{(\vx_i,\vy_i)\}_{i=1}^{m}$ and the output graph $G_t$.
-After the base learners have been generated, the predictions are extracted from each base classifier and are collected for a post-processing step: we compute a majority vote over the graph labeling from the sign on the means of the base classifier's prediction
+We use \mmcrf\ as the base classifier trained on a collection of random output graphs.
+In particular, a random graph $G_t$ is generated for each base learner to couple the multiple labels which are the activities of the molecule $\vx$ on target cell lines.
+The base model \mmcrf\ is learned with the training data $S=\{(\vx_i,\vy_i)\}_{i=1}^{m}$ and the output graph $G_t$.
+After the base learners have been generated, the predictions are extracted from the base learners and are collected for a post-processing step: we compute a majority vote over the graph labeling from the sign on the means of the base classifier's prediction
 \begin{align*}
 	F_j^{\text{\mve}}=\underset{y_j\in\Ycal_j}{\argmax}\,\left(\frac{1}{T}\sum_{i=1}^{T}\ind{F_j^{(t)}(x)=y_j}\right), \forall j\in\{1,\cdots,k\},
 \end{align*}
 where $T$ denotes the size of the ensemble which is also the number of random output graphs, and $F^{(t)}(\vx)=\{F^{(t)}_j(x)\}_{j=1}^{k}$ denotes the predicted multilabel from the $t$'th base learner.
-In words, the ensemble prediction on each microlabel is the most frequently appearing prediction among the base classifiers.
-It is also worth pointing out that the \mve\ framework is not restricted to the base learner \mmcrf\ and can be extended with any other structured output learning methods as long as the methods incorporate the output structure and make predictions based on the structure.
+That is, the ensemble prediction on each microlabel is the most frequently appearing prediction among the base classifiers.
+It is also worth pointing out that \mve\ is not restricted to the base learner \mmcrf\ and can be extended with any other structured output learning models as long as the model incorporates the output structure into learning and makes predictions based on the structure.
 
-In addition, we designed two approaches to generate random output graphs.
-In \text{random spanning tree} approach, we first generate a random correlation matrix and extract the spanning tree out from the matrix.
-The approach eventually generates a tree structure connecting all vertices.
+In addition, we design two approaches to generate the random output graphs.
+In \text{random spanning tree} approach, we first generate a random correlation matrix and extract a spanning tree out from the matrix.
+This approach eventually outputs a tree structure connecting all vertices.
 In \text{random pairing} approach, we randomly draw two vertices at a time and couple the two with an edge.
-The approach outputs a set of disconnected pairs.
+This approach outputs a set of disconnected pairs.
 
 
 
