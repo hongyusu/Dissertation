@@ -1632,7 +1632,7 @@ On the other hand, the Maximum-of-Average-Marginals (\mam) aggregation first col
 	%\vy^* &= \underset{\vy}{\argmax}\, \frac{1}{T}\sum_{t=1}^{T}\sum_{e\in E_t}{w^t_e}^T\varphib_e(x,\vy)
 	= \underset{\vy \in \Ycal}{\argmax}\, \frac{1}{T} \sum_{t=1}^T \sum_{e\in \hat{E}} \ip{\vw_e^{(t)}}{\phib_e(x,\vy_e)}. %\label{ensemble3}
 \end{align*}
-In addition, \citepub[Lemma 1]{su14b} allows us to simplify the computation of \mam\ in terms of dual variables and kernels.
+In addition, \citepub[Lemma 1]{su14b} simplifies the computation of \mam\ in terms of dual variables and kernels.
 \iffalse
 As a result, the \mam\ ensemble can be equivalently stated as
 \begin{align*}
@@ -1646,13 +1646,12 @@ where by $\bar\mu(i,e,\vu_e)=\frac{1}{T}\sum_{t=1}^T\mu^{(t)}(i,e,\vu_e)$ we den
 \end{align*}
 \fi
 
-Besides the proposed algorithm frameworks, we also develope theoretical analysis to explain the improvement of \mam\ ensemble.
-The analysis extends the theory on single-label ensemble developed by \citet{Brown10good}.
-In general, \citepub[Theory 1]{su14b} states that the reconstructive error from \mam\ ensemble is guaranteed to be less than or equal to the average reconstruction error from the base classifiers.
+Besides the proposed algorithms, we also present the theoretical analysis to explain the improvement of \mam.
+The analysis extends the theory of single-label ensemble developed in \citep{Brown10good}.
+In particular, \citepub[Theory 1]{su14b} states that the reconstructive error from \mam\ is guaranteed to be less than or equal to the average reconstruction error from base classifiers.
 The improvement can be decomposed into two terms, namely \textit{diversity} and \textit{coherence}.
 The former measures the variability of individual classifiers learned from different perspectives which shares the same argument as the analysis of single-label ensemble \citep{Brown10good}.
-The latter measures the correlation of the microlabel predictions in which higher correlation leads to better improvement.
-
+The latter measures the correlation of microlabel predictions in which the correlation has a positive effect on the performance. 
 
 
 %
