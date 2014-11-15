@@ -1515,27 +1515,25 @@ Walk kernel can be equivalently expressed in terms of the adjacency matrix $A_{\
 	K_{wk}(G_1,G_2) = \sum_{i,j=1}^{|V_{\times}|}\left[\sum_{n=0}^{\infty}\lambda^{n}A_{\times}^n\right]_{i,j},
 \end{align*}
 where $0<\lambda\le1$ is a scaling parameter.
-Using exponential series or geometric series, walk kernel can be evaluated in cubic time \citep{Gartner03a} in the number of vertices $V_{\times}$
+Using exponential series or geometric series, walk kernel can be evaluated in cubic time \citep{Gartner03a} in the number of vertices $V_{\times}$ according to
 \begin{align*}
 	K_{wk}(G_1,G_2) = \ve\tp(\vI-\lambda A_{\times})^{-1}\ve,
 \end{align*}
 where $\vI$ denotes an identity matrix and $\ve$ denotes a matrix of ones.
 
 % weighted decomposition kernel and others
-\textit{Weighted Decomposition Kernel} developed in \citep{Menchetti05weighted,Ceroni08classification} is an extension of substructure kernel \citep{Haussler99convolution}.
-The kernel aims to weight the identical part in two graphs with contextual information.
-It evaluates the matching subgraphs (\textit{contextor}) in the neighborhood of an atom (\textit{selector}).
-We also used \textit{Tanimoto Kernel} \citep{Ralaivola05graph} on a finite set of molecular fingerprints \citep{Wang09pubchem}.
+\textit{Weighted Decomposition Kernel} developed in \citep{Menchetti05weighted,Ceroni08classification} is an extension of \textit{Substructure Kernel} \citep{Haussler99convolution} that weights the identical atom of two graphs by contextual information.
+The contextual information is defined as the matching subgraph in the neighbourhood of an atom.
+In addition, we used \textit{Tanimoto Kernel} \citep{Ralaivola05graph} on a finite set of molecular fingerprints \citep{Wang09pubchem}.
 See \citep{Vishwanathan10graph} for a more comprehensive survey on graph kernels.
 
 %\subsubsection{Generation of Markov Network}
-To apply the structured output learning method described above, we assume the output graph is observed.
-However, it is not the case in molecular classification problem.
-We need to build an output graph with nodes correspond to cell lines and edges correspond to potential statistical dependencies.
-There exists auxiliary datasets \citep{Shoemaker06the} for this purpose, which implicitly describe the correlations between the cell lines.
-To build the output graph, we first compute the covariance matrix of cell lines from the auxiliary data, then extract the network structure by applying the following two methods.
-In \text{maximum spanning tree} approach, we take the minimum number of edges that make a connected network whilst maximize the edge weights.
-In \text{correlation thresholding} approach, we take all edges that exceed a fixed threshold, which typically generates a non-tree graph.
+To apply the structured output learning method described above, we need to have an output graph connecting labels given as \textit{apriori}.
+However, the output graph is not known in the molecular classification problem.
+There exists a variety of auxiliary datasets \citep{Shoemaker06the} which implicitly encodes the correlation of labels (target cell lines).
+To extract the output graph, we first compute a covariance matrix of cell lines from the auxiliary data, then extract the graph structure by the following two methods.
+In \text{maximum spanning tree} approach, we take the minimum number of edges that make a connected graph whilst maximize the sum of edge weights.
+In \text{correlation thresholding} approach, we take all edges that exceed a fixed threshold in terms of the pairwise correlation, which typically generates a non-tree graph.
 
 
 
