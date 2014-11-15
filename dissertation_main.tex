@@ -1658,10 +1658,10 @@ The latter measures the correlation of microlabel predictions in which the corre
 %
 \section{Random Spanning Tree Approximation (\rta)}\label{sc_su14c}
 
-\citepub{su14c} presents Random Spanning Tree Approximation (\rta) for structured output learning where the output graph is not observed but believed to play an important role during learning.
+\citepub{su14c} presents Random Spanning Tree Approximation (\rta) for structured output learning in which the output graph is not observed but believed to play an important role during learning.
 \rta\ is a major step forward of \mam\ by bringing in a joint learning and inference framework such that the base learners built from a collection of random spanning trees are optimized simultaneously towards the same global objective.
-\citepub{su14c} also presents the theoretical studies which not only explain the intuition behind the learning model but also guarantee the performance by generalization error analysis.
-Meanwhile, \rta\ lays the foundation of tackling the intractability of graph inference on unknown graph structure in which fast optimization and accurate prediction can be achieved with attainable computational efforts.
+\citepub{su14c} also presents the theoretical studies which not only explain the intuition behind the learning model but also guarantee the performance by the generalization error analysis.
+Meanwhile, \rta\ lays the foundation of tackling the intractability of the graph inference on unknown graph structures in which fast optimization and accurate prediction can be achieved with attainable computational efforts.
 
 
 
@@ -1669,25 +1669,25 @@ Meanwhile, \rta\ lays the foundation of tackling the intractability of graph inf
 %
 \subsection{Background}
 
-The applicability of structured output learning is limited due to the fact that the output graph is assume to be observed as \textit{a-priori}.
-It is also difficult to learn the label dependency structure from data \citep{Chickering94learning} if it is not harder than structured output learning itself.
-Instead we can resort to the \textit{complete graph} by assuming that the complete set of pairwise correlations have enough expression power to describe the label dependencies.
-With a complete graph as the output graph, we can construct a structured output learner and rely on the optimization algorithm to correctly reveal the hidden ``parameters'' defined on the edges of the compete graph (e.g., edge potentials).
-To see this, imagine the edges which are not from the correct output graph will have zero ``parameters'' in the complete graph.
+The applicability of structured output learning is limited due to the fact that the output graph is assume to be known \textit{apriori}.
+It is difficult to learn the label dependency structure from data \citep{Chickering94learning} if it is not harder than structured output learning.
+Instead we can resort to a \textit{complete graph} by assuming that a complete set of pairwise correlations have enough expression power to describe the correlation between labels.
+With the complete graph as the output graph, we can construct a structured output learner and rely on the optimization algorithm to correctly reveal the hidden ``parameters'' defined on the edges of the compete graph (e.g., edge potentials).
+To see this, imagine the edges which are not from the correct output graph will have zero ``parameter'' in the complete graph.
 
-Structured output learning on complete graph is not an easy problem as the inference is \nphard\ in nature.
-The inference problem is often instantiated as finding the \textit{Maximum A-Posteriori} (\map) configuration on a graph structured probability distribution.
+Structured output learning on a complete graph is not an easy problem as the inference is \nphard\ in nature.
+The inference problem is often instantiated as finding a \textit{Maximum A-Posteriori} (\map) configuration on a graph structured probability distribution.
 In terms of the intractability issue of the graph inference problem, many techniques have been proposed but with important differences.
-\citet{Jordan04semiefinite} developed the semi-definite programming convex relaxation for the inference on graph with cycles.
-\citet{Wainwright05map} proposed \map\ inference with tree-based and \textit{linear programming} (\lp) relaxation.
-Efficient inference algorithms on special graph have also been studied in \citep{Globerson07approximate}.
+\citet{Jordan04semiefinite} developed a semi-definite programming convex relaxation for the inference on the graph with cycles.
+\citet{Wainwright05map} proposed a \map\ inference with the tree-based and \textit{linear programming} (\lp) relaxation.
+Efficient inference algorithms on special graphs have also been studied in \citep{Globerson07approximate}.
 
-\citepub{su14c} is motivated by well-established Maximum-Margin Principle as described in Section~\ref{sc_svm}.
+\citepub{su14c} is motivated by the well-established Maximum-Margin Principle as described in Section~\ref{sc_svm}.
 The work investigates whether the problem of inference over a complete graph in structured output learning can be avoided by exploring the properties of the Maximum-Margin Principle.
-Start from a sampling results, \citepub[Lemma 3]{su14c} shows that with high probability a big fraction of margin achieved by the complete graph can be obtained by a random sample of spanning trees of a small size.
-Besides, \citepub[Theorem 5]{su14c} shows that good generalization error can also be guaranteed when learning with, instead of a complete graph, a random sample of spanning trees.
+Start from a sampling results, \citepub[Lemma 3]{su14c} shows that with a high probability a big fraction of the margin achieved by a complete graph can be obtained by a random sample of spanning trees of a small size.
+Besides, \citepub[Theorem 5]{su14c} shows that the good generalization error can also be guaranteed when learning with, instead of a complete graph, a random sample of spanning trees.
 
-Thus, in addition to \citepub[Theory 1]{su14b}, we further provide the theoretical justification of constructing a set of base classifiers trained on a random sample of spanning trees. 
+Thus, in addition to \citepub[Theory 1]{su14b}, we further provide a theoretical justification of constructing a set of base classifiers trained on a random sample of spanning trees. 
 Besides, \citepub[Theorem 5]{su14c} suggests we should, instead of optimizing the margin separately on each spanning tree similar to that in \mam, optimize the joint margin from all spanning trees.
 The strategy leads to the learning model presented in the following section.
 
@@ -1710,17 +1710,17 @@ The key for the optimization is to solve the argmax problem efficiently.
 This is an \nphard\ problem in practice, as the size of the multilabel space is exponential in the number of microlabels.
 In \citepub{su14c}, we have developed a $K$-best inference algorithm working in $\Theta(Knk)$ time per data point, where $k$ is the number of microlabels and $K$ is the number of best multilabels we compute from each random spanning tree.
 
-It is known that the exact solution for the inference problem on individual tree $T_t$ is tractable \citep{Koller09probabilistic} for which 
+It is known that the exact solution for the inference problem on an individual tree $T_t$ is tractable \citep{Koller09probabilistic} for which 
 \begin{align}
 	\hat{\vy}_{T_t}(x) = \underset{\vy\in\Ycal}{\argmax}\, F_{\vw_{T_t}}(x,\vy)\ =\ \underset{\vy\in\Ycal}{\argmax}\, \langle \vw_{T_t}, \phib_{T_t}(x,\vy)\rangle, \label{rta:maximizer_onetree}
 \end{align}
-can be solved in $\Theta(k)$ time by \textit{dynamic programming} algorithm also known as \textit{max-product} or \textit{min-sum} algorithm.
+can be solved in $\Theta(k)$ time by \textit{dynamic programming} also known as \textit{max-product} or \textit{min-sum}.
 However, there is no guarantee that the maximizer of (\ref{rta:maximizer_onetree}) is also the global maximizer of Definition~\ref{primalrta} over the set of random spanning trees.
 Therefore, we compute the top $K$-best multilabels for each random spanning tree.
 In total the computation costs $\Theta(Knk)$ time for all spanning trees.
-\citepub[Lemma 7]{su14c} provides a method to retrieve the best multilabel from $K$-best multilabel list in linear time.
+\citepub[Lemma 7]{su14c} provides a method to retrieve the best multilabel from the $K$-best multilabel list in linear time.
 We still need to make sure that the global maximizer is within the $K$-best multilabel list.
-\citepub[Lemma 8]{su14c} guarantees that with high probability the global violating multilabel is in the list and $K$ does not need to be large.
+\citepub[Lemma 8]{su14c} guarantees that with a high probability the global violating multilabel is in the list and $K$ does not need to be large.
 
 In addition, we derived the marginalized dual representation of the primal optimization problem in Definition~\ref{primalrta},
 \iffalse
@@ -1731,7 +1731,7 @@ In addition, we derived the marginalized dual representation of the primal optim
 	\end{align*}
 \end{definition}
 \fi
-which not only works with a polynomial sized parameter space but also enables kernel functions to tackle complex input space.
+which not only works with a polynomial sized parameter space but also enables kernels to tackle complex input space.
 
 
 
