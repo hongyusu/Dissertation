@@ -975,7 +975,7 @@ $\alpha_i^{(j)}$ is the regression coefficient.
 
 The idea of algorithm adaptation is to directly modify popular single-label classification algorithms to solve the multilabel classification problems.
 We will present the algorithms that are modified from ensemble methods and Logistic Regression.
-There also exists many other algorithms in the algorithm adaptation category, for example, the method based on label ranking \citep{Crammer03afamily}, and the method based on Neural Network \citep{Zhang06multilabel}
+There also exists many other algorithms in the algorithm adaptation category, for example, the method based on label ranking \citep{Crammer03afamily}, and the method based on neural network \citep{Zhang06multilabel}.
 These methods are not explained in detail due to the divergence from the main scope of this thesis.
 
 
@@ -989,7 +989,7 @@ However, it is not immediately clear how to combine vector valued outputs in fla
 
 \adaboostmh\ is a multilabel variance of the \adaboost\ algorithm \citep{Schapire99improved,Esuli2008boosting}.
 The core idea of \adaboostmh\ is to apply the hamming loss instead of the 0/1 loss. 
-In particular, the algorithm reduces from a multilabel classification problem to a single-label classification problems by replacing each training example $(\vx_i,\vy_i)$ with $k$ examples $\{(\vx_i,\vy_i[l])\}_{l=1}^k$.
+In particular, the algorithm reduces a multilabel classification problem into a single-label classification problem by replacing each training example $(\vx_i,\vy_i)$ with $k$ examples $\{(\vx_i,\vy_i[l])\}_{l=1}^k$.
 The algorithm is described in Algorithm~\ref{adaboostmh}.
 In particular, it maintains a distribution over all examples and labels.
 In each iteration, the algorithm takes in the distribution over all training examples, generates a weak learner $f^k(\vx)$ (line~\ref{mh_compuet_f}), computes the hamming loss (line~\ref{mh_compute_error}), computes the adaptive parameter $\alpha^t$ (line~\ref{mh_compute_alpha}), and update the distribution (line~\ref{mh_update_d}).
@@ -1014,15 +1014,15 @@ The prediction $H(x)$ is a weighted combination of the base learners $f^t(x)$ we
 \end{algorithm}
 
 Besides \adaboostmh, some other ensemble methods for multilabel classification have also been developed that are based on boosting or bagging \citep{Wang07simple,Yan07model,Kocev13tree}.
-In addition, there is a large body of work which aim to apply ensemble methods to solve real world classification problems, for example, natural language processing \citep{Collins05distrimnative,Zeman05improving,Sagae06parsing,Zhang09kbest}, and text and speech recognition \citep{Fiscus97a,Benesty08speech,Petrov10products}.
+In addition, there is a large body of work which aim to apply ensemble methods to solve the real world multilabel classification problems, for example, natural language processing \citep{Collins05distrimnative,Zeman05improving,Sagae06parsing,Zhang09kbest}, and text and speech recognition \citep{Fiscus97a,Benesty08speech,Petrov10products}.
 
 
 %
 %
 \subsection{Correlated Logistic Regression (\corrlog)} \label{sc_corrlog}
 
-Correlated Logistic Regression (\corrlog) developed in \citep{Bian12corrlog} is a model based approach for flat multilabel classification.
-\corrlog\ is a major step forward of \iblr\ by constructing a logistic regression classifier over all microlabels and by modeling the pairwise correlation of labels with a function defined on the pairs of microlabels.
+Correlated Logistic Regression (\corrlog) is a model based approach for flat multilabel classification \citep{Bian12corrlog}.
+\corrlog\ is a major step forward of \iblr\ by constructing a logistic regression classifier over all microlabels and by modeling the pairwise correlation of labels with a function defined on the microlabel pairs.
 
 In fact, \corrlog\ is derived from Independent Logistic Regression (\ilrs). 
 Given a pair of an arbitrary training example and a label $(\vx,\vy)$, we can construct a set of \ilrs\ classifiers, one for each microlabel.
@@ -1035,7 +1035,7 @@ The posteriori probability can be computed by
 where $j$ is the index that iterates over microlabels. 
 The bias term as that appears in Definition~\ref{logistic_regression} is omitted which is equivalent to augmenting $\vx$ with a constant term \citep{Bian12corrlog}.
 Otherwise, (\ref{ilrs}) can be derived into the same form of Definition~\ref{logistic_regression} by replacing $\vw$ with $\frac{\vw}{2}$.
-\ilrs\ has the problem of ignoring the correlation between labels and overfitting the training data when the number of microlabels is high.
+\ilrs\ has the problem of ignoring the correlation between labels and overfitting the training data when the number of microlabels is large.
 To alleviate the problems, \corrlog\ augments the posteriori probability (\ref{ilrs}) by a function $Q(\vy)$ defined on the pairs of microlabels as
 \begin{align}
 	Q(\vy) = \exp\left\{\sum_{k<j}\alpha_{k,j}\vy[k]\vy[j]\right\}. \label{ilrs_augment}
@@ -1053,9 +1053,9 @@ Thus, \corrlog\ examines the pairwise label correlations by augmenting the joint
 %
 \subsection{Multitask Feature Learning (\mtl)} \label{sc_mtl}
 
-Multitask Feature Learning (\mtl) developed by \citet{Argyriou07multitask} is another algorithm designed for flat multilabel classification.
-\mtl\ is quite different the flat multilabel classification algorithms discussed in the previous sections.
-In particular, \mtl\ is based on the assumption that different microlabels are related such that they share a common underlying feature representation.
+Multitask Feature Learning (\mtl) \citep{Argyriou07multitask} is another algorithm designed for flat multilabel classification.
+\mtl\ is quite different other flat multilabel classification algorithms discussed in the previous part.
+Specifically, \mtl\ is based on the assumption that different microlabels are related such that they share a common underlying feature representation.
 Similar assumptions are also applied in \citep{Caruana97multitask,Baxter00a,BenDavide03exploiting}.
 
 Let $f_t(\vx)$ denote a label specific function for the $t$'th microlabel.
@@ -1068,22 +1068,22 @@ $h(\vx)$ is a linear feature mapping function defined as
 \begin{align*}
 	h(\vx) = \ip{U}{\phib(\vx)},
 \end{align*}
-where $\phib(\vx)\in\RR^d$ is in the original feature space and $U\in\RR^{d\times d}$ is square matrix.
+where $\phib(\vx)\in\RR^d$ is in the original feature space and $U\in\RR^{d\times d}$ is a square matrix.
 We further use $A$ to denote the matrix composed by $\va_{t}$.
-\mtl\ assumes that microlabels share a small set of features in which $A$ is supposed to be sparse with many entries equal to zero.
+\mtl\ assumes that microlabels share a small set of features in which $A$ is assumed to be sparse with many entries being zero.
 The optimization problem of \mtl\ is defined as
 \begin{definition}{\mtl\ Optimization Problem in Primal}\label{mtl_opt}
 	\begin{align*}
-		\underset{\substack{U\in\RR^{d\times d}\\A\in\RR^{d\times T}}}{\minimize} \left\{\sum_{t=1}^{T}\sum_{i=1}^{m}\ell(\vy_{i,t},\ip{\va_t}{\ip{U}{\phib(\vx_i)}})+C\norm{A}_{2,1}^2\right\}.
+		\underset{\substack{U\in\RR^{d\times d}\\A\in\RR^{d\times T}}}{\minimize} \left\{\sum_{t=1}^{T}\sum_{i=1}^{m}\ell(\vy_{i,t},\ip{\va_t}{\ip{U}{\phib(\vx_i)}})+C\norm{A}_{2,1}^2\right\},
 	\end{align*}
 \end{definition}
 \noindent
+where $C$ is a positive parameter that controls the balance of the regularization term and the risk minimization term.
 The optimization problem is an instantiation of the regularized risk minimization (\ref{rl}) with the hamming loss and the $L_{2,1}$-norm regularization.
-$C$ is a positive parameter that controls the balance of the regularization term and the risk minimization term.
-As Definition~\ref{mtl_opt} is non-convex and the second term is non-smooth, the optimization is transformed into an equivalent form which is then solved by an alternative optimization approach \citep{Argyriou07multitask}.
+As Definition~\ref{mtl_opt} is non-convex and the second term is non-smooth, the optimization is transformed into an equivalent form which is solved by an alternative optimization approach \citep{Argyriou07multitask}.
 
-An extension of \mtl\ is developed in \citep{Argyriou08convex} which introduces a nonlinear generalization using kernel methods.
-In addition, \citet{Argyriou08an,Jacob09cluster} have developed several similar but not identical algorithms which assume that microlabels form clusters such that label specific weight vectors should be similar within the clusters.
+\citet{Argyriou08convex} developed an extension of \mtl\ that introduces a nonlinear generalization using kernel methods.
+In addition, \citet{Argyriou08an,Jacob09cluster} have developed several similar but not identical algorithms based on the assumption that microlabels form clusters such that label specific weight vectors should be similar within the clusters.
 Recently, \citet{Paredes12exploit} proposed a method that exploits the information between unrelated microlabels based on a similar assumption that the microlabels of different groups tend not to share any features.
 
 
