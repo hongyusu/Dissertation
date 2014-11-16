@@ -1115,7 +1115,7 @@ In particular, we define the output graph $G=(E,V)$ by a node set $V=\{1,\cdots,
 For each edge $e=(j,j')\in E$, we use $\vy_e$ to denote the label of the edge $\ve$ with respect to a multilabel $\vy$ by concatenating the head label $y_j$ and the tail label $y_{j'}$, with an edge label domain $\vy_e\in\vYcal_e=\Ycal_j\times\Ycal_{j'}$.
 We use $\vy_{i,e}$ to denote the edge label of an example $(\vx_i,\vy_i)$ on an edge $\ve$.
 Thus, given a training example $(\vx_i,\vy_i)$ and an output graph $G$, we can uniquely identify the node label $y_i$ and the edge label $\vy_{i,e}$ of the output graph.
-In addition, we denote the possible label of a node $i$ by $u_i$ and the possible label of an edge $\ve$ by $\vu_{e}$ where $u_i$ and $\vu_{e}$ are not constrained to any multilabel $\vy$.
+In addition, we denote the possible label of a node $i$ by $u_i$ and the possible label of an edge $\ve$ by $\vu_{e}$ where $u_i$ and $\vu_{e}$ are not constrained by any multilabel $\vy$.
 Naturally, $u_i\in\Ycal_i$ and $\vu_e\in\vYcal_e$.
 
 
@@ -1426,7 +1426,7 @@ Diffusion scaling has the effect of shrinking the distance to the nodes that are
 
 Structured output learning relies on an output graph connecting multilabel interdependent output variables to exploit the the correlation between labels.
 The applicability of structured output learning is limited due to the fact that the output graph needs to be known \textit{apriori}.
-In this chapter, we aim to develop several structured output learning algorithms that are not constrained to the availability of the output graph.
+In this chapter, we aim to develop several structured output learning algorithms that are not constrained by the availability of the output graph.
 As a result, structured output learning can be applied to a wide range of multilabel classification problems.
 In Section~\ref{sc_su10}, we study the multilabel molecular classification problem with structured output learning in which the output graph is extracted from auxiliary datasets.
 In Section~\ref{sc_su11}, we present \mve\ which uses majority voting to combines the predictions of a set of structured output learners built from a collection of random output graphs.
@@ -1925,7 +1925,7 @@ As the first direction is straight-forward and application oriented, we will foc
 
 To serve as a starting point, the inference algorithm for \spin\ can be further developed, which not only needs to be scalable to large scale social network datasets but should also have an approximation guarantee.
 Secondly, we plan to study \rta\ in multilabel classification problems with a general output graph.
-The setting is interesting as output variables in many real world problems are usually organised by a graph structure which is more complex that a spanning tree or a chain but is less complex than a complete graph.
+The setting is interesting as output variables in many real world problems are usually organized by a graph structure which is more complex that a spanning tree or a chain but is less complex than a complete graph.
 The exact inference is often prohibitive for any polynomial time algorithms.
 In particular, we are interested in the change of the properties (e.g., the general error bound, the conditions for the exact inference) when we randomly sample spanning trees according to a general graph rather than a complete graph.
 Thirdly, we plan to investigate the possibility of learning the feature weight parameters defined on a random collection of spanning trees through a $L_1$-norm regularized combination.
