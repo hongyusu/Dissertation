@@ -504,7 +504,7 @@ In the end we will briefly present the optimization strategies developed for \sv
 The framework of \svm\ was originally introduced in \citep{Cortes95support}.
 The theory and the algorithm details of \svm\ are also presented in the book chapters \citep{Scholkopf02learning,taylor04,Bishop07}.
 % hard margin svm
-We begin our discussion by considering a very simple case where we assume the training data are linearly separable.
+We begin our discussion by considering a very simple case where the training data is assumed to be linearly separable.
 There exists a \textit{hyperplane} in the feature space which separates the training data into two classes.
 Additionally, we assume the {separating hyperplane} has a simple linear form (\ref{linearclassifier}) as
 \begin{align*}
@@ -522,8 +522,8 @@ We further use $\gamma_i$ to denote the \textit{margin} of the $i$'th example de
 \begin{align*}
 	\gamma_i = \frac{y_i(\ip{\vw}{\varphib(\vx_i)}+b)}{\norm{\vw}}.
 \end{align*}
-We notice if we scale $\vw$ and $b$ by any constant $\kappa\in\RR$ (e.g., $\vw\leftarrow\kappa\vw, b\leftarrow\kappa b$) the margin $\gamma_i$ stays unchanged. 
-We still achieve the same classification performance and the same generalization power.
+We notice if $\vw$ and $b$ are scaled by any constant $\kappa\in\RR$ (e.g., $\vw\leftarrow\kappa\vw, b\leftarrow\kappa b$) the margin $\gamma_i$ stays unchanged. 
+The same classification performance and generalization power can still be obtained.
 As the parameters are invariance to scaling, we set $\norm{\vw}=1$.
 Given a collection of training examples $S$, we define the margin with respect to $S$ as the minimum margin achieved by an individual training example
 \begin{align*}
