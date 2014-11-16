@@ -1429,7 +1429,7 @@ The applicability of structured output learning is limited due to the fact that 
 In this chapter, we aim to develop several structured output learning algorithms that are not constrained by the availability of the output graph.
 As a result, structured output learning can be applied to a wide range of multilabel classification problems.
 In Section~\ref{sc_su10}, we study the multilabel molecular classification problem with structured output learning in which the output graph is extracted from auxiliary datasets.
-In Section~\ref{sc_su11}, we present \mve\ which uses majority voting to combines the predictions of a set of structured output learners built from a collection of random output graphs.
+In Section~\ref{sc_su11}, we present \mve\ which uses majority vote to combines the predictions of a set of structured output learners built from a collection of random output graphs.
 In Section~\ref{sc_su14b}, we present two aggregation techniques, namely \amm\ and \mam, which perform inference on output graphs before or after combining multiple structured output learners.
 In Section~\ref{sc_su14c}, we present \rta which a joint learning and inference framework that
 is based on Max-Margin learning on a random sample of spanning trees.
@@ -1546,7 +1546,7 @@ The structured output learning approaches, relying on the representation of mult
 To apply structured output learning, it is assumed that the structure of the output graph is known \textit{apriori}.
 For the molecular classification problem in \citepub{su10} where the output graph is not observed, we can extract the structure of the output graph by examining a collection of auxiliary datasets which explicitly encode the correlation of labels.
 For most real world multilabel classification problems, however, we cannot take for granted the availability of the output graph or the auxiliary data that reveals the label correlations.
-Therefore, in \citepub{su11}, we explore the potential of using majority voting to combine the predictions of a set of structured output learners built on a collection of random output graphs.
+Therefore, in \citepub{su11}, we explore the potential of using majority vote to combine the predictions of a set of structured output learners built on a collection of random output graphs.
 We also examine the classification performance on the molecular classification problem.
 
 
@@ -1577,7 +1577,7 @@ This approach outputs a set of disconnected pairs.
 %
 \section{Random Graph Ensemble (\amm, \mam)} \label{sc_su14b}
 
-Section~\ref{sc_su11} has shown that the prediction performance of the molecular classification problem can be improved by applying majority voting to combine the predictions from multiple structured output learners built on a collection of random output graphs.
+Section~\ref{sc_su11} has shown that the prediction performance of the molecular classification problem can be improved by applying majority vote to combine the predictions from multiple structured output learners built on a collection of random output graphs.
 This section is based on \citepub{su14b} in which we present two aggregation techniques to combine multiple structured output learners. 
 the proposed model, namely \amm\ and \mam, also perform inference before or after combining the base learners.
 The performance of the proposed models is evaluated on a set of heterogeneous multilabel datasets from a variety of domains.
