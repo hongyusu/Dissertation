@@ -1623,7 +1623,7 @@ The predicted multilabel by \amm\ is composed by the predicted microlabels
 \end{align*}
 
 % mam
-\amm\ performs inference to find max-marginals before combining base classifiers. 
+\amm\ performs inference to find the set of max-marginals before combining base classifiers. 
 On the other hand, the Maximum-of-Average-Marginals (\mam) aggregation first collects the local edge potentials $\psib_E^{(t)}$ from each base learner, averages them and performs a finial inference on a global consensus graph $\hat{G}=(\hat{E},V)$ with the averaged edge potentials.
 \mam\ is defined as
 \begin{align*}
@@ -1669,10 +1669,9 @@ Meanwhile, \rta\ lays the foundation of tackling the intractability of the graph
 \subsection{Background}
 
 The applicability of structured output learning is limited due to the fact that the output graph is assume to be known \textit{apriori}.
-It is difficult to learn the label dependency structure from data \citep{Chickering94learning} if it is not harder than structured output learning.
+It is difficult to learn the correlation structure of labels from data \citep{Chickering94learning} if it is not harder than structured output learning.
 Instead we can resort to a \textit{complete graph} by assuming that a complete set of pairwise correlations have enough expression power to describe the correlation between labels.
 With the complete graph as the output graph, we can construct a structured output learner and rely on the optimization algorithm to correctly reveal the hidden ``parameters'' defined on the edges of the compete graph (e.g., edge potentials).
-To see this, imagine the edges which are not from the correct output graph will have zero ``parameter'' in the complete graph.
 
 Structured output learning on a complete graph is not an easy problem as the inference is \nphard\ in nature.
 The inference problem is often instantiated as finding a \textit{Maximum A-Posteriori} (\map) configuration on a graph structured probability distribution.
@@ -1686,7 +1685,7 @@ The work investigates whether the problem of inference over a complete graph in 
 Start from a sampling results, \citepub[Lemma 3]{su14c} shows that with a high probability a big fraction of the margin achieved by a complete graph can be obtained by a random sample of spanning trees of a small size.
 Besides, \citepub[Theorem 5]{su14c} shows that the good generalization error can also be guaranteed when learning with, instead of a complete graph, a random sample of spanning trees.
 
-Thus, in addition to \citepub[Theory 1]{su14b}, we further provide a theoretical justification of constructing a set of base classifiers trained on a random sample of spanning trees. 
+Thus, in addition to \citepub[Theory 1]{su14b}, we further provide the theoretical justification of combining a set of base learners trained on a random sample of spanning trees. 
 Besides, \citepub[Theorem 5]{su14c} suggests we should, instead of optimizing the margin separately on each spanning tree similar to that in \mam, optimize the joint margin from all spanning trees.
 The strategy leads to the learning model presented in the following section.
 
@@ -1703,7 +1702,7 @@ For each example $(\vx_i,\vy_i)$, the goal of the optimization is to maximize th
 \end{definition}
 \noindent
 where $\phib_{T_t}(\vx,\vy)$ is the feature map that is local on each tree $T_t$, $\xi_i$ is the margin slack allocated for each $\vx_i$, and $C$ is the slack parameter that controls the amount of regularization.
-Definition~\ref{primalrta} is an instantiation of the regularized learning (Section~\ref{rl}) in terms of the $L_2$-norm regularization (\ref{l2_norm}) and the $0/1$ loss (\ref{one_loss}).
+Definition~\ref{primalrta} is an instantiation of the regularized learning (Section~\ref{rl}) in terms of the $L_2$-norm regularization (\ref{l2_norm}) and $0/1$ loss (\ref{one_loss}).
 
 The key for the optimization is to solve the argmax problem efficiently.
 This is an \nphard\ problem in practice, as the size of the multilabel space is exponential in the number of microlabels.
@@ -1719,7 +1718,7 @@ Therefore, we compute the top $K$-best multilabels for each random spanning tree
 In total the computation costs $\Theta(Knk)$ time for all spanning trees.
 \citepub[Lemma 7]{su14c} provides a method to retrieve the best multilabel from the $K$-best multilabel list in linear time.
 We still need to make sure that the global maximizer is within the $K$-best multilabel list.
-\citepub[Lemma 8]{su14c} guarantees that with a high probability the global violating multilabel is in the list and $K$ does not need to be large.
+\citepub[Lemma 8]{su14c} guarantees that with a high probability the global maximizing multilabel is in the list and $K$ does not need to be large.
 
 In addition, we derived the marginalized dual representation of the primal optimization problem in Definition~\ref{primalrta},
 \iffalse
@@ -1730,7 +1729,7 @@ In addition, we derived the marginalized dual representation of the primal optim
 	\end{align*}
 \end{definition}
 \fi
-which not only works with a polynomial sized parameter space but also enables kernels to tackle complex input space.
+which not only works with a polynomial sized parameter space but also enables kernels to tackle the complex input space.
 
 
 
