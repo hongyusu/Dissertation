@@ -599,7 +599,7 @@ As the weight vector can be expressed as a linear combination of training exampl
 \end{align*}
 the evaluation can be done efficiently by maintaining a small set of non-zero dual variables.
 
-In order to solve the optimization problem in Definition~\ref{softsvmdual}, it is not necessary to work in the feature space of $\varphib(\vx)$ as only the result of the inner product $\ip{\varphib(\vx_i)}{\varphib(\vx_j)}$ is required.
+To solve the optimization problem in Definition~\ref{softsvmdual}, we only need the result of the inner product $\ip{\varphib(\vx_i)}{\varphib(\vx_j)}$ rather than work explicitly in the feature space of $\varphib(\vx)$.
 This suggests that training data can be radically represented through pairwise similarities.
 In particular, we defined a function $K:\Xcal\times\Xcal\rightarrow\RR$ such that training data $\Scal$ is represented through a $m\times m$ matrix of pairwise similarities.
 % kernel function
@@ -694,7 +694,7 @@ There are many other active lines of research on \svm\ optimization that aim to 
 \section{Ensemble Methods} \label{sc_em}
 
 Ensemble methods are general classification techniques in machine learning.
-The methods train several base classifiers and combine them in order to achiever the more accurate predictions.
+The methods train several base classifiers and combine them in order to achieve the more accurate predictions.
 Most importantly, there is no requirement for base classifiers to be accurate as long as they perform better than random guessing.
 There are several variants of ensemble methods, to name but a few, 
 bagging \citep{Breiman96bagging}, 
@@ -726,7 +726,7 @@ In many cases, no other information about $f^t(x)$ is available to $H(x)$ except
 We begin our discussion from the \textit{concept class}.
 A \textit{concept} is a boolean function over a domain $\vXcal$, and a \textit{concept class} is a class of concepts.
 A concept class is \textit{strongly learnable} if there exists a polynomial learning algorithm which achieves a high accuracy with a high probability for all concepts in the class.
-On the other hand, a concept class is \textit{weakly learnable} if the learning algorithm achieves an arbitrary high accuracy where the only requirement is that the learning algorithm finds a function which performs better than the coin flip.
+On the other hand, a concept class is \textit{weakly learnable} if the learning algorithm achieves an arbitrary high accuracy where the only requirement is that the learning algorithm finds a function which performs better than the coin flipping.
 The concept of learnability was proposed in \citep{Kearns94cryptographic} together with the question whether the strong learnability and the weak learnability are equivalent which is known as the \textit{hypothesis boosting problem}.
 Finding a weak learner which performs better than random guessing is easy in practice, but finding a strong learner is usually difficult.
 \citet{Schapire90the} has proved that the two classes of learnability are equivalent which lays the foundation of the boosting algorithm that tunes a weak learning algorithm into a strong one.
@@ -949,7 +949,7 @@ It extends \mlknn\ by exploring the correlation between labels within the neighb
 The central idea of \iblr\ is to take the labels of the examples in the neighbor as the only features to predict the label of the current example.
 Similar ideas have been applied in collective classification \citep{Ghamrawi05collective} and link based classification \citep{Getoor05link, Getoor07introduction}.
 
-In particular, for each unseen example $\vx$, \iblr\ first identifies the set of $K$-nearest neighbors $N_k(\vx)$ from the training examples.
+In particular, for each unseen example $\vx$, \iblr\ first identifies the set of $K$-nearest neighbors $N_k(\vx)$ from the training data.
 The algorithm builds a Logistic Regression model (Section~\ref{sc_lr}) for each microlabel based on the label information collected from the examples in $N_k(\vx)$.
 Mathematically, \iblr\ defines a posterior probability of the $j$'th microlabel of $\vx$ being labeled as $u_j$ by
 \begin{align*}
