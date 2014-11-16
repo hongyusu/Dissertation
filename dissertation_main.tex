@@ -449,8 +449,8 @@ To apply \mle, it is easier if, instead of maximizing the likelihood, we maximiz
 
 % logistic regression of other type
 \mle\ can generate a \lr\ model that fits the training data.
-However, there is no guarantee that the model also generalize well on unseen test data.
-To achieve better generalization power, we apply the regularization technique presented in Section~\ref{sc_rl}.
+However, there is no guarantee that the model also generalize well on the unseen test data.
+To achieve a better generalization power, we apply the regularization technique presented in Section~\ref{sc_rl}.
 Many regularization methods for \lr\ have been developed \citep{Chen99,Chen00,Goodman03} among which adding Gaussian prior on weight parameter $\vw$ is a standard option.
 In practice, we assume $\vw$ is generated according to a zero-mean spherical Gaussian with variance $\sigma^2$.
 Thus, the \mle\ problem (\ref{lr_likelihood_sum}) is transformed into the \textit{Maximum A-Posteriori} (\map) problem of the following form
@@ -461,7 +461,7 @@ Instead of maximizing the posteriori (\ref{lr_posteriori}), it is easier to maxi
 \begin{align}
 	\log P(\vw,b|D;\sigma^2) = -{\frac{\norm{\vw}^2}{\sigma^2}} - \sum_{i=1}^{m}\log{(1+\exponential{-y_i(\ip{\varphib(\vx_i)}{\vw}+b)})}. \label{lr_posteriori_log}
 \end{align}
-In fact, (\ref{lr_posteriori_log}) is an instantiation of the regularization risk minimization strategy described in (\ref{rl}) with $L_2$-norm regularization (\ref{l2_norm}) and logistic loss (\ref{log_loss}).
+In fact, (\ref{lr_posteriori_log}) is an instantiation of the regularized risk minimization strategy described in (\ref{rl}) with the $L_2$-norm regularization (\ref{l2_norm}) and the logistic loss (\ref{log_loss}).
 
 Many optimization techniques have been proposed \citep{Minka03}, for example, 
 the {itrative scaling} method \citep{Darroch72,Pietra97inducing,Berger97,Goodman02Sequential,Jin03a},
@@ -501,8 +501,8 @@ In this section, we first introduce \textit{Maximum-Margin Principle} which is a
 After that, we will discuss the formalism of \svm, the primal-dual optimization strategy, and kernel methods which allow \svm\ to deal with the high dimensionality of the input feature space.
 In the end we will briefly present the optimization strategies developed for \svm.
 
-The framework of \svm\ was originally introduced by \citep{Cortes95support}.
-The theory and the algorithm details of \svm\ are also presented in book chapters \citep{Scholkopf02learning,taylor04,Bishop07}.
+The framework of \svm\ was originally introduced in \citep{Cortes95support}.
+The theory and the algorithm details of \svm\ are also presented in the book chapters \citep{Scholkopf02learning,taylor04,Bishop07}.
 % hard margin svm
 We begin our discussion by considering a very simple case where we assume the training data are linearly separable.
 There exists a \textit{hyperplane} in the feature space which separates the training data into two classes.
@@ -511,9 +511,9 @@ Additionally, we assume the {separating hyperplane} has a simple linear form (\r
 	f(\vx)=\ip{\vw}{\varphib(\vx)} + b = 0.
 \end{align*}
 As a result, we predict $y_i=+1$ if $f(\vx_i)\ge0$ and $y_i=-1$ otherwise.
-Given that a feature weight parameter $\vw$ achieves a correct separation on the training data, we can decide the label of a unseen test example $\vx_{ts}$ by the decision rule $y_{ts}=\sign(f(\vx_{ts}))$.
+Given that a feature weight parameter $\vw$ achieves a correct separation on the training data, we can decide the label of an unseen test example $\vx_{ts}$ by the decision rule $y_{ts}=\sign(f(\vx_{ts}))$.
 
-There can be infinite number of separating hyperplanes that solves the separation problem on the same training data, which is also suggested by the empirical risk minimization strategy presented in Section~\ref{sc_erm}. 
+There can be an infinite number of separating hyperplanes that solves the separation problem on the same training data, which is also suggested by the empirical risk minimization strategy presented in Section~\ref{sc_erm}. 
 We wish to find the hyperplane which also generalizes well on the test data.
 A good strategy is to look for a hyperplane that keeps the maximum distance from the examples of two classes, which is known as \textit{Maximum-Margin Principle}.
 To see this, imagine putting a separating hyperplane close to one class of examples, which will achieve better classification performance for the test examples from the other class.
@@ -523,14 +523,14 @@ We further use $\gamma_i$ to denote the \textit{margin} of the $i$'th example de
 	\gamma_i = \frac{y_i(\ip{\vw}{\varphib(\vx_i)}+b)}{\norm{\vw}}.
 \end{align*}
 We notice if we scale $\vw$ and $b$ by any constant $\kappa\in\RR$ (e.g., $\vw\leftarrow\kappa\vw, b\leftarrow\kappa b$) the margin $\gamma_i$ stays unchanged. 
-We still achieve the same classification performance and generalization power.
+We still achieve the same classification performance and the same generalization power.
 As the parameters are invariance to scaling, we set $\norm{\vw}=1$.
-Given a collection of training example $S$, we also define the margin with respect to $S$ as the minimum margin achieved by individual training example
+Given a collection of training examples $S$, we define the margin with respect to $S$ as the minimum margin achieved by an individual training example
 \begin{align*}
 	\gamma = \underset{i\in\{1,\cdots,m\}}{\minimize}\gamma_i.
 \end{align*}
 
-Based on Maximum-Margin Principle, the goal of learning is to find the separating hyperplane such that it maximizes the margin with respect to all training examples while separating the training examples into two classes.
+Based on the Maximum-Margin Principle, the goal of learning is to find the separating hyperplane such that it maximizes the margin with respect to all training examples while separating the training examples into two classes.
 This corresponds to finding a ``big gap'' between the examples of two classes in the feature space.
 The corresponding optimization problem is given in \citep{Bishop07} as
 \begin{align*}
@@ -554,8 +554,8 @@ This is equivalent to
 	\end{align*}
 \end{definition}
 \noindent
-where the goal is to find a weight vector of minimum norm which corresponds to maximize the margin between the examples of two classes.
-The constraints state that the training data should be correctly separated.
+where the goal is to find a weight vector of the minimum norm which corresponds to maximize the margin between the examples of two classes.
+The constraints state that the training examples should be correctly separated.
 
 % soft margin svm
 We do not use Definition~\ref{hardsvmprimal} in practice for two reasons. 
@@ -566,9 +566,9 @@ Therefore, we relax the constraints by introducing a \textit{margin slack} param
 \begin{align}
 	y_i(\ip{\vw}{\varphib(\vx_i)} + b) \ge 1-\xi_i, \xi_i\ge 0, \forall i\in\{1,\cdots,m\}. \label{softsvmconstraint}
 \end{align}
-$\xi_i$ will allow the data point to have a margin less than $1$.
+$\xi_i$ will allow data points to have a margin less than $1$.
 In particular, with $\xi_i=0$, the data point $x_i$ is correctly classified, and lies either on the margin or on the correct side.
-With $0<\xi_i\le 1$, the data point is correctly classified and lies between the margin and the separating hyperplane.
+With $0<\xi_i\le 1$, the data point is correctly classified, and lies between the margin and the separating hyperplane.
 With $\xi_i>1$, the data point is misclassified locating on the other side of the separating hyperplane.
 Now the new goal is to maximize the margin while penalize the data points which either lie on the wrong side of the hyperplane or have a margin less than one.
 This can be defined by
@@ -579,7 +579,7 @@ This can be defined by
 	\end{align*}
 \end{definition}
 \noindent
-Definition~\ref{softsvmprimal} is an instantiation of the regularized risk minimization strategy (\ref{rl}) with $L_2$-norm regularization (\ref{l2_norm}) and hinge loss (\ref{hinge_loss}).
+Definition~\ref{softsvmprimal} is an instantiation of the regularized risk minimization strategy (\ref{rl}) with the $L_2$-norm regularization (\ref{l2_norm}) and the hinge loss (\ref{hinge_loss}).
 % dual, kernel svm
 The optimization problem is usually transformed into a dual form by introducing for each constraint a \textit{Lagrangian multiplier} (dual variable) $\alpha$.
 We defined the dual optimization problem as
@@ -590,14 +590,14 @@ We defined the dual optimization problem as
 	\end{align*}
 \end{definition}
 \noindent
-It is not difficult to verify that according to Karush-Kuhn Tucher (\kkt) conditions only examples with $\xi_i=0$ and satisfying the equality constraints (\ref{softsvmconstraint}) will be ``active'', have a dual variable $\alpha_i>0$, and lie on the margin ($\gamma_i=1$).
+It is not difficult to verify that according to Karush-Kuhn Tucher (\kkt) conditions only the examples with $\xi_i=0$ and satisfying the equality constraints (\ref{softsvmconstraint}) will be ``active'', have a dual variable $\alpha_i>0$ and lie on the margin with $\gamma_i=1$.
 They are called \textit{support vectors} during the optimization of \svm.
 In fact the number of support vectors is usually smaller than the size of the training data.
 As the weight vector can be expressed as a linear combination of training examples \citep{taylor04}
 \begin{align*}
 	\vw = \sum_{i=1}^{m}\alpha_iy_i\varphib(\vx_i),
 \end{align*}
-the evaluation can be done efficiently by maintaining a small set of non-zero $\alpha$s.
+the evaluation can be done efficiently by maintaining a small set of non-zero dual variables.
 
 In order to solve the optimization problem in Definition~\ref{softsvmdual}, it is not necessary to work in the feature space of $\varphib(\vx)$ as only the result of the inner product $\ip{\varphib(\vx_i)}{\varphib(\vx_j)}$ is required.
 This suggests that training data can be radically represented through pairwise similarities.
@@ -608,7 +608,7 @@ In particular, we defined a function $K:\Xcal\times\Xcal\rightarrow\RR$ such tha
 \begin{align*}
 	K(\vx_i,\vx_j) = K(\vx_j,\vx_i)\quad \text{and}\, \sum_{\vx_i,\vx_j\in\Xcal}c_ic_jK(\vx_i,\vx_i)\ge0
 \end{align*}
-hold for any $c_i\in\RR$ and nonempty set $\Xcal$.
+hold for any $c_i\in\RR$ and a nonempty set $\Xcal$.
 \end{definition}
 \noindent
 \textit{Mercer's Theorem} \citep{taylor04} has shown that every positive semidefinite symmetric function is a kernel.
@@ -635,26 +635,26 @@ where $b$ is a bias term and $d$ is the degree of polynomial, and \textit{Gaussi
 \end{align*}
 where $\sigma$ is the Gaussian width parameter.
 \begin{definition}{Kernel Matrix.}
-	Given a kernel $K$ and a nonempty set $\Scal$, an $m\times m$ matrix $\hat{K}=(K(\vx_i,\vx_j))_{i,j}$ is called \textit{Kernel matrix} (Gram matrix) of kernel $K$ with respect to $\Scal$.
+	Given a kernel $K$ and a nonempty set $\Scal$, an $m\times m$ matrix $\hat{K}=(K(\vx_i,\vx_j))_{i,j}$ is called a \textit{Kernel matrix} (Gram matrix) of kernel $K$ with respect to $\Scal$.
 \end{definition}
 \noindent
-Kernel matrix is usually normalized by
+The kernel matrix is usually normalized by
 \begin{align*}
 	\hat{K}(\vx_i,\vx_j) = \frac{\hat{K}(\vx_i,\vx_j)}{\sqrt{\hat{K}(\vx_i,\vx_i)\hat{K}(\vx_j,\vx_j)}}
 \end{align*}
-to make sure that all elements in kernel matrix lie on a unit hypersphere.
+to make sure that all elements in the kernel matrix lie on a unit hypersphere.
 
 The algorithms for solving the optimization problem of \svm\ have been intensively studied, for example, 
 the ``chunking'' method \citep{Vapnik82estimation,Perezcruz04double}, 
 the decomposition method \citep{Osuna97an,Joachims98making}, 
 {Sequential Minimum Optimization} (\smo) \citep{Platt98sequential,Platt99fast}, 
 and the ``digesting'' method \citep{Decoste02support}.
-There are some recent studies that aim to scale \svm\ learning on very large datasets, for example, 
-representing training data with a small set of landmark points \citep{Pavlov00towards,Boley04training,Yu05making,Zhang08improved}, 
-greedy method for basis selection \citep{Keerthi06building}, 
-online \svm\ solver \citep{Bordes05fast}, 
+There are some recent studies that aim to scale \svm\ learning on the large scale datasets, for example, 
+representing the training data with a small set of landmark points \citep{Pavlov00towards,Boley04training,Yu05making,Zhang08improved}, 
+the greedy method for basis selections \citep{Keerthi06building}, 
+the online \svm\ solver \citep{Bordes05fast}, 
 approximating the objective function of \svm\ \citep{Zhang12scaling, Le13fast}, 
-and approximating kernel matrix with a low-rank matrix \citep{Smola00sparse,Fine02efficient,Drineas05on,Si14memory}.
+and approximating the kernel matrix with a low-rank matrix \citep{Smola00sparse,Fine02efficient,Drineas05on,Si14memory}.
 
 
 
