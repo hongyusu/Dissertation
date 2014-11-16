@@ -841,8 +841,8 @@ The feature split process of decision tree is deterministic given a set of featu
 
 Multilabel classification is a natural extension to single-label classification presented in Section~\ref{sc_slc}.
 In multilabel classification, each input (instant) is simultaneously associated with multiple outputs (labels).
-The research of multilabel classification has progressed rapidly in the last two decades with many learning algorithms being developed and applied to real world classification problems \citep{lafferty01,taskar02,Taskar04max,THJA04,Rousu07}.
-In general, there are two lines of research for multilabel classification, namely flat multilabel classification and structured output prediction.
+The research of multilabel classification has progressed rapidly in the last two decades with many learning algorithms being developed and applied to the real world classification problems \citep{lafferty01,taskar02,Taskar04max,THJA04,Rousu07}.
+In general, there are two lines of research in multilabel classification, namely flat multilabel classification and structured output prediction.
 In flat multilabel classification, multiple interdependent labels are treated essentially as a ``flat'' vector of labels.
 Structured output prediction, on the other hand, models the correlation between multiple labels with a graph structure that connects labels.
 This chapter will be devoted to flat multilabel classification in which several well-established algorithms will be presented.
@@ -852,10 +852,9 @@ Consider the infeasibility of listing all algorithms for flat multilabel classif
 In this chapter, we adopt the classification scheme proposed in \citep{Tsoumakas07multi,Tsoumakas10mining} which gives us two major algorithm categories, namely problem transformation and algorithm adaptation.
 For the problem transformation category, we will present the methods which aim to transfer the flat multilabel classification problem into other well studied problems, for example, single-label classification, and label ranking.
 For the algorithm adaptation category, we will describe the methods which directly modify established learning techniques (e.g., Logistic Regression, ensemble method) to solve the multilabel classification problem.
-Nevertheless, the present algorithms will explore the inherited difficulties of flat multilabel classification which are 
-Nevertheless, the presented algorithms will aim to tackle the difficulties of flat multilabel classification, namely the exponential sized multilabel space and the implicit correlation between multiple labels.
+Nevertheless, the presented algorithms aim to tackle the difficulties of flat multilabel classification, namely the exponential sized multilabel space and the implicit correlation between multiple labels.
 It is impossible to cover every lines of research in the field of flat multilabel classification.
-Readers are pointed out to recent research survey articles \citep{Tsoumakas07multi,Tsoumakas10mining,Zhang14a}.
+Readers are pointed out to the recent research survey articles \citep{Tsoumakas07multi,Tsoumakas10mining,Zhang14a}.
 
 
 
@@ -869,13 +868,12 @@ In particular, we examine the following {multilabel classification} problem.
 We assume training examples are drawn from a domain $\vXcal\times\vYcal$, where $\vXcal$ is a set of inputs (instants) and $\vYcal$ is a set of outputs (multilabels).
 $\vYcal = \Ycal_1\times\cdots\times\Ycal_k$ is composed by a Cartesian product of $k$ sets $\Ycal_i=\{-1,+1\}$.
 We retain a single-label classification problem by setting $k=1$.
-A vector $\vy=(y_1,\cdots,y_k)\in\vYcal$ is called \textit{multilabel} and its element $y_j$ is called \textit{microlabel}.
+A vector $\vy=(y_1,\cdots,y_k)\in\vYcal$ is called a \textit{multilabel} and its element $y_j$ is called a \textit{microlabel}.
 $\vy_i[j]$ denotes the $j$'th microlabel in the $i$'th multilabel.
 In addition, we are given a training set of $m$ labeled examples $\Scal=\{(\vx_i,\vy_i)\}_{i=1}^{m}\in\vXcal\times\vYcal$. 
 A pair $(\vx_i,\vy)$, where $\vx_i$ is a training input and $\vy\in\vYcal$ is an arbitrary output, is called \textit{pseudo-example}.
 It is worth pointing out that the pseudo-example $(\vx_i,\vy)$ can be generated from a different distribution that generates training examples $(\vx_i,\vy_i)$.
-The goal is to learn a mapping function $f\in\Hcal:\vXcal\rightarrow\vYcal$ which can compute the best multilabel given an input example such that the predefined loss $\ell$ for future unseen examples will be minimized.
-The loss function is usually tailored for the learning algorithm.
+The goal is to learn a mapping function $f\in\Hcal:\vXcal\rightarrow\vYcal$ which can compute the best multilabel for a given input example such that the predefined loss $\ell$ for future unseen examples will be minimized.
 
 
 
@@ -885,8 +883,8 @@ The loss function is usually tailored for the learning algorithm.
 
 The problem transformation approach aims to transform the flat multilabel classification problem into other well studied problems.
 The most typical way is known as \textit{binary relevance} (\br) \citep{Tsoumakas07multi,Tsoumakas10mining}, which amounts to transforming the multilabel classification problem into a set of single-label classification problems and to independently learning a single-label classifier for each subproblem.
-There are many other type of transformations including, into the problem of label power set \citep{Tsoumakas07random}, and into problem of label ranking \citep{Elisseeff01akernel,Brinker07case,Furnkranz08multilabel,Chiang12a}.
-However, learning by ranking will not be discussed in detail as it slightly diverges from the main scope of the thesis.
+There are many other type of transformations including, for example, into the label power set problem \citep{Tsoumakas07random}, and into label ranking problem \citep{Elisseeff01akernel,Brinker07case,Furnkranz08multilabel,Chiang12a}.
+However, learning by label ranking will not be discussed in detail as it slightly diverges from the main scope of the thesis.
 We will focus on \br\ in this section.
 
 
@@ -895,17 +893,17 @@ We will focus on \br\ in this section.
 %
 \subsection{Multilabel $K$-Nearest Neighbors (\mlknn)} \label{sc_mlknn}
 
-Multilabel $K$-Nearest Neightbors (\mlknn) proposed by \citet{Zhang05a,Zhang07mlknn} is perhaps the most famous binary relevance classifier for flat multilabel classification.
+Multilabel $K$-Nearest Neightbors (\mlknn) developed in \citep{Zhang05a,Zhang07mlknn} is perhaps the most famous binary relevance classifier for flat multilabel classification.
 \mlknn\ is also an instance based learning approach \citep{Aha91instance} which is derived from the $K$-Nearest Neightbor (\knn) algorithm designed for single-label classification.
 \mlknn\ transforms the flat multilabel classification problem into a set of single-label classification problems and processes each microlabel independently.
-For each unseen example $\vx$, \mlknn\ algorithm first identifies a set of $K$-nearest neighbors $N(\vx)$ from all training examples.
-After that, the algorithm predicts the multilabel $\vy$ of the unseen example $\vx$ by examining the set of labels collected from its $K$-nearest neightbors.
+For each unseen example $\vx$, \mlknn\ algorithm first identifies a set of $K$-nearest neighbors $N(\vx)$ from the training examples.
+After that, the algorithm predicts the multilabel $\vy$ by examining the set of labels collected from its $K$-nearest neightbors.
 
 Mathematically,
 let $C_{\vx}(j)$ denote the number of neighbors of $\vx$ with $j$'th label being ``$+1$'',
 let $H^b_{\vx}(j)$ denote the event that the $j$'th label of $\vx$ is $b\in\Ycal_j$,
 and let $E_{\vx}^l(j)$ denote the event that $0\le l \le K$ neighbors of $x$ have the $j$'th label being ``$+1$''.
-\mlknn\ processes each microlabel at a time and determines the value of the microlabel by examining the following Maximize A-Posteriori (\map) problem
+\mlknn\ processes each microlabel at a time and determines the value of the $j$'th microlabel by examining the following Maximize A-Posteriori (\map) problem
 \begin{align*}
 	\vy[j]^* = \underset{b\in\Ycal_j}{\argmax} \, P( H^b_{\vx}(j) | E_{\vx}^{C_{\vx(j)}}(j) )
 	= \underset{b\in\Ycal_j}{\argmax} \, \frac{P( H^b_{\vx}(j) ) P(  E_{\vx}^{C_{\vx(j)}}(j) ) | H^b_{\vx}(j))}{P( E_{\vx}^{C_{\vx(j)}}(j))}.
@@ -914,7 +912,7 @@ The prior probability distribution $H^b_{\vx}(j)$ and the likelihood distributio
 
 The central problem with \mlknn\ is that the algorithm ignores the correlation between labels.
 In order to utilize the correlation between labels, many other variants of \mlknn\ have been proposed \citep{Cheng09combining,Younes11a}.
-There also exists many alternatives which align to the direction of \knn\ typed learning for flat multilabel classification, for example, methods that incorporates \knn\ with label ranking \citep{Brinker07case,Chiang12a}.
+There also exists many alternatives which align to the direction of \knn\ typed learning for flat multilabel classification, for example, the method that incorporates \knn\ with label ranking \citep{Brinker07case,Chiang12a}.
 
 
 
@@ -930,12 +928,12 @@ For the $j$'th microlabel $\vy[j]$, \cc\ first constructs a new training data $S
 \end{align*}
 A classifier $h_j$ is built by applying any single-label classification algorithm on $S_j$.
 
-Thus, \cc\ takes the correlation between labels into consideration by incorporating label information as concatenated features in the new input feature space.
+Thus, \cc\ takes the correlation between labels into consideration by incorporating the label information as concatenated features in the new input feature space.
 The idea is not new which has been previously applied in \citep{Godbole04discriminative}.
-\cc\ mades a strong assumption of a high correlation between the output microlabel and the concatenated microlabels.
+\cc\ makes a strong assumption of a high correlation between the output microlabel and the concatenated microlabels.
 The central problem of \cc\ is that the additional label information only takes a small part of the input feature space especially when the dimension of the original feature space is already high.
 
-Probabilistic Classifier Chains (\pcc) developed in \citep{Read09classifier,Dembczynski10bayes} extends \cc\ by analyzing the algorithm with condition probability theory.
+Probabilistic Classifier Chains (\pcc) developed in \citep{Read09classifier,Dembczynski10bayes} extends \cc\ by analyzing the algorithm with the condition probability theory.
 As there is no standard way for the classification order of microlabels in \cc, Ensemble Classifier Chains (\ecc) has been developed in \citep{Read11classifier} which improves \cc\ by generating and combining multiple chains of classifiers. 
 
 
@@ -948,12 +946,12 @@ As there is no standard way for the classification order of microlabels in \cc, 
 \iblr\ is also an instant base learning approach \citep{Aha91instance} that is similar to \mlknn.
 It extends \mlknn\ by exploring the correlation between labels within the neighbors of an instant for posterior inference.
 %It is also similar to \cc\ but with major differences.
-The central idea of \iblr\ is to take the labels of examples in the neighbor as the only features to predict the label of the current example.
+The central idea of \iblr\ is to take the labels of the examples in the neighbor as the only features to predict the label of the current example.
 Similar ideas have been applied in collective classification \citep{Ghamrawi05collective} and link based classification \citep{Getoor05link, Getoor07introduction}.
 
-In particular, for each unseen example $\vx$, \iblr\ first identifies the set of $K$-nearest neighbors $N_k(\vx)$ from training examples.
-The algorithm builds a Logistic Regression model (Section~\ref{sc_lr}) for each microlabel based on the label information collected from all examples in $N_k(\vx)$.
-Mathematically \iblr\ defines a posterior probability of the $j$'th microlabel of $\vx$ being labeled as $u_j$ by
+In particular, for each unseen example $\vx$, \iblr\ first identifies the set of $K$-nearest neighbors $N_k(\vx)$ from the training examples.
+The algorithm builds a Logistic Regression model (Section~\ref{sc_lr}) for each microlabel based on the label information collected from the examples in $N_k(\vx)$.
+Mathematically, \iblr\ defines a posterior probability of the $j$'th microlabel of $\vx$ being labeled as $u_j$ by
 \begin{align*}
 	\pi^{(j)} = P( \vy(\vx)[j]=u_j | N_k(\vx)), u_j\in\Ycal_j.
 \end{align*}
@@ -975,8 +973,9 @@ $\alpha_i^{(j)}$ is the regression coefficient.
 %
 \section{Algorithm Adaptation}
 
-The idea of algorithm adaptation is to directly modify popular single-label classification algorithms (e.g., ensemble methods, Logistic Regression) to multilabel classification problems.
-There also exists other methods in algorithm adaptation \citep{Crammer03afamily, Zhang06multilabel}, which are not explained in detail in this section due to the divergence from the main scope of this thesis.
+The idea of algorithm adaptation is to directly modify popular single-label classification algorithms (e.g., ensemble methods, Logistic Regression) to solve the multilabel classification problems.
+There also exists other models for algorithm adaptation, for example, based on label ranking \citep{Crammer03afamily}, and based on Neural Network \citep{Zhang06multilabel}.
+They are not explained in detail in this section due to the divergence from the main scope of this thesis.
 
 
 
@@ -984,16 +983,16 @@ There also exists other methods in algorithm adaptation \citep{Crammer03afamily,
 %
 \subsection{Ensemble Methods for Flat Multilabel Classification} \label{sc_emfmlc}
 
-Ensemble methods have been initially developed for single-label classification \citep{Breiman96bagging,Freund97a} or regression \citep{Breiman96bagging}, as it is straightforward to combine multiple scalar output variables
+Ensemble methods have been initially developed for single-label classification \citep{Breiman96bagging,Freund97a} or regression \citep{Breiman96bagging}, as it is straightforward to combine multiple scalar output variables.
 However, it is not immediately clear how to combine vector valued outputs in flat multilabel classification.
 
 \adaboostmh\ is a multilabel variance of the \adaboost\ algorithm \citep{Schapire99improved,Esuli2008boosting}.
-The core idea of \adaboostmh\ is to apply hamming loss instead of 0/1 loss. 
+The core idea of \adaboostmh\ is to apply the hamming loss instead of the 0/1 loss. 
 In particular, the algorithm reduces from a multilabel classification problem to a single-label classification problems by replacing each training example $(\vx_i,\vy_i)$ with $k$ examples $\{(\vx_i,\vy_i[l])\}_{l=1}^k$.
 The algorithm is described in Algorithm~\ref{adaboostmh}.
 In particular, it maintains a distribution over all examples and labels.
-In each iteration, the algorithm takes in the distribution and all training examples, generates a weak learner $f^k(\vx)$ (line~\ref{mh_compuet_f}), computes the hamming loss (line~\ref{mh_compute_error}), computes the adaptive parameter $\alpha^t$ (line~\ref{mh_compute_alpha}), and update the distribution (line~\ref{mh_update_d}).
-The prediction $H(x)$ is the weighted combination of base learners $f^t(x)$ by adapter parameters $\alpha^t$.
+In each iteration, the algorithm takes in the distribution over all training examples, generates a weak learner $f^k(\vx)$ (line~\ref{mh_compuet_f}), computes the hamming loss (line~\ref{mh_compute_error}), computes the adaptive parameter $\alpha^t$ (line~\ref{mh_compute_alpha}), and update the distribution (line~\ref{mh_update_d}).
+The prediction $H(x)$ is a weighted combination of the base learners $f^t(x)$ weighted by the adapter parameters $\alpha^t$.
 \begin{algorithm}
 \caption{\adaboostmh}
 \label{adaboostmh}
@@ -1014,18 +1013,18 @@ The prediction $H(x)$ is the weighted combination of base learners $f^t(x)$ by a
 \end{algorithm}
 
 Besides \adaboostmh, some other ensemble methods for multilabel classification have also been developed that are based on boosting or bagging \citep{Wang07simple,Yan07model,Kocev13tree}.
-In addition, there are large body of work which aim to apply ensemble methods to solve real world classification problems, for example, natural language processing \citep{Collins05distrimnative,Zeman05improving,Sagae06parsing,Zhang09kbest}, and text and speech recognition \citep{Fiscus97a,Benesty08speech,Petrov10products}.
+In addition, there is a large body of work which aim to apply ensemble methods to solve real world classification problems, for example, natural language processing \citep{Collins05distrimnative,Zeman05improving,Sagae06parsing,Zhang09kbest}, and text and speech recognition \citep{Fiscus97a,Benesty08speech,Petrov10products}.
 
 
 %
 %
 \subsection{Correlated Logistic Regression (\corrlog)} \label{sc_corrlog}
 
-Correlated Logistic Regression (\corrlog) developed by \citet{Bian12corrlog} is a model based approach for flat multilabel classification.
+Correlated Logistic Regression (\corrlog) developed in \citep{Bian12corrlog} is a model based approach for flat multilabel classification.
 \corrlog\ is a major step forward of \iblr\ by constructing a logistic regression classifier over all microlabels and by modeling the pairwise correlation of labels with a function defined on the pairs of microlabels.
 
 In fact, \corrlog\ is derived from Independent Logistic Regression (\ilrs). 
-Given a pair of an arbitrary training example and a label $(\vx,\vy)$, we can construct a set of \ilrs classifiers, one for each microlabel.
+Given a pair of an arbitrary training example and a label $(\vx,\vy)$, we can construct a set of \ilrs\ classifiers, one for each microlabel.
 The posteriori probability can be computed by
 \begin{align}
 	P_{\text{\ilrs}}(\vy|\vx) 
@@ -1036,7 +1035,7 @@ where $j$ is the index that iterates over microlabels.
 The bias term as that appears in Definition~\ref{logistic_regression} is omitted which is equivalent to augmenting $\vx$ with a constant term \citep{Bian12corrlog}.
 Otherwise, (\ref{ilrs}) can be derived into the same form of Definition~\ref{logistic_regression} by replacing $\vw$ with $\frac{\vw}{2}$.
 \ilrs\ has the problem of ignoring the correlation between labels and overfitting the training data when the number of microlabels is high.
-To alleviate the problems, \corrlog\ augments the posteriori probability (\ref{ilrs}) by a function $Q(\vy)$ defined on pairs of microlabels as
+To alleviate the problems, \corrlog\ augments the posteriori probability (\ref{ilrs}) by a function $Q(\vy)$ defined on the pairs of microlabels as
 \begin{align}
 	Q(\vy) = \exp\left\{\sum_{k<j}\alpha_{k,j}\vy[k]\vy[j]\right\}. \label{ilrs_augment}
 \end{align}
@@ -1045,7 +1044,7 @@ Putting together (\ref{ilrs}) and (\ref{ilrs_augment}), \corrlog\ can be defined
 	P_{\text{\corrlog}}(\vy|\vx) &\propto P_{\text{\ilrs}}(\vy|\vx) Q(\vy) \\
 		&=\exp\left\{ \sum_{j=1}^{m}\vy(x)[j]\vw^{\tp}\vx + \sum_{k<j}\alpha_{kj}\vy(\vx)[k]\vy(\vx)[j] \right\}.
 \end{align*}
-Thus, \corrlog\ examines the pairwise label correlations by augmenting the joint prediction with a quadratic term $Q(\vy)$ built from pairs of microlabels.
+Thus, \corrlog\ examines the pairwise label correlations by augmenting the joint prediction with a quadratic term $Q(\vy)$ built from the pairs of microlabels.
 
 
 
@@ -1078,13 +1077,13 @@ The optimization problem of \mtl\ is defined as
 	\end{align*}
 \end{definition}
 \noindent
-The optimization problem is an instantiation of regularized risk minimization (\ref{rl}) with hamming loss and $L_{2,1}$-norm regularization.
+The optimization problem is an instantiation of the regularized risk minimization (\ref{rl}) with the hamming loss and the $L_{2,1}$-norm regularization.
 $C$ is a positive parameter that controls the balance of the regularization term and the risk minimization term.
 As Definition~\ref{mtl_opt} is non-convex and the second term is non-smooth, the optimization is transformed into an equivalent form which is then solved by an alternative optimization approach \citep{Argyriou07multitask}.
 
 An extension of \mtl\ is developed in \citep{Argyriou08convex} which introduces a nonlinear generalization using kernel methods.
 In addition, \citet{Argyriou08an,Jacob09cluster} have developed several similar but not identical algorithms which assume that microlabels form clusters such that label specific weight vectors should be similar within the clusters.
-Recently, \citet{Paredes12exploit} proposed a method that exploits the information between unrelated microlabels based on a similar assumption that microlabels of different groups tend not to share any features.
+Recently, \citet{Paredes12exploit} proposed a method that exploits the information between unrelated microlabels based on a similar assumption that the microlabels of different groups tend not to share any features.
 
 
 
