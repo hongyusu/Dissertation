@@ -82,7 +82,7 @@ The research questions can be summarized as follows.
 The contributions of the thesis are several novel statistical learning models that widen the applicability of structured output learning.
 The thesis starts by reviewing several lines of research in classification learning.
 The first contribution is to develop a new structured output learning model for the multilabel classification problem with an observed output graph.
-The proposed model can predict a directed acyclic graph (\daggraph) from an observed underlying network which best responses to an input.
+The proposed model can predict an optimal directed acyclic graph (\daggraph) from an observed underlying network which best responses to an input.
 The model has applied to network response prediction within the context of social network analysis.
 For the general multilabel classification problems in which the output graph is not known \textit{apriori}, we develop several new models that combine a set of structured output learners built on a collection of random output graphs.
 In addition, we develop a joint learning and inference framework that is based on Max-Margin learning on a random sample of spanning trees.
@@ -100,7 +100,7 @@ Chapter~\ref{ch_sopw} presents several models developed for structured output le
 Chapter~\ref{ch_implementation} describes the implementation details of the developed models.
 Chapter~\ref{ch_conclusion} concludes the thesis and details the future research directions.
 
-The thesis presents the idea and the background of the proposed structured output learning models.
+This thesis presents the idea and the background of the proposed structured output learning models.
 The formalisms of the proposed models are also briefly explained.
 The notation and the presentation of some of the proposed models are slightly improved to incorporate the models into an unified framework.
 The technical details and the empirical evaluations of the proposed models are not repeated, rather, they can be found from the original research articles in the latter part of the thesis.
@@ -1098,7 +1098,7 @@ Structured output prediction is a natural extension to flat multilabel classific
 Unlike flat multilabel classification which takes multiple interdependent output variables essentially as a ``flat'' vector, structured output prediction assumes that multiple output variables are correlated and located in a structured output space.
 It assumes that there exists an output graph (e.g., a chain, a spanning tree) connecting multiple output variables by which the correlation between labels can be utilized during learning.
 In this chapter, we will start by introducing several structured output learning algorithms developed during the last decade.
-We will present our new algorithm \spin\ that can predict a directed acyclic graph (\daggraph) which best ``responses'' to an input, and examine the performance on the network response prediction problem within the context of social network analysis.
+We will present our new algorithm \spin\ that can predict an optimal directed acyclic graph (\daggraph) which best ``responses'' to an input, and examine the performance on the network response prediction problem within the context of social network analysis.
 
 
 
@@ -1330,7 +1330,7 @@ In particular, our network influence problem is motivated by the following obser
 For example, $u'$ is a follower of $u$ in Twitter, $u'$ will retweet the message from $u$ if it is related to \textit{science} but not related to \textit{politics}.
 Therefore, we propose the following definition of the network response problem
 \begin{definition}{Network Response Problem.}
-	Given a complex network and an action performed on the network, predict the subnetwork that responses to the action. In particular, which nodes perform the action and which directed edges relay the action from one node to its neighbors.
+	Given a complex network and an action performed on the network, predict an optimal subnetwork that best responses to the action. In particular, which nodes perform the action and which directed edges relay the action from one node to its neighbors.
 \end{definition}
 
 %
@@ -1859,7 +1859,7 @@ In this chapter, the author aims to briefly discuss the implementations and poin
 		\item The package can be found from \url{http://git@github.com:hongyusu/random_spanning_tree_approximation.git}.
 	\end{enumerate}
 	
-	\item \spin, developed in \citepub{su14a}, is a structured output learning algorithm for multilabel classification with an observed output graph. \spin\ can predict a direct acyclic graph (\daggraph) that best responses to an input. The algorithm has been applied to the network response prediction problem within the context of social network analysis.
+	\item \spin, developed in \citepub{su14a}, is a structured output learning algorithm for multilabel classification with an observed output graph. \spin\ can predict an optimal direct acyclic graph (\daggraph) that best responses to an input. The algorithm has been applied to the network response prediction problem within the context of social network analysis.
 	\begin{enumerate}
 		\item The learning system of \spin\ is implemented in \matlab. The \sdp\ inference algorithm is implemented with \cvx\ toolbox which is designed for convex programming. The data preprocessing with Latent Dirichlet Allocation (\lda) \citep{Blei03latent} is implemented in \python\ and \matlab.
 		\item The package can be found from \url{http://git@github.com:hongyusu/SPIN.git}.
