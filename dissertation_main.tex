@@ -922,19 +922,19 @@ In addition, there exists many alternatives which also align to the direction of
 
 Classification Chains (\cc) developed in \citep{Read09classifier,Read11classifier} is another problem transformation approach for flat multilabel classification.
 \cc\ involves $k$ binary transformations and forms a chain of $k$ binary classifiers $h=\{h_1,\cdots,h_k\}$, in which the $j$'th classifier $h_j$ is built for predicting the $j$'th microlabel.
-For the $j$'th microlabel $\vy[j]$, \cc\ first constructs a new training data $S_j$ by taking the microlabel as the output variable and combing the original feature space of $\vx$ with all $j-1$ prior microlabels as the new input features defined by
+For the $j$'th microlabel $\vy[j]$, \cc\ first constructs a new training data $S_j$ by taking the $j$'th microlabel as the output variable and combing the original feature space with all $j-1$ prior microlabels as the new input features defined by
 \begin{align*}
 	S_j = \{((\vx_i[1],\cdots,\vx_i[d],\vy_i[1],\cdots,\vy_i[j-1]),\vy_i[j])\}_{i=1}^{m}.
 \end{align*}
 A classifier $h_j$ is built by applying any single-label classification algorithm on $S_j$.
 
-Thus, \cc\ takes the correlation between labels into consideration by incorporating the label information as concatenated features in the new input feature space.
+Thus, \cc\ takes the correlation between labels into consideration by incorporating the label information as the concatenated features in the new input feature space.
 The idea is not new which has been previously applied in \citep{Godbole04discriminative}.
-\cc\ makes a strong assumption of a high correlation between the output microlabel and the concatenated microlabels.
+\cc\ makes a strong assumption that there is a high correlation between the output microlabel and the concatenated microlabels.
 The central problem of \cc\ is that the additional label information only takes a small part of the input feature space especially when the dimension of the original feature space is already high.
 
-Probabilistic Classifier Chains (\pcc) developed in \citep{Read09classifier,Dembczynski10bayes} extends \cc\ by analyzing the algorithm with the condition probability theory.
-As there is no standard way for the classification order of microlabels in \cc, Ensemble Classifier Chains (\ecc) has been developed in \citep{Read11classifier} which improves \cc\ by generating and combining multiple chains of classifiers. 
+Probabilistic Classifier Chains (\pcc) extends \cc\ by analyzing the algorithm with the condition probability theory \citep{Read09classifier,Dembczynski10bayes}.
+In addition, Ensemble Classifier Chains (\ecc) has been developed which improves \cc\ by generating and combining multiple chains of classifiers \citep{Read11classifier}. 
 
 
 
