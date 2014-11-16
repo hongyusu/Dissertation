@@ -137,7 +137,7 @@ A \textit{hypothesis class} $\Hcal$ is a set of functions that a learning algori
 The goal of statistical learning is to provide an \textit{estimator} $f\in\Hcal:\vXcal\rightarrow\Ycal$ which predicts the best value of an output $y$ given an input $\vx$.
 
 We use \textit{loss function} $\Lcal(y,f(\vx)):\Ycal\times\Ycal\rightarrow\RR^+$ to measure the goodness of an estimator, which is a monotonic bounded function between a true value $y$ and an estimated value $f(\vx)$.
-There are many ways of defining the loss function including, for example,
+There are many ways to define the loss function including, for example,
 \textit{Hinge Loss} in Support Vector Machines \citep{Cortes95support}
 \begin{align}
 	\Lcal_{hinge}(y,f(\vx)) = \maximize (0,1-y f(\vx)),\, \Ycal=[-1,+1], \label{hinge_loss}
@@ -198,7 +198,8 @@ On the other hand, the $L_1$-norm regularization, defined by
 	\Omega_{L_1}(f) = ||\vw||_1=\sum_{i=1}^d|\vw[i]|,
 \end{align*}
 provides a sparse parameter estimation such that we obtain a high dimensional feature weight vector with many zero entries.
-This is an attractive property as \textit{feature selection} is incorporated into the learning process and the resulting model is usually easy to interpret.
+This is an attractive property as \textit{feature selection} is incorporated into the learning process.
+Therefore, the resulting model is usually easy to interpret.
 The $L_1$-norm regularization has been applied in, for example, \lasso\ \citep{Tibshirani94regression}.
 Many other regularization techniques have been widely studied, for example, the $L_{1,2}$-norm regularization \citep{Argyriou07multitask}, and the elastic net regularization \citep{Zou05regularizationa}.
 
@@ -396,7 +397,7 @@ which is more efficient to compute and is extremely similar to (\ref{voted_perce
 Logistic Regression is a classification model rather than a regression model \citep{Bishop07}.
 The formalism nicely transits from risk minimization (Section~\ref{sc_rl}) to regularized risk minimization (Section~\ref{sc_rl}).
 Logistic Regression has been extended to many other classification algorithms presented in the latter part of the thesis, for example, \iblr\ in Section~\ref{sc_iblr}, and \corrlog\ in Section~\ref{sc_corrlog}).
-The central idea of Logistic Regression, the odd-ratio type learning in particular, is also the building block of, for example, \mmmn\ in Section~\ref{sc_mmmn} and many other algorithms developed in this thesis.
+The central idea of Logistic Regression, the odd-ratio type learning in particular, is also the building block of \mmmn\ in Section~\ref{sc_mmmn} and many other algorithms developed in this thesis.
 
 Logistic Regression models the conditional probability $P(y=+1|\vx)$ for a binary output variable $y\in\Ycal$.
 %Without loss of generality, in the rest part of this section we use $P(\vx)$ to denote above conditional probability of $P(y|\vx)$ when fixing $y=1$.
@@ -439,7 +440,7 @@ The parameter $\vw$ and $b$ can be obtained by maximizing the probability (likel
 %The probability of training data $\vx$ with class label $y$ is $P(y|\vx)$.
 The likelihood of parameters given data can be computed by
 \begin{align}
-	L(\vw,b;D) = \prod_{i=1}^mP(y_i|\vx_i). \label{lr_likelihood}
+	L(\vw,b|D) = \prod_{i=1}^mP(y_i|\vx_i). \label{lr_likelihood}
 \end{align}
 To apply \mle, it is easier if, instead of maximizing the likelihood, we maximize the log-likelihood, which turns the product (\ref{lr_likelihood}) into sum
 \begin{align}
@@ -841,16 +842,16 @@ The feature split process of decision tree is deterministic given a set of featu
 Multilabel classification is a natural extension to single-label classification presented in Section~\ref{sc_slc}.
 In multilabel classification, each input (instant) is simultaneously associated with multiple outputs (labels).
 The research of multilabel classification has progressed rapidly in the last two decades with many learning algorithms being developed and applied to the real world classification problems \citep{lafferty01,taskar02,Taskar04max,THJA04,Rousu07}.
-In general, there are two lines of research in multilabel classification, namely flat multilabel classification and structured output prediction.
+In general, there are two broad categories of research in multilabel classification, namely flat multilabel classification and structured output prediction.
 In flat multilabel classification, multiple interdependent labels are treated essentially as a ``flat'' vector of labels.
-Structured output prediction, on the other hand, models the correlation between multiple labels with a graph structure that connects labels.
+Structured output prediction, on the other hand, models the correlation between multiple labels with an output graph that connects labels.
 This chapter will be devoted to flat multilabel classification in which several well-established algorithms will be presented.
 Structured output prediction will be covered in the latter part of the thesis.
 
-Consider the infeasibility of listing all algorithms for flat multilabel classification, it is easier if we are able to categorize the algorithms into classes.
-In this chapter, we adopt the classification scheme proposed in \citep{Tsoumakas07multi,Tsoumakas10mining} which gives us two major algorithm categories, namely problem transformation and algorithm adaptation.
-For the problem transformation category, we will present the methods which aim to transfer the flat multilabel classification problem into other well studied problems, for example, single-label classification, and label ranking.
-For the algorithm adaptation category, we will describe the methods which directly modify established learning techniques (e.g., Logistic Regression, ensemble method) to solve the multilabel classification problem.
+It is prohibitive to explain all algorithms for flat multilabel classification, it is easier if we are able to categorize the algorithms into groups.
+In this chapter, we adopt the categorization scheme proposed in \citep{Tsoumakas07multi,Tsoumakas10mining} which gives us two major algorithm groups, namely problem transformation and algorithm adaptation.
+For the problem transformation group, we present the algorithms which aim to transfer the flat multilabel classification problem into other well studied problems, for example, single-label classification, and label ranking.
+For the algorithm adaptation group, we describe the algorithms which directly modify the established learning techniques (e.g., Logistic Regression, ensemble method) to solve the multilabel classification problem.
 Nevertheless, the presented algorithms aim to tackle the difficulties of flat multilabel classification, namely the exponential sized multilabel space and the implicit correlation between multiple labels.
 It is impossible to cover every lines of research in the field of flat multilabel classification.
 Readers are pointed out to the recent research survey articles \citep{Tsoumakas07multi,Tsoumakas10mining,Zhang14a}.
@@ -868,11 +869,11 @@ We assume training examples are drawn from a domain $\vXcal\times\vYcal$, where 
 $\vYcal = \Ycal_1\times\cdots\times\Ycal_k$ is composed by a Cartesian product of $k$ sets $\Ycal_i=\{-1,+1\}$.
 We retain a single-label classification problem by setting $k=1$.
 A vector $\vy=(y_1,\cdots,y_k)\in\vYcal$ is called a \textit{multilabel} and its element $y_j$ is called a \textit{microlabel}.
-$\vy_i[j]$ denotes the $j$'th microlabel in the $i$'th multilabel.
+We use $\vy_i[j]$ to denote the $j$'th microlabel in the $i$'th multilabel.
 In addition, we are given a training set of $m$ labeled examples $\Scal=\{(\vx_i,\vy_i)\}_{i=1}^{m}\in\vXcal\times\vYcal$. 
 A pair $(\vx_i,\vy)$, where $\vx_i$ is a training input and $\vy\in\vYcal$ is an arbitrary output, is called \textit{pseudo-example}.
 It is worth pointing out that the pseudo-example $(\vx_i,\vy)$ can be generated from a different distribution that generates training examples $(\vx_i,\vy_i)$.
-The goal is to learn a mapping function $f\in\Hcal:\vXcal\rightarrow\vYcal$ which can compute the best multilabel for a given input example such that the predefined loss $\ell$ for future unseen examples will be minimized.
+The goal of learning is to find a mapping function $f\in\Hcal:\vXcal\rightarrow\vYcal$ which can compute the best multilabel for an input example such that the predefined loss $\ell$ for the unseen examples will be minimized.
 
 
 
@@ -880,10 +881,10 @@ The goal is to learn a mapping function $f\in\Hcal:\vXcal\rightarrow\vYcal$ whic
 %
 \section{Problem Transformation}
 
-The problem transformation approach aims to transform the flat multilabel classification problem into other well studied problems.
-The most typical way is known as \textit{binary relevance} (\br) \citep{Tsoumakas07multi,Tsoumakas10mining}, which amounts to transforming the multilabel classification problem into a set of single-label classification problems and to independently learning a single-label classifier for each subproblem.
-There are many other type of transformations including, for example, into the label power set problem \citep{Tsoumakas07random}, and into label ranking problem \citep{Elisseeff01akernel,Brinker07case,Furnkranz08multilabel,Chiang12a}.
-However, learning by label ranking will not be discussed in detail as it slightly diverges from the main scope of the thesis.
+The problem transformation approaches aim to transform the flat multilabel classification problem into other well studied problems.
+The most typical way is known as \textit{binary relevance} (\br) \citep{Tsoumakas07multi,Tsoumakas10mining}, which amounts to transforming a multilabel classification problem into a set of single-label classification problems and to independently learning a single-label classifier for each subproblem.
+There are many other type of transformations, for example, into the label power set problem \citep{Tsoumakas07random}, and into the label ranking problem \citep{Elisseeff01akernel,Brinker07case,Furnkranz08multilabel,Chiang12a}.
+However, learning by label ranking will not be explained in detail as it slightly diverges from the main scope of the thesis.
 We will focus on \br\ in this section.
 
 
@@ -895,11 +896,11 @@ We will focus on \br\ in this section.
 Multilabel $K$-Nearest Neightbors (\mlknn) developed in \citep{Zhang05a,Zhang07mlknn} is perhaps the most famous binary relevance classifier for flat multilabel classification.
 \mlknn\ is also an instance based learning approach \citep{Aha91instance} which is derived from the $K$-Nearest Neightbor (\knn) algorithm designed for single-label classification.
 \mlknn\ transforms the flat multilabel classification problem into a set of single-label classification problems and processes each microlabel independently.
-For each unseen example $\vx$, \mlknn\ algorithm first identifies a set of $K$-nearest neighbors $N(\vx)$ from the training examples.
+For each unseen example $\vx$, \mlknn\ first identifies a set of $K$-nearest neighbors $N(\vx)$ from the training set.
 After that, the algorithm predicts the multilabel $\vy$ by examining the set of labels collected from its $K$-nearest neightbors.
 
 Mathematically,
-let $C_{\vx}(j)$ denote the number of neighbors of $\vx$ with $j$'th label being ``$+1$'',
+let $C_{\vx}(j)$ denote the number of neighbors of $\vx$ with the $j$'th label being ``$+1$'',
 let $H^b_{\vx}(j)$ denote the event that the $j$'th label of $\vx$ is $b\in\Ycal_j$,
 and let $E_{\vx}^l(j)$ denote the event that $0\le l \le K$ neighbors of $x$ have the $j$'th label being ``$+1$''.
 \mlknn\ processes each microlabel at a time and determines the value of the $j$'th microlabel by examining the following Maximize A-Posteriori (\map) problem
@@ -909,9 +910,9 @@ and let $E_{\vx}^l(j)$ denote the event that $0\le l \le K$ neighbors of $x$ hav
 \end{align*}
 The prior probability distribution $H^b_{\vx}(j)$ and the likelihood distribution $P( H^b_{\vx}(j) | E_{\vx}^{C_{\vx(j)}}(j) )$ can be estimated from the training data in terms of relative frequencies.
 
-The central problem with \mlknn\ is that the algorithm ignores the correlation between labels.
-In order to utilize the correlation between labels, many other variants of \mlknn\ have been proposed \citep{Cheng09combining,Younes11a}.
-There also exists many alternatives which align to the direction of \knn\ typed learning for flat multilabel classification, for example, the method that incorporates \knn\ with label ranking \citep{Brinker07case,Chiang12a}.
+The central problem of \mlknn\ is that the algorithm ignores the correlation between labels.
+\citet{Cheng09combining,Younes11a} proposed the variants of \mlknn\ that aim to explore the label correlations.
+In addition, there exists many alternatives which also align to the direction of \knn\ typed learning for flat multilabel classification \citep{Brinker07case,Chiang12a}.
 
 
 
