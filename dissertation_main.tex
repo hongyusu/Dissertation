@@ -1096,11 +1096,11 @@ Recently, \citet{Paredes12exploit} proposed a method that exploits the informati
 %------------------------------------------------
 \chapter{Structured Output Prediction} \label{ch_sop}
 
-Structured output prediction is a natural extension to flat multilabel classification (Chapter~\ref{ch_fmlc}).
+Structured output prediction is a natural extension to flat multilabel classification presented in Chapter~\ref{ch_fmlc}.
 Unlike flat multilabel classification which takes multiple interdependent output variables essentially as a ``flat'' vector, structured output prediction assumes that multiple output variables are correlated and located in a structured output space.
-It assumes that there exists an output graph (e.g., chain, tree) connecting multiple output variables by which the correlation between labels can be utilized during learning.
+It assumes that there exists an output graph (e.g., a chain, a spanning tree) connecting multiple output variables by which the correlation between labels can be utilized during learning.
 In this chapter, we will start by introducing several structured output learning algorithms developed during the last decade.
-We will present our new algorithm \spin\ that is capable of predicting a directed acyclic graph (\daggraph) which best ``responses'' to an input, and examine the performance on the network response prediction problem within the context of social network analysis.
+We will present our new algorithm \spin\ that can predict a directed acyclic graph (\daggraph) which best ``responses'' to an input, and examine the performance on the network response prediction problem within the context of social network analysis.
 
 
 
@@ -1109,10 +1109,10 @@ We will present our new algorithm \spin\ that is capable of predicting a directe
 \section{Preliminaries}
 
 Multilabel classification deals with multiple interdependent output variables, $\vy\in\vYcal$.
-The problem is called as {structured output prediction} when these variables are located in a structured output space.
+The problem is called {structured output prediction} when these variables are located in a structured output space.
 That is, the correlation between labels is described by an {output graph} connecting multiple labels.
 In particular, we define the output graph $G=(E,V)$ by a node set $V=\{1,\cdots,k\}$ which corresponds to the microlabels $\{y_1,\cdots,y_k\}$ and an edge set $E=V\times V$ which represents the correlation between pair of microlabels.
-For each edge $e=(j,j')\in E$, we use $\vy_e$ to denote the label of the edge $\ve$ with respect to a multilabel $\vy$ by concatenating the head label $y_j$ and the tail label $y_{j'}$, with an edge label domain $\vy_e\in\vYcal_e=\Ycal_j\times\Ycal_{j'}$.
+For an edge $e=(j,j')\in E$, we use $\vy_e$ to denote the label of the edge $\ve$ with respect to a multilabel $\vy$ by concatenating the head label $y_j$ and the tail label $y_{j'}$, with an edge label domain $\vy_e\in\vYcal_e=\Ycal_j\times\Ycal_{j'}$.
 We use $\vy_{i,e}$ to denote the edge label of an example $(\vx_i,\vy_i)$ on an edge $\ve$.
 Thus, given a training example $(\vx_i,\vy_i)$ and an output graph $G$, we can uniquely identify the node label $y_i$ and the edge label $\vy_{i,e}$ of the output graph.
 In addition, we denote the possible label of a node $i$ by $u_i$ and the possible label of an edge $\ve$ by $\vu_{e}$ where $u_i$ and $\vu_{e}$ are not constrained by any multilabel $\vy$.
@@ -1133,9 +1133,9 @@ In this section, we will briefly present several related algorithms for structur
 \subsection{Structured Perceptron}
 
 The Perceptron developed by \citet{Rosenblatt58} is one of the oldest algorithms in machine learning.
-The structured Perceptron, as suggested by its name, is a generalization of the Perceptron algorithm to structured output space.
-It was proposed in \citep{collins02a, collins02b} with the formalism quite similar to the multiclass Perceptron. 
-The model assumes a score function $\ip{\vw}{\phib(\vx,\vy)}$ as an inner product between a joint feature map $\phib(\vx,\vy)$ and a feature weight parameter $\vw$.
+The structured Perceptron, as suggested by its name, is a generalization of the Perceptron algorithm to the structured output space.
+It was proposed in \citep{collins02a, collins02b} with the formalism quite similar to Multiclass Perceptron. 
+The model assumes a score function $\ip{\vw}{\phib(\vx,\vy)}$ as the inner product between a joint feature map $\phib(\vx,\vy)$ and a feature weight parameter $\vw$.
 After the feature weight parameter $\vw$ is obtained, one needs to solve the {argmax} problem to find the best output for a given input $\vx$, which is defined as
 \begin{align}
 	\hat{\vy} = \underset{\vy\in\vYcal}{\argmax} &\, \ip{\vw}{\phib(\vx,\vy)}. \label{sp_inference}
@@ -1149,10 +1149,10 @@ The update is defined by
 	\vw \leftarrow \vw + \left(\phib(\vx_i,\vy_i) - \phib(\vx_i,\hat{\vy}_i)\right). \label{sp_update}
 \end{align}
 The update usually leads to over-fitting.
-A simple refinement is usually applied which is similar to the averaged Perceptron \citep{Freund99large}.
+A simple refinement is usually applied which is similar to Averaged Perceptron \citep{Freund99large}.
 
-The central problem with the structured Perceptron is the loss function.
-In fact, the structured Perceptron tacitly applies $0/1$ loss (\ref{one_loss}) on multilabels, with which it is impossible to distinguish a nearly correct multilabel and a completely incorrect one.
+The central problem with Structured Perceptron is the loss function.
+In fact, Structured Perceptron tacitly applies $0/1$ loss (\ref{one_loss}) on multilabels, with which it is impossible to distinguish a nearly correct multilabel and a completely incorrect one.
 Both will lead to the same update to the feature weight parameter (\ref{sp_update}) during learning.
 
 
@@ -1161,16 +1161,16 @@ Both will lead to the same update to the feature weight parameter (\ref{sp_updat
 \subsection{Conditional Random Field (\crf)} \label{sc_crf}
 
 Condition Random Field (\crf) developed in \citep{lafferty01,taskar02} is a discriminative framework that constructs a conditional probability $P(\vy|\vx)$ for an input variable $\vx\in\vXcal$ and an output variables $\vy\in\vYcal$.
-It optimizes the log-loss which is analogue to the $0/1$ loss in a structured output space.
+It optimizes the log-loss which is analogue to the $0/1$ loss in the structured output space.
 
 Mathematically, let $Y=\{\vy_1,\cdots,\vy_m\}$ denote a set of output random variables and $X=\{\vx_1,\cdots,\vx_m\}$ denote a set of input random variables to condition on.
 Let $G=(E,V)$ denote an output graph such that $\vy = (y_v)_{v\in V}$.
-\textit{Conditional Random Field} (\crf) defines a conditional probability distribution
+\crf\ defines a conditional probability distribution
 \begin{align*}
 	P(\vy|\vx) &= \frac{1}{Z_{\vx,\vw}}\exp{\ip{\vw}{\phib(\vx,\vy)}},
 \end{align*}
 where $\phib(\vx,\vy)$ is a joint feature map. 
-$Z_{\vx,\vw}$ is a partition function dependent on $\vx$ that sums over all possible multilabels 
+$Z_{\vx,\vw}$ is the partition function dependent on $\vx$ that sums over all possible multilabels 
 \begin{align}
 	Z_{\vx,\vw} &= \sum_{\vy'\in\Ycal}\exp{\ip{\vw}{\phib(\vx,\vy')}}. \label{crf_partition_function}
 \end{align}
@@ -1180,8 +1180,8 @@ Applying the similar regularization technique as applied to Logistic Regression 
 \begin{align}
 	L(\vw) = \sum_{i=1}^{m}\left[\ip{\vw}{\phib(\vx_i,\vy_i)}-\log{\sum_{\vy'\in\vYcal}{\exp{\ip{\vw}{\phib(\vx_i,\vy')}}}}\right] - \frac{1}{\sigma^2}\norm{\vw}^2. \label{crf_inference}
 \end{align}
-The optimization problem derived from (\ref{crf_inference}) is an instantiation of the regularized risk minimization (\ref{rl}) with log-loss and the $L_2$-norm regularization.
-It is solved in \citep{lafferty01} by the improved iterative scaling algorithm (\iis) \citep{Pietra97inducing}.
+The optimization problem derived from (\ref{crf_inference}) is an instantiation of the regularized risk minimization (\ref{rl}) with the log-loss and the $L_2$-norm regularization (\ref{l2_norm}).
+It is solved in \citep{lafferty01} by an improved iterative scaling algorithm (\iis) \citep{Pietra97inducing}.
 In order to make \crf\ work in practice, one also need to make sure that the partition function (\ref{crf_partition_function}) can be evaluated efficiently.
 
 
