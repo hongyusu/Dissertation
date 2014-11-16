@@ -126,7 +126,7 @@ In this section, the author will introduce two fundamental concepts in statistic
 
 \subsection{Empirical Risk Minimization}\label{sc_erm}
 
-We assume that two random variables $\vx\in\vXcal$ and $y\in\Ycal$ are jointly distributed according to some fixed but unknown probability distribution $P(\vx,y)$ over domain $\vXcal\times\Ycal$, where $\vXcal$ is an input (instance) space and $\Ycal$ is an output (label) space.
+We assume that two random variables $\vx\in\vXcal$ and $y\in\Ycal$ are jointly distributed according to some fixed but unknown probability distribution $P(\vx,y)$ over a domain $\vXcal\times\Ycal$, where $\vXcal$ is an input (instance) space and $\Ycal$ is an output (label) space.
 The definition of the output space $\Ycal$ will decide the type of the learning problem,
 for example, 
 multiclass classification by setting $\Ycal=\{1,\cdots,K\}$,
@@ -159,7 +159,7 @@ and \textit{Logistic Loss} in Logistic Regression \citep{Chen99}
 \begin{align}
 	\Lcal_{log}(y,f(\vx)) = \log(1+\exp(-y f(\vx))),\, \Ycal=[-1,+1]. \label{log_loss}
 \end{align}
-We will study loss functions with corresponding learning algorithms in detail in the following part of this thesis.
+We will study the loss functions with the corresponding learning algorithms in detail in the following part of this thesis.
 
 The \textit{true risk} of an estimator $f$ over all examples from a domain $\vXcal\times\Ycal$ is then defined as
 \begin{align}
@@ -168,7 +168,7 @@ The \textit{true risk} of an estimator $f$ over all examples from a domain $\vXc
 As a result, the learning algorithm should search for an estimator $f\in\Hcal$ which minimizes the true risk (\ref{true_risk}).
 However, it is impossible to compute the true risk (\ref{true_risk}) directly, as the distribution $P(\vx,y)$ is unknown.
 Instead we are given a random sample of $m$ examples, denoted by $S=\{(\vx_1,y_1),\cdots,(\vx_m,y_m)\}$, called \textit{training data}.
-The \textit{Empirical risk} of an estimator $f\in\Hcal$ is defined as the average error made by the estimator on a training data $S$ of finite size
+The \textit{Empirical risk} of an estimator $f\in\Hcal$ is defined as the average error made by the estimator on a training data $S$ of a finite size
 \begin{align}
 	\Rcal_{emp}(f) = \frac{1}{m}\sum_{i=1}^{m}\Lcal(y_i,f(\vx_i)) \label{empirical_risk}.
 \end{align}
@@ -176,7 +176,7 @@ This suggests that the learning algorithm should search for an estimator to mini
 
 \subsection{Regularized Learning}\label{sc_rl}
 
-The empirical risk minimization strategy is ill-posed as it will provide infinite number of estimators with the same empirical risk on the same training data.
+The empirical risk minimization strategy is ill-posed as it will provide an infinite number of estimators with the same empirical risk on the same training data.
 Besides, it quite often leads to \textit{overfitting}, in particular when the dimensionality of the feature space is high and the number of training examples is relatively small.
 That is, the underlying true distribution $P(\vx,y)$ is difficult to estimate based on a finite sample of training examples.
 As a result, the estimator will generalize poorly on unseen test examples.
@@ -187,21 +187,21 @@ In particular, it suggests to minimize
 \end{align}
 where $\Omega(f)$ is a regularization function that controls the complexity of the estimator by penalizing the norm of the feature weight vector, $\lambda$ is a positive parameter that controls the relative weight between the empirical risk term and the regularization term.
 
-For the linear function class, there are several ways to define the regularization term including, for example, $L_1$-norm and $L_2$-norm regularization.
-$L_2$-norm regularization, defined by 
+For the linear function class, there are several ways to define the regularization term including, for example, the $L_1$-norm and the $L_2$-norm regularizations.
+The $L_2$-norm regularization, defined by 
 \begin{align}
 	\Omega_{L_2}(f) = ||\vw||_2=\left(\sum_{i=1}^d|\vw[i]|^2\right)^{\frac{1}{2}}, \label{l2_norm}
 \end{align} 
 controls the complexity of the estimator $f$ and provides a smooth solution.
 It has been applied in, for example, Ridge Regression \citep{Hoerl00ridge}, Logistic Regression \citep{Chen00}, and Support Vector Machines \citep{Cortes95support}.
-On the other hand, $L_1$-norm regularization, defined by
+On the other hand, the $L_1$-norm regularization, defined by
 \begin{align*}
 	\Omega_{L_1}(f) = ||\vw||_1=\sum_{i=1}^d|\vw[i]|,
 \end{align*}
-provides sparse parameter estimations such that we obtain a high dimensional feature weight vector with many zero entries.
+provides a sparse parameter estimation such that we obtain a high dimensional feature weight vector with many zero entries.
 This is an attractive property as \textit{feature selection} is incorporated into the learning process and the resulting model is usually easy to interpret.
 The $L_1$-norm regularization has been applied in, for example, \lasso\ \citep{Tibshirani94regression}.
-Many other regularization techniques have been widely studied, for example, $L_{1,2}$-norm regularization \citep{Argyriou07multitask}, and elastic net regularization \citep{Zou05regularizationa}.
+Many other regularization techniques have been widely studied, for example, the $L_{1,2}$-norm regularization \citep{Argyriou07multitask}, and the elastic net regularization \citep{Zou05regularizationa}.
 
 
 %------------------------------------------------
