@@ -841,18 +841,18 @@ The feature split process of decision tree is deterministic given a set of featu
 
 Multilabel classification is a natural extension to single-label classification presented in Section~\ref{sc_slc}.
 In multilabel classification, each input (instant) is simultaneously associated with multiple outputs (labels).
-The research of multilabel classification has progressed rapidly in the last two decades with many learning algorithms being developed and applied to the real world classification problems \citep{lafferty01,taskar02,Taskar04max,THJA04,Rousu07}.
+The research of multilabel classification has progressed rapidly in the last two decades with many learning models being developed and applied to the real world classification problems \citep{lafferty01,taskar02,Taskar04max,THJA04,Rousu07}.
 In general, there are two broad categories of research in multilabel classification, namely flat multilabel classification and structured output prediction.
 In flat multilabel classification, multiple interdependent labels are treated essentially as a ``flat'' vector of labels.
-Structured output prediction, on the other hand, models the correlation between multiple labels with an output graph that connects labels.
+Structured output prediction, on the other hand, models the correlation between multiple labels with an output graph connecting labels.
 This chapter will be devoted to flat multilabel classification in which several well-established algorithms will be presented.
 Structured output prediction will be covered in the latter part of the thesis.
 
-It is prohibitive to explain all algorithms for flat multilabel classification, it is easier if we are able to categorize the algorithms into groups.
-In this chapter, we adopt the categorization scheme proposed in \citep{Tsoumakas07multi,Tsoumakas10mining} which gives us two major algorithm groups, namely problem transformation and algorithm adaptation.
-For the problem transformation group, we present the algorithms which aim to transfer the flat multilabel classification problem into other well studied problems, for example, single-label classification, and label ranking.
-For the algorithm adaptation group, we describe the algorithms which directly modify the established learning techniques (e.g., Logistic Regression, ensemble method) to solve the multilabel classification problem.
-Nevertheless, the presented algorithms aim to tackle the difficulties of flat multilabel classification, namely the exponential sized multilabel space and the implicit correlation between multiple labels.
+It is prohibitive to present all the algorithms developed for flat multilabel classification, it is easier if we can categorize the algorithms into groups.
+In this chapter, we adopt the categorization scheme \citep{Tsoumakas07multi,Tsoumakas10mining} which gives us two major groups of algorithms, namely problem transformation and algorithm adaptation.
+Problem transformation aims to transfer the flat multilabel classification problem into other well-studied problems, for example, single-label classification, label ranking, label power set.
+The algorithm adaptation directly modify the established learning techniques to solve the multilabel classification problem.
+Nevertheless, the presented algorithms aim to tackle the central problems of flat multilabel classification, namely to explore the exponential sized multilabel space and to model the correlation between labels.
 It is impossible to cover every lines of research in the field of flat multilabel classification.
 Readers are pointed out to the recent research survey articles \citep{Tsoumakas07multi,Tsoumakas10mining,Zhang14a}.
 
@@ -1063,12 +1063,12 @@ $f_t(\vx)$ can be expressed as
 \begin{align*}
 	f_t(\vx) = \ip{\va_t}{h(\vx)} = \sum_{i=1}^{d}\va_{t}[i]h(\vx)[i],
 \end{align*}
-where $\va_t\in\RR^d$ is the weight parameter for the $t$'th microlabel.
+where $\va_t\in\RR^d$ is the feature weight parameter for the $t$'th microlabel.
 $h(\vx)$ is a linear feature mapping function defined as
 \begin{align*}
 	h(\vx) = \ip{U}{\phib(\vx)},
 \end{align*}
-where $\phib(\vx)\in\RR^d$ is in the original feature space and $U\in\RR^{d\times d}$ is a square matrix.
+where $\phib(\vx)\in\RR^d$ is the input feature map in the original feature space and $U\in\RR^{d\times d}$ is a square matrix.
 We further use $A$ to denote the matrix composed by $\va_{t}$.
 \mtl\ assumes that microlabels share a small set of features in which $A$ is assumed to be sparse with many entries being zero.
 The optimization problem of \mtl\ is defined as
