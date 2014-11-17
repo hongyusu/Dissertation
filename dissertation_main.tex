@@ -1446,7 +1446,7 @@ In Section~\ref{sc_su14c}, we present \rta\ which is a joint learning and infere
 The molecular classification problem has been tackled by a variety of single-label classification approaches \citep{Menchetti05weighted,Singh12qsar,Dutt12classification}.
 On the other hand, multiple interdependent molecular activities are often screened simultaneously in the field of drug research \citep{Shoemaker06the}, which presents two challenges for single-label classification.
 The first is the scalability in which a set of single-label classifiers needs to be built to predict multiple activities of molecules.
-This becomes infeasible when we need to examine a large number of molecular activities at the same time.
+This becomes infeasible in computation when we need to examine a large number of molecular activities at the same time.
 The second challenge is that single-label classification ignores the correlation between multiple output variables.
 On the other hand, multiple molecular activities are often correlated which can be utilized to improve the classification performance.
 In \citepub{su10}, we explore the potential of structured output learning in the molecular activity classification problem.
@@ -1462,7 +1462,7 @@ Viable molecular structures are scanned, searched, or designed for therapeutic e
 In particular, expensive preclinical \textit{in vitro} and \textit{in vivo} drug tests can be largely avoided and special efforts can be devoted to few promising candidate molecules, once accurate \textit{in silico} models are available \citep{Burbidg01drug}.
 
 A variety of machine learning methods have been developed for this task, to name but a few, inductive logic programming \citep{King96structure}, artificial neural network \citep{Bernazzani06predicting}, kernel methods for nonlinear molecular properties \citep{Trotter01drug,Ralaivola05graph,Swamidass05kernel,Ceroni07classification}, and the \svm\ based methods \citep{Trotter01drug,Byvatov03comparison,Xue04effect}.
-Albeit with a large quantity of developed methods, they only focus on predicting a single output variable (e.g., the inhibition potential of a molecule in a target cell line). 
+Albeit with a large quantity of the developed methods, they only focus on predicting a single output variable (e.g., the inhibition potential of a molecule in a target cell line). 
 On the other hand, a large number of interdependent molecular activities are often screened at the same time in the field of drug research.
 For example, in the recent \textit{NCI-60} {Human Tumor Cell Line Screen} project \citep{Shoemaker06the}, thousands of molecular structures are tested agains hundreds of target cell lines.
 
@@ -1479,7 +1479,7 @@ In particular, the model defines a compatibility score through the inner product
 \begin{align*}
 	F(\vx,\vy;\vw) = \ip{\vw}{\phib(\vx,\vy)},
 \end{align*}
-where $\vw$ is the feature weight parameter to ensure that a molecule with correct activities will be scored higher than with incorrect activities.
+where $\vw$ is the feature weight parameter to ensure that a molecule with the correct activity will be scored higher than with any incorrect activities.
 $\vw$ is obtained by maximizing the minimum loss-scaled margin between the correct examples $(\vx_i,\vy_i)$ and the incorrect pseudo-examples $(\vx_i,\vy)$ over all training examples, which amounts to solving the optimization problem that is not dissimilar to Definition~\ref{def_mmmn}.
 
 \iffalse
@@ -1525,18 +1525,18 @@ Using exponential series or geometric series, walk kernel can be evaluated in cu
 where $\vI$ denotes an identity matrix and $\ve$ denotes a matrix of ones.
 
 % weighted decomposition kernel and others
-\textit{Weighted Decomposition Kernel} developed in \citep{Menchetti05weighted,Ceroni08classification} is an extension of \textit{Substructure Kernel} \citep{Haussler99convolution} that weights the identical atoms of two graphs by contextual information.
+\textit{Weighted Decomposition Kernel} \citep{Menchetti05weighted,Ceroni08classification} is an extension of \textit{Substructure Kernel} \citep{Haussler99convolution} that weights the identical atoms of two graphs by contextual information.
 The contextual information is defined as the matching subgraph in the neighbourhood of an atom.
 In addition, we used \textit{Tanimoto Kernel} \citep{Ralaivola05graph} on a finite set of molecular fingerprints \citep{Wang09pubchem}.
-See \citep{Vishwanathan10graph} for a more comprehensive survey on graph kernels.
+The readers are also pointed to the comprehensive survey on graph kernels \citep{Vishwanathan10graph}.
 
 %\subsubsection{Generation of Markov Network}
-To apply the structured output learning method described above, we need to have an output graph connecting labels given \textit{apriori}.
+To apply the structured output learning method described above, we need an output graph connecting labels given \textit{apriori}.
 However, the output graph is not known in the molecular classification problem.
 There exists a variety of auxiliary datasets \citep{Shoemaker06the} which implicitly encodes the correlation of labels (target cell lines).
 To extract the output graph, we first compute a covariance matrix of cell lines from the auxiliary data, then extract the structure of the output graph by the following two methods.
-In \text{maximum spanning tree} approach, we take the minimum number of edges that make a connected graph whilst maximize the sum of edge weights.
-In \text{correlation thresholding} approach, we take all edges that exceed a fixed threshold in terms of the pairwise correlation, which typically generates a non-tree graph.
+The \text{maximum spanning tree} approach takes the minimum number of edges that make a connected graph whilst maximizes the sum of edge weights.
+The \text{correlation thresholding} approach takes all edges that exceed a fixed threshold in terms of the pairwise correlation, which typically generates a non-tree graph.
 
 
 
