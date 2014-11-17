@@ -884,7 +884,7 @@ The goal of learning is to find a mapping function $f\in\Hcal:\vXcal\rightarrow\
 Problem transformation aims to transform the flat multilabel classification problem into other well studied problems.
 The most typical way of the transformation is \textit{binary relevance} (\br) \citep{Tsoumakas07multi,Tsoumakas10mining}, which transforms a multilabel classification problem into a set of single-label classification problems and to independently learns a single-label classifier for each subproblem.
 There exists many other types of transformations, for example, into the label power set problem \citep{Tsoumakas07random}, and into the label ranking problem \citep{Elisseeff01akernel,Brinker07case,Furnkranz08multilabel,Chiang12a}.
-However, learning by label ranking will not be explained in detail as it slightly diverges from the main scope of the thesis.
+However, learning by label ranking will not be explained in detail as it slightly diverges from the main scope of this thesis.
 We will focus on \br\ in this section.
 
 
@@ -893,11 +893,11 @@ We will focus on \br\ in this section.
 %
 \subsection{Multilabel $K$-Nearest Neighbors (\mlknn)} \label{sc_mlknn}
 
-Multilabel $K$-Nearest Neightbors (\mlknn) developed in \citep{Zhang05a,Zhang07mlknn} is perhaps the most famous binary relevance classifier for flat multilabel classification.
-\mlknn\ is also an instance based learning approach \citep{Aha91instance} which is derived from the $K$-Nearest Neightbor (\knn) algorithm designed for single-label classification.
+Multilabel $K$-Nearest Neightbors (\mlknn) \citep{Zhang05a,Zhang07mlknn} is perhaps the most famous binary relevance classifier for flat multilabel classification.
+\mlknn\ is also an instance based learning approach \citep{Aha91instance} that is derived from the $K$-Nearest Neightbor (\knn) algorithm designed for single-label classification.
 \mlknn\ transforms the flat multilabel classification problem into a set of single-label classification problems and processes each microlabel independently.
 For each unseen example $\vx$, \mlknn\ first identifies a set of $K$-nearest neighbors $N(\vx)$ from the training set.
-After that, the algorithm predicts the multilabel $\vy$ by examining the set of labels collected from its $K$-nearest neightbors.
+After that, the algorithm predicts the multilabel $\vy$ of the example by examining the set of multilabels collected from the $K$-nearest neightbors.
 
 Mathematically,
 let $C_{\vx}(j)$ denote the number of neighbors of $\vx$ with the $j$'th label being ``$+1$'',
