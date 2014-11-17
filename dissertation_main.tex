@@ -992,7 +992,7 @@ The core idea of \adaboostmh\ is to apply the hamming loss instead of the 0/1 lo
 In particular, the algorithm reduces a multilabel classification problem into a single-label classification problem by replacing each training example $(\vx_i,\vy_i)$ with $k$ examples $\{(\vx_i,\vy_i[l])\}_{l=1}^k$.
 The algorithm is described in Algorithm~\ref{adaboostmh}.
 In particular, it maintains a distribution over all examples and labels.
-In each iteration, the algorithm takes in the distribution over all training examples, generates a weak learner $f^k(\vx)$ (line~\ref{mh_compuet_f}), computes the hamming loss (line~\ref{mh_compute_error}), computes the adaptive parameter $\alpha^t$ (line~\ref{mh_compute_alpha}), and update the distribution (line~\ref{mh_update_d}).
+In each iteration, the algorithm takes in the distribution over all training examples, generates a weak learner $f^t(\vx)$ (line~\ref{mh_compuet_f}), computes the hamming loss (line~\ref{mh_compute_error}), computes the adaptive parameter $\alpha^t$ (line~\ref{mh_compute_alpha}), and update the distribution (line~\ref{mh_update_d}).
 The prediction $H(x)$ is a weighted combination of the base learners $f^t(x)$ weighted by the adapter parameters $\alpha^t$.
 \begin{algorithm}
 \caption{\adaboostmh}
@@ -1111,7 +1111,7 @@ We will present our new algorithm \spin\ that can predict an optimal directed ac
 Multilabel classification deals with multiple interdependent output variables, $\vy\in\vYcal$.
 The problem is called {structured output prediction} when these variables are located in a structured output space.
 That is, the correlation between labels is described by an {output graph} connecting multiple labels.
-In particular, we define the output graph $G=(E,V)$ by a node set $V=\{1,\cdots,k\}$ which corresponds to the microlabels $\{y_1,\cdots,y_k\}$ and an edge set $E=V\times V$ which represents the correlation between pair of microlabels.
+In particular, we define the output graph $G=(E,V)$ by a node set $V=\{1,\cdots,k\}$ which corresponds to the microlabels $\{y_1,\cdots,y_k\}$ and an edge set $E=V\times V$ which represents the correlation between microlabels.
 For an edge $e=(j,j')\in E$, we use $\vy_e$ to denote the label of the edge $\ve$ with respect to a multilabel $\vy$ by concatenating the head label $y_j$ and the tail label $y_{j'}$, with an edge label domain $\vy_e\in\vYcal_e=\Ycal_j\times\Ycal_{j'}$.
 We use $\vy_{i,e}$ to denote the edge label of an example $(\vx_i,\vy_i)$ on an edge $\ve$.
 Thus, given a training example $(\vx_i,\vy_i)$ and an output graph $G$, we can uniquely identify the node label $y_i$ and the edge label $\vy_{i,e}$ of the output graph.
@@ -1132,18 +1132,18 @@ In this section, we will briefly present several related algorithms for structur
 %
 \subsection{Structured Perceptron}
 
-The Perceptron developed by \citet{Rosenblatt58} is one of the oldest algorithms in machine learning.
-The structured Perceptron, as suggested by its name, is a generalization of the Perceptron algorithm to the structured output space.
-It was proposed in \citep{collins02a, collins02b} with the formalism quite similar to Multiclass Perceptron. 
+The Perceptron \citep{Rosenblatt58} is one of the oldest algorithms in machine learning.
+Structured Perceptron \citep{collins02a, collins02b}, as suggested by its name, is a generalization of the Perceptron algorithm to the structured output space.
+The formalism of Structured Perceptron is quite similar to Multiclass Perceptron. 
 The model assumes a score function $\ip{\vw}{\phib(\vx,\vy)}$ as the inner product between a joint feature map $\phib(\vx,\vy)$ and a feature weight parameter $\vw$.
 After the feature weight parameter $\vw$ is obtained, one needs to solve the {argmax} problem to find the best output for a given input $\vx$, which is defined as
 \begin{align}
 	\hat{\vy} = \underset{\vy\in\vYcal}{\argmax} &\, \ip{\vw}{\phib(\vx,\vy)}. \label{sp_inference}
 \end{align}
-The argmax problem is solved in \citep{collins02a} by Viterbi decoding.
+The argmax problem is solved by Viterbi decoding in the original work \citep{collins02a}.
 
 The weight parameter $\vw$ is learned through the standard Perceptron iterative update by solving the argmax problem (\ref{sp_inference}) in each iteration.
-In particular, the algorithm loops through all training examples and updates $\vw$ whenever the predicted multilabel $\hat{\vy_i}$ is different from the true multilabel $\vy_i$.
+In particular, the algorithm loops through all training examples and updates $\vw$ whenever the predicted multilabel $\hat{\vy}_i$ is different from the true multilabel $\vy_i$.
 The update is defined by
 \begin{align}
 	\vw \leftarrow \vw + \left(\phib(\vx_i,\vy_i) - \phib(\vx_i,\hat{\vy}_i)\right). \label{sp_update}
@@ -1160,7 +1160,7 @@ Both will lead to the same update to the feature weight parameter (\ref{sp_updat
 % 
 \subsection{Conditional Random Field (\crf)} \label{sc_crf}
 
-Condition Random Field (\crf) developed in \citep{lafferty01,taskar02} is a discriminative framework that constructs a conditional probability $P(\vy|\vx)$ for an input variable $\vx\in\vXcal$ and an output variables $\vy\in\vYcal$.
+Condition Random Field (\crf) \citep{lafferty01,taskar02} is a discriminative framework that constructs a conditional probability $P(\vy|\vx)$ for an input variable $\vx\in\vXcal$ and an output variables $\vy\in\vYcal$.
 It optimizes the log-loss which is analogue to the $0/1$ loss in the structured output space.
 
 Mathematically, let $Y=\{\vy_1,\cdots,\vy_m\}$ denote a set of output random variables and $X=\{\vx_1,\cdots,\vx_m\}$ denote a set of input random variables to condition on.
@@ -1176,12 +1176,12 @@ $Z_{\vx,\vw}$ is the partition function dependent on $\vx$ that sums over all po
 \end{align}
 Thus, when conditioned on $\vx$, random variables $y_v$ obey the Markov property with respect to the output graph $G$.
 
-Applying the similar regularization technique as applied to Logistic Regression in Section~\ref{sc_lr}, the feature weight parameter $\vw$ can be solved by introducing a Gaussian prior and maximizing the logarithm of the resulting \textit{Maximize A-Posteriori} (\map) problem \citep{taskar02} defined as
+Applying the similar regularization technique as used in Logistic Regression in Section~\ref{sc_lr}, the feature weight parameter $\vw$ can be solved by introducing a Gaussian prior and maximizing the logarithm of the resulting \textit{Maximize A-Posteriori} (\map) problem \citep{taskar02} defined as
 \begin{align}
 	L(\vw) = \sum_{i=1}^{m}\left[\ip{\vw}{\phib(\vx_i,\vy_i)}-\log{\sum_{\vy'\in\vYcal}{\exp{\ip{\vw}{\phib(\vx_i,\vy')}}}}\right] - \frac{1}{\sigma^2}\norm{\vw}^2. \label{crf_inference}
 \end{align}
 The optimization problem derived from (\ref{crf_inference}) is an instantiation of the regularized risk minimization (\ref{rl}) with the log-loss and the $L_2$-norm regularization (\ref{l2_norm}).
-It is solved in \citep{lafferty01} by an improved iterative scaling algorithm (\iis) \citep{Pietra97inducing}.
+An improved iterative scaling algorithm (\iis) \citep{Pietra97inducing} is used to solve the optimization problem in the origin work \citep{lafferty01}.
 In order to make \crf\ work in practice, one also need to make sure that the partition function (\ref{crf_partition_function}) can be evaluated efficiently.
 
 
@@ -1200,7 +1200,7 @@ The compatibility score defined by
 	F(\vx,\vy;\vw) = \ip{\vw}{\phib(\vx,\vy)} \label{mmmn_score}
 \end{align}
 can be seen as the affinity of a multilabel $\vy$ to an input $\vx$ according to an output graph.
-The feature weight parameter $\vw$ in (\ref{mmmn_score}) ensures the example with the correct multilabel will obtain a higher score than with any incorrect multilabels.
+The feature weight parameter $\vw$ ensures the example with the correct multilabel will obtain a higher score than with any incorrect multilabels.
 \mmmn\ defines a margin as the difference of compatibility scores between the correct example $(\vx_i,\vy_i)$ and the psudo-example $(\vx_i,\vy)$.
 Under the Maximum-Margin principle in Section~\ref{sc_svm}, \mmmn\ requires the margin to be at least $\vell(\vy_i,{\vy})$.
 To learn the feature weight parameter $\vw$, we need to solve the following primal optimization problem
@@ -1225,10 +1225,10 @@ By exploring the Markov network structure, the original optimization problem (De
 
 As the number of parameters is quadratic in the number of training examples and the edges of the Markov network, it still cannot fit into the standard Quadratic Programming (\qp) solver. 
 \citet{Taskar04max} developed a coordinate descent method analogous to Sequential Minimal Optimization (\smo) \citep{Platt98sequential,Platt99fast}.
-Many other efficient optimization algorithms have been proposed, for example, exponential gradient optimization method in \citep{bartlett04}, 
-extra-gradient method in \citep{taskar06},
-sub-gradient method in \citet{Ratliff07},
-and conditional gradient method in \citep{Rousu06, Rousu07}.
+Many other efficient optimization algorithms have been proposed, for example, the exponential gradient optimization method \citep{bartlett04}, 
+the extra-gradient method \citep{taskar06},
+the sub-gradient method \citet{Ratliff07},
+and the conditional gradient method \citep{Rousu06, Rousu07}.
 
 In order to use \mmmn\ in practice, one have to solve the \textit{loss augmented} inference problem defined as
 \begin{align}
@@ -1243,8 +1243,7 @@ Nevertheless, \mmmn\ improves \crf\ by avoiding the evaluation of the partition 
 %
 \subsection{Max-Margin Conditional Random Fields (\mmcrf)} \label{sc_mmcrf}
 
-Max-Margin conditional random field (\mmcrf) is a structured output learning method developed in \citep{Rousu07}.
-It extends \mmmn\ by defining the joint feature map as the tensor product between an input feature map and an output feature map, and by developing an efficient optimization strategy. 
+Max-Margin conditional random field (\mmcrf) \citep{Rousu07} is a structured output learning method, that extends \mmmn\ by defining the joint feature map as the tensor product between an input feature map and an output feature map, and by developing an efficient optimization strategy. 
 \mmcrf\ is applied in \citepub{su10} in which the task is to reliably predict the multiple interdependent molecular activities.
 
 In particular, \mmcrf\ uses \textit{exponential family} to model the conditional probability of a multilabel $\vy$ given an input example $\vx$
@@ -1259,7 +1258,7 @@ After the feature weight parameter $\vw$ is obtained, the prediction of an input
 \end{align}
 
 To solve the optimization problem, \mmcrf\ uses the conditional gradient optimization method \citep{Bertsekas95nonlinear} in the marginalized dual space \citep{Taskar04max}, which not only benefits from a polynomial-size parameter space but also enables kernels that can deal with the non-linearity of the complex molecular structures.
-The inference problem (\ref{mmcrfinference}) is solved by loopy belief propagation (\lbp) which is an instantiation of the message-passing algorithm developed in \citep{Wainwright08graphical}.
+The inference problem (\ref{mmcrfinference}) is solved by loopy belief propagation (\lbp) which is an instantiation of the message-passing algorithm \citep{Wainwright08graphical}.
 
 
 
@@ -1267,9 +1266,9 @@ The inference problem (\ref{mmcrfinference}) is solved by loopy belief propagati
 % 
 \subsection{Support Vector Machines for Interdependent and Structured Outputs (\svmstruct)} \label{sc_svmstruct}
 
-Support Vector Machines for interdependent and structured output space (\svmstruct) is developed in \citep{THJA04,TJTA05}.
+Support Vector Machines for interdependent and structured output space (\svmstruct) is developed by \citet{THJA04,TJTA05}.
 The formalism of \svmstruct\ is quite similar to \mmmn\ described in Section~\ref{sc_mmmn}.
-Compared to \mmmn\ which scales the margin by the loss function, \svmstruct\ scales the margin errors ({\em slacks}) by the loss function.
+Compared to \mmmn\ which scales the margin by the loss function, \svmstruct\ scales the margin errors ({slacks}) by the loss function.
 The primal optimization problem of \svmstruct\ can be defined as
 \begin{definition}{\svmstruct\ Optimization Problem in Primal.}\label{def_svmstruct}
 	\begin{align*}
@@ -1285,11 +1284,11 @@ Besides, \citet{THJA04} suggests that \mmmn\ will work hard on the pseudo-exampl
 
 On the other hand, the optimization techniques employed by \svmstruct\ differ significantly compared to \mmmn.
 \svmstruct\ will have to work with the exponential number of constraints as the optimization is not decomposable over the Markov network.
-\citet{THJA04} developed an iterative optimization approach that creates a nested sequence of successively tighter relaxations of the original problem via a cutting-plane method \citep{Bishop07,JFY09}.
+An iterative optimization approach \citet{THJA04} has been developed which creates a nested sequence of successively tighter relaxations of the original problem via the cutting-plane method \citep{Bishop07,JFY09}.
 Constraints are added as necessary and the iterative optimization approach will converge to an optimal solution of $\epsilon$ precision within a polynomial number of iterations.
 
 Besides the issue during the optimization, another problem with \svmstruct\ is the intractability of the inference problem.
-To find the most violating constraint, we need to compute the loss-augmented inference problem defined in \citep{TJTA05} as
+To find the most violating constraint, we need to compute the loss-augmented inference problem \citep{TJTA05} defined as
 \begin{align}
 	\hat{\vy} = \underset{\vy\in\vYcal/\vy_i}{\argmax} &\, [1-\ip{\vw}{\phib(\vx_i,\vy)}]\,\vell(\vy_i,\vy). \label{svmstructinference}
 \end{align}
@@ -1318,16 +1317,16 @@ The outcome of the network influence research has been widely applied to many ar
 In the field of studying the network influence, one primary interest is to discover the latent structure that reveals the dynamics of influences.
 In general, the problem can be defined into two different ways depending on the availability of the underlying network structure.
 On one hand, one would assume that the underlying structure is hidden or incomplete and the only observation is a cascade of actions.
-The instantiation of the setting can be, for example,
-online news agents sharing information but not physically connected,
+The instantiations of the setting include, for example,
+the online news agents sharing information but not physically connected,
 in the epidemiological study where people are affected by pathogens through various ways.
 The task is to infer the network structure in terms of edges connecting nodes given a collection of actions.
 %With early work on independent cascade and linear threshold model \citep{Kempe03maximizing},
 Many algorithms are designed to solve the problem in this setting, for example, \netinf\ \citep{GomezRodriguez10inferring}, \netrate\ \citep{Rodrigues11unconvering}, \kernelcascade\ \citep{Du12learning}, the two stage model for inferring influence \citep{Du14influence}, the inference algorithm using cascades without any timestamps \citep{Amin14learning}, and the general framework of inferring the diffusion structure \citep{Daneshmand14estimating}.
-On the other hand, we argue the problem is unnecessarily hard as in many cases the structure of the network is observed (e.g., the friendship network, the citation network).
+However, we argue the problem is unnecessarily hard as in many cases the structure of the network is observed (e.g., the friendship network, the citation network).
 There are also many related research that aims to discover the hidden variables in the network \citep{Lovrek08prediction,Goyal10learning}.
 
-However, none of them consider the property of the action.
+None of them consider the property of the action performed on the network.
 In particular, our network influence problem is motivated by the following observation: for a given action $\va$ performed on a network $G$, the influence from a node $u$ to a node $u'$ not only depends on their connections but also depends on the action under consideration.
 For example, $u'$ is a follower of $u$ in Twitter, $u'$ will retweet the message from $u$ if it is related to \textit{science} but not related to \textit{politics}.
 Therefore, we propose the following definition of the network response problem
@@ -1341,9 +1340,9 @@ We approach the problem by structured output learning, where we define a computa
 \begin{align*}
 	F(\va,\Gva;\vw) = \ip{\va}{\phib(\va,\Gva)}.
 \end{align*}
-Intuitively, the action $\va$ with a correct response network $\Gva$ will achieve high score than with any incorrect response network $\Gva'$.
-The joint feature map $\phib(\va,\Gva)$ is composed by the tensor product between an input feature map of an action $\varphib(\va)$ and an output feature map of a response network $\Upsilonb(\Gva)$.
-In particular, $\varphib(\va)$ can be a bag-of-words feature of an action (e.g., a posted message on Twitter) and $\Upsilonb(\Gva)$ can be a vector of edges and labels of a response network $\Gva$.
+Intuitively, the action $\va$ with a correct response network $\Gva$ will achieve a higher score than with any incorrect response network $\Gva'$.
+The joint feature map $\phib(\va,\Gva)$ is composed by the tensor product between an input feature map $\varphib(\va)$ of an action $\va$  and an output feature map $\Upsilonb(\Gva)$ of a response network $\Gva$.
+In particular, $\varphib(\va)$ can be a bag-of-words feature of an action (e.g., a posted message on Twitter) and $\Upsilonb(\Gva)$ can be a vector of edges and labels of the response network $\Gva$.
 
 % optimization
 The feature weight parameter $\vw$ is learned through maximum-margin structured output learning by solving the following optimization problem
@@ -1373,9 +1372,9 @@ As these two problems are different only in terms of the definition of the score
 where $s_{\vy_e}(e,\va) = \sum_{i}\vw_{i,e,\vy_e}\varphib(\va)$ denotes the score of an edge $e$ with an edge label $\vy_e$.
 
 We have proved the \nphardness\ of (\ref{spin_np}) by forming a reduction from the \maxcut\ problem \citep{Garey90computers}.
-In addition, we proposed two algorithms to solve (\ref{spin_np}).
+In addition, we proposed two algorithms to solve the inference problem (\ref{spin_np}).
 The first is called {\sdp\ inference} which introduces for each node $u\in V$ a binary variable $x_u\in\{-1,+1\}$ and transforms the inference problem into an Integer Quadratic Programming (\iqp) problem.
-The \iqp\ is tackled by a similar technique proposed in \citep{Geomans1995improved} such that each variable $x_u$ is relaxed to a vector $\vv_u\in\RR^n$ and the relaxed problem is solved by Semidefinite Programming (\sdp). 
+The \iqp\ is tackled by a similar technique proposed by \citet{Geomans1995improved} such that each variable $x_u$ is relaxed to a vector $\vv_u\in\RR^n$ and the relaxed problem is solved by Semidefinite Programming (\sdp). 
 The resulting vector is rounded back into binary values by Incomplete Cholesky Decomposition.
 The benefit from \sdp\ inference algorithm is an approximation guarantee. 
 %If we denote by $Z^*$ ($Z_R$, and $Z$ respectively) the optimal value achieved by \iqp\ (the relaxed problem, and the \sdp\ inference respectively), we have $Z_R\ge Z^*$ and $E[Z]\ge(\alpha-\epsilon)Z_R$ where $\alpha\ge0.796$.
