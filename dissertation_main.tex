@@ -865,15 +865,15 @@ Readers are pointed out to the recent research survey articles \citep{Tsoumakas0
 
 We borrow most notations from the single-label classification setting described in Section~\ref{sc_slc_pn}.
 In particular, we examine the following {multilabel classification} problem.
-We assume training examples are drawn from a domain $\vXcal\times\vYcal$, where $\vXcal$ is a set of inputs (instants) and $\vYcal$ is a set of outputs (multilabels).
-$\vYcal = \Ycal_1\times\cdots\times\Ycal_k$ is composed by a Cartesian product of $k$ sets $\Ycal_i=\{-1,+1\}$.
+We assume training examples are drawn from a domain $\vXcal\times\vYcal$, where $\vXcal$ is an input (instant) space and $\vYcal$ is a space of outputs (multilabels).
+The output space $\vYcal = \Ycal_1\times\cdots\times\Ycal_k$ is composed by a Cartesian product of $k$ sets $\Ycal_i=\{-1,+1\}$.
 We retain a single-label classification problem by setting $k=1$.
 A vector $\vy=(y_1,\cdots,y_k)\in\vYcal$ is called a \textit{multilabel} and its element $y_j$ is called a \textit{microlabel}.
 We use $\vy_i[j]$ to denote the $j$'th microlabel in the $i$'th multilabel.
 In addition, we are given a training set of $m$ labeled examples $\Scal=\{(\vx_i,\vy_i)\}_{i=1}^{m}\in\vXcal\times\vYcal$. 
 A pair $(\vx_i,\vy)$, where $\vx_i$ is a training input and $\vy\in\vYcal$ is an arbitrary output, is called \textit{pseudo-example}.
 It is worth pointing out that the pseudo-example $(\vx_i,\vy)$ can be generated from a different distribution that generates training examples $(\vx_i,\vy_i)$.
-The goal of learning is to find a mapping function $f\in\Hcal:\vXcal\rightarrow\vYcal$ which can compute the best multilabel for an input example such that the predefined loss $\ell$ for the unseen examples will be minimized.
+The goal of learning is to find a mapping function $f\in\Hcal:\vXcal\rightarrow\vYcal$ which can compute the best multilabel for an input example such that the predefined loss function $\ell$ for the unseen examples will be minimized.
 
 
 
