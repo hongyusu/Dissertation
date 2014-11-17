@@ -1558,7 +1558,7 @@ We also examine the classification performance on the molecular classification p
 \subsection{Methods}
 
 We use \mmcrf\ as the base classifier trained on a collection of random output graphs.
-In particular, a random graph $G_t$ is generated for each base learner to couple the multiple labels which are the activities of the molecule $\vx$ in all target cell lines.
+In particular, a random graph $G_t$ is generated for each base learner to couple the multiple labels which are the activities of the molecule in all target cell lines.
 The base model \mmcrf\ is learned with the training data $S=\{(\vx_i,\vy_i)\}_{i=1}^{m}$ and the output graph $G_t$.
 After all base learners have been generated, the predictions are extracted from the base learners and are collected for a post-processing step, in which we compute a majority vote over the graph labeling from the sign on the means of the base classifier's prediction
 \begin{align*}
@@ -1569,10 +1569,8 @@ That is, the ensemble prediction on each microlabel is the most frequently appea
 It is also worth pointing out that \mve\ is not restricted to the base learner \mmcrf\ and can be extended with any other structured output learning models as long as the model incorporates the output structure into learning and makes predictions based on the structure of the output graph.
 
 In addition, we design two approaches to generate the random output graphs.
-In \text{random spanning tree} approach, we first generate a random correlation matrix and extract a spanning tree out from the matrix.
-This approach outputs a tree structure connecting all vertices.
-In \text{random pairing} approach, we randomly draw two vertices at a time and couple the two with an edge.
-This approach outputs a set of disconnected pairs.
+The \text{random spanning tree} approach first generates a random correlation matrix and extracts a spanning tree out from the matrix, which outputs a tree structure connecting all vertices.
+The \text{random pairing} approach randomly draws two vertices at a time and couples the two with an edge, which outputs a set of disconnected pairs.
 
 
 
@@ -1580,7 +1578,7 @@ This approach outputs a set of disconnected pairs.
 %
 \section{Random Graph Ensemble (\amm, \mam)} \label{sc_su14b}
 
-Section~\ref{sc_su11} has shown that the prediction performance of the molecular classification problem can be improved by applying majority vote to combine the predictions from multiple structured output learners built on a collection of random output graphs.
+Section~\ref{sc_su11} has shown that the prediction performance in the molecular classification problem can be improved by applying majority vote to combine the predictions from multiple structured output learners built on a collection of random output graphs.
 This section is based on \citepub{su14b} in which we present two aggregation techniques to combine multiple structured output learners. 
 The proposed model, namely \amm\ and \mam, also perform inference before or after combining the base learners.
 The performance of the proposed models is evaluated on a set of heterogeneous multilabel datasets from a variety of domains.
@@ -1599,15 +1597,15 @@ The compatibility score $\psi(\vx,\vy)$ is defined as
 \begin{align*}
 	\psi(\vx,\vy) = \ip{\vw}{\phib(\vx,\vy)} = \sum_{e\in E}\ip{\vw}{\phib_e(\vx,\vy_e)}=\sum_{e\in E}\psi_e(\vx,\vy_e),
 \end{align*}
-where $\psi_e(\vx,\vy_e)$ denotes the edge compatibility score (\textit{edge potential}) between an input $\vx$ and the edge label $\vy_e$ of an edge $e$.
-$\vw$ is the feature weight parameter which ensures that an input $\vx$ with the correct output $\vy$ will achieve higher compatibility score than with any incorrect outputs.
+where $\psi_e(\vx,\vy_e)$ denotes the edge compatibility score (\textit{edge potential}) between an input example $\vx$ and the edge label $\vy_e$ of an edge $e$.
+$\vw$ is the feature weight parameter which ensures that an input $\vx$ with the correct output $\vy$ will achieve a higher compatibility score than with any incorrect outputs.
 
 % edge potential
-In addition, we assume that we have access to the set of edge potentials of each base classifier 
+In addition, we assume that we have access to the set of edge potentials of the $t$'th base classifier 
 \begin{align*}
 	\psib_E^{(t)} = (\psi_e^{(t)}(\vx,\vu_e))_{e\in E^{(t)},\vu_e\in\Ycal_e}.
 \end{align*}
-With edge compatibility scores, we can infer the \textit{max-marginal} \citep{Wainwright05map} of the $i$'th node which is the score incurred by assigning a label $u_i\in\Ycal_i$ to the $i$'th node defined by
+With the edge compatibility scores, we can infer the \textit{max-marginal} \citep{Wainwright05map} of the $i$'th node which is the score incurred by assigning a label $u_i\in\Ycal_i$ to the $i$'th node defined by
 \begin{align*}
 	\tilde{\psi}_j(\vx,u_j) = \underset{\vy\in\Ycal,y_j=u_j}{\maximize}\sum_{e\in E}\psi_e(\vx,\vy_e).
 \end{align*}
@@ -1650,7 +1648,7 @@ where by $\bar\mu(i,e,\vu_e)=\frac{1}{T}\sum_{t=1}^T\mu^{(t)}(i,e,\vu_e)$ we den
 \fi
 
 Besides the proposed algorithms, we also present a theoretical analysis to explain the improvement of \mam.
-The analysis extends the theory of single-label ensemble developed in \citep{Brown10good}.
+The analysis extends the theory of single-label ensemble \citep{Brown10good}.
 In particular, \citepub[Theory 1]{su14b} states that the reconstructive error of \mam\ is guaranteed to be less than or equal to the average reconstruction error of base classifiers.
 The improvement can be decomposed into two terms, namely \textit{diversity} and \textit{coherence}.
 The former measures the variability of the individual classifiers learned from different perspectives which shares the same argument as the analysis of single-label ensemble \citep{Brown10good}.
