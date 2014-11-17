@@ -920,7 +920,7 @@ In addition, there exists many alternatives which also align to the direction of
 %
 \subsection{Classifier Chains (\cc)}
 
-Classification Chains (\cc) developed in \citep{Read09classifier,Read11classifier} is another problem transformation approach for flat multilabel classification.
+Classification Chains (\cc) \citep{Read09classifier,Read11classifier} is another problem transformation approach for flat multilabel classification.
 \cc\ involves $k$ binary transformations and forms a chain of $k$ binary classifiers $h=\{h_1,\cdots,h_k\}$, in which the $j$'th classifier $h_j$ is built for predicting the $j$'th microlabel.
 For the $j$'th microlabel $\vy[j]$, \cc\ first constructs a new training data $S_j$ by taking the $j$'th microlabel as the output variable and combing the original feature space with all $j-1$ prior microlabels as the new input features defined by
 \begin{align*}
@@ -929,7 +929,7 @@ For the $j$'th microlabel $\vy[j]$, \cc\ first constructs a new training data $S
 A classifier $h_j$ is built by applying any single-label classification algorithm on $S_j$.
 
 Thus, \cc\ takes the correlation between labels into consideration by incorporating the label information as the concatenated features in the new input feature space.
-The idea is not new which has been previously applied in \citep{Godbole04discriminative}.
+The idea is not new which has been previously studied \citep{Godbole04discriminative}.
 \cc\ makes a strong assumption that there is a high correlation between the output microlabel and the concatenated microlabels.
 The central problem of \cc\ is that the additional label information only takes a small part of the input feature space especially when the dimension of the original feature space is already high.
 
@@ -960,11 +960,11 @@ It constructs a Logistic Regression classifier for $\pi^{(j)}$ which can be deri
 	\log\frac{\pi^{(j)}}{1-\pi^{(j)}} = w_0^{(j)} + \sum_{i=1}^{k}\alpha_i^{(j)}\cdot w_{i}^{(j)}(\vx),
 \end{align*}
 where $i$ iterates over all microlabels.
-$w_i^{(j)}(\vx)$ is defined by 
+$w_i^{(j)}(\vx)$ defined by 
 \begin{align*}
 	w_i^{(j)}(\vx) = \sum_{\vx'\in N_k(\vx)}K(\vx',\vx)\cdot \vy(\vx')[i]
 \end{align*}
-which collects the $i'$th microlabel from each neighbor $\vx'\in N_k(\vx)$ and weights the microlabels according to the similarity between $\vx$ and $\vx'$ encoded in $K(\vx',\vx)$.
+collects the $i'$th microlabel from each neighbor $\vx'\in N_k(\vx)$ and weights the microlabels according to the similarity between $\vx$ and $\vx'$ encoded in $K(\vx',\vx)$.
 $\alpha_i^{(j)}$ is the regression coefficient.
 
 
@@ -973,7 +973,7 @@ $\alpha_i^{(j)}$ is the regression coefficient.
 %
 \section{Algorithm Adaptation}
 
-The idea of algorithm adaptation is to directly modify popular single-label classification algorithms to solve the multilabel classification problems.
+Algorithm adaptation directly modifies popular single-label classification algorithms to solve the multilabel classification problems.
 We will present the algorithms that are modified from ensemble methods and Logistic Regression.
 There also exists many other algorithms in the algorithm adaptation category, for example, the method based on label ranking \citep{Crammer03afamily}, and the method based on neural network \citep{Zhang06multilabel}.
 These methods are not explained in detail due to the divergence from the main scope of this thesis.
@@ -1902,7 +1902,7 @@ In particular, the proposed algorithm \spin\ can predict a directed acyclic grap
 The empirical evaluation on the network response prediction problem within the context of social network analysis shows that the proposed model outperforms several state-of-the-art flat multilabel classification approaches.
 The study demonstrates that accurate predictions can be achieved by structured output learning when the output graph is known and utilized during learning.
 
-Meanwhile, we realize that the current structured output learning approaches rely on an output graph connecting multiple output variables in order to exploit the correlation between labels.
+Meanwhile, the current structured output learning approaches rely on an output graph connecting multiple output variables in order to exploit the correlation between labels.
 Thus, the applicability of structured output learning is limited due to the fact that the output graph needs to be known \textit{apriori}.
 The second outcome of the thesis is that we have developed several new models for structured output learning which are no longer constrained by the availability of the output graph.
 Analog but with significant differences to the previously established ensemble methods, the proposed models aim to combine a set of structured output learners which are built on a collection of random output graphs.
