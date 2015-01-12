@@ -1626,8 +1626,8 @@ The predicted multilabel by \amm\ is composed by the predicted microlabels
 
 % mam
 \amm\ performs inference to find the set of max-marginals before combining base classifiers. 
-On the other hand, the Maximum-of-Average-Marginals (\mam) aggregation first collects the local edge potentials $\psib_E^{(t)}$ from each base learner, averages them and performs a finial inference on a global consensus graph $\hat{G}=(\hat{E},V)$ with the averaged edge potentials.
-\mam\ is defined as
+On the other hand, the Maximum-of-Average-Marginals (\mam) aggregation first collects the local edge potentials $\psib_E^{(t)}$ from each base learner, averages them and performs a finial inference with the averaged edge potentials on a global consensus graph $\hat{G}=(\hat{E},V)$ where $\hat{E}=\bigcup_{t=1}^{T}{E^{(t)}}$ is the union of distinct edges of the set of random output graphs.
+Mathematically, \mam\ is defined as
 \begin{align*}
 	F^{\text{\tiny MAM}}(x) &= \underset{\vy \in \Ycal }{\argmax}\,\sum_{e\in \hat{E}}\frac{1}{T}\sum_{t=1}^{T}\ \psi^{(t)}_e(x,\vy_e)
 	%\vy^* &= \underset{\vy}{\argmax}\, \frac{1}{T}\sum_{t=1}^{T}\sum_{e\in E_t}{w^t_e}^T\varphib_e(x,\vy)
