@@ -1382,14 +1382,12 @@ In particular, the proposed \sdp\ inference algorithm is a $0.796$ approximation
 
 As \sdp\ inference is not scalable to the large scale networks, we develop a \greedy\ heuristic based on the observation stated in the following lemma:
 \begin{lemma}
-	The inference problem (\ref{spin_np}) can be expressed equivalently with a set of activated vertices $V^H_{\p}$ and the marginal gain $F_m(v_i)$ on each vertex $v_i\in V^H_{\p}$
+	The inference problem (\ref{spin_np}) can be expressed equivalently with a set of activated vertices $V^H_{\p}$ and the marginal gain function $F_m(v_i)$ defined on each vertex $v_i\in V^H_{\p}$ as
 	\begin{align*}
-		H^{*}(\va) = \underset{{H \in {\cal H}(G)}}{\argmax} \sum_{ \substack{v_i\in V^H_{\p}}}F_m(v_i),
+		H^{*}(\va) = \underset{{H \in {\cal H}(G)}}{\argmax} \sum_{ \substack{v_i\in V^H_{\p}}}F_m(v_i).
 	\end{align*}
 \end{lemma}
 \noindent
-where $F_m(v_i)$ 
-
 The proof is given in the supplementary material of \citepub{su14a}. 
 As a result, the \greedy\ algorithm starts with an empty vertex set and adds one vertex in each iteration such that the increment of the score is maximized over all possible choices of inactivated vertices.
 The procedure ends when the objective cannot be improved.  
