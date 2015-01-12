@@ -1003,7 +1003,7 @@ The prediction $H(x)$ is a weighted combination of the base learners $f^t(x)$ we
 	\STATE Initialize $D^1(i,l)=\frac{1}{mk},i\in\{1,\cdots,m\}$
 	\FOR{$t=1\cdots T$}
 		\STATE $f^t(\vx)\leftarrow\Wcal(\Scal,D^{t})$ \label{mh_compuet_f}
-		\STATE $\vy_i = f^t(\vx_i),\forall i\in\{1,\cdots,m\}$
+		\STATE $\hat{\vy}_i = f^t(\vx_i),\forall i\in\{1,\cdots,m\}$
 		\STATE $\epsilon^t =\sum_{l=1}^k\sum_{i=1}^{m}D^t(i,l)\ind{\vy_i[l]\neq\hat{\vy}_i[l]}$ \label{mh_compute_error}
 		\STATE $\alpha^{t} = \frac{1}{2}\ln\left(\frac{1-\epsilon^t}{\epsilon^t}\right)$ \label{mh_compute_alpha}
 		\STATE $Z=\sum_{i=1}^{m}\sum_{l=1}^{k}D^{t}(i,l)\exp(-\alpha^t\vy_i[l]\hat{\vy}_i[l])$
@@ -1112,10 +1112,10 @@ Multilabel classification deals with multiple interdependent output variables, $
 The problem is called {structured output prediction} when these variables are located in a structured output space.
 That is, the correlation between labels is described by an {output graph} connecting multiple labels.
 In particular, we define the output graph $G=(E,V)$ by a node set $V=\{1,\cdots,k\}$ which corresponds to the microlabels $\{y_1,\cdots,y_k\}$ and an edge set $E=V\times V$ which represents the correlation between microlabels.
-For an edge $e=(j,j')\in E$, we use $\vy_e$ to denote the label of the edge $\ve$ with respect to a multilabel $\vy$ by concatenating the head label $y_j$ and the tail label $y_{j'}$, with an edge label domain $\vy_e\in\vYcal_e=\Ycal_j\times\Ycal_{j'}$.
-We use $\vy_{i,e}$ to denote the edge label of an example $(\vx_i,\vy_i)$ on an edge $\ve$.
+For an edge $e=(j,j')\in E$, we use $\vy_e$ to denote the label of the edge $e$ with respect to a multilabel $\vy$ by concatenating the head label $y_j$ and the tail label $y_{j'}$, with an edge label domain $\vy_e\in\vYcal_e=\Ycal_j\times\Ycal_{j'}$.
+We use $\vy_{i,e}$ to denote the edge label of an example $(\vx_i,\vy_i)$ on an edge $e$.
 Thus, given a training example $(\vx_i,\vy_i)$ and an output graph $G$, we can uniquely identify the node label $y_i$ and the edge label $\vy_{i,e}$ of the output graph.
-In addition, we denote the possible label of a node $i$ by $u_i$ and the possible label of an edge $\ve$ by $\vu_{e}$ where $u_i$ and $\vu_{e}$ are not constrained by any multilabel $\vy$.
+In addition, we denote the possible label of a node $i$ by $u_i$ and the possible label of an edge $e$ by $\vu_{e}$ where $u_i$ and $\vu_{e}$ are not constrained by any multilabel $\vy$.
 Naturally, $u_i\in\Ycal_i$ and $\vu_e\in\vYcal_e$.
 
 
