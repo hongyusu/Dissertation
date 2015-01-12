@@ -1250,7 +1250,7 @@ In particular, \mmcrf\ uses \textit{exponential family} to model the conditional
 \begin{align*}
 	P(\vy|\vx) \propto \exp(\ip{\vw}{\phib(\vx,\vy)}) = \prod_{e\in E}\exp(\ip{\vw_e}{\phib_e(\vx,\vy_e)}),
 \end{align*}
-where $\phib_e(\vx,\vy_e)=\varphib(\vx)\otimes\Upsilonb_e(\vy_e)$ is the tensor product between an input feature map and an output feature map which is the label of an edge $e\in E$ in an output Markov network $G$ with respect to a multilabel $\vy$. 
+where the joint feature map $\phib_e(\vx,\vy_e)=\varphib(\vx)\otimes\Upsilonb_e(\vy_e)$ is defined as the tensor product between an input feature map and an output feature map which is the label of an edge $e\in E$ in an output Markov network $G$ with respect to a multilabel $\vy$. 
 To obtain $\vw$, one needs to solve the primal optimization problem that is not dissimilar to Definition~\ref{def_mmmn}.
 After the feature weight parameter $\vw$ is obtained, the prediction of an input example can be computed by solving the following argmax problem
 \begin{align}
@@ -1360,13 +1360,13 @@ In particular, the goal during training is to find the worst margin violating su
 \begin{align*}
 	H^*(\va_i) = \underset{G_{\va_i}'\in\Hcal(G)/G_{\va_i}}{\argmax}\, (F(\va_i,G_{\va_i}';\vw)+\vell_{G}(G_{\va_i},G_{\va_i}')).
 \end{align*}
-The goal during prediction is to find the subgraph with maximum compatibility given an action
+The goal during prediction is to find the subgraph with maximum compatibility given an action $\va$
 \begin{align}
-	H^*(\va_i) = \underset{H\in\Hcal(G)}{\argmax}\, F(\va_i,H;\vw) \label{spin_inference}.
+	H^*(\va) = \underset{H\in\Hcal(G)}{\argmax}\, F(\va,H;\vw) \label{spin_inference}.
 \end{align}
 As these two problems are different only in terms of the definition of the scores, we explain our inference algorithm based on (\ref{spin_inference}) by writing the problem explicitly in terms of the weight vectors and the feature maps
 \begin{align}
-	H^*(\va_i) &= \underset{H\in\Hcal(G)}{\argmax}\, \ip{\vw}{\varphib(\va)\otimes\Upsilonb(H)} \nonumber \\
+	H^*(\va) &= \underset{H\in\Hcal(G)}{\argmax}\, \ip{\vw}{\varphib(\va)\otimes\Upsilonb(H)} \nonumber \\
 	&= \underset{H\in\Hcal(G)}{\argmax}\, \sum_{e\in E^H}s_{\vy_e}(e,\va), \label{spin_np}
 \end{align}
 where $s_{\vy_e}(e,\va) = \sum_{i}\vw_{i,e,\vy_e}\varphib(\va)$ denotes the score of an edge $e$ with an edge label $\vy_e$.
@@ -1382,12 +1382,13 @@ In particular, the proposed \sdp\ inference algorithm is a $0.796$ approximation
 
 As \sdp\ inference is not scalable to the large scale networks, we develop a \greedy\ heuristic based on the observation stated in the following lemma:
 \begin{lemma}
-	The inference problem (\ref{spin_np}) can be expressed equivalently as a function of activated vertices
+	The inference problem (\ref{spin_np}) can be expressed equivalently as a function of a set of activated vertices $V^H_{\p}$
 	\begin{align*}
-		H^{*}(\va) = \underset{{H \in {\cal H}(G)}}{\argmax} \sum_{ \substack{v_i\in V^H_{\p}}}F_m(v_i). \nonumber 
+		H^{*}(\va) = \underset{{H \in {\cal H}(G)}}{\argmax} \sum_{ \substack{v_i\in V^H_{\p}}}F_m(v_i),
 	\end{align*}
 \end{lemma}
 \noindent
+where $F_m(v_i)$ 
 The proof is given in the supplementary material of \citepub{su14a}. 
 As a result, the \greedy\ algorithm starts with an empty vertex set and adds one vertex in each iteration such that the increment of the score is maximized over all possible choices of inactivated vertices.
 The procedure ends when the objective cannot be improved.  
