@@ -455,7 +455,7 @@ Many regularization methods for \lr\ have been developed \citep{Chen99,Chen00,Go
 In practice, we assume $\vw$ is generated according to a zero-mean spherical Gaussian with variance $\sigma^2$.
 Thus, the \mle\ problem (\ref{lr_likelihood_sum}) is transformed into the \textit{Maximum A-Posteriori} (\map) problem of the following form
 \begin{align}
-	P(\vw,b|D;\sigma^2) = P(\vw|\sigma^2)\prod_{i=1}^mP(y_i|\varphib(\vx_i))=\exponential{-\frac{\norm{\vw}^2}{\sigma^2}}\prod_{i=1}^{m}{\frac{1}{1+\exponential{-y_i(\ip{\varphib(\vx_i)}{\vw}+b)}}}. \label{lr_posteriori}
+	P(\vw,b|D;\sigma^2) = P(\vw|\sigma^2)\prod_{i=1}^mP(y_i|\vx_i)=\exponential{-\frac{\norm{\vw}^2}{\sigma^2}}\prod_{i=1}^{m}{\frac{1}{1+\exponential{-y_i(\ip{\varphib(\vx_i)}{\vw}+b)}}}. \label{lr_posteriori}
 \end{align}
 Instead of maximizing the posteriori (\ref{lr_posteriori}), it is easier to maximize the log-posteriori
 \begin{align}
@@ -749,14 +749,14 @@ The ensemble prediction is the weighted combination of all weak learners (line~\
 \begin{algorithmic}[1]
 	\REQUIRE Training sample $\Scal = \{(x_i,\vy_i)\}_{i=1}^m$, learning function $\Wcal$, number of weak learners $T$
 	\ENSURE Boosting ensemble $H(\vx)$
-	\STATE Initialize $D^0(i)=\frac{1}{m},i\in\{1,\cdots,m\}$
+	\STATE Initialize $D^1(i)=\frac{1}{m},i\in\{1,\cdots,m\}$
 	\FOR{$t=1\cdots T$}
-		\STATE $f^t(\vx)\leftarrow\Wcal(\Scal,D^{i-1})$ \label{compuet_f}
+		\STATE $f^t(\vx)\leftarrow\Wcal(\Scal,D^{t})$ \label{compuet_f}
 		%\STATE $y_i = f^t(\vx_i),\forall i\in\{1,\cdots,m\}$
 		\STATE $\epsilon^t = \sum_{i=1}^{m}D^t(i)\ind{y_i\neq f^t(\vx_i)}$ \label{compute_error}
 		\STATE $\alpha^{t} = \frac{1}{2}\ln\left(\frac{1-\epsilon^t}{\epsilon^t}\right)$ \label{compute_alpha}
-		\STATE $Z=\sum_{i=1}^{m}D^{t-1}(i)\exp(-\alpha^ty_if^t(\vx_i))$
-		\STATE $D^t(i) = \frac{1}{Z}D^{t-1}(i)\exp(-\alpha^ty_if^t(\vx_i)),\forall i\in\{1,\cdots,m\}$ \label{update_d}
+		\STATE $Z=\sum_{i=1}^{m}D^{t}(i)\exp(-\alpha^ty_if^t(\vx_i))$
+		\STATE $D^{t+1}(i) = \frac{1}{Z}D^{t}(i)\exp(-\alpha^ty_if^t(\vx_i)),\forall i\in\{1,\cdots,m\}$ \label{update_d}
 	\ENDFOR
 	\RETURN $H(\vx) = \sign(\sum_{t=1}^T\alpha^tf^t(\vx))$ \label{adaboost_prediction}
 \end{algorithmic}
@@ -1000,14 +1000,14 @@ The prediction $H(x)$ is a weighted combination of the base learners $f^t(x)$ we
 \begin{algorithmic}[1]
 	\REQUIRE Training sample $\Scal = \{(x_i,\vy_i)\}_{i=1}^m$, learning function $\Wcal$, number of weak learners $T$
 	\ENSURE Boosting ensemble $H(\vx)$
-	\STATE Initialize $D^0(i,l)=\frac{1}{mk},i\in\{1,\cdots,m\}$
+	\STATE Initialize $D^1(i,l)=\frac{1}{mk},i\in\{1,\cdots,m\}$
 	\FOR{$t=1\cdots T$}
-		\STATE $f^t(\vx)\leftarrow\Wcal(\Scal,D^{i-1})$ \label{mh_compuet_f}
+		\STATE $f^t(\vx)\leftarrow\Wcal(\Scal,D^{t})$ \label{mh_compuet_f}
 		\STATE $\vy_i = f^t(\vx_i),\forall i\in\{1,\cdots,m\}$
 		\STATE $\epsilon^t =\sum_{l=1}^k\sum_{i=1}^{m}D^t(i,l)\ind{\vy_i[l]\neq\hat{\vy}_i[l]}$ \label{mh_compute_error}
 		\STATE $\alpha^{t} = \frac{1}{2}\ln\left(\frac{1-\epsilon^t}{\epsilon^t}\right)$ \label{mh_compute_alpha}
-		\STATE $Z=\sum_{i=1}^{m}\sum_{l=1}^{k}D^{t-1}(i,l)\exp(-\alpha^t\vy_i[l]\hat{\vy}_i[l])$
-		\STATE $D^t(i,l) = \frac{1}{Z}D^{t-1}(i,l)\exp(-\alpha^t\vy_i[l]\hat{\vy}_i[l]),\forall i,\forall l$ \label{mh_update_d}
+		\STATE $Z=\sum_{i=1}^{m}\sum_{l=1}^{k}D^{t}(i,l)\exp(-\alpha^t\vy_i[l]\hat{\vy}_i[l])$
+		\STATE $D^{t+1}(i,l) = \frac{1}{Z}D^{t}(i,l)\exp(-\alpha^t\vy_i[l]\hat{\vy}_i[l]),\forall i,\forall l$ \label{mh_update_d}
 	\ENDFOR
 	\RETURN $H(\vx) = \sign(\sum_{t=1}^T\alpha^tf^t(\vx))$
 \end{algorithmic}
@@ -1338,7 +1338,7 @@ Therefore, we propose the following definition of the network response problem
 \subsection{Methods}
 We approach the problem by structured output learning, where we define a computability score as the inner product between an action $\va$ and a response network $\Gva$
 \begin{align*}
-	F(\va,\Gva;\vw) = \ip{\va}{\phib(\va,\Gva)}.
+	F(\va,\Gva;\vw) = \ip{\va}{\phib(\vw,\Gva)}.
 \end{align*}
 Intuitively, the action $\va$ with a correct response network $\Gva$ will achieve a higher score than with any incorrect response network $\Gva'$.
 The joint feature map $\phib(\va,\Gva)$ is composed by the tensor product between an input feature map $\varphib(\va)$ of an action $\va$  and an output feature map $\Upsilonb(\Gva)$ of a response network $\Gva$.
@@ -1595,7 +1595,7 @@ In addition, we assume that the base learner for \amm\ and \mam\ is defined on a
 That is, the base learner computes a compatibility score $\psi(\vx,\vy)$ for $(\vx,\vy)\in\vXcal\times\Ycal$ based on the output graph $G$, indicating how well an input $\vx$ gets along with an output $\vy$.
 The compatibility score $\psi(\vx,\vy)$ is defined as
 \begin{align*}
-	\psi(\vx,\vy) = \ip{\vw}{\phib(\vx,\vy)} = \sum_{e\in E}\ip{\vw}{\phib_e(\vx,\vy_e)}=\sum_{e\in E}\psi_e(\vx,\vy_e),
+	\psi(\vx,\vy) = \ip{\vw}{\phib(\vx,\vy)} = \sum_{e\in E}\ip{\vw_e}{\phib_e(\vx,\vy_e)}=\sum_{e\in E}\psi_e(\vx,\vy_e),
 \end{align*}
 where $\psi_e(\vx,\vy_e)$ denotes the edge compatibility score (\textit{edge potential}) between an input example $\vx$ and the edge label $\vy_e$ of an edge $e$.
 $\vw$ is the feature weight parameter which ensures that an input $\vx$ with the correct output $\vy$ will achieve a higher compatibility score than with any incorrect outputs.
@@ -1605,7 +1605,7 @@ In addition, we assume that we have access to the set of edge potentials of the 
 \begin{align*}
 	\psib_E^{(t)} = (\psi_e^{(t)}(\vx,\vu_e))_{e\in E^{(t)},\vu_e\in\Ycal_e}.
 \end{align*}
-With the edge compatibility scores, we can infer the \textit{max-marginal} \citep{Wainwright05map} of the $i$'th node which is the score incurred by assigning a label $u_i\in\Ycal_i$ to the $i$'th node defined by
+With the edge compatibility scores, we can infer the \textit{max-marginal} \citep{Wainwright05map} of the $j$'th node which is the score incurred by assigning a label $u_j\in\Ycal_j$ to the $j$'th node defined by
 \begin{align*}
 	\tilde{\psi}_j(\vx,u_j) = \underset{\vy\in\Ycal,y_j=u_j}{\maximize}\sum_{e\in E}\psi_e(\vx,\vy_e).
 \end{align*}
