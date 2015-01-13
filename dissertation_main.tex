@@ -601,14 +601,44 @@ the evaluation can be done efficiently by maintaining a small set of non-zero du
 
 To solve the optimization problem in Definition~\ref{softsvmdual}, we only need the result of the inner product $\ip{\varphib(\vx_i)}{\varphib(\vx_j)}$ rather than work explicitly in the feature space of $\varphib(\vx)$.
 This suggests that training data can be radically represented through pairwise similarities.
-In particular, we defined a function $K:\Xcal\times\Xcal\rightarrow\RR$ such that training data $\Scal$ is represented through a $m\times m$ matrix of pairwise similarities.
+In particular, we defined a function $k:\Xcal\times\Xcal\rightarrow\RR$ such that training data $\Scal$ is represented through a $m\times m$ matrix of pairwise similarities.
+
 % kernel function
 \begin{definition}{Kernel Function.}
-	A \textit{kernel} is a function $K$ that for all $x_i,x_j\in\Xcal$ satisfies
-		$K(x_i,x_j) = \ip{\varphib(x_i)}{\varphib(x_j)}$
+	A \textit{kernel} is a function $k$ that for all $x_i,x_j\in\Xcal$ satisfies
+		$k(x_i,x_j) = \ip{\varphib(x_i)}{\varphib(x_j)},$
 	where $\varphib:\Xcal\rightarrow\vFcal$ is a function that maps from an input space $\Xcal$ to a feature space $\vFcal$.
 \end{definition}
 \noindent
+Kernel functions that are heavily used in practice include \textit{linear kernel}
+\begin{align*}
+	k(\vx_i,\vx_j) = \ip{\vx_i}{\vx_j},
+\end{align*}
+\textit{polynomial kernel}
+\begin{align*}
+	k(\vx_i,\vx_j) = (\ip{\vx_i}{\vx_j} + b)^d,
+\end{align*}
+where $b$ is a bias term and $d$ is the degree of polynomial, and \textit{Gaussian kernel} (\rbf)
+\begin{align*}
+	k(\vx_i,\vx_j) = \exp{\left(\frac{\norm{{\vx_i}-{\vx_j}}^2}{2\sigma^2}\right)},
+\end{align*}
+where $\sigma$ is the Gaussian width parameter.
+
+\begin{definition}{Kernel Matrix.}
+	Given a kernel function $k$ and any choice of $m$ objects $\Scal=\{x_1,\cdots,x_m\}\subseteq\Xcal$, the $m\times m$ matrix $K=(K(x_i,x_j))_{i,j}$ is called a Kernel matrix (\textit{Gram matrix}) of kernel $k$ with respect to $\Scal$.
+\end{definition}
+\noindent
+The kernel matrix is usually normalized by
+\begin{align*}
+	{K}(\vx_i,\vx_j) = \frac{{K}(\vx_i,\vx_j)}{\sqrt{{K}(\vx_i,\vx_i){K}(\vx_j,\vx_j)}}
+\end{align*}
+to make sure that all elements in the kernel matrix lie on a unit hypersphere.
+
+\begin{definition}{Positive Definite Matrix.}
+	A $m\times m$ symmetric matrix $K$ is called positive definite if it satisfies $\sum_{i,j}c_ic_jK_{i,j}\ge0$ for all $c_i\in\RR$.
+\end{definition}
+
+
 	\iffalse
 	psd
  	A function $K:\vXcal\times\vXcal\rightarrow\RR$ is called a \textit{kernel} if it is symmetric and positive semidefinite. That is, 
@@ -627,28 +657,8 @@ Definition~\ref{rkhs} shows that any kernel function can be represented as an in
 Kernel enables us to work in a high dimensional feature space $\vFcal$ without ever computing the exact coordinate or evaluating the inner product explicitly in that space.
 Instead, kernel can be computed based on the inner product in the original space $\Xcal$.
 
-Kernel functions that are heavily used in practice include \textit{linear kernel}
-\begin{align*}
-	K(\vx_i,\vx_j) = \ip{\vx_i}{\vx_j},
-\end{align*}
-\textit{polynomial kernel}
-\begin{align*}
-	K(\vx_i,\vx_j) = (\ip{\vx_i}{\vx_j} + b)^d,
-\end{align*}
-where $b$ is a bias term and $d$ is the degree of polynomial, and \textit{Gaussian kernel} (\rbf)
-\begin{align*}
-	K(\vx_i,\vx_j) = \exp{\left(\frac{\norm{{\vx_i}-{\vx_j}}^2}{2\sigma^2}\right)},
-\end{align*}
-where $\sigma$ is the Gaussian width parameter.
-\begin{definition}{Kernel Matrix.}
-	Given a kernel $K$ and a nonempty set $\Scal$, an $m\times m$ matrix $\hat{K}=(K(\vx_i,\vx_j))_{i,j}$ is called a \textit{Kernel matrix} (Gram matrix) of kernel $K$ with respect to $\Scal$.
-\end{definition}
-\noindent
-The kernel matrix is usually normalized by
-\begin{align*}
-	\hat{K}(\vx_i,\vx_j) = \frac{\hat{K}(\vx_i,\vx_j)}{\sqrt{\hat{K}(\vx_i,\vx_i)\hat{K}(\vx_j,\vx_j)}}
-\end{align*}
-to make sure that all elements in the kernel matrix lie on a unit hypersphere.
+
+
 
 The algorithms for solving the optimization problem of \svm\ have been intensively studied, for example, 
 the ``chunking'' method \citep{Vapnik82estimation,Perezcruz04double}, 
