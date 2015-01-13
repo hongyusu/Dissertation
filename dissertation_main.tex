@@ -604,13 +604,19 @@ This suggests that training data can be radically represented through pairwise s
 In particular, we defined a function $K:\Xcal\times\Xcal\rightarrow\RR$ such that training data $\Scal$ is represented through a $m\times m$ matrix of pairwise similarities.
 % kernel function
 \begin{definition}{Kernel Function.}
+	A \textit{kernel} is a function $K$ that for all $x_i,x_j\in\Xcal$ satisfies
+		$K(x_i,x_j) = \ip{\varphib(x_i)}{\varphib(x_j)}$
+	where $\varphib:\Xcal\rightarrow\vFcal$ is a function that maps from an input space $\Xcal$ to a feature space $\vFcal$.
+\end{definition}
+\noindent
+	\iffalse
+	psd
  	A function $K:\vXcal\times\vXcal\rightarrow\RR$ is called a \textit{kernel} if it is symmetric and positive semidefinite. That is, 
 \begin{align*}
 	K(\vx_i,\vx_j) = K(\vx_j,\vx_i)\quad \text{and}\, \sum_{\vx_i,\vx_j\in\Xcal}c_ic_jK(\vx_i,\vx_i)\ge0
 \end{align*}
 hold for any $c_i\in\RR$ and a nonempty set $\Xcal$.
-\end{definition}
-\noindent
+	\fi
 \textit{Mercer's Theorem} \citep{taylor04} has shown that every positive semidefinite symmetric function is a kernel.
 % rkhs
 \begin{definition}{Reproduced Kernel Hilbert Space.} \label{rkhs}
