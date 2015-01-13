@@ -635,7 +635,11 @@ The kernel matrix is usually normalized by
 to make sure that all elements in the kernel matrix lie on a unit hypersphere.
 
 \begin{definition}{Positive Definite Matrix.}
-	An $m\times m$ symmetric matrix $K$ is called positive definite if it satisfies $\sum_{i,j}c_ic_jK_{i,j}\ge0$ for all $c_i\in\RR$.
+	An $m\times m$ symmetric matrix $K$ is called positive definite if it satisfies 
+	\begin{align*}
+		\sum_{i,j=1}^{m}c_ic_jK(i,j)\ge0
+		\end{align*} 
+		for any $c_i\in\RR$.
 \end{definition}
 
 
