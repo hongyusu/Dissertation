@@ -625,17 +625,17 @@ where $b$ is a bias term and $d$ is the degree of polynomial, and \textit{Gaussi
 where $\sigma$ is the Gaussian width parameter.
 
 \begin{definition}{Kernel Matrix.}
-	Given a kernel function $k$ and any choice of $m$ objects $\Scal=\{x_1,\cdots,x_m\}\subseteq\Xcal$, the $m\times m$ matrix $K=(K(x_i,x_j))_{i,j}$ is called a Kernel matrix (\textit{Gram matrix}) of kernel $k$ with respect to $\Scal$.
+	Given a kernel function $k$ and any choice of $m$ objects $\Scal=\{x_1,\cdots,x_m\}\subseteq\Xcal$, the $m\times m$ matrix $K=(k(x_i,x_j))_{i,j}$ is called a Kernel matrix (\textit{Gram matrix}) of kernel $k$ with respect to $\Scal$.
 \end{definition}
 \noindent
 The kernel matrix is usually normalized by
 \begin{align*}
-	{K}(\vx_i,\vx_j) = \frac{{K}(\vx_i,\vx_j)}{\sqrt{{K}(\vx_i,\vx_i){K}(\vx_j,\vx_j)}}
+	{K}(i,j) = \frac{{K}(i,j)}{\sqrt{{K}(i,i){K}(j,j)}}
 \end{align*}
 to make sure that all elements in the kernel matrix lie on a unit hypersphere.
 
 \begin{definition}{Positive Definite Matrix.}
-	A $m\times m$ symmetric matrix $K$ is called positive definite if it satisfies $\sum_{i,j}c_ic_jK_{i,j}\ge0$ for all $c_i\in\RR$.
+	An $m\times m$ symmetric matrix $K$ is called positive definite if it satisfies $\sum_{i,j}c_ic_jK_{i,j}\ge0$ for all $c_i\in\RR$.
 \end{definition}
 
 
