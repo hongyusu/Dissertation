@@ -605,9 +605,11 @@ In particular, we defined a function $k:\Xcal\times\Xcal\rightarrow\RR$ such tha
 
 % kernel function
 \begin{definition}{Kernel Function.}
-	A \textit{kernel} is a function $k$ that for all $x_i,x_j\in\Xcal$ satisfies
-		$k(x_i,x_j) = \ip{\varphib(x_i)}{\varphib(x_j)},$
-	where $\varphib:\Xcal\rightarrow\vFcal$ is a function that maps from an input space $\Xcal$ to a feature space $\vFcal$.
+	A \textit{kernel} $k:\Xcal\times\Xcal\rightarrow\RR$ is a function that for all $x_i,x_j\in\Xcal$ satisfies
+	\begin{align*}
+		k(x_i,x_j) = \ip{\varphib(x_i)}{\varphib(x_j)},
+	\end{align*}
+	where $\varphib:\Xcal\rightarrow\vFcal$ is a feature map that encodes from an input space $\Xcal$ to a feature space $\vFcal$.
 \end{definition}
 \noindent
 Kernel functions that are heavily used in practice include \textit{linear kernel}
@@ -634,13 +636,20 @@ The kernel matrix is usually normalized by
 \end{align*}
 to make sure that all elements in the kernel matrix lie on a unit hypersphere.
 
-\begin{definition}{Positive Definite Matrix.}
-	An $m\times m$ symmetric matrix $K$ is called positive definite if it satisfies 
+\begin{definition}{Positive Semi-definite Matrix.}
+	An $m\times m$ symmetric matrix $K$ is a positive semi-definite matrix if it satisfies 
 	\begin{align*}
 		\sum_{i,j=1}^{m}c_ic_jK(i,j)\ge0
 		\end{align*} 
-		for any $c_i\in\RR$.
+		for any $c_1,\cdots,c_m\in\RR$. If equality occurs only when $c_1=\cdots=c_m=0$, then $K$ is called \textit{strictly positive definite}. 
 \end{definition}
+
+\begin{definition}{Positive Semi-definite Kernel.}
+	Given a non-empty set $\Scal=\{x_1,\cdots,x_m\}\subseteq\Xcal$ of $m$ objects, a function $k:\Scal\times\Scal\rightarrow\RR$ is called a positive semi-definite kernel if it generates a positive semi-definite Kernel matrix $K$ with respect to $\Scal$.
+\end{definition}
+\noindent
+We refer to positive semi-definite kernels as \textit{kernels} in the remaining part of the thesis.
+
 
 
 	\iffalse
