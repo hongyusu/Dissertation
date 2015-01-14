@@ -611,7 +611,27 @@ In particular, we defined a function $k:\Xcal\times\Xcal\rightarrow\RR$ such tha
 	\end{align*}
 	where $\varphib:\Xcal\rightarrow\vFcal$ is a feature map that encodes from an input space $\Xcal$ to a feature space $\vFcal$.
 \end{definition}
+\begin{definition}{Kernel Matrix.}
+	Given a kernel function $k$ and any choice of $m$ objects $\Scal=\{x_1,\cdots,x_m\}\subseteq\Xcal$, the $m\times m$ matrix $K=(k(x_i,x_j))_{i,j}$ is called a Kernel matrix (\textit{Gram matrix}) of kernel $k$ with respect to $\Scal$.
+\end{definition}
 \noindent
+The kernel matrix is usually normalized by
+\begin{align*}
+	{K}(i,j) = \frac{{K}(i,j)}{\sqrt{{K}(i,i){K}(j,j)}}
+\end{align*}
+to make sure that all elements in the kernel matrix lie on a unit hypersphere.
+\begin{definition}{Positive Semi-definite Matrix.}
+	An $m\times m$ symmetric matrix $K$ is a positive semi-definite matrix if it satisfies 
+	\begin{align*}
+		\sum_{i,j=1}^{m}c_ic_jK(i,j)\ge0
+		\end{align*} 
+		for any $c_1,\cdots,c_m\in\RR$. If equality occurs only when $c_1=\cdots=c_m=0$, then $K$ is called \textit{strictly positive definite}. 
+\end{definition}
+\begin{definition}{Positive Semi-definite Kernel.}\label{psdkernel}
+	Given a non-empty set $\Scal=\{x_1,\cdots,x_m\}\subseteq\Xcal$ of $m$ objects, a function $k:\Scal\times\Scal\rightarrow\RR$ is called a positive semi-definite kernel if it generates a positive semi-definite Kernel matrix $K$ with respect to $\Scal$.
+\end{definition}
+\noindent
+We refer to positive semi-definite kernels simply as \textit{kernels} in the remaining part of the thesis.
 Kernel functions that are heavily used in practice include \textit{linear kernel}
 \begin{align*}
 	k(\vx_i,\vx_j) = \ip{\vx_i}{\vx_j},
@@ -626,41 +646,12 @@ where $b$ is a bias term and $d$ is the degree of polynomial, and \textit{Gaussi
 \end{align*}
 where $\sigma$ is the Gaussian width parameter.
 
-\begin{definition}{Kernel Matrix.}
-	Given a kernel function $k$ and any choice of $m$ objects $\Scal=\{x_1,\cdots,x_m\}\subseteq\Xcal$, the $m\times m$ matrix $K=(k(x_i,x_j))_{i,j}$ is called a Kernel matrix (\textit{Gram matrix}) of kernel $k$ with respect to $\Scal$.
-\end{definition}
-\noindent
-The kernel matrix is usually normalized by
-\begin{align*}
-	{K}(i,j) = \frac{{K}(i,j)}{\sqrt{{K}(i,i){K}(j,j)}}
-\end{align*}
-to make sure that all elements in the kernel matrix lie on a unit hypersphere.
+Definition~\ref{psdkernel} makes difference between general similarity measures and kernels.
+The positive semi-definiteness is essential in kernel based methods from two perspectives.
+First, the property ensures kernel based methods will converge to a relevant solution in in convex optimization \citep{Boyd2004convex}.
+Secondly, it is a key assumption in \textit{Reproducing Kernel Hilbert Space} (\rkhs) theory described as follows.
+%\textit{Mercer's Theorem} \citep{taylor04} has shown that every positive semidefinite symmetric function is a kernel.
 
-\begin{definition}{Positive Semi-definite Matrix.}
-	An $m\times m$ symmetric matrix $K$ is a positive semi-definite matrix if it satisfies 
-	\begin{align*}
-		\sum_{i,j=1}^{m}c_ic_jK(i,j)\ge0
-		\end{align*} 
-		for any $c_1,\cdots,c_m\in\RR$. If equality occurs only when $c_1=\cdots=c_m=0$, then $K$ is called \textit{strictly positive definite}. 
-\end{definition}
-
-\begin{definition}{Positive Semi-definite Kernel.}
-	Given a non-empty set $\Scal=\{x_1,\cdots,x_m\}\subseteq\Xcal$ of $m$ objects, a function $k:\Scal\times\Scal\rightarrow\RR$ is called a positive semi-definite kernel if it generates a positive semi-definite Kernel matrix $K$ with respect to $\Scal$.
-\end{definition}
-\noindent
-We refer to positive semi-definite kernels as \textit{kernels} in the remaining part of the thesis.
-
-
-
-	\iffalse
-	psd
- 	A function $K:\vXcal\times\vXcal\rightarrow\RR$ is called a \textit{kernel} if it is symmetric and positive semidefinite. That is, 
-\begin{align*}
-	K(\vx_i,\vx_j) = K(\vx_j,\vx_i)\quad \text{and}\, \sum_{\vx_i,\vx_j\in\Xcal}c_ic_jK(\vx_i,\vx_i)\ge0
-\end{align*}
-hold for any $c_i\in\RR$ and a nonempty set $\Xcal$.
-	\fi
-\textit{Mercer's Theorem} \citep{taylor04} has shown that every positive semidefinite symmetric function is a kernel.
 % rkhs
 \begin{definition}{Reproduced Kernel Hilbert Space.} \label{rkhs}
 	For any kernel function $K$ defined on a space $\Xcal$, there always exists a \textit{Reproduced Kernel Hilbert Space} (RKHS) $\vFcal$ and a mapping function $\varphib:\Xcal\rightarrow\vFcal$ such that $K(\vx_i,\vx_j)=\ip{\varphib(\vx_i)}{\varphib(\vy_i)}$ holds for any $\vx\in\Xcal$.
