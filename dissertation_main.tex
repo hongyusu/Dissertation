@@ -502,7 +502,7 @@ After that, we will discuss the formalism of \svm, the primal-dual optimization 
 In the end we will briefly present the optimization strategies developed for \svm.
 
 The framework of \svm\ was originally introduced by \citet{Cortes95support}.
-The theory and the algorithm details of \svm\ are also presented in the book chapters \citep{Scholkopf02learning,taylor04,Bishop07}.
+The theory and the algorithm details of \svm\ are also presented in the book chapters \citep{Scholkopf02learning,Taylor04kernel,Bishop07}.
 % hard margin svm
 We begin our discussion by considering a very simple case where the training data is assumed to be linearly separable.
 There exists a \textit{hyperplane} in the feature space which separates the training data into two classes.
@@ -593,7 +593,7 @@ We defined the dual optimization problem as
 It is not difficult to verify that according to Karush-Kuhn Tucher (\kkt) conditions only the examples with $\xi_i=0$ and satisfying the equality constraints (\ref{softsvmconstraint}) will be ``active'', have a dual variable $\alpha_i>0$ and lie on the margin with $\gamma_i=1$.
 They are called \textit{support vectors} during the optimization of \svm.
 In fact the number of support vectors is usually smaller than the size of the training data.
-As the weight vector can be expressed as a linear combination of training examples \citep{taylor04}
+As the weight vector can be expressed as a linear combination of training examples \citep{Taylor04kernel}
 \begin{align*}
 	\vw = \sum_{i=1}^{m}\alpha_iy_i\varphib(\vx_i),
 \end{align*}
@@ -611,24 +611,13 @@ In particular, we defined a function $k:\Xcal\times\Xcal\rightarrow\RR$ such tha
 	\end{align*}
 	where $\varphib:\Xcal\rightarrow\vFcal$ is a feature map that encodes from an input space $\Xcal$ to a feature space $\vFcal$.
 \end{definition}
-\begin{definition}{Kernel Matrix.}
-	Given a kernel function $k$ and any choice of $m$ objects $\Scal=\{x_1,\cdots,x_m\}\subseteq\Xcal$, the $m\times m$ matrix $K=(k(x_i,x_j))_{i,j}$ is called a Kernel matrix (\textit{Gram matrix}) of kernel $k$ with respect to $\Scal$.
-\end{definition}
-\noindent
-The kernel matrix is usually normalized by
-\begin{align*}
-	{K}(i,j) = \frac{{K}(i,j)}{\sqrt{{K}(i,i){K}(j,j)}}
-\end{align*}
-to make sure that all elements in the kernel matrix lie on a unit hypersphere.
-\begin{definition}{Positive Semi-definite Matrix.}
-	An $m\times m$ symmetric matrix $K$ is a positive semi-definite matrix if it satisfies 
-	\begin{align*}
-		\sum_{i,j=1}^{m}c_ic_jK(i,j)\ge0
-		\end{align*} 
-		for any $c_1,\cdots,c_m\in\RR$. If equality occurs only when $c_1=\cdots=c_m=0$, then $K$ is called \textit{strictly positive definite}. 
-\end{definition}
+% psd kernel
 \begin{definition}{Positive Semi-definite Kernel.}\label{psdkernel}
-	Given a non-empty set $\Scal=\{x_1,\cdots,x_m\}\subseteq\Xcal$ of $m$ objects, a function $k:\Scal\times\Scal\rightarrow\RR$ is called a positive semi-definite kernel if it generates a positive semi-definite Kernel matrix $K$ with respect to $\Scal$.
+	Given a non-empty set $\Scal=\{x_1,\cdots,x_m\}\subseteq\Xcal$ of $m$ objects, a function $k:\Scal\times\Scal\rightarrow\RR$ is called a positive semi-definite kernel if it is symmetric and positive semi-definite. That is
+	\begin{align*}
+		k(x_i,x_j) = k(x_j,x_i)\quad \text{and}\quad \sum_{x_i,x_j\in S}c_ic_jk(x_i,x_j)\ge0
+	\end{align*}
+	holds for any $c_i\in\RR$.
 \end{definition}
 \noindent
 We refer to positive semi-definite kernels simply as \textit{kernels} in the remaining part of the thesis.
@@ -645,12 +634,34 @@ where $b$ is a bias term and $d$ is the degree of polynomial, and \textit{Gaussi
 	k(\vx_i,\vx_j) = \exp{\left(\frac{\norm{{\vx_i}-{\vx_j}}^2}{2\sigma^2}\right)},
 \end{align*}
 where $\sigma$ is the Gaussian width parameter.
+% kernel matrix
+\begin{definition}{Kernel Matrix.}
+	Given a kernel function $k$ and any choice of $m$ objects $\Scal=\{x_1,\cdots,x_m\}\subseteq\Xcal$, the $m\times m$ matrix $K=(k(x_i,x_j))_{i,j}$ is called a Kernel matrix (\textit{Gram matrix}) of kernel $k$ with respect to $\Scal$.
+\end{definition}
+\noindent
+The kernel matrix is usually normalized by
+\begin{align*}
+	{K}(i,j) = \frac{{K}(i,j)}{\sqrt{{K}(i,i){K}(j,j)}}
+\end{align*}
+to make sure that all elements in the kernel matrix lie on a unit hypersphere.
+\begin{definition}{Positive Semi-definite Matrix.}
+	An $m\times m$ symmetric matrix $K$ is a positive semi-definite matrix if it satisfies 
+	\begin{align*}
+		\sum_{i,j=1}^{m}c_ic_jK(i,j)\ge0
+		\end{align*} 
+		for any $c_1,\cdots,c_m\in\RR$. If equality occurs only when $c_1=\cdots=c_m=0$, then $K$ is called \textit{strictly positive definite}. 
+\end{definition}
+\noindent
+It is not difficult to show that Kernel matrices are positive semi-definite \citep{Taylor04kernel}.
+
+\noindent
+
 
 Definition~\ref{psdkernel} makes difference between general similarity measures and kernels.
 The positive semi-definiteness is essential in kernel based methods from two perspectives.
 First, the property ensures kernel based methods will converge to a relevant solution in convex optimization \citep{Boyd2004convex}.
-Secondly, it is a key assumption in \textit{Reproducing Kernel Hilbert Space} (\rkhs) theory described as follows.
-%\textit{Mercer's Theorem} \citep{taylor04} has shown that every positive semidefinite symmetric function is a kernel.
+Secondly, it is a key assumption in \textit{Reproducing Kernel Hilbert Space} theory described as follows.
+%\textit{Mercer's Theorem} \citep{Taylor04kernel} has shown that every positive semidefinite symmetric function is a kernel.
 
 % rkhs
 \begin{definition}{Reproduced Kernel Hilbert Space.} \label{rkhs}
