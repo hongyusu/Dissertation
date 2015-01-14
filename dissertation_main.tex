@@ -82,12 +82,12 @@ The research questions can be summarized as follows.
 The contributions of the thesis are several novel statistical learning models that widen the applicability of structured output learning.
 The thesis starts by reviewing several lines of research in classification learning.
 The first contribution is to develop a new structured output learning model for the multilabel classification problem with an observed output graph.
-The proposed model can predict an optimal directed acyclic graph (\daggraph) from an observed underlying network which best responses to an input.
-The model has applied to network response prediction within the context of social network analysis.
+The proposed model can predict an optimal directed acyclic graph (\daggraph) from an observed underlying network which best responds to an input.
+The model has been applied to network response prediction within the context of social network analysis.
 For the general multilabel classification problems in which the output graph is not known \textit{apriori}, we develop several new models that combine a set of structured output learners built on a collection of random output graphs.
 In addition, we develop a joint learning and inference framework that is based on Max-Margin learning on a random sample of spanning trees.
 Thus, the proposed methods are not constrained by the availability of the output graphs.
-Moreover, we provide the theoretic studies which not only explain the intuition behind the formalisms but also guarantee the generalization error of the proposed models.
+Moreover, we provide the theoretical studies which not only explain the intuition behind the formalisms but also guarantee the generalization error of the proposed models.
 
 The remaining part of this thesis is structured as follows.
 Chapter~\ref{ch_rlc} gives the background information to the learning problem in terms of classification, covering the basic concepts in classification learning including regularized risk minimization in Section~\ref{sc_rrm}, single-label classification in Section~\ref{sc_slc}, and ensemble learning in Section~\ref{sc_em}.
@@ -432,7 +432,7 @@ Putting (\ref{lr_1}) and (\ref{lr_2}) together, we define Logistic Regression as
 \noindent
 We predict $y=+1$ when $P(y=+1|\vx;\vw,b)\ge0.5$, and $y=-1$ otherwise.
 The decision rule is such that we predict $y=+1$ when $\ip{\vw}{\varphib(\vx)}+b\ge0$, and $y=-1$ otherwise.
-Besides the decision boundary, Logistic Regression can output the class probability of a data point as the the ``distance'' of the data point to the decision boundary.
+Besides the decision boundary, Logistic Regression can output the class probability of a data point as the ``distance'' of the data point to the decision boundary.
 It is the probabilistic output that makes Logistic Regression no more than a classifier.
 
 % optimization
@@ -449,7 +449,7 @@ To apply \mle, it is easier if, instead of maximizing the likelihood, we maximiz
 
 % logistic regression of other type
 \mle\ can generate a \lr\ model that fits the training data.
-However, there is no guarantee that the model also generalize well on the unseen test data.
+However, there is no guarantee that the model also generalizes well on the unseen test data.
 To achieve a better generalization power, we apply the regularization technique presented in Section~\ref{sc_rl}.
 Many regularization methods for \lr\ have been developed \citep{Chen99,Chen00,Goodman03} among which adding Gaussian prior on weight parameter $\vw$ is a standard option.
 In practice, we assume $\vw$ is generated according to a zero-mean spherical Gaussian with variance $\sigma^2$.
@@ -638,20 +638,20 @@ We refer to positive semi-definite kernels simply as \textit{kernels} in the rem
 \noindent
 Definition~\ref{rkhs} shows that any kernel function can be represented as an inner product in some feature space $\vFcal$.
 Kernel enables us to work in a high dimensional feature space $\vFcal$ without ever computing the exact coordinate or evaluating the inner product explicitly in that space.
-Instead, kernel can be computed based on the inner product in the original space $\Xcal$.
+Instead, kernel can be computed based on the inner product in the original input space $\Xcal$.
 The simplest kernel is \textit{linear kernel}
 \begin{align*}
-	k(\vx_i,\vx_j) = \ip{\vx_i}{\vx_j},
+	k_{\text{\sc linear}}(\vx_i,\vx_j) = \ip{\vx_i}{\vx_j},
 \end{align*}
-which assumes a linear feature map $\varphib:\Xcal\rightarrow\Xcal$.
+which assumes a linear feature map $\varphib_{\text{\sc linear}}:\Xcal\rightarrow\Xcal$.
 Kernels that are heavily used in practice include
 \textit{polynomial kernel}
 \begin{align*}
-	k(\vx_i,\vx_j) = (\ip{\vx_i}{\vx_j} + b)^d,
+	k_{\textit{\sc{poly}}}(\vx_i,\vx_j) = (\ip{\vx_i}{\vx_j} + b)^d,
 \end{align*}
 where $b$ is a bias term and $d$ is the degree of polynomial, and \textit{Gaussian kernel} (\rbf)
 \begin{align*}
-	k(\vx_i,\vx_j) = \exp{\left(\frac{\norm{{\vx_i}-{\vx_j}}^2}{2\sigma^2}\right)},
+	k_{\text{\rbf}}(\vx_i,\vx_j) = \exp{\left(\frac{\norm{{\vx_i}-{\vx_j}}^2}{2\sigma^2}\right)},
 \end{align*}
 where $\sigma$ is the Gaussian width parameter.
 % kernel matrix
@@ -1469,7 +1469,7 @@ Diffusion scaling has the effect of shrinking the distance to the nodes that are
 %------------------------------------------------
 \chapter{Structured Output Prediction with Unknown Output Graphs} \label{ch_sopw}
 
-Structured output learning relies on an output graph connecting multilabel interdependent output variables to exploit the the correlation between labels.
+Structured output learning relies on an output graph connecting multilabel interdependent output variables to exploit the correlation between labels.
 The applicability of structured output learning is limited due to the fact that the output graph needs to be known \textit{apriori}.
 In this chapter, we aim to develop several structured output learning algorithms that are not constrained by the availability of the output graph.
 As a result, structured output learning can be applied to a wide range of multilabel classification problems.
