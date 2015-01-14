@@ -627,10 +627,15 @@ In particular, the symmetry can be verified by
 	k(\vx_i,\vx_j) = \ip{\varphib(\vx_i)}{\varphib(\vx_j)} = \ip{\varphib(\vx_j)}{\varphib(\vx_i)} = k(\vx_j,\vx_i),
 \end{align*}
 and the positive semi-definiteness can be verified by
-\begin{align*}
-	\sum_{i,j=1}^{m}c_ic_jk(\vx_i,\vx_j) = \sum_{i,j=1}^{m}c_ic_j\ip{\varphib(\vx_i)}{\varphib(\vx_j)} = ||\sum_{i=1}^{m}c_i\varphib(\vx_i)||^2\ge0.
-\end{align*}
+\begin{align}
+	\sum_{i,j=1}^{m}c_ic_jk(\vx_i,\vx_j) = \sum_{i,j=1}^{m}c_ic_j\ip{\varphib(\vx_i)}{\varphib(\vx_j)} = ||\sum_{i=1}^{m}c_i\varphib(\vx_i)||^2\ge0. \label{psd}
+\end{align}
 We refer to positive semi-definite kernels simply as \textit{kernels} in the remaining part of the thesis.
+\ref{psd} also implies that kernels are positive semi-definite for any choice of the feature map $\varphib$.
+In particular, if $\Xcal$ is already a dot product space, we can define a linear feature map $\varphib_{\text{\sc linear}}:\Xcal\rightarrow\Xcal$, which corresponds to the simplest \textit{linear kernel}
+\begin{align*}
+	k_{\text{\sc linear}}(\vx_i,\vx_j) = \ip{\vx_i}{\vx_j}.
+\end{align*}
 % rkhs
 \begin{definition}{Reproduced Kernel Hilbert Space.} \label{rkhs}
 	For any kernel function $k$ defined on a space $\Xcal$, there always exists a \textit{Reproduced Kernel Hilbert Space} (RKHS) $\vFcal$ and a mapping function $\varphib:\Xcal\rightarrow\vFcal$ such that $k(\vx_i,\vx_j)=\ip{\varphib(\vx_i)}{\varphib(\vy_i)}$ holds for any $\vx\in\Xcal$.
@@ -639,11 +644,6 @@ We refer to positive semi-definite kernels simply as \textit{kernels} in the rem
 Definition~\ref{rkhs} shows that any kernel function can be represented as an inner product in some feature space $\vFcal$.
 Kernel enables us to work in a high dimensional feature space $\vFcal$ without ever computing the exact coordinate or evaluating the inner product explicitly in that space.
 Instead, kernel can be computed based on the inner product in the original input space $\Xcal$.
-The simplest kernel is \textit{linear kernel}
-\begin{align*}
-	k_{\text{\sc linear}}(\vx_i,\vx_j) = \ip{\vx_i}{\vx_j},
-\end{align*}
-which assumes a linear feature map $\varphib_{\text{\sc linear}}:\Xcal\rightarrow\Xcal$.
 Kernels that are heavily used in practice include
 \textit{polynomial kernel}
 \begin{align*}
