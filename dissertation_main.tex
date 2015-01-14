@@ -631,7 +631,7 @@ and the positive semi-definiteness can be verified by
 	\sum_{i,j=1}^{m}c_ic_jk(\vx_i,\vx_j) = \sum_{i,j=1}^{m}c_ic_j\ip{\varphib(\vx_i)}{\varphib(\vx_j)} = ||\sum_{i=1}^{m}c_i\varphib(\vx_i)||^2\ge0. \label{psd}
 \end{align}
 We refer to positive semi-definite kernels simply as \textit{kernels} in the remaining part of the thesis.
-\ref{psd} also implies that kernels are positive semi-definite for any choice of the feature map $\varphib$.
+(\ref{psd}) also implies that kernels are positive semi-definite for any choice of the feature map $\varphib$.
 In particular, if $\Xcal$ is already a dot product space, we can define a linear feature map $\varphib_{\text{\sc linear}}:\Xcal\rightarrow\Xcal$, which corresponds to the simplest \textit{linear kernel}
 \begin{align*}
 	k_{\text{\sc linear}}(\vx_i,\vx_j) = \ip{\vx_i}{\vx_j}.
