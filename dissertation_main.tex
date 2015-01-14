@@ -457,7 +457,7 @@ Thus, the \mle\ problem (\ref{lr_likelihood_sum}) is transformed into the \texti
 \begin{align}
 	P(\vw,b|D;\sigma^2) = P(\vw|\sigma^2)\prod_{i=1}^mP(y_i|\vx_i)=\exponential{-\frac{\norm{\vw}^2}{\sigma^2}}\prod_{i=1}^{m}{\frac{1}{1+\exponential{-y_i(\ip{\varphib(\vx_i)}{\vw}+b)}}}. \label{lr_posteriori}
 \end{align}
-Instead of maximizing the posteriori (\ref{lr_posteriori}), it is easier to maximize the log-posteriori
+Instead of maximizing the posterior (\ref{lr_posteriori}), it is easier to maximize the log-posterior
 \begin{align}
 	\log P(\vw,b|D;\sigma^2) = -{\frac{\norm{\vw}^2}{\sigma^2}} - \sum_{i=1}^{m}\log{(1+\exponential{-y_i(\ip{\varphib(\vx_i)}{\vw}+b)})}. \label{lr_posteriori_log}
 \end{align}
@@ -1067,7 +1067,7 @@ Correlated Logistic Regression (\corrlog) is a model based approach for flat mul
 
 In fact, \corrlog\ is derived from Independent Logistic Regression (\ilrs). 
 Given a pair of an arbitrary training example and a label $(\vx,\vy)$, we can construct a set of \ilrs\ classifiers, one for each microlabel.
-The posteriori probability can be computed by
+The posterior probability can be computed by
 \begin{align}
 	P_{\text{\ilrs}}(\vy|\vx) 
 	= \prod_{j=1}^{k}P_{\text{\lr}}(\vy[j]|\vx)
@@ -1077,7 +1077,7 @@ where $j$ is the index that iterates over microlabels.
 The bias term as that appears in Definition~\ref{logistic_regression} is omitted which is equivalent to augmenting $\vx$ with a constant term \citep{Bian12corrlog}.
 Otherwise, (\ref{ilrs}) can be derived into the same form of Definition~\ref{logistic_regression} by replacing $\vw$ with $\frac{\vw}{2}$.
 \ilrs\ has the problem of ignoring the correlation between labels and overfitting the training data when the number of microlabels is large.
-To alleviate the problems, \corrlog\ augments the posteriori probability (\ref{ilrs}) by a function $Q(\vy)$ defined on the pairs of microlabels as
+To alleviate the problems, \corrlog\ augments the posterior probability (\ref{ilrs}) by a function $Q(\vy)$ defined on the pairs of microlabels as
 \begin{align}
 	Q(\vy) = \exp\left\{\sum_{k<j}\alpha_{k,j}\vy[k]\vy[j]\right\}. \label{ilrs_augment}
 \end{align}
