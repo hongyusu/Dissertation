@@ -648,13 +648,13 @@ where $\sigma$ is the Gaussian width parameter.
 
 Definition~\ref{psdkernel} makes difference between general similarity measures and kernels.
 The positive semi-definiteness is essential in kernel based methods from two perspectives.
-First, the property ensures kernel based methods will converge to a relevant solution in in convex optimization \citep{Boyd2004convex}.
+First, the property ensures kernel based methods will converge to a relevant solution in convex optimization \citep{Boyd2004convex}.
 Secondly, it is a key assumption in \textit{Reproducing Kernel Hilbert Space} (\rkhs) theory described as follows.
 %\textit{Mercer's Theorem} \citep{taylor04} has shown that every positive semidefinite symmetric function is a kernel.
 
 % rkhs
 \begin{definition}{Reproduced Kernel Hilbert Space.} \label{rkhs}
-	For any kernel function $K$ defined on a space $\Xcal$, there always exists a \textit{Reproduced Kernel Hilbert Space} (RKHS) $\vFcal$ and a mapping function $\varphib:\Xcal\rightarrow\vFcal$ such that $K(\vx_i,\vx_j)=\ip{\varphib(\vx_i)}{\varphib(\vy_i)}$ holds for any $\vx\in\Xcal$.
+	For any kernel function $k$ defined on a space $\Xcal$, there always exists a \textit{Reproduced Kernel Hilbert Space} (RKHS) $\vFcal$ and a mapping function $\varphib:\Xcal\rightarrow\vFcal$ such that $k(\vx_i,\vx_j)=\ip{\varphib(\vx_i)}{\varphib(\vy_i)}$ holds for any $\vx\in\Xcal$.
 \end{definition}
 \noindent
 Definition~\ref{rkhs} shows that any kernel function can be represented as an inner product in some feature space $\vFcal$.
