@@ -605,26 +605,46 @@ In particular, we defined a function $k:\Xcal\times\Xcal\rightarrow\RR$ such tha
 
 % kernel function
 \begin{definition}{Kernel Function.}
-	A \textit{kernel} $k:\Xcal\times\Xcal\rightarrow\RR$ is a function that for all $x_i,x_j\in\Xcal$ satisfies
+	A \textit{kernel} $k:\Xcal\times\Xcal\rightarrow\RR$ is a function that for all $\vx_i,\vx_j\in\Xcal$ satisfies
 	\begin{align*}
-		k(x_i,x_j) = \ip{\varphib(x_i)}{\varphib(x_j)},
+		k(\vx_i,\vx_j) = \ip{\varphib(\vx_i)}{\varphib(\vx_j)},
 	\end{align*}
 	where $\varphib:\Xcal\rightarrow\vFcal$ is a feature map that encodes from an input space $\Xcal$ to a feature space $\vFcal$.
 \end{definition}
 % psd kernel
 \begin{definition}{Positive Semi-definite Kernel.}\label{psdkernel}
-	Given a non-empty set $\Scal=\{x_1,\cdots,x_m\}\subseteq\Xcal$ of $m$ objects, a kernel $k:\Scal\times\Scal\rightarrow\RR$ is called a positive semi-definite kernel if it is symmetric and positive semi-definite. That is
+	Given a non-empty set $\Scal=\{\vx_1,\cdots,\vx_m\}\subseteq\Xcal$ of $m$ objects, a kernel $k:\Scal\times\Scal\rightarrow\RR$ is called a positive semi-definite kernel if it is symmetric and positive semi-definite. That is
 	\begin{align*}
-		k(x_i,x_j) = k(x_j,x_i)\quad \text{and}\quad \sum_{x_i,x_j\in S}c_ic_jk(x_i,x_j)\ge0
+		k(\vx_i,\vx_j) = k(\vx_j,\vx_i)\quad \text{and}\quad \sum_{i,j=1}^mc_ic_jk(\vx_i,\vx_j)\ge0
 	\end{align*}
-	holds for any $c_i\in\RR$.
+	holds for any $c_1,\cdots,c_m\in\RR$.
 \end{definition}
 \noindent
+% verify psd kernel
+Definition~\ref{psdkernel} implies that any kernel defined on a finite set of objects is a positive semi-definite kernel.
+In particular, the symmetry can be verified by
+\begin{align*}
+	k(\vx_i,\vx_j) = \ip{\varphib(\vx_i)}{\varphib(\vx_j)} = \ip{\varphib(\vx_j)}{\varphib(\vx_i)} = k(\vx_j,\vx_i),
+\end{align*}
+and the positive semi-definiteness can be verified by
+\begin{align*}
+	\sum_{i,j=1}^{m}c_ic_jk(\vx_i,\vx_j) = \sum_{i,j=1}^{m}c_ic_j\ip{\varphib(\vx_i)}{\varphib(\vx_j)} = ||\sum_{i=1}^{m}c_i\varphib(\vx_i)||^2\ge0.
+\end{align*}
 We refer to positive semi-definite kernels simply as \textit{kernels} in the remaining part of the thesis.
-Kernel functions that are heavily used in practice include \textit{linear kernel}
+% rkhs
+\begin{definition}{Reproduced Kernel Hilbert Space.} \label{rkhs}
+	For any kernel function $k$ defined on a space $\Xcal$, there always exists a \textit{Reproduced Kernel Hilbert Space} (RKHS) $\vFcal$ and a mapping function $\varphib:\Xcal\rightarrow\vFcal$ such that $k(\vx_i,\vx_j)=\ip{\varphib(\vx_i)}{\varphib(\vy_i)}$ holds for any $\vx\in\Xcal$.
+\end{definition}
+\noindent
+Definition~\ref{rkhs} shows that any kernel function can be represented as an inner product in some feature space $\vFcal$.
+Kernel enables us to work in a high dimensional feature space $\vFcal$ without ever computing the exact coordinate or evaluating the inner product explicitly in that space.
+Instead, kernel can be computed based on the inner product in the original space $\Xcal$.
+The simplest kernel is \textit{linear kernel}
 \begin{align*}
 	k(\vx_i,\vx_j) = \ip{\vx_i}{\vx_j},
 \end{align*}
+which assumes a linear feature map $\varphib:\Xcal\rightarrow\Xcal$.
+Kernels that are heavily used in practice include
 \textit{polynomial kernel}
 \begin{align*}
 	k(\vx_i,\vx_j) = (\ip{\vx_i}{\vx_j} + b)^d,
@@ -636,7 +656,7 @@ where $b$ is a bias term and $d$ is the degree of polynomial, and \textit{Gaussi
 where $\sigma$ is the Gaussian width parameter.
 % kernel matrix
 \begin{definition}{Kernel Matrix.}
-	Given any choice of $m$ objects $\Scal=\{x_1,\cdots,x_m\}\subseteq\Xcal$ and a kernel function $k$ on $S$, the $m\times m$ matrix $K=(k(x_i,x_j))_{i,j}$ is called a Kernel matrix (\textit{Gram matrix}) of kernel $k$ with respect to $\Scal$.
+	Given any choice of $m$ objects $\Scal=\{\vx_1,\cdots,\vx_m\}\subseteq\Xcal$ and a kernel function $k$ on $S$, the $m\times m$ matrix $K=(k(\vx_i,\vx_j))_{i,j}$ is called a Kernel matrix (\textit{Gram matrix}) of kernel $k$ with respect to $\Scal$.
 \end{definition}
 \noindent
 The kernel matrix is usually normalized by
@@ -654,21 +674,13 @@ to make sure that all elements in the kernel matrix lie on a unit hypersphere.
 		% If equality occurs only when $c_1=\cdots=c_m=0$, then $K$ is called \textit{strictly positive definite}. 
 \end{definition}
 \noindent
-It is not difficult to show that Kernel matrices are positive semi-definite \citep{Taylor04kernel}.
-Positive semi-definiteness makes difference between general similarity measures and kernels.
+It has been shown that Kernel matrices are positive semi-definite \citep{Taylor04kernel}.
+Positive semi-definiteness distinguishes between general similarity measures and kernels.
 The property is essential in kernel based methods from two perspectives.
 First, it ensures kernel based methods will converge to a relevant solution in convex optimization \citep{Boyd2004convex}.
 Secondly, it is a key assumption in \textit{Reproducing Kernel Hilbert Space} theory described as follows.
 %\textit{Mercer's Theorem} \citep{Taylor04kernel} has shown that every positive semidefinite symmetric function is a kernel.
 
-% rkhs
-\begin{definition}{Reproduced Kernel Hilbert Space.} \label{rkhs}
-	For any kernel function $k$ defined on a space $\Xcal$, there always exists a \textit{Reproduced Kernel Hilbert Space} (RKHS) $\vFcal$ and a mapping function $\varphib:\Xcal\rightarrow\vFcal$ such that $k(\vx_i,\vx_j)=\ip{\varphib(\vx_i)}{\varphib(\vy_i)}$ holds for any $\vx\in\Xcal$.
-\end{definition}
-\noindent
-Definition~\ref{rkhs} shows that any kernel function can be represented as an inner product in some feature space $\vFcal$.
-Kernel enables us to work in a high dimensional feature space $\vFcal$ without ever computing the exact coordinate or evaluating the inner product explicitly in that space.
-Instead, kernel can be computed based on the inner product in the original space $\Xcal$.
 
 
 
