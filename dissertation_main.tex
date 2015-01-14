@@ -1379,7 +1379,7 @@ Therefore, we propose the following definition of the network response problem
 \subsection{Methods}
 We approach the problem by structured output learning, where we define a computability score as the inner product between an action $\va$ and a response network $\Gva$
 \begin{align*}
-	F(\va,\Gva;\vw) = \ip{\va}{\phib(\vw,\Gva)}.
+	F(\va,\Gva;\vw) = \ip{\vw}{\phib(\va,\Gva)}.
 \end{align*}
 Intuitively, the action $\va$ with a correct response network $\Gva$ will achieve a higher score than with any incorrect response network $\Gva'$.
 The joint feature map $\phib(\va,\Gva)$ is composed by the tensor product between an input feature map $\varphib(\va)$ of an action $\va$  and an output feature map $\Upsilonb(\Gva)$ of a response network $\Gva$.
@@ -1474,7 +1474,7 @@ The applicability of structured output learning is limited due to the fact that 
 In this chapter, we aim to develop several structured output learning algorithms that are not constrained by the availability of the output graph.
 As a result, structured output learning can be applied to a wide range of multilabel classification problems.
 In Section~\ref{sc_su10}, we study the multilabel molecular classification problem with structured output learning in which the output graph is extracted from auxiliary datasets.
-In Section~\ref{sc_su11}, we present \mve\ which uses majority vote to combines the predictions from a set of structured output learners built on a collection of random output graphs.
+In Section~\ref{sc_su11}, we present \mve\ which uses majority vote to combine the predictions from a set of structured output learners built on a collection of random output graphs.
 In Section~\ref{sc_su14b}, we present two aggregation techniques, namely \amm\ and \mam, which perform inference on output graphs before or after combining multiple structured output learners.
 In Section~\ref{sc_su14c}, we present \rta\ which is a joint learning and inference model that performs Max-Margin learning on a random sample of spanning trees.
 
@@ -1552,7 +1552,7 @@ In addition, we use $G_{\times}(G_1,G_2)$ to denote the direct product graph of 
 \end{align*}
 and the set of edges in $G_{\times}$ are computed by
 \begin{align*}
-	E_{\times}(G_1,G_2) = \{((v_1,v_2),(u_1,u_2))\in V_{\times}\times V_{\times},\, (v_1,u_i)\in E_1\wedge (v_2,u_2)\in E_2\}.
+	E_{\times}(G_1,G_2) = \{((v_1,v_2),(u_1,u_2))\in V_{\times}\times V_{\times},\, (v_1,u_1)\in E_1\wedge (v_2,u_2)\in E_2\}.
 \end{align*}
 Walk kernel can be equivalently expressed in terms of the adjacency matrix $A_{\times}$ of the product graph $G_{\times}$ as
 \begin{align*}
@@ -1576,7 +1576,7 @@ To apply the structured output learning method described above, we need an outpu
 However, the output graph is not known in the molecular classification problem.
 There exists a variety of auxiliary datasets \citep{Shoemaker06the} which implicitly encodes the correlation of labels (target cell lines).
 To extract the output graph, we first compute a covariance matrix of cell lines from the auxiliary data, then extract the structure of the output graph by the following two methods.
-The \text{maximum spanning tree} approach takes the minimum number of edges that make a connected graph whilst maximizes the sum of edge weights.
+The \text{maximum spanning tree} approach takes the minimum number of edges that make a connected graph whilst maximizing the sum of edge weights.
 The \text{correlation thresholding} approach takes all edges that exceed a fixed threshold in terms of the pairwise correlation, which typically generates a non-tree graph.
 
 
@@ -1667,7 +1667,7 @@ The predicted multilabel by \amm\ is composed by the predicted microlabels
 
 % mam
 \amm\ performs inference to find the set of max-marginals before combining base classifiers. 
-On the other hand, the Maximum-of-Average-Marginals (\mam) aggregation first collects the local edge potentials $\psib_E^{(t)}$ from each base learner, averages them and performs a finial inference with the averaged edge potentials on a global consensus graph $\hat{G}=(\hat{E},V)$ where $\hat{E}=\bigcup_{t=1}^{T}{E^{(t)}}$ is the union of distinct edges of the set of random output graphs.
+On the other hand, the Maximum-of-Average-Marginals (\mam) aggregation first collects the local edge potentials $\psib_E^{(t)}$ from each base learner, averages them and performs a final inference with the averaged edge potentials on a global consensus graph $\hat{G}=(\hat{E},V)$ where $\hat{E}=\bigcup_{t=1}^{T}{E^{(t)}}$ is the union of distinct edges of the set of random output graphs.
 Mathematically, \mam\ is defined as
 \begin{align*}
 	F^{\text{\tiny MAM}}(x) &= \underset{\vy \in \Ycal }{\argmax}\,\sum_{e\in \hat{E}}\frac{1}{T}\sum_{t=1}^{T}\ \psi^{(t)}_e(x,\vy_e)
@@ -1690,7 +1690,7 @@ where by $\bar\mu(i,e,\vu_e)=\frac{1}{T}\sum_{t=1}^T\mu^{(t)}(i,e,\vu_e)$ we den
 
 Besides the proposed algorithms, we also present a theoretical analysis to explain the improvement of \mam.
 The analysis extends the theory of single-label ensemble \citep{Brown10good}.
-In particular, \citepub[Theory 1]{su14b} states that the reconstructive error of \mam\ is guaranteed to be less than or equal to the average reconstruction error of base classifiers.
+In particular, \citepub[Theorem 1]{su14b} states that the reconstructive error of \mam\ is guaranteed to be less than or equal to the average reconstruction error of base classifiers.
 The improvement can be decomposed into two terms, namely \textit{diversity} and \textit{coherence}.
 The former measures the variability of the individual classifiers learned from different perspectives which shares the same argument as the analysis of single-label ensemble \citep{Brown10good}.
 The latter measures the correlation of microlabel predictions in which the correlation has a positive effect on the performance. 
@@ -1725,7 +1725,7 @@ Efficient inference algorithms on special graphs have also been studied \citep{G
 
 \citepub{su14c} is motivated by the well-established Maximum-Margin Principle as described in Section~\ref{sc_svm}.
 The work investigates whether the problem of inference over a complete graph in structured output learning can be avoided by exploring the properties of the Maximum-Margin Principle.
-Start from a sampling results, \citepub[Lemma 3]{su14c} shows that with a high probability a big fraction of the margin achieved by a complete graph can be obtained by a random sample of spanning trees of a small size.
+Starting from a sampling results, \citepub[Lemma 3]{su14c} shows that with a high probability a big fraction of the margin achieved by a complete graph can be obtained by a random sample of spanning trees of a small size.
 Besides, \citepub[Theorem 5]{su14c} shows that the good generalization error can also be guaranteed when learning with, instead of a complete graph, a random sample of spanning trees.
 
 Thus, in addition to \citepub[Theory 1]{su14b}, we further provide the theoretical justification of combining a set of base learners trained on a collection of random output graphs. 
@@ -1734,7 +1734,7 @@ The strategy leads to the learning model presented in the following section.
 
 \subsection{Methods}
 
-Let $\Tcal=\{T_1,\cdots,T_n\}$ denote a sample of $n$ random spanning trees, and $\{\vw_{T_t}|T_t\in\Tcal\}$ denote the feature weight parameters to be learner on each tree.
+Let $\Tcal=\{T_1,\cdots,T_n\}$ denote a sample of $n$ random spanning trees, and $\{\vw_{T_t}|T_t\in\Tcal\}$ denote the feature weight parameters to be learned on each tree.
 For each example $(\vx_i,\vy_i)$, the goal of the optimization is to maximize the joint margin from all spanning trees between the correct training examples and the pseudo-examples $(\vx_i,\vy)$ defined as
 \begin{definition}{\bf Primal $L_2$-norm Random Tree Approximation (\rta).}\label{primalrta}
 	\begin{align*}
