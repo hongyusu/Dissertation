@@ -963,7 +963,7 @@ In addition, there exists many alternatives which also align to the direction of
 
 Classification Chains (\cc) \citep{Read09classifier,Read11classifier} is another problem transformation approach for flat multilabel classification.
 \cc\ involves $k$ binary transformations and forms a chain of $k$ binary classifiers $h=\{h_1,\cdots,h_k\}$, in which the $j$'th classifier $h_j$ is built for predicting the $j$'th microlabel.
-For the $j$'th microlabel $\vy[j]$, \cc\ first constructs a new training data $S_j$ by taking the $j$'th microlabel as the output variable and combing the original feature space with all $j-1$ prior microlabels as the new input features defined by
+For the $j$'th microlabel $\vy[j]$, \cc\ first constructs a new training data $S_j$ by taking the $j$'th microlabel as the output variable and combining the original feature space with all $j-1$ prior microlabels as the new input features defined by
 \begin{align*}
 	S_j = \{((\vx_i[1],\cdots,\vx_i[d],\vy_i[1],\cdots,\vy_i[j-1]),\vy_i[j])\}_{i=1}^{m}.
 \end{align*}
@@ -1141,7 +1141,7 @@ Structured output prediction is a natural extension to flat multilabel classific
 Unlike flat multilabel classification which takes multiple interdependent output variables essentially as a ``flat'' vector, structured output prediction assumes that multiple output variables are correlated and located in a structured output space.
 It assumes that there exists an output graph (e.g., a chain, a spanning tree) connecting multiple output variables by which the correlation between labels can be utilized during learning.
 In this chapter, we will start by introducing several structured output learning algorithms developed during the last decade.
-We will present our new algorithm \spin\ that can predict an optimal directed acyclic graph (\daggraph) which best ``responses'' to an input, and examine the performance on the network response prediction problem within the context of social network analysis.
+We will present our new algorithm \spin\ that can predict an optimal directed acyclic graph (\daggraph) which best ``responds'' to an input, and examine the performance on the network response prediction problem within the context of social network analysis.
 
 
 
@@ -1222,7 +1222,7 @@ Applying the similar regularization technique as used in Logistic Regression in 
 	L(\vw) = \sum_{i=1}^{m}\left[\ip{\vw}{\phib(\vx_i,\vy_i)}-\log{\sum_{\vy'\in\vYcal}{\exp{\ip{\vw}{\phib(\vx_i,\vy')}}}}\right] - \frac{1}{\sigma^2}\norm{\vw}^2. \label{crf_inference}
 \end{align}
 The optimization problem derived from (\ref{crf_inference}) is an instantiation of the regularized risk minimization (\ref{rl}) with the log-loss and the $L_2$-norm regularization (\ref{l2_norm}).
-An improved iterative scaling algorithm (\iis) \citep{Pietra97inducing} is used to solve the optimization problem in the origin work \citep{lafferty01}.
+An improved iterative scaling algorithm (\iis) \citep{Pietra97inducing} is used to solve the optimization problem in the original work \citep{lafferty01}.
 To make \crf\ work in practice, one also need to make sure that the partition function (\ref{crf_partition_function}) can be evaluated efficiently.
 
 
@@ -1325,7 +1325,7 @@ Besides, \citet{THJA04} suggests that \mmmn\ will work hard on the pseudo-exampl
 
 On the other hand, the optimization techniques employed by \svmstruct\ differ significantly compared to \mmmn.
 \svmstruct\ will have to work with the exponential number of constraints as the optimization is not decomposable over the Markov network.
-An iterative optimization approach \citet{THJA04} has been developed which creates a nested sequence of successively tighter relaxations of the original problem via the cutting-plane method \citep{Bishop07,JFY09}.
+An iterative optimization approach \citep{THJA04} has been developed which creates a nested sequence of successively tighter relaxations of the original problem via the cutting-plane method \citep{Bishop07,JFY09}.
 Constraints are added as necessary and the iterative optimization approach will converge to an optimal solution of $\epsilon$ precision within a polynomial number of iterations.
 
 Besides the issue during the optimization, another problem with \svmstruct\ is the intractability of the inference problem.
@@ -1372,7 +1372,7 @@ In particular, our network influence problem is motivated by the following obser
 For example, $u'$ is a follower of $u$ in Twitter, $u'$ will retweet the message from $u$ if it is related to \textit{science} but not related to \textit{politics}.
 Therefore, we propose the following definition of the network response problem
 \begin{definition}{Network Response Problem.}
-	Given a complex network and an action performed on the network, predict an optimal subnetwork that best responses to the action. In particular, which nodes perform the action and which directed edges relay the action from one node to its neighbors.
+	Given a complex network and an action performed on the network, predict an optimal subnetwork that best responds to the action. In particular, which nodes perform the action and which directed edges relay the action from one node to its neighbors.
 \end{definition}
 
 %
@@ -1792,7 +1792,7 @@ These methods enable us to quantitatively examine the performance of the propose
 
 It is often difficult and expensive to obtain labeled data. 
 To maximize the outcomes of the valuable labeled data, the common approach adopted by the machine learning community is known as \textit{$K$-fold cross-validation}.
-In particular, the origin set of labeled examples are partitioned into $K$ disjoint subsets of the same size denoted by $\{S_1,\cdots,S_K\}$.
+In particular, the original set of labeled examples are partitioned into $K$ disjoint subsets of the same size denoted by $\{S_1,\cdots,S_K\}$.
 The cross-validation framework will repeat training and test procedures $K$ times.
 In the $i$'th iteration, the method uses $K-1$ subsets of labeled examples $\cup_{j\in\{1,\cdots,K\}/i}S_j$ to build a training set in order to construct a classifier.
 The examples in the $i$'th subset are taken as test data of which the labels are assumed to be unknown to the classifier.
@@ -1803,7 +1803,7 @@ This is typically known as \textit{leave-one-out} (\loo) {cross-validation} .
 
 Most machine learning algorithms explicitly assume that the training data and the test data are drawn from the same distribution.
 We should make sure that the statistical property of the original labeled data is well preserved when partitioning the original labeled examples into subsets.
-In single-label classification problem we can easily preserve the label distribution if we randomly sample labeled examples without replacement from the origin dataset.
+In single-label classification problem we can easily preserve the label distribution if we randomly sample labeled examples without replacement from the original dataset.
 However, it is not clear on how to preserve label distribution under the multilabel classification setting.
 To this end, we use \textit{stratification} (\textit{stratified sampling}) method where we first group the labeled examples into equivalent classes based on the number of positive labels they have. 
 Each class is then randomly split into $K$ local folds, after that local folds are merged to create $K$ global folds.
@@ -1899,7 +1899,7 @@ In this chapter, the author aims to briefly discuss the implementations and poin
 		\item The package can be found from \url{http://git@github.com:hongyusu/random_spanning_tree_approximation.git}.
 	\end{enumerate}
 	
-	\item \spin, developed in \citepub{su14a}, is a structured output learning algorithm for multilabel classification with an observed output graph. \spin\ can predict an optimal direct acyclic graph (\daggraph) that best responses to an input. The algorithm has been applied to the network response prediction problem within the context of social network analysis.
+	\item \spin, developed in \citepub{su14a}, is a structured output learning algorithm for multilabel classification with an observed output graph. \spin\ can predict an optimal direct acyclic graph (\daggraph) that best responds to an input. The algorithm has been applied to the network response prediction problem within the context of social network analysis.
 	\begin{enumerate}
 		\item The learning system of \spin\ is implemented in \matlab. The \sdp\ inference algorithm is implemented with \cvx\ toolbox which is designed for convex programming. The data preprocessing with Latent Dirichlet Allocation (\lda) \citep{Blei03latent} is implemented in \python\ and \matlab.
 		\item The package can be found from \url{http://git@github.com:hongyusu/SPIN.git}.
