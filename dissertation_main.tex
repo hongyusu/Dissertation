@@ -524,7 +524,7 @@ We further use $\gamma_i$ to denote the \textit{margin} of the $i$'th example de
 \end{align*}
 We notice if $\vw$ and $b$ are scaled by any constant $\kappa\in\RR$ (e.g., $\vw\leftarrow\kappa\vw, b\leftarrow\kappa b$) the margin $\gamma_i$ stays unchanged. 
 The same classification performance and generalization power can still be obtained.
-As the parameters are invariance to scaling, we set $\norm{\vw}=1$.
+As the parameters are invariant to scaling, we set $\norm{\vw}=1$.
 Given a collection of training examples $S$, we define the margin with respect to $S$ as the minimum margin achieved by an individual training example
 \begin{align*}
 	\gamma = \underset{i\in\{1,\cdots,m\}}{\minimize}\gamma_i.
@@ -570,7 +570,7 @@ $\xi_i$ will allow data points to have a margin less than $1$.
 In particular, with $\xi_i=0$, the data point $x_i$ is correctly classified, and lies either on the margin or on the correct side.
 With $0<\xi_i\le 1$, the data point is correctly classified, and lies between the margin and the separating hyperplane.
 With $\xi_i>1$, the data point is misclassified locating on the other side of the separating hyperplane.
-Now the new goal is to maximize the margin while penalize the data points which either lie on the wrong side of the hyperplane or have a margin less than one.
+Now the new goal is to maximize the margin while penalizing the data points which either lie on the wrong side of the hyperplane or have a margin less than one.
 This can be defined by
 \begin{definition}{Primal Soft-Margin \svm\ Optimization Problem.}\label{softsvmprimal}
 	\begin{align*}
