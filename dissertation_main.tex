@@ -604,12 +604,16 @@ This suggests that training data can be radically represented through pairwise s
 In particular, we defined a function $k:\Xcal\times\Xcal\rightarrow\RR$ such that training data $\Scal$ is represented through a $m\times m$ matrix of pairwise similarities.
 
 % kernel function
-\begin{definition}{Kernel Function.}
+\begin{definition}{Kernel.}
 	A \textit{kernel} $k:\Xcal\times\Xcal\rightarrow\RR$ is a function that for all $\vx_i,\vx_j\in\Xcal$ satisfies
 	\begin{align*}
 		k(\vx_i,\vx_j) = \ip{\varphib(\vx_i)}{\varphib(\vx_j)},
 	\end{align*}
-	where $\varphib:\Xcal\rightarrow\vFcal$ is a feature map that encodes from an input space $\Xcal$ to a inner product space $\vFcal$ which is often called feature space.
+	where $\varphib:\Xcal\rightarrow\vFcal$ is a feature map that encodes from an input space $\Xcal$ to some feature space $\vFcal$ which is also an inner product space.
+\end{definition}
+% inner product space
+\begin{definition}{Inner Product Space.}
+	A real vector space $\vFcal$ is an inner product space if it is defined with the inner product operation $\ip{}{}:\vFcal\times\vFcal\rightarrow\RR$ that is symmetric $\ip{\vz_i}{\vz_j} = \ip{\vz_j}{\vz_i}$, bilinear in both scalars $\ip{\lambda\vz_i}{\vz_j} = \lambda\ip{\vz_i}{\vz_j}$ and vectors $\ip{\vz_i+\vz_j}{\vz} = \ip{\vz_i\vz}{\vz_j\vz}$, and positive $\ip{\vz}{\vz}\ge0$, for all $\lambda\in\RR$ and $\vz_i,\vz_j,\vz\in\vFcal$.
 \end{definition}
 % psd kernel
 \begin{definition}{Positive Semi-definite Kernel.}\label{psdkernel}
