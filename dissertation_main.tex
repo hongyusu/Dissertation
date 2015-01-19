@@ -625,7 +625,7 @@ In particular, we defined a function $k:\Xcal\times\Xcal\rightarrow\RR$ such tha
 \end{definition}
 \noindent
 % verify psd kernel
-Kernels defined in Definition~\ref{kernels} are symmetric positive semi-definite.
+Kernel functions in Definition~\ref{kernels} are symmetric positive semi-definite.
 In particular, the symmetry can be verified by
 \begin{align*}
 	k(\vx_i,\vx_j) = \ip{\varphib(\vx_i)}{\varphib(\vx_j)} = \ip{\varphib(\vx_j)}{\varphib(\vx_i)} = k(\vx_j,\vx_i),
@@ -634,20 +634,18 @@ and the positive semi-definiteness can be verified by
 \begin{align}
 	\sum_{i,j=1}^{m}c_ic_jk(\vx_i,\vx_j) = \sum_{i,j=1}^{m}c_ic_j\ip{\varphib(\vx_i)}{\varphib(\vx_j)} = ||\sum_{i=1}^{m}c_i\varphib(\vx_i)||^2\ge0. \label{psd}
 \end{align}
-We refer to positive semi-definite kernels simply as \textit{kernels} in the remaining part of the thesis.
 (\ref{psd}) also implies that kernels are positive semi-definite for any choice of the feature map $\varphib$.
 In particular, if $\Xcal$ is already a inner product space, we can define a linear feature map $\varphib_{\text{\sc linear}}:\Xcal\rightarrow\Xcal$, which corresponds to the simplest kernel, known as \textit{linear kernel}
 \begin{align*}
 	k_{\text{\sc linear}}(\vx_i,\vx_j) = \ip{\vx_i}{\vx_j}.
 \end{align*}
-% rkhs
-\begin{definition}{Reproduced Kernel Hilbert Space.} \label{rkhs}
-	For any kernel function $k$ defined on a space $\Xcal$, there always exists a \textit{Reproduced Kernel Hilbert Space} (RKHS) $\vFcal$ and a mapping function $\varphib:\Xcal\rightarrow\vFcal$ such that $k(\vx_i,\vx_j)=\ip{\varphib(\vx_i)}{\varphib(\vy_i)}$ holds for any $\vx\in\Xcal$.
-\end{definition}
-\noindent
-Definition~\ref{rkhs} shows that any kernel function can be represented as an inner product in some feature space $\vFcal$.
-Kernel enables us to work in a high dimensional feature space $\vFcal$ without ever computing the exact coordinate or evaluating the inner product explicitly in that space.
-Instead, kernel can be computed based on the inner product in the original input space $\Xcal$.
+\iffalse
+	% rkhs
+	\begin{definition}{Reproduced Kernel Hilbert Space.} \label{rkhs}
+		For any kernel function $k$ defined on a space $\Xcal$, there always exists a \textit{Reproduced Kernel Hilbert Space} (RKHS) $\vFcal$ and a mapping function $\varphib:\Xcal\rightarrow\vFcal$ such that $k(\vx_i,\vx_j)=\ip{\varphib(\vx_i)}{\varphib(\vy_i)}$ holds for any $\vx\in\Xcal$.
+	\end{definition}
+	\noindent
+\fi
 Kernels that are heavily used in practice include
 \textit{polynomial kernel}
 \begin{align*}
@@ -658,6 +656,10 @@ where $b$ is a bias term and $d$ is the degree of polynomial, and \textit{Gaussi
 	k_{\text{\rbf}}(\vx_i,\vx_j) = \exp{\left(\frac{\norm{{\vx_i}-{\vx_j}}^2}{2\sigma^2}\right)},
 \end{align*}
 where $\sigma$ is the Gaussian width parameter.
+
+Any kernel function can be represented as an inner product in some feature space $\vFcal$.
+Kernel enables us to work in a high dimensional feature space $\vFcal$ without ever computing the exact coordinate or evaluating the inner product explicitly in that space.
+Instead, kernel can be computed based on the inner product in the original input space $\Xcal$.
 % kernel matrix
 \begin{definition}{Kernel Matrix.}
 	Given any choice of $m$ objects $\Scal=\{\vx_1,\cdots,\vx_m\}\subseteq\Xcal$ and a kernel function $k$ on $S$, the $m\times m$ matrix $K=(k(\vx_i,\vx_j))_{i,j}$ is called a Kernel matrix (\textit{Gram matrix}) of kernel $k$ with respect to $\Scal$.
@@ -888,7 +890,9 @@ In multilabel classification, each input (instant) is simultaneously associated 
 The research of multilabel classification has progressed rapidly in the last two decades with many learning models being developed and applied to the real world classification problems \citep{lafferty01,taskar02,Taskar04max,THJA04,Rousu07}.
 In general, there are two broad categories of research in multilabel classification, namely flat multilabel classification and structured output prediction.
 In flat multilabel classification, multiple interdependent labels are treated essentially as a ``flat'' vector of labels.
+% revision on structured output prediction definition
 Structured output prediction, on the other hand, models the correlation between multiple labels with an output graph connecting labels.
+The output graph is usually given \textit{apriori} in addition to the vector of multiple labels.
 This chapter will be devoted to flat multilabel classification in which several well-established algorithms will be presented.
 Structured output prediction will be covered in the latter part of the thesis.
 
@@ -993,23 +997,22 @@ It extends \mlknn\ by exploring the correlation between labels within the neighb
 The central idea of \iblr\ is to take the labels of the examples in the neighbor as the only features to predict the label of the current example.
 Similar ideas have been applied in collective classification \citep{Ghamrawi05collective} and link based classification \citep{Getoor05link, Getoor07introduction}.
 
-In particular, for each unseen example $\vx$, \iblr\ first identifies the set of $K$-nearest neighbors $N_k(\vx)$ from the training data.
-The algorithm builds a Logistic Regression model (Section~\ref{sc_lr}) for each microlabel based on the label information collected from the examples in $N_k(\vx)$.
-Mathematically, \iblr\ defines a posterior probability of the $j$'th microlabel of $\vx$ being labeled as $u_j$ by
+In particular, for each unseen example $\vx$, \iblr\ first identifies a set of $K$-nearest neighbors $N_K(\vx)$ from the training data.
+The algorithm builds a Logistic Regression model (Section~\ref{sc_lr}) for each microlabel based on the label information collected from the examples in $N_K(\vx)$.
+Mathematically, \iblr\ defines a posterior probability of the $j$'th microlabel of $\vx$ being labeled as ``$+1$'' by
 \begin{align*}
-	\pi^{(j)} = P( \vy(\vx)[j]=u_j | N_k(\vx)), u_j\in\Ycal_j.
+	\pi^{(j)} = P( \vy[j]=+1 | N_K(\vx)).
 \end{align*}
 It constructs a Logistic Regression classifier for $\pi^{(j)}$ which can be derived from the following 
 \begin{align*}
 	\log\frac{\pi^{(j)}}{1-\pi^{(j)}} = w_0^{(j)} + \sum_{i=1}^{k}\alpha_i^{(j)}\cdot w_{i}^{(j)}(\vx),
 \end{align*}
-where $i$ iterates over all microlabels.
+where $i$ iterates over all microlabels, $w_0^{(j)}$ is the regression constant which can be computed from the training data, and $\alpha_i^{(j)}$ is the regression coefficient which can be obtained during training.
 $w_i^{(j)}(\vx)$ defined by 
 \begin{align*}
-	w_i^{(j)}(\vx) = \sum_{\vx'\in N_k(\vx)}K(\vx',\vx)\cdot \vy(\vx')[i]
+	w_i^{(j)}(\vx) = \sum_{\vx'\in N_K(\vx)}K(\vx',\vx)\cdot \vy'[i]
 \end{align*}
-collects the $i'$th microlabel from each neighbor $\vx'\in N_k(\vx)$ and weights the microlabels according to the similarity between $\vx$ and $\vx'$ encoded in $K(\vx',\vx)$.
-$\alpha_i^{(j)}$ is the regression coefficient.
+collects the $i'$th microlabel from each neighbor $\vx'\in N_K(\vx)$ and weights the microlabels according to the similarity between $\vx$ and $\vx'$ encoded in $K(\vx',\vx)$.
 
 
 
@@ -1142,9 +1145,12 @@ Recently, \citet{Paredes12exploit} proposed a method that exploits the informati
 
 Structured output prediction is a natural extension to flat multilabel classification presented in Chapter~\ref{ch_fmlc}.
 Unlike flat multilabel classification which takes multiple interdependent output variables essentially as a ``flat'' vector, structured output prediction assumes that multiple output variables are correlated and located in a structured output space.
-It assumes that there exists an output graph (e.g., a chain, a spanning tree) connecting multiple output variables by which the correlation between labels can be utilized during learning.
+In other words, there exists an output graph (e.g., a chain, a spanning tree) given as input in addition to the flat vector of multiple labels.
+The multiple output variables are connected by the output graph so that the correlation between labels can be utilized during learning.
 In this chapter, we will start by introducing several structured output learning algorithms developed during the last decade.
 We will present our new algorithm \spin\ that can predict an optimal directed acyclic graph (\daggraph) which best ``responds'' to an input, and examine the performance on the network response prediction problem within the context of social network analysis.
+
+
 
 
 
@@ -1179,21 +1185,22 @@ In this section, we will briefly present several related algorithms for structur
 The Perceptron \citep{Rosenblatt58} is one of the oldest algorithms in machine learning.
 Structured Perceptron \citep{collins02a, collins02b}, as suggested by its name, is a generalization of the Perceptron algorithm to the structured output space.
 The formalism of Structured Perceptron is quite similar to Multiclass Perceptron. 
-The model assumes a score function $\ip{\vw}{\phib(\vx,\vy)}$ as the inner product between a joint feature map $\phib(\vx,\vy)$ and a feature weight parameter $\vw$.
+The model assumes a score function $\ip{\vw}{\phib(\vx,\vy)}$ as the inner product between a feature weight parameter $\vw$ and a joint feature map $\phib(\vx,\vy)$ which is a function $\phib:\vXcal\times\vYcal\rightarrow\RR^d$ that maps an input--output pair to a vector of $d$ dimension.
+The joint feature map is often defined based on the structure of the output graph (e.g., a chain in sequence tagging problem \citep{collins02a}).
 After the feature weight parameter $\vw$ is obtained, one needs to solve the {argmax} problem to find the best output for a given input $\vx$, which is defined as
 \begin{align}
 	\hat{\vy} = \underset{\vy\in\vYcal}{\argmax} &\, \ip{\vw}{\phib(\vx,\vy)}. \label{sp_inference}
 \end{align}
-The argmax problem is solved by Viterbi decoding in the original work \citep{collins02a}.
+The argmax problem is solved by an algorithm such as Viterbi decoding \citep{collins02a} rather than an exhaustive search through the exponential sized output space.
 
 The weight parameter $\vw$ is learned through the standard Perceptron iterative update by solving the argmax problem (\ref{sp_inference}) in each iteration.
 In particular, the algorithm loops through all training examples and updates $\vw$ whenever the predicted multilabel $\hat{\vy}_i$ is different from the true multilabel $\vy_i$.
-The update is defined by
+The update is given by
 \begin{align}
 	\vw \leftarrow \vw + \left(\phib(\vx_i,\vy_i) - \phib(\vx_i,\hat{\vy}_i)\right). \label{sp_update}
 \end{align}
 The update usually leads to over-fitting.
-A simple refinement is usually applied which is similar to Averaged Perceptron \citep{Freund99large}.
+A simple refinement is usually applied which is similar to Averaged Perceptron developed by \citet{Freund99large}.
 
 The central problem with Structured Perceptron is the loss function.
 In fact, Structured Perceptron tacitly applies $0/1$ loss (\ref{one_loss}) on multilabels, with which it is impossible to distinguish a nearly correct multilabel and a completely incorrect one.
@@ -1213,12 +1220,12 @@ Let $G=(E,V)$ denote an output graph such that $\vy = (y_v)_{v\in V}$.
 \begin{align*}
 	P(\vy|\vx) &= \frac{1}{Z_{\vx,\vw}}\exp{\ip{\vw}{\phib(\vx,\vy)}},
 \end{align*}
-where $\phib(\vx,\vy)$ is a joint feature map. 
+where $\phib(\vx,\vy)$ is a joint feature map defined according to the output graph $G$. 
 $Z_{\vx,\vw}$ is the partition function dependent on $\vx$ that sums over all possible multilabels 
 \begin{align}
 	Z_{\vx,\vw} &= \sum_{\vy'\in\Ycal}\exp{\ip{\vw}{\phib(\vx,\vy')}}. \label{crf_partition_function}
 \end{align}
-Thus, when conditioned on $\vx$, random variables $y_v$ obey the Markov property with respect to the output graph $G$.
+When conditioned on $\vx$, random variables $y_v$ obey the Markov property with respect to the output graph $G$.
 
 Applying the similar regularization technique as used in Logistic Regression in Section~\ref{sc_lr}, the feature weight parameter $\vw$ can be solved by introducing a Gaussian prior and maximizing the logarithm of the resulting \textit{Maximize A-Posteriori} (\map) problem \citep{taskar02} defined as
 \begin{align}
