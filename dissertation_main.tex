@@ -941,8 +941,8 @@ We will focus on \br\ in this section.
 %
 \subsection{Multilabel $K$-Nearest Neighbors (\mlknn)} \label{sc_mlknn}
 
-Multilabel $K$-Nearest Neightbors (\mlknn) \citep{Zhang05a,Zhang07mlknn} is perhaps the most famous binary relevance classifier for flat multilabel classification.
-\mlknn\ is also an instance based learning approach \citep{Aha91instance} that is derived from the $K$-Nearest Neightbor (\knn) algorithm designed for single-label classification.
+Multilabel $K$-Nearest Neightbors (\mlknn) developed by \citet{Zhang05a,Zhang07mlknn} is perhaps the most famous binary relevance classifier for flat multilabel classification.
+\mlknn\ is also an instance based learning approach \citep{Aha91instance} that is derived from the $K$-Nearest Neightbors (\knn) algorithm designed for single-label classification.
 \mlknn\ transforms the flat multilabel classification problem into a set of single-label classification problems and processes each microlabel independently.
 For each unseen example $\vx$, \mlknn\ first identifies a set of $K$-nearest neighbors $N(\vx)$ from the training set.
 After that, the algorithm predicts the multilabel $\vy$ of the example by examining the set of multilabels collected from the $K$-nearest neightbors.
