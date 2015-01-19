@@ -604,7 +604,7 @@ This suggests that training data can be radically represented through pairwise s
 In particular, we defined a function $k:\Xcal\times\Xcal\rightarrow\RR$ such that training data $\Scal$ is represented through a $m\times m$ matrix of pairwise similarities.
 
 % kernel function
-\begin{definition}{Kernel function.}
+\begin{definition}{Kernel function.}\label{kernels}
 	A \textit{kernel} $k:\Xcal\times\Xcal\rightarrow\RR$ is a function that for all $\vx_i,\vx_j\in\Xcal$ satisfies
 	\begin{align*}
 		k(\vx_i,\vx_j) = \ip{\varphib(\vx_i)}{\varphib(\vx_j)},
@@ -613,7 +613,7 @@ In particular, we defined a function $k:\Xcal\times\Xcal\rightarrow\RR$ such tha
 \end{definition}
 % inner product space
 \begin{definition}{Inner Product Space.}
-	A real vector space $\vFcal$ is an inner product space if it is defined with the inner product operation $\ip{}{}:\vFcal\times\vFcal\rightarrow\RR$ that is symmetric $\ip{\vz_i}{\vz_j} = \ip{\vz_j}{\vz_i}$, bilinear in both scalars $\ip{\lambda\vz_i}{\vz_j} = \lambda\ip{\vz_i}{\vz_j}$ and vectors $\ip{\vz_i+\vz_j}{\vz} = \ip{\vz_i\vz}{\vz_j\vz}$, and positive $\ip{\vz}{\vz}\ge0$, for all $\lambda\in\RR$ and $\vz_i,\vz_j,\vz\in\vFcal$.
+	A real vector space $\vFcal$ is an inner product space if it is defined with the inner product operation $\ip{\cdot}{\cdot}:\vFcal\times\vFcal\rightarrow\RR$ that is symmetric $\ip{\vz_i}{\vz_j} = \ip{\vz_j}{\vz_i}$, bilinear in both scalars $\ip{\lambda\vz_i}{\vz_j} = \lambda\ip{\vz_i}{\vz_j}$ and vectors $\ip{\vz_i+\vz_j}{\vz} = \ip{\vz_i\vz}{\vz_j\vz}$, and positive $\ip{\vz}{\vz}\ge0$, for all $\lambda\in\RR$ and $\vz_i,\vz_j,\vz\in\vFcal$.
 \end{definition}
 % psd kernel
 \begin{definition}{Symmetric and Positive Semi-definite Property.}\label{psdkernel}
@@ -625,7 +625,7 @@ In particular, we defined a function $k:\Xcal\times\Xcal\rightarrow\RR$ such tha
 \end{definition}
 \noindent
 % verify psd kernel
-Definition~\ref{psdkernel} implies that any kernel defined on a finite set of objects is a positive semi-definite kernel.
+Kernels defined in Definition~\ref{kernels} are symmetric positive semi-definite.
 In particular, the symmetry can be verified by
 \begin{align*}
 	k(\vx_i,\vx_j) = \ip{\varphib(\vx_i)}{\varphib(\vx_j)} = \ip{\varphib(\vx_j)}{\varphib(\vx_i)} = k(\vx_j,\vx_i),
