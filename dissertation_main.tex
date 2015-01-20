@@ -1956,8 +1956,8 @@ Current structured output learning approaches rely on an output graph connecting
 Thus, the applicability of structured output learning is limited due to the fact that the output graph needs to be known \textit{apriori}.
 The second outcome of the thesis is that we have developed several new models for structured output learning which are no longer constrained by the availability of the output graph.
 Analog but with significant differences to the previously established ensemble methods, the proposed models aim to combine a set of structured output learners built on a collection of random output graphs.
-In particular, \mve\ applies majority vote to directly combine the predictions from the base learners, while \amm\ and \mam\ perform additional inference on the output graphs before or after combining the base learners.
-Meanwhile, we have developed \rta\ based on the theoretical study.
+In particular, \mve\ applies majority vote to directly combine the predictions from the base learners, while \amm\ and \mam\ perform additional inference on the output graphs before or after combining base learners.
+In addition, we have developed \rta\ based on the theoretical study.
 The proposed model performs max-margin learning on a random sample of spanning trees.
 The joint learning and inference in \rta\ ensures that the base learners, which are built from a set of random spanning trees, are optimized simultaneously towards a same global objective.
 \rta\ has also laid the foundation of tackling the intractability of the graph inference on any unknown graph structures in which the fast optimization and accurate predictions can be achieved with attainable computational efforts.
