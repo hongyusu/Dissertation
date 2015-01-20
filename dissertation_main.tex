@@ -1976,16 +1976,16 @@ First, the algorithms developed in this thesis can be applied to many other mult
 Secondly, the development of the learning algorithms and the theoretical studies are readily to be continued.
 As the first direction is application oriented, we will focus on the latter part.
 
-To serve as a starting point, the inference algorithm for \spin\ can be further developed, which not only needs to be scalable to the large scale social network datasets but should also have an approximation guarantee.
+To serve as a starting point, the inference algorithm for \spin\ can be further developed, which not only needs to be scalable to large scale social network datasets but should also have an approximation guarantee.
 Secondly, we plan to study \rta\ in multilabel classification problems with a general output graph.
 The setting is interesting as output variables in many real world problems are usually organized by a graph structure which is more complex that a spanning tree or a chain but is less complex than a complete graph.
 The exact inference is often prohibitive for any polynomial time algorithms.
-In particular, we are interested in the change of the properties (e.g., the general error bound, the conditions for the exact inference) when we randomly sample spanning trees according to a general graph rather than a complete graph.
+In particular, we are interested in the properties of the new algorithms (e.g., the generalization error bound, conditions for exact inference) when we randomly sample spanning trees from a general graph rather than a complete graph.
 Thirdly, we plan to investigate the possibility of learning the feature weight parameters defined on a random collection of spanning trees through a $L_1$-norm regularized combination.
 Learning with the $L_1$-norm regularized parameter combination has previously been studied in multiple kernel learning \citep{Rakotomamonjy08simplemkl}, which can be formulated into an equivalent form of learning a weighted $L_2$-norm combination.
 The additional weight can be interpreted as the affinity of an output graph to the training data, which can be used to select relevant output graph structures.
 We need to study the corresponding optimization algorithm as the current alternative optimization \citep{Rakotomamonjy08simplemkl} is not efficient.
-The theoretical studies of \rta\ should also be extended to the new algorithm.
+The theoretical analysis of \rta\ should also be extended to the new algorithm.
 
 %% Examples of article references, remove these from your manuscript!
 % Uncomment them, if you want to see the results of these commands in this example document
