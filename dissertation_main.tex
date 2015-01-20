@@ -1952,11 +1952,11 @@ In particular, the proposed algorithm \spin\ can predict a directed acyclic grap
 The empirical evaluation on the network response prediction problem within the context of social network analysis shows that the proposed model outperforms several state-of-the-art flat multilabel classification approaches.
 The study demonstrates that accurate predictions can be achieved by structured output learning when the output graph is known and utilized during learning.
 
-Meanwhile, current structured output learning approaches rely on an output graph connecting multiple output variables to exploit the correlation between labels.
+Current structured output learning approaches rely on an output graph connecting multiple output variables to exploit the correlation between labels.
 Thus, the applicability of structured output learning is limited due to the fact that the output graph needs to be known \textit{apriori}.
 The second outcome of the thesis is that we have developed several new models for structured output learning which are no longer constrained by the availability of the output graph.
 Analog but with significant differences to the previously established ensemble methods, the proposed models aim to combine a set of structured output learners built on a collection of random output graphs.
-In particular, \mve\ uses majority vote to directly combine the predictions from the base learners, while \amm\ and \mam\ perform additional inference on the output graphs before or after combining the base learners.
+In particular, \mve\ applies majority vote to directly combine the predictions from the base learners, while \amm\ and \mam\ perform additional inference on the output graphs before or after combining the base learners.
 Meanwhile, we have developed \rta\ based on the theoretical study.
 The proposed model performs max-margin learning on a random sample of spanning trees.
 The joint learning and inference in \rta\ ensures that the base learners, which are built from a set of random spanning trees, are optimized simultaneously towards a same global objective.
