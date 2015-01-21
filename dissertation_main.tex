@@ -68,7 +68,7 @@ Finally, we study the theoretic aspect of the proposed models.
 The research questions can be summarized as follows.
 \begin{itemize}
 \item Should we tackle multilabel classification with structured output learning rather than flat multilabel classification?
-\item How to apply structured output learning to the multilabel classification problems when the output graph is not known \textit{apriori}?
+\item How to apply structured output learning to multilabel classification problems when the output graph is not known \textit{apriori}?
 \item Can we provide any theoretical studies to explain the behavior of the proposed learning models and to guarantee the performance?
 \item Can we efficiently solve the inference problems of the proposed structured output learning models?
 \end{itemize}
@@ -139,23 +139,23 @@ The goal of statistical learning is to provide an \textit{estimator} $f\in\Hcal:
 
 We use \textit{loss function} $\Lcal(y,f(\vx)):\Ycal\times\Ycal\rightarrow\RR^+$ to measure the goodness of an estimator, which is a monotonic bounded function between a true value $y$ and an estimated value $f(\vx)$.
 There are many ways to define the loss function including, for example,
-\textit{Hinge Loss} in Support Vector Machines \citep{Cortes95support}
+the \textit{hinge loss} in Support Vector Machines \citep{Cortes95support}
 \begin{align}
 	\Lcal_{hinge}(y,f(\vx)) = \maximize (0,1-y f(\vx)),\, \Ycal=[-1,+1], \label{hinge_loss}
 \end{align}
-\textit{$0/1$ Loss} in structured \svm\ \citep{THJA04}
+the \textit{$0/1$ loss} in structured \svm\ \citep{THJA04}
 \begin{align}
-	\Lcal_{0/1}(y,f(\vx)) = \ind{y=f(\vx)},\, \vYcal = \{-1,+1\}^k, \label{one_loss}
+	\Lcal_{0/1}(\vy,f(\vx)) = \ind{\vy=f(\vx)},\, \vYcal = \{-1,+1\}^k, \label{one_loss}
 \end{align}
-\textit{Squared Loss} in Ridge Regression \citep{Hoerl00ridge}
+the \textit{squared loss} in Ridge Regression \citep{Hoerl00ridge}
 \begin{align*}
 	\Lcal_{squared}(y,f(\vx)) = (y-f(\vx))^2,\, \Ycal=\RR,
 \end{align*}
-\textit{Exponential Loss} in \adaboost\ \citep{Schapire99improved}
+the \textit{exponential loss} in \adaboost\ \citep{Schapire99improved}
 \begin{align}
 	\Lcal_{exp}(y,f(\vx)) = \exp(-y f(\vx)),\, \Ycal=\RR, \label{exp_loss}
 \end{align}
-and \textit{Logistic Loss} in Logistic Regression \citep{Chen99}
+and the \textit{logistic loss} in Logistic Regression \citep{Chen99}
 \begin{align}
 	\Lcal_{log}(y,f(\vx)) = \log(1+\exp(-y f(\vx))),\, \Ycal=[-1,+1]. \label{log_loss}
 \end{align}
@@ -163,12 +163,12 @@ We will study the loss functions with the corresponding learning algorithms in d
 
 The \textit{true risk} of an estimator $f$ over all examples from a domain $\vXcal\times\Ycal$ is then defined as
 \begin{align}
-	\Rcal(f) = \int_{(\vx,y)\in\vXcal\times\vYcal}\Lcal(y,f(\vx))P(\vx,y)\,d_{\vx}d_{y} \label{true_risk}.
+	\Rcal(f) = \int_{(\vx,y)\in\vXcal\times\Ycal}\Lcal(y,f(\vx))P(\vx,y)\,d_{\vx}d_{y} \label{true_risk}.
 \end{align}
-As a result, the learning algorithm should search for an estimator $f\in\Hcal$ which minimizes the true risk (\ref{true_risk}).
-However, it is impossible to compute the true risk (\ref{true_risk}) directly, as the distribution $P(\vx,y)$ is unknown.
-Instead we are given a random sample of $m$ examples, denoted by $S=\{(\vx_1,y_1),\cdots,(\vx_m,y_m)\}$, called \textit{training data}.
-The \textit{Empirical risk} of an estimator $f\in\Hcal$ is defined as the average error made by the estimator on a training data $S$ of a finite size
+As a result, the learning algorithm should search for an estimator $f\in\Hcal$ which minimizes the true risk.
+However, it is impossible to compute the true risk directly according to (\ref{true_risk}), as the distribution $P(\vx,y)$ is usually unknown.
+Instead we are given a random sample of $m$ examples, denoted by $S=\{(\vx_1,y_1),\cdots,(\vx_m,y_m)\}$, called the \textit{training data}.
+The \textit{Empirical risk} of an estimator $f\in\Hcal$ is defined as the average error made by the estimator on the training data $S$ of a finite size
 \begin{align}
 	\Rcal_{emp}(f) = \frac{1}{m}\sum_{i=1}^{m}\Lcal(y_i,f(\vx_i)) \label{empirical_risk}.
 \end{align}
@@ -180,7 +180,7 @@ The empirical risk minimization strategy is ill-posed as it will provide an infi
 Besides, it quite often leads to \textit{overfitting}, in particular when the dimensionality of the feature space is high and the number of training examples is relatively small.
 That is, the underlying true distribution $P(\vx,y)$ is difficult to estimate based on a finite sample of training examples.
 As a result, the estimator will generalize poorly on unseen test examples.
-Regularization theory \citep{Evgeniou99a,Evgeniou02regularization} provides a framework to tackle those two problems.
+Regularization theory \citep{Evgeniou99a,Evgeniou02regularization} provides a framework to tackle these two problems.
 In particular, it suggests to minimize 
  \begin{align}
 	\Jcal(f) = \Rcal_{emp}(f) + \lambda\Omega(f), \label{rl}
@@ -200,7 +200,7 @@ On the other hand, the $L_1$-norm regularization, defined by
 \end{align*}
 provides a sparse parameter estimation such that we obtain a high dimensional feature weight vector with many zero entries.
 This is an attractive property as \textit{feature selection} is incorporated into the learning process.
-Therefore, the resulting model is usually easy to interpret.
+The resulting model is usually easy to interpret.
 The $L_1$-norm regularization has been applied in, for example, \lasso\ \citep{Tibshirani94regression}.
 Many other regularization techniques have been widely studied, for example, the $L_{1,2}$-norm regularization \citep{Argyriou07multitask}, and the elastic net regularization \citep{Zou05regularizationa}.
 
