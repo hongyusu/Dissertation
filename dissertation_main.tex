@@ -914,12 +914,12 @@ In particular, we examine the following {multilabel classification} problem.
 We assume training examples are drawn from a domain $\vXcal\times\vYcal$, where $\vXcal$ is an input (instant) space and $\vYcal$ is a space of outputs (multilabels).
 The output space $\vYcal = \Ycal_1\times\cdots\times\Ycal_k$ is composed by a Cartesian product of $k$ sets $\Ycal_i=\{-1,+1\}$.
 We retain a single-label classification problem by setting $k=1$.
-A vector $\vy=(y_1,\cdots,y_k)\in\vYcal$ is called a \textit{multilabel} and its element $y_j$ is called a \textit{microlabel}.
+A vector $\vy=(\vy[1],\cdots,\vy[k])\in\vYcal$ is called a \textit{multilabel} and its element $\vy[j]$ is called a \textit{microlabel}.
 We use $\vy_i[j]$ to denote the $j$'th microlabel in the $i$'th multilabel.
 In addition, we are given a training set of $m$ labeled examples $\Scal=\{(\vx_i,\vy_i)\}_{i=1}^{m}\in\vXcal\times\vYcal$. 
 A pair $(\vx_i,\vy)$, where $\vx_i$ is a training input and $\vy\in\vYcal$ is an arbitrary output, is called \textit{pseudo-example}.
 It is worth pointing out that the pseudo-example $(\vx_i,\vy)$ can be generated from a different distribution that generates training examples $(\vx_i,\vy_i)$.
-The goal of learning is to find a mapping function $f\in\Hcal:\vXcal\rightarrow\vYcal$ which can compute the best multilabel for an input example such that the predefined loss function $\ell$ for the unseen examples will be minimized.
+The goal of learning is to find a mapping function $f\in\Hcal:\vXcal\rightarrow\vYcal$ which can compute the best multilabel for an input example such that the predefined loss function $\Lcal$ for the unseen examples will be minimized.
 
 
 
@@ -939,10 +939,10 @@ We will focus on \br\ in this section.
 %
 \subsection{Multilabel $K$-Nearest Neighbors (\mlknn)} \label{sc_mlknn}
 
-Multilabel $K$-Nearest Neightbors (\mlknn) developed by \citet{Zhang05a,Zhang07mlknn} is perhaps the most famous binary relevance classifier for flat multilabel classification.
-\mlknn\ is also an instance based learning approach \citep{Aha91instance} that is derived from the $K$-Nearest Neightbors (\knn) algorithm designed for single-label classification.
+Multilabel $K$-Nearest Neightbors algorithm (\mlknn) developed by \citet{Zhang05a,Zhang07mlknn} is perhaps the most famous binary relevance classifier for flat multilabel classification.
+\mlknn\ is also an instance based learning approach \citep{Aha91instance} that is derived from the $K$-Nearest Neightbors algorithm (\knn) designed for single-label classification.
 \mlknn\ transforms the flat multilabel classification problem into a set of single-label classification problems and processes each microlabel independently.
-For each unseen example $\vx$, \mlknn\ first identifies a set of $K$-nearest neighbors $N(\vx)$ from the training set.
+For each unseen example $\vx$, \mlknn\ first identifies a set of $K$-nearest neighbors $N_K(\vx)$ from the training set.
 After that, the algorithm predicts the multilabel $\vy$ of the example by examining the set of multilabels collected from the $K$-nearest neightbors.
 
 Mathematically,
@@ -966,7 +966,7 @@ In addition, there exists many alternatives which also align to the direction of
 %
 \subsection{Classifier Chains (\cc)}
 
-Classification Chains (\cc) \citep{Read09classifier,Read11classifier} is another problem transformation approach for flat multilabel classification.
+Classifier chains (\cc) \citep{Read09classifier,Read11classifier} is another problem transformation approach for flat multilabel classification.
 \cc\ involves $k$ binary transformations and forms a chain of $k$ binary classifiers $h=\{h_1,\cdots,h_k\}$, in which the $j$'th classifier $h_j$ is built for predicting the $j$'th microlabel.
 For the $j$'th microlabel $\vy[j]$, \cc\ first constructs a new training data $S_j$ by taking the $j$'th microlabel as the output variable and combining the original feature space with all $j-1$ prior microlabels as the new input features defined by
 \begin{align*}
@@ -979,8 +979,8 @@ The idea is not new which has been previously studied \citep{Godbole04discrimina
 \cc\ makes a strong assumption that there is a high correlation between the output microlabel and the concatenated microlabels.
 The central problem of \cc\ is that the additional label information only takes a small part of the input feature space especially when the dimension of the original feature space is already high.
 
-Probabilistic Classifier Chains (\pcc) extends \cc\ by analyzing the algorithm with the condition probability theory \citep{Read09classifier,Dembczynski10bayes}.
-In addition, Ensemble Classifier Chains (\ecc) has been developed which improves \cc\ by generating and combining multiple chains of classifiers \citep{Read11classifier}. 
+Probabilistic classifier chains (\pcc) extends \cc\ by analyzing the algorithm with the condition probability theory \citep{Read09classifier,Dembczynski10bayes}.
+In addition, ensemble classifier chains (\ecc) has been developed which improves \cc\ by generating and combining multiple chains of classifiers \citep{Read11classifier}. 
 
 
 
@@ -988,7 +988,7 @@ In addition, Ensemble Classifier Chains (\ecc) has been developed which improves
 %
 \subsection{Instant Based Logistic Regression (\iblr)} \label{sc_iblr}
 
-\citet{Cheng09combining} developed Instance Based Logistic Regression (\iblr) with an extension to flat multilabel classification.
+\citet{Cheng09combining} developed instance based logistic regression (\iblr) with an extension to flat multilabel classification.
 \iblr\ is also an instant base learning approach \citep{Aha91instance} that is similar to \mlknn.
 It extends \mlknn\ by exploring the correlation between labels within the neighbors of an instant for posterior inference.
 %It is also similar to \cc\ but with major differences.
@@ -996,12 +996,12 @@ The central idea of \iblr\ is to take the labels of the examples in the neighbor
 Similar ideas have been applied in collective classification \citep{Ghamrawi05collective} and link based classification \citep{Getoor05link, Getoor07introduction}.
 
 In particular, for each unseen example $\vx$, \iblr\ first identifies a set of $K$-nearest neighbors $N_K(\vx)$ from the training data.
-The algorithm builds a Logistic Regression model (Section~\ref{sc_lr}) for each microlabel based on the label information collected from the examples in $N_K(\vx)$.
+The algorithm builds a logistic regression model (Section~\ref{sc_lr}) for each microlabel based on the label information collected from the examples in $N_K(\vx)$.
 Mathematically, \iblr\ defines a posterior probability of the $j$'th microlabel of $\vx$ being labeled as ``$+1$'' by
 \begin{align*}
 	\pi^{(j)} = P( \vy[j]=+1 | N_K(\vx)).
 \end{align*}
-It constructs a Logistic Regression classifier for $\pi^{(j)}$ which can be derived from the following 
+It constructs a logistic regression classifier for $\pi^{(j)}$ which can be derived from the following 
 \begin{align*}
 	\log\frac{\pi^{(j)}}{1-\pi^{(j)}} = w_0^{(j)} + \sum_{i=1}^{k}\alpha_i^{(j)}\cdot w_{i}^{(j)}(\vx),
 \end{align*}
@@ -1019,7 +1019,7 @@ collects the $i'$th microlabel from each neighbor $\vx'\in N_K(\vx)$ and weights
 \section{Algorithm Adaptation}
 
 Algorithm adaptation directly modifies popular single-label classification algorithms to solve the multilabel classification problems.
-We will present the algorithms that are modified from ensemble methods and Logistic Regression.
+We will present the algorithms that are modified from ensemble methods and logistic regression.
 There also exists many other algorithms in the algorithm adaptation category, for example, the method based on label ranking \citep{Crammer03afamily}, and the method based on neural network \citep{Zhang06multilabel}.
 These methods are not explained in detail due to the divergence from the main scope of this thesis.
 
@@ -1032,7 +1032,7 @@ These methods are not explained in detail due to the divergence from the main sc
 Ensemble methods have been initially developed for single-label classification \citep{Breiman96bagging,Freund97a} or regression \citep{Breiman96bagging}, as it is straightforward to combine multiple scalar output variables.
 However, it is not immediately clear how to combine vector valued outputs in flat multilabel classification.
 
-\adaboostmh\ is a multilabel variance of the \adaboost\ algorithm \citep{Schapire99improved,Esuli2008boosting}.
+\adaboostmh\ \citep{Schapire99improved,Esuli2008boosting} is a multilabel variant of the \adaboost\ algorithm.
 The core idea of \adaboostmh\ is to apply the hamming loss instead of the 0/1 loss. 
 In particular, the algorithm reduces a multilabel classification problem into a single-label classification problem by replacing each training example $(\vx_i,\vy_i)$ with $k$ examples $\{(\vx_i,\vy_i[l])\}_{l=1}^k$.
 The algorithm is described in Algorithm~\ref{adaboostmh}.
@@ -1045,7 +1045,7 @@ The prediction $H(x)$ is a weighted combination of the base learners $f^t(x)$ we
 \begin{algorithmic}[1]
 	\REQUIRE Training sample $\Scal = \{(x_i,\vy_i)\}_{i=1}^m$, learning function $\Wcal$, number of weak learners $T$
 	\ENSURE Boosting ensemble $H(\vx)$
-	\STATE Initialize $D^1(i,l)=\frac{1}{mk},i\in\{1,\cdots,m\}$
+	\STATE Initialize $D^1(i,l)=\frac{1}{mk},\, \forall i\in\{1,\cdots,m\},l\in\{1,\cdots,k\}$
 	\FOR{$t=1\cdots T$}
 		\STATE $f^t(\vx)\leftarrow\Wcal(\Scal,D^{t})$ \label{mh_compuet_f}
 		\STATE $\hat{\vy}_i = f^t(\vx_i),\forall i\in\{1,\cdots,m\}$
@@ -1066,18 +1066,18 @@ In addition, there is a large body of work which aim to apply ensemble methods t
 %
 \subsection{Correlated Logistic Regression (\corrlog)} \label{sc_corrlog}
 
-Correlated Logistic Regression (\corrlog) is a model based approach for flat multilabel classification \citep{Bian12corrlog}.
+Correlated logistic regression (\corrlog) is a model based approach for flat multilabel classification \citep{Bian12corrlog}.
 \corrlog\ is a major step forward of \iblr\ by constructing a logistic regression classifier over all microlabels and by modeling the pairwise correlation of labels with a function defined on the microlabel pairs.
 
-In fact, \corrlog\ is derived from Independent Logistic Regression (\ilrs). 
+In fact, \corrlog\ is derived from independent logistic regressions (\ilrs). 
 Given a pair of an arbitrary training example and a label $(\vx,\vy)$, we can construct a set of \ilrs\ classifiers, one for each microlabel.
 The posterior probability can be computed by
 \begin{align}
 	P_{\text{\ilrs}}(\vy|\vx) 
 	= \prod_{j=1}^{k}P_{\text{\lr}}(\vy[j]|\vx)
-	= \prod_{j=1}^{k}\frac{\exp(\vy[j]\vw^{\tp}\vx)}{\exp(\vw^{\tp}\vx)+\exp(-\vw^{\tp}\vx)}, \label{ilrs}
+	= \prod_{j=1}^{k}\frac{\exp(\vy[j]\vw^{\tp}\varphib(\vx))}{\exp(\vw^{\tp}\varphib(\vx))+\exp(-\vw^{\tp}\varphib(\vx))}, \label{ilrs}
 \end{align}
-where $j$ is the index that iterates over microlabels. 
+where $j$ is the index that iterates over microlabels and $\tp$ denotes matrix transpose.
 The bias term as that appears in Definition~\ref{logistic_regression} is omitted which is equivalent to augmenting $\vx$ with a constant term \citep{Bian12corrlog}.
 Otherwise, (\ref{ilrs}) can be derived into the same form of Definition~\ref{logistic_regression} by replacing $\vw$ with $\frac{\vw}{2}$.
 \ilrs\ has the problem of ignoring the correlation between labels and overfitting the training data when the number of microlabels is large.
@@ -1088,7 +1088,7 @@ To alleviate the problems, \corrlog\ augments the posterior probability (\ref{il
 Putting together (\ref{ilrs}) and (\ref{ilrs_augment}), \corrlog\ can be defined as
 \begin{align*}
 	P_{\text{\corrlog}}(\vy|\vx) &\propto P_{\text{\ilrs}}(\vy|\vx) Q(\vy) \\
-		&=\exp\left\{ \sum_{j=1}^{m}\vy(x)[j]\vw^{\tp}\vx + \sum_{k<j}\alpha_{kj}\vy(\vx)[k]\vy(\vx)[j] \right\}.
+		&=\exp\left\{ \sum_{j=1}^{m}\vy[j]\ip{\vw}{\varphib(\vx)} + \sum_{k<j}\alpha_{kj}\vy[k]\vy[j] \right\}.
 \end{align*}
 Thus, \corrlog\ examines the pairwise label correlations by augmenting the joint prediction with a quadratic term $Q(\vy)$ built from the pairs of microlabels.
 
@@ -1098,7 +1098,7 @@ Thus, \corrlog\ examines the pairwise label correlations by augmenting the joint
 %
 \subsection{Multitask Feature Learning (\mtl)} \label{sc_mtl}
 
-Multitask Feature Learning (\mtl) \citep{Argyriou07multitask} is another algorithm designed for flat multilabel classification.
+Multitask feature learning (\mtl) \citep{Argyriou07multitask} is another algorithm designed for flat multilabel classification.
 \mtl\ is quite different from the algorithms discussed in the previous part of the section.
 Specifically, \mtl\ is based on the assumption that different microlabels are related such that they share a common underlying feature representation.
 Similar assumptions are also made in other models \citep{Caruana97multitask,Baxter00a,BenDavide03exploiting}.
@@ -1111,15 +1111,15 @@ $f_t(\vx)$ can be expressed as
 where $\va_t\in\RR^d$ is the feature weight parameter for the $t$'th microlabel.
 $h(\vx)$ is a linear feature mapping function defined as
 \begin{align*}
-	h(\vx) = \ip{U}{\phib(\vx)},
+	h(\vx) = \ip{U}{\varphib(\vx)},
 \end{align*}
-where $\phib(\vx)\in\RR^d$ is the input feature map in the original feature space and $U\in\RR^{d\times d}$ is a square matrix.
+where $\varphib(\vx)\in\RR^d$ is the input feature map in the original feature space and $U\in\RR^{d\times d}$ is a square matrix.
 We further use $A$ to denote the matrix composed by $\va_{t}$.
 \mtl\ assumes that microlabels share a small set of features in which $A$ is assumed to be sparse with many entries being zero.
 The optimization problem of \mtl\ is defined as
 \begin{definition}{\mtl\ Optimization Problem in Primal}\label{mtl_opt}
 	\begin{align*}
-		\underset{\substack{U\in\RR^{d\times d}\\A\in\RR^{d\times T}}}{\minimize} \left\{\sum_{t=1}^{T}\sum_{i=1}^{m}\ell(\vy_{i,t},\ip{\va_t}{\ip{U}{\phib(\vx_i)}})+C\norm{A}_{2,1}^2\right\},
+		\underset{\substack{U\in\RR^{d\times d}\\A\in\RR^{d\times T}}}{\minimize} \left\{\sum_{t=1}^{T}\sum_{i=1}^{m}\ell(\vy_{i,t},\ip{\va_t}{\ip{U}{\varphib(\vx_i)}})+C\norm{A}_{2,1}^2\right\},
 	\end{align*}
 \end{definition}
 \noindent
