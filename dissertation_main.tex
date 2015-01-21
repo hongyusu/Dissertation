@@ -452,7 +452,7 @@ To apply \mle, it is easier if, instead of maximizing the likelihood, we maximiz
 \mle\ can generate a \lr\ model that fits the training data.
 However, there is no guarantee that the model also generalizes well on the unseen test data.
 To achieve a better generalization power, we apply the regularization technique presented in Section~\ref{sc_rl}.
-Many regularization methods for \lr\ have been developed \citep{Chen99,Chen00,Goodman03} among which adding Gaussian prior on weight parameter $\vw$ is a standard option.
+Many regularization methods for \lr\ have been developed \citep{Chen99,Chen00,Goodman03} among which adding Gaussian prior on the weight parameter $\vw$ is a standard option.
 In practice, we assume $\vw$ is generated according to a zero-mean spherical Gaussian with variance $\sigma^2$.
 Thus, the \mle\ problem (\ref{lr_likelihood_sum}) is transformed into the \textit{Maximum A-Posteriori} (\map) problem of the following form
 \begin{align}
