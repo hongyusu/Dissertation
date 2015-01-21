@@ -416,7 +416,7 @@ we compute the logistic transformation of the original conditional probability b
 \begin{align*}
 	\log\frac{P(y=+1|\vx)}{P(y=-1|\vx)} = \ip{\vw}{\varphib(\vx)} + b.
 \end{align*}
-Solving for $P(y=+1|\vx)$, we obtain
+Solve it for $P(y=+1|\vx)$, we obtain
 \begin{align}
 	P(y=+1|\vx;\vw,b) = \frac{1}{1+\exponential{-\ip{\vw}{\varphib(\vx)}-b}}. \label{lr_1}
 \end{align}
@@ -758,10 +758,10 @@ Moreover, we will present several new learning algorithms in the latter part of 
 %
 \subsection{Preliminaries} \label{sc_em_pn}
 
-In addition to the notations introduced in Section~\ref{sc_slc_pn}, we assume there is a hypothesis class $\Hcal'$ where we generate weak/base hypotheses $f^t(x)\in\Hcal'$.
+In addition to the notations introduced in Section~\ref{sc_slc_pn}, we assume there is a hypothesis class $\Hcal^w$ where we generate weak/base hypotheses $f^t(x)\in\Hcal^w$.
 We use $t$ to index the $t$'th weak hypothesis.
 Let $H(x)$ denote the ensemble framework which combines multiple weak hypotheses and generate a stronger one.
-In many cases, no other information about $f^t(x)$ is available to $H(x)$ except that each weak hypothesis will take in a parameter $\vx$ and generate an output $y\in\Ycal$.
+In many cases, no other information about $f^t(x)$ is available to $H(x)$ except that each weak hypothesis will take in a parameter $\vx\in\vXcal$ and generate an output $y\in\Ycal$.
 
 
 \subsection{Boosting} \label{sc_boosting}
@@ -769,13 +769,13 @@ In many cases, no other information about $f^t(x)$ is available to $H(x)$ except
 \textit{Boosting} corresponds to a learning framework or a family of algorithms that takes in a weak classifier and tunes it into a strong one.
 We begin our discussion from the \textit{concept class}.
 A \textit{concept} is a boolean function over a domain $\vXcal$, and a \textit{concept class} is a class of concepts.
-A concept class is \textit{strongly learnable} if there exists a polynomial learning algorithm which achieves a high accuracy with a high probability for all concepts in the class.
-On the other hand, a concept class is \textit{weakly learnable} if the learning algorithm achieves an arbitrary high accuracy where the only requirement is that the learning algorithm finds a function which performs better than the coin flipping.
+A concept class is \textit{strongly learnable} if there exists a polynomial learning algorithm which achieves high accuracy with high probability for all concepts in the class.
+On the other hand, a concept class is \textit{weakly learnable} if the learning algorithm achieves arbitrarily high accuracy where the only requirement is that the learning algorithm finds a function which performs better than the coin flipping.
 The concept of learnability was proposed by \citet{Kearns94cryptographic} together with the question whether the strong learnability and the weak learnability are equivalent which is known as the \textit{hypothesis boosting problem}.
 Finding a weak learner which performs better than random guessing is easy in practice, but finding a strong learner is usually difficult.
 \citet{Schapire90the} has proved that the two classes of learnability are equivalent which lays the foundation of the boosting algorithm that tunes a weak learning algorithm into a strong one.
 
-Adaptive Boosting (\adaboost) \citet{Freund97a} is the very first practical boosting algorithm and is the most influential one.
+Adaptive Boosting (\adaboost) proposed by \citet{Freund97a} is the very first practical boosting algorithm and is the most influential one.
 In addition, \citet{Schapire99improved} proposed a variant of the algorithm which updates the adaptive parameters to minimize the exponential loss (\ref{exp_loss}) of each weak learner.
 The algorithm is shown in Algorithm~\ref{adaboost}.
 The central idea of \adaboost\ is to maintain a distribution $D$ over all training examples, and update the distribution in each iteration such that the difficult-to-classify examples will get more probability mass for the next iteration (line~\ref{update_d}).
@@ -793,21 +793,21 @@ The ensemble prediction is the weighted combination of all weak learners (line~\
 \begin{algorithmic}[1]
 	\REQUIRE Training sample $\Scal = \{(x_i,\vy_i)\}_{i=1}^m$, learning function $\Wcal$, number of weak learners $T$
 	\ENSURE Boosting ensemble $H(\vx)$
-	\STATE Initialize $D^1(i)=\frac{1}{m},i\in\{1,\cdots,m\}$
+	\STATE Initialize $D^1(i)=\frac{1}{m},\, \forall i\in\{1,\cdots,m\}$
 	\FOR{$t=1\cdots T$}
 		\STATE $f^t(\vx)\leftarrow\Wcal(\Scal,D^{t})$ \label{compuet_f}
 		%\STATE $y_i = f^t(\vx_i),\forall i\in\{1,\cdots,m\}$
 		\STATE $\epsilon^t = \sum_{i=1}^{m}D^t(i)\ind{y_i\neq f^t(\vx_i)}$ \label{compute_error}
 		\STATE $\alpha^{t} = \frac{1}{2}\ln\left(\frac{1-\epsilon^t}{\epsilon^t}\right)$ \label{compute_alpha}
 		\STATE $Z=\sum_{i=1}^{m}D^{t}(i)\exp(-\alpha^ty_if^t(\vx_i))$
-		\STATE $D^{t+1}(i) = \frac{1}{Z}D^{t}(i)\exp(-\alpha^ty_if^t(\vx_i)),\forall i\in\{1,\cdots,m\}$ \label{update_d}
+		\STATE $D^{t+1}(i) = \frac{1}{Z}D^{t}(i)\exp(-\alpha^ty_if^t(\vx_i)),\, \forall i\in\{1,\cdots,m\}$ \label{update_d}
 	\ENDFOR
 	\RETURN $H(\vx) = \sign(\sum_{t=1}^T\alpha^tf^t(\vx))$ \label{adaboost_prediction}
 \end{algorithmic}
 \end{algorithm}
 
 For each weak learner $f^t(\vx)$, the strategy of updating the adaptive parameter $\alpha^t$ is to ensure that the exponential loss of $\alpha^tf^t(\vx)$ is minimized.
-To see this, we first compute the exponential loss for $\alpha^tf^t(\vx)$ given the current distribution $D^t$ and the adaptive parameter $\alpha^t$
+To see this, we first compute the exponential loss of $\alpha^tf^t(\vx)$ given the current distribution $D^t$ and the adaptive parameter $\alpha^t$
 \begin{align*}
 	\Lcal_{exp}&(y,\alpha^tf^t(\vx);D^t) \\
 	&= \sum_{i=1}^mD^t(i)\exp(-y_i\alpha^tf^t(\vx_i))\\
@@ -837,28 +837,28 @@ The theoretic analysis of \deepboosting\ also advances the previous performance 
 
 \textit{Bootstrap Aggregating} (\bagging) \citep{Breiman96bagging} is an ensemble method that exploits the independency between weak learners.
 The algorithm is based on the fact that errors can be dramatically reduced by combining independent base learners.
-Let $f_t$ denote the $t$'th weak learner.
+Let $f^t$ denote the $t$'th weak learner.
 The ensemble prediction $H(\vx)$ is the averaged prediction over all weak learners
 \begin{align}
-	H(\vx) = \sign\left(\sum_{t=1}^{T}f_t(\vx)\right). \label{bagging_ensemble}
+	H(\vx) = \sign\left(\sum_{t=1}^{T}f^t(\vx)\right). \label{bagging_ensemble}
 \end{align}
 %Let $\hatf$ denote the ground true function.
-We assume a base learner has a probability $\epsilon$ of making an independent mistake
+We assume that each base learner has a probability of $\epsilon$ to make an independent mistake
 \begin{align*}
-	P(f_t(\vx) \ne y) = \epsilon.
+	P(f^t(\vx) \ne y) = \epsilon.
 \end{align*}
 As \bagging\ (\ref{bagging_ensemble}) makes a mistake when at least half of the weak learners make mistakes, the probability of \bagging\ making mistake can be computed by
 \begin{align*}
 	P(H(\vx)\neq y) = \sum_{t=0}^{T/2}\left(\begin{tabular}{cc}T\\t\end{tabular}\right)(1-\epsilon)^t\epsilon^{T-t} \le\exp\left(-\frac{1}{2}T(2\epsilon-1)^2\right).
 \end{align*}
 The probability decreases exponentially in the number of weak learners, which will approach zero when the number of weak learners approaches infinity.
-However, it does not hold in practice as the base learners are generated from the same training data which can hardly be independent from each other.
+However, it does not hold in practice as base learners are generated from the same training data which can hardly be independent from each other.
 The goal of \bagging\ is to best exploit the independency by adding randomness into the algorithm.
 
-\textit{Bootstrap Sampling} \citep{Efron1994introduction} is applied in \bagging\ to generate subsets of training examples.
+\textit{Bootstrap sampling} \citep{Efron1994introduction} is applied in \bagging\ to generate subsets of training examples.
 Given a training set of $m$ training examples, a subset of the same size is generated by sampling with replacement $m$ times from the original training set.
 The sampling procedure is repeated $T$ times to generate $T$ subsets for constructing base learners.
-Sampled subsets will be similar since they are sampled from the same training set.
+Sampled subsets will be similar as they are sampled from the same training set.
 However, they will not be too similar in that each subset will only cover around $63\%$ of the original training data under the condition that $m$ is large.
 To see this, consider the probability that the $i$'th training examples is not sampled once is $(1-\frac{1}{m})$, and the probability that it is not sampled at all is $(1-\frac{1}{m})^m$.
 When $m$ is large, this probability will approach $37\%$. 
@@ -1735,7 +1735,7 @@ Efficient inference algorithms on special graphs have also been studied \citep{G
 
 \citepub{su14c} is motivated by the well-established maximum-margin principle as described in Section~\ref{sc_svm}.
 The work investigates whether the problem of inference over a complete graph in structured output learning can be avoided by exploring the properties of the maximum-margin principle.
-Starting from a sampling results, \citepub[Lemma 3]{su14c} shows that with a high probability a big fraction of the margin achieved by a complete graph can be obtained by a random sample of spanning trees of a small size.
+Starting from a sampling results, \citepub[Lemma 3]{su14c} shows that with high probability a big fraction of the margin achieved by a complete graph can be obtained by a random sample of spanning trees of a small size.
 Besides, \citepub[Theorem 5]{su14c} shows that the good generalization error can also be guaranteed when learning with, instead of a complete graph, a random sample of spanning trees.
 
 Thus, in addition to \citepub[Theory 1]{su14b}, we further provide the theoretical justification of combining a set of base learners trained on a collection of random output graphs. 
@@ -1771,7 +1771,7 @@ Therefore, we compute the top $K$-best multilabels for each random spanning tree
 In total the computation costs $\Theta(Knk)$ time for all spanning trees.
 \citepub[Lemma 7]{su14c} provides a method to retrieve the best multilabel from the $K$-best multilabel list in linear time.
 We still need to make sure that the global maximizer is within the $K$-best multilabel list.
-\citepub[Lemma 8]{su14c} guarantees that with a high probability the global maximizing multilabel is in the list and $K$ does not need to be large.
+\citepub[Lemma 8]{su14c} guarantees that with high probability the global maximizing multilabel is in the list and $K$ does not need to be large.
 
 In addition, we derived the marginalized dual representation of the primal optimization problem in Definition~\ref{primalrta},
 \iffalse
