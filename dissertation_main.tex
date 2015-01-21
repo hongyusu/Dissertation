@@ -22,7 +22,7 @@ With the increasing availability of large scale datasets, machine learning is ex
 The function is learned by exploring a set of observed input/output pairs known as training examples.
 In the classical supervised learning setting, there is only one variable to be predicted.
 This is called \textit{single-label classification} if the output variable is discrete, or \textit{regression} if the output variable is continuous.
-Many single-label classification models have been designed and applied in practice, for example, the Perceptron \citep{Rosenblatt58}, Logistic Regression \citep{Chen99}, and Support Vector Machines \citep{Cortes95support}.
+Many single-label classification models have been designed and applied in practice, for example, the perceptron \citep{Rosenblatt58}, logistic regression \citep{Chen99}, and support vector machines \citep{Cortes95support}.
 
 \textit{Multilabel classification} is a natural extension to single-label classification by defining multiple interdependent output variables associated with each input.
 This type of problems are prevalent in everyday life.
@@ -139,7 +139,7 @@ The goal of statistical learning is to provide an \textit{estimator} $f\in\Hcal:
 
 We use \textit{loss function} $\Lcal(y,f(\vx)):\Ycal\times\Ycal\rightarrow\RR^+$ to measure the goodness of an estimator, which is a monotonic bounded function between a true value $y$ and an estimated value $f(\vx)$.
 There are many ways to define the loss function including, for example,
-the \textit{hinge loss} in Support Vector Machines \citep{Cortes95support}
+the \textit{hinge loss} in support vector machines \citep{Cortes95support}
 \begin{align}
 	\Lcal_{hinge}(y,f(\vx)) = \maximize (0,1-y f(\vx)),\, \Ycal=[-1,+1], \label{hinge_loss}
 \end{align}
@@ -147,7 +147,7 @@ the \textit{$0/1$ loss} in structured \svm\ \citep{THJA04}
 \begin{align}
 	\Lcal_{0/1}(\vy,f(\vx)) = \ind{\vy=f(\vx)},\, \vYcal = \{-1,+1\}^k, \label{one_loss}
 \end{align}
-the \textit{squared loss} in Ridge Regression \citep{Hoerl00ridge}
+the \textit{squared loss} in ridge regression \citep{Hoerl00ridge}
 \begin{align*}
 	\Lcal_{squared}(y,f(\vx)) = (y-f(\vx))^2,\, \Ycal=\RR,
 \end{align*}
@@ -155,7 +155,7 @@ the \textit{exponential loss} in \adaboost\ \citep{Schapire99improved}
 \begin{align}
 	\Lcal_{exp}(y,f(\vx)) = \exp(-y f(\vx)),\, \Ycal=\RR, \label{exp_loss}
 \end{align}
-and the \textit{logistic loss} in Logistic Regression \citep{Chen99}
+and the \textit{logistic loss} in logistic regression \citep{Chen99}
 \begin{align}
 	\Lcal_{log}(y,f(\vx)) = \log(1+\exp(-y f(\vx))),\, \Ycal=[-1,+1]. \label{log_loss}
 \end{align}
@@ -168,7 +168,7 @@ The \textit{true risk} of an estimator $f$ over all examples from a domain $\vXc
 As a result, the learning algorithm should search for an estimator $f\in\Hcal$ which minimizes the true risk.
 However, it is impossible to compute the true risk directly according to (\ref{true_risk}), as the distribution $P(\vx,y)$ is usually unknown.
 Instead we are given a random sample of $m$ examples, denoted by $S=\{(\vx_1,y_1),\cdots,(\vx_m,y_m)\}$, called the \textit{training data}.
-The \textit{Empirical risk} of an estimator $f\in\Hcal$ is defined as the average error made by the estimator on the training data $S$ of a finite size
+The \textit{empirical risk} of an estimator $f\in\Hcal$ is defined as the average error made by the estimator on the training data $S$ of a finite size
 \begin{align}
 	\Rcal_{emp}(f) = \frac{1}{m}\sum_{i=1}^{m}\Lcal(y_i,f(\vx_i)) \label{empirical_risk}.
 \end{align}
@@ -193,7 +193,7 @@ The $L_2$-norm regularization, defined by
 	\Omega_{L_2}(f) = ||\vw||_2=\left(\sum_{i=1}^d|\vw[i]|^2\right)^{\frac{1}{2}}, \label{l2_norm}
 \end{align} 
 controls the complexity of the estimator $f$ and provides a smooth solution.
-It has been applied in, for example, Ridge Regression \citep{Hoerl00ridge}, Logistic Regression \citep{Chen00}, and Support Vector Machines \citep{Cortes95support}.
+It has been applied in, for example, ridge regression \citep{Hoerl00ridge}, logistic regression \citep{Chen00}, and support vector machines \citep{Cortes95support}.
 On the other hand, the $L_1$-norm regularization, defined by
 \begin{align*}
 	\Omega_{L_1}(f) = ||\vw||_1=\sum_{i=1}^d|\vw[i]|,
@@ -210,7 +210,7 @@ Many other regularization techniques have been widely studied, for example, the 
 %------------------------------------------------
 \section{Single-Label Classification}\label{sc_slc}
 
-In this section, the author will introduce the basic classification problem known as {single-label classification}, and explain two prominent algorithms in this area, namely Logistic Regression and Support Vector Machines.
+In this section, the author will introduce the basic classification problem known as {single-label classification}, and explain two prominent algorithms in this area, namely logistic regression and support vector machines.
 Optimization techniques and the latest advances of these two algorithms will also be briefly discussed.
 The goal is to provide background information that is necessary to understand the algorithms presented in the latter part of this thesis. 
 
@@ -402,7 +402,7 @@ The central idea of logistic regression, the odd-ratio type learning in particul
 
 Logistic regression models the conditional probability $P(y=+1|\vx)$ for a binary output variable $y\in\Ycal$.
 %Without loss of generality, in the rest part of this section we use $P(\vx)$ to denote above conditional probability of $P(y|\vx)$ when fixing $y=1$.
-To model the probability, we do not restrict to any particular form, as any unknown parameters can be estimated by \textit{Maximum Likelihood Estimation} (\mle).
+To model the probability, we do not restrict to any particular form, as any unknown parameters can be estimated by \textit{maximum likelihood estimation} (\mle).
 However, we are most interested in the simple linear model as described in (\ref{linearclassifier}).
 % detailed model, decision boundary
 To apply the linear model,
@@ -454,7 +454,7 @@ However, there is no guarantee that the model also generalizes well on the unsee
 To achieve a better generalization power, we apply the regularization technique presented in Section~\ref{sc_rl}.
 Many regularization methods for \lr\ have been developed \citep{Chen99,Chen00,Goodman03} among which adding Gaussian prior on the weight parameter $\vw$ is a standard option.
 In practice, we assume $\vw$ is generated according to a zero-mean spherical Gaussian with variance $\sigma^2$.
-Thus, the \mle\ problem (\ref{lr_likelihood_sum}) is transformed into the \textit{Maximum A-Posteriori} (\map) problem of the following form
+Thus, the \mle\ problem (\ref{lr_likelihood_sum}) is transformed into the \textit{maximum a-posteriori} (\map) problem of the following form
 \begin{align}
 	P(\vw,b|D;\sigma^2) = P(\vw|\sigma^2)\prod_{i=1}^mP(y_i|\vx_i)=\exponential{-\frac{\norm{\vw}^2}{\sigma^2}}\prod_{i=1}^{m}{\frac{1}{1+\exponential{-y_i(\ip{\varphib(\vx_i)}{\vw}+b)}}}. \label{lr_posteriori}
 \end{align}
@@ -496,7 +496,7 @@ Later on, optimization algorithms that are based on dual form have been develope
 \subsection{Support Vector Machines (\svm)}	\label{sc_svm}
 
 % some history
-Support Vector Machines (\svm) is probably the most widely used single-label classification algorithm in machine learning.
+Support vector machines (\svm) is probably the most widely used single-label classification algorithm in machine learning.
 Its extensions for multilabel classification will be described in the latter part of the thesis (e.g., \svmstruct\ in Section~\ref{sc_svmstruct}).
 In this section, we first introduce \textit{maximum-margin principle} which is also the basis of many structured output learning models, for example,  \mmmn\ in Section~\ref{sc_mmmn}, \spin\ in Section~\ref{sc_su14a}, and \rta\ in Section~\ref{sc_su14c}.
 After that, we will discuss the formalism of \svm, the primal-dual optimization strategy, and kernel methods which allow \svm\ to deal with the high dimensionality of the input feature space.
@@ -1727,7 +1727,7 @@ Instead we can resort to a \textit{complete graph} by assuming that a complete s
 With the complete graph as the output graph, we can construct a structured output learner and use the optimization algorithm to correctly reveal the hidden ``parameters'' defined on the edges of the compete graph (e.g., edge potentials).
 
 Structured output learning on a complete graph is not an easy problem as the inference is \nphard\ in nature.
-The inference problem is often instantiated as finding a \textit{Maximum A-Posteriori} (\map) configuration on a graph structured probability distribution.
+The inference problem is often instantiated as finding a \textit{maximum a-posteriori} (\map) configuration on a graph structured probability distribution.
 In terms of the intractability issue of the graph inference problem, many techniques have been proposed but with important differences.
 \citet{Jordan04semiefinite} developed a semi-definite programming convex relaxation for the inference on the graph with cycles.
 \citet{Wainwright05map} proposed a \map\ inference with the tree-based and \textit{linear programming} (\lp) relaxation.
