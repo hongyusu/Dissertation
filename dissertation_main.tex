@@ -236,7 +236,7 @@ For any $1\le\rho\in\RR$, the {$L_{\rho}$-norm of a vector $\vw$ is defined as
 \begin{align*}
 	\norm{\vw}_{\rho} = \left(\sum_{i=1}^{d}|\vw[i]|^{\rho}\right)^{\frac{1}{\rho}}.
 \end{align*}
-For the convenience of presentation, we will explicitly use $||\vw||$ to refer to the $L_2$-norm of $\vw$ throughout the thesis.
+For the convenience of presentation, we will explicitly use $||\vw||$ to refer to the $L_2$-norm of $\vw$ in the remaining part of the thesis.
 
 
 
@@ -395,22 +395,22 @@ which is more efficient to compute and is extremely similar to (\ref{voted_perce
 % 
 \subsection{Logistic Regression (\lr)}\label{sc_lr}
 
-Logistic Regression is a classification model rather than a regression model \citep{Bishop07}.
+Logistic regression is a classification model rather than a regression model \citep{Bishop07}.
 The formalism nicely transits from risk minimization (Section~\ref{sc_rl}) to regularized risk minimization (Section~\ref{sc_rl}).
-Logistic Regression has been extended to many other classification algorithms presented in the latter part of the thesis, for example, \iblr\ in Section~\ref{sc_iblr}, and \corrlog\ in Section~\ref{sc_corrlog}).
-The central idea of Logistic Regression, the odd-ratio type learning in particular, is also the building block of \mmmn\ in Section~\ref{sc_mmmn} and many other algorithms developed in this thesis.
+Logistic regression has been extended to many other classification algorithms presented in the latter part of the thesis, for example, \iblr\ in Section~\ref{sc_iblr}, and \corrlog\ in Section~\ref{sc_corrlog}.
+The central idea of logistic regression, the odd-ratio type learning in particular, is also the building block of \mmmn\ in Section~\ref{sc_mmmn} and many other algorithms developed in this thesis.
 
-Logistic Regression models the conditional probability $P(y=+1|\vx)$ for a binary output variable $y\in\Ycal$.
+Logistic regression models the conditional probability $P(y=+1|\vx)$ for a binary output variable $y\in\Ycal$.
 %Without loss of generality, in the rest part of this section we use $P(\vx)$ to denote above conditional probability of $P(y|\vx)$ when fixing $y=1$.
 To model the probability, we do not restrict to any particular form, as any unknown parameters can be estimated by \textit{Maximum Likelihood Estimation} (\mle).
-However, we are most interested in a simple linear model as described in (\ref{linearclassifier}).
+However, we are most interested in the simple linear model as described in (\ref{linearclassifier}).
 % detailed model, decision boundary
 To apply the linear model,
 \iffalse
 the first choice is to let $P(y=+1|\vx)$ be a linear function of $\vx$, while the problem is the linear function is unbounded but the probability $P(\vx)\in[0,1]$.
 Another choice is to let $\log P(y=+1|\vx)$ be a linear function of $\vx$. 
 However, the problem is the log-likelihood ranges from zero to infinite but the linear function is unbounded.
-The choice in Logistic Regression is to use 
+The choice in logistic regression is to use 
 \fi
 we compute the logistic transformation of the original conditional probability by
 \begin{align*}
@@ -424,7 +424,7 @@ We can also compute
 \begin{align}
 	P(y=-1|\vx;\vw,b)=1-P(y=+1|\vx;\vw,b)=\frac{1}{1+\exponential{\ip{\vw}{\varphib(\vx)}+b}}. \label{lr_2}
 \end{align}
-Putting (\ref{lr_1}) and (\ref{lr_2}) together, we define Logistic Regression as
+Putting (\ref{lr_1}) and (\ref{lr_2}) together, we define logistic regression as
 \begin{definition}{Logistic Regression (\lr).} \label{logistic_regression}
 	\begin{align*}
 		P(y|\vx;\vw,b) = \frac{1}{1+\exponential{-y(\ip{\vw}{\varphib(\vx)}-b)}}.
@@ -433,8 +433,8 @@ Putting (\ref{lr_1}) and (\ref{lr_2}) together, we define Logistic Regression as
 \noindent
 We predict $y=+1$ when $P(y=+1|\vx;\vw,b)\ge0.5$, and $y=-1$ otherwise.
 The decision rule is such that we predict $y=+1$ when $\ip{\vw}{\varphib(\vx)}+b\ge0$, and $y=-1$ otherwise.
-Besides the decision boundary, Logistic Regression can output the class probability of a data point as the ``distance'' of the data point to the decision boundary.
-It is the probabilistic output that makes Logistic Regression no more than a classifier.
+Besides the decision boundary, logistic regression can output the class probability of a data point as the ``distance'' of the data point to the decision boundary.
+It is the probabilistic output that makes logistic regression no more than a classifier.
 
 % optimization
 The parameter $\vw$ and $b$ can be obtained by maximizing the probability (likelihood) of the training data.
