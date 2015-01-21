@@ -498,7 +498,7 @@ Later on, optimization algorithms that are based on dual form have been develope
 % some history
 Support Vector Machines (\svm) is probably the most widely used single-label classification algorithm in machine learning.
 Its extensions for multilabel classification will be described in the latter part of the thesis (e.g., \svmstruct\ in Section~\ref{sc_svmstruct}).
-In this section, we first introduce \textit{Maximum-Margin Principle} which is also the basis of many structured output learning models, for example,  \mmmn\ in Section~\ref{sc_mmmn}, \spin\ in Section~\ref{sc_su14a}, and \rta\ in Section~\ref{sc_su14c}.
+In this section, we first introduce \textit{maximum-margin principle} which is also the basis of many structured output learning models, for example,  \mmmn\ in Section~\ref{sc_mmmn}, \spin\ in Section~\ref{sc_su14a}, and \rta\ in Section~\ref{sc_su14c}.
 After that, we will discuss the formalism of \svm, the primal-dual optimization strategy, and kernel methods which allow \svm\ to deal with the high dimensionality of the input feature space.
 In the end we will briefly present the optimization strategies developed for \svm.
 
@@ -514,16 +514,16 @@ Additionally, we assume the {separating hyperplane} has a simple linear form (\r
 As a result, we predict $y_i=+1$ if $f(\vx_i)\ge0$ and $y_i=-1$ otherwise.
 Given that a feature weight parameter $\vw$ achieves a correct separation on the training data, we can decide the label of an unseen test example $\vx_{ts}$ by the decision rule $y_{ts}=\sign(f(\vx_{ts}))$.
 
-There can be an infinite number of separating hyperplanes that solves the separation problem on the same training data, which is also suggested by the empirical risk minimization strategy presented in Section~\ref{sc_erm}. 
+There can be an infinite number of separating hyperplanes that solve the separation problem on the same training data, which is also suggested by the empirical risk minimization strategy presented in Section~\ref{sc_erm}. 
 We wish to find the hyperplane which also generalizes well on the test data.
-A good strategy is to look for a hyperplane that keeps the maximum distance from the examples of two classes, which is known as \textit{Maximum-Margin Principle}.
+A good strategy is to look for a hyperplane that keeps the maximum distance from the examples of two classes, which is known as \textit{maximum-margin principle}.
 To see this, imagine putting a separating hyperplane close to one class of examples, which will achieve better classification performance for the test examples from the other class.
 
 We further use $\gamma_i$ to denote the \textit{margin} of the $i$'th example defined as the geometric distance from the data point to the separating hyperplane
 \begin{align*}
 	\gamma_i = \frac{y_i(\ip{\vw}{\varphib(\vx_i)}+b)}{\norm{\vw}}.
 \end{align*}
-We notice if $\vw$ and $b$ are scaled by any constant $\kappa\in\RR$ (e.g., $\vw\leftarrow\kappa\vw, b\leftarrow\kappa b$) the margin $\gamma_i$ stays unchanged. 
+We notice that if $\vw$ and $b$ are scaled by any constant $\kappa\in\RR$ (e.g., $\vw\leftarrow\kappa\vw, b\leftarrow\kappa b$) the margin $\gamma_i$ stays unchanged. 
 The same classification performance and generalization power can still be obtained.
 As the parameters are invariant to scaling, we set $\norm{\vw}=1$.
 Given a collection of training examples $S$, we define the margin with respect to $S$ as the minimum margin achieved by an individual training example
@@ -531,7 +531,7 @@ Given a collection of training examples $S$, we define the margin with respect t
 	\gamma = \underset{i\in\{1,\cdots,m\}}{\minimize}\gamma_i.
 \end{align*}
 
-Based on the Maximum-Margin Principle, the goal of learning is to find the separating hyperplane such that it maximizes the margin with respect to all training examples while separating the training examples into two classes.
+Based on the maximum-margin principle, the goal of learning is to find a separating hyperplane such that it maximizes the margin with respect to all training examples while separating the training examples into two classes.
 This corresponds to finding a ``big gap'' between the examples of two classes in the feature space.
 The corresponding optimization problem \citep{Bishop07} is given as
 \begin{align*}
@@ -591,7 +591,7 @@ We defined the dual optimization problem as
 	\end{align*}
 \end{definition}
 \noindent
-It is not difficult to verify that according to Karush-Kuhn Tucher (\kkt) conditions only the examples with $\xi_i=0$ and satisfying the equality constraints (\ref{softsvmconstraint}) will be ``active'', have a dual variable $\alpha_i>0$ and lie on the margin with $\gamma_i=1$.
+It is not difficult to verify that according to Karush-Kuhn Tucher (\kkt) conditions only the examples with $\xi_i=0$ and satisfying the equality constraints (\ref{softsvmconstraint}) will be ``active'', have a dual variable $\alpha_i>0$, and lie on the margin with $\gamma_i=1$.
 They are called \textit{support vectors} during the optimization of \svm.
 In fact the number of support vectors is usually smaller than the size of the training data.
 As the weight vector can be expressed as a linear combination of training examples \citep{Taylor04kernel}
@@ -663,14 +663,14 @@ Kernel enables us to work in a high dimensional feature space $\vFcal$ without e
 Instead, kernel can be computed based on the inner product in the original input space $\Xcal$.
 % kernel matrix
 \begin{definition}{Kernel Matrix.}
-	Given any choice of $m$ objects $\Scal=\{\vx_1,\cdots,\vx_m\}\subseteq\Xcal$ and a kernel function $k$ on $S$, the $m\times m$ matrix $K=(k(\vx_i,\vx_j))_{i,j}$ is called a Kernel matrix (\textit{Gram matrix}) of kernel $k$ with respect to $\Scal$.
+	Given any choice of $m$ objects $\Scal=\{\vx_1,\cdots,\vx_m\}\subseteq\Xcal$ and a kernel function $k$ on $S$, an $m\times m$ matrix $K=(k(\vx_i,\vx_j))_{i,j}$ is called a Kernel matrix (\textit{Gram matrix}) of kernel $k$ with respect to $\Scal$.
 \end{definition}
 \noindent
 The kernel matrix is usually normalized by
 \begin{align*}
 	{K}(i,j) = \frac{{K}(i,j)}{\sqrt{{K}(i,i){K}(j,j)}}
 \end{align*}
-to make sure that all elements in the kernel matrix lie on a unit hypersphere.
+to ensure that all elements in the kernel matrix lie on a unit hypersphere.
 % psd matrix
 \begin{definition}{Positive Semi-definite Matrix.}
 	An $m\times m$ symmetric matrix $K$ is a positive semi-definite matrix if it satisfies 
@@ -688,15 +688,12 @@ It ensures kernel based methods will converge to a relevant solution in convex o
 %\textit{Mercer's Theorem} \citep{Taylor04kernel} has shown that every positive semidefinite symmetric function is a kernel.
 
 
-
-
-
 The algorithms for solving the optimization problem of \svm\ have been intensively studied, for example, 
 the ``chunking'' method \citep{Vapnik82estimation,Perezcruz04double}, 
 the decomposition method \citep{Osuna97an,Joachims98making}, 
-{Sequential Minimum Optimization} (\smo) \citep{Platt98sequential,Platt99fast}, 
+{sequential minimal optimization} (\smo) \citep{Platt98sequential,Platt99fast}, 
 and the ``digesting'' method \citep{Decoste02support}.
-There are some recent studies that aim to scale \svm\ learning on the large scale datasets, for example, 
+There are some recent studies that aim to scale \svm\ learning on large scale datasets, for example, 
 representing the training data with a small set of landmark points \citep{Pavlov00towards,Boley04training,Yu05making,Zhang08improved}, 
 the greedy method for basis selections \citep{Keerthi06building}, 
 the online \svm\ solver \citep{Bordes05fast}, 
@@ -718,7 +715,7 @@ It gains advantage of linear memory requirement with respect to the number of su
 \citet{Joachims98making} has improved this decomposition strategy by applying a shrinking technique which will identify the dual variables that is less likely to change their values.
 Thus, the algorithm effectively maintains a good working set that makes much progress towards the object.
 The implementation of the algorithm is well-known as \svmlight.
-The decomposition strategy was further developed by solving in each iteration a smallest as possible optimization that only contains two Lagrangian multipliers, which is known as \textit{Sequential Minimum Optimization} (\smo) \citep{Platt98sequential,Platt99fast}.
+The decomposition strategy was further developed by solving in each iteration a smallest as possible optimization that only contains two Lagrangian multipliers, which is known as \textit{Sequential minimum optimization} (\smo) \citep{Platt98sequential,Platt99fast}.
 \smo\ is the basis of another powerful software package \libsvm\ developed by \citet{Chang11libsvm}.
 \citet{Perezcruz04double} proposed a double-chunking method to further speed up the decomposition type of training. 
 Similarly yet another approach ``digesting'' \citep{Decoste02support} optimizes subsets close to completion before adding new data, which saves huge amount of memory.
@@ -1255,7 +1252,7 @@ The compatibility score defined by
 can be seen as the affinity of a multilabel $\vy$ to an input $\vx$ according to an output graph.
 The feature weight parameter $\vw$ ensures the example with the correct multilabel will obtain a higher score than with any incorrect multilabels.
 \mmmn\ defines a margin as the difference of compatibility scores between the correct example $(\vx_i,\vy_i)$ and the pseudo-example $(\vx_i,\vy)$.
-Under the Maximum-Margin principle in Section~\ref{sc_svm}, \mmmn\ requires the margin to be at least $\vell(\vy_i,{\vy})$.
+Under the maximum-margin principle in Section~\ref{sc_svm}, \mmmn\ requires the margin to be at least $\vell(\vy_i,{\vy})$.
 To learn the feature weight parameter $\vw$, we need to solve the following primal optimization problem
 \begin{definition}{\mmmn\ Optimization Problem in Primal.}\label{def_mmmn}
 	\begin{align*}
@@ -1277,7 +1274,7 @@ The corresponding dual form is also difficult due to the exponential number of d
 By exploring the Markov network structure, the original optimization problem (Definition~\ref{def_mmmn}) can be formulated into a factorized dual quadratic programming, as long as the loss function $\vell$ and the joint feature map $\phib(\vx,\vy)$ are decomposable over the Markov network.
 
 As the number of parameters is quadratic in the number of training examples and the edges of the Markov network, it still cannot fit into the standard Quadratic Programming (\qp) solver. 
-\citet{Taskar04max} developed a coordinate descent method analogous to Sequential Minimal Optimization (\smo) \citep{Platt98sequential,Platt99fast}.
+\citet{Taskar04max} developed a coordinate descent method analogous to sequential minimal optimization (\smo) \citep{Platt98sequential,Platt99fast}.
 Many other efficient optimization algorithms have been proposed, for example, the exponential gradient optimization method \citep{bartlett04}, 
 the extra-gradient method \citep{taskar06},
 the sub-gradient method \citet{Ratliff07},
@@ -1736,8 +1733,8 @@ In terms of the intractability issue of the graph inference problem, many techni
 \citet{Wainwright05map} proposed a \map\ inference with the tree-based and \textit{linear programming} (\lp) relaxation.
 Efficient inference algorithms on special graphs have also been studied \citep{Globerson07approximate}.
 
-\citepub{su14c} is motivated by the well-established Maximum-Margin Principle as described in Section~\ref{sc_svm}.
-The work investigates whether the problem of inference over a complete graph in structured output learning can be avoided by exploring the properties of the Maximum-Margin Principle.
+\citepub{su14c} is motivated by the well-established maximum-margin principle as described in Section~\ref{sc_svm}.
+The work investigates whether the problem of inference over a complete graph in structured output learning can be avoided by exploring the properties of the maximum-margin principle.
 Starting from a sampling results, \citepub[Lemma 3]{su14c} shows that with a high probability a big fraction of the margin achieved by a complete graph can be obtained by a random sample of spanning trees of a small size.
 Besides, \citepub[Theorem 5]{su14c} shows that the good generalization error can also be guaranteed when learning with, instead of a complete graph, a random sample of spanning trees.
 
