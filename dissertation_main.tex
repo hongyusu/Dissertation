@@ -685,7 +685,7 @@ It has been shown that any Kernel matrices are positive semi-definite \citep{Tay
 Positive semi-definiteness distinguishes between general similarity measures and kernels.
 The property is essential in kernel based methods.
 It ensures kernel based methods will converge to a relevant solution in convex optimization \citep{Boyd2004convex}.
-%\textit{Mercer's Theorem} \citep{Taylor04kernel} has shown that every positive semidefinite symmetric function is a kernel.
+%\textit{Mercer's Theorem} \citep{Taylor04kernel} has shown that every positive semi-definite symmetric function is a kernel.
 
 
 The algorithms for solving the optimization problem of \svm\ have been intensively studied, for example, 
@@ -1033,7 +1033,7 @@ Ensemble methods have been initially developed for single-label classification \
 However, it is not immediately clear how to combine vector valued outputs in flat multilabel classification.
 
 \adaboostmh\ \citep{Schapire99improved,Esuli2008boosting} is a multilabel variant of the \adaboost\ algorithm.
-The core idea of \adaboostmh\ is to apply the hamming loss instead of the 0/1 loss. 
+The core idea of \adaboostmh\ is to apply the hamming loss instead of the $0/1$ loss (\ref{one_loss}). 
 In particular, the algorithm reduces a multilabel classification problem into a single-label classification problem by replacing each training example $(\vx_i,\vy_i)$ with $k$ examples $\{(\vx_i,\vy_i[l])\}_{l=1}^k$.
 The algorithm is described in Algorithm~\ref{adaboostmh}.
 In particular, it maintains a distribution over all examples and labels.
@@ -1241,9 +1241,9 @@ To make \crf\ work in practice, one also need to make sure that the partition fu
 % 
 \subsection{Max-Margin Markov Network (\mmmn)} \label{sc_mmmn}
 
-\citet{Taskar04max} proposed Max-Margin Markov Network (\mmmn) that combines the framework of the kernel based discriminative learning and the probabilistic graphical model.
+\citet{Taskar04max} proposed max-margin Markov network (\mmmn) that combines the framework of the kernel based discriminative learning and the probabilistic graphical model.
 \mmmn\ extends \svm\ (Section~\ref{sc_svm}) to the structured output space.
-It also improves \crf\ (Section~\ref{sc_crf}) by which the evaluation of the partition function (\ref{crf_partition_function}) can be avoided by introducing the odd-ratio typed learning that is not dissimilar to Logistic Regression presented in Section~\ref{sc_lr}.
+It also improves \crf\ (Section~\ref{sc_crf}) by which the evaluation of the partition function (\ref{crf_partition_function}) can be avoided by introducing the odd-ratio typed learning that is not dissimilar to logistic regression presented in Section~\ref{sc_lr}.
 
 \mmmn\ defines a log-linear Markov network over multiple labels which exploits the correlation between labels.
 The compatibility score defined by 
@@ -1286,7 +1286,7 @@ To use \mmmn\ in practice, one have to solve the \textit{loss augmented} inferen
 	\hat{\vy} = \underset{\vy\in\vYcal/\vy_i}{\argmax} &\, \ip{\vw}{\phib(\vx_i,\vy)} + \vell(\vy_i,\vy) \label{mmmninference}.
 \end{align} 
 To compute (\ref{mmmninference}) efficiently, the loss function need to be decomposable over the Markov network.
-Nevertheless, \mmmn\ improves \crf\ by avoiding the evaluation of the partition function and allowing complex loss functions to be defined.
+Nevertheless, \mmmn\ improves \crf\ by avoiding the evaluation of the partition function (\ref{crf_partition_function}) and allowing complex loss functions to be defined.
 
 
 
@@ -1294,7 +1294,7 @@ Nevertheless, \mmmn\ improves \crf\ by avoiding the evaluation of the partition 
 %
 \subsection{Max-Margin Conditional Random Fields (\mmcrf)} \label{sc_mmcrf}
 
-Max-Margin conditional random field (\mmcrf) \citep{Rousu07} is a structured output learning method, that extends \mmmn\ by defining the joint feature map as the tensor product between an input feature map and an output feature map, and by developing an efficient optimization strategy. 
+Max-margin conditional random field (\mmcrf) \citep{Rousu07} is a structured output learning method, that extends \mmmn\ by defining the joint feature map as the tensor product between an input feature map and an output feature map, and by developing an efficient optimization strategy. 
 \mmcrf\ is applied in \citepub{su10} in which the task is to reliably predict the multiple interdependent molecular activities.
 
 In particular, \mmcrf\ uses \textit{exponential family} to model the conditional probability of a multilabel $\vy$ given an input example $\vx$
@@ -1308,7 +1308,7 @@ After the feature weight parameter $\vw$ is obtained, the prediction of an input
 	\hat{\vy} = \underset{\vy\in\vYcal/\vy_i}{\argmax} \, \ip{\vw}{\phib(\vx_i,\vy)}.\label{mmcrfinference}
 \end{align}
 
-To solve the optimization problem, \mmcrf\ uses the conditional gradient optimization method \citep{Bertsekas95nonlinear} in the marginalized dual space \citep{Taskar04max}, which not only benefits from a polynomial-size parameter space but also enables kernels that can deal with the non-linearity of the complex molecular structures.
+To solve the optimization problem, \mmcrf\ uses the conditional gradient optimization method \citep{Bertsekas95nonlinear} in the marginalized dual space \citep{Taskar04max}, which not only benefits from a polynomial-size parameter space but also enables kernels (Definition~\ref{kernels}) that can deal with the non-linearity of the complex input space.
 The inference problem (\ref{mmcrfinference}) is solved by loopy belief propagation (\lbp) which is an instantiation of the message-passing algorithm \citep{Wainwright08graphical}.
 
 
@@ -1317,7 +1317,7 @@ The inference problem (\ref{mmcrfinference}) is solved by loopy belief propagati
 % 
 \subsection{Support Vector Machines for Interdependent and Structured Outputs (\svmstruct)} \label{sc_svmstruct}
 
-Support Vector Machines for interdependent and structured output space (\svmstruct) is developed by \citet{THJA04,TJTA05}.
+Support vector machines for interdependent and structured output space (\svmstruct) is developed by \citet{THJA04,TJTA05}.
 The formalism of \svmstruct\ is quite similar to \mmmn\ described in Section~\ref{sc_mmmn}.
 Compared to \mmmn\ which scales the margin by the loss function, \svmstruct\ scales the margin errors ({slacks}) by the loss function.
 The primal optimization problem of \svmstruct\ can be defined as
@@ -1358,7 +1358,7 @@ The generality of the loss function can be seen as an advantage compared to \crf
 Unlike the previous methods which model the influence in terms of the network connectivity, the proposed model (\spin) is \textit{context-sensitive}. 
 That is, the influence dynamics also depend on the properties of the action performed on the underlying network.
 The inference problem of \spin\ is \nphard\ in general.
-We develop a semidefinite programming algorithm (\sdp) with an approximation guarantee as well as a fast \greedy\ heuristics.
+We develop a semi-definite programming algorithm (\sdp) with an approximation guarantee as well as a fast \greedy\ heuristics.
 
 \subsection{Background}
 
@@ -1416,23 +1416,24 @@ The goal during prediction is to find the subgraph with maximum compatibility gi
 \begin{align}
 	H^*(\va) = \underset{H\in\Hcal(G)}{\argmax}\, F(\va,H;\vw) \label{spin_inference}.
 \end{align}
-As these two problems are different only in terms of the definition of the scores, we explain our inference algorithm based on (\ref{spin_inference}) by writing the problem explicitly in terms of the weight vectors and the feature maps
+As these two problems are different only in terms of the definition of scores, we explain our inference algorithm based on (\ref{spin_inference}) by writing the problem explicitly in terms of the weight vectors and the feature maps
 \begin{align}
 	H^*(\va) &= \underset{H\in\Hcal(G)}{\argmax}\, \ip{\vw}{\varphib(\va)\otimes\Upsilonb(H)} \nonumber \\
 	&= \underset{H\in\Hcal(G)}{\argmax}\, \sum_{e\in E^H}s_{\vy_e}(e,\va), \label{spin_np}
 \end{align}
-where $s_{\vy_e}(e,\va) = \sum_{i}\vw_{i,e,\vy_e}\varphib(\va)$ denotes the score of an edge $e$ with an edge label $\vy_e$.
+where $s_{\vy_e}(e,\va) = \sum_{i}\vw_{i,e,\vy_e}\varphib(\va)[i]$ denotes the score of an edge $e$ with an edge label $\vy_e$.
+The tuples $(i,e,\vy_e)$ index the elements in the vector $\vw$.
 
 We have proved the \nphardness\ of (\ref{spin_np}) by forming a reduction from the \maxcut\ problem \citep{Garey90computers}.
 In addition, we proposed two algorithms to solve the inference problem (\ref{spin_np}).
-The first is called {\sdp\ inference} which introduces for each node $u\in V$ a binary variable $x_u\in\{-1,+1\}$ and transforms the inference problem into an Integer Quadratic Programming (\iqp) problem.
-The \iqp\ is tackled by a similar technique proposed by \citet{Geomans1995improved} such that each variable $x_u$ is relaxed to a vector $\vv_u\in\RR^n$ and the relaxed problem is solved by Semidefinite Programming (\sdp). 
-The resulting vector is rounded back into binary values by Incomplete Cholesky Decomposition.
+The first is called {\sdp\ inference} which introduces for each node $u\in V$ a binary variable $x_u\in\{-1,+1\}$ and transforms the inference problem into an integer quadratic programming problem (\iqp).
+The \iqp\ is tackled by a similar technique proposed by \citet{Geomans1995improved} such that each variable $x_u$ is relaxed to a vector $\vv_u\in\RR^n$ and the relaxed problem is solved by semi-definite programming (\sdp). 
+The resulting vector is rounded back into binary values by incomplete Cholesky decomposition.
 The benefit from \sdp\ inference algorithm is an approximation guarantee. 
 %If we denote by $Z^*$ ($Z_R$, and $Z$ respectively) the optimal value achieved by \iqp\ (the relaxed problem, and the \sdp\ inference respectively), we have $Z_R\ge Z^*$ and $E[Z]\ge(\alpha-\epsilon)Z_R$ where $\alpha\ge0.796$.
 In particular, the proposed \sdp\ inference algorithm is a $0.796$ approximation of the original \iqp.
 
-As \sdp\ inference is not scalable to the large scale networks, we develop a \greedy\ heuristic based on the observation stated in the following lemma:
+As \sdp\ inference is not scalable to large scale networks, we develop a \greedy\ heuristic based on the observation stated in the following lemma:
 \begin{lemma}
 	The inference problem (\ref{spin_np}) can be expressed equivalently with a set of activated vertices $V^H_{\p}$ and the marginal gain function $F_m(v_i)$ defined on each vertex $v_i\in V^H_{\p}$ as
 	\begin{align*}
