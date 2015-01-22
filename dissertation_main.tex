@@ -1488,7 +1488,7 @@ As a result, structured output learning can be applied to a wide range of multil
 In Section~\ref{sc_su10}, we study the multilabel molecular classification problem with structured output learning in which the output graph is extracted from auxiliary datasets.
 In Section~\ref{sc_su11}, we present \mve\ which uses majority vote to combine the predictions from a set of structured output learners built on a collection of random output graphs.
 In Section~\ref{sc_su14b}, we present two aggregation techniques, namely \amm\ and \mam, which perform inference on output graphs before or after combining multiple structured output learners.
-In Section~\ref{sc_su14c}, we present \rta\ which is a joint learning and inference model that performs Max-Margin learning on a random sample of spanning trees.
+In Section~\ref{sc_su14c}, we present \rta\ which is a joint learning and inference model that performs max-margin learning on a random sample of spanning trees.
 
 
 
@@ -1498,12 +1498,12 @@ In Section~\ref{sc_su14c}, we present \rta\ which is a joint learning and infere
 
 The molecular classification problem has been tackled by a variety of single-label classification approaches \citep{Menchetti05weighted,Singh12qsar,Dutt12classification}.
 On the other hand, multiple interdependent molecular activities are often screened simultaneously in the field of drug research \citep{Shoemaker06the}, which presents two challenges for single-label classification.
-The first is the scalability in which a set of single-label classifiers needs to be built to predict multiple activities of molecules.
+The first challenge is the scalability issue in which a set of single-label classifiers needs to be built to predict multiple activities of a molecule.
 This becomes infeasible in computation when we need to examine a large number of molecular activities at the same time.
 The second challenge is that single-label classification ignores the correlation between multiple output variables.
 On the other hand, multiple molecular activities are often correlated which can be utilized to improve the classification performance.
 In \citepub{su10}, we explore the potential of structured output learning in the molecular activity classification problem.
-To apply structured output learning, we extract output graphs from several auxiliary datasets which encode the correlation between multiple activities of molecules.
+To apply structured output learning, we extract output graphs from several auxiliary datasets which encode the correlation between multiple molecular activities.
 
 
 %
@@ -1517,7 +1517,7 @@ In particular, expensive preclinical \textit{in vitro} and \textit{in vivo} drug
 A variety of machine learning methods have been developed for this task, to name but a few, inductive logic programming \citep{King96structure}, artificial neural network \citep{Bernazzani06predicting}, kernel methods for nonlinear molecular properties \citep{Trotter01drug,Ralaivola05graph,Swamidass05kernel,Ceroni07classification}, and the \svm\ based methods \citep{Trotter01drug,Byvatov03comparison,Xue04effect}.
 Albeit with a large quantity of the developed methods, they only focus on predicting a single output variable (e.g., the inhibition potential of a molecule in a target cell line). 
 On the other hand, a large number of interdependent molecular activities are often screened at the same time in the field of drug research.
-For example, in the recent \textit{NCI-60} {Human Tumor Cell Line Screen} project \citep{Shoemaker06the}, thousands of molecular structures are tested agains hundreds of target cell lines.
+For example, in the recent \textit{NCI-60} {human tumor cell line screen} project \citep{Shoemaker06the}, thousands of molecular structures are tested agains hundreds of target cell lines.
 
 
 
@@ -1555,7 +1555,7 @@ The common way to represent the structure of a molecule is to use an undirected 
 The adjacency matrix $A$ of a graph $G$ is defined such that the $(i,j)$'th entry $A_{i,j}$ equals to one if there is an edge connecting the $i$'th and the $j$'th atoms.
 
 % walk kernel
-\textit{Walk Kernel} \citep{Kashima03marginalized,Gartner03a} computes the sum of all matching walks in a pair of graphs. 
+\textit{Walk kernel} \citep{Kashima03marginalized,Gartner03a} computes the sum of all matching walks in a pair of graphs. 
 The contribution of each matching walk is down scaled exponentially by the length of the walk.
 Let $w_m$ denote a walk of length $m$ such that there exists an edge for each pair of vertices $(v_i,v_{i+1})$ for all $i\in\{1,\cdots,m-1\}$.
 In addition, we use $G_{\times}(G_1,G_2)$ to denote the direct product graph of two graphs $G_1$ and $G_2$, in which the set of vertices in $G_{\times}$ is computed by 
@@ -1578,9 +1578,9 @@ Using exponential series or geometric series, walk kernel can be evaluated in cu
 where $\vI$ denotes an identity matrix and $\ve$ denotes a vector of ones.
 
 % weighted decomposition kernel and others
-\textit{Weighted Decomposition Kernel} \citep{Menchetti05weighted,Ceroni08classification} is an extension of \textit{Substructure Kernel} \citep{Haussler99convolution} that weights the identical atoms of two graphs by contextual information.
+\textit{Weighted decomposition kernel} \citep{Menchetti05weighted,Ceroni08classification} is an extension of \textit{substructure kernel} \citep{Haussler99convolution} that weights the identical atoms of two graphs by contextual information.
 The contextual information is defined as the matching subgraph in the neighborhood of an atom.
-In addition, we used \textit{Tanimoto Kernel} \citep{Ralaivola05graph} on a finite set of molecular fingerprints \citep{Wang09pubchem}.
+In addition, we used \textit{Tanimoto kernel} \citep{Ralaivola05graph} on a finite set of molecular fingerprints \citep{Wang09pubchem}.
 The readers are also pointed to the comprehensive survey on graph kernels \citep{Vishwanathan10graph}.
 
 %\subsubsection{Generation of Markov Network}
@@ -1615,7 +1615,7 @@ In particular, a random graph $G_t$ is generated for each base learner to couple
 The base model \mmcrf\ is learned with the training data $S=\{(\vx_i,\vy_i)\}_{i=1}^{m}$ and the output graph $G_t$.
 After all base learners have been generated, the predictions are extracted from the base learners and are collected for a post-processing step, in which we compute a majority vote over the graph labeling from the sign on the means of the base classifier's prediction
 \begin{align*}
-	F_j^{\text{\mve}}=\underset{y_j\in\Ycal_j}{\argmax}\,\left(\frac{1}{T}\sum_{i=1}^{T}\ind{F_j^{(t)}(x)=y_j}\right), \forall j\in\{1,\cdots,k\},
+	F_j^{\text{\mve}}=\underset{\vy[j]\in\Ycal_j}{\argmax}\,\left(\frac{1}{T}\sum_{i=1}^{T}\ind{F_j^{(t)}(x)=\vy[j]}\right), \forall j\in\{1,\cdots,k\},
 \end{align*}
 where $T$ denotes the size of the ensemble which is also the number of random output graphs, and $F^{(t)}(\vx)=\{F^{(t)}_j(x)\}_{j=1}^{k}$ denotes the predicted multilabel from the $t$'th base learner.
 That is, the ensemble prediction on each microlabel is the most frequently appearing prediction among the base classifiers.
@@ -1662,14 +1662,14 @@ With the edge compatibility scores, we can infer the \textit{max-marginal} \cite
 \begin{align*}
 	\tilde{\psi}_j(\vx,u_j) = \underset{\vy\in\vYcal,y_j=u_j}{\maximize}\sum_{e\in E}\psi_e(\vx,\vy_e).
 \end{align*}
-In words, the max-marginal is the maximum score of a multilabel consistent with $y_i=u_i$.
+In words, the max-marginal is the maximum score of a multilabel consistent with $\vy[i]=u_i$.
 We use $\tilde{\psib} = (\tilde{\psi}_j(\vx,u_j))_{j\in V,u_j\in\Ycal_j}$ to denote the collection of max-marginals.
 
 \subsection{Methods}
 
 % amm
 Let $\Gcal=\{G^{(1)},\cdots,G^{(T)}\}$ denote a set of random output graphs, and let $\{\tilde{\psib}^{(1)},\cdots,\tilde{\psib}^{(T)}\}$ denote the max-marginal vectors from the base learners built on a collection of random output graphs.
-The prediction of the Average-of-Max-Marginal (\amm) aggregation on the $j$'th node is obtained by averaging the max-marginals from all base classifiers and choose the maximizing microlabel for the node 
+The prediction of the average-of-max-marginal (\amm) aggregation on the $j$'th node is obtained by averaging the max-marginals from all base classifiers and choose the maximizing microlabel for the node 
 \begin{align*}
 	F_j^{\text{\amm}}=\underset{u_j\in\Ycal_j}{\argmax}\,\frac{1}{T}\sum_{t=1}^{T}\tilde{\psi}_{j,u_j}^{(t)}(\vx).	\end{align*}
 The predicted multilabel by \amm\ is composed by the predicted microlabels
@@ -1679,7 +1679,7 @@ The predicted multilabel by \amm\ is composed by the predicted microlabels
 
 % mam
 \amm\ performs inference to find the set of max-marginals before combining base classifiers. 
-On the other hand, the Maximum-of-Average-Marginals (\mam) aggregation first collects the local edge potentials $\psib_E^{(t)}$ from each base learner, averages them and performs a final inference with the averaged edge potentials on a global consensus graph $\hat{G}=(\hat{E},V)$ where $\hat{E}=\bigcup_{t=1}^{T}{E^{(t)}}$ is the union of distinct edges of the set of random output graphs.
+On the other hand, the maximum-of-average-marginals (\mam) aggregation first collects the local edge potentials $\psib_E^{(t)}$ from each base learner, averages them and performs a final inference with the averaged edge potentials on a global consensus graph $\hat{G}=(\hat{E},V)$ where $\hat{E}=\bigcup_{t=1}^{T}{E^{(t)}}$ is the union of distinct edges of the set of random output graphs.
 Mathematically, \mam\ is defined as
 \begin{align*}
 	F^{\text{\tiny MAM}}(x) &= \underset{\vy \in \vYcal }{\argmax}\,\sum_{e\in \hat{E}}\frac{1}{T}\sum_{t=1}^{T}\ \psi^{(t)}_e(x,\vy_e)
@@ -1712,7 +1712,7 @@ The latter measures the correlation of microlabel predictions in which the corre
 %
 \section{Random Spanning Tree Approximation (\rta)}\label{sc_su14c}
 
-\citepub{su14c} presents Random Spanning Tree Approximation (\rta) for structured output learning in which the output graph is not observed but believed to play an important role during learning.
+\citepub{su14c} presents random spanning tree approximation (\rta) for structured output learning in which the output graph is not observed but believed to play an important role during learning.
 \rta\ is a major step forward of \mam\ by bringing in a joint learning and inference framework such that the base learners built from a collection of random spanning trees are optimized simultaneously towards the same global objective.
 \citepub{su14c} also presents the theoretical studies which not only explain the intuition behind the learning model but also guarantee the performance by the generalization error analysis.
 Meanwhile, \rta\ lays the foundation of tackling the intractability of the graph inference on unknown graph structures in which the fast optimization and accurate predictions can be achieved with attainable computational efforts.
