@@ -1159,8 +1159,8 @@ We will present our new algorithm \spin\ that can predict an optimal directed ac
 Multilabel classification deals with multiple interdependent output variables, $\vy\in\vYcal$.
 The problem is called {structured output prediction} when these variables are located in a structured output space.
 That is, the correlation between labels is described by an {output graph} connecting multiple labels.
-In particular, we define the output graph $G=(E,V)$ by a node set $V=\{1,\cdots,k\}$ which corresponds to the microlabels $\{y_1,\cdots,y_k\}$ and an edge set $E=V\times V$ which represents the correlation between microlabels.
-For an edge $e=(j,j')\in E$, we use $\vy_e$ to denote the label of the edge $e$ with respect to a multilabel $\vy$ by concatenating the head label $y_j$ and the tail label $y_{j'}$, with an edge label domain $\vy_e\in\vYcal_e=\Ycal_j\times\Ycal_{j'}$.
+In particular, we define the output graph $G=(E,V)$ by a node set $V=\{1,\cdots,k\}$ which corresponds to the microlabels $\{\vy[1],\cdots,\vy[k]\}$ and an edge set $E=V\times V$ which represents the correlation between microlabels.
+For an edge $e=(j,j')\in E$, we use $\vy_e$ to denote the label of the edge $e$ with respect to a multilabel $\vy$ by concatenating the head label $\vy[j]$ and the tail label $\vy[j']$, with an edge label domain $\vy_e\in\vYcal_e=\Ycal_j\times\Ycal_{j'}$.
 We use $\vy_{i,e}$ to denote the edge label of an example $(\vx_i,\vy_i)$ on an edge $e$.
 Thus, given a training example $(\vx_i,\vy_i)$ and an output graph $G$, we can uniquely identify the node label $y_i$ and the edge label $\vy_{i,e}$ of the output graph.
 In addition, we denote the possible label of a node $i$ by $u_i$ and the possible label of an edge $e$ by $\vu_{e}$ where $u_i$ and $\vu_{e}$ are not constrained by any multilabel $\vy$.
@@ -1172,7 +1172,7 @@ Naturally, $u_i\in\Ycal_i$ and $\vu_e\in\vYcal_e$.
 %
 \section{Related Methods}
 
-In this section, we will briefly present several related algorithms for structured output prediction including Structured Perceptron, Conditional Random Field, Max-Margin Conditional Random Fields, Structured \svm, and Max-Margin Markov Networks.
+In this section, we will briefly present several related algorithms for structured output prediction including structured perceptron, conditional random field, max-margin conditional random fields, structured \svm, and max-margin Markov networks.
 
 
 
@@ -1180,10 +1180,11 @@ In this section, we will briefly present several related algorithms for structur
 %
 \subsection{Structured Perceptron}
 
-The Perceptron \citep{Rosenblatt58} is one of the oldest algorithms in machine learning.
-Structured Perceptron \citep{collins02a, collins02b}, as suggested by its name, is a generalization of the Perceptron algorithm to the structured output space.
-The formalism of Structured Perceptron is quite similar to Multiclass Perceptron. 
-The model assumes a score function $\ip{\vw}{\phib(\vx,\vy)}$ as the inner product between a feature weight parameter $\vw$ and a joint feature map $\phib(\vx,\vy)$ which is a function $\phib:\vXcal\times\vYcal\rightarrow\RR^d$ that maps an input--output pair to a vector of $d$ dimension.
+The perceptron \citep{Rosenblatt58} is one of the oldest algorithms in machine learning.
+Structured perceptron \citep{collins02a, collins02b}, as suggested by its name, is a generalization of the perceptron algorithm to the structured output space.
+The formalism of structured perceptron is quite similar to multiclass perceptron. 
+The model assumes a score function $\ip{\vw}{\phib(\vx,\vy)}$ as the inner product between a feature weight parameter $\vw$ and a joint feature map $\phib(\vx,\vy)$,
+In particular, $\phib:\vXcal\times\vYcal\rightarrow\RR^d$ maps an input--output pair to a vector of $d$ dimension.
 The joint feature map is often defined based on the structure of the output graph (e.g., a chain in sequence tagging problem \citep{collins02a}).
 After the feature weight parameter $\vw$ is obtained, one needs to solve the {argmax} problem to find the best output for a given input $\vx$, which is defined as
 \begin{align}
@@ -1191,16 +1192,16 @@ After the feature weight parameter $\vw$ is obtained, one needs to solve the {ar
 \end{align}
 The argmax problem is solved by an algorithm such as Viterbi decoding \citep{collins02a} rather than an exhaustive search through the exponential sized output space.
 
-The weight parameter $\vw$ is learned through the standard Perceptron iterative update by solving the argmax problem (\ref{sp_inference}) in each iteration.
+The weight parameter $\vw$ is learned through the standard perceptron iterative update by solving the argmax problem (\ref{sp_inference}) in each iteration.
 In particular, the algorithm loops through all training examples and updates $\vw$ whenever the predicted multilabel $\hat{\vy}_i$ is different from the true multilabel $\vy_i$.
 The update is given by
 \begin{align}
 	\vw \leftarrow \vw + \left(\phib(\vx_i,\vy_i) - \phib(\vx_i,\hat{\vy}_i)\right). \label{sp_update}
 \end{align}
-The update usually leads to over-fitting.
-A simple refinement is usually applied which is similar to Averaged Perceptron developed by \citet{Freund99large}.
+The update (\ref{sp_update}) usually leads to over-fitting.
+A simple refinement is usually applied which is similar to averaged perceptron developed by \citet{Freund99large}.
 
-The central problem with Structured Perceptron is the loss function.
+The central problem with structured perceptron is the loss function.
 In fact, Structured Perceptron tacitly applies $0/1$ loss (\ref{one_loss}) on multilabels, with which it is impossible to distinguish a nearly correct multilabel and a completely incorrect one.
 Both will lead to the same update to the feature weight parameter (\ref{sp_update}) during learning.
 
@@ -1209,11 +1210,11 @@ Both will lead to the same update to the feature weight parameter (\ref{sp_updat
 % 
 \subsection{Conditional Random Field (\crf)} \label{sc_crf}
 
-Condition Random Field (\crf) \citep{lafferty01,taskar02} is a discriminative framework that constructs a conditional probability $P(\vy|\vx)$ for an input variable $\vx\in\vXcal$ and an output variables $\vy\in\vYcal$.
-It optimizes the log-loss which is analogue to the $0/1$ loss in the structured output space.
+Condition random field (\crf) \citep{lafferty01,taskar02} is a discriminative framework that constructs a conditional probability $P(\vy|\vx)$ for an input variable $\vx\in\vXcal$ and an output variable $\vy\in\vYcal$.
+It optimizes the log-loss which is analogue to the $0/1$ loss (\ref{one_loss}) in the structured output space.
 
 Mathematically, let $Y=\{\vy_1,\cdots,\vy_m\}$ denote a set of output random variables and $X=\{\vx_1,\cdots,\vx_m\}$ denote a set of input random variables to condition on.
-Let $G=(E,V)$ denote an output graph such that $\vy = (y_v)_{v\in V}$.
+Let $G=(E,V)$ denote an output graph such that $\vy = (\vy[v])_{v\in V}$.
 \crf\ defines a conditional probability distribution
 \begin{align*}
 	P(\vy|\vx) &= \frac{1}{Z(\vx,\vw)}\exp{\ip{\vw}{\phib(\vx,\vy)}},
@@ -1223,9 +1224,9 @@ $Z(\vx,\vw)$ is the partition function dependent on $\vx$ that sums over all pos
 \begin{align}
 	Z_{\vx,\vw} &= \sum_{\vy'\in\vYcal}\exp{\ip{\vw}{\phib(\vx,\vy')}}. \label{crf_partition_function}
 \end{align}
-When conditioned on $\vx$, random variables $y_v$ obey the Markov property with respect to the output graph $G$.
+When conditioned on $\vx$, random variables $\vy[v]$ obey the Markov property with respect to the output graph $G$.
 
-Applying the similar regularization technique as used in Logistic Regression in Section~\ref{sc_lr}, the feature weight parameter $\vw$ can be solved by introducing a Gaussian prior and maximizing the logarithm of the resulting \textit{Maximize A-Posteriori} (\map) problem \citep{taskar02} defined as
+Applying the similar regularization technique as used in logistic regression in Section~\ref{sc_lr}, the feature weight parameter $\vw$ can be solved by introducing a Gaussian prior and maximizing the logarithm of the resulting \textit{maximize a-posteriori} (\map) problem \citep{taskar02}
 \begin{align}
 %	L(\vw) = \sum_{i=1}^{m}\left[\ip{\vw}{\phib(\vx_i,\vy_i)}-\log{\sum_{\vy'\in\vYcal}{\exp{\ip{\vw}{\phib(\vx_i,\vy')}}}}\right] - \frac{1}{\sigma^2}\norm{\vw}^2. \label{crf_inference}
 	L(\vw) = \sum_{i=1}^{m}\left[\ip{\vw}{\phib(\vx_i,\vy_i)}-\log{Z(\vx_i,\vw)}\right] - \frac{1}{\sigma^2}\norm{\vw}^2. \label{crf_inference}
