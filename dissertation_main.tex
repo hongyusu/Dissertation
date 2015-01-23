@@ -85,7 +85,7 @@ The first contribution is to develop a new structured output learning model for 
 The proposed model can predict an optimal directed acyclic graph (\daggraph) from an observed underlying network which best responds to an input.
 The model has been applied to network response prediction within the context of social network analysis.
 For the general multilabel classification problems in which the output graph is not known \textit{apriori}, we develop several new models that combine a set of structured output learners built on a collection of random output graphs.
-In addition, we develop a joint learning and inference framework that is based on Max-Margin learning on a random sample of spanning trees.
+In addition, we develop a joint learning and inference framework that is based on max-margin learning on a random sample of spanning trees.
 Thus, the proposed methods are not constrained by the availability of the output graphs.
 Moreover, we provide the theoretical studies which not only explain the intuition behind the formalisms but also guarantee the generalization error of the proposed models.
 
@@ -949,7 +949,7 @@ Mathematically,
 let $C(j)$ denote the number of the neighbors of $\vx$ with the $j$'th label being ``$+1$'',
 let $H^b(j)$ denote the event that the $j$'th label of $\vx$ is $b\in\Ycal_j$,
 and let $E^l(j)$ denote the event that $0\le l \le K$ neighbors of $x$ have the $j$'th label being ``$+1$''.
-\mlknn\ processes each microlabel at a time and determines the value of the $j$'th microlabel by examining the following Maximize A-Posteriori (\map) problem
+\mlknn\ processes each microlabel at a time and determines the value of the $j$'th microlabel by examining the following maximize a-posteriori (\map) problem
 \begin{align*}
 	\vy[j]^* = \underset{b\in\Ycal_j}{\argmax} \, P( H^b(j) | E^{C(j)}(j) )
 	= \underset{b\in\Ycal_j}{\argmax} \, \frac{P( H^b(j) ) P(  E^{C(j)}(j)  | H^b(j))}{P(E^{C(j)}(j))}.
