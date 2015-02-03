@@ -1977,14 +1977,16 @@ Secondly, the development of the learning algorithms and the theoretical studies
 As the first research direction is application oriented, we will focus on the latter part.
 
 To serve as a starting point, the inference algorithm for \spin\ can be further developed such that the model can be applied to large scale social network datasets.
-It is also important to obtain an approximation guarantee for the new inference algorithm in order to ensure the quality of the inference.
-Secondly, we plan to study \rta\ in multilabel classification problems with a general output graph.
-The setting is interesting as output variables in many real world problems are usually organized by a graph structure which is more complex that a spanning tree or a chain but is less complex than a complete graph.
+It is also important to obtain an approximation guarantee for the new inference algorithm in order to ensure the quality of the solution.
+Secondly, we plan to study \rta\ in the multilabel classification problems where the output graph takes a more general form.
+The setting is interesting as output variables in many real world problems are usually organized by a graph structure which is more complex that a spanning tree or a chain but is far less complex than a complete graph.
 The exact inference is often prohibitive for any polynomial time algorithms.
 In particular, we are interested in the properties of the new algorithm (e.g., the generalization error bound, conditions for exact inference) when we randomly sample spanning trees from a general graph rather than a complete graph.
-Next, we plan to investigate the possibility of learning the feature weight parameters defined on a collection of random spanning trees through a $L_1$-norm regularized combination.
-Learning with the $L_1$-norm regularized parameter combination has previously been studied in multiple kernel learning \citep{Rakotomamonjy08simplemkl}, which can be formulated equivalently as learning a weighted $L_2$-norm combination.
-The weight can be interpreted as the affinity of an output graph to the training data, which can be used to select relevant output graph structures.
+Next, we plan to investigate the possibility of learning a convex combination of a set of random spanning trees.
+Compared to the current conical combination, this approach will lead to a different objective function that is similar to the $L_1$-norm regularized parameter combination previously studied in multiple kernel learning \citep{Rakotomamonjy08simplemkl}.
+The objective function can be expressed equivalently as learning a weighted $L_2$-norm regularized parameter combination.
+The weight can be interpreted as the affinity of an output graph to the current training data.
+We can use the weights to select relevant output graph structures.
 We need to study the corresponding optimization algorithm as the current alternative optimization developed by \citet{Rakotomamonjy08simplemkl} is not very efficient.
 The theoretical analysis of \rta\ should also be extended to the new algorithm.
 
