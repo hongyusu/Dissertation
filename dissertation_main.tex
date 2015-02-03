@@ -1971,12 +1971,15 @@ In addition to the practical learning algorithms, the thesis also contributes to
 %------------------------------------------------
 \section{Future Work}
 
-The work presented in the thesis can be extended along two main directions.
+The work presented in the thesis will be extended along two main directions.
 First, the algorithms developed in this thesis can be applied to many other multilabel classification problems in which the output graph does not need to be observed but is believed to play an important role during learning.
 Secondly, the development of the learning algorithms and the theoretical studies are readily to be continued.
-As the first direction is application oriented, we will focus on the latter part.
+As the first research direction is application oriented, we will focus on the latter part.
 
-To serve as a starting point, the inference algorithm for \spin\ can be further developed, which not only needs to be scalable to large scale social network datasets but should also have an approximation guarantee.
+% spin
+To serve as a starting point, the inference algorithm for \spin\ can be further developed such that the model can be applied to large scale social network datasets.
+It is also important to obtain an approximation guarantee for the new inference algorithm in order to ensure the quality of the inference.
+% rta
 Secondly, we plan to study \rta\ in multilabel classification problems with a general output graph.
 The setting is interesting as output variables in many real world problems are usually organized by a graph structure which is more complex that a spanning tree or a chain but is less complex than a complete graph.
 The exact inference is often prohibitive for any polynomial time algorithms.
