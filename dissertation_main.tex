@@ -1737,8 +1737,9 @@ Efficient inference algorithms on special graphs have also been studied \citep{G
 
 \citepub{su14c} is motivated by the well-established maximum-margin principle as described in Section~\ref{sc_svm}.
 The work investigates whether the problem of inference over a complete graph in structured output learning can be avoided by exploring the properties of the maximum-margin principle.
-Starting from a sampling results, \citepub[Lemma 3]{su14c} shows that with high probability a big fraction of the margin achieved by a complete graph can be obtained by a random sample of spanning trees of a small size.
-Besides, \citepub[Theorem 5]{su14c} shows that the good generalization error can also be guaranteed when learning with, instead of a complete graph, a random sample of spanning trees.
+Starting from a sampling results, \citepub[Lemma 3]{su14c} shows that with high probability a big fraction of the margin achieved by a complete graph can be obtained by a conical combination of a random sample of spanning trees.
+The number of the spanning trees does not need to be large.
+Besides, \citepub[Theorem 5]{su14c} shows that good generalization error can also be guaranteed when learning with, instead of a complete graph, a random sample of spanning trees.
 
 Thus, in addition to \citepub[Theory 1]{su14b}, we further provide the theoretical justification of combining a set of base learners trained on a collection of random output graphs. 
 Besides, \citepub[Theorem 5]{su14c} suggests we should, instead of optimizing the margin separately on each spanning tree similar to that in \mam, optimize the joint margin from all spanning trees.
@@ -1908,19 +1909,19 @@ In this chapter, the author aims to briefly discuss the implementations and poin
 	\item \rta, developed in \citepub{su14c}, is a structured output learning algorithm for multilabel classification with an unknown output graph. \rta\ performs joint learning and inference on a random sample of spanning trees.
 	\begin{enumerate}
 		\item The learning system is implemented in \matlab. The inference algorithm is implemented in \cpp. The parallelization of the inference algorithm is implemented with \openmp. Other parts of \rta\ are mostly implemented in \matlab.
-		\item The package can be found from \url{http://git@github.com:hongyusu/random_spanning_tree_approximation.git}.
+		\item The package can be found from \url{https://github.com/hongyusu/RTA}.
 	\end{enumerate}
 	
 	\item \spin, developed in \citepub{su14a}, is a structured output learning algorithm for multilabel classification with an observed output graph. \spin\ can predict an optimal direct acyclic graph (\daggraph) that best responds to an input. The algorithm has been applied to the network response prediction problem within the context of social network analysis.
 	\begin{enumerate}
 		\item The learning system of \spin\ is implemented in \matlab. The \sdp\ inference algorithm is implemented with \cvx\ toolbox which is designed for convex programming. The data preprocessing with Latent Dirichlet Allocation (\lda) \citep{Blei03latent} is implemented in \python\ and \matlab.
-		\item The package can be found from \url{http://git@github.com:hongyusu/SPIN.git}.
+		\item The package can be found from \url{https://github.com/hongyusu/SPIN}.
 	\end{enumerate}
 	
 	\item \mve\ developed in \citepub{su11} as well as \amm\ and \mam\ developed in \citepub{su14b} are the structured output learning algorithms that are not constrained by the availability of the output graph. The algorithms combine a set of structured output learners built on a collection of random output graphs.
 	\begin{enumerate}
 		\item The learning systems are mostly implemented in \matlab.
-		\item The packages can be found from \url{http://git@github.com:hongyusu/RandomOutputGraphEnsemble.git}.
+		\item The packages can be found from \url{https://github.com/hongyusu/RandomOutputGraphEnsemble}.
 	\end{enumerate}
 \end{enumerate}
 
@@ -1948,7 +1949,7 @@ The approaches have difficulty of modeling the correlation between labels.
 Structured output learning arises as a natural extension to flat multilabel classification in which the correlation is modeled by an output graph connecting labels.
 
 The first outcome of the thesis is a new structured output learning model for multilabel classification in which the output graph is known \textit{apriori}.
-In particular, the proposed algorithm \spin\ can predict a directed acyclic graph (\daggraph) from an observed underlying network which best ``responds'' to an input example.
+In particular, the proposed algorithm \spin\ can predict a directed acyclic graph from an observed underlying network which best ``responds'' to an input example.
 The empirical evaluation on the network response prediction problem within the context of social network analysis shows that the proposed model outperforms several state-of-the-art flat multilabel classification approaches.
 The study demonstrates that accurate predictions can be achieved by structured output learning when the output graph is known and utilized during learning.
 
@@ -1972,16 +1973,18 @@ In addition to the practical learning algorithms, the thesis also contributes to
 \section{Future Work}
 
 The work presented in the thesis will be extended along two main directions.
-First, the algorithms developed in this thesis can be applied to many other multilabel classification problems in which the output graph does not need to be observed but is believed to play an important role during learning.
+First, the algorithms developed in this thesis can be applied to other multilabel classification problems in which the output graph does not need to be observed but is believed to play an important role during learning.
 Secondly, the development of the learning algorithms and the theoretical studies are readily to be continued.
 As the first research direction is application oriented, we will focus on the latter part.
 
 To serve as a starting point, the inference algorithm for \spin\ can be further developed such that the model can be applied to large scale social network datasets.
 It is also important to obtain an approximation guarantee for the new inference algorithm in order to ensure the quality of the solution.
 Secondly, we plan to study \rta\ in the multilabel classification problems where the output graph takes a more general form.
-The setting is interesting as output variables in many real world problems are usually organized by a graph structure which is more complex that a spanning tree or a chain but is far less complex than a complete graph.
-The exact inference is often prohibitive for any polynomial time algorithms.
-In particular, we are interested in the properties of the new algorithm (e.g., the generalization error bound, conditions for exact inference) when we randomly sample spanning trees from a general graph rather than a complete graph.
+The setting is interesting as in many real world problems the underlying output graph structure is usually more complex than a spanning tree or a chain but should be much simpler than a complete graph.
+The exact inference is also prohibitive for any polynomial time algorithms.
+To tackle the problem we plan to randomly sample spanning trees from the general graph structures rather than a complete graph.
+In particular, we are interested in the properties of the new algorithm (e.g., the generalization error bound, conditions for exact inference).
+We also need to develop the algorithm that allows to generate spanning trees uniformly at random.
 Next, we plan to investigate the possibility of learning a convex combination of a set of random spanning trees.
 Compared to the current conical combination, this approach will lead to a different objective function that is similar to the $L_1$-norm regularized parameter combination previously studied in multiple kernel learning \citep{Rakotomamonjy08simplemkl}.
 The objective function can be expressed equivalently as learning a weighted $L_2$-norm regularized parameter combination.
