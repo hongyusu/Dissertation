@@ -1,0 +1,1128 @@
+\begin{thebibliography}{}
+
+\bibitem[Adar and Adamic, 2005]{Adar05tracking}
+Adar, E. and Adamic, L.~A. (2005).
+\newblock Tracking information epidemics in blogspace.
+\newblock In {\em Proceedings of the 2005 IEEE/WIC/ACM International Conference
+  on Web Intelligence}, WI '05, pages 207--214, Washington, DC, USA. IEEE
+  Computer Society.
+
+\bibitem[Adar et~al., 2004]{Adar04implicit}
+Adar, E., Zhang, L., Adamic, L., and Lukose, R. (2004).
+\newblock Implicit structure and the dynamics of blogspace.
+\newblock In {\em Workshop on the Weblogging Ecosystem}, volume~13.
+
+\bibitem[Aha et~al., 1991]{Aha91instance}
+Aha, D., Kibler, D., and Albert, M. (1991).
+\newblock Instance-based learning algorithms.
+\newblock {\em Machine Learning}, 6(1):37--66.
+
+\bibitem[Amin et~al., 2014]{Amin14learning}
+Amin, K., Heidari, H., and Kearns, M. (2014).
+\newblock Learning from contagion (without timestamps).
+\newblock In {\em Proceedings of the 31th International Conference on Machine
+  Learning (ICML 2004)}, pages 823--830. JMLR.org.
+
+\bibitem[Anderson and May, 2002]{Anderson02infectious}
+Anderson, R.~M. and May, R.~M. (2002).
+\newblock {\em Infectious Diseases of Humans: Dynamics and Control}.
+\newblock Oxford Press.
+
+\bibitem[Argyriou et~al., 2007]{Argyriou07multitask}
+Argyriou, A., Evgeniou, T., and Pontil, M. (2007).
+\newblock Multi-task feature learning.
+\newblock In Sch\"{o}lkopf, B., Platt, J., and Hoffman, T., editors, {\em
+  Advances in Neural Information Processing Systems 19}, pages 41--48. MIT
+  Press.
+
+\bibitem[Argyriou et~al., 2008a]{Argyriou08convex}
+Argyriou, A., Evgeniou, T., and Pontil, M. (2008a).
+\newblock Convex multi-task feature learning.
+\newblock {\em Machine Learning}, 73(3):243--272.
+
+\bibitem[Argyriou et~al., 2008b]{Argyriou08an}
+Argyriou, A., Maurer, A., and Pontil, M. (2008b).
+\newblock An algorithm for transfer learning in a heterogeneous environment.
+\newblock In {\em Proceedings of the 2008 European Conference on Machine
+  Learning and Knowledge Discovery in Databases (ECML-PKDD 2008)}, pages
+  71--85, Berlin, Heidelberg. Springer-Verlag.
+
+\bibitem[Bartlett et~al., 2005]{bartlett04}
+Bartlett, P.~L., Collins, M., Taskar, B., and McAllester, D.~A. (2005).
+\newblock Exponentiated gradient algorithms for large-margin structured
+  classification.
+\newblock In Saul, L., Weiss, Y., and Bottou, L., editors, {\em Advances in
+  Neural Information Processing Systems 17}, pages 113--120. MIT Press.
+
+\bibitem[Barutcuoglu et~al., 2006]{Barutcuoglu06hierarchical}
+Barutcuoglu, Z., Schapire, R.~E., and Troyanskaya, O.~G. (2006).
+\newblock Hierarchical multi-label prediction of gene function.
+\newblock {\em Bioinformatics}, 22(7):830--836.
+
+\bibitem[Baxter, 2000]{Baxter00a}
+Baxter, J. (2000).
+\newblock A model of inductive bias learning.
+\newblock {\em Journal of Artificial Intelligence Research}, 12(1):149--198.
+
+\bibitem[Bell and Koren, 2007]{Bell07lessons}
+Bell, R.~M. and Koren, Y. (2007).
+\newblock Lessons from the netflix prize challenge.
+\newblock {\em SIGKDD Explor. Newsl.}, 9(2):75--79.
+
+\bibitem[Ben-David and Schuller, 2003]{BenDavide03exploiting}
+Ben-David, S. and Schuller, R. (2003).
+\newblock Exploiting task relatedness for multiple task learning.
+\newblock In Schölkopf, B. and Warmuth, M., editors, {\em Learning Theory and
+  Kernel Machines}, volume 2777, pages 567--580. Springer Berlin Heidelberg.
+
+\bibitem[Bengio, 2009]{Bengio09learning}
+Bengio, Y. (2009).
+\newblock Learning deep architectures for ai.
+\newblock {\em Foundation and Trends of Machine Learning}, 2(1):1--127.
+
+\bibitem[Berger, 1999]{Berger97}
+Berger, A. (1999).
+\newblock The improved iterative scaling algorithm: A gentle introduction.
+\newblock {\em Machine Learning}.
+
+\bibitem[Bernazzani et~al., 2006]{Bernazzani06predicting}
+Bernazzani, L., Duce, C., Micheli, A., Mollica, V., Sperduti, A., Starita, A.,
+  and Tine, M. (2006).
+\newblock Predicting physical-chemical properties of compounds from molecular
+  structures by recursive neural networks.
+\newblock {\em Journal of Chemical Information and Modeling}, 46:2030--2042.
+
+\bibitem[Bertsekas, 1995]{Bertsekas95nonlinear}
+Bertsekas, D.~P. (1995).
+\newblock {\em Nonlinear Programming}.
+\newblock Athena Scientific, Belmont, MA.
+
+\bibitem[Bian et~al., 2012]{Bian12corrlog}
+Bian, W., Xie, B., and Tao, D. (2012).
+\newblock Corrlog: Correlated logistic models for joint prediction of multiple
+  labels.
+\newblock {\em Journal of Machine Learning Research - Proceedings Track}, pages
+  109--117.
+
+\bibitem[Bishop, 2007]{Bishop07}
+Bishop, C.~M. (2007).
+\newblock {\em {Pattern Recognition and Machine Learning (Information Science
+  and Statistics)}}.
+\newblock Springer, 1st ed. 2006. corr. 2nd printing 2011 edition.
+
+\bibitem[Blei et~al., 2003]{Blei03latent}
+Blei, D.~M., Ng, A.~Y., and Jordan, M.~I. (2003).
+\newblock Latent dirichlet allocation.
+\newblock {\em Journal of Machine Learning Research}, 3:993--1022.
+
+\bibitem[Boley and Cao, 2004]{Boley04training}
+Boley, D. and Cao, D. (2004).
+\newblock Training support vector machine using adaptive clustering.
+\newblock In {\em Proceedings of the 4th SIAM International Conference on Data
+  Mining}.
+
+\bibitem[Bordes et~al., 2005]{Bordes05fast}
+Bordes, A., Ertekin, S., Weston, J., and Bottou, L. (2005).
+\newblock Fast kernel classifiers with online and active learning.
+\newblock {\em Journal of Machine Learning Research}, 6:1579--1619.
+
+\bibitem[Boyd and Vandenberghe, 2004]{Boyd2004convex}
+Boyd, S. and Vandenberghe, L. (2004).
+\newblock {\em Convex Optimization}.
+\newblock Cambridge Univeristy Press, Cambridge, UK.
+
+\bibitem[Breiman, 1996a]{Breiman96bagging}
+Breiman, L. (1996a).
+\newblock Bagging predictors.
+\newblock {\em Machine Learning}, 24(2):123--140.
+
+\bibitem[Breiman, 1996b]{Breiman96out}
+Breiman, L. (1996b).
+\newblock Out-of-bag estimation.
+\newblock Technical report, Statistics Department, University of California,
+  Berkeley.
+
+\bibitem[Brinker and H\"{u}llermeier, 2007]{Brinker07case}
+Brinker, K. and H\"{u}llermeier, E. (2007).
+\newblock Case-based multilabel ranking.
+\newblock In {\em Proceedings of the 20th International Joint Conference on
+  Artifical Intelligence (IJCAI 2007)}, pages 702--707, San Francisco, CA, USA.
+  Morgan Kaufmann Publishers Inc.
+
+\bibitem[Brown and Kuncheva, 2010]{Brown10good}
+Brown, G. and Kuncheva, L.~I. (2010).
+\newblock “good” and “bad” diversity in majority vote ensembles.
+\newblock In {\em Multiple Classifier Systems}, pages 124--133. Springer.
+
+\bibitem[Burbidge et~al., 2001]{Burbidg01drug}
+Burbidge, R., Trotter, M., Buxton, B., and Holden, S. (2001).
+\newblock Drug design by machine learning: support vector machines for
+  pharmaceutical data analysis.
+\newblock {\em Computers and Chemistry}, 26(1):5 -- 14.
+
+\bibitem[Byvatov et~al., 2003]{Byvatov03comparison}
+Byvatov, E., Fechner, U., Sadowski, J., and Schneider, G. (2003).
+\newblock Comparison of support vector machine and artificial neural network
+  systems for drug/nondrug classification.
+\newblock {\em Journal of Chemical Information and Computer Science},
+  43:1882--1889.
+
+\bibitem[Cai and Hofmann, 2004]{Cai04hierarchical}
+Cai, L. and Hofmann, T. (2004).
+\newblock Hierarchical document categorization with support vector machines.
+\newblock In {\em Proceedings of the Thirteenth ACM International Conference on
+  Information and Knowledge Management}, CIKM '04, pages 78--87, New York, NY,
+  USA. ACM.
+
+\bibitem[Caruana, 1997]{Caruana97multitask}
+Caruana, R. (1997).
+\newblock Multitask learning.
+\newblock {\em Machine learning}, 28(1):41--75.
+
+\bibitem[Ceroni et~al., 2007a]{Ceroni07classification}
+Ceroni, A., Costa, F., and Frasconi, P. (2007a).
+\newblock Classification of small molecules by two- and three-dimensional
+  decomposition kernels.
+\newblock {\em Bioinformatics}, 23:2038--2045.
+
+\bibitem[Ceroni et~al., 2007b]{Ceroni08classification}
+Ceroni, A., Costa, F., and Frasconi, P. (2007b).
+\newblock Classification of small molecules by two- and three-dimensional
+  decomposition kernels.
+\newblock {\em Bioinformatics}, 23(16):2038--2045.
+
+\bibitem[Cesa-bianchi et~al., 2005]{Cesabianchi05incremental}
+Cesa-bianchi, N., Gentile, C., Tironi, A., and Zaniboni, L. (2005).
+\newblock Incremental algorithms for hierarchical classification.
+\newblock In Saul, L., Weiss, Y., and Bottou, L., editors, {\em Advances in
+  Neural Information Processing Systems 17}, pages 233--240. MIT Press.
+
+\bibitem[Chen and Rosenfeld, 1999]{Chen99}
+Chen, S. and Rosenfeld, R. (1999).
+\newblock {\em A Gaussian Prior for Smoothing Maximum Entropy Models}.
+\newblock PhD thesis, Computer Science Department, Carnegie Mellon University.
+\newblock Technical Report CMU-CS-99-108.
+
+\bibitem[Chen and Rosenfeld, 2000]{Chen00}
+Chen, S. and Rosenfeld, R. (2000).
+\newblock A survey of smoothing techniques for me models.
+\newblock {\em IEEE Transactions on Speech and Audio Processing}, 8(1):37--50.
+
+\bibitem[Cheng and Hüllermeier, 2009]{Cheng09combining}
+Cheng, W. and Hüllermeier, E. (2009).
+\newblock Combining instance-based learning and logistic regression for
+  multilabel classification.
+\newblock {\em Machine Learning}, 76(2-3):211--225.
+
+\bibitem[Chiang et~al., 2012]{Chiang12a}
+Chiang, T.-H., Lo, H.-Y., and Lin, S.-D. (2012).
+\newblock A ranking-based knn approach for multi-label classification.
+\newblock In Hoi, S. C.~H. and Buntine, W.~L., editors, {\em ACML}, volume~25
+  of {\em JMLR Proceedings}, pages 81--96. JMLR.org.
+
+\bibitem[Chickering et~al., 1994]{Chickering94learning}
+Chickering, D.~M., Geiger, D., and Heckerman, D. (1994).
+\newblock Learning bayesian networks is np-hard.
+\newblock Technical Report MSR-TR-94-17, Microsoft Research.
+
+\bibitem[Collins, 2002]{collins02a}
+Collins, M. (2002).
+\newblock Discriminative training methods for hidden markov models: Theory and
+  experiments with perceptron algorithms.
+\newblock In {\em Proceedings of the ACL-02 Conference on Empirical Methods in
+  Natural Language Processing}, pages 1--8. Association for Computational
+  Linguistics.
+
+\bibitem[Collins and Duffy, 2002]{collins02b}
+Collins, M. and Duffy, N. (2002).
+\newblock New ranking algorithms for parsing and tagging: Kernels over discrete
+  structures, and the voted perceptron.
+\newblock In {\em Proceedings of the 40th Annual Meeting on Association for
+  Computational Linguistics (ACL 2002)}, pages 263--270, Stroudsburg, PA, USA.
+  Association for Computational Linguistics.
+
+\bibitem[Collins and Koo, 2005]{Collins05distrimnative}
+Collins, M. and Koo, T. (2005).
+\newblock Discriminative reranking for natural language parsing.
+\newblock {\em Comput. Linguist.}, 31(1):25--70.
+
+\bibitem[Cortes et~al., 2014a]{Cortes14semble}
+Cortes, C., Kuznetsov, V., and Mohri, M. (2014a).
+\newblock Ensemble methods for structured prediction.
+\newblock In {\em Proceedings of the 31th International Conference on Machine
+  Learning (ICML 2004)}, pages 823--830. JMLR.org.
+
+\bibitem[Cortes et~al., 2014b]{Cortes14deep}
+Cortes, C., Mohri, M., and Syed, U. (2014b).
+\newblock Deep boosting.
+\newblock In {\em Proceedings of the 31th International Conference on Machine
+  Learning (ICML 2004)}, pages 823--830. JMLR.org.
+
+\bibitem[Cortes and Vapnik, 1995]{Cortes95support}
+Cortes, C. and Vapnik, V. (1995).
+\newblock Support-vector networks.
+\newblock {\em Machine Learning}, 20(3):273--297.
+
+\bibitem[Crammer et~al., 2003]{Crammer03afamily}
+Crammer, K., Singer, Y., K, J., Hofmann, T., Poggio, T., and Shawe-taylor, J.
+  (2003).
+\newblock A family of additive online algorithms for category ranking.
+\newblock {\em Journal of Machine Learning Research}, 3:2003.
+
+\bibitem[Daneshmand et~al., 2014]{Daneshmand14estimating}
+Daneshmand, H., Gomez-Rodriguez, M., Song, L., and Schoelkopf, B. (2014).
+\newblock Estimating diffusion network structures: Recovery conditions, sample
+  complexity and soft-thresholding algorithm.
+\newblock In {\em Proceedings of the 31th International Conference on Machine
+  Learning (ICML 2004)}, pages 823--830. JMLR.org.
+
+\bibitem[Darroch and Ratcliff, 1972]{Darroch72}
+Darroch, J. and Ratcliff, D. (1972).
+\newblock Generalized iterative scaling for log-linear models.
+\newblock {\em Annals of Mathematical Statistics}, 43(4):25--40.
+
+\bibitem[DeCoro et~al., 2007]{DeCoro07bayesian}
+DeCoro, C., Barutcuoglu, Z., and Fiebrink, R. (2007).
+\newblock Bayesian aggregation for hierarchical genre classification.
+\newblock In {\em International Symposium on Music Information Retrieval 2007}.
+
+\bibitem[Decoste and Schölkopf, 2002]{Decoste02support}
+Decoste, D. and Schölkopf, B. (2002).
+\newblock Training invariant support vector machines.
+\newblock {\em Machine Learning}, 46(1-3):161--190.
+
+\bibitem[Della~Pietra et~al., 1997]{Pietra97inducing}
+Della~Pietra, S., Della~Pietra, V., and Lafferty, J. (1997).
+\newblock Inducing features of random fields.
+\newblock {\em IEEE Transactions on Pattern Analysis and Machine Intelligence},
+  19(4):380--393.
+
+\bibitem[Dembczynski et~al., 2010]{Dembczynski10bayes}
+Dembczynski, K., Cheng, W., and Hüllermeier, E. (2010).
+\newblock Bayes optimal multilabel classification via probabilistic classifier
+  chains.
+\newblock In {\em Proceedings of the 27th International Conference on Machine
+  Learning (ICML 2010)}, pages 279--286. JMLR.org.
+
+\bibitem[Domingos and Richardson, 2001]{Domingos01mining}
+Domingos, P. and Richardson, M. (2001).
+\newblock Mining the network value of customers.
+\newblock In {\em Proceedings of the Seventh ACM SIGKDD International
+  Conference on Knowledge Discovery and Data Mining}, KDD '01, pages 57--66,
+  New York, NY, USA. ACM.
+
+\bibitem[Drineas and Mahoney, 2005]{Drineas05on}
+Drineas, P. and Mahoney, M.~W. (2005).
+\newblock On the nystr\"om method for approximating a gram matrix for improved
+  kernel-based learning.
+\newblock {\em Journal of Machine Learning Research}, 6:2153--2175.
+
+\bibitem[Du et~al., 2014]{Du14influence}
+Du, N., Liang, Y., Balcan, M.-F., and Song, L. (2014).
+\newblock Influence function learning in information diffusion networks.
+\newblock In {\em Proceedings of the 31th International Conference on Machine
+  Learning (ICML 2004)}, pages 823--830. JMLR.org.
+
+\bibitem[Du et~al., 2012]{Du12learning}
+Du, N., Song, L., Yuan, M., and Smola, A.~J. (2012).
+\newblock Learning networks of heterogeneous influence.
+\newblock In Pereira, F., Burges, C., Bottou, L., and Weinberger, K., editors,
+  {\em Advances in Neural Information Processing Systems 25}, pages 2780--2788.
+  Curran Associates, Inc.
+
+\bibitem[Dumais and Chen, 2000]{Dumais00Hierarchical}
+Dumais, S. and Chen, H. (2000).
+\newblock Hierarchical classification of web content.
+\newblock In {\em Proceedings of the 23rd Annual International ACM SIGIR
+  Conference on Research and Development in Information Retrieval}, SIGIR '00,
+  pages 256--263, New York, NY, USA. ACM.
+
+\bibitem[Dutt, 2012]{Dutt12classification}
+Dutt, R.and~Madan, A.~K. (2012).
+\newblock Classification models for anticancer activity.
+\newblock {\em Machine Learning}, 12(23/24):2705.
+
+\bibitem[Efron and Tibshirani, 1994]{Efron1994introduction}
+Efron, B. and Tibshirani, R. (1994).
+\newblock An introduction to the bootstrap.
+
+\bibitem[Elisseeff and Weston, 2002]{Elisseeff01akernel}
+Elisseeff, A. and Weston, J. (2002).
+\newblock A kernel method for multi-labelled classification.
+\newblock In Dietterich, T., Becker, S., and Ghahramani, Z., editors, {\em
+  Advances in Neural Information Processing Systems 14}, pages 681--687. MIT
+  Press.
+
+\bibitem[Esuli et~al., 2008]{Esuli2008boosting}
+Esuli, A., Fagni, T., and Sebastiani, F. (2008).
+\newblock Boosting multi-label hierarchical text categorization.
+\newblock {\em Information Retrieval}, 11(4):287--313.
+
+\bibitem[Evgeniou et~al., 2002]{Evgeniou02regularization}
+Evgeniou, T., Poggio, T., Pontil, M., and Verri, A. (2002).
+\newblock Regularization and statistical learning theory for data analysis.
+\newblock {\em Comput. Stat. Data Anal.}, 38(4):421--432.
+
+\bibitem[Evgeniou et~al., 1999]{Evgeniou99a}
+Evgeniou, T., Pontil, M., and Poggio, T. (1999).
+\newblock A unified framework for regularization networks and support vector
+  machines.
+\newblock Technical report, Cambridge, MA, USA.
+
+\bibitem[Fan and Bifet, 2013]{Fan13mining}
+Fan, W. and Bifet, A. (2013).
+\newblock Mining big data: Current status, and forecast to the future.
+\newblock {\em SIGKDD Explor. Newsl.}, 14(2):1--5.
+
+\bibitem[Fine and Scheinberg, 2002]{Fine02efficient}
+Fine, S. and Scheinberg, K. (2002).
+\newblock Efficient svm training using low-rank kernel representations.
+\newblock {\em Journal of Machine Learning Research}, 2:243--264.
+
+\bibitem[Fiscus, 1997]{Fiscus97a}
+Fiscus, J. (1997).
+\newblock A post-processing system to yield reduced word error rates:
+  Recognizer output voting error reduction (rover).
+\newblock In {\em Proceedings of the 1997 IEEE Workshop on Automatic Speech
+  Recognition and Understanding}, pages 347--354.
+
+\bibitem[Freund et~al., 2004]{Freund04generalization}
+Freund, Y., Mansour, Y., and Schapire, R.~E. (2004).
+\newblock Generalization bounds for averaged classifiers.
+\newblock {\em THE ANNALS OF STATISTICS}, 32:1698--1722.
+
+\bibitem[Freund and Schapire, 1997]{Freund97a}
+Freund, Y. and Schapire, R.~E. (1997).
+\newblock A decision-theoretic generalization of on-line learning and an
+  application to boosting.
+\newblock {\em J. Comput. Syst. Sci.}, 55(1):119--139.
+
+\bibitem[Freund and Schapire, 1999]{Freund99large}
+Freund, Y. and Schapire, R.~E. (1999).
+\newblock Large margin classification using the perceptron algorithm.
+\newblock {\em Machine Learning}, 37(3):277--296.
+
+\bibitem[F\"{u}rnkranz et~al., 2008]{Furnkranz08multilabel}
+F\"{u}rnkranz, J., H\"{u}llermeier, E., Loza~Menc\'{\i}a, E., and Brinker, K.
+  (2008).
+\newblock Multilabel classification via calibrated label ranking.
+\newblock {\em Machine Learning}, 73(2):133--153.
+
+\bibitem[Garey and Johnson, 1990]{Garey90computers}
+Garey, M.~R. and Johnson, D.~S. (1990).
+\newblock {\em Computers and Intractability; A Guide to the Theory of
+  NP-Completeness}.
+\newblock W. H. Freeman \& Co., New York, NY, USA.
+
+\bibitem[G\"{a}rtner, 2003]{Gartner03a}
+G\"{a}rtner, T. (2003).
+\newblock A survey of kernels for structured data.
+\newblock {\em SIGKDD Explor. Newsl.}, 5(1):49--58.
+
+\bibitem[Getoor, 2005]{Getoor05link}
+Getoor, L. (2005).
+\newblock Link-based classification.
+\newblock In {\em Advanced Methods for Knowledge Discovery from Complex Data},
+  Advanced Information and Knowledge Processing, pages 189--207. Springer
+  London.
+
+\bibitem[Getoor and Taskar, 2007]{Getoor07introduction}
+Getoor, L. and Taskar, B. (2007).
+\newblock {\em Introduction to Statistical Relational Learning}.
+\newblock the MIT Press.
+
+\bibitem[Ghamrawi and McCallum, 2005]{Ghamrawi05collective}
+Ghamrawi, N. and McCallum, A. (2005).
+\newblock Collective multi-label classification.
+\newblock In {\em Proceedings of the 14th ACM International Conference on
+  Information and Knowledge Management}, CIKM '05, pages 195--200, New York,
+  NY, USA. ACM.
+
+\bibitem[Globerson and Jaakkola, 2007]{Globerson07approximate}
+Globerson, A. and Jaakkola, T.~S. (2007).
+\newblock Approximate inference using planar graph decomposition.
+\newblock In Sch\"{o}lkopf, B., Platt, J., and Hoffman, T., editors, {\em
+  Advances in Neural Information Processing Systems 19}, pages 473--480. MIT
+  Press.
+
+\bibitem[Godbole and Sarawagi, 2004]{Godbole04discriminative}
+Godbole, S. and Sarawagi, S. (2004).
+\newblock Discriminative methods for multi-labeled classification.
+\newblock In Dai, H., Srikant, R., and Zhang, C., editors, {\em Advances in
+  Knowledge Discovery and Data Mining}, volume 3056, pages 22--30. Springer
+  Berlin Heidelberg.
+
+\bibitem[Goemans and Williamson, 1995]{Geomans1995improved}
+Goemans, M. and Williamson, D. (1995).
+\newblock Improved approximation algorithms for maximum cut and satisfiability
+  problems using semidefinite programming.
+\newblock {\em Journal of the {ACM}}, 42(6):1115 -- 1145.
+
+\bibitem[Gomez~Rodriguez et~al., 2010]{GomezRodriguez10inferring}
+Gomez~Rodriguez, M., Leskovec, J., and Krause, A. (2010).
+\newblock Inferring networks of diffusion and influence.
+\newblock In {\em Proceedings of the 16th ACM SIGKDD International Conference
+  on Knowledge Discovery and Data Mining}, KDD '10, pages 1019--1028, New York,
+  NY, USA. ACM.
+
+\bibitem[Goodman, 2002]{Goodman02Sequential}
+Goodman, J. (2002).
+\newblock Sequential conditional generalized iterative scaling.
+\newblock In {\em Proceedings of the 40th Annual Meeting on Association for
+  Computational Linguistics (ACL 2002)}, ACL '02, pages 9--16.
+
+\bibitem[Goodman, 2003]{Goodman03}
+Goodman, J. (2003).
+\newblock Exponential priors for maximum entropy models.
+\newblock In {\em Proceedings of the Annual Meeting of the Association for
+  Computational Linguistics (ACL 2003)}, pages 305--312.
+
+\bibitem[Goodman and tau Yih, 2006]{Goodman06online}
+Goodman, J. and tau Yih, W. (2006).
+\newblock Online discriminative spam filter training.
+\newblock In {\em CEAS'06}, pages --1--1.
+
+\bibitem[Gopal et~al., 2012]{Gopal12bayesian}
+Gopal, S., Yang, Y., Bai, B., and Niculescu-mizil, A. (2012).
+\newblock Bayesian models for large-scale hierarchical classification.
+\newblock In Bartlett, P., Pereira, F., Burges, C., Bottou, L., and Weinberger,
+  K., editors, {\em Advances in Neural Information Processing Systems 25},
+  pages 2420--2428.
+
+\bibitem[Goyal et~al., 2010]{Goyal10learning}
+Goyal, A., Bonchi, F., and Lakshmanan, L.~V. (2010).
+\newblock Learning influence probabilities in social networks.
+\newblock In {\em Proceedings of the Third ACM International Conference on Web
+  Search and Data Mining}, WSDM '10, pages 241--250, New York, NY, USA. ACM.
+
+\bibitem[Gruhl et~al., 2004]{Gruhl04information}
+Gruhl, D., Guha, R., Liben-Nowell, D., and Tomkins, A. (2004).
+\newblock Information diffusion through blogspace.
+\newblock In {\em Proceedings of the 13th International Conference on World
+  Wide Web (WWW 2004)}, pages 491--501, New York, NY, USA. ACM.
+
+\bibitem[Hao et~al., 2007]{Hao07hierarchicaly}
+Hao, P.-Y., Chiang, J.-H., and Tu, Y.-K. (2007).
+\newblock Hierarchically svm classification based on support vector clustering
+  method and its application to document categorization.
+\newblock {\em Expert Syst. Appl.}, 33(3):627--635.
+
+\bibitem[Hethcote, 2000]{Hethcote00the}
+Hethcote, H.~W. (2000).
+\newblock The mathematics of infectious diseases.
+\newblock {\em SIAM Review}, 42:599--653.
+
+\bibitem[Hoerl and Kennard, 2000]{Hoerl00ridge}
+Hoerl, A.~E. and Kennard, R.~W. (2000).
+\newblock Ridge regression: Biased estimation for nonorthogonal problems.
+\newblock {\em Technometrics}, 42(1):80--86.
+
+\bibitem[Huang et~al., 2009]{Huang09iterative}
+Huang, F.-L., Hsieh, C.-J., Chang, K.-W., and Lin, C.-J. (2009).
+\newblock Iterative scaling and coordinate descent methods for maximum entropy.
+\newblock In {\em Proceedings of the ACL-IJCNLP 2009 Conference Short Papers},
+  pages 285--288.
+
+\bibitem[Jaakkola and Haussler, 1999]{Jaakkola99probabilistic}
+Jaakkola, T.~S. and Haussler, D. (1999).
+\newblock Probabilistic kernel regression models.
+\newblock In {\em Proceedings of the 7th Workshop on Artificial Intelligent and
+  Statistics (AISTATS 1999)}. Morgan Kaufmann.
+
+\bibitem[Jacob et~al., 2009]{Jacob09cluster}
+Jacob, L., philippe Vert, J., and Bach, F.~R. (2009).
+\newblock Clustered multi-task learning: A convex formulation.
+\newblock In Koller, D., Schuurmans, D., Bengio, Y., and Bottou, L., editors,
+  {\em Advances in Neural Information Processing Systems 21}, pages 745--752.
+  Curran Associates, Inc.
+
+\bibitem[Jin et~al., 2003]{Jin03a}
+Jin, R., Yan, R., Zhang, J., and Hauptmann, A.~G. (2003).
+\newblock A faster iterative scaling algorithm for conditional exponential
+  model.
+\newblock In {\em Proceedings of the 20th International Conference on Machine
+  Learning (ICML 2003)}, pages 282--289. JMLR.org.
+
+\bibitem[Joachims, 1998]{Joachims98making}
+Joachims, T. (1998).
+\newblock Making large-scale svm learning practical.
+\newblock LS8-Report~24, Universit{\"a}t Dortmund, LS VIII-Report.
+
+\bibitem[Joachims et~al., 2009]{JFY09}
+Joachims, T., Finley, T., and Yu, C.-N. (2009).
+\newblock Cutting-plane training of structural svms.
+\newblock {\em Machine Learning}, 77(1):27--59.
+
+\bibitem[Jordan and Wainwright, 2004]{Jordan04semiefinite}
+Jordan, M.~I. and Wainwright, M.~J. (2004).
+\newblock Semidefinite relaxations for approximate inference on graphs with
+  cycles.
+\newblock In Thrun, S., Saul, L., and Sch\"{o}lkopf, B., editors, {\em Advances
+  in Neural Information Processing Systems 16}, pages 369--376. MIT Press.
+
+\bibitem[Kashima et~al., 2003]{Kashima03marginalized}
+Kashima, H., Tsuda, K., and Inokuchi, A. (2003).
+\newblock Marginalized kernels between labeled graphs.
+\newblock In {\em Proceedings of the Twentieth International Conference on
+  Machine Learning}, pages 321--328. AAAI Press.
+
+\bibitem[Kearns and Valiant, 1989]{Kearns94cryptographic}
+Kearns, M. and Valiant, L. (1989).
+\newblock Cryptographic limitations on learning boolean formulae and finite
+  automata.
+\newblock {\em J. ACM}, 41(1):67--95.
+
+\bibitem[Keerthi et~al., 2005]{Keerthi05a}
+Keerthi, S., Duan, K., Shevade, S., and Poo, A. (2005).
+\newblock A fast dual algorithm for kernel logistic regression.
+\newblock {\em Machine Learning}, 61(1-3):151--165.
+
+\bibitem[Keerthi et~al., 2006]{Keerthi06building}
+Keerthi, S.~S., Chapelle, O., and DeCoste, D. (2006).
+\newblock Building support vector machines with reduced classifier complexity.
+\newblock {\em Journal of Machine Learning Research}, 7:1493--1515.
+
+\bibitem[Kempe et~al., 2003]{Kempe03maximizing}
+Kempe, D., Kleinberg, J., and Tardos, E. (2003).
+\newblock Maximizing the spread of influence through a social network.
+\newblock In {\em Proceedings of the Ninth ACM SIGKDD International Conference
+  on Knowledge Discovery and Data Mining}, KDD '03, pages 137--146, New York,
+  NY, USA. ACM.
+
+\bibitem[King et~al., 1996]{King96structure}
+King, R.~D., Muggleton, S.~H., Srinivasan, A., and Sternberg, M.~J. (1996).
+\newblock Structure-activity relationships derived by machine learning: the use
+  of atoms and their bond connectivities to predict mutagenicity by inductive
+  logic programming.
+\newblock {\em Proceedings of the National Academy of Sciences},
+  93(1):438--442.
+
+\bibitem[Kocev et~al., 2013]{Kocev13tree}
+Kocev, D., Vens, C., Struyf, J., and Deroski, S. (2013).
+\newblock Tree ensembles for predicting structured outputs.
+\newblock {\em Pattern Recogn.}, 46(3):817--833.
+
+\bibitem[Koller and Friedman, 2009]{Koller09probabilistic}
+Koller, D. and Friedman, N. (2009).
+\newblock {\em Probabilistic Graphical Models: Principles and Techniques}.
+\newblock The MIT Press.
+
+\bibitem[Koller and Sahami, 1997]{Koller97hierarchically}
+Koller, D. and Sahami, M. (1997).
+\newblock Hierarchically classifying documents using very few words.
+\newblock In {\em Proceedings of the Fourteenth International Conference on
+  Machine Learning}, pages 170--178.
+
+\bibitem[Koltchinskii and Panchenko, 2000]{Koltchinskii00empirical}
+Koltchinskii, V. and Panchenko, D. (2000).
+\newblock Empirical margin distributions and bounding the generalization error
+  of combined classifiers.
+\newblock {\em Annals of Statistics}, 30:2002.
+
+\bibitem[Komarek and Moore, 1999]{Haussler99convolution}
+Komarek, P. and Moore, A. (1999).
+\newblock Convolution kernels on discrete structures.
+\newblock Technical Report UCSC-CRL-99-10, University of California at Santa
+  Cruz.
+
+\bibitem[Komarek and Moore, 2005]{Komarek05making}
+Komarek, P. and Moore, A. (2005).
+\newblock Making logistic regression a core data mining tool: A practical
+  investigation of accuracy, speed, and simplicity.
+\newblock Technical Report CMU-RI-TR-05-27, Robotics Institute.
+
+\bibitem[Lafferty et~al., 2001]{lafferty01}
+Lafferty, J.~D., McCallum, A., and Pereira, F. C.~N. (2001).
+\newblock Conditional random fields: Probabilistic models for segmenting and
+  labeling sequence data.
+\newblock In {\em Proceedings of the 8th International Conference on Machine
+  Learning (ICML 2001)}, pages 282--289. Morgan Kaufmann Publishers Inc.
+
+\bibitem[Le et~al., 2013]{Le13fast}
+Le, Q., Sarlos, T., and Smola, A. (2013).
+\newblock Fastfood - approximating kernel expansions in loglinear time.
+\newblock In {\em Proceedings of the 30th International Conference on Machine
+  Learning (ICML 2013)}, pages 244--252. JMLR.org.
+
+\bibitem[Leskovec et~al., 2009]{Leskovec09meme}
+Leskovec, J., Backstrom, L., and Kleinberg, J. (2009).
+\newblock Meme-tracking and the dynamics of the news cycle.
+\newblock In {\em Proceedings of the 15th ACM SIGKDD International Conference
+  on Knowledge Discovery and Data Mining}, KDD '09, pages 497--506, New York,
+  NY, USA. ACM.
+
+\bibitem[Leskovec et~al., 2007]{Leskovec07cascading}
+Leskovec, J., McGlohon, M., Faloutsos, C., Glance, N., and Hurst, M. (2007).
+\newblock Cascading behavior in large blog graphs: Patterns and a model.
+\newblock In {\em Society of Applied and Industrial Mathematics: Data Mining
+  (SDM07)}.
+
+\bibitem[Li et~al., 2007]{Li07hierarchical}
+Li, T., Zhu, S., and Ogihara, M. (2007).
+\newblock Hierarchical document classification using automatically generated
+  hierarchy.
+\newblock {\em J. Intell. Inf. Syst.}, 29(2):211--230.
+
+\bibitem[Liben-Nowell and Kleinberg, 2003]{Liben-Nowell03the}
+Liben-Nowell, D. and Kleinberg, J. (2003).
+\newblock The link prediction problem for social networks.
+\newblock In {\em Proceedings of the Twelfth International Conference on
+  Information and Knowledge Management}, CIKM '03, pages 556--559, New York,
+  NY, USA. ACM.
+
+\bibitem[Liben-Nowell and Kleinberg, 2008]{Nowell08tracing}
+Liben-Nowell, D. and Kleinberg, J. (2008).
+\newblock {Tracing information flow on a global scale using Internet
+  chain-letter data}.
+\newblock {\em Proceedings of the National Academy of Sciences},
+  105(12):4633--4638.
+
+\bibitem[Lin et~al., 2008]{Lin2008trust}
+Lin, C.-J., Weng, R.~C., and Keerthi, S.~S. (2008).
+\newblock Trust region newton method for logistic regression.
+\newblock {\em Journal of Machine Learning Research}, 9:627--650.
+
+\bibitem[Liu et~al., 2005]{Liu05support}
+Liu, T.-Y., Yang, Y., Wan, H., Zeng, H.-J., Chen, Z., and Ma, W.-Y. (2005).
+\newblock Support vector machines classification with a very large-scale
+  taxonomy.
+\newblock {\em SIGKDD Explor. Newsl.}, 7(1):36--43.
+
+\bibitem[Menchetti et~al., 2005]{Menchetti05weighted}
+Menchetti, S., Costa, F., and Frasconi, P. (2005).
+\newblock Weighted decomposition kernels.
+\newblock In {\em Proceedings of the 22th International Conference on Machine
+  Learning (ICML 2005)}, pages 585--592. ACM.
+
+\bibitem[Minka, 2003]{Minka03}
+Minka, T.~P. (2003).
+\newblock A comparison of numerical optimizers for logistic regression.
+
+\bibitem[Mohri et~al., 2008]{Benesty08speech}
+Mohri, M., Pereira, F., and Riley, M. (2008).
+\newblock Speech recognition with weighted finite-state transducers.
+\newblock In Benesty, J., Sondhi, M., and Huang, Y., editors, {\em Springer
+  Handbook of Speech Processing}, pages 559--584. Springer Berlin Heidelberg.
+
+\bibitem[Osuna et~al., 1997]{Osuna97an}
+Osuna, E., Freund, R., and Girosi, F. (1997).
+\newblock An improved training algorithm for support vector machines.
+\newblock In {\em Proceedings of the 1997 IEEE Workshop on Neural Networks for
+  Signal Processing [1997] VII}, pages 276--285.
+
+\bibitem[Pavlov et~al., 2000]{Pavlov00towards}
+Pavlov, D., Chudova, D., and Smyth, P. (2000).
+\newblock Towards scalable support vector machines using squashing.
+\newblock In {\em Proceedings of the Sixth ACM SIGKDD International Conference
+  on Knowledge Discovery and Data Mining}, KDD '00, pages 295--299, New York,
+  NY, USA. ACM.
+
+\bibitem[Petrov, 2010]{Petrov10products}
+Petrov, S. (2010).
+\newblock Products of random latent variable grammars.
+\newblock In {\em Human Language Technologies: The 2010 Annual Conference of
+  the North American Chapter of the Association for Computational Linguistics},
+  HLT '10, pages 19--27, Stroudsburg, PA, USA. Association for Computational
+  Linguistics.
+
+\bibitem[Platt, 1998]{Platt98sequential}
+Platt, J. (1998).
+\newblock Sequential minimal optimization: A fast algorithm for training
+  support vector machines.
+\newblock Technical Report MSR-TR-98-14, Microsoft Research.
+
+\bibitem[Platt, 1999]{Platt99fast}
+Platt, J.~C. (1999).
+\newblock Advances in kernel methods.
+\newblock chapter Fast Training of Support Vector Machines Using Sequential
+  Minimal Optimization, pages 185--208. MIT Press, Cambridge, MA, USA.
+
+\bibitem[Pérez-Cruz et~al., 2004]{Perezcruz04double}
+Pérez-Cruz, O., Figueiras-Vidal, A.~R., and Artés-Rodríguez, A. (2004).
+\newblock Double chunking for solving svms for very large datasets.
+\newblock In {\em Learning’04, Elche, Spain (2004)}.
+
+\bibitem[Rakotomamonjy et~al., 2008]{Rakotomamonjy08simplemkl}
+Rakotomamonjy, A., , Bach, F., Canu, S., and Grandvalet, Y. (2008).
+\newblock implemkl.
+\newblock {\em Journal of Machine Learning Research 9}.
+
+\bibitem[Ralaivola et~al., 2005]{Ralaivola05graph}
+Ralaivola, L., Swamidass, S., Saigo, H., and Baldi, P. (2005).
+\newblock Graph kernels for chemical informatics.
+\newblock {\em Neural Networks}, 18:1093--1110.
+
+\bibitem[Ratliff et~al., 2007]{Ratliff07}
+Ratliff, N., Bagnell, J. A.~D., and Zinkevich, M. (2007).
+\newblock (online) subgradient methods for structured prediction.
+\newblock In {\em Proceedings of the 11th International Conference on
+  Artificial Intelligence and Statistics (AISTATS 2007)}, volume~2. JMLR.org.
+
+\bibitem[Read et~al., 2009]{Read09classifier}
+Read, J., Pfahringer, B., Holmes, G., and Frank, E. (2009).
+\newblock Classifier chains for multi-label classification.
+\newblock In Buntine, W., Grobelnik, M., Mladenić, D., and Shawe-Taylor, J.,
+  editors, {\em Machine Learning and Knowledge Discovery in Databases}, volume
+  5782, pages 254--269. Springer Berlin Heidelberg.
+
+\bibitem[Read et~al., 2011]{Read11classifier}
+Read, J., Pfahringer, B., Holmes, G., and Frank, E. (2011).
+\newblock Classifier chains for multi-label classification.
+\newblock {\em Machine Learning}, 85(3):333--359.
+
+\bibitem[Richardson et~al., 2006]{Richardson06beyond}
+Richardson, M., Prakash, A., and Brill, E. (2006).
+\newblock Beyond pagerank: Machine learning for static ranking.
+\newblock In {\em Proceedings of the 15th International Conference on World
+  Wide Web (WWW 2006)}, pages 707--715, New York, NY, USA. ACM.
+
+\bibitem[Rodriguez et~al., 2011]{Rodrigues11unconvering}
+Rodriguez, M.~G., Balduzzi, D., and Schölkopf, B. (2011).
+\newblock Uncovering the temporal dynamics of diffusion networks.
+\newblock In {\em Proceedings of the 28th International Conference on Machine
+  Learning (ICML 2011)}, pages 561--568. ACM.
+
+\bibitem[Rogers, 2003]{Rogers03the}
+Rogers, E.~M. (2003).
+\newblock {\em Diffusion of Innovations}.
+\newblock The Free Press, 5th ed. 2003 edition.
+
+\bibitem[Romera-Paredes et~al., 2012]{Paredes12exploit}
+Romera-Paredes, B., Argyriou, A., Berthouze, N., and Pontil, M. (2012).
+\newblock Exploiting unrelated tasks in multi-task learning.
+\newblock In {\em Proceedings of the 16th International Conference on
+  Artificial Intelligence and Statistics (AISTATS 2012)}, volume~22, pages
+  951--959. JMLR.org.
+
+\bibitem[Rosenblatt, 1958]{Rosenblatt58}
+Rosenblatt, F. (1958).
+\newblock The perceptron: A probabilistic model for information storage and
+  organization in the brain.
+\newblock {\em Psychological Review}, 65:386--408.
+
+\bibitem[Rousu et~al., 2006]{Rousu06}
+Rousu, J., Saunders, C., Szedmak, S., and Shawe-Taylor, J. (2006).
+\newblock Kernel-based learning of hierarchical multilabel classification
+  models.
+\newblock {\em The Journal of Machine Learning Research}, 7:1601--1626.
+
+\bibitem[Rousu et~al., 2007]{Rousu07}
+Rousu, J., Saunders, C., Szedmak, S., and Shawe-Taylor, J. (2007).
+\newblock {Efficient algorithms for max-margin structured classification}.
+\newblock {\em Predicting Structured Data}, pages 105--129.
+
+\bibitem[Sagae and Lavie, 2006]{Sagae06parsing}
+Sagae, K. and Lavie, A. (2006).
+\newblock Parser combination by reparsing.
+\newblock In {\em Proceedings of the Human Language Technology Conference of
+  the NAACL, Companion Volume: Short Papers}, pages 129--132, Stroudsburg, PA,
+  USA. Association for Computational Linguistics.
+
+\bibitem[Saito et~al., 2008]{Lovrek08prediction}
+Saito, K., Nakano, R., and Kimura, M. (2008).
+\newblock Prediction of information diffusion probabilities for independent
+  cascade model.
+\newblock In Lovrek, I., Howlett, R., and Jain, L., editors, {\em
+  Knowledge-Based Intelligent Information and Engineering Systems}, volume
+  5179, pages 67--75. Springer Berlin Heidelberg.
+
+\bibitem[Schapire and Singer, 1999]{Schapire99improved}
+Schapire, R. and Singer, Y. (1999).
+\newblock Improved boosting algorithms using confidence-rated predictions.
+\newblock {\em Machine Learning}, 37(3):297--336.
+
+\bibitem[Schapire, 1990]{Schapire90the}
+Schapire, R.~E. (1990).
+\newblock The strength of weak learnability.
+\newblock {\em Machine Learning}, 5(2):197--227.
+
+\bibitem[Schapire et~al., 1997]{Schapire97boosting}
+Schapire, R.~E., Freund, Y., Barlett, P., and Lee, W.~S. (1997).
+\newblock Boosting the margin: A new explanation for the effectiveness of
+  voting methods.
+\newblock In {\em Proceedings of the 14th International Conference on Machine
+  Learning (ICML 1997)}, pages 322--330. Morgan Kaufmann Publishers Inc.
+
+\bibitem[Schölkopf and Smola, 2002]{Scholkopf02learning}
+Schölkopf, B. and Smola, A.~J. (2002).
+\newblock {\em Learning with Kernels - Support Vector Machines, Regularization,
+  Optimization, and Beyond}.
+\newblock MIT Press.
+
+\bibitem[Shawe-Taylor and Cristianini, 2004]{Taylor04kernel}
+Shawe-Taylor, J. and Cristianini, N. (2004).
+\newblock {\em {Kernel Methods for Pattern Analysis}}.
+\newblock Cambridge University Press.
+
+\bibitem[Shoemaker, 2006]{Shoemaker06the}
+Shoemaker, R.~H. (2006).
+\newblock The {NCI}60 human tumour cell line anticancer drug screen.
+\newblock {\em Nat Rev Cancer}, 6(10):813--823.
+
+\bibitem[Si et~al., 2014]{Si14memory}
+Si, S., jui Hsieh, C., and Dhillon, I. (2014).
+\newblock Memory efficient kernel approximation.
+\newblock In {\em Proceedings of the 31st International Conference on Machine
+  Learning (ICML 2014)}, pages 701--709. JMLR.org.
+
+\bibitem[Silla and Freitas, 2011]{Silla11a}
+Silla, Jr., C.~N. and Freitas, A.~A. (2011).
+\newblock A survey of hierarchical classification across different application
+  domains.
+\newblock {\em Data Min. Knowl. Discov.}, 22(1-2):31--72.
+
+\bibitem[Singh et~al., 2012]{Singh12qsar}
+Singh, N., Chaudhury, S., Liu, R., AbdulHameed, M. D.~M., Tawa, G., and
+  Wallqvist, A. (2012).
+\newblock Qsar classification model for antibacterial compounds and its use in
+  virtual screening.
+\newblock {\em Journal of Chemical Information and Modeling},
+  52(10):2559--2569.
+
+\bibitem[Smola and Sch\"{o}kopf, 2000]{Smola00sparse}
+Smola, A.~J. and Sch\"{o}kopf, B. (2000).
+\newblock Sparse greedy matrix approximation for machine learning.
+\newblock In {\em Proceedings of the 17th International Conference on Machine
+  Learning (ICML 2000)}, pages 911--918. Morgan Kaufmann Publishers Inc.
+
+\bibitem[Smyth and Wolpert, 1999]{Smyth99linearly}
+Smyth, P. and Wolpert, D. (1999).
+\newblock Linearly combining density estimators via stacking.
+\newblock {\em Machine Learning}, 36(1-2):59--83.
+
+\bibitem[Strang and Soule, 1998]{Strang98diffusion}
+Strang, D. and Soule, S.~A. (1998).
+\newblock {Diffusion in Organizations and Social Movements: From Hybrid Corn to
+  Poison Pills}.
+\newblock {\em Annual Review of Sociology}, 24(1):265--290.
+
+\bibitem[Swamidass et~al., 2005]{Swamidass05kernel}
+Swamidass, S., Chen, J., Bruand, J., Phung, P., Ralaivola, L., and Baldi, P.
+  (2005).
+\newblock Kernels for small molecules and the prediction of mutagenicity,
+  toxicity and anti-cancer activity.
+\newblock {\em Bioinformatics}, 21:359--368.
+
+\bibitem[Taskar et~al., 2002]{taskar02}
+Taskar, B., Abbeel, P., and Koller, D. (2002).
+\newblock Discriminative probabilistic models for relational data.
+\newblock In {\em Proceedings of the Eighteenth Conference on Uncertainty in
+  Artificial Intelligence (UAI 2002)}, pages 485--492, San Francisco, CA, USA.
+  Morgan Kaufmann Publishers Inc.
+
+\bibitem[Taskar et~al., 2004]{Taskar04max}
+Taskar, B., Guestrin, C., and Koller, D. (2004).
+\newblock Max-margin markov networks.
+\newblock In Thrun, S., Saul, L., and Sch\"{o}lkopf, B., editors, {\em Advances
+  in Neural Information Processing Systems 16}, pages 25--32. MIT Press.
+
+\bibitem[Taskar et~al., 2006]{taskar06}
+Taskar, B., Lacoste-Julian, S., and Jordan, M.~I. (2006).
+\newblock Structured prediction via the extragradient method.
+\newblock In Weiss, Y., Sch\"{o}lkopf, B., and Platt, J., editors, {\em
+  Advances in Neural Information Processing Systems 18}, pages 1345--1352. MIT
+  Press.
+
+\bibitem[Tibshirani, 1994]{Tibshirani94regression}
+Tibshirani, R. (1994).
+\newblock Regression shrinkage and selection via the lasso.
+\newblock {\em Journal of the Royal Statistical Society, Series B},
+  58:267--288.
+
+\bibitem[Tibshirani, 1996]{Tibshirani1996bias}
+Tibshirani, R. (1996).
+\newblock Bias, variance and prediction error for classification rules.
+
+\bibitem[Trotter et~al., 2001]{Trotter01drug}
+Trotter, M., Buxton, M., and Holden, S. (2001).
+\newblock Drug design by machine learning: support vector machines for
+  pharmaceutical data analysis.
+\newblock {\em Journal of Computational Chemistry.}, 26:1--20.
+
+\bibitem[Tsochantaridis et~al., 2004]{THJA04}
+Tsochantaridis, I., Hofmann, T., Joachims, T., and Altun, Y. (2004).
+\newblock Support vector machine learning for interdependent and structured
+  output spaces.
+\newblock In {\em Proceedings of the 21th International Conference on Machine
+  Learning (ICML 2004)}, pages 823--830. ACM.
+
+\bibitem[Tsochantaridis et~al., 2005]{TJTA05}
+Tsochantaridis, I., Joachims, T., Hofmann, T., and Altun, Y. (2005).
+\newblock Large margin methods for structured and interdependent output
+  variables.
+\newblock {\em Journal of Machine Learning Research}, 6:1453--1484.
+
+\bibitem[Tsoumakas and Katakis, 2007]{Tsoumakas07multi}
+Tsoumakas, G. and Katakis, I. (2007).
+\newblock Multi-label classification: An overview.
+\newblock {\em Int J Data Warehousing and Mining}, 2007:1--13.
+
+\bibitem[Tsoumakas et~al., 2010]{Tsoumakas10mining}
+Tsoumakas, G., Katakis, I., and Vlahavas, I. (2010).
+\newblock Mining multi-label data.
+\newblock In Maimon, O. and Rokach, L., editors, {\em Data Mining and Knowledge
+  Discovery Handbook}, pages 667--685. Springer US.
+
+\bibitem[Tsoumakas and Vlahavas, 2007]{Tsoumakas07random}
+Tsoumakas, G. and Vlahavas, I. (2007).
+\newblock Random k-labelsets: An ensemble method for multilabel classification.
+\newblock In {\em Proceedings of the 2007 European Conference on Machine
+  Learning and Knowledge Discovery in Databases (ECML-PKDD 2007)}, pages
+  406--417. Springer Berlin Heidelberg.
+
+\bibitem[Vapnik, 1982]{Vapnik82estimation}
+Vapnik, V. (1982).
+\newblock {\em Estimation of Dependences Based on Empirical Data}.
+\newblock Springer-Verlag.
+
+\bibitem[Vapnik, 1992]{Vapnik92principles}
+Vapnik, V. (1992).
+\newblock Principles of risk minimization for learning theory.
+\newblock In Moody, J., Hanson, S., and Lippmann, R., editors, {\em Advances in
+  Neural Information Processing Systems 4}, pages 831--838. Morgan-Kaufmann.
+
+\bibitem[Vapnik, 1998]{Vapnik98statistical}
+Vapnik, V.~N. (1998).
+\newblock {\em Statistical Learning Theory}.
+\newblock Wiley-Interscience.
+
+\bibitem[Vapnik, 1999]{Vapnik99an}
+Vapnik, V.~N. (1999).
+\newblock An overview of statistical learning theory.
+\newblock {\em IEEE Transactions on Neural Network}, 10(5):988--999.
+
+\bibitem[Vishwanathan et~al., 2010]{Vishwanathan10graph}
+Vishwanathan, S. V.~N., Schraudolph, N.~N., Kondor, R., and Borgwardt, K.~M.
+  (2010).
+\newblock Graph kernels.
+\newblock {\em Journal of Machine Learning Research}, 11:1201--1242.
+
+\bibitem[Wainwright et~al., 2005]{Wainwright05map}
+Wainwright, M., Jaakkola, T., and Willsky, A. (2005).
+\newblock Map estimation via agreement on trees: message-passing and linear
+  programming.
+\newblock {\em IEEE Transactions on Information Theory}, 51(11):3697--3717.
+
+\bibitem[Wainwright and Jordan, 2003]{Wainwright08graphical}
+Wainwright, M.~J. and Jordan, M.~I. (2003).
+\newblock Graphical models, exponential families, and variational inference.
+\newblock {\em Foundation and Trends in Machine Learning}, 1(1-2):1--305.
+
+\bibitem[Wang et~al., 2007]{Wang07simple}
+Wang, Q.~I., Lin, D., and Schuurmans, D. (2007).
+\newblock Simple training of dependency parsers via structured boosting.
+\newblock In {\em Proceedings of the 20th International Joint Conference on
+  Artifical Intelligence}, IJCAI'07, pages 1756--1762, San Francisco, CA, USA.
+  Morgan Kaufmann Publishers Inc.
+
+\bibitem[Wang and Mori, 2011]{Wang11hidden}
+Wang, Y. and Mori, G. (2011).
+\newblock Hidden part models for human action recognition: Probabilistic versus
+  max margin.
+\newblock {\em IEEE Transactions on Pattern Analysis and Machine Intelligence},
+  33(7):1310--1323.
+
+\bibitem[Wang et~al., 2009]{Wang09pubchem}
+Wang, Y., Xiao, J., Suzek, T.~O., Zhang, J., Wang, J., and Bryant, S.~H.
+  (2009).
+\newblock Pubchem: a public information system for analyzing bioactivities of
+  small molecules.
+\newblock {\em Nucleic Acids Research}, 37(suppl 2):W623--W633.
+
+\bibitem[Wolpert and Macready, 1999]{Wolpert99an}
+Wolpert, D. and Macready, W. (1999).
+\newblock An efficient method to estimate bagging's generalization error.
+\newblock {\em Machine Learning}, 35(1):41--55.
+
+\bibitem[Xue et~al., 2004]{Xue04effect}
+Xue, Y., Li, Z., Yap, C., Sun, L., Chen, X., and Chen, Y. (2004).
+\newblock Effect of molecular descriptor feature selection in support vector
+  machine classification of pharmacokinetic and toxicological properties of
+  chemical agents.
+\newblock {\em Journal of Chemical Information and Computer Science},
+  44:1630--1638.
+
+\bibitem[Yan et~al., 2007]{Yan07model}
+Yan, R., Tesic, J., and Smith, J.~R. (2007).
+\newblock Model-shared subspace boosting for multi-label classification.
+\newblock In {\em Proceedings of the 13th ACM SIGKDD International Conference
+  on Knowledge Discovery and Data Mining}, KDD '07, pages 834--843, New York,
+  NY, USA. ACM.
+
+\bibitem[Younes et~al., 2011]{Younes11a}
+Younes, Z., Abdallah, F., Denoeux, T., and Snoussi, H. (2011).
+\newblock A dependent multilabel classification method derived from the
+  k-nearest neighbor rule.
+\newblock {\em EURASIP J. Adv. Sig. Proc.}, 2011.
+
+\bibitem[Yu et~al., 2005]{Yu05making}
+Yu, H., Yang, J., Han, J., and Li, X. (2005).
+\newblock Making svms scalable to large data sets using hierarchical cluster
+  indexing.
+\newblock {\em Data Min. Knowl. Discov.}, 11(3):295--321.
+
+\bibitem[Yu et~al., 2011]{Yu11dual}
+Yu, H.-F., Huang, F.-L., and Lin, C.-J. (2011).
+\newblock Dual coordinate descent methods for logistic regression and maximum
+  entropy models.
+\newblock {\em Machine Learning}, 85(1-2):41--75.
+
+\bibitem[Zeman and \v{Z}abokrtsk\'{y}, 2005]{Zeman05improving}
+Zeman, D. and \v{Z}abokrtsk\'{y}, Z. (2005).
+\newblock Improving parsing accuracy by combining diverse dependency parsers.
+\newblock In {\em Proceedings of the Ninth International Workshop on Parsing
+  Technology}, Parsing '05, pages 171--178, Stroudsburg, PA, USA. Association
+  for Computational Linguistics.
+
+\bibitem[Zhang et~al., 2009]{Zhang09kbest}
+Zhang, H., Zhang, M., Tan, C.~L., and Li, H. (2009).
+\newblock K-best combination of syntactic parsers.
+\newblock In {\em Proceedings of the 2009 Conference on Empirical Methods in
+  Natural Language Processing: Volume 3 - Volume 3}, EMNLP '09, pages
+  1552--1560, Stroudsburg, PA, USA. Association for Computational Linguistics.
+
+\bibitem[Zhang et~al., 2012]{Zhang12scaling}
+Zhang, K., Lan, L., Wang, Z., and Moerchen, F. (2012).
+\newblock Scaling up kernel svm on limited resources: A low-rank linearization
+  approach.
+\newblock In {\em Proceedings of the Fifteenth International Conference on
+  Artificial Intelligence and Statistics (AISTATS 2012)}, volume~22, pages
+  1425--1434.
+
+\bibitem[Zhang et~al., 2008]{Zhang08improved}
+Zhang, K., Tsang, I.~W., and Kwok, J.~T. (2008).
+\newblock Improved nystr\"{o}m low-rank approximation and error analysis.
+\newblock In {\em Proceedings of the 25th International Conference on Machine
+  Learning (ICML 2008)}, pages 1232--1239. ACM.
+
+\bibitem[Zhang and Zhou, 2005]{Zhang05a}
+Zhang, M. and Zhou, Z. (2005).
+\newblock A k-nearest neighbor based algorithm for multi-label classification.
+\newblock In {\em Proceedings of the 2005 IEEE International Conference on
+  Granular Computing}, volume~2, pages 718--721 Vol. 2.
+
+\bibitem[Zhang and Zhou, 2007]{Zhang07mlknn}
+Zhang, M. and Zhou, Z. (2007).
+\newblock Ml-knn: A lazy learning approach to multi-label learning.
+\newblock {\em Pattern Recognition}, 40:2007.
+
+\bibitem[Zhang and Zhou, 2006]{Zhang06multilabel}
+Zhang, M.-L. and Zhou, Z.-H. (2006).
+\newblock Multilabel neural networks with applications to functional genomics
+  and text categorization.
+\newblock {\em IEEE Transactions on Knowledge and Data Engineering},
+  18(10):1338--1351.
+
+\bibitem[Zhang and Zhou, 2014]{Zhang14a}
+Zhang, M.-L. and Zhou, Z.-H. (2014).
+\newblock A review on multi-label learning algorithms.
+\newblock {\em IEEE Transactions on Knowledge and Data Engineering},
+  26(8):1819--1837.
+
+\bibitem[Zou and Hastie, 2005]{Zou05regularizationa}
+Zou, H. and Hastie, T. (2005).
+\newblock Regularization and variable selection via the elastic net.
+\newblock {\em Journal of the Royal Statistical Society, Series B},
+  67:301--320.
+
+\end{thebibliography}
