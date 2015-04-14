@@ -1,7 +1,18 @@
-*This package include the following files*
+
+Dissertation
+============
+
+
+
+** This package include the following files: **
+-----------------------------------------------
+
     aaltologo.sty
+
     aaltoseries.cls
+
         style files of Aalto Latex style package
+
     autorun.sh
         script to compile latex documents
     dissertation.bbl
