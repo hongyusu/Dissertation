@@ -5,7 +5,7 @@ Dissertation
 
 **About**
 --
-Doctoral thesis titled 'Multilabel classification through structured output learning - methods and applications'. The thesis summarizes the research carried out during 2011.1 to 2014.12 in Helsinki Institute for Information Technology HIIT, Department of Information and Computer Science, Aalto University (Department of Computer in University of Helsinki during the year 2011).   
+Doctoral thesis titled 'Multilabel classification through structured output learning - methods and applications'. The thesis summarizes the research carried out during 2011.1 to 2014.12 in Helsinki Institute for Information Technology HIIT, Department of Computer Science in Aalto University. Some of the research has been done in Department of Computer in University of Helsinki during the year 2011.   
 
 **List of files**
 --
