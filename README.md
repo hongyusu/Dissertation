@@ -4,7 +4,7 @@ Dissertation
 
 
 
-This package include the following files:
+**This package include the following files:**
 ------------------------------------
 
     aaltologo.sty
