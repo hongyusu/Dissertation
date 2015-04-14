@@ -49,6 +49,9 @@ Doctoral thesis titled 'Multilabel classification through structured output lear
         Raw tex file for the content of the dissertation
 
     dissertation_nomenclature.tex
+
+		Raw tex file to include list of figures, notatations at the beginning of the dissertation, however, I decicde to drop this section.
+		
     dissertation_preface.tex
 
         Raw tex file for the preface of the dissertation
